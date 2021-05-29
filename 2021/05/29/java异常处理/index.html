@@ -13,14 +13,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="异常概述  在程序中，错误可能产生于程序没有预料到的各种情况，或者是超出了程序员可控范围的环境因素，如用户的坏数据，试图打开一个不存在的文件夹等。在java中这种在程序运行时可能出现的一些错误称为异常。异常是一个在程序执行期间发生的事件，它中断了正在执行的程序的正常的指令流。 处理程序异常错误​        在java中，如果某个方法抛出异常，既可以在当前方法中捕获异常，也可以将异常向上抛出，由">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210529231806254.png">
-<meta property="og:image" content="http://example.com/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/!%5Bimage-20210529151418682%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210529151418682.png)">
+<meta property="og:image" content="http://example.com/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530002526957.png">
 <meta property="og:image" content="http://example.com/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/!%5Bimage-20210529152828971%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210529152828971.png)">
 <meta property="article:published_time" content="2021-05-29T06:41:08.000Z">
-<meta property="article:modified_time" content="2021-05-29T15:40:29.401Z">
+<meta property="article:modified_time" content="2021-05-29T16:26:03.552Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210529231806254.png">
+<meta name="twitter:image" content="http://example.com/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530002526957.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -99,13 +98,12 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="异常概述"><a href="#异常概述" class="headerlink" title="异常概述"></a>异常概述</h2><p> <img src="image-20210529231806254.png" alt="image-20210529231806254"></p>
+        <h2 id="异常概述"><a href="#异常概述" class="headerlink" title="异常概述"></a>异常概述</h2><p> <img src="image-20210530002526957.png" alt="image-20210530002526957"></p>
 <p>在程序中，错误可能产生于程序没有预料到的各种情况，或者是超出了程序员可控范围的环境因素，如用户的坏数据，试图打开一个不存在的文件夹等。在java中这种在程序运行时可能出现的一些错误称为异常。异常是一个在程序执行期间发生的事件，它中断了正在执行的程序的正常的指令流。</p>
 <h2 id="处理程序异常错误"><a href="#处理程序异常错误" class="headerlink" title="处理程序异常错误"></a>处理程序异常错误</h2><p>​        在java中，如果某个方法抛出异常，既可以在当前方法中捕获异常，也可以将异常向上抛出，由方法调用者来处理。</p>
 <h4 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">         String s=&quot;xhy&quot;;</span><br><span class="line">System.out.println(s+&quot;年龄是:&quot;);</span><br><span class="line">int age=Integer.parseInt(&quot;20L&quot;);</span><br><span class="line">System.out.println(age);</span><br></pre></td></tr></table></figure>
 
 <p>​       在本段代码中，实现将非字符型数值转换为int型，程序会报出异常。</p>
-<p><img src="!%5Bimage-20210529151418682%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210529151418682.png)"></p>
 <p>​     可以看出，本实例报出的是NumberFormatException(字符串转换为数字异常)。提示信息“xhy年龄是”已经输出，而变量age没有输出，可知程序在执行类型代码转换时已经终止。</p>
 <h4 id="捕捉异常"><a href="#捕捉异常" class="headerlink" title="捕捉异常"></a>捕捉异常</h4><p>​        java语言的异常捕获结构是由try，catch和finally三部分组成，try语句存放的是可能发生异常的java语句；catch程序块在try之后，用来激发被捕获的异常；finally语句块是异常处理结构的最后执行部分，无论try语句中的代码块如何退出，都将执行finally语句块。</p>
 <p>​       语法如下：</p>
@@ -125,7 +123,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" data-id="ckp9yp3cf00015owab5iueyyg" data-title="java异常处理" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" data-id="ckp9yunb800018swah9gu4e8k" data-title="java异常处理" class="article-share-link">Share</a>
       
       
       
