@@ -253,7 +253,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-30 01:11:59" itemprop="dateModified" datetime="2021-05-30T01:11:59+08:00">2021-05-30</time>
+                <time title="Modified: 2021-05-30 09:16:12" itemprop="dateModified" datetime="2021-05-30T09:16:12+08:00">2021-05-30</time>
               </span>
 
           
@@ -267,12 +267,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="异常概述"><a href="#异常概述" class="headerlink" title="异常概述"></a>异常概述</h2><p> <img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530002526957.png" alt="image-20210530002526957"></p>
-<p>在程序中，错误可能产生于程序没有预料到的各种情况，或者是超出了程序员可控范围的环境因素，如用户的坏数据，试图打开一个不存在的文件夹等。在java中这种在程序运行时可能出现的一些错误称为异常。异常是一个在程序执行期间发生的事件，它中断了正在执行的程序的正常的指令流。</p>
+          <h2 id="异常概述"><a href="#异常概述" class="headerlink" title="异常概述"></a>异常概述</h2><p>在程序中，错误可能产生于程序没有预料到的各种情况，或者是超出了程序员可控范围的环境因素，如用户的坏数据，试图打开一个不存在的文件夹等。在java中这种在程序运行时可能出现的一些错误称为异常。异常是一个在程序执行期间发生的事件，它中断了正在执行的程序的正常的指令流。</p>
 <h2 id="处理程序异常错误"><a href="#处理程序异常错误" class="headerlink" title="处理程序异常错误"></a>处理程序异常错误</h2><p>​        在java中，如果某个方法抛出异常，既可以在当前方法中捕获异常，也可以将异常向上抛出，由方法调用者来处理。</p>
 <h4 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">         String s=&quot;xhy&quot;;</span><br><span class="line">System.out.println(s+&quot;年龄是:&quot;);</span><br><span class="line">int age=Integer.parseInt(&quot;20L&quot;);</span><br><span class="line">System.out.println(age);</span><br></pre></td></tr></table></figure>
 
 <p>​       在本段代码中，实现将非字符型数值转换为int型，程序会报出异常。</p>
+<p><img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530090934105.png" alt="image-20210530090934105"></p>
 <p>​     可以看出，本实例报出的是NumberFormatException(字符串转换为数字异常)。提示信息“xhy年龄是”已经输出，而变量age没有输出，可知程序在执行类型代码转换时已经终止。</p>
 <h4 id="捕捉异常"><a href="#捕捉异常" class="headerlink" title="捕捉异常"></a>捕捉异常</h4><p>​        java语言的异常捕获结构是由try，catch和finally三部分组成，try语句存放的是可能发生异常的java语句；catch程序块在try之后，用来激发被捕获的异常；finally语句块是异常处理结构的最后执行部分，无论try语句中的代码块如何退出，都将执行finally语句块。</p>
 <p>​       语法如下：</p>
@@ -281,14 +281,15 @@
 <p>利用try -catch语句对刚刚代码行进行修改</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">		    String s=&quot;xhy&quot;;</span><br><span class="line">			System.out.println(s+&quot;年龄是:&quot;);</span><br><span class="line">			int age=Integer.parseInt(&quot;20L&quot;);</span><br><span class="line">			System.out.println(age);</span><br><span class="line">		&#125;catch(Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;over&quot;);</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/!%5Bimage-20210529152828971%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210529152828971.png)"></p>
-<p>​        可以看出，程序仍然输出最后的提示信息，没有因为异常而终止。当try代码块中的语句发生异常时，程序就会跳转到catch中执行，</p>
-<p>执行完catch中的代码块后，将继续执行catch后的代码块。由此可知，java的异常处理是结构化的，不会因为一个异常而影响整个代码的执行。</p>
+<p><img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530091539131.png" alt="image-20210530091539131"></p>
+<p>​        可以看出，程序仍然输出最后的提示信息，没有因为异常而终止。当try代码块中的语句发生异常时，程序就会跳转到catch中执行，执行完catch中的代码块后，将继续执行catch后的代码块。由此可知，java的异常处理是结构化的，不会因为一个异常而影响整个代码的执行。</p>
 <h5 id="异常捕捉函数"><a href="#异常捕捉函数" class="headerlink" title="异常捕捉函数"></a>异常捕捉函数</h5><p>这里介绍三个异常捕捉函数：</p>
 <p>getMessage()函数：输出错误性质。</p>
 <p><img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530011148818-1622308310257.png" alt="image-20210530011148818"></p>
 <p>toString()函数：给出异常的类型与性质。</p>
+<p><img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530091428578.png" alt="image-20210530091428578"></p>
 <p>printStackTrace()函数：</p>
+<p>见上图。</p>
 
       
     </div>
