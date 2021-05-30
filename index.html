@@ -253,7 +253,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-30 09:16:12" itemprop="dateModified" datetime="2021-05-30T09:16:12+08:00">2021-05-30</time>
+                <time title="Modified: 2021-05-30 15:17:02" itemprop="dateModified" datetime="2021-05-30T15:17:02+08:00">2021-05-30</time>
               </span>
 
           
@@ -290,6 +290,27 @@
 <p><img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530091428578.png" alt="image-20210530091428578"></p>
 <p>printStackTrace()函数：</p>
 <p>见上图。</p>
+<h5 id="finally语句块"><a href="#finally语句块" class="headerlink" title="finally语句块"></a>finally语句块</h5><p>完整的异常处理语句一定要包含finally语句，但以下四种情况finally语句不会被执行。</p>
+<p>(1)在finally语句块中发生异常。</p>
+<p>(2)在前面的代码中使用了System.exit(0)退出了程序。</p>
+<p>(3)程序所在的线程死亡。</p>
+<p>(4)CPU关闭。</p>
+<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p>用户只需要继承Exception类即可自定义异常类。</p>
+<p>在程序中使用自定义异常类，大致可分为以下几个步骤：</p>
+<p>(1)创建自定义异常类。</p>
+<p>(2)在方法中通过throw关键字抛出异常类。</p>
+<p>(3)若在当前抛出异常的方法中处理异常，可以使用try-catch语句块捕获并处理，否则在方法的声明处通过throws关键字指明要抛出给方法调用者的异常，继续进行下一步操作。</p>
+<p>(4)在出现异常方法的调用者中捕获并处理异常。</p>
+<h6 id="创建自定义异常，在项目中创建类MyException-该类继承Exception。"><a href="#创建自定义异常，在项目中创建类MyException-该类继承Exception。" class="headerlink" title="创建自定义异常，在项目中创建类MyException,该类继承Exception。"></a>创建自定义异常，在项目中创建类MyException,该类继承Exception。</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class MyException extends Exception &#123;</span><br><span class="line">    public MyException(String ErrorMessage) &#123;</span><br><span class="line">    	super(ErrorMessage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="在项目中创建类Tran，该类中创建一个带有int型参数的方法avg-该方法用来检测参数中是否有数小于0，如果存在，则通过throw关键字抛出MyException异常对象，并在main函数中捕捉。"><a href="#在项目中创建类Tran，该类中创建一个带有int型参数的方法avg-该方法用来检测参数中是否有数小于0，如果存在，则通过throw关键字抛出MyException异常对象，并在main函数中捕捉。" class="headerlink" title="在项目中创建类Tran，该类中创建一个带有int型参数的方法avg(),该方法用来检测参数中是否有数小于0，如果存在，则通过throw关键字抛出MyException异常对象，并在main函数中捕捉。"></a>在项目中创建类Tran，该类中创建一个带有int型参数的方法avg(),该方法用来检测参数中是否有数小于0，如果存在，则通过throw关键字抛出MyException异常对象，并在main函数中捕捉。</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class Tran &#123;</span><br><span class="line">   static int avg(int number1,int number2)throws MyException&#123;</span><br><span class="line">	   if(number1&lt;0||number2&lt;0) &#123;</span><br><span class="line">		   throw new MyException(&quot;不可使用负数&quot;);</span><br><span class="line">	   &#125;</span><br><span class="line">	   return(number1+number2)/2;</span><br><span class="line">   &#125;</span><br><span class="line">   public static void main(String[]args) &#123;</span><br><span class="line">	   try &#123;</span><br><span class="line">		   int result=avg(102,-2);</span><br><span class="line">		   System.out.println(result);</span><br><span class="line">	   &#125;catch(MyException e) &#123;</span><br><span class="line">		   System.out.println(e);</span><br><span class="line">	   &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如图</p>
+<p><img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530145801591.png" alt="image-20210530145801591"></p>
+<h2 id="运行时异常"><a href="#运行时异常" class="headerlink" title="运行时异常"></a>运行时异常</h2><p>Java类库的每个包都定义了异常类，所有这些类都是Throwable类的子类。Throwable类派生了两个子类，分别是Exception和Error类。Error类及其子类用来描述Java运行系统中的内部错误以及资源耗尽的错误，这类错误一般比较严重。Exception类称为非致命类，可以通过捕捉处理使程序继续执行。</p>
+<h2 id="异常的使用原则"><a href="#异常的使用原则" class="headerlink" title="异常的使用原则"></a>异常的使用原则</h2><p>(1)在当前方法声明中使用try-catch语句捕获异常。</p>
+<p>(2)一个方法被覆盖时，覆盖它的方法必须抛出相同的异常或异常的子类。</p>
+<p>(3)如果父类抛出多个异常，则覆盖方法必须抛出那些异常的一个子集，不能抛出新异常。</p>
 
       
     </div>
