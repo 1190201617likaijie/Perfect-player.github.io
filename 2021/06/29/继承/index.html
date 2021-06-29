@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="定义子类关键词extends表明正在构造的新类派生于一个已存在的类。这个已存在的类1称为超类、基类或父类；新类称为子类、派生类或孩子类。 1234public class Manger extends Employee&amp;#123;  addded methods and fields&amp;#125;    覆盖方法超类中的有些方法对子类并不一定适用。为此，需要提供一个新的方法来覆盖超类中的这个方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="继承">
+<meta property="og:url" content="http://example.com/2021/06/29/%E7%BB%A7%E6%89%BF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="定义子类关键词extends表明正在构造的新类派生于一个已存在的类。这个已存在的类1称为超类、基类或父类；新类称为子类、派生类或孩子类。 1234public class Manger extends Employee&amp;#123;  addded methods and fields&amp;#125;    覆盖方法超类中的有些方法对子类并不一定适用。为此，需要提供一个新的方法来覆盖超类中的这个方法。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-29T05:23:25.000Z">
+<meta property="article:modified_time" content="2021-06-29T11:44:21.212Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/06/29/%E7%BB%A7%E6%89%BF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>继承 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E7%BB%A7%E6%89%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          继承
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-29 13:23:25 / Modified: 19:44:21" itemprop="dateCreated datePublished" datetime="2021-06-29T13:23:25+08:00">2021-06-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="定义子类"><a href="#定义子类" class="headerlink" title="定义子类"></a>定义子类</h4><p>关键词extends表明正在构造的新类派生于一个已存在的类。这个已存在的类1称为超类、基类或父类；新类称为子类、派生类或孩子类。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Manger extends Employee</span><br><span class="line">&#123;</span><br><span class="line">  addded methods and fields</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="覆盖方法"><a href="#覆盖方法" class="headerlink" title="覆盖方法"></a>覆盖方法</h4><p>超类中的有些方法对子类并不一定适用。为此，需要提供一个新的方法来覆盖超类中的这个方法。</p>
+<p>当我们希望调用超类中的方法，而不是当前类的这个方法，可以用特殊的关键词<strong>super</strong>来解决。</p>
+<p>继承绝对不会删除任何字段或方法。</p>
+<h4 id="子类构造器"><a href="#子类构造器" class="headerlink" title="子类构造器"></a>子类构造器</h4><p>当子类的构造器不能访问父类的私有字段时，则必须通过一个构造器来初始化这些私有字段。可以利用特殊的super语法调用这个构造器。使用super调用构造器的语句必须是子类构造器的第一条语句。</p>
+<p>如果子类构造器没有显示地调用超类的构造器，将自动调用超类的无参数构造器。如果超类没有无参数构造器，并且在子类的构造器中又没有显示地调用超类的其他构造器，java编译器就会报告一个错误。</p>
+<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><p>一个对象变量可以指示多种实际类型的现象被称为<strong>多态</strong>。</p>
+<p>在运行是能够自动地选择适当的方法，称为<strong>动态绑定</strong>。</p>
+<p><strong>替换原则</strong>：程序中出现超类对象的任何地方都可以使用子类对象替换。</p>
+<p>在java程序设计语言中，对象变量是多态的。</p>
+<h4 id="理解方法调用"><a href="#理解方法调用" class="headerlink" title="理解方法调用"></a>理解方法调用</h4><p>（1）编译器查看对象的声明类型和方法名。</p>
+<p>（2）接下来，编译器要确定方法调用中提供的参数类型。方法的名字和参数列表称为方法的<strong>签名</strong>。</p>
+<p>（3）如果是private方法，static方法，final方法或者构造器，那么编译器将可以准确地知道应该调用哪个方法，这称为<strong>静态绑定</strong>。</p>
+<p>（4）程序运行并且采用动态绑定调用方法时，虚拟机必须调用与x所引用对象的实际类型对应的那个方法。</p>
+<p><strong>警告</strong>：在覆盖一个方法时，子类方法不能低于超类方法的可见性。特别是，如果超类方法时public，子类方法必须也要声明为public。</p>
+<h4 id="阻止继承"><a href="#阻止继承" class="headerlink" title="阻止继承"></a>阻止继承</h4><p>有时候，我们可能希望阻止人们利用某个类定义子类。不允许扩展的类被称为final类。如果在定义类的时候使用了final修饰符就表示这个类是final类。</p>
+<p>类中的某个特定方法也可以被声明为final。如果这样做，子类就不能覆盖这个方法（final类中的所有方法自动地成为final方法）。</p>
+<p>如果一个方法没有被覆盖并且很短，编译器就能对它进行优化处理，这个过程称为<strong>内联</strong>。</p>
+<h4 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h4><p>只能在继承层次内进行强制类型转换。</p>
+<p>在将超类强制转换成子类之前，应该使用instanceof进行检查。</p>
+<h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><p>使用abstract关键字，则不需要实现该方法。</p>
+<p>为了提高程序的清晰度，包含一个或多个抽象方法的类本身必须被声明为抽象的。</p>
+<p>扩展抽象类可以有两种选择。一种是在子类中保留抽象类中的部分或所有抽象方法仍未定义，这样就必须将子类也标记为抽象类；另一种做法是定义全部方法，这样一来，子类就不是抽象的了。</p>
+<p>即使不含抽象方法，也可以将类声明为抽象类。</p>
+<p>抽象类不能实例化。</p>
+<h4 id="受保护访问"><a href="#受保护访问" class="headerlink" title="受保护访问"></a>受保护访问</h4><p>子类也无法访问父类的私有对象。</p>
+<p>当希望允许子类的访问父类的某个字段。为此，需要将这些类方法或字段声明为受保护。</p>
+<p>在java中保护字段只能由同一个包的类访问。</p>
+<h4 id="object类型变量"><a href="#object类型变量" class="headerlink" title="object类型变量"></a>object类型变量</h4><p>在java中，只有基本类型不是对象，例如，数值、字符和布尔类型的值都不是对象。</p>
+<h4 id="相等测试与继承"><a href="#相等测试与继承" class="headerlink" title="相等测试与继承"></a>相等测试与继承</h4><p>java语言规范要求equals方法具有以下特性：</p>
+<p>（1）自反性</p>
+<p>对于任何非空引用想，x.equals(x)应该返回true。</p>
+<p>（2）对称性</p>
+<p>对于任何引用x和y，当且仅当y.equals(x)返回true时，x.equals(y)返回true。</p>
+<p>（3）传递性</p>
+<p>对于任何引用x,y,z，如果x.equlas(y)返回true，y.equals(z)返回true，x.equals(z)也应该返回true。</p>
+<p>（4）一致性</p>
+<p>如果x和y引用的对象没有发生变化，反复调用x.equals(y)应该返回同样的结果。</p>
+<p>（5）对于任何非空引用x，x.equals（null）应该返回fasle</p>
+<h4 id="hasCode方法"><a href="#hasCode方法" class="headerlink" title="hasCode方法"></a>hasCode方法</h4><p>散列码是由对象导出的一个整型值。散列码是没有规律的。如果x和y是两个不同的对象，x.hasCode()与y.hasCode()基本上不会相同。</p>
+<p>如果重新定义了equals方法，就必须为用户可能插入散列表的对象重新定义hasCode方法。</p>
+<h4 id="泛型数组列表"><a href="#泛型数组列表" class="headerlink" title="泛型数组列表"></a>泛型数组列表</h4><p>一旦能够确认数组列表的大小将保持恒定，不再发生变化，就可以调用trimToSize方法。这个方法将存储块的大小调整为保存当前元素数量所需要的存储空间。垃圾回收器将回收多余的存储空间。</p>
+<p>一旦削减了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该在确认不会再向数组列表添加任何元素时再调用trimToSize。</p>
+<h4 id="参数数量可变的方法"><a href="#参数数量可变的方法" class="headerlink" title="参数数量可变的方法"></a>参数数量可变的方法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(&quot;%d&quot;,n)；</span><br><span class="line">System.out.printf(&quot;%d %s&quot;,n,&quot;widgets&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>这两条语句都调用同一个方法，不过一个调用有两个参数，一个有三个。</p>
+<p>printf方法是这样定义的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class PrintStream</span><br><span class="line">&#123;</span><br><span class="line">public PrintStream printf(String fmt,Object...args)&#123;return format(fmt,args);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="继承的设计技巧"><a href="#继承的设计技巧" class="headerlink" title="继承的设计技巧"></a>继承的设计技巧</h4><p>（1）将公共操作和字段放在超类中。</p>
+<p>（2）不要使用受保护的字段。</p>
+<p>（3）使用继承实现“is-a”关系。</p>
+<p>（4）除非所有继承的方法都有意义，否则不要使用继承。</p>
+<p>（5）在覆盖方法时，不要改变预期的行为。</p>
+<p>（6）使用多态，而不要使用类型信息。</p>
+<p>（7）不要滥用反射。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/29/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/" rel="prev" title="对象与类">
+      <i class="fa fa-chevron-left"></i> 对象与类
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%AD%90%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">定义子类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">覆盖方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E7%B1%BB%E6%9E%84%E9%80%A0%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">子类构造器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E6%80%81"><span class="nav-number">4.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">理解方法调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%BB%E6%AD%A2%E7%BB%A7%E6%89%BF"><span class="nav-number">6.</span> <span class="nav-text">阻止继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">7.</span> <span class="nav-text">强制类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">8.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%97%E4%BF%9D%E6%8A%A4%E8%AE%BF%E9%97%AE"><span class="nav-number">9.</span> <span class="nav-text">受保护访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object%E7%B1%BB%E5%9E%8B%E5%8F%98%E9%87%8F"><span class="nav-number">10.</span> <span class="nav-text">object类型变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E7%AD%89%E6%B5%8B%E8%AF%95%E4%B8%8E%E7%BB%A7%E6%89%BF"><span class="nav-number">11.</span> <span class="nav-text">相等测试与继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hasCode%E6%96%B9%E6%B3%95"><span class="nav-number">12.</span> <span class="nav-text">hasCode方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8"><span class="nav-number">13.</span> <span class="nav-text">泛型数组列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%95%B0%E9%87%8F%E5%8F%AF%E5%8F%98%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">14.</span> <span class="nav-text">参数数量可变的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7"><span class="nav-number">15.</span> <span class="nav-text">继承的设计技巧</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
