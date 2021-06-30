@@ -145,6 +145,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E6%B3%9B%E5%9E%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/29/%E6%B3%9B%E5%9E%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">泛型程序设计</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-29 21:03:24" itemprop="dateCreated datePublished" datetime="2021-06-29T21:03:24+08:00">2021-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-30 10:15:30" itemprop="dateModified" datetime="2021-06-30T10:15:30+08:00">2021-06-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="为什么要使用泛型程序设计"><a href="#为什么要使用泛型程序设计" class="headerlink" title="为什么要使用泛型程序设计"></a>为什么要使用泛型程序设计</h3><p><strong>泛型程序设计</strong>意味着编写的代码可以对多种不同类型的对象重用。</p>
+<h4 id="谁想成为泛型程序员"><a href="#谁想成为泛型程序员" class="headerlink" title="谁想成为泛型程序员"></a>谁想成为泛型程序员</h4><p>使用像 ArrayList的泛型类很容易。大多数Java程序员都使用 ArrayList<String>这样的类型，就好像它们已经构建在语言之中，像 String[]数组一样。(当然，数组列表比数组要好一些，因为它可以自动扩展。)<br>但是，实现一个泛型类并没有那么容易。对于类型参数，使用这段代码的程序员可能想要内置( plug in)所有的类。他们希望在没有过多的限制以及混乱的错误消息的状态下，做所有的事情。因此，一个泛型程序员的任务就是预测出所用类的未来可能有的所有用途。<br>这一任务难到什么程度呢?下面是标准类库的设计者们肯定产生争议的一个典型问题。 ArrayList类有一个方法addAll用来添加另一个集合的全部元素。程序员可能想要将 ArrayList<Manager>中的所有元素添加到 ArrayList&lt; Employee&gt;中去。然而，反过来就不行了。如果只能允许前一个调用，而不能允许后一个调用呢?Java语言的设计者发明了一个具有独创性的新概念，通配符类型( wildcard type),它解决了这个问题。通配符类型非常抽象，然而，它们能让库的构建者编写出尽可能灵活的方法。<br>泛型程序设计划分为3个能力级别。基本级别是，仅仅使用泛型类——典型的是像 ArrayList这样的集合——不必考虑它们的工作方式与原因。大多数应用程序员将会停留在这一级别上，直到出现了什么问题。当把不同的泛型类混合在一起时，或是在与对类型参数一无所知的遗留的代码进行衔接时，可能会看到含混不清的错误消息。如果这样的话，就需要学习Java泛型来系统地解决这些问题，而不要胡乱地猜测。当然，最终可能想要实现自己的泛型类与泛型方法。<br>应用程序员很可能不喜欢编写太多的泛型代码。JDK开发人员已经做出了很大的努力，为所有的集合类提供了类型参数。凭经验来说，那些原本涉及许多来自通用类型(如 Object或 Comparable接口)的强制类型转换的代码一定会因使用类型参数而受益。</Manager></String></p>
+<h3 id="定义简单泛型"><a href="#定义简单泛型" class="headerlink" title="定义简单泛型"></a>定义简单泛型</h3><p><strong>泛型类</strong>就是有一个或多个类型变量的类。</p>
+<p>注释：类型变量使用大写形式，且比较短，这是很常见的。在ava库中，使用变量E表示集合的元素类型，K和V分别表示表的关键字与值的类型。T(需要时还可以用临近的字母U和S)表示“任意类型”。</p>
+<h3 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h3><p>定义一个带有类型参数的简单方法。 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class ArrayAlg</span><br><span class="line">&#123;</span><br><span class="line"> public static &lt;T&gt; T getMiddle(T... a)</span><br><span class="line">&#123;</span><br><span class="line"> return a[a.length /2];</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个方法是在普通类中定义的，而不是在泛型类中定义的。然而，这是一个泛型方法，可以从尖括号和类型变量看出这一点。注意，类型变量放在修饰符(这里是 public static)的后面，返回类型的前面。<br>泛型方法可以定义在普通类中，也可以定义在泛型类中。<br>当调用一个泛型方法时，在方法名前的尖括号中放入具体的类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String middle ArrayAlg. &lt;String&gt; (&quot;John&quot;, &quot;Q&quot;, &quot;Public&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况(实际也是大多数情况)下，方法调用中可以省略<String>类型参数。编译器有足够的信息能够推断出所调用的方法。它用names的类型(即 String[])与泛型类型T[]进行匹配并推断出T一定 String是。也就是说，可以调用</String></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String middle ArrayAlg. getMiddle(&quot;John&quot;, &quot;Q.&quot;, &quot;Public&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>几乎在大多数情况下，对于泛型方法的类型引用没有问题。偶尔，编译器也会提示错误，此时需要解译错误报告。看一看下面这个示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double middle= ArrayAlg.getMiddle(3.14,1729,0);</span><br></pre></td></tr></table></figure>
+
+<p>错误消息会以晦涩的方式指出(不同的编译器给出的错误消息可能有所不同):解释这句代码有两种方法，而且这两种方法都是合法的。简单地说，编译器将会自动打包参数为1个 Double和2个 Integer对象，而后寻找这些类的共同超类型。事实上；找到2个这样的超类型： Number和 Comparable接口，其本身也是一个泛型类型。在这种情况下，可以采取的补救措施是将所有的参数都写为double值。</p>
+<h3 id="类型限定的变量"><a href="#类型限定的变量" class="headerlink" title="类型限定的变量"></a>类型限定的变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">有时，类或方法需要对类型变量加以约束。下面是一个典型的例子。我们要计算数组中的最小元素：</span><br><span class="line"> class ArrayAlg</span><br><span class="line"> &#123;</span><br><span class="line">    public static &lt;T&gt; T min( a)//almost correct</span><br><span class="line">   &#123;</span><br><span class="line">        if (a = null ||a.length==0) return null;</span><br><span class="line">        T smallest a[0];</span><br><span class="line">        for (int 1; i a. length; i++)</span><br><span class="line">            if (smallest. compareTo(a[i])&gt; 0) smallest=a[i];</span><br><span class="line">        return smallest;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;  </span><br></pre></td></tr></table></figure>
+
+<p>但是，这里有一个问题。请看一下min方法的代码内部。变量 smallest类型为T,这意味着它可以是任何一个类的对象。怎么才能确信T所属的类有 compareTo方法呢?<br>解决这个问题的方案是将T限制为实现了 Comparable接口(只含一个方法compareTo的标准接口)的类。可以通过对类型变量T设置限定( bound)实现这一点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&gt; T min(T[] a)...</span><br></pre></td></tr></table></figure>
+
+<p>实际上 Comparable接口本身就是一个泛型类型。目前，我们忽略其复杂性以及编译器产生的警告。<br>现在，泛型的min方法只能被实现了 Comparable接口的类(如String、 LocalDate等)的数组调用。由于 Rectangle类没有实现 Comparable接口，所以调用min将会产生一个编译错误。</p>
+<p>读者或许会感到奇怪——在此为什么使用关键字 extends而不是 implements?毕竞， Comparable是一个接口。下面的记法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;T extends Boundinglype&gt;</span><br></pre></td></tr></table></figure>
+
+<p>表示T应该是绑定类型的子类型(subtype)。T和绑定类型可以是类，也可以是接口。选择关键字 extends的原因是更接近子类的概念，并且Java的设计者也不打算在语言中再添加一个新的关键字(如sub)。<br>一个类型变量或通配符可以有多个限定，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T extends Comparable &amp; Serializable</span><br></pre></td></tr></table></figure>
+
+<p>限定类型用“&amp;”分隔，而逗号用来分隔类型变量。<br>在java的继承中，可以根据需要拥有多个接口超类型，但限定中至多有一个类。如果用一个类作为限定，它必须是限定列表中的第一个。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1305,7 +1399,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
