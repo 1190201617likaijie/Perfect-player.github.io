@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Verilog数字表示基本格式：&lt; 位宽 &gt;’&lt; 数制的符号 &gt;&lt; 数值 &gt; h十六进制 d十进制 o八进制 b二进制 向量可直接进行加减等运算，方括号位于向量名前方。eg: reg [7:0] data 数组方括号位于数组名的后面。括号内的第一个数字为第一个元素的序号，第二 个数字为最后一个元素的序号，中间用冒号隔开。 eg: wire array [15:0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2021/10/13/Verilog/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Verilog数字表示基本格式：&lt; 位宽 &gt;’&lt; 数制的符号 &gt;&lt; 数值 &gt; h十六进制 d十进制 o八进制 b二进制 向量可直接进行加减等运算，方括号位于向量名前方。eg: reg [7:0] data 数组方括号位于数组名的后面。括号内的第一个数字为第一个元素的序号，第二 个数字为最后一个元素的序号，中间用冒号隔开。 eg: wire array [15:0">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-13T13:49:51.212Z">
+<meta property="article:modified_time" content="2021-10-13T13:49:51.212Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/10/13/Verilog/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/13/Verilog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-13 21:49:51" itemprop="dateCreated datePublished" datetime="2021-10-13T21:49:51+08:00">2021-10-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Verilog"><a href="#Verilog" class="headerlink" title="Verilog"></a>Verilog</h2><h4 id="数字表示"><a href="#数字表示" class="headerlink" title="数字表示"></a>数字表示</h4><p>基本格式：&lt; 位宽 &gt;’&lt; 数制的符号 &gt;&lt; 数值 &gt;</p>
+<p>h十六进制</p>
+<p>d十进制</p>
+<p>o八进制</p>
+<p>b二进制</p>
+<h4 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h4><p>可直接进行加减等运算，方括号位于向量名前方。eg: reg [7:0] data</p>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>方括号位于数组名的后面。括号内的第一个数字为第一个元素的序号，第二 个数字为最后一个元素的序号，中间用冒号隔开。</p>
+<p>eg: wire array [15:0];</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>可以通过 parameter 关键字声明参数以增强模块可拓展性和可读性。</p>
+<p>在模块实例化时，可以使用 #() 将所需的实例参数覆盖模块的默认参数。</p>
+<p>局部参数可以用 localparam 关键字声明，它不能够进行参数重载。</p>
+<p>eg:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder #(</span><br><span class="line"><span class="keyword">parameter</span> WIDTH = <span class="number">4</span> <span class="comment">// 默认宽度为 4</span></span><br><span class="line">) (</span><br><span class="line"><span class="keyword">input</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] a,</span><br><span class="line"><span class="keyword">input</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] b,</span><br><span class="line"><span class="keyword">output</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] c</span><br><span class="line">);</span><br><span class="line"><span class="keyword">assign</span> c = a + b;</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在我们例化这个模块时，可以进行如下操作：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 覆盖宽度，修改为 6</span></span><br><span class="line">adder <span class="variable">#( .WIDTH (6) )</span> U_adder_0(</span><br><span class="line"><span class="variable">.a</span> (a ),</span><br><span class="line"><span class="variable">.b</span> (b ),</span><br><span class="line"><span class="variable">.c</span> (c )</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 使用默认的宽度 4</span></span><br><span class="line">adder U_adder_1(</span><br><span class="line"><span class="variable">.a</span> (a ),</span><br><span class="line"><span class="variable">.b</span> (b ),</span><br><span class="line"><span class="variable">.c</span> (c )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>局部参数 localparam 和参数类似，但是不能在例化时被覆盖。</p>
+<h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><h6 id="按位运算"><a href="#按位运算" class="headerlink" title="按位运算"></a>按位运算</h6><p>按位取反 ~</p>
+<p>按位与 &amp;</p>
+<p>按位或 |</p>
+<p>按位异或 ^</p>
+<h6 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h6><p>• 逻辑取反!</p>
+<p>• 逻辑与 &amp;&amp;</p>
+<p>• 逻辑或 ||</p>
+<h6 id="缩减运算"><a href="#缩减运算" class="headerlink" title="缩减运算"></a>缩减运算</h6><p>• 缩减与 &amp;：对一个多位操作数进行缩减与操作，计算所有位之间的与操作结果，例如：&amp;(4’b1011) 的结果为 0</p>
+<p> • 缩减或 |：对一个多位操作数进行缩减或操作，计算所有位之间的或操作结果。例如：|(4’b1011) 的结果为 1</p>
+<p> • 缩减异或 ^：对一个多位操作数进行缩减异或操作，计算所有位之间的异或操作结果。例如： ^(4’b1011) 的结果为 1 </p>
+<p>缩减或非、缩减异或、缩减同或是类似的。</p>
+<h6 id="移位运算"><a href="#移位运算" class="headerlink" title="移位运算"></a>移位运算</h6><p>• 逻辑右移&gt;&gt;：1 个操作数向右移位，产生的空位用 0 填充 </p>
+<p>• 逻辑左移&lt;&lt;：1 个操作数向左移位，产生的空位用 0 填充</p>
+<p> • 算术右移&gt;&gt;&gt;：1 个操作数向右移位。如果是无符号数，则产生的空位用 0 填充；有符号数则用其符号 位填充</p>
+<p> • 算术左移&lt;&lt;&lt;：1 个操作数向左移位，产生的空位用 0 填充</p>
+<h6 id="其他运算"><a href="#其他运算" class="headerlink" title="其他运算"></a>其他运算</h6><p>• 拼接 {,}：2 个操作数分别作为高低位进行拼接，例如：{2’b10,2’b11} 的结果是 4’b1011 </p>
+<p>• 重复 {n{m}}：将操作数 m 重复 n 次，拼接成一个多位的数。例如：a=2’b01，则 {2{a}} 的结果 是 4’b0101 </p>
+<p>• 条件? :：根据? 前的表达式是否为真，选择执行后面位于: 左右两个语句。例如：assign c = (a &gt; b) ? a : b，如果 a 大于 b，则将 a 的值赋给 c，否则将 b 的值赋给 c</p>
+<h4 id="组合逻辑"><a href="#组合逻辑" class="headerlink" title="组合逻辑"></a>组合逻辑</h4><h6 id="always"><a href="#always" class="headerlink" title="always"></a>always</h6><p>不推荐使用 always 块来表示组合逻辑。不正确的使用会生成大量锁存器。 </p>
+<p>下面的例子是一个 32-5 优先编码器，如果 tlb_hit_array 全为 0，那么 tlb_hit_index 也为 0。 always 块中被赋值的变量只能是 reg 类型，但是该编码器并不会综合出寄存器或者锁存器，这是因为 Verilog 中的寄存器 (reg) 和硬件上的寄存器不能完全等价。 如果去掉 tlb_hit_index = 5’d0; 一句，则会综合出锁存器。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">4</span> :<span class="number">0</span>] tlb_hit_index;</span><br><span class="line"><span class="keyword">wire</span> [<span class="number">31</span>:<span class="number">0</span>] tlb_hit_array;</span><br><span class="line"><span class="keyword">integer</span> i;</span><br><span class="line"><span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">tlb_hit_index = <span class="number">5&#x27;d0</span>;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i = i + <span class="number">1</span>) <span class="keyword">begin</span></span><br><span class="line"><span class="keyword">if</span> (tlb_hit_array[i]) <span class="keyword">begin</span></span><br><span class="line">tlb_hit_index = i;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="模块声明和例化"><a href="#模块声明和例化" class="headerlink" title="模块声明和例化"></a>模块声明和例化</h4><p>模块被包含在关键字 module、endmodule 之内。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder ( <span class="comment">// 模块名称声明</span></span><br><span class="line"><span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] a, <span class="comment">// 输入输出声明</span></span><br><span class="line"><span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] b,</span><br><span class="line"><span class="keyword">output</span> [<span class="number">31</span>:<span class="number">0</span>] c</span><br><span class="line">);</span><br><span class="line"><span class="keyword">assign</span> c = a + b; <span class="comment">// 变量声明、always 语句、assign 语句等</span></span><br><span class="line"><span class="keyword">endmodule</span> <span class="comment">// 模块结束</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Generate-块"><a href="#Generate-块" class="headerlink" title="Generate 块"></a>Generate 块</h4><p>这里只介绍 generate for 块。 </p>
+<p>generate for 的主要功能就是对模块或组件以及 always 块、assign 语句进行复制。 使用 generate for 的时候, 必须要注意以下几点要求 </p>
+<p>• 在使用 generate for 的时候必须先声明一个 genvar 变量，用作 for 的循环变量。genvar 是 generate 语句中的一种变量类型，用于在 generate for 语句中声明一个正整数的索引变量。</p>
+<p> • for 里面的内嵌语句, 必须写在 begin-end 里 </p>
+<p>• 尽量对 begin-end 顺序块进行命名</p>
+<p> generate for 的语法示例如下：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">genvar</span> i;</span><br><span class="line"><span class="keyword">generate</span> <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i = i + <span class="number">1</span>) <span class="keyword">begin</span>: gen_assign_temp</span><br><span class="line"><span class="keyword">assign</span> temp[i] = indata[<span class="number">2</span> * i + <span class="number">1</span> : <span class="number">2</span> * i];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">endgenerat</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h4><h6 id="时延语句"><a href="#时延语句" class="headerlink" title="时延语句"></a>时延语句</h6><p>仿真中还经常使用时延来构造合适的仿真激励。它是不可综合的，仅能够在仿真中使用。时延分两类，一是 语句内部时延，二是语句间时延，其示例如下所示：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 语句内部时延</span></span><br><span class="line">A = #<span class="number">5</span> <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="comment">// 语句间时延</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">Temp = <span class="number">1&#x27;b1</span>;</span><br><span class="line">#<span class="number">5</span> A = Temp;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>两种方式都表达在五个时间单位后，将 A 的值赋为 1。</p>
+<h6 id="initial-语句"><a href="#initial-语句" class="headerlink" title="initial 语句"></a>initial 语句</h6><p>一般用来生成复位信号和激励。只在仿真开始时执行一次。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试代码中</span></span><br><span class="line"><span class="comment">// 假设`timescale 1ns / 1ps</span></span><br><span class="line"><span class="keyword">reg</span> rst_n, clk;</span><br><span class="line"><span class="keyword">always</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">rst_n = <span class="number">1&#x27;b0</span>;</span><br><span class="line">clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">#<span class="number">50</span> rst_n = <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>会生成一个 100MHz 的时钟，一个 50ns 有效的复位信号。</p>
+<h6 id="系统任务"><a href="#系统任务" class="headerlink" title="系统任务"></a>系统任务</h6><p>系统任务可以被用来执行一些系统设计所需的输入、输出、时序检查、仿真控制操作。所有的系统任务名称 前都带有符号 $ 使之与用户定义的任务和函数相区分。</p>
+<p>常见的系统任务：</p>
+<p> • $display：用于显示指定的字符串，然后自动换行（用法类似 C 语言中的 printf 函数）</p>
+<p> • $time：可以提取当前的仿真时间</p>
+<p> • $stop：暂停仿真</p>
+<p> • $finish：终止仿真</p>
+<p> • $random：生成随机数 </p>
+<p>• $readmemh：读入一个 16 进制数的文件以初始化 reg</p>
+<h6 id="测试设计"><a href="#测试设计" class="headerlink" title="测试设计"></a>测试设计</h6><p>测试最基本的结构包括信号声明、激励和模块例化。 测试模块声明时，一般不需要声明端口。因为激励信号一般都在测试模块内部，没有外部信号。 声明的变量应该能全部对应被测试模块的端口。当然，变量不一定要与被测试模块端口名字一样。但是被测试模块输入端对应的变量应该声明为 reg 型，输出端对应的变量应该声明为 wire 型。 仿真过程中可以使用 $display 显示当前仿真进度或者测试结果。 在测试完成或者发现错误时可以使用 $finish; 或者 $stop; 来停止仿真。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/11/R12/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/10/machine-learning/" rel="next" title="machine learning">
+      machine learning <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Verilog"><span class="nav-number">1.</span> <span class="nav-text">Verilog</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.0.1.</span> <span class="nav-text">数字表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E9%87%8F"><span class="nav-number">1.0.2.</span> <span class="nav-text">向量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">1.0.3.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">1.0.4.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E7%AE%97"><span class="nav-number">1.0.5.</span> <span class="nav-text">运算</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="nav-number">1.0.5.0.1.</span> <span class="nav-text">按位运算</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97"><span class="nav-number">1.0.5.0.2.</span> <span class="nav-text">逻辑运算</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BC%A9%E5%87%8F%E8%BF%90%E7%AE%97"><span class="nav-number">1.0.5.0.3.</span> <span class="nav-text">缩减运算</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="nav-number">1.0.5.0.4.</span> <span class="nav-text">移位运算</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%BF%90%E7%AE%97"><span class="nav-number">1.0.5.0.5.</span> <span class="nav-text">其他运算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91"><span class="nav-number">1.0.6.</span> <span class="nav-text">组合逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#always"><span class="nav-number">1.0.6.0.1.</span> <span class="nav-text">always</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%A3%B0%E6%98%8E%E5%92%8C%E4%BE%8B%E5%8C%96"><span class="nav-number">1.0.7.</span> <span class="nav-text">模块声明和例化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Generate-%E5%9D%97"><span class="nav-number">1.0.8.</span> <span class="nav-text">Generate 块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81"><span class="nav-number">1.0.9.</span> <span class="nav-text">测试代码</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%97%B6%E5%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.0.9.0.1.</span> <span class="nav-text">时延语句</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#initial-%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.0.9.0.2.</span> <span class="nav-text">initial 语句</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.0.9.0.3.</span> <span class="nav-text">系统任务</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.0.9.0.4.</span> <span class="nav-text">测试设计</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
