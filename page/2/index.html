@@ -145,6 +145,64 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/26/%E6%B8%B8%E6%88%8F%E5%A4%96%E6%98%9F%E4%BA%BA%E5%85%A5%E4%BE%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/26/%E6%B8%B8%E6%88%8F%E5%A4%96%E6%98%9F%E4%BA%BA%E5%85%A5%E4%BE%B5/" class="post-title-link" itemprop="url">游戏外星人入侵</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-26 15:10:45 / Modified: 16:50:07" itemprop="dateCreated datePublished" datetime="2021-07-26T15:10:45+08:00">2021-07-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/26/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -324,7 +382,7 @@
 <p>导入模块中特定函数 from pizza import makepizza1,makepizza2</p>
 <p>可使用as给模块或者函数指定别名</p>
 <p>from pizza import make as m</p>
-<p>使用*号可导入模块中所有函数 from pizza import *</p>
+<p>使用<em>号可导入模块中所有函数 from pizza import </em></p>
 <h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>类中的 __init()方法会自动运行，并且开头和结尾各有两个下划线。</p>
 <h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>class elecar(car):</p>
 
@@ -390,144 +448,100 @@
 <p><img src="/2021/06/30/%E9%9B%86%E5%90%88/image-20210630104036075.png" alt="image-20210630104036075"></p>
 <p>队列接口的最简形式可能类似下面这样：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface Queue&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">    void add(E element);</span><br><span class="line">    E remove();</span><br><span class="line">    int size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>这个接口并没有说明队列是如何实现的。队列通常有两种实现方式：一种是使用循环数组；另一种是使用链表。</p>
 <p><img src="/2021/06/30/%E9%9B%86%E5%90%88/image-20210630104055147.png" alt="image-20210630104055147"></p>
 <p>每一个实现都可以用一个实现了Queue接口的类表示。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class CircularArrayQueue&lt;E&gt; implements Queue&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">   private int head;</span><br><span class="line">   private int tail;</span><br><span class="line">   CircularArrayQueue(int capacity)&#123;...&#125;</span><br><span class="line">   public void add(E element)&#123;...&#125;</span><br><span class="line">   public E remove()&#123;...&#125;</span><br><span class="line">   public int size()&#123;...&#125;</span><br><span class="line">   private E[] elements;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class LinkedListQueue&lt;E&gt; implements Queue&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">   private Link head;</span><br><span class="line">   private Link tail;</span><br><span class="line">   </span><br><span class="line">   LinkedListQueue()&#123;...&#125;</span><br><span class="line">   public void add(E element)&#123;...&#125;</span><br><span class="line">   public E remove()&#123;...&#125;</span><br><span class="line">   public int size()&#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>当在程序中使用队列时，一旦已经构造了集合，就不需要知道究竟使用了哪种实现。因此，只有在构造集合对象时，才会使用具体的类。可以使用接口类型存放集合引用。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;Customer&gt; expresslane = new CircularArrayQueue&lt;&gt;(100);</span><br><span class="line">expressLane.add(new Customer(&quot;Harry&quot;));</span><br></pre></td></tr></table></figure>
-
 <p>利用这种方法，一旦改变了想法，就可以很轻松地使用另外一种不同的实现。只需要对程序的一个地方1做出修改，即调用构造器的地方。如果觉得LinkedListQueue是个更好的选择，就将代码修改为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Queue1&lt;Customer&gt; expressLane =new LinkedListQueue&lt;&gt;();</span><br><span class="line">expressLane.add(new Customer(&quot;Harry&quot;));</span><br></pre></td></tr></table></figure>
-
 <p>为什么选择这种实现，而不选择那种实现呢？接口本身并不能说明哪种实现的效率究竟如何。循环数组要比链表更高效，因此多数人优先选择循环数组。不过，通常来讲，这样做也需要付出一定代价。</p>
 <p>循环数组是一个有界集合，即容量有限。如果程序中要收集的对象数量没有上限，就最好使用链表来实现。</p>
 <h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>Iterator接口包含4个方法：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public interface Iterator&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">   E next();</span><br><span class="line">   boolean hasNext();</span><br><span class="line">   void remove();</span><br><span class="line">   default void forEachRemaining(Consumer&lt;?super E&gt; action);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>通过反复调用next方法，可以逐个访问集合中的每个元素。但是，如果到达了集合的末尾，next方法将抛出一个NoSuchElementException。因此，需要在调用next之前调用hasNext方法。如果迭代器对象还有多个可以访问的元素，这个方法就返回true。如果想要查看集合中的所有元素，就请求一个迭代器，党hasNext返回true时就反复地调用next方法。例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;String&gt; c=...;</span><br><span class="line">Iterator&lt;String&gt; iter=c.iterator();</span><br><span class="line">while(iter.hasNext())</span><br><span class="line">&#123;</span><br><span class="line">  String element-iter.next();</span><br><span class="line">  do something with element</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>用”for each”循坏可以更加简练地表示同样的循环操作：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(String element : c)</span><br><span class="line">&#123;</span><br><span class="line">   do something with element</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>编译器简单地将”for each”循环转换为带有迭代器的循坏。</p>
 <p>“for each”循环可以处理任何实现了Iterable接口的对象，这个接口只包含一个抽象方法:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Iterable&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">   Iterator&lt;E&gt; iterator();</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>访问元素的顺序取决于集合类型。如果迭代处理一个ArrayList，迭代器将从索引0开始，每迭代一次，索引值加1.不过，如果访问HashSet中的元素，会按照一种基本上随机的顺序获得元素。虽然可以确保在迭代过程中能够遍历到集合中的所有元素，但是无法预知访问各元素的顺序。这通常并不是什么问题，因为对于计算总和或统计匹配之类的计算，顺序并不重要。</p>
 <p>Java集合类库中的迭代器与其他类库中的迭代器在概念上有着重要的区别。在传统的集合类库中，例如，C++的标准模版库，迭代器是根据数组索引建模的。如果给定这样一个迭代器，就可以查看指定位置上的元素，就像知道数组索引i就可以查看数组元素a[i]一样。不需要查找元素，就可以将迭代器向前移动一个位置。这与不需要执行查找操作就可以通过i++将数组索引向前移动一样。但是，Java迭代器并不是这样操作的。查找操作与位置变更是紧密相连的。查找一个元素的唯一方法是调用next,而在执行查找操作的同时，迭代器的位置随之向前移动。<br>因此，应该将Java迭代器认为是位于两个元素之间。当调用next时，迭代器就越过下一个元素，并返回刚刚越过的那个元素的引用。</p>
 <p><img src="/2021/06/30/%E9%9B%86%E5%90%88/image-20210630113409750.png" alt="image-20210630113409750"></p>
 <p>Iterator接口的remove方法将会删除上次调用next方法时返回的元素。在大多数情况下，这是有道理的，在决定删除某个元素之前应该先看一下这个元素。不过，如果想要删除指定位置上的元素，仍然需要越过这个元素：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;String&gt; it =c.iterator();</span><br><span class="line">it.next;</span><br><span class="line">it.remove();</span><br></pre></td></tr></table></figure>
-
 <p>更重要的是，next方法和remove方法调用之间存在依赖性。如果调用remove之前没有调用next，将是不合法的。如果这样做，将会抛出一个IllegalStateException异常。</p>
 <p>如果想删掉两个相邻的元素，不能直接这样调用：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">it.remove();</span><br><span class="line">it.remove();</span><br></pre></td></tr></table></figure>
-
 <p>实际上，必须先调用next越过要删除的元素。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">it.remove();</span><br><span class="line">it.next();</span><br><span class="line">it.remove();</span><br></pre></td></tr></table></figure>
-
 <h3 id="具体集合"><a href="#具体集合" class="headerlink" title="具体集合"></a>具体集合</h3><h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>链表是一个有序集合。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListIterator&lt;E&gt; ListIterator()</span><br></pre></td></tr></table></figure>
-
 <p>返回一个列表迭代器，用来访问列表中的元素。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListIterator&lt;E&gt; listIterator(int index)</span><br></pre></td></tr></table></figure>
-
 <p>返回一个列表迭代器，用来访问列表中的元素，第一次调用这个迭代器的next会返回给定索引的元素。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void add(int i,E element)</span><br></pre></td></tr></table></figure>
-
 <p>在给定位置添加一个元素。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void addAll(int i,Collection&lt;?extends E&gt;elements)</span><br></pre></td></tr></table></figure>
-
 <p>将一个集合中的所有元素添加到给定位置。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E remove(int i)</span><br></pre></td></tr></table></figure>
-
 <p>删除给定位置的元素。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E get(int i)</span><br></pre></td></tr></table></figure>
-
 <p>获取给定位置的元素。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E set(int i,E element)</span><br></pre></td></tr></table></figure>
-
 <p>用一个新元素替换给定位置的元素，并返回原来那个元素。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int indexOf(Object element)</span><br></pre></td></tr></table></figure>
-
 <p>返回与指定元素相等的元素在列表中第一次出现的位置，如果没有这样的元素就返回-1.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int lastIndexOf(Object element)</span><br></pre></td></tr></table></figure>
-
 <p>返回与指定元素相等的元素在列表中最后一次出现的位置，如果没有这样的元素将返回-1.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void add(E newElement)</span><br></pre></td></tr></table></figure>
-
 <p>在当前位置添加一个元素。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void set(E newElement)</span><br></pre></td></tr></table></figure>
-
 <p>用新元素替换next或previous访问的上一个元素。如果在上一个next或previous调用之后列表结构被修改了，将抛出一个IllegalStateException异常。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boolean hasPrevious()</span><br></pre></td></tr></table></figure>
-
 <p>当反向迭代列表时，如果还有可以访问的元素，返回true。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E previous()</span><br></pre></td></tr></table></figure>
-
 <p>返回前一个对象。如果已经到达了列表的头部，就抛出一个NoSuchElementException异常。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int nextIndex()</span><br></pre></td></tr></table></figure>
-
 <p>返回下一次调用next方法时将返回的元素的索引。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int previousIndex()</span><br></pre></td></tr></table></figure>
-
 <p>返回下一次调用previous方法时将返回的元素的索引。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LinkedList()</span><br></pre></td></tr></table></figure>
-
 <p>构造一个空链表。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LinkedList(Collection&lt;?extends E&gt;elements)</span><br></pre></td></tr></table></figure>
-
 <p>构造一个链表，并将集合中所有的元素添加到这个链表中。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void addFirst(E element)</span><br><span class="line">void addLast(E element)</span><br></pre></td></tr></table></figure>
-
 <p>将某个元素添加到列表的头部或尾部。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E getFirst()</span><br><span class="line">E getLast()</span><br></pre></td></tr></table></figure>
-
 <p>返回列表头部或尾部的元素。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E removeFirst()</span><br><span class="line">E removeLast()</span><br></pre></td></tr></table></figure>
-
 <p>删除并返回列表头部或尾部的元素。</p>
 <h4 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashSet()</span><br></pre></td></tr></table></figure>
-
 <p>构造一个空散列集。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashSet(Collection&lt;?extends E&gt;elements)</span><br></pre></td></tr></table></figure>
-
 <p>构造一个散列集，并将集合中所有元素添加到这个散列集中。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashSet(int initialCapacity)</span><br></pre></td></tr></table></figure>
-
 <p>构造一个空的具有指定容量的散列集。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashSet(int initialCapacity,float loadFactor)</span><br></pre></td></tr></table></figure>
-
 <p>构造一个有指定容量和装填因子的空散列集。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int hashCode()</span><br></pre></td></tr></table></figure>
-
 <p>返回这个对象的散列码。</p>
 <h4 id="树集"><a href="#树集" class="headerlink" title="树集"></a>树集</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TreeSet()</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TreeSet(Comparator&lt;?super E&gt; compartor)</span><br></pre></td></tr></table></figure>
-
 <p>构造一个空数集。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TreeSet(Collection&lt;?extends E&gt;elements)</span><br><span class="line">TreeSet(SortedSet&lt;E&gt; s)</span><br></pre></td></tr></table></figure>
-
 <p>构造一个树集，并增加一个集合或有序集中的所有元素。</p>
 <h4 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V get(Object key)</span><br></pre></td></tr></table></figure>
-
 <p>获取与键关联的值；返回与键关联的对象，或者映射中如果没有这个对象，就返回NULL。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V put(K key,V value)</span><br></pre></td></tr></table></figure>
-
 <p>将关联的一对键和值放到映射中。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void putAll(Map&lt;?extends K,?extends V&gt;entries)</span><br></pre></td></tr></table></figure>
-
 <p>将给定映射中的所有映射条目添加到这个映射中。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boolean containsKey(Object key)</span><br></pre></td></tr></table></figure>
-
 <p>如果在映射中已经有这个键，返回true。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boolean containsValue(Object value)</span><br></pre></td></tr></table></figure>
-
 <p>如果映射中已经有这个值，返回true。</p>
 
       
@@ -599,29 +613,21 @@
 <p>注释：类型变量使用大写形式，且比较短，这是很常见的。在ava库中，使用变量E表示集合的元素类型，K和V分别表示表的关键字与值的类型。T(需要时还可以用临近的字母U和S)表示“任意类型”。</p>
 <h3 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h3><p>定义一个带有类型参数的简单方法。 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class ArrayAlg</span><br><span class="line">&#123;</span><br><span class="line"> public static &lt;T&gt; T getMiddle(T... a)</span><br><span class="line">&#123;</span><br><span class="line"> return a[a.length /2];</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
 <p>这个方法是在普通类中定义的，而不是在泛型类中定义的。然而，这是一个泛型方法，可以从尖括号和类型变量看出这一点。注意，类型变量放在修饰符(这里是 public static)的后面，返回类型的前面。<br>泛型方法可以定义在普通类中，也可以定义在泛型类中。<br>当调用一个泛型方法时，在方法名前的尖括号中放入具体的类型：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String middle ArrayAlg. &lt;String&gt; (&quot;John&quot;, &quot;Q&quot;, &quot;Public&quot;);</span><br></pre></td></tr></table></figure>
-
 <p>在这种情况(实际也是大多数情况)下，方法调用中可以省略<String>类型参数。编译器有足够的信息能够推断出所调用的方法。它用names的类型(即 String[])与泛型类型T[]进行匹配并推断出T一定 String是。也就是说，可以调用</String></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String middle ArrayAlg. getMiddle(&quot;John&quot;, &quot;Q.&quot;, &quot;Public&quot;);</span><br></pre></td></tr></table></figure>
-
 <p>几乎在大多数情况下，对于泛型方法的类型引用没有问题。偶尔，编译器也会提示错误，此时需要解译错误报告。看一看下面这个示例：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double middle= ArrayAlg.getMiddle(3.14,1729,0);</span><br></pre></td></tr></table></figure>
-
 <p>错误消息会以晦涩的方式指出(不同的编译器给出的错误消息可能有所不同):解释这句代码有两种方法，而且这两种方法都是合法的。简单地说，编译器将会自动打包参数为1个 Double和2个 Integer对象，而后寻找这些类的共同超类型。事实上；找到2个这样的超类型： Number和 Comparable接口，其本身也是一个泛型类型。在这种情况下，可以采取的补救措施是将所有的参数都写为double值。</p>
 <h3 id="类型限定的变量"><a href="#类型限定的变量" class="headerlink" title="类型限定的变量"></a>类型限定的变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">有时，类或方法需要对类型变量加以约束。下面是一个典型的例子。我们要计算数组中的最小元素：</span><br><span class="line"> class ArrayAlg</span><br><span class="line"> &#123;</span><br><span class="line">    public static &lt;T&gt; T min( a)//almost correct</span><br><span class="line">   &#123;</span><br><span class="line">        if (a = null ||a.length==0) return null;</span><br><span class="line">        T smallest a[0];</span><br><span class="line">        for (int 1; i a. length; i++)</span><br><span class="line">            if (smallest. compareTo(a[i])&gt; 0) smallest=a[i];</span><br><span class="line">        return smallest;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;  </span><br></pre></td></tr></table></figure>
-
 <p>但是，这里有一个问题。请看一下min方法的代码内部。变量 smallest类型为T,这意味着它可以是任何一个类的对象。怎么才能确信T所属的类有 compareTo方法呢?<br>解决这个问题的方案是将T限制为实现了 Comparable接口(只含一个方法compareTo的标准接口)的类。可以通过对类型变量T设置限定( bound)实现这一点：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&gt; T min(T[] a)...</span><br></pre></td></tr></table></figure>
-
 <p>实际上 Comparable接口本身就是一个泛型类型。目前，我们忽略其复杂性以及编译器产生的警告。<br>现在，泛型的min方法只能被实现了 Comparable接口的类(如String、 LocalDate等)的数组调用。由于 Rectangle类没有实现 Comparable接口，所以调用min将会产生一个编译错误。</p>
 <p>读者或许会感到奇怪——在此为什么使用关键字 extends而不是 implements?毕竞， Comparable是一个接口。下面的记法</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;T extends Boundinglype&gt;</span><br></pre></td></tr></table></figure>
-
 <p>表示T应该是绑定类型的子类型(subtype)。T和绑定类型可以是类，也可以是接口。选择关键字 extends的原因是更接近子类的概念，并且Java的设计者也不打算在语言中再添加一个新的关键字(如sub)。<br>一个类型变量或通配符可以有多个限定，例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T extends Comparable &amp; Serializable</span><br></pre></td></tr></table></figure>
-
 <p>限定类型用“&amp;”分隔，而逗号用来分隔类型变量。<br>在java的继承中，可以根据需要拥有多个接口超类型，但限定中至多有一个类。如果用一个类作为限定，它必须是限定列表中的第一个。</p>
 
       
@@ -684,19 +690,14 @@
           <h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><h4 id="接口的概念"><a href="#接口的概念" class="headerlink" title="接口的概念"></a>接口的概念</h4><p>接口中的所有方法都自动是public方法。因此，在接口中声明方法时，不必提供关键字public。</p>
 <h4 id="接口的属性"><a href="#接口的属性" class="headerlink" title="接口的属性"></a>接口的属性</h4><p>接口不是类。具体来说，不能用new运算符实例化一个接口：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x =new Comparable(...);/erron</span><br></pre></td></tr></table></figure>
-
 <p>不过，尽管不能构造接口的对象，却能声明接口的变量：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Comparable x;//ok</span><br></pre></td></tr></table></figure>
-
 <p>接下来，如同使用instanceof检查一个对象是否属于某个特定类一样，也可以使用instanceof检查一个对象是否实现了某个特定的接口：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(anObject instanceof Comparable)&#123;...&#125;</span><br></pre></td></tr></table></figure>
-
 <p>与建立类的继承层次一样，也可以扩展接口。。这里允许有多条接口链，从通用性较高的接口扩展到专用性较高的接口。例如，假设有一个名为Moveable的接口：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Moveable</span><br><span class="line">&#123;</span><br><span class="line">void move(double x,double y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>然后，可以假设一个名为Powered的接口扩展了以上接口：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Powered extends Moveable</span><br><span class="line">&#123;</span><br><span class="line">double milePerGallon();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>虽然在接口中不能包含实例字段，但是可以包含常量。</p>
 <h4 id="解决默认方法冲突"><a href="#解决默认方法冲突" class="headerlink" title="解决默认方法冲突"></a>解决默认方法冲突</h4><p>如果先在一个接口中将一个方法定义为默认方法，然后又在超类或另一个接口中定义同样的方法，会发生什么情况？java的规则如下：</p>
 <p>（1）超类优先。如果超类提供了一个具体方法，同名而且参数相同的默认方法会被忽略。</p>
@@ -710,7 +711,6 @@
 <p>●指定接口所需要的全部方法。<br>●object类中的全部方法，例如， toString、 equals等。</p>
 <p>不过，不能在运行时为这些方法定义新代码。实际上，必须提供一个调用处理器。调用处理器是实现了 InvocationHandler接口的类的对象。这个接口只有一个方法：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object invoke(Object proxy, Method method, Object[] args)</span><br></pre></td></tr></table></figure>
-
 <p>无论何时调用代理对象的方法，调用处器的 invoke方法都会被调用，并向其传递Method对象和原调用的参数。之后调用处理必须确定如何处理这个调用。</p>
 <h4 id="创建代理对象"><a href="#创建代理对象" class="headerlink" title="创建代理对象"></a>创建代理对象</h4><p>要想创建一个代理对象，需要使用 Proxy类 newProxyInstance方法。这个方法有三个参数：<br>●一个类加载器。作为java安全模型的一部分，可以对平台和应用类、 从因特网下载的类等使用不同的类加载器。<br>●一个 Class对象数组，每个元素对应需要实现的各个接口。<br>●一个调用处理器。<br>还有两个需要解决的问题。如何定义处理器?另外，对于得到的代理对象能够做些什么?当然，这两个问题的答案取决于我们想要用代理机制解决什么问题。使用代理可能出于很多目的，例如：</p>
 <p>●将方法调用路由到远程服务器。<br>●在运行的程序中将用户界面事件与动作关联起来。<br>●为了调试，跟踪方法调用。</p>
@@ -774,9 +774,6 @@
       
           <h4 id="定义子类"><a href="#定义子类" class="headerlink" title="定义子类"></a>定义子类</h4><p>关键词extends表明正在构造的新类派生于一个已存在的类。这个已存在的类1称为超类、基类或父类；新类称为子类、派生类或孩子类。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Manger extends Employee</span><br><span class="line">&#123;</span><br><span class="line">  addded methods and fields</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <h4 id="覆盖方法"><a href="#覆盖方法" class="headerlink" title="覆盖方法"></a>覆盖方法</h4><p>超类中的有些方法对子类并不一定适用。为此，需要提供一个新的方法来覆盖超类中的这个方法。</p>
 <p>当我们希望调用超类中的方法，而不是当前类的这个方法，可以用特殊的关键词<strong>super</strong>来解决。</p>
 <p>继承绝对不会删除任何字段或方法。</p>
@@ -820,11 +817,9 @@
 <h4 id="泛型数组列表"><a href="#泛型数组列表" class="headerlink" title="泛型数组列表"></a>泛型数组列表</h4><p>一旦能够确认数组列表的大小将保持恒定，不再发生变化，就可以调用trimToSize方法。这个方法将存储块的大小调整为保存当前元素数量所需要的存储空间。垃圾回收器将回收多余的存储空间。</p>
 <p>一旦削减了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该在确认不会再向数组列表添加任何元素时再调用trimToSize。</p>
 <h4 id="参数数量可变的方法"><a href="#参数数量可变的方法" class="headerlink" title="参数数量可变的方法"></a>参数数量可变的方法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(&quot;%d&quot;,n)；</span><br><span class="line">System.out.printf(&quot;%d %s&quot;,n,&quot;widgets&quot;);</span><br></pre></td></tr></table></figure>
-
 <p>这两条语句都调用同一个方法，不过一个调用有两个参数，一个有三个。</p>
 <p>printf方法是这样定义的：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class PrintStream</span><br><span class="line">&#123;</span><br><span class="line">public PrintStream printf(String fmt,Object...args)&#123;return format(fmt,args);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h4 id="继承的设计技巧"><a href="#继承的设计技巧" class="headerlink" title="继承的设计技巧"></a>继承的设计技巧</h4><p>（1）将公共操作和字段放在超类中。</p>
 <p>（2）不要使用受保护的字段。</p>
 <p>（3）使用继承实现“is-a”关系。</p>
@@ -996,30 +991,30 @@
 
       
           <h1 id="计算机系统"><a href="#计算机系统" class="headerlink" title="计算机系统"></a>计算机系统</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>​        本文遍历了hello.c在Linux下的生命周期，利用了Linux下的开发工具，通过对其进行预处理，编译，汇编，链接等过程的分布解读，来进行对各个过程Linux下的学习与理解。通过对其中的进程运行，内存管理，I/O管理等过程来探索深层次的Linux相关内容。重点在于将课本知识与实例进行结合，同时帮助复习，来将计算机系统的知识所贯通。</p>
-<p><em><strong>*关键词：*</strong>***</em>*计算机系统；预处理；编译；汇编；链接；内存管理；Linux**** </p>
-<p><em><strong>*目  录*</strong></em></p>
-<p><a href="#_Toc532238396">第1章 概述    <em><strong>*- 4 -*</strong></em></a></p>
+<p><strong><em>\</em>关键词：*<em>**</em></strong>*计算机系统；预处理；编译；汇编；链接；内存管理；Linux*<em>*</em> </p>
+<p><strong><em>\</em>目  录**</strong></p>
+<p><a href="#_Toc532238396">第1章 概述    <strong><em>\</em>- 4 -**</strong></a></p>
 <p><a href="#_Toc532238397">1.1 Hello简介    - 4 -</a></p>
 <p><a href="#_Toc532238398">1.2 环境与工具    - 4 -</a></p>
 <p><a href="#_Toc532238399">1.3 中间结果    - 4 -</a></p>
 <p><a href="#_Toc532238400">1.4 本章小结    - 4 -</a></p>
-<p><a href="#_Toc532238401">第2章 预处理    <em><strong>*- 5 -*</strong></em></a></p>
+<p><a href="#_Toc532238401">第2章 预处理    <strong><em>\</em>- 5 -**</strong></a></p>
 <p><a href="#_Toc532238402">2.1 预处理的概念与作用    - 5 -</a></p>
 <p><a href="#_Toc532238403">2.2在Ubuntu下预处理的命令    - 5 -</a></p>
 <p><a href="#_Toc532238404">2.3 Hello的预处理结果解析    - 5 -</a></p>
 <p><a href="#_Toc532238405">2.4 本章小结    - 5 -</a></p>
-<p><a href="#_Toc532238406">第3章 编译    <em><strong>*- 6 -*</strong></em></a></p>
+<p><a href="#_Toc532238406">第3章 编译    <strong><em>\</em>- 6 -**</strong></a></p>
 <p><a href="#_Toc532238407">3.1 编译的概念与作用    - 6 -</a></p>
 <p><a href="#_Toc532238408">3.2 在Ubuntu下编译的命令    - 6 -</a></p>
 <p><a href="#_Toc532238409">3.3 Hello的编译结果解析    - 6 -</a></p>
 <p><a href="#_Toc532238410">3.4 本章小结    - 6 -</a></p>
-<p><a href="#_Toc532238411">第4章 汇编    <em><strong>*- 7 -*</strong></em></a></p>
+<p><a href="#_Toc532238411">第4章 汇编    <strong><em>\</em>- 7 -**</strong></a></p>
 <p><a href="#_Toc532238412">4.1 汇编的概念与作用    - 7 -</a></p>
 <p><a href="#_Toc532238413">4.2 在Ubuntu下汇编的命令    - 7 -</a></p>
 <p><a href="#_Toc532238414">4.3 可重定位目标elf格式    - 7 -</a></p>
 <p><a href="#_Toc532238415">4.4 Hello.o的结果解析    - 7 -</a></p>
 <p><a href="#_Toc532238416">4.5 本章小结    - 7 -</a></p>
-<p><a href="#_Toc532238417">第5章 链接    <em><strong>*- 8 -*</strong></em></a></p>
+<p><a href="#_Toc532238417">第5章 链接    <strong><em>\</em>- 8 -**</strong></a></p>
 <p><a href="#_Toc532238418">5.1 链接的概念与作用    - 8 -</a></p>
 <p><a href="#_Toc532238419">5.2 在Ubuntu下链接的命令    - 8 -</a></p>
 <p><a href="#_Toc532238420">5.3 可执行目标文件hello的格式    - 8 -</a></p>
@@ -1028,7 +1023,7 @@
 <p><a href="#_Toc532238423">5.6 hello的执行流程    - 8 -</a></p>
 <p><a href="#_Toc532238424">5.7 Hello的动态链接分析    - 8 -</a></p>
 <p><a href="#_Toc532238425">5.8 本章小结    - 9 -</a></p>
-<p><a href="#_Toc532238426">第6章 hello进程管理    <em><strong>*- 10 -*</strong></em></a></p>
+<p><a href="#_Toc532238426">第6章 hello进程管理    <strong><em>\</em>- 10 -**</strong></a></p>
 <p><a href="#_Toc532238427">6.1 进程的概念与作用    - 10 -</a></p>
 <p><a href="#_Toc532238428">6.2 简述壳Shell-bash的作用与处理流程    - 10 -</a></p>
 <p><a href="#_Toc532238429">6.3 Hello的fork进程创建过程    - 10 -</a></p>
@@ -1036,7 +1031,7 @@
 <p><a href="#_Toc532238431">6.5 Hello的进程执行    - 10 -</a></p>
 <p><a href="#_Toc532238432">6.6 hello的异常与信号处理    - 10 -</a></p>
 <p><a href="#_Toc532238433">6.7本章小结    - 10 -</a></p>
-<p><a href="#_Toc532238434">第7章 hello的存储管理    <em><strong>*- 11 -*</strong></em></a></p>
+<p><a href="#_Toc532238434">第7章 hello的存储管理    <strong><em>\</em>- 11 -**</strong></a></p>
 <p><a href="#_Toc532238435">7.1 hello的存储器地址空间    - 11 -</a></p>
 <p><a href="#_Toc532238436">7.2 Intel逻辑地址到线性地址的变换-段式管理    - 11 -</a></p>
 <p><a href="#_Toc532238437">7.3 Hello的线性地址到物理地址的变换-页式管理    - 11 -</a></p>
@@ -1047,20 +1042,20 @@
 <p><a href="#_Toc532238442">7.8 缺页故障与缺页中断处理    - 11 -</a></p>
 <p><a href="#_Toc532238443">7.9动态存储分配管理    - 11 -</a></p>
 <p><a href="#_Toc532238444">7.10本章小结    - 12 -</a></p>
-<p><a href="#_Toc532238445">第8章 hello的IO管理    <em><strong>*- 13 -*</strong></em></a></p>
+<p><a href="#_Toc532238445">第8章 hello的IO管理    <strong><em>\</em>- 13 -**</strong></a></p>
 <p><a href="#_Toc532238446">8.1 Linux的IO设备管理方法    - 13 -</a></p>
 <p><a href="#_Toc532238447">8.2 简述Unix IO接口及其函数    - 13 -</a></p>
 <p><a href="#_Toc532238448">8.3 printf的实现分析    - 13 -</a></p>
 <p><a href="#_Toc532238449">8.4 getchar的实现分析    - 13 -</a></p>
 <p><a href="#_Toc532238450">8.5本章小结    - 13 -</a></p>
-<p><a href="#_Toc532238451">结论    <em><strong>*- 14 -*</strong></em></a></p>
-<p><a href="#_Toc532238452">附件    <em><strong>*- 15 -*</strong></em></a></p>
-<p><a href="#_Toc532238453">参考文献    <em><strong>*- 16 -*</strong></em></a></p>
+<p><a href="#_Toc532238451">结论    <strong><em>\</em>- 14 -**</strong></a></p>
+<p><a href="#_Toc532238452">附件    <strong><em>\</em>- 15 -**</strong></a></p>
+<p><a href="#_Toc532238453">参考文献    <strong><em>\</em>- 16 -**</strong></a></p>
 <h2 id="第一章-概述"><a href="#第一章-概述" class="headerlink" title="第一章 概述"></a>第一章 概述</h2><h3 id="1-1-Hello简介"><a href="#1-1-Hello简介" class="headerlink" title="1.1 Hello简介"></a>1.1 Hello简介</h3><p>P2P：From Program to Process</p>
 <p>从源文件到目标文件的转换是由编译器驱动程序完成的。</p>
 <p>在这里，GCC编译器驱动程序读取源程序文件hello.c，并把它翻译成一个可执行的目标文件hello。这个编译可以分为四部分进行，执行这四个阶段的程序（预处理器，编译器，汇编器，链接器）一起构成了编译系统。</p>
 <p>Hello.c-&gt;(cpp)hello.i-&gt;(ccl)hello.s-&gt;(as)hello.o-&gt;(ld)hello</p>
-<p>预处理阶段：预处理器（cpp）根据以字符#开头的命令，修改原始的c程序。比如hello.c中第一行的#include&lt;stdio.h&gt;命令告诉预处理器读取系统头文件stdio.h的内容，并把它直接插入程序文本。结果就得到了另一个C程序，通常以.i作为文件扩展名。</p>
+<p>预处理阶段：预处理器（cpp）根据以字符#开头的命令，修改原始的c程序。比如hello.c中第一行的#include<stdio.h>命令告诉预处理器读取系统头文件stdio.h的内容，并把它直接插入程序文本。结果就得到了另一个C程序，通常以.i作为文件扩展名。</stdio.h></p>
 <p>编译阶段：编译器（ccl）将文本文件hello.i翻译成文本文件hello.s。它包含一个汇编语言程序。</p>
 <p>汇编阶段：接下来，汇编器（as）将hello.s翻译成机器语言指令，把这些指令打包成一种叫做可重定位目标程序的格式，并将结果保存在目标文件hello.o中。hello.o是一个二进制文件，它包含的17个字节是函数main的指令编码。</p>
 <p>链接阶段：请注意，hello程序调用了printf函数，它是每个C编译器都提供的标准C库中的一个函数。printf函数存在于一个名为printf.o的单独的预编译好了的目标文件中，而这个文件必须以某种方式合并到我们的hello.o程序中。链接器（ld）就负责处理这种合并。</p>
@@ -1084,9 +1079,9 @@
 <p>objdump -d hello.o<br>ELFout.txt：链接后的hello可执行文件经过readelf读取的ELF信息</p>
 <p>readelf -a hello.o &gt;hello.elf</p>
 <h3 id="1-4-本章小结"><a href="#1-4-本章小结" class="headerlink" title="1.4 本章小结"></a>1.4 本章小结</h3><p>本章对hello做了一个总体的概述，了解了P2P与020，简述了硬件与软件环境，并了解了中间产物以及其作用。</p>
-<h2 id="第2章-预处理"><a href="#第2章-预处理" class="headerlink" title="*第2章* *预处理*"></a><em><strong>*第2章*</strong></em> <em><strong>*预处理*</strong></em></h2><h3 id="2-1-预处理的概念与作用"><a href="#2-1-预处理的概念与作用" class="headerlink" title="2.1 预处理的概念与作用"></a>2.1 预处理的概念与作用</h3><p>概念：预处理一般是指在程序源代码被翻译为目标代码的过程中，生成二进制代码之前的过程。预处理器（cpp）根据以字符#开头的命令，修改原始的C程序，读取头文件stdio.h的内容，并把它直接插入程序文本中。</p>
+<h2 id="第2章-预处理"><a href="#第2章-预处理" class="headerlink" title="\第2章** \预处理**"></a><strong><em>\</em>第2章**</strong> <strong><em>\</em>预处理**</strong></h2><h3 id="2-1-预处理的概念与作用"><a href="#2-1-预处理的概念与作用" class="headerlink" title="2.1 预处理的概念与作用"></a>2.1 预处理的概念与作用</h3><p>概念：预处理一般是指在程序源代码被翻译为目标代码的过程中，生成二进制代码之前的过程。预处理器（cpp）根据以字符#开头的命令，修改原始的C程序，读取头文件stdio.h的内容，并把它直接插入程序文本中。</p>
 <p>作用:</p>
-<p>(1)预处理器（cpp）根据以字符#开头的命令，修改原始的c程序。比如hello.c中第一行的#include&lt;stdio.h&gt;命令告诉预处理器读取系统头文件stdio.h的内容，并把它直接插入程序文本。结果就得到了另一个C程序，通常以.i作为文件扩展名。</p>
+<p>(1)预处理器（cpp）根据以字符#开头的命令，修改原始的c程序。比如hello.c中第一行的#include<stdio.h>命令告诉预处理器读取系统头文件stdio.h的内容，并把它直接插入程序文本。结果就得到了另一个C程序，通常以.i作为文件扩展名。</stdio.h></p>
 <p>(2)用实际值替换用#define定义的字符串</p>
 <p>(3)根据#if后面的条件决定需要编译的代码</p>
 <h3 id="2-2在Ubuntu下预处理的命令"><a href="#2-2在Ubuntu下预处理的命令" class="headerlink" title="2.2在Ubuntu下预处理的命令"></a>2.2在Ubuntu下预处理的命令</h3><p>gcc -E hello.c -o hello.i</p>
@@ -1105,7 +1100,7 @@
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps9676.tmp.jpg" alt="img"></p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsA655.tmp.jpg" alt="img"></p>
 <h3 id="2-4-本章小结"><a href="#2-4-本章小结" class="headerlink" title="2.4 本章小结"></a>2.4 本章小结</h3><p>​       本章了解了预处理的概念及作用，以及在linux系统下的指令，同时解析了预处理的文本内容，让我对预处理有了更一步的了解和较为深刻的认识，更好的理解了计算机系统。</p>
-<h2 id="第3章-编译"><a href="#第3章-编译" class="headerlink" title="*第3章* *编译*"></a><em><strong>*第3章*</strong></em> <em><strong>*编译*</strong></em></h2><h3 id="3-1-编译的概念与作用"><a href="#3-1-编译的概念与作用" class="headerlink" title="3.1 编译的概念与作用"></a>3.1 编译的概念与作用</h3><p>概念：编译过程是整个程序构建的核心部分，编译成功，会将源代码由文本形式转换成机器语言，编译过程就是把预处理完的文件进行一系列词法分析、语法分析、语义分析以及优化后生成相应的汇编代码文件。 </p>
+<h2 id="第3章-编译"><a href="#第3章-编译" class="headerlink" title="\第3章** \编译**"></a><strong><em>\</em>第3章**</strong> <strong><em>\</em>编译**</strong></h2><h3 id="3-1-编译的概念与作用"><a href="#3-1-编译的概念与作用" class="headerlink" title="3.1 编译的概念与作用"></a>3.1 编译的概念与作用</h3><p>概念：编译过程是整个程序构建的核心部分，编译成功，会将源代码由文本形式转换成机器语言，编译过程就是把预处理完的文件进行一系列词法分析、语法分析、语义分析以及优化后生成相应的汇编代码文件。 </p>
 <p>作用：编译器（ccl）将文本文件hello.i翻译成文本文件hello.s，它包含一个汇编语言程序，该程序包含函数main的定义，其中每条语句都以一种文本格式描述了一条低级语言指令。编译主要作用除了是将文本文件hello.i翻译成文本文件hello.s之外，还在出现语法错误时给出提示信息。执行过程主要从其中几个阶段进行分析：</p>
 <p>(1)词法分析：词法分析是使用一种叫做lex的程序实现词法扫描，它会按照用户之前描述好的词法规则将输入的字符串分割成一个个记号。产生的记号一般分为：关键字、标识符、字面量（包含数字、字符串等）和特殊符号（运算符、等号等），然后他们放到对应的表中。</p>
 <p>(2)语法分析：语法分析器根据用户给定的语法规则，将词法分析产生的记号序列进行解析，然后将它们构成一棵语法树。对于不同的语言，只是其语法规则不一样。用于语法分析也有一个现成的工具，叫做：yacc。</p>
@@ -1118,22 +1113,22 @@
 <h3 id="3-3-Hello的编译结果解析"><a href="#3-3-Hello的编译结果解析" class="headerlink" title="3.3 Hello的编译结果解析"></a>3.3 Hello的编译结果解析</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps35E.tmp.jpg" alt="img"></p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps18AC.tmp.jpg" alt="img"></p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps2C83.tmp.jpg" alt="img"></p>
-<h4 id="3-3-1-数据"><a href="#3-3-1-数据" class="headerlink" title="*3.3.1 数据*"></a><em><strong>*3.3.1 数据*</strong></em></h4><h5 id="1-全局变量"><a href="#1-全局变量" class="headerlink" title="(1)全局变量"></a>(1)全局变量</h5><p> int sleeptime=2;</p>
+<h4 id="3-3-1-数据"><a href="#3-3-1-数据" class="headerlink" title="\3.3.1 数据**"></a><strong><em>\</em>3.3.1 数据**</strong></h4><h5 id="1-全局变量"><a href="#1-全局变量" class="headerlink" title="(1)全局变量"></a>(1)全局变量</h5><p> int sleeptime=2;</p>
 <p>   全局变量sleeptime被设置为int，由于int与long大小相同，所以被转换为long，数值大小为2，被赋予4个字节内存，对齐方式设置为4，储存在.data中。</p>
 <h5 id="2-局部变量"><a href="#2-局部变量" class="headerlink" title="(2)局部变量"></a>(2)局部变量</h5><p> int i;</p>
 <p>通常储存在栈或者是寄存器中，在这个程序中，i被存放在栈中</p>
 <p>而argc作为传入main的参数同样储存在栈中</p>
 <h5 id="3-字符串"><a href="#3-字符串" class="headerlink" title="(3)字符串"></a>(3)字符串</h5><p> 代码中出现的字符串，存放在.roarta中</p>
-<h4 id="3-3-2-赋值"><a href="#3-3-2-赋值" class="headerlink" title="*3.3.2 赋值*"></a><em><strong>*3.3.2 赋值*</strong></em></h4><p> 对全局变量的赋初值直接在汇编后代码。</p>
+<h4 id="3-3-2-赋值"><a href="#3-3-2-赋值" class="headerlink" title="\3.3.2 赋值**"></a><strong><em>\</em>3.3.2 赋值**</strong></h4><p> 对全局变量的赋初值直接在汇编后代码。</p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps1CFF.tmp.jpg" alt="img"></p>
 <p>对循环变量i的赋值，局部变量i保存在栈中，存放在-4(%rbp)中，对其赋初值为0。</p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps57C7.tmp.jpg" alt="img"></p>
-<h4 id="3-3-3-类型转换"><a href="#3-3-3-类型转换" class="headerlink" title="*3.3.3 类型转换*"></a><em><strong>*3.3.3 类型转换*</strong></em></h4><p>将全局变量的int转换为long类型。都占据4个字节。</p>
+<h4 id="3-3-3-类型转换"><a href="#3-3-3-类型转换" class="headerlink" title="\3.3.3 类型转换**"></a><strong><em>\</em>3.3.3 类型转换**</strong></h4><p>将全局变量的int转换为long类型。都占据4个字节。</p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps856F.tmp.jpg" alt="img"> </p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8570.tmp.jpg" alt="img"> </p>
-<h4 id="3-3-4-算数操作"><a href="#3-3-4-算数操作" class="headerlink" title="*3.3.4 算数操作*"></a><em><strong>*3.3.4 算数操作*</strong></em></h4><p>当i的值小于8时，将i的值每次循环+1。</p>
+<h4 id="3-3-4-算数操作"><a href="#3-3-4-算数操作" class="headerlink" title="\3.3.4 算数操作**"></a><strong><em>\</em>3.3.4 算数操作**</strong></h4><p>当i的值小于8时，将i的值每次循环+1。</p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8571.tmp.jpg" alt="img"> </p>
-<h4 id="3-3-5-关系操作"><a href="#3-3-5-关系操作" class="headerlink" title="*3.3.5 关系操作*"></a><em><strong>*3.3.5 关系操作*</strong></em></h4><p>判断argc是否等于3</p>
+<h4 id="3-3-5-关系操作"><a href="#3-3-5-关系操作" class="headerlink" title="\3.3.5 关系操作**"></a><strong><em>\</em>3.3.5 关系操作**</strong></h4><p>判断argc是否等于3</p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8572.tmp.jpg" alt="img"> </p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8573.tmp.jpg" alt="img"> </p>
 <p>通过cmpl来判断，argc存放在-20(%rbp)中</p>
@@ -1143,16 +1138,16 @@
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8575.tmp.jpg" alt="img"> </p>
 <p>通过cmpl来判断，i存放在-4(%rbp)中</p>
 <p>通过jle跳转</p>
-<h4 id="3-3-6-数组-指针-结构操作"><a href="#3-3-6-数组-指针-结构操作" class="headerlink" title="*3.3.6 数组/指针/结构操作*"></a><em><strong>*3.3.6 数组/指针/结构操作*</strong></em></h4><p>在代码中对数组的引用</p>
+<h4 id="3-3-6-数组-指针-结构操作"><a href="#3-3-6-数组-指针-结构操作" class="headerlink" title="\3.3.6 数组/指针/结构操作**"></a><strong><em>\</em>3.3.6 数组/指针/结构操作**</strong></h4><p>在代码中对数组的引用</p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8576.tmp.jpg" alt="img"> </p>
 <p>分别存放argv[0]与argv[1]</p>
-<h4 id="3-3-7-控制转移"><a href="#3-3-7-控制转移" class="headerlink" title="*3.3.7 控制转移*"></a><em><strong>*3.3.7 控制转移*</strong></em></h4><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8577.tmp.jpg" alt="img"> </p>
+<h4 id="3-3-7-控制转移"><a href="#3-3-7-控制转移" class="headerlink" title="\3.3.7 控制转移**"></a><strong><em>\</em>3.3.7 控制转移**</strong></h4><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8577.tmp.jpg" alt="img"> </p>
 <p>赋初值给i,开始进行循环</p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8578.tmp.jpg" alt="img"> </p>
 <p>判断是否满足循环条件</p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8579.tmp.jpg" alt="img"> </p>
 <p>判断argc是否等于3</p>
-<h4 id="3-3-8-函数操作"><a href="#3-3-8-函数操作" class="headerlink" title="*3.3.8 函数操作*"></a><em><strong>*3.3.8 函数操作*</strong></em></h4><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps857A.tmp.jpg" alt="img"> </p>
+<h4 id="3-3-8-函数操作"><a href="#3-3-8-函数操作" class="headerlink" title="\3.3.8 函数操作**"></a><strong><em>\</em>3.3.8 函数操作**</strong></h4><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps857A.tmp.jpg" alt="img"> </p>
 <p>调用printf与sleep</p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps858B.tmp.jpg" alt="img"> </p>
 <p>主函数</p>
@@ -1160,7 +1155,7 @@
 <p>return</p>
 <h3 id="3-4-本章小结"><a href="#3-4-本章小结" class="headerlink" title="3.4 本章小结"></a>3.4 本章小结</h3><p>​        通过对文本文件hello.c的学习，再次强调了汇编语言的重要性。</p>
 <p>​        编译器将高级语言编译成汇编语言，在以上的分析过程中，详细的分析了编译器是怎么处理C语言的各个数据类型以及各类操作的，按照不同的数据类型和操作格式，解释了hello.c文件与hello.s文件间的映射关系。通过对汇编语言的分析，加深了对各种操作的掌握。</p>
-<h2 id="第4章-汇编"><a href="#第4章-汇编" class="headerlink" title="*第4章* *汇编*"></a><em><strong>*第4章*</strong></em> <em><strong>*汇编*</strong></em></h2><h3 id="4-1-汇编的概念与作用"><a href="#4-1-汇编的概念与作用" class="headerlink" title="4.1 汇编的概念与作用"></a>4.1 汇编的概念与作用</h3><p>概念与作用：汇编器（as）将hello.s翻译成机器语言指令，把这些指令打包成一种叫做可重定位目标程序的格式，并将结果保存在目标文件hello.o中。hello.o是一个二进制文件，它包含的17个字节是函数main的指令编码。</p>
+<h2 id="第4章-汇编"><a href="#第4章-汇编" class="headerlink" title="\第4章** \汇编**"></a><strong><em>\</em>第4章**</strong> <strong><em>\</em>汇编**</strong></h2><h3 id="4-1-汇编的概念与作用"><a href="#4-1-汇编的概念与作用" class="headerlink" title="4.1 汇编的概念与作用"></a>4.1 汇编的概念与作用</h3><p>概念与作用：汇编器（as）将hello.s翻译成机器语言指令，把这些指令打包成一种叫做可重定位目标程序的格式，并将结果保存在目标文件hello.o中。hello.o是一个二进制文件，它包含的17个字节是函数main的指令编码。</p>
 <h3 id="4-2-在Ubuntu下汇编的命令"><a href="#4-2-在Ubuntu下汇编的命令" class="headerlink" title="4.2 在Ubuntu下汇编的命令"></a>4.2 在Ubuntu下汇编的命令</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74B.tmp.jpg" alt="img"> </p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74C.tmp.jpg" alt="img"> </p>
 <h3 id="4-3-可重定位目标elf格式"><a href="#4-3-可重定位目标elf格式" class="headerlink" title="4.3 可重定位目标elf格式"></a>4.3 可重定位目标elf格式</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74D.tmp.jpg" alt="img"> </p>
@@ -1190,7 +1185,7 @@
 <p>(4)对于全局变量的引用，某些全局变量因为他们的地址需要在运行后才能确定，所以访问需要重定位；在汇编后的代码，所以在汇编后，这些操作数都被置于零，添加重定位条目</p>
 <h3 id="4-5-本章小结"><a href="#4-5-本章小结" class="headerlink" title="4.5 本章小结"></a>4.5 本章小结</h3><p>​       汇编阶段，通过汇编器(as)将hello.s翻译成机器语言指令，把这些指令打包成一种叫做可重定位目标程序的格式，并将结果保存在hello.o中。</p>
 <p>​       通过实验，了解了汇编前后代码的区别以及ELF表的相关内容，对汇编的掌握又提升了一部分。</p>
-<h2 id="第-5-章-链接"><a href="#第-5-章-链接" class="headerlink" title="*第*****5*****章* *链接*"></a><em><strong>*第*</strong>***</em>*5****<em><strong>*章*</strong></em> <em><strong>*链接*</strong></em></h2><h3 id="5-1-链接的概念与作用"><a href="#5-1-链接的概念与作用" class="headerlink" title="5.1 链接的概念与作用"></a>5.1 链接的概念与作用</h3><p>链接是将各种代码和数据片段收集并组合成为一个单一文件的过程，这个文件可被加载(复制)到内存并执行。链接可以执行于编译时，也就是在源代码被翻译成机器代码时；也可以执行于加载时，也就是在程序被加载器加载到内存并执行时；甚至执行于运行时，也就是由应用程序来执行。</p>
+<h2 id="第-5-章-链接"><a href="#第-5-章-链接" class="headerlink" title="\第****5****章* *链接**"></a><strong><em>\</em>第*<em>**</em></strong>*5*<strong>**</strong>*章*<strong><em> </em></strong>*链接*<em>*</em></h2><h3 id="5-1-链接的概念与作用"><a href="#5-1-链接的概念与作用" class="headerlink" title="5.1 链接的概念与作用"></a>5.1 链接的概念与作用</h3><p>链接是将各种代码和数据片段收集并组合成为一个单一文件的过程，这个文件可被加载(复制)到内存并执行。链接可以执行于编译时，也就是在源代码被翻译成机器代码时；也可以执行于加载时，也就是在程序被加载器加载到内存并执行时；甚至执行于运行时，也就是由应用程序来执行。</p>
 <h3 id="5-2-在Ubuntu下链接的命令"><a href="#5-2-在Ubuntu下链接的命令" class="headerlink" title="5.2 在Ubuntu下链接的命令"></a>5.2 在Ubuntu下链接的命令</h3><p>gcc -o hello hello.o</p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF185.tmp.jpg" alt="img"> </p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF186.tmp.jpg" alt="img"> </p>
@@ -1227,18 +1222,18 @@
 <p>2.对于函数调用和跳转：在hello.o反汇编生成的代码中，跳转都是一个偏移量，并在后面加上重定位条目，而在链接后生成的反汇编代码中，函数调用和跳转拥有了实际上的虚拟地址和函数，链接前的函数调用，调用地址为空，添加重定位条目，链接后的函数调用，拥有了实际的虚拟地址和函数名，不再需要重定位条目</p>
 <p>3.增加了节：在hello.o反汇编生成的代码中，只有.text一个节，而在链接后生成的反汇编代码中，又添加了.init节和.fini节</p>
 <p>4.地址引用和全局变量的引用：在hello.o反汇编生成的代码中，对全局变量的引用是通过重定位符号来描述的，而在链接后生成的反汇编代码中，随着链接的完成，有些需要在运行时确定的地址得到确定的变量被确定了虚拟内存地址</p>
-<h3 id="5-6-hello的执行流程"><a href="#5-6-hello的执行流程" class="headerlink" title="5.6 hello的执行流程"></a>5.6 hello的执行流程</h3><p>0000000000401000 &lt;_init&gt;:</p>
+<h3 id="5-6-hello的执行流程"><a href="#5-6-hello的执行流程" class="headerlink" title="5.6 hello的执行流程"></a>5.6 hello的执行流程</h3><p>0000000000401000 <_init>:</_init></p>
 <p>0000000000401030 puts@plt:</p>
 <p>0000000000401040 printf@plt:</p>
 <p>0000000000401050 getchar@plt:</p>
 <p>0000000000401060 exit@plt:</p>
 <p>0000000000401070 sleep@plt:</p>
 <p>0000000000401080 :</p>
-<p>0000000000401110 &lt;_start&gt;:</p>
-<p>0000000000401140 &lt;_dl_relocate_static_pie&gt;:</p>
-<p>0000000000401150 &lt;_libc_csu_init&gt;</p>
-<p>00000000004011b0 &lt;_libc_csu_fini&gt;</p>
-<p>00000000004011b4 &lt;_fini&gt;:</p>
+<p>0000000000401110 <_start>:</_start></p>
+<p>0000000000401140 <_dl_relocate_static_pie>:</_dl_relocate_static_pie></p>
+<p>0000000000401150 <_libc_csu_init></_libc_csu_init></p>
+<p>00000000004011b0 <_libc_csu_fini></_libc_csu_fini></p>
+<p>00000000004011b4 <_fini>:</_fini></p>
 <h3 id="5-7-Hello的动态链接分析"><a href="#5-7-Hello的动态链接分析" class="headerlink" title="5.7 Hello的动态链接分析"></a>5.7 Hello的动态链接分析</h3><p>分析hello程序的动态链接项目，通过edb调试，分析在dl_init前后，这些项目的内容变化。要截图标识说明。</p>
 <p>根据hello  ELF可知，.got起始位置为0x3f98</p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1B7.tmp.jpg" alt="img"> </p>
@@ -1248,7 +1243,7 @@
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1B9.tmp.jpg" alt="img"> </p>
 <p>可以看出其已经动态链接，GOT条目已经改变。</p>
 <h3 id="5-8-本章小结"><a href="#5-8-本章小结" class="headerlink" title="5.8 本章小结"></a>5.8 本章小结</h3><p>​          链接是将各种代码和数据片段收集并组合成为一个单一文件的过程，这个文件可被加载(复制)到内存并执行。链接可以执行于编译时，也就是在源代码被翻译成机器代码时；也可以执行于加载时，也就是在程序被加载器加载到内存并执行时；甚至执行于运行时，也就是由应用程序来执行。在进行本章操作后，对于链接过程及其中间变化有了新的了解，对于这部分知识也加深了掌握。</p>
-<h2 id="第-6-章-hello进程管理"><a href="#第-6-章-hello进程管理" class="headerlink" title="*第*****6*****章* *hello进程管理*"></a><em><strong>*第*</strong>***</em>*6****<em><strong>*章*</strong></em> <em><strong>*hello进程管理*</strong></em></h2><h3 id="6-1-进程的概念与作用"><a href="#6-1-进程的概念与作用" class="headerlink" title="6.1 进程的概念与作用"></a>6.1 进程的概念与作用</h3><p>进程的经典定义是一个执行中程序的实例。系统中的每个程序都运行在某个进程上下文中。上下文是由程序正确运行所需的状态组成的。这个状态包括存放在内存中的程序的代码和数据，它的栈，通用目的寄存器的内容，程序计数器，环境变量以及打开文件描述符的集合。</p>
+<h2 id="第-6-章-hello进程管理"><a href="#第-6-章-hello进程管理" class="headerlink" title="\第****6****章* *hello进程管理**"></a><strong><em>\</em>第*<em>**</em></strong>*6*<strong>**</strong>*章*<strong><em> </em></strong>*hello进程管理*<em>*</em></h2><h3 id="6-1-进程的概念与作用"><a href="#6-1-进程的概念与作用" class="headerlink" title="6.1 进程的概念与作用"></a>6.1 进程的概念与作用</h3><p>进程的经典定义是一个执行中程序的实例。系统中的每个程序都运行在某个进程上下文中。上下文是由程序正确运行所需的状态组成的。这个状态包括存放在内存中的程序的代码和数据，它的栈，通用目的寄存器的内容，程序计数器，环境变量以及打开文件描述符的集合。</p>
 <p>进程的作用是给在在运行一个程序时，得到一个假象，就好像我们的程序是系统中当前运行的唯一的程序一样。我们的程序好像是独占地使用处理器和内存。处理器就好像是无间断地一条接一条地执行我们程序中的指令。最后，我们程序中的代码和数据好像是系统内存中唯一的对象。这些假象都是通过进程的概念提供给我们的。</p>
 <h3 id="6-2-简述壳Shell-bash的作用与处理流程"><a href="#6-2-简述壳Shell-bash的作用与处理流程" class="headerlink" title="6.2 简述壳Shell-bash的作用与处理流程"></a>6.2 简述壳Shell-bash的作用与处理流程</h3><p>shell是一种命令解释器，指为操作系统的使用者提供操作界面，它接收用户命令，然后调用相应的应用程序，交互式解释和执行用户输入的命令或者自动地解释和执行预先设定好的一连串的命令。</p>
 <p>Shell-bash的处理流程</p>
@@ -1269,7 +1264,7 @@
 <h3 id="6-4-Hello的execve过程"><a href="#6-4-Hello的execve过程" class="headerlink" title="6.4 Hello的execve过程"></a>6.4 Hello的execve过程</h3><p>execve函数在当前进程的上下文中加载并运行一个新程序。</p>
 <p>execve函数加载并运行可执行目标文件hello，且带参数列表argv和环境变量列表envp。只有当出现错误时，例如找不到hello，execve 才会返回到调用程序。所以，与fork一次调用返回两次不同，execve调用一次并从不返回。</p>
 <p>在execve加载了hello之后，调用启动代码libc_start_main。启动代码设置栈，并将控制传递给新程序的主函数，该主函数具有如下形式的原型</p>
-<p>int main(int argc,char **argv ,char **envp)</p>
+<p>int main(int argc,char <strong>argv ,char </strong>envp)</p>
 <p>execve过程执行以下内容：</p>
 <p>1.删除已存在的用户区域。删除当前进程虚拟地址的用户部分中的已存在的区域结构。</p>
 <p>2.映射私有区域。为新程序的代码、数据、bss 和栈区域创建新的区域结构。所有这些</p>
@@ -1328,7 +1323,7 @@
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps6411.tmp.jpg" alt="img"> </p>
 <p>在运行过程中输入乱码发现输入不会影响进程的运行，当按到回车键时，之前输入的字符会被读入缓冲区等待getchar处理，回车后再输入的字符会被当做是输入shell的命令。</p>
 <h3 id="6-7本章小结"><a href="#6-7本章小结" class="headerlink" title="6.7本章小结"></a>6.7本章小结</h3><p>​        本章介绍了hello程序在shell中运行形式，并通过此方式延申至对于进程以及unix环境下终端指令的实验，使得对进程工作原理更加熟悉了解。明白了有关进程创建，管理运行以及终止/上下文切换的各种知识。对于各种指令有了直观的体验，增加了对于fork与execve的理解。对于异常控制流与虚拟内存部分的内容有了更深的掌握。</p>
-<h2 id="第-7-章-hello的存储管理"><a href="#第-7-章-hello的存储管理" class="headerlink" title="*第*****7*****章* *hello的存储管理*"></a><em><strong>*第*</strong>***</em>*7****<em><strong>*章*</strong></em> <em><strong>*hello的存储管理*</strong></em></h2><h3 id="7-1-hello的存储器地址空间"><a href="#7-1-hello的存储器地址空间" class="headerlink" title="7.1 hello的存储器地址空间"></a>7.1 hello的存储器地址空间</h3><p>逻辑地址：是指由程序产生的与段相关的偏移地址部分。用段基址(段地址)和段内偏移量(偏移地址)来表示,段基址确定它所在的段居于整个存储空间的位置,偏移量确定它在段内的位置。</p>
+<h2 id="第-7-章-hello的存储管理"><a href="#第-7-章-hello的存储管理" class="headerlink" title="\第****7****章* *hello的存储管理**"></a><strong><em>\</em>第*<em>**</em></strong>*7*<strong>**</strong>*章*<strong><em> </em></strong>*hello的存储管理*<em>*</em></h2><h3 id="7-1-hello的存储器地址空间"><a href="#7-1-hello的存储器地址空间" class="headerlink" title="7.1 hello的存储器地址空间"></a>7.1 hello的存储器地址空间</h3><p>逻辑地址：是指由程序产生的与段相关的偏移地址部分。用段基址(段地址)和段内偏移量(偏移地址)来表示,段基址确定它所在的段居于整个存储空间的位置,偏移量确定它在段内的位置。</p>
 <p>线性地址：如果地址空间中的整数是连续的，那么我们说它是一个线性地址空间，为了简化讨论，我们总是假设使用的是线性地址空间。在分段部件中逻辑地址是段中的偏移地址，然后加上基地址就是线性地址。</p>
 <p>虚拟地址：在一个带虚拟内存的系统.中，CPU从一个有N=2^n个地址的地址空间中生成虚拟地址，这个地址空间称为虚拟地址空间。</p>
 <p>物理地址：计算机系统的主存被组织成一个由M个连续的字节大小的单元组成的数组，每个字节都对应具体的物理地址。</p>
@@ -1336,7 +1331,7 @@
 <p>页式管理：虚拟地址—&gt;物理地址。</p>
 <p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsAB28.tmp.jpg" alt="img"> </p>
 <p>在hello的反汇编文件中可以看到，很多都是用偏移地址表示的。</p>
-<h2 id><a href="#" class="headerlink" title></a></h2><h3 id="7-2-Intel逻辑地址到线性地址的变换-段式管理"><a href="#7-2-Intel逻辑地址到线性地址的变换-段式管理" class="headerlink" title="7.2 Intel逻辑地址到线性地址的变换-段式管理"></a>7.2 Intel逻辑地址到线性地址的变换-段式管理</h3><p>段式存储管理中，将程序的地址空间划分为若干个段(segment)，这样每个进程有一个二维的地址空间。在前面所介绍的动态分区分配方式中，系统为整个进程分配一个连续的内存空间。而在段式存储管理系统中，则为每个段分配一个连续的分区，而进程中的各个段可以不连续地存放在内存的不同分区中。程序加载时，操作系统为所有段分配其所需内存，这些段不必连续，物理内存的管理采用动态分区的管理方法。</p>
+<h2 id><a href="#" class="headerlink" title=" "></a> </h2><h3 id="7-2-Intel逻辑地址到线性地址的变换-段式管理"><a href="#7-2-Intel逻辑地址到线性地址的变换-段式管理" class="headerlink" title="7.2 Intel逻辑地址到线性地址的变换-段式管理"></a>7.2 Intel逻辑地址到线性地址的变换-段式管理</h3><p>段式存储管理中，将程序的地址空间划分为若干个段(segment)，这样每个进程有一个二维的地址空间。在前面所介绍的动态分区分配方式中，系统为整个进程分配一个连续的内存空间。而在段式存储管理系统中，则为每个段分配一个连续的分区，而进程中的各个段可以不连续地存放在内存的不同分区中。程序加载时，操作系统为所有段分配其所需内存，这些段不必连续，物理内存的管理采用动态分区的管理方法。</p>
 <p>在为某个段分配物理内存时，可以采用首先适配法、下次适配法、最佳适配法等方法。</p>
 <p>在回收某个段所占用的空间时，要注意将收回的空间与其相邻的空间合并。</p>
 <p>段式存储管理也需要硬件支持，实现逻辑地址到物理地址的映射。</p>
@@ -1400,7 +1395,7 @@
 <p>4.对齐块(对齐要求)。分配器必须对齐块，使得它们可以保存任何类型的数据对象。</p>
 <p>5.不修改已分配的块。分配器只能操作或者改变空闲块。特别是，-旦块被分配了，就不允许修改或者移动它了。因此，诸如压缩已分配块这样的技术是不允许使用的。</p>
 <h3 id="7-10本章小结"><a href="#7-10本章小结" class="headerlink" title="7.10本章小结"></a>7.10本章小结</h3><p>本章从Linux存储器的地址空间起，阐述了Intel的段式管理和页式管理机制，以及TLB与多级页表支持下的VA到PA的转换，同时对cache支持下的物理内存访问做了说明。针对内存映射及管理，简述了hello的fork和execve内存映射，了解了缺页故障与缺页中断处理程序，对动态分配管理做了系统阐述。通过本章学习，对于虚拟内存部分的大部分内容，如虚拟地址，catch命中等进行了巩固，并加深了对其的了解。</p>
-<h2 id="第-8-章-hello的IO管理"><a href="#第-8-章-hello的IO管理" class="headerlink" title="* *****第**8**章**** *hello的IO管理*"></a><em><strong>* *</strong>***</em>*第*<strong><strong><strong>*8*</strong></strong></strong>*章**** <em><strong>*hello的IO管理*</strong></em></h2><h3 id="8-1-Linux的IO设备管理方法"><a href="#8-1-Linux的IO设备管理方法" class="headerlink" title="8.1 Linux的IO设备管理方法"></a>8.1 Linux的IO设备管理方法</h3><p>一个Linux文件就是一个m个字节的序列：B0,B1,B2,……B(m-1)。所有的I/O设备都被模型化为文件，而所有的输入输出都被当作对相应文件的读和写来执行。这种将设备优雅地映射为文件的方式，允许Linux内核引出一个简单，低级的应用接口，称为UnixI/O，这使得所有的输入和输出都能以一种统一且一致的方式来执行。</p>
+<h2 id="第-8-章-hello的IO管理"><a href="#第-8-章-hello的IO管理" class="headerlink" title="\ ****第****8****章* *hello的IO管理**"></a><strong><em>\</em> *<em>**</em></strong>*第*<strong>**</strong>*8*<strong>**</strong>*章*<strong><em> </em></strong>*hello的IO管理*<em>*</em></h2><h3 id="8-1-Linux的IO设备管理方法"><a href="#8-1-Linux的IO设备管理方法" class="headerlink" title="8.1 Linux的IO设备管理方法"></a>8.1 Linux的IO设备管理方法</h3><p>一个Linux文件就是一个m个字节的序列：B0,B1,B2,……B(m-1)。所有的I/O设备都被模型化为文件，而所有的输入输出都被当作对相应文件的读和写来执行。这种将设备优雅地映射为文件的方式，允许Linux内核引出一个简单，低级的应用接口，称为UnixI/O，这使得所有的输入和输出都能以一种统一且一致的方式来执行。</p>
 <h3 id="8-2-简述Unix-IO接口及其函数"><a href="#8-2-简述Unix-IO接口及其函数" class="headerlink" title="8.2 简述Unix IO接口及其函数"></a>8.2 简述Unix IO接口及其函数</h3><p>打开文件。一个应用程序通过要求内核打开相应的文件，来宣告它想要访问一个I/O设备。内核返回一个小的非负整数，叫做描述符，它在后续对此文件的所有操作中标识这个文件。内核记录有关这个打开文件的所有信息。应用程序只需要记住这个描述符。</p>
 <p>Linux shell创建的每个进程开始时都有三个打开的文件：标准输入，标准输出和标准错误。</p>
 <p>改变当前的文件位置。对于每个打开的文件，内核保持着一个文件位置k,初始为0.这个文件位置是从文件开头起始的字节偏移量。应用程序能够通过执行seek操作，显示地设置文件的当前位置为k。</p>
@@ -1430,7 +1425,7 @@
 <p>异步异常-键盘中断的处理：键盘中断处理是底层的硬件异常，当用户按下键盘时，内核会调用异常键盘中断处理子程序。接受按键扫描码转成ascii码，保存到系统的键盘缓冲区。</p>
 <p>getchar函数read系统函数，通过系统调用读取按键ascii码，直到接受到回车键才返回。实现读取一个字符的功能。</p>
 <h3 id="8-5本章小结"><a href="#8-5本章小结" class="headerlink" title="8.5本章小结"></a>8.5本章小结</h3><p>本章系统的了解了Unix I/O，通过LinuxI/O设备管理方法以及Unix I/O接口及函数了解系统级I/O的底层实现机制。通过对printf和getchar函数的底层解析加深对Unix I/O以及异常中断等的了解。通过本章的学习，对于程序间的交互和通信有了进一步的理解。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="*结论*"></a><em><strong>*结论*</strong></em></h2><p>让我们来一起回顾一下hello的一生：</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="\结论**"></a><strong><em>\</em>结论**</strong></h2><p>让我们来一起回顾一下hello的一生：</p>
 <p>(1)hello.c经过预处理器处理，变成了hello.i。</p>
 <p>(2)hello.i经过编译器，变成了hello.s。</p>
 <p>(3)hello.s经过汇编器，被翻译成了机器指令，打包为可重定位目标文件hello.o。</p>
@@ -1445,7 +1440,7 @@
 <p>至此，hello走完了它的一生。</p>
 <p>回顾hello短暂的一生，却又并不短暂，每一步都是人类智慧的结晶，为了这短短的几步，人类走了许久，自1946年第一台电子计算机问世以来，就在不断探索，计算机技术在元件器件、硬件系统结构、软件系统、应用等方面，均有惊人进步。从两个足球场大的计算机到如今我们面前的小小的笔记本，令人叹服。</p>
 <p>回顾计算机系统漫游，学习了信息的表示和处理，程序的机器级表示，处理器体系结构，优化程序性能，存储器层次结构，了解了链接，异常控制流与虚拟内存，见识了程序间的交互和通信。都展现了计算机迷人的魅力。</p>
-<h2 id="附件"><a href="#附件" class="headerlink" title="* *****附件****"></a><em><strong>* *</strong>***</em>*附件****</h2><p>列出所有的中间产物的文件名，并予以说明起作用。</p>
+<h2 id="附件"><a href="#附件" class="headerlink" title="\ ****附件**"></a><strong><em>\</em> *<em>**</em></strong>*附件*<em>*</em></h2><p>列出所有的中间产物的文件名，并予以说明起作用。</p>
 <p>(1)hello.c:源代码</p>
 <p>(2)hello.i：预处理生成的文本文件</p>
 <p>(3)hello.s:编译翻译成的文本文件</p>
@@ -1454,10 +1449,10 @@
 <p>(6)hello.elf:hello.o的ELF格式</p>
 <p>(7)helloobj.txt：hello.o生成的反汇编文件</p>
 <p>(8)hello_out.elf:hello生成的ELF格式</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="*参考文献*"></a><em><strong>*参考文献*</strong></em></h2><p><em><strong>*为完成本次大作业你翻阅的书籍与网站等*</strong></em></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="\参考文献**"></a><strong><em>\</em>参考文献**</strong></h2><p><strong><em>\</em>为完成本次大作业你翻阅的书籍与网站等**</strong></p>
 <p>[1]  林来兴. 空间控制技术[M]. 北京：中国宇航出版社，1992：25-42.</p>
 <p>[2]  辛希孟. 信息技术与信息服务国际研讨会论文集：A集[C]. 北京：中国科学出版社，1999.</p>
-<p>[3]  赵耀东. 新时代的工业工程师[M/OL]. 台北：天下文化出版社，1998 [1998-09-26]. <a target="_blank" rel="noopener" href="http://www.ie.nthu.edu.tw/info/ie.newie.htm%EF%BC%88Big5%EF%BC%89">http://www.ie.nthu.edu.tw/info/ie.newie.htm（Big5）</a>.</p>
+<p>[3]  赵耀东. 新时代的工业工程师[M/OL]. 台北：天下文化出版社，1998 [1998-09-26]. <a target="_blank" rel="noopener" href="http://www.ie.nthu.edu.tw/info/ie.newie.htm（Big5）">http://www.ie.nthu.edu.tw/info/ie.newie.htm（Big5）</a>.</p>
 <p>[4]  谌颖. 空间交会控制理论与方法研究[D]. 哈尔滨：哈尔滨工业大学，1992：8-13.</p>
 <p>[5] KANAMORI H. Shaking Without Quaking[J]. Science，1998，279（5359）：2063-2064.</p>
 <p>[6] CHRISTINE M. Plant Physiology: Plant Biology in the Genome Era[J/OL]. Science，1998，281：331-332[1998-09-23]. <a target="_blank" rel="noopener" href="http://www.sciencemag.org/cgi/">http://www.sciencemag.org/cgi/</a> collection/anatmorp.</p>
@@ -1531,127 +1526,13 @@
       
           <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
 <h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">java异常处理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-05-29 14:41:08" itemprop="dateCreated datePublished" datetime="2021-05-29T14:41:08+08:00">2021-05-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-30 15:24:46" itemprop="dateModified" datetime="2021-05-30T15:24:46+08:00">2021-05-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="异常概述"><a href="#异常概述" class="headerlink" title="异常概述"></a>异常概述</h2><p>在程序中，错误可能产生于程序没有预料到的各种情况，或者是超出了程序员可控范围的环境因素，如用户的坏数据，试图打开一个不存在的文件夹等。在java中这种在程序运行时可能出现的一些错误称为异常。异常是一个在程序执行期间发生的事件，它中断了正在执行的程序的正常的指令流。</p>
-<h2 id="处理程序异常错误"><a href="#处理程序异常错误" class="headerlink" title="处理程序异常错误"></a>处理程序异常错误</h2><p>​        在java中，如果某个方法抛出异常，既可以在当前方法中捕获异常，也可以将异常向上抛出，由方法调用者来处理。</p>
-<h4 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">         String s=&quot;xhy&quot;;</span><br><span class="line">System.out.println(s+&quot;年龄是:&quot;);</span><br><span class="line">int age=Integer.parseInt(&quot;20L&quot;);</span><br><span class="line">System.out.println(age);</span><br></pre></td></tr></table></figure>
-
-<p>​       在本段代码中，实现将非字符型数值转换为int型，程序会报出异常。</p>
-<p><img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530090934105.png" alt="image-20210530090934105"></p>
-<p>​     可以看出，本实例报出的是NumberFormatException(字符串转换为数字异常)。提示信息“xhy年龄是”已经输出，而变量age没有输出，可知程序在执行类型代码转换时已经终止。</p>
-<h4 id="捕捉异常"><a href="#捕捉异常" class="headerlink" title="捕捉异常"></a>捕捉异常</h4><p>​        java语言的异常捕获结构是由try，catch和finally三部分组成，try语句存放的是可能发生异常的java语句；catch程序块在try之后，用来激发被捕获的异常；finally语句块是异常处理结构的最后执行部分，无论try语句中的代码块如何退出，都将执行finally语句块。</p>
-<p>​       语法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">//程序代码块</span><br><span class="line">&#125;</span><br><span class="line">catch(Exceptiontype1 e)&#123;</span><br><span class="line"> //对Exceptiontype1的处理</span><br><span class="line">&#125;</span><br><span class="line">catch(Exceptiontype2 e)&#123;</span><br><span class="line"> //对Exceptiontype2的处理</span><br><span class="line">&#125;</span><br><span class="line">finally&#123;</span><br><span class="line">//finally程序块</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>利用try -catch语句对刚刚代码行进行修改</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">		    String s=&quot;xhy&quot;;</span><br><span class="line">			System.out.println(s+&quot;年龄是:&quot;);</span><br><span class="line">			int age=Integer.parseInt(&quot;20L&quot;);</span><br><span class="line">			System.out.println(age);</span><br><span class="line">		&#125;catch(Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;over&quot;);</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530091539131.png" alt="image-20210530091539131"></p>
-<p>​        可以看出，程序仍然输出最后的提示信息，没有因为异常而终止。当try代码块中的语句发生异常时，程序就会跳转到catch中执行，执行完catch中的代码块后，将继续执行catch后的代码块。由此可知，java的异常处理是结构化的，不会因为一个异常而影响整个代码的执行。</p>
-<h5 id="异常捕捉函数"><a href="#异常捕捉函数" class="headerlink" title="异常捕捉函数"></a>异常捕捉函数</h5><p>这里介绍三个异常捕捉函数：</p>
-<p>getMessage()函数：输出错误性质。</p>
-<p><img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530011148818-1622308310257.png" alt="image-20210530011148818"></p>
-<p>toString()函数：给出异常的类型与性质。</p>
-<p><img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530091428578.png" alt="image-20210530091428578"></p>
-<p>printStackTrace()函数：</p>
-<p>见上图。</p>
-<p>注意：前两个函数需要打印，而第三个不需打印。</p>
-<h5 id="finally语句块"><a href="#finally语句块" class="headerlink" title="finally语句块"></a>finally语句块</h5><p>完整的异常处理语句一定要包含finally语句，但以下四种情况finally语句不会被执行。</p>
-<p>(1)在finally语句块中发生异常。</p>
-<p>(2)在前面的代码中使用了System.exit(0)退出了程序。</p>
-<p>(3)程序所在的线程死亡。</p>
-<p>(4)CPU关闭。</p>
-<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p>用户只需要继承Exception类即可自定义异常类。</p>
-<p>在程序中使用自定义异常类，大致可分为以下几个步骤：</p>
-<p>(1)创建自定义异常类。</p>
-<p>(2)在方法中通过throw关键字抛出异常类。</p>
-<p>(3)若在当前抛出异常的方法中处理异常，可以使用try-catch语句块捕获并处理，否则在方法的声明处通过throws关键字指明要抛出给方法调用者的异常，继续进行下一步操作。</p>
-<p>(4)在出现异常方法的调用者中捕获并处理异常。</p>
-<h6 id="创建自定义异常，在项目中创建类MyException-该类继承Exception。"><a href="#创建自定义异常，在项目中创建类MyException-该类继承Exception。" class="headerlink" title="创建自定义异常，在项目中创建类MyException,该类继承Exception。"></a>创建自定义异常，在项目中创建类MyException,该类继承Exception。</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class MyException extends Exception &#123;</span><br><span class="line">    public MyException(String ErrorMessage) &#123;</span><br><span class="line">    	super(ErrorMessage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="在项目中创建类Tran，该类中创建一个带有int型参数的方法avg-该方法用来检测参数中是否有数小于0，如果存在，则通过throw关键字抛出MyException异常对象，并在main函数中捕捉。"><a href="#在项目中创建类Tran，该类中创建一个带有int型参数的方法avg-该方法用来检测参数中是否有数小于0，如果存在，则通过throw关键字抛出MyException异常对象，并在main函数中捕捉。" class="headerlink" title="在项目中创建类Tran，该类中创建一个带有int型参数的方法avg(),该方法用来检测参数中是否有数小于0，如果存在，则通过throw关键字抛出MyException异常对象，并在main函数中捕捉。"></a>在项目中创建类Tran，该类中创建一个带有int型参数的方法avg(),该方法用来检测参数中是否有数小于0，如果存在，则通过throw关键字抛出MyException异常对象，并在main函数中捕捉。</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class Tran &#123;</span><br><span class="line">   static int avg(int number1,int number2)throws MyException&#123;</span><br><span class="line">	   if(number1&lt;0||number2&lt;0) &#123;</span><br><span class="line">		   throw new MyException(&quot;不可使用负数&quot;);</span><br><span class="line">	   &#125;</span><br><span class="line">	   return(number1+number2)/2;</span><br><span class="line">   &#125;</span><br><span class="line">   public static void main(String[]args) &#123;</span><br><span class="line">	   try &#123;</span><br><span class="line">		   int result=avg(102,-2);</span><br><span class="line">		   System.out.println(result);</span><br><span class="line">	   &#125;catch(MyException e) &#123;</span><br><span class="line">		   System.out.println(e);</span><br><span class="line">	   &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果如图</p>
-<p><img src="/2021/05/29/java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20210530145801591.png" alt="image-20210530145801591"></p>
-<h2 id="运行时异常"><a href="#运行时异常" class="headerlink" title="运行时异常"></a>运行时异常</h2><p>Java类库的每个包都定义了异常类，所有这些类都是Throwable类的子类。Throwable类派生了两个子类，分别是Exception和Error类。Error类及其子类用来描述Java运行系统中的内部错误以及资源耗尽的错误，这类错误一般比较严重。Exception类称为非致命类，可以通过捕捉处理使程序继续执行。</p>
-<h2 id="异常的使用原则"><a href="#异常的使用原则" class="headerlink" title="异常的使用原则"></a>异常的使用原则</h2><p>(1)在当前方法声明中使用try-catch语句捕获异常。</p>
-<p>(2)一个方法被覆盖时，覆盖它的方法必须抛出相同的异常或异常的子类。</p>
-<p>(3)如果父类抛出多个异常，则覆盖方法必须抛出那些异常的一个子集，不能抛出新异常。</p>
-<p>建议：不要将异常抛出，应该编写异常处理语句。</p>
 
       
     </div>
@@ -1736,7 +1617,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1819,6 +1700,8 @@
 
 
 
+
+  
 
   
 

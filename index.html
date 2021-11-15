@@ -145,6 +145,65 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">计算机组成原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-11-15 01:18:45 / Modified: 13:12:03" itemprop="dateCreated datePublished" datetime="2021-11-15T01:18:45+08:00">2021-11-15</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <script type="math/tex; mode=display">
+y=k_t x+b^2</script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/13/Verilog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -196,10 +255,8 @@
 <p>局部参数可以用 localparam 关键字声明，它不能够进行参数重载。</p>
 <p>eg:</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder #(</span><br><span class="line"><span class="keyword">parameter</span> WIDTH = <span class="number">4</span> <span class="comment">// 默认宽度为 4</span></span><br><span class="line">) (</span><br><span class="line"><span class="keyword">input</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] a,</span><br><span class="line"><span class="keyword">input</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] b,</span><br><span class="line"><span class="keyword">output</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] c</span><br><span class="line">);</span><br><span class="line"><span class="keyword">assign</span> c = a + b;</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>在我们例化这个模块时，可以进行如下操作：</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 覆盖宽度，修改为 6</span></span><br><span class="line">adder <span class="variable">#( .WIDTH (6) )</span> U_adder_0(</span><br><span class="line"><span class="variable">.a</span> (a ),</span><br><span class="line"><span class="variable">.b</span> (b ),</span><br><span class="line"><span class="variable">.c</span> (c )</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 使用默认的宽度 4</span></span><br><span class="line">adder U_adder_1(</span><br><span class="line"><span class="variable">.a</span> (a ),</span><br><span class="line"><span class="variable">.b</span> (b ),</span><br><span class="line"><span class="variable">.c</span> (c )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
 <p>局部参数 localparam 和参数类似，但是不能在例化时被覆盖。</p>
 <h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><h6 id="按位运算"><a href="#按位运算" class="headerlink" title="按位运算"></a>按位运算</h6><p>按位取反 ~</p>
 <p>按位与 &amp;</p>
@@ -222,10 +279,8 @@
 <h4 id="组合逻辑"><a href="#组合逻辑" class="headerlink" title="组合逻辑"></a>组合逻辑</h4><h6 id="always"><a href="#always" class="headerlink" title="always"></a>always</h6><p>不推荐使用 always 块来表示组合逻辑。不正确的使用会生成大量锁存器。 </p>
 <p>下面的例子是一个 32-5 优先编码器，如果 tlb_hit_array 全为 0，那么 tlb_hit_index 也为 0。 always 块中被赋值的变量只能是 reg 类型，但是该编码器并不会综合出寄存器或者锁存器，这是因为 Verilog 中的寄存器 (reg) 和硬件上的寄存器不能完全等价。 如果去掉 tlb_hit_index = 5’d0; 一句，则会综合出锁存器。</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">4</span> :<span class="number">0</span>] tlb_hit_index;</span><br><span class="line"><span class="keyword">wire</span> [<span class="number">31</span>:<span class="number">0</span>] tlb_hit_array;</span><br><span class="line"><span class="keyword">integer</span> i;</span><br><span class="line"><span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">tlb_hit_index = <span class="number">5&#x27;d0</span>;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i = i + <span class="number">1</span>) <span class="keyword">begin</span></span><br><span class="line"><span class="keyword">if</span> (tlb_hit_array[i]) <span class="keyword">begin</span></span><br><span class="line">tlb_hit_index = i;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 <h4 id="模块声明和例化"><a href="#模块声明和例化" class="headerlink" title="模块声明和例化"></a>模块声明和例化</h4><p>模块被包含在关键字 module、endmodule 之内。</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder ( <span class="comment">// 模块名称声明</span></span><br><span class="line"><span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] a, <span class="comment">// 输入输出声明</span></span><br><span class="line"><span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] b,</span><br><span class="line"><span class="keyword">output</span> [<span class="number">31</span>:<span class="number">0</span>] c</span><br><span class="line">);</span><br><span class="line"><span class="keyword">assign</span> c = a + b; <span class="comment">// 变量声明、always 语句、assign 语句等</span></span><br><span class="line"><span class="keyword">endmodule</span> <span class="comment">// 模块结束</span></span><br></pre></td></tr></table></figure>
-
 <h4 id="Generate-块"><a href="#Generate-块" class="headerlink" title="Generate 块"></a>Generate 块</h4><p>这里只介绍 generate for 块。 </p>
 <p>generate for 的主要功能就是对模块或组件以及 always 块、assign 语句进行复制。 使用 generate for 的时候, 必须要注意以下几点要求 </p>
 <p>• 在使用 generate for 的时候必须先声明一个 genvar 变量，用作 for 的循环变量。genvar 是 generate 语句中的一种变量类型，用于在 generate for 语句中声明一个正整数的索引变量。</p>
@@ -233,14 +288,11 @@
 <p>• 尽量对 begin-end 顺序块进行命名</p>
 <p> generate for 的语法示例如下：</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">genvar</span> i;</span><br><span class="line"><span class="keyword">generate</span> <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i = i + <span class="number">1</span>) <span class="keyword">begin</span>: gen_assign_temp</span><br><span class="line"><span class="keyword">assign</span> temp[i] = indata[<span class="number">2</span> * i + <span class="number">1</span> : <span class="number">2</span> * i];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">endgenerat</span><br></pre></td></tr></table></figure>
-
 <h4 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h4><h6 id="时延语句"><a href="#时延语句" class="headerlink" title="时延语句"></a>时延语句</h6><p>仿真中还经常使用时延来构造合适的仿真激励。它是不可综合的，仅能够在仿真中使用。时延分两类，一是 语句内部时延，二是语句间时延，其示例如下所示：</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 语句内部时延</span></span><br><span class="line">A = #<span class="number">5</span> <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="comment">// 语句间时延</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">Temp = <span class="number">1&#x27;b1</span>;</span><br><span class="line">#<span class="number">5</span> A = Temp;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 <p>两种方式都表达在五个时间单位后，将 A 的值赋为 1。</p>
 <h6 id="initial-语句"><a href="#initial-语句" class="headerlink" title="initial 语句"></a>initial 语句</h6><p>一般用来生成复位信号和激励。只在仿真开始时执行一次。</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试代码中</span></span><br><span class="line"><span class="comment">// 假设`timescale 1ns / 1ps</span></span><br><span class="line"><span class="keyword">reg</span> rst_n, clk;</span><br><span class="line"><span class="keyword">always</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">rst_n = <span class="number">1&#x27;b0</span>;</span><br><span class="line">clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">#<span class="number">50</span> rst_n = <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 <p>会生成一个 100MHz 的时钟，一个 50ns 有效的复位信号。</p>
 <h6 id="系统任务"><a href="#系统任务" class="headerlink" title="系统任务"></a>系统任务</h6><p>系统任务可以被用来执行一些系统设计所需的输入、输出、时序检查、仿真控制操作。所有的系统任务名称 前都带有符号 $ 使之与用户定义的任务和函数相区分。</p>
 <p>常见的系统任务：</p>
@@ -468,7 +520,6 @@
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/140260245">什么是张量？ - 知乎 (zhihu.com)</a></p>
 <h4 id="convert-to-tensor"><a href="#convert-to-tensor" class="headerlink" title="convert_to_tensor"></a>convert_to_tensor</h4><p>将给定值转换为张量。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.convert_to_tensor(</span><br><span class="line">    value,</span><br><span class="line">    dtype=<span class="literal">None</span>,</span><br><span class="line">    dtype_hint=<span class="literal">None</span>,</span><br><span class="line">    name=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <p>该函数将各种类型的Python对象转换为张量对象。它接受张量对象、数字数组、Python列表和Python标量。</p>
 <h5 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h5><p>value:类型具有注册张量转换函数的对象。<br>dtype:返回张量的可选元素类型。如果缺少，则从值的类型推断类型。<br>dtype_hint:返回张量的可选元素类型，当dtype为None时使用。在某些情况下，调用者在转换为张量时可能没有考虑到dtype，因此dtype_hint可以用作软首选项。如果不能转换为dtype_hint，则此参数没有效果。<br>name:创建新张量时使用的可选名称。</p>
 <h5 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h5><p>一个基于值的张量。</p>
@@ -476,28 +527,24 @@
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6e61528acad9">tf.nn.embedding_lookup() 详解 - 简书 (jianshu.com)</a></p>
 <h4 id="expand-dims"><a href="#expand-dims" class="headerlink" title="expand_dims()"></a>expand_dims()</h4><p>tf.expand_dims()函数用于给函数增加维度。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.expand_dims(</span><br><span class="line">    input,</span><br><span class="line">    axis=None,</span><br><span class="line">    name=None,</span><br><span class="line">    dim=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <h5 id="参数：-1"><a href="#参数：-1" class="headerlink" title="参数："></a>参数：</h5><ul>
 <li>input是输入张量。</li>
 <li>axis是指定扩大输入张量形状的维度索引值。</li>
 <li>dim等同于轴，一般不推荐使用。</li>
 </ul>
 <p>函数的功能是在给定一个input时，在axis轴处给input增加一个维度。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/TeFuirnever/article/details/88797810">(5条消息) tf.expand_dims()函数解析（最清晰的解释）_种树最好的时间是10年前，其次是现在！！！-CSDN博客_tf.expand_dim</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/TeFuirnever/article/details/88797810">(5条消息) tf.expand<em>dims()函数解析（最清晰的解释）</em>种树最好的时间是10年前，其次是现在！！！-CSDN博客_tf.expand_dim</a></p>
 <h4 id="tf-tile"><a href="#tf-tile" class="headerlink" title="tf.tile()"></a>tf.tile()</h4><p>tensorflow中的tile()函数是用来对张量(Tensor)进行扩展的，其特点是对当前张量内的数据进行一定规则的复制。最终的输出张量维度不变。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tf.tile(</span><br><span class="line">    input,</span><br><span class="line">    multiples,</span><br><span class="line">    name=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <p>input是待扩展的张量，multiples是扩展方法。<br>假如input是一个3维的张量。那么mutiples就必须是一个1x3的1维张量。这个张量的三个值依次表示input的第1，第2，第3维数据扩展几倍。 </p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chamie/p/11124314.html">tf.tile()函数理解 - chamie - 博客园 (cnblogs.com)</a></p>
 <h4 id="concact"><a href="#concact" class="headerlink" title="concact"></a>concact</h4><p>tensorflow中用来拼接张量的函数tf.concat()，用法:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.concat([tensor1, tensor2, tensor3,...], axis)</span><br></pre></td></tr></table></figure>
-
 <p>axis=0   代表在第0个维度拼接</p>
 <p>axis=1   代表在第1个维度拼接 </p>
 <p>对于一个二维矩阵，第0个维度代表最外层方括号所框下的子集，第1个维度代表内部方括号所框下的子集。维度越高，括号越小。</p>
 <h4 id="tf-layers-batch-normalization"><a href="#tf-layers-batch-normalization" class="headerlink" title="tf.layers.batch_normalization"></a>tf.layers.batch_normalization</h4><p>用来构建待训练的神经网络模型,方法接口如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">tf.layers.batch_normalization(</span><br><span class="line">    inputs,</span><br><span class="line">    axis=-1,</span><br><span class="line">    momentum=0.99,</span><br><span class="line">    epsilon=0.001,</span><br><span class="line">    center=True,</span><br><span class="line">    scale=True,</span><br><span class="line">    beta_initializer=tf.zeros_initializer(),</span><br><span class="line">    gamma_initializer=tf.ones_initializer(),</span><br><span class="line">    moving_mean_initializer=tf.zeros_initializer(),</span><br><span class="line">    moving_variance_initializer=tf.ones_initializer(),</span><br><span class="line">    beta_regularizer=None,</span><br><span class="line">    gamma_regularizer=None,</span><br><span class="line">    beta_constraint=None,</span><br><span class="line">    gamma_constraint=None,</span><br><span class="line">    training=False,</span><br><span class="line">    trainable=True,</span><br><span class="line">    name=None,</span><br><span class="line">    reuse=None,</span><br><span class="line">    renorm=False,</span><br><span class="line">    renorm_clipping=None,</span><br><span class="line">    renorm_momentum=0.99,</span><br><span class="line">    fused=None,</span><br><span class="line">    virtual_batch_size=None,</span><br><span class="line">    adjustment=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <p>这里有几个重要参数需要注意：</p>
 <ul>
 <li><code>axis</code>的值取决于按照<code>input</code>的哪一个维度进行BN，例如输入为<code>channel_last</code> format，即<code>[batch_size, height, width, channel]</code>，则<code>axis</code>应该设定为4，如果为<code>channel_first</code> format，则<code>axis</code>应该设定为1.</li>
@@ -509,7 +556,6 @@
 </ul>
 <h4 id="dense"><a href="#dense" class="headerlink" title="dense"></a>dense</h4><p>dense，即全连接网络，layers 模块提供了一个 dense() 方法来实现此操作，定义在 tensorflow/python/layers/core.py 中，下面我们来说明一下它的用法。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dense(</span><br><span class="line">    inputs,</span><br><span class="line">    units,</span><br><span class="line">    activation=None,</span><br><span class="line">    use_bias=True,</span><br><span class="line">    kernel_initializer=None,</span><br><span class="line">    bias_initializer=tf.zeros_initializer(),</span><br><span class="line">    kernel_regularizer=None,</span><br><span class="line">    bias_regularizer=None,</span><br><span class="line">    activity_regularizer=None,</span><br><span class="line">    kernel_constraint=None,</span><br><span class="line">    bias_constraint=None,</span><br><span class="line">    trainable=True,</span><br><span class="line">    name=None,</span><br><span class="line">    reuse=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <p>参数说明如下：<br> inputs：必需，即需要进行操作的输入数据。<br> units：必须，即神经元的数量。<br> activation：可选，默认为 None，如果为 None 则是线性激活。<br> use_bias：可选，默认为 True，是否使用偏置。<br> kernel_initializer：可选，默认为 None，即权重的初始化方法，如果为 None，则使用默认的 Xavier 初始化方法。<br> bias_initializer：可选，默认为零值初始化，即偏置的初始化方法。<br> kernel_regularizer：可选，默认为 None，施加在权重上的正则项。<br> bias_regularizer：可选，默认为 None，施加在偏置上的正则项。<br> activity_regularizer：可选，默认为 None，施加在输出上的正则项。<br> kernel_constraint，可选，默认为 None，施加在权重上的约束项。<br> bias_constraint，可选，默认为 None，施加在偏置上的约束项。<br> trainable：可选，默认为 True，布尔类型，如果为 True，则将变量添加到 GraphKeys.TRAINABLE_VARIABLES 中。<br> name：可选，默认为 None，卷积层的名称。<br> reuse：可选，默认为 None，布尔类型，如果为 True，那么如果 name 相同时，会重复利用。<br> 返回值： 全连接网络处理后的 Tensor。</p>
 <h4 id="reshape"><a href="#reshape" class="headerlink" title="reshape()"></a>reshape()</h4><p>tf.reshape(tensor, shape, name=None)<br>函数的作用是将tensor变换为参数shape的形式。 其中shape为一个列表形式，特殊的一点是列表中可以存在-1。</p>
 <p>转换为一般的shape（也就是不涉及-1的）我这里就不说了，主要说一下对-1的理解。<br>-1代表的含义是不用我们自己指定这一维的大小，函数会自动计算，但列表中只能存在一个-1。<br>（当然如果存在多个-1，就是一个存在多解的方程了）</p>
@@ -524,13 +570,11 @@
 <p><img src="/2021/10/05/tensorflow/image-20211006175946915.png" alt="image-20211006175946915"></p>
 <h4 id="tf-reduce-mean"><a href="#tf-reduce-mean" class="headerlink" title="tf.reduce_mean"></a>tf.reduce_mean</h4><p>tf.reduce_mean 函数用于计算张量tensor沿着指定的数轴（tensor的某一维度）上的的平均值，主要用作降维或者计算tensor（图像）的平均值。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reduce_mean(input_tensor,</span><br><span class="line">                axis=None,</span><br><span class="line">                keep_dims=False,</span><br><span class="line">                name=None,</span><br><span class="line">                reduction_indices=None)</span><br></pre></td></tr></table></figure>
-
 <p>第一个参数input_tensor： 输入的待降维的tensor;<br>第二个参数axis： 指定的轴，如果不指定，则计算所有元素的均值;<br>第三个参数keep_dims：是否降维度，设置为True，输出的结果保持输入tensor的形状，设置为False，输出结果会降低维度;<br>第四个参数name： 操作的名称;<br>第五个参数 reduction_indices：在以前版本中用来指定轴，已弃用;</p>
 <h4 id="tf-nn-sigmoid-cross-entropy-with-logits"><a href="#tf-nn-sigmoid-cross-entropy-with-logits" class="headerlink" title="tf.nn.sigmoid_cross_entropy_with_logits"></a>tf.nn.sigmoid_cross_entropy_with_logits</h4><p>tf.nn.sigmoid_cross_entropy_with_logits(_sentinel=None,,labels=None,logits=None,name=None)</p>
 <p>对于给定的logits计算sigmoid的交叉熵。</p>
 <h4 id="tf-trainable-variables"><a href="#tf-trainable-variables" class="headerlink" title="tf.trainable_variables()"></a>tf.trainable_variables()</h4><p>顾名思义，这个函数可以也仅可以查看可训练的变量，在我们生成变量时，无论是使用tf.Variable()还是tf.get_variable()生成变量，都会涉及一个参数trainable,其默认为True。以tf.Variable()为例：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">__init__(</span><br><span class="line">    initial_value=None,</span><br><span class="line">    trainable=True,</span><br><span class="line">    collections=None,</span><br><span class="line">    validate_shape=True,</span><br><span class="line">   ...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <p>对于一些我们不需要训练的变量，比较典型的例如学习率或者计步器这些变量，我们都需要将trainable设置为False，这时tf.trainable_variables() 就不会打印这些变量。</p>
 <h4 id="tf-train-GradientDescentOptimizer"><a href="#tf-train-GradientDescentOptimizer" class="headerlink" title="tf.train.GradientDescentOptimizer"></a>tf.train.GradientDescentOptimizer</h4><p>TensorFlow中损失优化方法</p>
 <ul>
@@ -538,7 +582,6 @@
 </ul>
 <h4 id="tf-gradients"><a href="#tf-gradients" class="headerlink" title="tf.gradients()"></a>tf.gradients()</h4><p>参数如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tf.gradients(ys, xs, </span><br><span class="line">			 grad_ys=None, </span><br><span class="line">			 name=&#x27;gradients&#x27;,</span><br><span class="line">			 colocate_gradients_with_ops=False,</span><br><span class="line">			 gate_gradients=False,</span><br><span class="line">			 aggregation_method=None,</span><br><span class="line">			 stop_gradients=None)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p><code>tf.gradients()</code>实现<code>ys</code>对<code>xs</code>求导，接受求导值<code>ys</code>和<code>xs</code>不仅可以是tensor，还可以是list</p>
 <h4 id="tf-clip-by-global-norm"><a href="#tf-clip-by-global-norm" class="headerlink" title="tf.clip_by_global_norm"></a>tf.clip_by_global_norm</h4><p>tf.clip_by_global_norm函数的作用就是通过权重梯度的总和的比率来截取多个张量的值。</p>
 <h4 id="tf-gather"><a href="#tf-gather" class="headerlink" title="tf.gather"></a>tf.gather</h4><p>tf.gather(params,indices,axis=0 )</p>
@@ -609,9 +652,9 @@
 <h4 id="基于梯度的神经架构优化算法"><a href="#基于梯度的神经架构优化算法" class="headerlink" title="基于梯度的神经架构优化算法"></a>基于梯度的神经架构优化算法</h4><p>前面介绍的NAS算法都存在计算量大的问题，虽然存在改进方案。强化学习、遗传算法等方案低效的一个原因是结构搜索被当作离散空间（网络结构的表示是离散的，如遗传算法中的二进制串编码）中的黑箱优化问题，无法利用梯度信息来求解。</p>
 <p>其中一种解决思路是将离散优化问题连续化。文献[6]提出了一种称为可微结构搜索（Differentiable Architecture Search，简称DARTS）的算法，将网络结构搜索转化为连续空间的优化问题，采用梯度下降法求解，可高效地搜索神经网络架构，同时得到网络的权重参数。</p>
 <p>DARTS将网络结构、网络单元表示成有向无环图，对结构搜索问题进行松弛，转化为连续变量优化问题。目标函数是可导的，能够用梯度下降法求解，同时得到网络结构和权重等参数。算法寻找计算单元，作为最终网络结构的基本构建块。这些单元可以堆积形成卷积神经网络，递归连接形成循环神经网络。</p>
-<h4 id="教师-学生网络"><a href="#教师-学生网络" class="headerlink" title="教师-学生网络"></a>教师-学生网络</h4><p>教师–学生网络的方法，属于迁移学习的一种。迁移学习也就是将一个模型的性能迁移到另一个模型上，而对于教师–学生网络，教师网络往往是一个更加复杂的网络，具有非常好的性能和泛化能力，可以用这个网络来作为一个soft target来指导另外一个更加简单的学生网络来学习，使得更加简单、参数运算量更少的学生模型也能够具有和教师网络相近的性能，也算是一种模型压缩的方式。</p>
+<h4 id="教师-学生网络"><a href="#教师-学生网络" class="headerlink" title="教师-学生网络"></a>教师-学生网络</h4><p>教师—学生网络的方法，属于迁移学习的一种。迁移学习也就是将一个模型的性能迁移到另一个模型上，而对于教师—学生网络，教师网络往往是一个更加复杂的网络，具有非常好的性能和泛化能力，可以用这个网络来作为一个soft target来指导另外一个更加简单的学生网络来学习，使得更加简单、参数运算量更少的学生模型也能够具有和教师网络相近的性能，也算是一种模型压缩的方式。</p>
 <p>较大、较复杂的网络虽然通常具有很好的性能，但是也存在很多的冗余信息，因此运算量以及资源的消耗都非常多。而所谓的Distilling就是将复杂网络中的有用信息提取出来迁移到一个更小的网络上，这样学习来的小网络可以具备和大的复杂网络想接近的性能效果，并且也大大的节省了计算资源。这个复杂的网络可以看成一个教师，而小的网络则可以看成是一个学生。</p>
-<h4 id="知识蒸馏"><a href="#知识蒸馏" class="headerlink" title="知识蒸馏"></a>知识蒸馏</h4><p>一般认为模型的参数保留了模型学到的知识，因此最常见的迁移学习的方式就是在一个大的数据集上先做预训练，然后使用预训练得到的参数在一个小的数据集上做微调（两个数据集往往领域不同或者任务不同）。例如先在Imagenet上做预训练，然后在COCO数据集上做检测。在这篇论文中，作者认为可以将模型看成是黑盒子，知识可以看成是输入到输出的映射关系。因此，我们可以先训练好一个teacher网络，然后将teacher的网络的输出结果 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 作为student网络的目标，训练student网络，使得student网络的结果 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 接近 <img src="https://www.zhihu.com/equation?tex=q" alt="[公式]"> ，因此，我们可以将损失函数写成 <img src="https://www.zhihu.com/equation?tex=L=CE(y,+p)+%5Calpha+CE(q,+p)" alt="[公式]"> 。这里CE是交叉熵（Cross Entropy），y是真实标签的onehot编码，q是teacher网络的输出结果，p是student网络的输出结果。</p>
+<h4 id="知识蒸馏"><a href="#知识蒸馏" class="headerlink" title="知识蒸馏"></a>知识蒸馏</h4><p>一般认为模型的参数保留了模型学到的知识，因此最常见的迁移学习的方式就是在一个大的数据集上先做预训练，然后使用预训练得到的参数在一个小的数据集上做微调（两个数据集往往领域不同或者任务不同）。例如先在Imagenet上做预训练，然后在COCO数据集上做检测。在这篇论文中，作者认为可以将模型看成是黑盒子，知识可以看成是输入到输出的映射关系。因此，我们可以先训练好一个teacher网络，然后将teacher的网络的输出结果 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 作为student网络的目标，训练student网络，使得student网络的结果 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 接近 <img src="https://www.zhihu.com/equation?tex=q" alt="[公式]"> ，因此，我们可以将损失函数写成 <img src="https://www.zhihu.com/equation?tex=L%3DCE%28y%2C+p%29%2B%5Calpha+CE%28q%2C+p%29" alt="[公式]"> 。这里CE是交叉熵（Cross Entropy），y是真实标签的onehot编码，q是teacher网络的输出结果，p是student网络的输出结果。</p>
 <p>但是，直接使用teacher网络的softmax的输出结果 <img src="https://www.zhihu.com/equation?tex=q" alt="[公式]"> ，可能不大合适。因此，一个网络训练好之后，对于正确的答案会有一个很高的置信度。例如，在MNIST数据中，对于某个2的输入，对于2的预测概率会很高，而对于2类似的数字，例如3和7的预测概率为 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 和 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 。这样的话，teacher网络学到数据的相似信息（例如数字2和3，7很类似）很难传达给student网络。由于它们的概率值接近0。因此，文章提出了softmax-T，公式如下所示：</p>
 <p><img src="/2021/10/01/NAS/equation" alt="[公式]"></p>
 <p>这里 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 是student网络学习的对象（soft targets），<img src="/2021/10/01/NAS/equation" alt="[公式]"> 是神经网络softmax前的输出logit。如果将T取1，这个公式就是softmax，根据logit输出各个类别的概率。如果T接近于0，则最大的值会越近1，其它值会接近0，近似于onehot编码。如果T越大，则输出的结果的分布越平缓，相当于平滑的一个作用，起到保留相似信息的作用。如果T等于无穷，就是一个均匀分布。</p>
@@ -702,10 +745,10 @@
 <p>base模型缺点：（1）用户的历史行为特征和当前的候选广告特征在全都拼起来给神经网络之前，是一点交互的过程都没有。</p>
 <p>（2）拼起来之后给神经网络，虽然有了交互，但也丢失了部分信息，并引入了噪声。</p>
 <p>DIN模型：DIN模型在基准模型的基础上，增加了注意力机制，就是模型在对候选商品预测的时候，对用户不同行为的注意力是不一样的。“相关”的行为历史看重一些，“不相关”的历史甚至可以忽略。下图展示了DIN模型的网络结构图。DIN的模型结构中增加了 Activation Unit模块，该模块主要提取当前候选商品与历史行为中的商品的权重值。<img src="/2021/09/27/CTR/image-20210927194403979.png" alt="image-20210927194403979"></p>
-<h4 id="单层注意力模型与多层注意力模型"><a href="#单层注意力模型与多层注意力模型" class="headerlink" title="单层注意力模型与多层注意力模型"></a>单层注意力模型与多层注意力模型</h4><p>在最一般的情形下，注意力权重是仅仅是由注意力模型的原始的输入序列算出来的，这一注意力模型可被称为**<em>单层注意力模型*<strong>。另一方面，我们可对输入序列进行多次抽象，这样可以使得底层抽象的上下文向量成为下一次抽象的查询状态。这种对输入数据叠加若干层注意力模块实现对序列数据多层抽象的方法可被称为</strong></em>多层注意力模型***。更具体地来说，多层注意力模型又可按照模型的权重是自顶向下学习还是自底向上学习的方式进行划分。</p>
+<h4 id="单层注意力模型与多层注意力模型"><a href="#单层注意力模型与多层注意力模型" class="headerlink" title="单层注意力模型与多层注意力模型"></a>单层注意力模型与多层注意力模型</h4><p>在最一般的情形下，注意力权重是仅仅是由注意力模型的原始的输入序列算出来的，这一注意力模型可被称为<strong><em>单层注意力模型\</em></strong>。另一方面，我们可对输入序列进行多次抽象，这样可以使得底层抽象的上下文向量成为下一次抽象的查询状态。这种对输入数据叠加若干层注意力模块实现对序列数据多层抽象的方法可被称为<strong><em>多层注意力模型\</em></strong>。更具体地来说，多层注意力模型又可按照模型的权重是自顶向下学习还是自底向上学习的方式进行划分。</p>
 <p>多层注意力机制的一个典型应用是通过对文本进行两层抽象实现对文本的分类。这一模型称为“层次和注意力模型(Hierarchical Attention Model,HAM)”。文本是由不同的句子组合而成的，而每个句子又包含不同的单词，HAM能够对文章这种自然的层次化结构进行抽取。具体来说，其首先对每个句子建立一个注意力模型，该注意力模型的输入是每个句子中的基本单词，从而得到这个句子的特征表示；然后将句子的特征的表示输入到后续的注意力模型中来构建整段文本的特征表示。这一最后得到的整段文本的特征表示可以用于后面分类任务分类器的输入。</p>
-<h4 id="特征表示的数量"><a href="#特征表示的数量" class="headerlink" title="特征表示的数量"></a>特征表示的数量</h4><p>在大多数的应用场景下，我们只会对输入数据进行一种特征表示。然而在有些场景下，对输入数据进行单一的特征表示可能不能够为后续的过程提供足够的信息。在这种情形下，我们可以对同样的输入数据进行多种特征表示。利用注意力机制可以为这些不同的特征表示指定相关的权重，从而丢弃掉输入数据中的噪声信息和重复冗余信息。我们称这种模型为***多表示注意力模型***。这种多表示注意力模型能够决定不同特征表示的权重从而有助于后面对这一表示的应用。最后得到的输入的特征表示是多个特征表示的加权组合，这一模型的一个优势在于针对不同的后处理任务能够决定哪些特征表示更适合当前的任务场景。</p>
-<p>基于类似的想法，还有一种称为***多维度注意力模型***的方法。其核心观点是对特征表示向量的各个维度之间的依赖关系进行建模，这样我们便能够选择特征中更为有用的属性来帮助我们处理后续的任务。这一思想在自然语言处理领域至关重要因为相同的单词往往会出现多义性。</p>
+<h4 id="特征表示的数量"><a href="#特征表示的数量" class="headerlink" title="特征表示的数量"></a>特征表示的数量</h4><p>在大多数的应用场景下，我们只会对输入数据进行一种特征表示。然而在有些场景下，对输入数据进行单一的特征表示可能不能够为后续的过程提供足够的信息。在这种情形下，我们可以对同样的输入数据进行多种特征表示。利用注意力机制可以为这些不同的特征表示指定相关的权重，从而丢弃掉输入数据中的噪声信息和重复冗余信息。我们称这种模型为<strong><em>多表示注意力模型\</em></strong>。这种多表示注意力模型能够决定不同特征表示的权重从而有助于后面对这一表示的应用。最后得到的输入的特征表示是多个特征表示的加权组合，这一模型的一个优势在于针对不同的后处理任务能够决定哪些特征表示更适合当前的任务场景。</p>
+<p>基于类似的想法，还有一种称为<strong><em>多维度注意力模型\</em></strong>的方法。其核心观点是对特征表示向量的各个维度之间的依赖关系进行建模，这样我们便能够选择特征中更为有用的属性来帮助我们处理后续的任务。这一思想在自然语言处理领域至关重要因为相同的单词往往会出现多义性。</p>
 <h4 id="AUC"><a href="#AUC" class="headerlink" title="AUC"></a>AUC</h4><p>本质是一个概率值，简单来说就是随机抽出一对样本（一个正样本一个负样本），然后用训练得到的分类器对这两个样本进行预测，预测得到正样本的概率大于负样本的概率的概率。</p>
 <h4 id="GAUC"><a href="#GAUC" class="headerlink" title="GAUC"></a>GAUC</h4><p>优点：实现了用户级别的AUC计算</p>
 <p>缺点：用户行为没有那么多的时候，GAUC会抖动，所以大部分公司还是会采用AUC</p>
@@ -898,7 +941,6 @@
       
           <h2 id="Latex入门教程"><a href="#Latex入门教程" class="headerlink" title="Latex入门教程"></a>Latex入门教程</h2><p>在编辑框中输入一下内容</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">% 这里是导言区</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">Hello, world!</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-
 <p>则会有如下显示</p>
 <p><img src="/2021/07/29/Latex/image-20210729082909909.png" alt="image-20210729082909909"></p>
 <p>同时会自动生成PDF文件在<code>.tex</code>文件所保存的目录下。</p>
@@ -908,7 +950,6 @@
 <p><code>\begin&#123;document&#125;</code>与<code>\documentclass&#123;article&#125;</code>之间的部分被称为<strong>导言区</strong>。导言区中的控制序列，通常会影响到整个输出文档。</p>
 <h3 id="中英混排"><a href="#中英混排" class="headerlink" title="中英混排"></a>中英混排</h3><p>在编辑框中输入</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\documentclass[UTF8]&#123;ctexart&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">你好，world!</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-
 <p>会产生以下结果</p>
 <p><img src="/2021/07/29/Latex/image-20210729083704740.png" alt="image-20210729083704740"></p>
 <p>相较于之前的例子，代码有了细微的差别：</p>
@@ -922,88 +963,24 @@
 <p>\subparagraph{.}</p>
 <p>在编辑框输入以下文本</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">\documentclass[UTF8]&#123;ctexart&#125;</span><br><span class="line">\title&#123;你好，world!&#125;</span><br><span class="line">\author&#123;李凯杰&#125;</span><br><span class="line">\date&#123;\today&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">	\maketitle</span><br><span class="line">	\section&#123;你好中国&#125;</span><br><span class="line">	中国在 East Asia.</span><br><span class="line">	\subsection&#123;Hello Beijing&#125;</span><br><span class="line">	北京是 capital of China.</span><br><span class="line">	\subsubsection&#123;Hello Dongcheng District&#125;</span><br><span class="line">	\paragraph&#123;Tian&#x27;anmen Square&#125;</span><br><span class="line">	is in the center of Beijing</span><br><span class="line">	\subparagraph&#123;Chairman Mao&#125;</span><br><span class="line">	is in the center of 天安门广场。</span><br><span class="line">	\subsection&#123;Hello 北京&#125;</span><br><span class="line">	\paragraph&#123;北京&#125; is an international city。</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-
 <p>会产生以下结果：</p>
 <p><img src="/2021/07/29/Latex/image-20210729084810750.png" alt="image-20210729084810750"></p>
 <h3 id="文献引用"><a href="#文献引用" class="headerlink" title="文献引用"></a>文献引用</h3><h3 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h3><p>为了使用 AMS-LaTeX 提供的数学功能，我们需要在导言区加载<code>amsmath</code>宏包：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;amsmath&#125;</span><br></pre></td></tr></table></figure>
-
 <p>数学模式</p>
 <p>LaTeX 的数学模式有两种：行内模式 (inline) 和行间模式 (display)。前者在正文的行文中，插入数学公式；后者独立排列单独成行。</p>
-<p>在行文中，使用<code>$ ... $</code>可以插入行内公式，使用<code>\[ ... \]</code>可以插入行间公式，如果需要对行间公式进行编号，可以使用<code>equation</code>环境： \begin{equaion} … \end{equation}</p>
+<p>在行文中，使用<script type="math/tex">...</script>可以插入行内公式，使用<code>\[ ... \]</code>可以插入行间公式，如果需要对行间公式进行编号，可以使用<code>equation</code>环境： \begin{equaion} … \end{equation}</p>
 <p>Latex在线工具编辑器：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.codecogs.com/latex/eqneditor.php</span><br></pre></td></tr></table></figure>
-
 <h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>Latex在线表格编辑器</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.tablesgenerator.com/</span><br></pre></td></tr></table></figure>
-
 <h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>在 LaTeX 中插入图片，有很多种方式。最好用的应当属利用<code>graphicx</code>宏包提供的<code>\includegraphics</code>命令。比如你在你的 TeX 源文件同目录下，有名为 a.jpg 的图片，你可以用这样的方式将它插入到输出文档中：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\usepackage&#123;graphicx&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">\includegraphics&#123;a.jpg&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-
 <p>图片可能很大，超过了输出文件的纸张大小，或者干脆就是你自己觉得输出的效果不爽。这时候你可以用</p>
 <p><code>\includegraphics</code>控制序列的可选参数来控制。比如</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\includegraphics[width = .8\textwidth]&#123;a.jpg&#125;</span><br></pre></td></tr></table></figure>
-
 <p>这样图片的宽度会被缩放至页面宽度的百分之八十，图片的总高度会按比例缩放。</p>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/26/%E6%B8%B8%E6%88%8F%E5%A4%96%E6%98%9F%E4%BA%BA%E5%85%A5%E4%BE%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/26/%E6%B8%B8%E6%88%8F%E5%A4%96%E6%98%9F%E4%BA%BA%E5%85%A5%E4%BE%B5/" class="post-title-link" itemprop="url">游戏外星人入侵</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-26 15:10:45 / Modified: 16:50:07" itemprop="dateCreated datePublished" datetime="2021-07-26T15:10:45+08:00">2021-07-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
       
     </div>
 
@@ -1087,7 +1064,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1170,6 +1147,8 @@
 
 
 
+
+  
 
   
 

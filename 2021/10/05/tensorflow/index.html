@@ -211,7 +211,6 @@
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/140260245">什么是张量？ - 知乎 (zhihu.com)</a></p>
 <h4 id="convert-to-tensor"><a href="#convert-to-tensor" class="headerlink" title="convert_to_tensor"></a>convert_to_tensor</h4><p>将给定值转换为张量。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.convert_to_tensor(</span><br><span class="line">    value,</span><br><span class="line">    dtype=<span class="literal">None</span>,</span><br><span class="line">    dtype_hint=<span class="literal">None</span>,</span><br><span class="line">    name=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <p>该函数将各种类型的Python对象转换为张量对象。它接受张量对象、数字数组、Python列表和Python标量。</p>
 <h5 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h5><p>value:类型具有注册张量转换函数的对象。<br>dtype:返回张量的可选元素类型。如果缺少，则从值的类型推断类型。<br>dtype_hint:返回张量的可选元素类型，当dtype为None时使用。在某些情况下，调用者在转换为张量时可能没有考虑到dtype，因此dtype_hint可以用作软首选项。如果不能转换为dtype_hint，则此参数没有效果。<br>name:创建新张量时使用的可选名称。</p>
 <h5 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h5><p>一个基于值的张量。</p>
@@ -219,28 +218,24 @@
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6e61528acad9">tf.nn.embedding_lookup() 详解 - 简书 (jianshu.com)</a></p>
 <h4 id="expand-dims"><a href="#expand-dims" class="headerlink" title="expand_dims()"></a>expand_dims()</h4><p>tf.expand_dims()函数用于给函数增加维度。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.expand_dims(</span><br><span class="line">    input,</span><br><span class="line">    axis=None,</span><br><span class="line">    name=None,</span><br><span class="line">    dim=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <h5 id="参数：-1"><a href="#参数：-1" class="headerlink" title="参数："></a>参数：</h5><ul>
 <li>input是输入张量。</li>
 <li>axis是指定扩大输入张量形状的维度索引值。</li>
 <li>dim等同于轴，一般不推荐使用。</li>
 </ul>
 <p>函数的功能是在给定一个input时，在axis轴处给input增加一个维度。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/TeFuirnever/article/details/88797810">(5条消息) tf.expand_dims()函数解析（最清晰的解释）_种树最好的时间是10年前，其次是现在！！！-CSDN博客_tf.expand_dim</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/TeFuirnever/article/details/88797810">(5条消息) tf.expand<em>dims()函数解析（最清晰的解释）</em>种树最好的时间是10年前，其次是现在！！！-CSDN博客_tf.expand_dim</a></p>
 <h4 id="tf-tile"><a href="#tf-tile" class="headerlink" title="tf.tile()"></a>tf.tile()</h4><p>tensorflow中的tile()函数是用来对张量(Tensor)进行扩展的，其特点是对当前张量内的数据进行一定规则的复制。最终的输出张量维度不变。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tf.tile(</span><br><span class="line">    input,</span><br><span class="line">    multiples,</span><br><span class="line">    name=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <p>input是待扩展的张量，multiples是扩展方法。<br>假如input是一个3维的张量。那么mutiples就必须是一个1x3的1维张量。这个张量的三个值依次表示input的第1，第2，第3维数据扩展几倍。 </p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chamie/p/11124314.html">tf.tile()函数理解 - chamie - 博客园 (cnblogs.com)</a></p>
 <h4 id="concact"><a href="#concact" class="headerlink" title="concact"></a>concact</h4><p>tensorflow中用来拼接张量的函数tf.concat()，用法:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.concat([tensor1, tensor2, tensor3,...], axis)</span><br></pre></td></tr></table></figure>
-
 <p>axis=0   代表在第0个维度拼接</p>
 <p>axis=1   代表在第1个维度拼接 </p>
 <p>对于一个二维矩阵，第0个维度代表最外层方括号所框下的子集，第1个维度代表内部方括号所框下的子集。维度越高，括号越小。</p>
 <h4 id="tf-layers-batch-normalization"><a href="#tf-layers-batch-normalization" class="headerlink" title="tf.layers.batch_normalization"></a>tf.layers.batch_normalization</h4><p>用来构建待训练的神经网络模型,方法接口如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">tf.layers.batch_normalization(</span><br><span class="line">    inputs,</span><br><span class="line">    axis=-1,</span><br><span class="line">    momentum=0.99,</span><br><span class="line">    epsilon=0.001,</span><br><span class="line">    center=True,</span><br><span class="line">    scale=True,</span><br><span class="line">    beta_initializer=tf.zeros_initializer(),</span><br><span class="line">    gamma_initializer=tf.ones_initializer(),</span><br><span class="line">    moving_mean_initializer=tf.zeros_initializer(),</span><br><span class="line">    moving_variance_initializer=tf.ones_initializer(),</span><br><span class="line">    beta_regularizer=None,</span><br><span class="line">    gamma_regularizer=None,</span><br><span class="line">    beta_constraint=None,</span><br><span class="line">    gamma_constraint=None,</span><br><span class="line">    training=False,</span><br><span class="line">    trainable=True,</span><br><span class="line">    name=None,</span><br><span class="line">    reuse=None,</span><br><span class="line">    renorm=False,</span><br><span class="line">    renorm_clipping=None,</span><br><span class="line">    renorm_momentum=0.99,</span><br><span class="line">    fused=None,</span><br><span class="line">    virtual_batch_size=None,</span><br><span class="line">    adjustment=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <p>这里有几个重要参数需要注意：</p>
 <ul>
 <li><code>axis</code>的值取决于按照<code>input</code>的哪一个维度进行BN，例如输入为<code>channel_last</code> format，即<code>[batch_size, height, width, channel]</code>，则<code>axis</code>应该设定为4，如果为<code>channel_first</code> format，则<code>axis</code>应该设定为1.</li>
@@ -252,7 +247,6 @@
 </ul>
 <h4 id="dense"><a href="#dense" class="headerlink" title="dense"></a>dense</h4><p>dense，即全连接网络，layers 模块提供了一个 dense() 方法来实现此操作，定义在 tensorflow/python/layers/core.py 中，下面我们来说明一下它的用法。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dense(</span><br><span class="line">    inputs,</span><br><span class="line">    units,</span><br><span class="line">    activation=None,</span><br><span class="line">    use_bias=True,</span><br><span class="line">    kernel_initializer=None,</span><br><span class="line">    bias_initializer=tf.zeros_initializer(),</span><br><span class="line">    kernel_regularizer=None,</span><br><span class="line">    bias_regularizer=None,</span><br><span class="line">    activity_regularizer=None,</span><br><span class="line">    kernel_constraint=None,</span><br><span class="line">    bias_constraint=None,</span><br><span class="line">    trainable=True,</span><br><span class="line">    name=None,</span><br><span class="line">    reuse=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <p>参数说明如下：<br> inputs：必需，即需要进行操作的输入数据。<br> units：必须，即神经元的数量。<br> activation：可选，默认为 None，如果为 None 则是线性激活。<br> use_bias：可选，默认为 True，是否使用偏置。<br> kernel_initializer：可选，默认为 None，即权重的初始化方法，如果为 None，则使用默认的 Xavier 初始化方法。<br> bias_initializer：可选，默认为零值初始化，即偏置的初始化方法。<br> kernel_regularizer：可选，默认为 None，施加在权重上的正则项。<br> bias_regularizer：可选，默认为 None，施加在偏置上的正则项。<br> activity_regularizer：可选，默认为 None，施加在输出上的正则项。<br> kernel_constraint，可选，默认为 None，施加在权重上的约束项。<br> bias_constraint，可选，默认为 None，施加在偏置上的约束项。<br> trainable：可选，默认为 True，布尔类型，如果为 True，则将变量添加到 GraphKeys.TRAINABLE_VARIABLES 中。<br> name：可选，默认为 None，卷积层的名称。<br> reuse：可选，默认为 None，布尔类型，如果为 True，那么如果 name 相同时，会重复利用。<br> 返回值： 全连接网络处理后的 Tensor。</p>
 <h4 id="reshape"><a href="#reshape" class="headerlink" title="reshape()"></a>reshape()</h4><p>tf.reshape(tensor, shape, name=None)<br>函数的作用是将tensor变换为参数shape的形式。 其中shape为一个列表形式，特殊的一点是列表中可以存在-1。</p>
 <p>转换为一般的shape（也就是不涉及-1的）我这里就不说了，主要说一下对-1的理解。<br>-1代表的含义是不用我们自己指定这一维的大小，函数会自动计算，但列表中只能存在一个-1。<br>（当然如果存在多个-1，就是一个存在多解的方程了）</p>
@@ -267,13 +261,11 @@
 <p><img src="/2021/10/05/tensorflow/image-20211006175946915.png" alt="image-20211006175946915"></p>
 <h4 id="tf-reduce-mean"><a href="#tf-reduce-mean" class="headerlink" title="tf.reduce_mean"></a>tf.reduce_mean</h4><p>tf.reduce_mean 函数用于计算张量tensor沿着指定的数轴（tensor的某一维度）上的的平均值，主要用作降维或者计算tensor（图像）的平均值。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reduce_mean(input_tensor,</span><br><span class="line">                axis=None,</span><br><span class="line">                keep_dims=False,</span><br><span class="line">                name=None,</span><br><span class="line">                reduction_indices=None)</span><br></pre></td></tr></table></figure>
-
 <p>第一个参数input_tensor： 输入的待降维的tensor;<br>第二个参数axis： 指定的轴，如果不指定，则计算所有元素的均值;<br>第三个参数keep_dims：是否降维度，设置为True，输出的结果保持输入tensor的形状，设置为False，输出结果会降低维度;<br>第四个参数name： 操作的名称;<br>第五个参数 reduction_indices：在以前版本中用来指定轴，已弃用;</p>
 <h4 id="tf-nn-sigmoid-cross-entropy-with-logits"><a href="#tf-nn-sigmoid-cross-entropy-with-logits" class="headerlink" title="tf.nn.sigmoid_cross_entropy_with_logits"></a>tf.nn.sigmoid_cross_entropy_with_logits</h4><p>tf.nn.sigmoid_cross_entropy_with_logits(_sentinel=None,,labels=None,logits=None,name=None)</p>
 <p>对于给定的logits计算sigmoid的交叉熵。</p>
 <h4 id="tf-trainable-variables"><a href="#tf-trainable-variables" class="headerlink" title="tf.trainable_variables()"></a>tf.trainable_variables()</h4><p>顾名思义，这个函数可以也仅可以查看可训练的变量，在我们生成变量时，无论是使用tf.Variable()还是tf.get_variable()生成变量，都会涉及一个参数trainable,其默认为True。以tf.Variable()为例：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">__init__(</span><br><span class="line">    initial_value=None,</span><br><span class="line">    trainable=True,</span><br><span class="line">    collections=None,</span><br><span class="line">    validate_shape=True,</span><br><span class="line">   ...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <p>对于一些我们不需要训练的变量，比较典型的例如学习率或者计步器这些变量，我们都需要将trainable设置为False，这时tf.trainable_variables() 就不会打印这些变量。</p>
 <h4 id="tf-train-GradientDescentOptimizer"><a href="#tf-train-GradientDescentOptimizer" class="headerlink" title="tf.train.GradientDescentOptimizer"></a>tf.train.GradientDescentOptimizer</h4><p>TensorFlow中损失优化方法</p>
 <ul>
@@ -281,7 +273,6 @@
 </ul>
 <h4 id="tf-gradients"><a href="#tf-gradients" class="headerlink" title="tf.gradients()"></a>tf.gradients()</h4><p>参数如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tf.gradients(ys, xs, </span><br><span class="line">			 grad_ys=None, </span><br><span class="line">			 name=&#x27;gradients&#x27;,</span><br><span class="line">			 colocate_gradients_with_ops=False,</span><br><span class="line">			 gate_gradients=False,</span><br><span class="line">			 aggregation_method=None,</span><br><span class="line">			 stop_gradients=None)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p><code>tf.gradients()</code>实现<code>ys</code>对<code>xs</code>求导，接受求导值<code>ys</code>和<code>xs</code>不仅可以是tensor，还可以是list</p>
 <h4 id="tf-clip-by-global-norm"><a href="#tf-clip-by-global-norm" class="headerlink" title="tf.clip_by_global_norm"></a>tf.clip_by_global_norm</h4><p>tf.clip_by_global_norm函数的作用就是通过权重梯度的总和的比率来截取多个张量的值。</p>
 <h4 id="tf-gather"><a href="#tf-gather" class="headerlink" title="tf.gather"></a>tf.gather</h4><p>tf.gather(params,indices,axis=0 )</p>
@@ -380,7 +371,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -463,6 +454,8 @@
 
 
 
+
+  
 
   
 

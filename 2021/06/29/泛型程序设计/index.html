@@ -200,29 +200,21 @@
 <p>注释：类型变量使用大写形式，且比较短，这是很常见的。在ava库中，使用变量E表示集合的元素类型，K和V分别表示表的关键字与值的类型。T(需要时还可以用临近的字母U和S)表示“任意类型”。</p>
 <h3 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h3><p>定义一个带有类型参数的简单方法。 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class ArrayAlg</span><br><span class="line">&#123;</span><br><span class="line"> public static &lt;T&gt; T getMiddle(T... a)</span><br><span class="line">&#123;</span><br><span class="line"> return a[a.length /2];</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
 <p>这个方法是在普通类中定义的，而不是在泛型类中定义的。然而，这是一个泛型方法，可以从尖括号和类型变量看出这一点。注意，类型变量放在修饰符(这里是 public static)的后面，返回类型的前面。<br>泛型方法可以定义在普通类中，也可以定义在泛型类中。<br>当调用一个泛型方法时，在方法名前的尖括号中放入具体的类型：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String middle ArrayAlg. &lt;String&gt; (&quot;John&quot;, &quot;Q&quot;, &quot;Public&quot;);</span><br></pre></td></tr></table></figure>
-
 <p>在这种情况(实际也是大多数情况)下，方法调用中可以省略<String>类型参数。编译器有足够的信息能够推断出所调用的方法。它用names的类型(即 String[])与泛型类型T[]进行匹配并推断出T一定 String是。也就是说，可以调用</String></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String middle ArrayAlg. getMiddle(&quot;John&quot;, &quot;Q.&quot;, &quot;Public&quot;);</span><br></pre></td></tr></table></figure>
-
 <p>几乎在大多数情况下，对于泛型方法的类型引用没有问题。偶尔，编译器也会提示错误，此时需要解译错误报告。看一看下面这个示例：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double middle= ArrayAlg.getMiddle(3.14,1729,0);</span><br></pre></td></tr></table></figure>
-
 <p>错误消息会以晦涩的方式指出(不同的编译器给出的错误消息可能有所不同):解释这句代码有两种方法，而且这两种方法都是合法的。简单地说，编译器将会自动打包参数为1个 Double和2个 Integer对象，而后寻找这些类的共同超类型。事实上；找到2个这样的超类型： Number和 Comparable接口，其本身也是一个泛型类型。在这种情况下，可以采取的补救措施是将所有的参数都写为double值。</p>
 <h3 id="类型限定的变量"><a href="#类型限定的变量" class="headerlink" title="类型限定的变量"></a>类型限定的变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">有时，类或方法需要对类型变量加以约束。下面是一个典型的例子。我们要计算数组中的最小元素：</span><br><span class="line"> class ArrayAlg</span><br><span class="line"> &#123;</span><br><span class="line">    public static &lt;T&gt; T min( a)//almost correct</span><br><span class="line">   &#123;</span><br><span class="line">        if (a = null ||a.length==0) return null;</span><br><span class="line">        T smallest a[0];</span><br><span class="line">        for (int 1; i a. length; i++)</span><br><span class="line">            if (smallest. compareTo(a[i])&gt; 0) smallest=a[i];</span><br><span class="line">        return smallest;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;  </span><br></pre></td></tr></table></figure>
-
 <p>但是，这里有一个问题。请看一下min方法的代码内部。变量 smallest类型为T,这意味着它可以是任何一个类的对象。怎么才能确信T所属的类有 compareTo方法呢?<br>解决这个问题的方案是将T限制为实现了 Comparable接口(只含一个方法compareTo的标准接口)的类。可以通过对类型变量T设置限定( bound)实现这一点：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&gt; T min(T[] a)...</span><br></pre></td></tr></table></figure>
-
 <p>实际上 Comparable接口本身就是一个泛型类型。目前，我们忽略其复杂性以及编译器产生的警告。<br>现在，泛型的min方法只能被实现了 Comparable接口的类(如String、 LocalDate等)的数组调用。由于 Rectangle类没有实现 Comparable接口，所以调用min将会产生一个编译错误。</p>
 <p>读者或许会感到奇怪——在此为什么使用关键字 extends而不是 implements?毕竞， Comparable是一个接口。下面的记法</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;T extends Boundinglype&gt;</span><br></pre></td></tr></table></figure>
-
 <p>表示T应该是绑定类型的子类型(subtype)。T和绑定类型可以是类，也可以是接口。选择关键字 extends的原因是更接近子类的概念，并且Java的设计者也不打算在语言中再添加一个新的关键字(如sub)。<br>一个类型变量或通配符可以有多个限定，例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T extends Comparable &amp; Serializable</span><br></pre></td></tr></table></figure>
-
 <p>限定类型用“&amp;”分隔，而逗号用来分隔类型变量。<br>在java的继承中，可以根据需要拥有多个接口超类型，但限定中至多有一个类。如果用一个类作为限定，它必须是限定列表中的第一个。</p>
 
     </div>
@@ -318,7 +310,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -401,6 +393,8 @@
 
 
 
+
+  
 
   
 

@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Latex入门教程在编辑框中输入一下内容 12345\documentclass&amp;#123;article&amp;#125;% 这里是导言区\begin&amp;#123;document&amp;#125;Hello, world!\end&amp;#123;document&amp;#125;  则会有如下显示  同时会自动生成PDF文件在.tex文件所保存的目录下。 此处的第一行\documentclass&amp;#123;artic">
+  <meta name="description" content="Latex入门教程在编辑框中输入一下内容 12345\documentclass&amp;#123;article&amp;#125;% 这里是导言区\begin&amp;#123;document&amp;#125;Hello, world!\end&amp;#123;document&amp;#125; 则会有如下显示  同时会自动生成PDF文件在.tex文件所保存的目录下。 此处的第一行\documentclass&amp;#123;articl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Latex">
 <meta property="og:url" content="http://example.com/2021/07/29/Latex/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Latex入门教程在编辑框中输入一下内容 12345\documentclass&amp;#123;article&amp;#125;% 这里是导言区\begin&amp;#123;document&amp;#125;Hello, world!\end&amp;#123;document&amp;#125;  则会有如下显示  同时会自动生成PDF文件在.tex文件所保存的目录下。 此处的第一行\documentclass&amp;#123;artic">
+<meta property="og:description" content="Latex入门教程在编辑框中输入一下内容 12345\documentclass&amp;#123;article&amp;#125;% 这里是导言区\begin&amp;#123;document&amp;#125;Hello, world!\end&amp;#123;document&amp;#125; 则会有如下显示  同时会自动生成PDF文件在.tex文件所保存的目录下。 此处的第一行\documentclass&amp;#123;articl">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/07/29/Latex/image-20210729082909909.png">
 <meta property="og:image" content="http://example.com/2021/07/29/Latex/image-20210729083704740.png">
@@ -194,7 +194,6 @@
       
         <h2 id="Latex入门教程"><a href="#Latex入门教程" class="headerlink" title="Latex入门教程"></a>Latex入门教程</h2><p>在编辑框中输入一下内容</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">% 这里是导言区</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">Hello, world!</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-
 <p>则会有如下显示</p>
 <p><img src="/2021/07/29/Latex/image-20210729082909909.png" alt="image-20210729082909909"></p>
 <p>同时会自动生成PDF文件在<code>.tex</code>文件所保存的目录下。</p>
@@ -204,7 +203,6 @@
 <p><code>\begin&#123;document&#125;</code>与<code>\documentclass&#123;article&#125;</code>之间的部分被称为<strong>导言区</strong>。导言区中的控制序列，通常会影响到整个输出文档。</p>
 <h3 id="中英混排"><a href="#中英混排" class="headerlink" title="中英混排"></a>中英混排</h3><p>在编辑框中输入</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\documentclass[UTF8]&#123;ctexart&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">你好，world!</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-
 <p>会产生以下结果</p>
 <p><img src="/2021/07/29/Latex/image-20210729083704740.png" alt="image-20210729083704740"></p>
 <p>相较于之前的例子，代码有了细微的差别：</p>
@@ -218,28 +216,22 @@
 <p>\subparagraph{.}</p>
 <p>在编辑框输入以下文本</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">\documentclass[UTF8]&#123;ctexart&#125;</span><br><span class="line">\title&#123;你好，world!&#125;</span><br><span class="line">\author&#123;李凯杰&#125;</span><br><span class="line">\date&#123;\today&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">	\maketitle</span><br><span class="line">	\section&#123;你好中国&#125;</span><br><span class="line">	中国在 East Asia.</span><br><span class="line">	\subsection&#123;Hello Beijing&#125;</span><br><span class="line">	北京是 capital of China.</span><br><span class="line">	\subsubsection&#123;Hello Dongcheng District&#125;</span><br><span class="line">	\paragraph&#123;Tian&#x27;anmen Square&#125;</span><br><span class="line">	is in the center of Beijing</span><br><span class="line">	\subparagraph&#123;Chairman Mao&#125;</span><br><span class="line">	is in the center of 天安门广场。</span><br><span class="line">	\subsection&#123;Hello 北京&#125;</span><br><span class="line">	\paragraph&#123;北京&#125; is an international city。</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-
 <p>会产生以下结果：</p>
 <p><img src="/2021/07/29/Latex/image-20210729084810750.png" alt="image-20210729084810750"></p>
 <h3 id="文献引用"><a href="#文献引用" class="headerlink" title="文献引用"></a>文献引用</h3><h3 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h3><p>为了使用 AMS-LaTeX 提供的数学功能，我们需要在导言区加载<code>amsmath</code>宏包：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;amsmath&#125;</span><br></pre></td></tr></table></figure>
-
 <p>数学模式</p>
 <p>LaTeX 的数学模式有两种：行内模式 (inline) 和行间模式 (display)。前者在正文的行文中，插入数学公式；后者独立排列单独成行。</p>
-<p>在行文中，使用<code>$ ... $</code>可以插入行内公式，使用<code>\[ ... \]</code>可以插入行间公式，如果需要对行间公式进行编号，可以使用<code>equation</code>环境： \begin{equaion} … \end{equation}</p>
+<p>在行文中，使用<script type="math/tex">...</script>可以插入行内公式，使用<code>\[ ... \]</code>可以插入行间公式，如果需要对行间公式进行编号，可以使用<code>equation</code>环境： \begin{equaion} … \end{equation}</p>
 <p>Latex在线工具编辑器：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.codecogs.com/latex/eqneditor.php</span><br></pre></td></tr></table></figure>
-
 <h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>Latex在线表格编辑器</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.tablesgenerator.com/</span><br></pre></td></tr></table></figure>
-
 <h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>在 LaTeX 中插入图片，有很多种方式。最好用的应当属利用<code>graphicx</code>宏包提供的<code>\includegraphics</code>命令。比如你在你的 TeX 源文件同目录下，有名为 a.jpg 的图片，你可以用这样的方式将它插入到输出文档中：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\usepackage&#123;graphicx&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">\includegraphics&#123;a.jpg&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-
 <p>图片可能很大，超过了输出文件的纸张大小，或者干脆就是你自己觉得输出的效果不爽。这时候你可以用</p>
 <p><code>\includegraphics</code>控制序列的可选参数来控制。比如</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\includegraphics[width = .8\textwidth]&#123;a.jpg&#125;</span><br></pre></td></tr></table></figure>
-
 <p>这样图片的宽度会被缩放至页面宽度的百分之八十，图片的总高度会按比例缩放。</p>
 
     </div>
@@ -335,7 +327,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -418,6 +410,8 @@
 
 
 
+
+  
 
   
 
