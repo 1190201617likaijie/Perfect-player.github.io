@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-18 00:31:35" itemprop="dateModified" datetime="2021-11-18T00:31:35+08:00">2021-11-18</time>
+                <time title="Modified: 2021-11-20 12:10:39" itemprop="dateModified" datetime="2021-11-20T12:10:39+08:00">2021-11-20</time>
               </span>
 
           
@@ -336,8 +336,9 @@ ln\frac{y}{1-y}=w^Tx+b</script><p>注：极大似然估计，梯度下降法，�
 <p><img src="/2021/11/10/machine-learning/F4BAAC59D4585EE05971A98DC99EA6C4.jpg" alt="img" style="zoom:33%;">           </p>
 <p><img src="/2021/11/10/machine-learning/97DB1639B86ED8B3021436B71378A6FE.jpg" alt="img" style="zoom: 33%;"></p>
 <p><img src="/2021/11/10/machine-learning/2D144DC0F1851483569B8FCFBC4AA36D.jpg" alt="img" style="zoom:50%;"></p>
-<p>定义类内散度矩阵$S<em>w=\sum_0+\sum_1=\sum</em>{x\in X<em>0}^{}(x-\mu_0)(x-\mu_0)^T+\sum</em>{x\in X_1}^{}(x-\mu_1)(x-\mu_1)^T$         </p>
-<p>类间散度矩阵$S_b=(\mu_0-\mu_1)(\mu_0-\mu_1)^T$                        </p>
+<p>定义类内散度矩阵</p>
+<script type="math/tex; mode=display">
+$S_w=\sum_0+\sum_1=\sum_{x\in X_0}^{}(x-\mu_0)(x-\mu_0)^T+\sum_{x\in X_1}^{}(x-\mu_1)(x-\mu_1)^T</script><p>类间散度矩阵$S_b=(\mu_0-\mu_1)(\mu_0-\mu_1)^T$                        </p>
 <p>则有最大化目标</p>
 <script type="math/tex; mode=display">
 J=\frac{w^TS_bw}{w^TS_ww}</script><p>这就是LDA想要最大化的目标，即$S_b与S_w$的“广义瑞利商”。   </p>
@@ -399,7 +400,7 @@ Gini\_index(D,a)=\sum_{v=1}^{V}\frac{|D^v|}{|D|}Gini(D^v)</script><h3 id="剪枝
 <p>对于小规模的树比较容易解释；</p>
 <p>在许多小的简单数据集合性能与其他方法相近。</p>
 <h4 id="TOP-DOWN决策树"><a href="#TOP-DOWN决策树" class="headerlink" title="TOP-DOWN决策树"></a>TOP-DOWN决策树</h4><p><img src="/2021/11/10/machine-learning/image-20211117162908027.png" alt="image-20211117162908027" style="zoom:50%;"></p>
-<h4 id><a href="#" class="headerlink" title=" "></a> </h4><h4 id="过拟合"><a href="#过拟合" class="headerlink" title="过拟合"></a>过拟合</h4><h5 id="pre-pruning"><a href="#pre-pruning" class="headerlink" title="pre-pruning"></a>pre-pruning</h5><p>如果所有的实例都属于同一类别就停止；如果所有的属性值都一样就停止。</p>
+<h4 id="过拟合"><a href="#过拟合" class="headerlink" title="过拟合"></a>过拟合</h4><h5 id="pre-pruning"><a href="#pre-pruning" class="headerlink" title="pre-pruning"></a>pre-pruning</h5><p>如果所有的实例都属于同一类别就停止；如果所有的属性值都一样就停止。</p>
 <p>更加具有限制性的，如果实例的数量少于用户指定的阈值；如果实例的类别分布与可用的特征无关；如果扩展当前节点不能改善纯度。（基尼系数或信息增益）</p>
 <h5 id="post-pruning"><a href="#post-pruning" class="headerlink" title="post-pruning"></a>post-pruning</h5><p>将决策树增长到其全部内容，以自下而上的方式修剪。若修剪后泛化错误得到改善，则将子树替换为叶子。可使用MDL修剪。</p>
 <h4 id="MDL"><a href="#MDL" class="headerlink" title="MDL"></a>MDL</h4><p>最小描述长度准则—Minimum Description Length</p>
@@ -424,22 +425,21 @@ w^T x+b\le-1,y_i=-1</script><p>如图所示，距离超平面最近的这几个�
 <p>显然，为了最大化间隔，仅需要最大化$||w||^{-1}$，这等价于最小化$||w||^2$，于是便有</p>
 <script type="math/tex; mode=display">
 min\frac12 ||w||^2</script><script type="math/tex; mode=display">
-st y_i(w^Tx_i+b)\ge1，i=1,2,...,m</script><p>这就是SVM的基本型。</p>
+st\  y_i(w^Tx_i+b)\ge1，i=1,2,...,m</script><p>这就是SVM的基本型。</p>
 <h3 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h3><p>对于SVM的基本型，添加拉格朗日乘子$\alpha\ge0$，则该问题拉格朗日函数可以写为</p>
 <script type="math/tex; mode=display">
 L(w,b,\alpha)=\frac12 ||w||^2+\sum_{i=1}^{m}\alpha_i(1-y_i(w^Tx_i+b))</script><p>其中$\alpha_i=(\alpha_1,\alpha_2,…,\alpha_m)$</p>
-<p>分别求偏导，$w=\sum<em>{i=1}^{m}\alpha_i y_i x_i$，$0=\sum</em>{i=1}^{m}\alpha_i y_i$</p>
+<p>分别求偏导，$w=\sum<em>{i=1}^{m}\alpha_i y_i x_i，0=\sum</em>{i=1}^{m}\alpha_i y_i$</p>
 <p>代入，可得对偶问题如下</p>
 <script type="math/tex; mode=display">
-max:\sum_{i=1}^{m}\alpha_i-\frac12 \sum_{i=1}^{m}\sum_{j=1}^m \alpha_i \alpha_j y_i y_j x_i^T x_j
-$$（11）
-
+max:\sum_{i=1}^{m}\alpha_i-\frac12 \sum_{i=1}^{m}\sum_{j=1}^m \alpha_i \alpha_j y_i y_j x_i^T x_j（11）
+\\
 st\sum_{i=1}^m\alpha_i y_i=0,\alpha_i\ge0</script><p>解出$\alpha$后，求出w与b即可得到模型</p>
 <script type="math/tex; mode=display">
 f(x)=\sum_{i=1}^m \alpha_i y_i x_i^Tx+b(12)</script><p>因为上述过程需要满足KK条件，即要求</p>
 <p>$\alpha_i\ge0$</p>
 <p>$y_if(x_i)-1\ge0$</p>
-<p>$\alpha_i(y_if(x_i)-1)=0$（13）</p>
+<p>$\alpha_i(y_if(x_i)-1)=0$（13）    </p>
 <p>若$\alpha_i$=0，则该样本不会在12的求和中出现，也就不会对f(x)有影响‘</p>
 <p>若后面等于0，则所对应的样本点位于最大间隔边界上，是一个支持向量。</p>
 <p>如何求解11呢？我们介绍一种高效的SMO算法。</p>
@@ -484,7 +484,8 @@ P(c|x)\propto\ P(c)\prod{i=1}^{d}P(x_i|c,pa_i)$$（21）</script><p>其中$pa_i$
 <p><img src="/2021/11/10/machine-learning/38DEA55FFF99EC16FC86A14D9523652D.jpg" alt="img" style="zoom:50%;"></p>
 <h3 id="贝叶斯网"><a href="#贝叶斯网" class="headerlink" title="贝叶斯网"></a>贝叶斯网</h3><p>Directed Acyclic Graph(DAG)：有向无环图</p>
 <p>Conditional Probability Table(CPT)：条件概率表</p>
-<p>具体来说，一个贝叶斯网B由结构G和参数$\theta$两部分构成，即$B=<G,\theta>$.网络结构G为DAG，其每个结点对应于一个属性，若两个属性有直接依赖关系，则他们由一条边连接起来；参数$\theta$定量描述这种依赖关系，假设属性$x<em>i$在G中的父节点为$\pi_i$,则$\theta$包含了每个属性的条件概率表$\theta</em>{x_i|\pi_i}=P_B(x_i|\pi_i)$</G,\theta></p>
+<p>具体来说，一个贝叶斯网B由结构G和参数$\theta$两部分构成，即$B=<G,\theta>$。</G,\theta></p>
+<p>网络结构G为DAG，其每个结点对应于一个属性，若两个属性有直接依赖关系，则他们由一条边连接起来；参数$\theta$定量描述这种依赖关系，假设属性$x<em>i$在G中的父节点为$\pi_i$,则$\theta$包含了每个属性的条件概率表$\theta</em>{x_i|\pi_i}=P_B(x_i|\pi_i)$</p>
 <h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><p>给定父节点集，贝叶斯网假设每个属性与它的非后裔属性独立。</p>
 <p><img src="/2021/11/10/machine-learning/79D783BCFC662B14C00191FCE9BFE39E.jpg" alt="img" style="zoom:50%;"></p>
 <p>为了分析有向图中变量间的条件独立性，可使用有向分离。我们先把有向图转变成为一个无向图：</p>
@@ -524,8 +525,9 @@ LL(B|D)=\sum_{i=1}^{m}logP_B(x_i)(29)</script><p>是贝叶斯网B的对数似然
 <p>同一性：$dist(x_i,x_j)=0当且仅当x_i=x_j$</p>
 <p>对称性</p>
 <p>直递性</p>
-<p>对于给定样本$x<em>i=(x</em>{i1};x<em>{i2};…;x</em>{in})$与$x_j$</p>
-<p>最常用的闵可夫斯基距离</p>
+<p>对于给定样本</p>
+<script type="math/tex; mode=display">
+x_i=(x_{i1};x_{i2};...;x_{in})与x_j</script><p>最常用的闵可夫斯基距离</p>
 <script type="math/tex; mode=display">
 dist_{mk}(x_i,x_j)=(\sum_{u=1}^n |x_{iu}-x_{ju}|^p)^{\frac1p}（18）</script><p>当p=2时，闵可夫斯基距离即为欧氏距离</p>
 <script type="math/tex; mode=display">
@@ -543,7 +545,9 @@ MinkovDM_p(x_i,x_j)=(\sum_{u=1}^{n_c}|x_{iu}-x_{ju}|^p+\sum_{u=n_c+1}^{n}VDM_p(x
 <script type="math/tex; mode=display">
 E=\sum_{i=1}^{k}\sum_{x\in C_i} ||x-\mu_i||_2^2（24）</script><p>k均值算法采用了贪心策略，通过迭代优化来近似求解式。</p>
 <h4 id="学习向量量化"><a href="#学习向量量化" class="headerlink" title="学习向量量化"></a>学习向量量化</h4><p>Learning Vector Quantization（LVQ)与一般的聚类算法不同，LVQ假设数据样本带有标记类别，学习过程利用样本的这些监督信息来辅助聚类。</p>
-<p>给定样本集$D={(x<em>1,y_1),(x_2,y_2),…,(x_m,y_m)}$,每个样本$x_j$是由n个属性描述的特征向量$(x</em>{j1};x<em>{j2};…;x</em>{jn})$,$y_i\in \gamma$是样本$x_j$的类别标记。LVQ的目标是学得一组n维向量${p_1,p_2,…,p_n}$,每个原型向量代表一个聚类簇，簇标记$t_i \in \gamma$。</p>
+<p>给定样本集</p>
+<script type="math/tex; mode=display">
+D={(x_1,y_1),(x_2,y_2),...,(x_m,y_m)}</script><p>每个样本$x<em>j$是由n个属性描述的特征向量$(x</em>{j1};x<em>{j2};…;x</em>{jn})$,$y_i\in \gamma$是样本$x_j$的类别标记。LVQ的目标是学得一组n维向量${p_1,p_2,…,p_n}$,每个原型向量代表一个聚类簇，簇标记$t_i \in \gamma$。</p>
 <p><img src="/2021/11/10/machine-learning/6B4E7175C6A70D74E89E1D5803B11140.jpg" alt="img" style="zoom:50%;"></p>
 <h4 id="高斯混合模型"><a href="#高斯混合模型" class="headerlink" title="高斯混合模型"></a>高斯混合模型</h4><p>参考下面这篇文章</p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30483076">https://zhuanlan.zhihu.com/p/30483076</a></p>
@@ -552,20 +556,26 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i} ||x-\mu_i||_2^2（24）</script><p>k均值算法
 <p>$\varepsilon-$邻域：对于x，其$\varepsilon$邻域包含样本集D中与$x_j$的距离不大于$\varepsilon$的样本</p>
 <p>核心对象：若x的$\varepsilon$邻域至少包含MinPts个样本，则为一个核心对象</p>
 <p>密度直达：若$x_j$位于$x_i$的$\varepsilon$邻域中，且$x_i$是核心对象，则称$x_j$由$x_i$密度直达</p>
-<p>密度可达：对$x<em>i$与$x_j$，若存在样本序列$p_1,p_2,…,p_n$，其中$p_1=x_i,p_n=x_j$且$p</em>{i+1}$由$p_i$密度直达，则称$x_j$由$x_i$密度可达</p>
+<p>密度可达：对$x_i$与$x_j$，若存在样本序列</p>
+<script type="math/tex; mode=display">
+$p_1,p_2,...,p_n</script><p>其中$p<em>1=x_i,p_n=x_j$且$p</em>{i+1}$由$p_i$密度直达，则称$x_j$由$x_i$密度可达</p>
 <p>密度相连：对$x_i$与$x_j$，若存在$x_k$使得$x_k$使得二者均由$x_k$密度可达，则称二者密度相连。</p>
 <p>DBSCAN将簇定义为：由密度可达关系导出的最大的密度相连样本集合。</p>
 <p><img src="/2021/11/10/machine-learning/EDC190CDAD019755FE8DB3451CDB741C.jpg" alt="img" style="zoom:50%;"></p>
 <h3 id="层次聚类"><a href="#层次聚类" class="headerlink" title="层次聚类"></a>层次聚类</h3><p>层次聚类试图在不同层次上对数据集进行划分，从而形成树形的聚类结构。数据集的划分可采用“自顶向上”的聚合策略，也可采用“自顶向下”的分拆策略。</p>
 <p>AGNES是一种采用自底向上聚合策略的层次聚类算法。它先将数据集中的每个样本看作一个初始聚类簇，然后在算法运行的每一步中找出距离最近的两个聚类簇进行合并。</p>
-<p>当聚类簇距离由$d<em>{min},d</em>{max},d_{avg}$计算时，AGNES算法被相应地称为单链接，全链接和均链接算法。</p>
+<p>当聚类簇距离由</p>
+<script type="math/tex; mode=display">
+d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单链接，全链接和均链接算法。</p>
 <p><img src="/2021/11/10/machine-learning/38F2CE5A44DBE19A0FC3066D27AB8B2A.jpg" alt="img" style="zoom:50%;"></p>
 <h2 id="降维与度量学习"><a href="#降维与度量学习" class="headerlink" title="降维与度量学习"></a>降维与度量学习</h2><h3 id="k近邻学习"><a href="#k近邻学习" class="headerlink" title="k近邻学习"></a>k近邻学习</h3><p>k-Nearest Neighbor，简称kNN学习是一种常用的监督学习方法。</p>
 <p>其工作机制是：给定测试样本，基于某种距离度量找出训练集中与其最靠近的k个训练样本，然后基于这k个邻居的信息来进行预测。</p>
 <p>k近邻学习没有显示的训练过程，是“懒惰学习”的主要代表，此类学习技术在训练阶段仅仅是把样本保存起来，训练时间开销为0，待收到测试样本后再进行处理；相应的，那些在训练阶段就对样本进行学习处理的方法称为急切学习。</p>
+<p>k近邻的错误率小于贝叶斯的两倍。    </p>
 <h3 id="低维嵌入"><a href="#低维嵌入" class="headerlink" title="低维嵌入"></a>低维嵌入</h3><p>通过某种数学变换将原始高维属性空间转变为一个低维子空间。</p>
 <p>若要求原始空间中样本之间的距离在低维空间中得以保持，即得到多维缩放(Multiple Dimensional Scaling,MDS)这样一种经典的降维方法。</p>
 <h3 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h3><p>Principal Component Analysis,PCA</p>
+<p>​    </p>
 
       
     </div>
