@@ -145,6 +145,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/21/MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/21/MySQL/" class="post-title-link" itemprop="url">MySQL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-11-21 10:52:34 / Modified: 23:57:28" itemprop="dateCreated datePublished" datetime="2021-11-21T10:52:34+08:00">2021-11-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><h2 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h2><h3 id="数据库系统概述"><a href="#数据库系统概述" class="headerlink" title="数据库系统概述"></a>数据库系统概述</h3><p>DB :database数据库</p>
+<p>DBMS :Database Management System数据库管理系统</p>
+<p>SQL :Structure Query Language专门用来与数据库通信的语言</p>
+<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>数据模型由数据结构，数据操作和完整性约束构成。</p>
+<h4 id="常见的数据模型"><a href="#常见的数据模型" class="headerlink" title="常见的数据模型"></a>常见的数据模型</h4><p>层次模型：用树形结构表示实体类型及实体间的联系的数据模型称为层次模型。</p>
+<p><img src="/2021/11/21/MySQL/0251C980E3935BE8B502DB12BF4E28AA.jpg" alt="img" style="zoom: 33%;"></p>
+<p>网状模型：用有向图结构表示实体类型以及实体间联系的数据模型称为网状模型。用网状模型编写应用程序及其复杂，数据的独立性较差。</p>
+<p><img src="/2021/11/21/MySQL/814994B32C68AB40E0CCAD787BDBAE45.jpg" alt="img" style="zoom:50%;"></p>
+<p>关系模型：以二维表来描述数据。</p>
+<p><img src="/2021/11/21/MySQL/52A9A70E94E089277537417FF9770065.jpg" alt="img" style="zoom: 33%;"></p>
+<p><img src="/2021/11/21/MySQL/520D0BD20FC882EBF07D1707CA7EC95B.jpg" alt="img" style="zoom: 33%;"></p>
+<h4 id="关系数据库的规范化"><a href="#关系数据库的规范化" class="headerlink" title="关系数据库的规范化"></a>关系数据库的规范化</h4><p>根据满足规范的条件不同，可以分为五个等级：第一范式（1NF）、…，第五范式（5NF）。一般情况下，只要把数据规范到第三范式标准就可以。</p>
+<h5 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h5><p>在第一范式中，数据表的每一行只包含一个实体的信息，并且每一行的每一列只能存放实体的一个属性。</p>
+<p><img src="/2021/11/21/MySQL/4223C3CA9AD1A5D76E8D9C0FD3C5020D.jpg" alt="img" style="zoom: 25%;"></p>
+<h5 id="第二范式"><a href="#第二范式" class="headerlink" title="第二范式"></a>第二范式</h5><p>第二范式应该首先满足第一范式，第二范式要求数据库表中的每个实体必须可以被唯一的区分。为了实现区分各行记录，通常需要为表设置一个区分列，用以存储各个实体的唯一标识。</p>
+<h5 id="第三范式"><a href="#第三范式" class="headerlink" title="第三范式"></a>第三范式</h5><p>第三范式要求一个关系表中不包含已在其他表中已包含的非关键字信息。</p>
+<h4 id="关系数据库的设计原则"><a href="#关系数据库的设计原则" class="headerlink" title="关系数据库的设计原则"></a>关系数据库的设计原则</h4><p>○数据库内数据文件的数据组织应该获得最大限度的共享、最小的冗余度，消除数据及数据依赖关系中的冗余部分，是依赖于同一个数据模型的数据达到有效的分离。</p>
+<p>○保证输入、修改数据时数据的一致性与正确性。</p>
+<p>○保证数据与使用数据的应用程序之间的高度独立性。</p>
+<h4 id="实体与关系"><a href="#实体与关系" class="headerlink" title="实体与关系"></a>实体与关系</h4><p>一对一关系</p>
+<p>一对多关系</p>
+<p>多对多关系</p>
+<h3 id="数据库的体系结构"><a href="#数据库的体系结构" class="headerlink" title="数据库的体系结构"></a>数据库的体系结构</h3><h4 id="数据库三级模式结构"><a href="#数据库三级模式结构" class="headerlink" title="数据库三级模式结构"></a>数据库三级模式结构</h4><h5 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h5><p>也称逻辑模式或概念模式，是数据库中全体数据的逻辑结构和特征的描述，是所有用户的公共数据拼图。一个数据库只有一个模式，模式处于三级结构中的中间层。</p>
+<h5 id="外模式"><a href="#外模式" class="headerlink" title="外模式"></a>外模式</h5><p>也称用户模式，是数据库用户能够看见和使用的局部数据的逻辑结构和特征的描述，是数据库用户的数据视图，是与某一应用有关的数据的逻辑表示。外模式是模式的子集，一个数据库可以有多个外模式。</p>
+<p>外模式是保证数据安全性的一个有力措施。</p>
+<h5 id="内模式"><a href="#内模式" class="headerlink" title="内模式"></a>内模式</h5><p>也称存储模式，一个数据库只有一个内模式。他是数据结构和存储方式的描述，是数据在数据库内部的表示方式。</p>
+<h4 id="三级模式之间的映射"><a href="#三级模式之间的映射" class="headerlink" title="三级模式之间的映射"></a>三级模式之间的映射</h4><p>数据库管理系统在三级模式之间提供了两层映射，分别为</p>
+<h5 id="外模式-模式映射"><a href="#外模式-模式映射" class="headerlink" title="外模式/模式映射"></a>外模式/模式映射</h5><p>对于同一个模式可以由多个外模式。对于每一个外模式，数据库系统都有一个外模式/模式映射。当模式改变时，由数据库管理员作出改变，保证数据与程序的逻辑独立性。</p>
+<h5 id="模式-内模式映射"><a href="#模式-内模式映射" class="headerlink" title="模式/内模式映射"></a>模式/内模式映射</h5><p>唯一，定义了数据库的全局逻辑结构与存储之间的对应关系。当数据库的存储结构改变时，有数据库管理员对其作出改变。保证数据与程序的物理独立性。</p>
+<h2 id><a href="#" class="headerlink" title=" "></a> </h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1220,73 +1307,6 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/31/%E5%88%9D%E7%AD%89%E6%A8%A1%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/31/%E5%88%9D%E7%AD%89%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">初等模型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-31 09:33:39 / Modified: 10:43:57" itemprop="dateCreated datePublished" datetime="2021-07-31T09:33:39+08:00">2021-07-31</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="初等模型"><a href="#初等模型" class="headerlink" title="初等模型"></a>初等模型</h1><h3 id="双层玻璃的功效"><a href="#双层玻璃的功效" class="headerlink" title="双层玻璃的功效"></a>双层玻璃的功效</h3><p>北方城镇的有些建筑物窗户是双层的，窗户上装两层玻璃且中间留有一定的空隙，两层厚度为d的玻璃夹着一层厚度为l的空气。我们要建立一个模型来描述热量通过窗户的传导过程，并将双层玻璃制成同样多材料的单层玻璃，进行，热量传导对比，对双层玻璃能够减少多少热量损失给出定量分析结果。</p>
-<h4 id="模型假设"><a href="#模型假设" class="headerlink" title="模型假设"></a>模型假设</h4><p>（1）热量的传播过程只有传导，没有对流。即假定窗户的密封性能很好，两层玻璃之间的空气是不流动的。</p>
-<p>（2）室内温度T1和室外温度T2保持不变，热传导过程已处于稳定状态，即沿热传导方向，单位时间内通过单位面积的热量是常数。</p>
-<p>（3）玻璃材料均匀，热传导系数是常数。</p>
-<h4 id="模型构成"><a href="#模型构成" class="headerlink" title="模型构成"></a>模型构成</h4><p>在上述假设下热传导过程遵从以下物理定律：</p>
-<p>厚度为d的均匀介质，两侧温度差为<img src="/2021/07/31/%E5%88%9D%E7%AD%89%E6%A8%A1%E5%9E%8B/wpsFA62.tmp.wmf" alt="img">，则单位时间内由温度高的一侧向温度低的一侧通过单位面积的热量Q与<img src="/2021/07/31/%E5%88%9D%E7%AD%89%E6%A8%A1%E5%9E%8B/wpsFA62.tmp-1627698544223.wmf" alt="img">成正比，与d成反比，即<img src="/2021/07/31/%E5%88%9D%E7%AD%89%E6%A8%A1%E5%9E%8B/wpsB5F9.tmp.wmf" alt="img"></p>
-<p>k为热传导系数。</p>
-<p>其余步骤省略。</p>
-<h4 id="模型应用"><a href="#模型应用" class="headerlink" title="模型应用"></a>模型应用</h4><p>这个模型具有一定应用价值。制作双层玻璃窗虽然工艺复杂会增加一些费用，但它减少的热量损失确实相当可观的。通常，建筑规范要求g=l/d≈4.按照这个模型，Q1/Q2≈3%，即双层窗比用同样多的玻璃材质制成的单层窗节约热量97%左右。不难发现，之所以有如此高的功效主要是由于层间空气的极低的热传导系数k2,而这要求空气是干燥，不流通的。作为模型假设这个条件在实际情况下当然不能完全满足，所以实际上双层窗户的功效会比上述结果差一些。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1356,7 +1376,7 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
