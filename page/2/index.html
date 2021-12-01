@@ -145,6 +145,63 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/25/%E7%88%AC%E8%99%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/25/%E7%88%AC%E8%99%AB/" class="post-title-link" itemprop="url">爬虫</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-09-25 19:49:32" itemprop="dateCreated datePublished" datetime="2021-09-25T19:49:32+08:00">2021-09-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/31/%E5%88%9D%E7%AD%89%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1008,111 +1065,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/" class="post-title-link" itemprop="url">对象与类</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-29 09:44:10 / Modified: 12:11:38" itemprop="dateCreated datePublished" datetime="2021-06-29T09:44:10+08:00">2021-06-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><strong>类</strong>：构造对象的模板和蓝图。</p>
-<p><strong>封装</strong>：有时称为数据隐藏。是处理对象的一个重要概念。从形式上看，封装就是将数据和行为组合在一个包中，并对对象的使用者隐藏具体的实现方式。</p>
-<p><strong>实例字段</strong>：对象中的数据。</p>
-<p><strong>方法</strong>：操作数据的过程。</p>
-<p><strong>继承</strong>：通过扩展一个类来建立另外一个类的过程称为继承。</p>
-<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><h4 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h4><p>构造器与类同名。在构造类的对象时，构造器会运行，从而将实例字段初始化为所希望的初始状态。</p>
-<p>构造器与其他方法有一个重要不同。构造器总是结合new运算符来调用。不能对一个已经存在的对象调用构造器来达到重新设置实例字段的目的。</p>
-<p>每个类可以有一个以上的构造器。</p>
-<p>构造器可以有0个，1个或多个参数。</p>
-<p>构造器没有返回值。</p>
-<h4 id="使用NULL值引用"><a href="#使用NULL值引用" class="headerlink" title="使用NULL值引用"></a>使用NULL值引用</h4><p>一个对象变量包含一个对象的引用，或者包含一个特殊值null，后者表示没有引用任何对象。</p>
-<p>如果对null值应用一个方法，会产生一个NullPointerException异常。</p>
-<p>这是一个很严重的错误，类似于“索引越界”异常。如果你的程序没有“捕获”异常，程序就会终止。正常情况下，程序并不捕获这些异常，而是依赖于程序员从一开始就不要带来异常。</p>
-<h4 id="隐式参数与显示参数"><a href="#隐式参数与显示参数" class="headerlink" title="隐式参数与显示参数"></a>隐式参数与显示参数</h4><p>方法中的参数通常分为隐式参数与显示参数，隐式参数是出现在方法名前的类类型的对象。显示参数是位于方法名后面括号中的数值。</p>
-<p>可用关键词this指示隐式参数，可以将实例字段与局部变量明显地区分开。</p>
-<h4 id="final实例字段"><a href="#final实例字段" class="headerlink" title="final实例字段"></a>final实例字段</h4><p>可以将实例字段定义为final。这样的字段必须在构造对象时初始化。也就是说，必须确保在每一个构造器执行之后，这个字段的值已经设置，并且以后不能再修改这个字段。</p>
-<h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><p>静态方法是不在对象上执行的方法。可以认为静态方法是没有this参数的方法。</p>
-<p>以下两种方法可以使用静态方法：</p>
-<p>(1)方法不需要访问对象状态，因为它需要的所有参数都通过显示参数提供。</p>
-<p>(2)方法只需要访问类的静态字段。</p>
-<p>注：建议使用类名而不是对象来调用静态方法。</p>
-<h4 id="方法参数"><a href="#方法参数" class="headerlink" title="方法参数"></a>方法参数</h4><p><strong>按值调用</strong>：表示方法接受的是调用者提供的值。</p>
-<p><strong>按引用调用</strong>：表示方法接收的是调用者提供的变量地址。</p>
-<p>方法可以修改按引用传递的变量的值，而不能修改按值传递的变量的值。</p>
-<p>java程序设计语言总是采用按值调用。也就是说，方法得到的是所有参数值的一个副本。</p>
-<p>方法不能修改基本数据类型的参数。</p>
-<p>方法可以改变对象参数的状态。</p>
-<p>方法不能让一个对象参数引用一个新的对象。</p>
-<h4 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h4><p>如果多个方法有相同的名字，不同的参数，便出现了重载。编译器必须挑出具体调用哪个方法。它用各个方法首部中的参数类型与特定方法调用中所使用的值类型进行匹配，来选出正确的方法。查找匹配的过程被称为重载解析。</p>
-<h4 id="构造器的具体处理步骤"><a href="#构造器的具体处理步骤" class="headerlink" title="构造器的具体处理步骤"></a>构造器的具体处理步骤</h4><p>(1)如果构造器的第一行调用了另一个构造器，则基于所提供的参数执行第二个构造器。</p>
-<p>(2)否则，</p>
-<p>a）所有数据字段初始化为其默认值（0，false，null）</p>
-<p>b）按照在类声明中出现的顺序，执行所有字段初始化方法和初始化块。</p>
-<p>(3)执行构造器主体代码。</p>
-<h4 id="类设计技巧"><a href="#类设计技巧" class="headerlink" title="类设计技巧"></a>类设计技巧</h4><p>(1)一定要保证数据私有。</p>
-<p>这是最重要的；绝对不要破坏封装性。有时候，可能需要编写一个访问器方法或更改器方法，但是最好还是保持实例字段的私有性。很多惨痛的教训告诉我们，数据的表示形式很可能会改变，但它们的使用方式却不会经变化。当数据保持私有时，表示形式的变化不会对类的使用者产生影响，而且也更容易检测bug。</p>
-<p>(2)一定要对数据进行初始化。</p>
-<p>Java不会为你初始化局部变量，但是会对对象的实例字段进行初始化。最好不要依赖于系统的默认值，而是应该显式地初始化所有的数据，可以提供默认值，也可以在所有构造器中设置默认值。</p>
-<p>(3)不要再类中使用过多的基本类型。</p>
-<p>这个想法是要用其他的类替换使用多个相关的基本类型。</p>
-<p>(4)不是所有的字段都需要单独的字段访问器和字段更改器。</p>
-<p>(5)分解有过多职责的类。</p>
-<p>这样说似乎有点含糊，究竟多少算是“过多”?每个人的看法都不同。但是，如果明显地可以将一个复杂的类分解成两个更为简单的类，就应该将其分解。</p>
-<p>(6)类名和方法名要能够体现它们的职责。</p>
-<p>与变量应该有一个能够反映其含义的名字一样，类也应该如此。</p>
-<p>(7)优先使用不可变的类。</p>
-<p> LocalDate类以及java.time包中的其他类是不可变的——没有方法能修改对象的状态。类似 plusDays的方法并不是更改对象，而是返回状态已修改的新对象。<br>更改对象的问题在于，如果多个线程试图同时更新一个对象，就会发生并发更改。其结果是不可预料的。如果类是不可变的，就可以安全地在多个线程间共享其对象。<br>因此，要尽可能让类是不可变的，</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1182,7 +1134,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
