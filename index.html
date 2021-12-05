@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-05 18:48:26" itemprop="dateModified" datetime="2021-12-05T18:48:26+08:00">2021-12-05</time>
+                <time title="Modified: 2021-12-06 00:17:10" itemprop="dateModified" datetime="2021-12-06T00:17:10+08:00">2021-12-06</time>
               </span>
 
           
@@ -502,7 +502,7 @@
 <p>每条虚电路包括</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">从源主机到目的主机的一条路径</span><br><span class="line">虚电路号，沿路每段链路一个编号(虚电路号会变化)</span><br><span class="line">沿路每个网络层设备，利用转发表记录经过的每条虚电路</span><br><span class="line">同一条VC，在每段链路的VCID不同</span><br></pre></td></tr></table></figure>
 <p>虚电路信令协议：</p>
-<p>哟用于VC的建立，维护拆除</p>
+<p>用于VC的建立，维护拆除</p>
 <p><strong>数据报网络</strong></p>
 <p>网络层无连接；每个分组携带目的地址；路由器根据分组的目的地址转发分组。</p>
 <p>路由算法确定通过网络的端到端路径；咋混发表确定在本路由器如何转发分组。</p>
@@ -577,11 +577,11 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">附加报文类型</span><br><span class="line">多播组管理功能</span><br></pre></td></tr></table></figure>
 <p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204093735301.png" alt="image-20211204093735301" style="zoom:50%;"></p>
 <p>IPV6基本地址类型</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">单播：一对一通信</span><br><span class="line">多播：一对多通信</span><br><span class="line">任意播：一对一组之一通信</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">单播：一对一通信</span><br><span class="line">多播：一对多通信</span><br><span class="line">任意播：一对一组之一通信</span><br><span class="line">https://blog.csdn.net/weixin_40274679/article/details/106308577</span><br></pre></td></tr></table></figure>
 <p>隧道：IPV6数据报作为IPV4数据报的载荷进行封装，穿越IPV4网络。</p>
 <h3 id="路由算法"><a href="#路由算法" class="headerlink" title="路由算法"></a>路由算法</h3><h4 id="路由算法-1"><a href="#路由算法-1" class="headerlink" title="路由算法"></a>路由算法</h4><p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204094231897.png" alt="image-20211204094231897" style="zoom:50%;"></p>
 <h4 id="链路状态路由算法"><a href="#链路状态路由算法" class="headerlink" title="链路状态路由算法"></a>链路状态路由算法</h4><p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204094325050.png" alt="image-20211204094325050" style="zoom:50%;"></p>
-<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204094606037.png" alt="image-20211204094606037" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204094606037.png" alt="image-20211204094606037" style="zoom:50%;">    </p>
 <p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204094739283.png" alt="image-20211204094739283" style="zoom:50%;"></p>
 <h4 id="距离向量路由算法"><a href="#距离向量路由算法" class="headerlink" title="距离向量路由算法"></a>距离向量路由算法</h4><p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204100125061.png" alt="image-20211204100125061" style="zoom:50%;"></p>
 <p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204100217247.png" alt="image-20211204100217247" style="zoom:50%;"></p>
@@ -610,6 +610,9 @@
 <p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204114632956.png" alt="image-20211204114632956" style="zoom:50%;"></p>
 <p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204115119242.png" alt="image-20211204115119242" style="zoom:50%;"></p>
 <h3 id="附加-3"><a href="#附加-3" class="headerlink" title="附加"></a>附加</h3><p>拥塞丢失时发送抑制源站报文。</p>
+<p>RIP为UDP协议传输报文。</p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205192548473.png" alt="image-20211205192548473" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205201933225.png" alt="image-20211205201933225" style="zoom:50%;"></p>
 <h2 id="链路层和局域网"><a href="#链路层和局域网" class="headerlink" title="链路层和局域网"></a>链路层和局域网</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>节点</strong>：运行链路层协议的任何设备。包括主机，路由器，交换机和WiFi接入点。</p>
 <h4 id="链路层提供的服务"><a href="#链路层提供的服务" class="headerlink" title="链路层提供的服务"></a>链路层提供的服务</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">成帧</span><br><span class="line">链路接入。MAC媒体访问控制 协议规定了帧在链路上传输的规则</span><br><span class="line">可靠交付。链路层可靠交付目的是本地纠正一个差错，而不是通过运输层或应用层协议迫使进行端到端数据重传。</span><br><span class="line">差错检测和纠正。</span><br></pre></td></tr></table></figure>
 <h4 id="链路层在何处实现"><a href="#链路层在何处实现" class="headerlink" title="链路层在何处实现"></a>链路层在何处实现</h4><p>链路层的主体部分是在 <strong>网络适配器</strong>中实现的，网络适配器有时也称 <strong>网络接口卡(NIC)</strong>。位于网络适配器核心的是链路层控制器。</p>
@@ -626,6 +629,7 @@
 <p>$R=remainder\ \frac{D*2^r}{G}$</p>
 <p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204135514798.png" alt="image-20211204135514798" style="zoom:25%;"></p>
 <h3 id="多路访问链路和协议"><a href="#多路访问链路和协议" class="headerlink" title="多路访问链路和协议"></a>多路访问链路和协议</h3><p>多路访问控制MAC</p>
+<p>MAC地址为链路层地址。</p>
 <p><strong>点对点链路</strong>：由链路一端的单个发送方和链路另一端的单个接收方组成。eg:点对点协议(PPP)，高级数据链路控制(HDLC)。</p>
 <p><strong>广播链路</strong>：让多个发送和接收节点都连接到相同的单一的，共享的广播信道上。</p>
 <h4 id="信道划分协议"><a href="#信道划分协议" class="headerlink" title="信道划分协议"></a>信道划分协议</h4><p>时分多路复用TDM；频分多路复用FDM</p>
@@ -689,6 +693,8 @@
 <h3 id="附加-4"><a href="#附加-4" class="headerlink" title="附加"></a>附加</h3><p>MTU、IP MTU、TCP MSS设置上的区别及联系</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">1.MTU是一个二层的概念，即最大传输单元（Maximum Transmission Unit，MTU）；以太网最大的mtu就是1500（它是不包含二层头部的，加上头部应该为1518 bytes，2bit的以太网类型+6bit的DMAC+6bit的SMAC+4bit的FCS），每个以太网帧都有最小的大小64bytes，最大不能超过1518bytes</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line"></span><br><span class="line">1）小于64Bytes的数据帧一般是由于以太网冲突产生的 “碎片”或者线路干扰或者坏的以太网接口产生的，对于大于1518Bytes的数据帧我们一般把它叫做Giant帧，这种一般是由于线路干扰或者坏的以太网口产生</span><br><span class="line"></span><br><span class="line">2）以太网EthernetII最大的数据帧是1518Bytes，最小为64bytes,是指包含以太网帧的帧头（DMAC目的MAC地址 48bit=6Bytes+SMAC源MAC地址48bit=6Bytes+Type域2bytes）14Bytes和帧尾CRC校验部分4Bytes （这个部份有时候大家也把它叫做FCS）</span><br><span class="line"></span><br><span class="line">2.IP MTU是一个三层概念，它包含了三层头部及所有载荷，根据下层为上层服务的，上层基于下层才能做进一步的扩展的原则，尽管IP MTU的变化范围很大（68-65535），但也不得不照顾以太网MTU的限制,说白了就是ip对以太网的妥协。</span><br><span class="line"></span><br><span class="line">网络层IP协议会检查每个从上层协议下来的数据包的大小，并根据本机MTU的大小决定是否作“分片”处理</span><br><span class="line"></span><br><span class="line">3.MSS是TCP里面的一个概念，它是TCP数据包每次能够传输的最大数据分段，不包含包头部分，它与IP MTU满足如下关系：</span><br><span class="line"></span><br><span class="line">IP MTU=MSS+20bytes（IP包头）+20bytes（TCP包头）</span><br><span class="line"></span><br><span class="line">当然，如果传输的时候还承载有其他协议，还要加些包头在前面。</span><br><span class="line"></span><br><span class="line">注：为了达到最佳的传输效能，TCP协议在建立连接的时候通常要协商双方的MSS值，这个值TCP协议在实现的时候往往用MTU值代替（需要减去IP数据包报头的大小20Bytes和TCP数据段的包头20Bytes），所以往往MSS为1460。通讯双方会根据双方提供的MSS值得最小值确定为这次连接的最大MSS值。</span><br><span class="line"></span><br><span class="line">4.简言之，mtu就是总的最后发出去的报文大小，MSS就是需要发出去的数据大小，比如PPPoE，就是在以太网上承载PPP协议（点到点连接协议），它包括6bytes的PPPoE头部和2bytes的PPP协议ID号，此时，由于以太网的MTU值为1500，所以上层PPP负载数据不能超过1492字节，也就是相当于在PPPOE环境下的MTU是1492字节，MSS是1452字节（1492字节-20-20）。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">重点：</span><br><span class="line"></span><br><span class="line">MTU 不包含 帧头（18byte） 指帧头后面的所有负载，与ip mtu的区别就是在帧头和ip头之间可能会有其他协议头（比如GRE头、pppoe头、MPLS标签，这些协议头都是在帧头后ip头前）</span><br><span class="line"></span><br><span class="line">ip MTU 包含 ip头（20byte） 指ip头本身及后面的所有负载，一个普通的以太网数据包mtu=ip mut，只有封装了其他协议头部时mtu=ip mut+其他协议头部+负载（tcp头+tcp-mss）</span><br><span class="line"></span><br><span class="line">TCP-MSS 不包含 tcp头（20byte） 指tcp头后面的所有负载</span><br><span class="line"></span><br><span class="line">IP MTU=tcp-MSS+20bytes（IP包头）+20bytes（TCP包头）</span><br></pre></td></tr></table></figure>
 <p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204194239650.png" alt="image-20211204194239650"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205195424849.png" alt="image-20211205195424849" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205202022663.png" alt="image-20211205202022663" style="zoom:50%;"></p>
 <h2 id="物理层-1"><a href="#物理层-1" class="headerlink" title="物理层"></a>物理层</h2><h3 id="数据通信基础"><a href="#数据通信基础" class="headerlink" title="数据通信基础"></a>数据通信基础</h3><p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204201851500.png" alt="image-20211204201851500" style="zoom:50%;"></p>
 <p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204202022742.png" alt="image-20211204202022742" style="zoom:50%;"></p>
 <p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204202733890.png" alt="image-20211204202733890" style="zoom:50%;"></p>
@@ -701,7 +707,31 @@
 <p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204203744847.png" alt="image-20211204203744847" style="zoom:50%;"></p>
 <p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204203823712.png" alt="image-20211204203823712" style="zoom:50%;"></p>
 <h3 id="基带传输基础"><a href="#基带传输基础" class="headerlink" title="基带传输基础"></a>基带传输基础</h3><p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211204203916364.png" alt="image-20211204203916364" style="zoom:50%;"></p>
-<h3 id="频带传输基础"><a href="#频带传输基础" class="headerlink" title="频带传输基础"></a>频带传输基础</h3>
+<h3 id="频带传输基础"><a href="#频带传输基础" class="headerlink" title="频带传输基础"></a>频带传输基础</h3><h4 id="典型数字基带信号码型"><a href="#典型数字基带信号码型" class="headerlink" title="典型数字基带信号码型"></a>典型数字基带信号码型</h4><p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205204044465.png" alt="image-20211205204044465" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205204526302.png" alt="image-20211205204526302" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205204553033.png" alt="image-20211205204553033" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205204657865.png" alt="image-20211205204657865" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205204718087.png" alt="image-20211205204718087" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205204743795.png" alt="image-20211205204743795" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205204811037.png" alt="image-20211205204811037" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205204844547.png" alt="image-20211205204844547" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205205637743.png" alt="image-20211205205637743" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205205848891.png" alt="image-20211205205848891" style="zoom:50%;"></p>
+<ul>
+<li>数据传输速率=波特率*log2(幅值相位组合)</li>
+</ul>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205211421158.png" alt="image-20211205211421158" style="zoom:50%;"></p>
+<h2 id="附加-5"><a href="#附加-5" class="headerlink" title="附加"></a>附加</h2><p>CDMA</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/qq_43262059/article/details/106201119</span><br></pre></td></tr></table></figure>
+<p>FTP</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FTP协议运行在TCP连接上，保证了文件传输的可靠性。</span><br><span class="line">FTP使用了两个并行的TCP来传输文件：一个是控制连接（port:21），一个是数据连接(port:20)。控制连接用于在两个主机之间传输控制信息，如口令，用户标识，存放、获取文件等命令。数据连接用于实际发送一个文件,发送完文件之后数据连接会关闭。因为FTP协议使用一个独立的控制连接，所以，也称FTP的控制信息是带外（out-of-band）传送的。</span><br><span class="line">FTP支持两种方式的传输：文本（ASCII）方式和二进制（Binary）方式。</span><br></pre></td></tr></table></figure>
+<p>在划分VLAN的以太网交换机的Trunk端口间传输的帧是802.1帧。</p>
+<p>利用链路控制协议，大多数的产品通过协商可以省略标志符和地址字段，并且把协议字段由 2个字节减少到 1个字节。</p>
+<p>二进制数字调制系统中，频带利用率最低的是2FSK。</p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205231152187.png" alt="image-20211205231152187" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205233856793.png" alt="image-20211205233856793" style="zoom:50%;"></p>
+<p><img src="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20211205234246885.png" alt="image-20211205234246885" style="zoom:50%;"></p>
+
       
     </div>
 
