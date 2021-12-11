@@ -145,6 +145,149 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/05/tensorflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/05/tensorflow/" class="post-title-link" itemprop="url">tensorflow</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-05 21:08:48" itemprop="dateCreated datePublished" datetime="2021-10-05T21:08:48+08:00">2021-10-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-07 20:54:27" itemprop="dateModified" datetime="2021-10-07T20:54:27+08:00">2021-10-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="placeholder"><a href="#placeholder" class="headerlink" title="placeholder"></a>placeholder</h4><p>函数形式：<img src="/2021/10/05/tensorflow/image-20211005211038432.png" alt="image-20211005211038432"></p>
+<p>参数：</p>
+<p>dtype：数据类型。常用的是tf.float32,tf.float64等数值类型</p>
+<p>shape：数据形状。默认是None，就是一维值，也可以是多维（比如[2,3], [None, 3]表示列是3，行不定）</p>
+<p>name：名称</p>
+<p>使用原因： Tensorflow的设计理念称之为计算流图，在编写程序时，首先构筑整个系统的graph，代码并不会直接生效，这一点和python的其他数值计算库（如Numpy等）不同，graph为静态的，类似于docker中的镜像。然后，在实际的运行时，启动一个session，程序才会真正的运行。这样做的好处就是：避免反复地切换底层程序实际运行的上下文，tensorflow帮你优化整个系统的代码。我们知道，很多python程序的底层为C语言或者其他语言，执行一行脚本，就要切换一次，是有成本的，tensorflow通过计算流图的方式，帮你优化整个session需要执行的代码，还是很有优势的。</p>
+<p>​        所以placeholder()函数是在神经网络构建graph的时候在模型中的占位，此时并没有把要输入的数据传入模型，它只会分配必要的内存。等建立session，在会话中，运行模型的时候通过feed_dict()函数向占位符喂入数据。</p>
+<h4 id="get-variable"><a href="#get-variable" class="headerlink" title="get_variable"></a>get_variable</h4><p>该函数共有十一个参数，常用的有：名称name、变量规格shape、变量类型dtype、变量初始化方式initializer、所属于的集合collections。</p>
+<p>该函数的作用是创建新的tensorflow变量，常见的initializer有：常量初始化器tf.constant_initializer、正太分布初始化器tf.random_normal_initializer、截断正态分布初始化器tf.truncated_normal_initializer、均匀分布初始化器tf.random_uniform_initializer。</p>
+<h4 id="张量"><a href="#张量" class="headerlink" title="张量"></a>张量</h4><p>关于张量的学习，可参考：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/140260245">什么是张量？ - 知乎 (zhihu.com)</a></p>
+<h4 id="convert-to-tensor"><a href="#convert-to-tensor" class="headerlink" title="convert_to_tensor"></a>convert_to_tensor</h4><p>将给定值转换为张量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.convert_to_tensor(</span><br><span class="line">    value,</span><br><span class="line">    dtype=<span class="literal">None</span>,</span><br><span class="line">    dtype_hint=<span class="literal">None</span>,</span><br><span class="line">    name=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>该函数将各种类型的Python对象转换为张量对象。它接受张量对象、数字数组、Python列表和Python标量。</p>
+<h5 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h5><p>value:类型具有注册张量转换函数的对象。<br>dtype:返回张量的可选元素类型。如果缺少，则从值的类型推断类型。<br>dtype_hint:返回张量的可选元素类型，当dtype为None时使用。在某些情况下，调用者在转换为张量时可能没有考虑到dtype，因此dtype_hint可以用作软首选项。如果不能转换为dtype_hint，则此参数没有效果。<br>name:创建新张量时使用的可选名称。</p>
+<h5 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h5><p>一个基于值的张量。</p>
+<h4 id="embedding-lookup"><a href="#embedding-lookup" class="headerlink" title="embedding_lookup()"></a>embedding_lookup()</h4><p>用途主要是选取一个张量里面索引对应的元素。</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6e61528acad9">tf.nn.embedding_lookup() 详解 - 简书 (jianshu.com)</a></p>
+<h4 id="expand-dims"><a href="#expand-dims" class="headerlink" title="expand_dims()"></a>expand_dims()</h4><p>tf.expand_dims()函数用于给函数增加维度。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.expand_dims(</span><br><span class="line">    input,</span><br><span class="line">    axis=None,</span><br><span class="line">    name=None,</span><br><span class="line">    dim=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h5 id="参数：-1"><a href="#参数：-1" class="headerlink" title="参数："></a>参数：</h5><ul>
+<li>input是输入张量。</li>
+<li>axis是指定扩大输入张量形状的维度索引值。</li>
+<li>dim等同于轴，一般不推荐使用。</li>
+</ul>
+<p>函数的功能是在给定一个input时，在axis轴处给input增加一个维度。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/TeFuirnever/article/details/88797810">(5条消息) tf.expand<em>dims()函数解析（最清晰的解释）</em>种树最好的时间是10年前，其次是现在！！！-CSDN博客_tf.expand_dim</a></p>
+<h4 id="tf-tile"><a href="#tf-tile" class="headerlink" title="tf.tile()"></a>tf.tile()</h4><p>tensorflow中的tile()函数是用来对张量(Tensor)进行扩展的，其特点是对当前张量内的数据进行一定规则的复制。最终的输出张量维度不变。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tf.tile(</span><br><span class="line">    input,</span><br><span class="line">    multiples,</span><br><span class="line">    name=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>input是待扩展的张量，multiples是扩展方法。<br>假如input是一个3维的张量。那么mutiples就必须是一个1x3的1维张量。这个张量的三个值依次表示input的第1，第2，第3维数据扩展几倍。 </p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chamie/p/11124314.html">tf.tile()函数理解 - chamie - 博客园 (cnblogs.com)</a></p>
+<h4 id="concact"><a href="#concact" class="headerlink" title="concact"></a>concact</h4><p>tensorflow中用来拼接张量的函数tf.concat()，用法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.concat([tensor1, tensor2, tensor3,...], axis)</span><br></pre></td></tr></table></figure>
+<p>axis=0   代表在第0个维度拼接</p>
+<p>axis=1   代表在第1个维度拼接 </p>
+<p>对于一个二维矩阵，第0个维度代表最外层方括号所框下的子集，第1个维度代表内部方括号所框下的子集。维度越高，括号越小。</p>
+<h4 id="tf-layers-batch-normalization"><a href="#tf-layers-batch-normalization" class="headerlink" title="tf.layers.batch_normalization"></a>tf.layers.batch_normalization</h4><p>用来构建待训练的神经网络模型,方法接口如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">tf.layers.batch_normalization(</span><br><span class="line">    inputs,</span><br><span class="line">    axis=-1,</span><br><span class="line">    momentum=0.99,</span><br><span class="line">    epsilon=0.001,</span><br><span class="line">    center=True,</span><br><span class="line">    scale=True,</span><br><span class="line">    beta_initializer=tf.zeros_initializer(),</span><br><span class="line">    gamma_initializer=tf.ones_initializer(),</span><br><span class="line">    moving_mean_initializer=tf.zeros_initializer(),</span><br><span class="line">    moving_variance_initializer=tf.ones_initializer(),</span><br><span class="line">    beta_regularizer=None,</span><br><span class="line">    gamma_regularizer=None,</span><br><span class="line">    beta_constraint=None,</span><br><span class="line">    gamma_constraint=None,</span><br><span class="line">    training=False,</span><br><span class="line">    trainable=True,</span><br><span class="line">    name=None,</span><br><span class="line">    reuse=None,</span><br><span class="line">    renorm=False,</span><br><span class="line">    renorm_clipping=None,</span><br><span class="line">    renorm_momentum=0.99,</span><br><span class="line">    fused=None,</span><br><span class="line">    virtual_batch_size=None,</span><br><span class="line">    adjustment=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>这里有几个重要参数需要注意：</p>
+<ul>
+<li><code>axis</code>的值取决于按照<code>input</code>的哪一个维度进行BN，例如输入为<code>channel_last</code> format，即<code>[batch_size, height, width, channel]</code>，则<code>axis</code>应该设定为4，如果为<code>channel_first</code> format，则<code>axis</code>应该设定为1.</li>
+<li><code>momentum</code>的值用在训练时，滑动平均的方式计算滑动平均值<code>moving_mean</code>和滑动方差<code>moving_variance</code>。</li>
+<li><code>center</code>为<code>True</code>时，添加位移因子<code>beta</code>到该BN层，否则不添加。添加<code>beta</code>是对BN层的变换加入位移操作。注意，<code>beta</code>一般设定为可训练参数，即<code>trainable=True</code>。</li>
+<li><code>scale</code>为<code>True</code>是，添加缩放因子<code>gamma</code>到该BN层，否则不添加。添加<code>gamma</code>是对BN层的变化加入缩放操作。注意，<code>gamma</code>一般设定为可训练参数，即<code>trainable=True</code>。</li>
+<li><code>training</code>表示模型当前的模式，如果为<code>True</code>，则模型在训练模式，否则为推理模式。要非常注意这个模式的设定，这个参数默认值为<code>False</code>。如果在训练时采用了默认值<code>False</code>，则滑动均值<code>moving_mean</code>和滑动方差<code>moving_variance</code>都不会根据当前batch的数据更新，这就意味着在推理模式下，均值和方差都是其初始值，因为这两个值并没有在训练迭代过程中滑动更新。</li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fclbky/p/12636842.html">tf.layers.batch_normalization 介绍 - 大雄fcl - 博客园 (cnblogs.com)</a></li>
+</ul>
+<h4 id="dense"><a href="#dense" class="headerlink" title="dense"></a>dense</h4><p>dense，即全连接网络，layers 模块提供了一个 dense() 方法来实现此操作，定义在 tensorflow/python/layers/core.py 中，下面我们来说明一下它的用法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dense(</span><br><span class="line">    inputs,</span><br><span class="line">    units,</span><br><span class="line">    activation=None,</span><br><span class="line">    use_bias=True,</span><br><span class="line">    kernel_initializer=None,</span><br><span class="line">    bias_initializer=tf.zeros_initializer(),</span><br><span class="line">    kernel_regularizer=None,</span><br><span class="line">    bias_regularizer=None,</span><br><span class="line">    activity_regularizer=None,</span><br><span class="line">    kernel_constraint=None,</span><br><span class="line">    bias_constraint=None,</span><br><span class="line">    trainable=True,</span><br><span class="line">    name=None,</span><br><span class="line">    reuse=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>参数说明如下：<br> inputs：必需，即需要进行操作的输入数据。<br> units：必须，即神经元的数量。<br> activation：可选，默认为 None，如果为 None 则是线性激活。<br> use_bias：可选，默认为 True，是否使用偏置。<br> kernel_initializer：可选，默认为 None，即权重的初始化方法，如果为 None，则使用默认的 Xavier 初始化方法。<br> bias_initializer：可选，默认为零值初始化，即偏置的初始化方法。<br> kernel_regularizer：可选，默认为 None，施加在权重上的正则项。<br> bias_regularizer：可选，默认为 None，施加在偏置上的正则项。<br> activity_regularizer：可选，默认为 None，施加在输出上的正则项。<br> kernel_constraint，可选，默认为 None，施加在权重上的约束项。<br> bias_constraint，可选，默认为 None，施加在偏置上的约束项。<br> trainable：可选，默认为 True，布尔类型，如果为 True，则将变量添加到 GraphKeys.TRAINABLE_VARIABLES 中。<br> name：可选，默认为 None，卷积层的名称。<br> reuse：可选，默认为 None，布尔类型，如果为 True，那么如果 name 相同时，会重复利用。<br> 返回值： 全连接网络处理后的 Tensor。</p>
+<h4 id="reshape"><a href="#reshape" class="headerlink" title="reshape()"></a>reshape()</h4><p>tf.reshape(tensor, shape, name=None)<br>函数的作用是将tensor变换为参数shape的形式。 其中shape为一个列表形式，特殊的一点是列表中可以存在-1。</p>
+<p>转换为一般的shape（也就是不涉及-1的）我这里就不说了，主要说一下对-1的理解。<br>-1代表的含义是不用我们自己指定这一维的大小，函数会自动计算，但列表中只能存在一个-1。<br>（当然如果存在多个-1，就是一个存在多解的方程了）</p>
+<p>我理解的要点是：首先shape就是reshape变换后的矩阵大小，先不管-1的那一个维度，先看其它维度，然后用原矩阵的总元素个数除以确定的维度，就能得到-1维度的值。</p>
+<p>我们来看例子。</p>
+<p>M=np.array([[[[1,2,3]]],[[[4,5,6]]],[[[7,8,9]]]])   #M是[3,1,1,3]的四维矩阵</p>
+<p>我想把M重组成若干个3维的向量，那么直接tf.reshape(M,[-1,3])</p>
+<p>那么会得到几个3维向量呢？  M一共有9个元素，9/3=3，那么得到3个三维向量，那么结果就是[3,3]的矩阵。</p>
+<p><img src="/2021/10/05/tensorflow/image-20211006175936881.png" alt="image-20211006175936881"></p>
+<p>那么我想得到若干个[3,3]的矩阵，那么我们tf.reshape(M,[-1,3,3])</p>
+<p>那么结果就是[1,3,3]的矩阵</p>
+<p><img src="/2021/10/05/tensorflow/image-20211006175946915.png" alt="image-20211006175946915"></p>
+<h4 id="tf-reduce-mean"><a href="#tf-reduce-mean" class="headerlink" title="tf.reduce_mean"></a>tf.reduce_mean</h4><p>tf.reduce_mean 函数用于计算张量tensor沿着指定的数轴（tensor的某一维度）上的的平均值，主要用作降维或者计算tensor（图像）的平均值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reduce_mean(input_tensor,</span><br><span class="line">                axis=None,</span><br><span class="line">                keep_dims=False,</span><br><span class="line">                name=None,</span><br><span class="line">                reduction_indices=None)</span><br></pre></td></tr></table></figure>
+<p>第一个参数input_tensor： 输入的待降维的tensor;<br>第二个参数axis： 指定的轴，如果不指定，则计算所有元素的均值;<br>第三个参数keep_dims：是否降维度，设置为True，输出的结果保持输入tensor的形状，设置为False，输出结果会降低维度;<br>第四个参数name： 操作的名称;<br>第五个参数 reduction_indices：在以前版本中用来指定轴，已弃用;</p>
+<h4 id="tf-nn-sigmoid-cross-entropy-with-logits"><a href="#tf-nn-sigmoid-cross-entropy-with-logits" class="headerlink" title="tf.nn.sigmoid_cross_entropy_with_logits"></a>tf.nn.sigmoid_cross_entropy_with_logits</h4><p>tf.nn.sigmoid_cross_entropy_with_logits(_sentinel=None,,labels=None,logits=None,name=None)</p>
+<p>对于给定的logits计算sigmoid的交叉熵。</p>
+<h4 id="tf-trainable-variables"><a href="#tf-trainable-variables" class="headerlink" title="tf.trainable_variables()"></a>tf.trainable_variables()</h4><p>顾名思义，这个函数可以也仅可以查看可训练的变量，在我们生成变量时，无论是使用tf.Variable()还是tf.get_variable()生成变量，都会涉及一个参数trainable,其默认为True。以tf.Variable()为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">__init__(</span><br><span class="line">    initial_value=None,</span><br><span class="line">    trainable=True,</span><br><span class="line">    collections=None,</span><br><span class="line">    validate_shape=True,</span><br><span class="line">   ...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>对于一些我们不需要训练的变量，比较典型的例如学习率或者计步器这些变量，我们都需要将trainable设置为False，这时tf.trainable_variables() 就不会打印这些变量。</p>
+<h4 id="tf-train-GradientDescentOptimizer"><a href="#tf-train-GradientDescentOptimizer" class="headerlink" title="tf.train.GradientDescentOptimizer"></a>tf.train.GradientDescentOptimizer</h4><p>TensorFlow中损失优化方法</p>
+<ul>
+<li>tf.train.GradientDescentOptimizer(learningrate, uselocking, name)：原始梯度下降方法，唯一参数就是学习率。</li>
+</ul>
+<h4 id="tf-gradients"><a href="#tf-gradients" class="headerlink" title="tf.gradients()"></a>tf.gradients()</h4><p>参数如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tf.gradients(ys, xs, </span><br><span class="line">			 grad_ys=None, </span><br><span class="line">			 name=&#x27;gradients&#x27;,</span><br><span class="line">			 colocate_gradients_with_ops=False,</span><br><span class="line">			 gate_gradients=False,</span><br><span class="line">			 aggregation_method=None,</span><br><span class="line">			 stop_gradients=None)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>tf.gradients()</code>实现<code>ys</code>对<code>xs</code>求导，接受求导值<code>ys</code>和<code>xs</code>不仅可以是tensor，还可以是list</p>
+<h4 id="tf-clip-by-global-norm"><a href="#tf-clip-by-global-norm" class="headerlink" title="tf.clip_by_global_norm"></a>tf.clip_by_global_norm</h4><p>tf.clip_by_global_norm函数的作用就是通过权重梯度的总和的比率来截取多个张量的值。</p>
+<h4 id="tf-gather"><a href="#tf-gather" class="headerlink" title="tf.gather"></a>tf.gather</h4><p>tf.gather(params,indices,axis=0 )</p>
+<p>从params的axis维根据indices的参数值获取切片</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/01/NAS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -952,92 +1095,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E6%B3%9B%E5%9E%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/%E6%B3%9B%E5%9E%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">泛型程序设计</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-29 21:03:24" itemprop="dateCreated datePublished" datetime="2021-06-29T21:03:24+08:00">2021-06-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-30 10:15:30" itemprop="dateModified" datetime="2021-06-30T10:15:30+08:00">2021-06-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="为什么要使用泛型程序设计"><a href="#为什么要使用泛型程序设计" class="headerlink" title="为什么要使用泛型程序设计"></a>为什么要使用泛型程序设计</h3><p><strong>泛型程序设计</strong>意味着编写的代码可以对多种不同类型的对象重用。</p>
-<h4 id="谁想成为泛型程序员"><a href="#谁想成为泛型程序员" class="headerlink" title="谁想成为泛型程序员"></a>谁想成为泛型程序员</h4><p>使用像 ArrayList的泛型类很容易。大多数Java程序员都使用 ArrayList<String>这样的类型，就好像它们已经构建在语言之中，像 String[]数组一样。(当然，数组列表比数组要好一些，因为它可以自动扩展。)<br>但是，实现一个泛型类并没有那么容易。对于类型参数，使用这段代码的程序员可能想要内置( plug in)所有的类。他们希望在没有过多的限制以及混乱的错误消息的状态下，做所有的事情。因此，一个泛型程序员的任务就是预测出所用类的未来可能有的所有用途。<br>这一任务难到什么程度呢?下面是标准类库的设计者们肯定产生争议的一个典型问题。 ArrayList类有一个方法addAll用来添加另一个集合的全部元素。程序员可能想要将 ArrayList<Manager>中的所有元素添加到 ArrayList&lt; Employee&gt;中去。然而，反过来就不行了。如果只能允许前一个调用，而不能允许后一个调用呢?Java语言的设计者发明了一个具有独创性的新概念，通配符类型( wildcard type),它解决了这个问题。通配符类型非常抽象，然而，它们能让库的构建者编写出尽可能灵活的方法。<br>泛型程序设计划分为3个能力级别。基本级别是，仅仅使用泛型类——典型的是像 ArrayList这样的集合——不必考虑它们的工作方式与原因。大多数应用程序员将会停留在这一级别上，直到出现了什么问题。当把不同的泛型类混合在一起时，或是在与对类型参数一无所知的遗留的代码进行衔接时，可能会看到含混不清的错误消息。如果这样的话，就需要学习Java泛型来系统地解决这些问题，而不要胡乱地猜测。当然，最终可能想要实现自己的泛型类与泛型方法。<br>应用程序员很可能不喜欢编写太多的泛型代码。JDK开发人员已经做出了很大的努力，为所有的集合类提供了类型参数。凭经验来说，那些原本涉及许多来自通用类型(如 Object或 Comparable接口)的强制类型转换的代码一定会因使用类型参数而受益。</Manager></String></p>
-<h3 id="定义简单泛型"><a href="#定义简单泛型" class="headerlink" title="定义简单泛型"></a>定义简单泛型</h3><p><strong>泛型类</strong>就是有一个或多个类型变量的类。</p>
-<p>注释：类型变量使用大写形式，且比较短，这是很常见的。在ava库中，使用变量E表示集合的元素类型，K和V分别表示表的关键字与值的类型。T(需要时还可以用临近的字母U和S)表示“任意类型”。</p>
-<h3 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h3><p>定义一个带有类型参数的简单方法。 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class ArrayAlg</span><br><span class="line">&#123;</span><br><span class="line"> public static &lt;T&gt; T getMiddle(T... a)</span><br><span class="line">&#123;</span><br><span class="line"> return a[a.length /2];</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>这个方法是在普通类中定义的，而不是在泛型类中定义的。然而，这是一个泛型方法，可以从尖括号和类型变量看出这一点。注意，类型变量放在修饰符(这里是 public static)的后面，返回类型的前面。<br>泛型方法可以定义在普通类中，也可以定义在泛型类中。<br>当调用一个泛型方法时，在方法名前的尖括号中放入具体的类型：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String middle ArrayAlg. &lt;String&gt; (&quot;John&quot;, &quot;Q&quot;, &quot;Public&quot;);</span><br></pre></td></tr></table></figure>
-<p>在这种情况(实际也是大多数情况)下，方法调用中可以省略<String>类型参数。编译器有足够的信息能够推断出所调用的方法。它用names的类型(即 String[])与泛型类型T[]进行匹配并推断出T一定 String是。也就是说，可以调用</String></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String middle ArrayAlg. getMiddle(&quot;John&quot;, &quot;Q.&quot;, &quot;Public&quot;);</span><br></pre></td></tr></table></figure>
-<p>几乎在大多数情况下，对于泛型方法的类型引用没有问题。偶尔，编译器也会提示错误，此时需要解译错误报告。看一看下面这个示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double middle= ArrayAlg.getMiddle(3.14,1729,0);</span><br></pre></td></tr></table></figure>
-<p>错误消息会以晦涩的方式指出(不同的编译器给出的错误消息可能有所不同):解释这句代码有两种方法，而且这两种方法都是合法的。简单地说，编译器将会自动打包参数为1个 Double和2个 Integer对象，而后寻找这些类的共同超类型。事实上；找到2个这样的超类型： Number和 Comparable接口，其本身也是一个泛型类型。在这种情况下，可以采取的补救措施是将所有的参数都写为double值。</p>
-<h3 id="类型限定的变量"><a href="#类型限定的变量" class="headerlink" title="类型限定的变量"></a>类型限定的变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">有时，类或方法需要对类型变量加以约束。下面是一个典型的例子。我们要计算数组中的最小元素：</span><br><span class="line"> class ArrayAlg</span><br><span class="line"> &#123;</span><br><span class="line">    public static &lt;T&gt; T min( a)//almost correct</span><br><span class="line">   &#123;</span><br><span class="line">        if (a = null ||a.length==0) return null;</span><br><span class="line">        T smallest a[0];</span><br><span class="line">        for (int 1; i a. length; i++)</span><br><span class="line">            if (smallest. compareTo(a[i])&gt; 0) smallest=a[i];</span><br><span class="line">        return smallest;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;  </span><br></pre></td></tr></table></figure>
-<p>但是，这里有一个问题。请看一下min方法的代码内部。变量 smallest类型为T,这意味着它可以是任何一个类的对象。怎么才能确信T所属的类有 compareTo方法呢?<br>解决这个问题的方案是将T限制为实现了 Comparable接口(只含一个方法compareTo的标准接口)的类。可以通过对类型变量T设置限定( bound)实现这一点：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&gt; T min(T[] a)...</span><br></pre></td></tr></table></figure>
-<p>实际上 Comparable接口本身就是一个泛型类型。目前，我们忽略其复杂性以及编译器产生的警告。<br>现在，泛型的min方法只能被实现了 Comparable接口的类(如String、 LocalDate等)的数组调用。由于 Rectangle类没有实现 Comparable接口，所以调用min将会产生一个编译错误。</p>
-<p>读者或许会感到奇怪——在此为什么使用关键字 extends而不是 implements?毕竞， Comparable是一个接口。下面的记法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;T extends Boundinglype&gt;</span><br></pre></td></tr></table></figure>
-<p>表示T应该是绑定类型的子类型(subtype)。T和绑定类型可以是类，也可以是接口。选择关键字 extends的原因是更接近子类的概念，并且Java的设计者也不打算在语言中再添加一个新的关键字(如sub)。<br>一个类型变量或通配符可以有多个限定，例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T extends Comparable &amp; Serializable</span><br></pre></td></tr></table></figure>
-<p>限定类型用“&amp;”分隔，而逗号用来分隔类型变量。<br>在java的继承中，可以根据需要拥有多个接口超类型，但限定中至多有一个类。如果用一个类作为限定，它必须是限定列表中的第一个。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1107,7 +1164,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
