@@ -145,6 +145,63 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">计算机组织原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-13 16:49:24" itemprop="dateCreated datePublished" datetime="2021-12-13T16:49:24+08:00">2021-12-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/09/ASP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -176,7 +233,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-11 18:50:56" itemprop="dateModified" datetime="2021-12-11T18:50:56+08:00">2021-12-11</time>
+                <time title="Modified: 2021-12-11 22:43:48" itemprop="dateModified" datetime="2021-12-11T22:43:48+08:00">2021-12-11</time>
               </span>
 
           
@@ -221,6 +278,9 @@
 <p><img src="/2021/12/09/ASP/image-20211210190952668.png" alt="image-20211210190952668"></p>
 <p><img src="/2021/12/09/ASP/image-20211210191832719.png" alt="image-20211210191832719"></p>
 <p><img src="/2021/12/09/ASP/image-20211210191935390.png" alt="image-20211210191935390"></p>
+<p><img src="/2021/12/09/ASP/image-20211211204121826.png" alt="image-20211211204121826"></p>
+<p><img src="/2021/12/09/ASP/image-20211211204221557.png" alt="image-20211211204221557"></p>
+<p><img src="/2021/12/09/ASP/image-20211211204301439.png" alt="image-20211211204301439"></p>
 
       
     </div>
@@ -271,7 +331,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-08 21:01:54" itemprop="dateModified" datetime="2021-12-08T21:01:54+08:00">2021-12-08</time>
+                <time title="Modified: 2021-12-14 01:48:11" itemprop="dateModified" datetime="2021-12-14T01:48:11+08:00">2021-12-14</time>
               </span>
 
           
@@ -302,27 +362,36 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">--创建课程信息表</span><br><span class="line">create table 课程信息</span><br><span class="line">(</span><br><span class="line">课程名称 varchar(15) not null,</span><br><span class="line">课程编号 varchar(10) not null,</span><br><span class="line">教师编号 varchar(15) not null,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>创建课程时间表</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--创建课程时间表</span><br><span class="line">create table 课程时间</span><br><span class="line">(</span><br><span class="line">课程编号 varchar(10) not null,</span><br><span class="line">教师编号 varchar(15) not null,</span><br><span class="line">教师名称 varchar(10) not null,</span><br><span class="line">上课时间 varchar(10) not null</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alter table 学生信息 add 密码 varchar(15)</span><br><span class="line"></span><br><span class="line">alter table 课程时间 add 上课教室 varchar(5)</span><br><span class="line"></span><br><span class="line">alter table 教室使用信息 add 开设课程 varchar(15) default &#x27;无&#x27;</span><br></pre></td></tr></table></figure>
 <h3 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--将教师信息表中教师编号设置为主键约束，身份证号设为唯一约束</span><br><span class="line">alter table 教师信息 </span><br><span class="line">add constraint PK_教师编号 primary key (教师编号)</span><br><span class="line">alter table 教师信息</span><br><span class="line">add constraint UQ_身份证号 unique(身份证号)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--将学生信息表中学号设置为主键约束，身份证号设为唯一约束</span><br><span class="line">alter table 学生信息 </span><br><span class="line">add constraint PK_学号 primary key (学号)</span><br><span class="line">alter table 学生信息</span><br><span class="line">add constraint UQ_身份证号学生 unique(身份证号)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--将教室信息中教室编号设置为主键</span><br><span class="line">alter table 教室信息</span><br><span class="line">add constraint PK_教室编号 primary key(教室编号)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--将教学楼信息中教学楼编号设置为主键</span><br><span class="line">alter table 教学楼信息</span><br><span class="line">add constraint PK_教学楼编号 primary key(教学楼编号)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--将教学楼信息中的教学楼编号与教室信息中的教学楼编号添加外键</span><br><span class="line">alter table 教室信息</span><br><span class="line">add constraint FK_教学楼编号 foreign key(教学楼编号)references 教学楼信息(教学楼编号)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">--将教室使用信息表中教学楼编号与教学楼信息表中的教学楼编号添加外键</span><br><span class="line">alter table 教室使用信息</span><br><span class="line">add constraint FK_教学楼编号教室使用信息 foreign key (教学楼编号)references 教学楼信息(教学楼编号)</span><br><span class="line"></span><br><span class="line">--将教室使用信息表中教室编号与教室信息表中的教室编号添加外键</span><br><span class="line">alter table 教室使用信息</span><br><span class="line">add constraint FK_教室编号教室使用信息 foreign key (教室编号)references 教室信息(教室编号)</span><br><span class="line"></span><br><span class="line">--将教室使用信息表中教师状态做约束</span><br><span class="line">alter table 教室使用信息</span><br><span class="line">add constraint CK_状态 check(状态=&#x27;有课&#x27; or 状态=&#x27;讲座&#x27; or 状态=&#x27;活动&#x27; or 状态=&#x27;空闲&#x27; or 状态=&#x27;其他&#x27;)</span><br><span class="line"></span><br><span class="line">--将教室使用信息表中教室状态添加默认约束空闲</span><br><span class="line">alter table 教室使用信息</span><br><span class="line">add constraint DF_状态 default &#x27;空闲&#x27; for 状态</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">--将教室使用信息表中教学楼编号与教学楼信息表中的教学楼编号添加外键</span><br><span class="line">alter table 教室使用信息</span><br><span class="line">add constraint FK_教学楼编号教室使用信息 foreign key (教学楼编号)references 教学楼信息(教学楼编号)</span><br><span class="line"></span><br><span class="line">--将教室使用信息表中教室编号与教室信息表中的教室编号添加外键</span><br><span class="line">alter table 教室使用信息</span><br><span class="line">add constraint FK_教室编号教室使用信息 foreign key (教室编号)references 教室信息(教室编号)</span><br><span class="line"></span><br><span class="line">--将教室使用信息表中教师状态做约束</span><br><span class="line">alter table 教室使用信息</span><br><span class="line">add constraint CK_状态 check(状态=&#x27;有课&#x27; or 状态=&#x27;讲座&#x27; or 状态=&#x27;活动&#x27; or 状态=&#x27;空闲&#x27; or 状态=&#x27;其他&#x27;)//删除掉该约束</span><br><span class="line"></span><br><span class="line">--将教室使用信息表中教室状态添加默认约束空闲</span><br><span class="line">alter table 教室使用信息</span><br><span class="line">add constraint DF_状态 default &#x27;空闲&#x27; for 状态</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">--对课程信息表中课程编号添加主键约束</span><br><span class="line">alter table 课程信息</span><br><span class="line">　add constraint PK_课程编号 primary key (课程编号)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--对课程信息表中教师编号添加外键约束</span><br><span class="line">alter table 课程信息</span><br><span class="line">add constraint FK_教师编号课程信息 foreign key(教师编号)references 教师信息(教师编号)</span><br><span class="line"></span><br><span class="line">--对课程时间表中教师编号添加外键约束</span><br><span class="line">alter table 课程时间</span><br><span class="line">add constraint FK_教师编号课程时间 foreign key(教师编号)references 教师信息(教师编号)</span><br><span class="line"></span><br><span class="line">--对课程时间表中课程编号添加外键约束</span><br><span class="line">alter table 课程时间</span><br><span class="line">add constraint FK_课程编号课程时间 foreign key(课程编号)references 课程信息(课程编号)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">--对教师信息中的性别添加约束</span><br><span class="line">　　alter table 教师信息</span><br><span class="line">　　add constraint CK_性别教师 check (性别=&#x27;男&#x27; or 性别=&#x27;女&#x27;)</span><br><span class="line"></span><br><span class="line">--对教室使用信息的时间进行约束</span><br><span class="line">  alter table 教室使用信息</span><br><span class="line">  add constraint CK_时间 check (时间=&#x27;周一一二&#x27; or 时间=&#x27;周一三四&#x27; or 时间=&#x27;周一五六&#x27; or 时间=&#x27;周一七八&#x27; or </span><br><span class="line">  时间=&#x27;周二一二&#x27; or 时间=&#x27;周二三四&#x27; or 时间=&#x27;周二五六&#x27; or 时间=&#x27;周二七八&#x27; or </span><br><span class="line">  时间=&#x27;周三一二&#x27; or 时间=&#x27;周三三四&#x27; or 时间=&#x27;周三五六&#x27; or 时间=&#x27;周三七八&#x27; or </span><br><span class="line">  时间=&#x27;周四一二&#x27; or 时间=&#x27;周四三四&#x27; or 时间=&#x27;周四五六&#x27; or 时间=&#x27;周四七八&#x27; or </span><br><span class="line">  时间=&#x27;周五一二&#x27; or 时间=&#x27;周五三四&#x27; or 时间=&#x27;周五五六&#x27; or 时间=&#x27;周五七八&#x27; or </span><br><span class="line">  时间=&#x27;周六一二&#x27; or 时间=&#x27;周六三四&#x27; or 时间=&#x27;周六五六&#x27; or 时间=&#x27;周六七八&#x27; or </span><br><span class="line">  时间=&#x27;周日一二&#x27; or 时间=&#x27;周日三四&#x27; or 时间=&#x27;周日五六&#x27; or 时间=&#x27;周日七八&#x27; </span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<p>修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alter table 课程时间</span><br><span class="line">add constraint FK_教室 foreign key(上课教室) references 教室信息(教室编号)</span><br><span class="line"></span><br><span class="line">alter table 教室使用信息</span><br><span class="line">alter column 状态 varchar(15) not null</span><br></pre></td></tr></table></figure>
 <h3 id="插入的信息"><a href="#插入的信息" class="headerlink" title="插入的信息"></a>插入的信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">insert into 教师信息</span><br><span class="line"> values(&#x27;001&#x27;,&#x27;张三&#x27;,&#x27;男&#x27;,&#x27;计算机&#x27;,&#x27;教授&#x27;,&#x27;123456789&#x27;)</span><br><span class="line"> insert into 教师信息</span><br><span class="line"> values(&#x27;002&#x27;,&#x27;李四&#x27;,&#x27;女&#x27;,&#x27;地理与海洋&#x27;,&#x27;教授&#x27;,&#x27;123123123&#x27;)</span><br><span class="line"> insert into 教师信息</span><br><span class="line">values(&#x27;003&#x27;,&#x27;王五&#x27;,&#x27;男&#x27;,&#x27;计算机&#x27;,&#x27;教授&#x27;,&#x27;456456456&#x27;)</span><br><span class="line"></span><br><span class="line"> select * from 教师信息</span><br><span class="line"></span><br><span class="line">insert into 教学楼信息</span><br><span class="line">values(&#x27;仙一&#x27;,&#x27;001&#x27;)</span><br><span class="line"></span><br><span class="line">insert into 教学楼信息</span><br><span class="line">values(&#x27;仙二&#x27;,&#x27;002&#x27;)</span><br><span class="line">select * from 教学楼信息</span><br><span class="line"></span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1101&#x27;,&#x27;001&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1102&#x27;,&#x27;001&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1103&#x27;,&#x27;001&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1104&#x27;,&#x27;001&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1201&#x27;,&#x27;001&#x27;,&#x27;2&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1202&#x27;,&#x27;001&#x27;,&#x27;2&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1203&#x27;,&#x27;001&#x27;,&#x27;2&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1204&#x27;,&#x27;001&#x27;,&#x27;2&#x27;)</span><br><span class="line"></span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2101&#x27;,&#x27;002&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2102&#x27;,&#x27;002&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2103&#x27;,&#x27;002&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2104&#x27;,&#x27;002&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2201&#x27;,&#x27;002&#x27;,&#x27;2&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2202&#x27;,&#x27;002&#x27;,&#x27;2&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2203&#x27;,&#x27;002&#x27;,&#x27;2&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2204&#x27;,&#x27;002&#x27;,&#x27;2&#x27;)</span><br><span class="line">select * from 教室信息</span><br></pre></td></tr></table></figure>
 <p>插入课程信息</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">exec information_entry &#x27;数据库&#x27;,&#x27;001&#x27;,&#x27;周一三四&#x27;,&#x27;张三&#x27;,&#x27;001&#x27;,&#x27;001&#x27;,&#x27;1102&#x27;</span><br><span class="line">exec information_entry &#x27;数据库&#x27;,&#x27;001&#x27;,&#x27;周二三四&#x27;,&#x27;张三&#x27;,&#x27;001&#x27;,&#x27;001&#x27;,&#x27;1102&#x27;</span><br><span class="line">exec information_entry &#x27;地理综合认知&#x27;,&#x27;002&#x27;,&#x27;周三三四&#x27;,&#x27;李四&#x27;,&#x27;002&#x27;,&#x27;001&#x27;,&#x27;1202&#x27;</span><br><span class="line">exec information_entry &#x27;地理综合认知&#x27;,&#x27;002&#x27;,&#x27;周四三四&#x27;,&#x27;李四&#x27;,&#x27;002&#x27;,&#x27;001&#x27;,&#x27;1202&#x27;</span><br><span class="line">exec information_entry &#x27;机器学习&#x27;,&#x27;003&#x27;,&#x27;周一五六&#x27;,&#x27;张三&#x27;,&#x27;001&#x27;,&#x27;002&#x27;,&#x27;2102&#x27;</span><br><span class="line">exec information_entry &#x27;机器学习&#x27;,&#x27;003&#x27;,&#x27;周二五六&#x27;,&#x27;张三&#x27;,&#x27;001&#x27;,&#x27;002&#x27;,&#x27;2102&#x27;</span><br><span class="line">exec information_entry &#x27;机器学习&#x27;,&#x27;004&#x27;,&#x27;周四七八&#x27;,&#x27;王五&#x27;,&#x27;003&#x27;,&#x27;002&#x27;,&#x27;2202&#x27;</span><br><span class="line">exec information_entry &#x27;机器学习&#x27;,&#x27;004&#x27;,&#x27;周五七八&#x27;,&#x27;王五&#x27;,&#x27;003&#x27;,&#x27;002&#x27;,&#x27;2202&#x27;</span><br></pre></td></tr></table></figure>
 <h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h3><p>插入课程信息存储</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">--插入课程信息</span><br><span class="line"></span><br><span class="line">go</span><br><span class="line">create procedure information_entry</span><br><span class="line"> @coursename varchar(15),--输入参数，课程名称</span><br><span class="line"> @coursenumber varchar(10),--输入参数，课程编号</span><br><span class="line"> @coursetime varchar(10),--输入参数，课程时间</span><br><span class="line"> @teachername varchar(10),--输入参数，教师名称</span><br><span class="line"> @teachernumber varchar(15),--输入参数，教师编号</span><br><span class="line"> @buildingnumber varchar(5),--输入参数，教学楼编号</span><br><span class="line"> @roomnumber varchar(5)--输入参数教室编号</span><br><span class="line">AS</span><br><span class="line"> insert into 课程信息</span><br><span class="line"> values(@coursename,@coursenumber,@teachernumber)</span><br><span class="line"> insert into 课程时间</span><br><span class="line"> values(@coursenumber,@teachernumber,@teachername,@coursetime)</span><br><span class="line"> insert into 教室使用信息</span><br><span class="line"> values(@buildingnumber,@roomnumber,@coursetime,&#x27;有课&#x27;)</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+<p>修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">create procedure information_entry</span><br><span class="line"> @coursename varchar(15),--输入参数，课程名称</span><br><span class="line"> @coursenumber varchar(10),--输入参数，课程编号</span><br><span class="line"> @coursetime varchar(10),--输入参数，课程时间</span><br><span class="line"> @teachername varchar(10),--输入参数，教师名称</span><br><span class="line"> @teachernumber varchar(15),--输入参数，教师编号</span><br><span class="line"> @buildingnumber varchar(5),--输入参数，教学楼编号</span><br><span class="line"> @roomnumber varchar(5)--输入参数教室编号</span><br><span class="line">AS</span><br><span class="line"> insert into 课程信息</span><br><span class="line"> values(@coursename,@coursenumber,@teachernumber)</span><br><span class="line"> insert into 课程时间</span><br><span class="line"> values(@coursenumber,@teachernumber,@teachername,@coursetime,@roomnumber)</span><br><span class="line"> insert into 教室使用信息</span><br><span class="line"> values(@buildingnumber,@roomnumber,@coursetime,&#x27;有课&#x27;,@coursename)</span><br><span class="line">go</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>查询指定教室使用情况</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">--查询指定教室使用情况</span><br><span class="line">create procedure classroom_query</span><br><span class="line"> @room varchar(5),</span><br><span class="line"> @time varchar(10),</span><br><span class="line"> @state varchar(10)=&#x27;空闲&#x27; output</span><br><span class="line"> AS</span><br><span class="line"> declare @state1 varchar(10)</span><br><span class="line"> select @state=状态</span><br><span class="line"> from 教室使用信息</span><br><span class="line"> where 教室编号=@room and 时间=@time</span><br><span class="line"> if @state IS NULL</span><br><span class="line">   set  @state=&#x27;空闲&#x27;</span><br><span class="line"> go</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">--查询指定教室使用情况</span><br><span class="line">create procedure classroom_query</span><br><span class="line"> @room varchar(5),</span><br><span class="line"> @time varchar(10),</span><br><span class="line"> @state varchar(10)=&#x27;空闲&#x27; output</span><br><span class="line"> AS</span><br><span class="line"> declare @state1 varchar(10)</span><br><span class="line"> select @state=状态</span><br><span class="line"> from 教室使用信息</span><br><span class="line"> where 教室编号=@room and 时间=@time</span><br><span class="line"> if @state IS NULL</span><br><span class="line">   set  @state=&#x27;空闲&#x27;</span><br><span class="line"> go</span><br><span class="line"></span><br><span class="line">修改</span><br><span class="line">create procedure classroom_query</span><br><span class="line"> @room varchar(5),</span><br><span class="line"> @time varchar(10),</span><br><span class="line"> @state varchar(10)=&#x27;空闲&#x27; output</span><br><span class="line"> AS</span><br><span class="line"></span><br><span class="line"> select @state=状态</span><br><span class="line"> from 教室使用信息</span><br><span class="line"> where 教室编号=@room and 时间=@time</span><br><span class="line"> if @state IS NULL</span><br><span class="line">   set  @state=&#x27;空闲&#x27;</span><br><span class="line">   else if @state=&#x27;有课&#x27;</span><br><span class="line">   begin</span><br><span class="line">    select @state=开设课程</span><br><span class="line"> from 教室使用信息</span><br><span class="line"> where 教室编号=@room and 时间=@time</span><br><span class="line"></span><br><span class="line">   end</span><br><span class="line"> go</span><br></pre></td></tr></table></figure>
 <p>查询指定课程</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">create procedure course_query</span><br><span class="line"> @name varchar(10),</span><br><span class="line"> @state varchar(10) output</span><br><span class="line"> AS</span><br><span class="line"></span><br><span class="line"> select 课程信息.课程名称,课程信息.课程编号,课程时间.教师名称,课程时间.上课时间</span><br><span class="line"> from 课程时间 inner join 课程信息 on 课程信息.课程编号=课程时间.课程编号</span><br><span class="line"> where 课程信息.课程名称=@name</span><br><span class="line"> go</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>租借教室</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">go</span><br><span class="line"> create procedure borrow</span><br><span class="line"> @building varchar(5),</span><br><span class="line"> @room varchar(5),</span><br><span class="line"> @time varchar(10),</span><br><span class="line"> @reason varchar(10)</span><br><span class="line">AS</span><br><span class="line">declare @state varchar(10)</span><br><span class="line"> select @state=状态</span><br><span class="line"> from 教室使用信息</span><br><span class="line"> where 教室编号=@room and 时间=@time</span><br><span class="line"> if @state IS NULL</span><br><span class="line"> begin</span><br><span class="line">   set  @state=&#x27;空闲&#x27;</span><br><span class="line">   print &#x27;此时教室空闲，可以借用&#x27;</span><br><span class="line">   insert into 教室使用信息</span><br><span class="line">   values(@building,@room,@time,@reason)</span><br><span class="line">  end</span><br><span class="line">else</span><br><span class="line">  print &#x27;此教室被占用，正在&#x27;+@state</span><br><span class="line">  go</span><br></pre></td></tr></table></figure>
+<p>修改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">declare @state varchar(10)</span><br><span class="line">go</span><br><span class="line">create procedure borrow</span><br><span class="line"> @building varchar(5),</span><br><span class="line"> @room varchar(5),</span><br><span class="line"> @time varchar(10),</span><br><span class="line"> @reason varchar(10),</span><br><span class="line"> @state varchar(10) output</span><br><span class="line">AS</span><br><span class="line">declare @state1 varchar(10)</span><br><span class="line"> select @state1=状态</span><br><span class="line"> from 教室使用信息</span><br><span class="line"> where 教室编号=@room and 时间=@time</span><br><span class="line"> if @state1 IS NULL</span><br><span class="line"> begin</span><br><span class="line">   set  @state1=&#x27;空闲&#x27;</span><br><span class="line">   </span><br><span class="line">   print &#x27;此时教室空闲，可以借用&#x27;</span><br><span class="line">   insert into 教室使用信息</span><br><span class="line">   values(@building,@room,@time,@reason)</span><br><span class="line">  end</span><br><span class="line">else</span><br><span class="line">  print &#x27;此教室被占用，正在&#x27;+@state1</span><br><span class="line">  set @state=@state1</span><br><span class="line">  print @state</span><br><span class="line">  go</span><br><span class="line"></span><br><span class="line">  select *from 教室使用信息</span><br><span class="line">  declare @state varchar(10)</span><br><span class="line">  exec borrow &#x27;001&#x27;,&#x27;1102&#x27;,&#x27;周一三四&#x27;,&#x27;其他&#x27;,@state output</span><br><span class="line">  print @state</span><br></pre></td></tr></table></figure>
 <h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>创建视图，查询张三老师课程</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--创建视图，查询计算机学院张三老师所有课程名称</span><br><span class="line">go</span><br><span class="line">create VIEW view_张三</span><br><span class="line">as </span><br><span class="line">select 课程名称 </span><br><span class="line">from 课程信息</span><br><span class="line">where 教师编号=&#x27;001&#x27;</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">exec information_entry &#x27;机器学习&#x27;,&#x27;004&#x27;,&#x27;周六七八&#x27;,&#x27;王五&#x27;,&#x27;003&#x27;,&#x27;002&#x27;,&#x27;2202&#x27;</span><br><span class="line">select *from 教室使用信息</span><br><span class="line">declare @state varchar(15)</span><br><span class="line">exec classroom_query &#x27;2202&#x27;,&#x27;周六七八&#x27;,@state output</span><br><span class="line">print @state</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1358,10 +1427,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-11-15 01:18:45 / Modified: 20:01:31" itemprop="dateCreated datePublished" datetime="2021-11-15T01:18:45+08:00">2021-11-15</time>
+              <time title="Created: 2021-11-15 01:18:45" itemprop="dateCreated datePublished" datetime="2021-11-15T01:18:45+08:00">2021-11-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-13 19:23:36" itemprop="dateModified" datetime="2021-12-13T19:23:36+08:00">2021-12-13</time>
+              </span>
 
           
 
@@ -1374,7 +1449,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h2 id="计算机系统概论"><a href="#计算机系统概论" class="headerlink" title="计算机系统概论"></a>计算机系统概论</h2><p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/7E98C321CA302366D429FA58F7F0F1B8.jpg" alt="img" style="zoom: 25%;"></p>
+<h3 id="计算机的基本组成"><a href="#计算机的基本组成" class="headerlink" title="计算机的基本组成"></a>计算机的基本组成</h3><h4 id="冯诺依曼计算机的特点"><a href="#冯诺依曼计算机的特点" class="headerlink" title="冯诺依曼计算机的特点"></a>冯诺依曼计算机的特点</h4><p>（1）计算机由运算器，存储器，控制器，输入设备，输出设备五大部件组成。</p>
+<p>（2）指令和数据以同等地位存放于存储器内，可按地址访问。</p>
+<p>（3）指令和数据均用二进制数表示。</p>
+<p>（4）指令由操作码和地址码组成，操作码用来表示操作的性质，地址码用来表示操作数在存储器中的位置。</p>
+<p>（5）指令在存储器内顺序存放。</p>
+<p>（6）机器以运算器为中心，输入输出设备与存储器间的数据传送通过运算器完成。</p>
+<h4 id="计算机的硬件框图"><a href="#计算机的硬件框图" class="headerlink" title="计算机的硬件框图"></a>计算机的硬件框图</h4><p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/94750150D2C1C873C26D2D9976705CDC.jpg" alt="img" style="zoom: 25%;"></p>
+<p>通常把运算器与控制器统称为中央处理器，即CPU。把输入/输出设备成为I/O设备，也可称为外部设备。</p>
+<p>CPU与主存储器合起来称为主存。</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/997ACEF4162CFC523F026283A2A12F41.jpg" alt="img" style="zoom:25%;"></p>
+<p>控制元（CU）用来解释存储器中的指令，并发出各种操作命令来执行指令。</p>
+<h3 id="计算机硬件的主要技术指标"><a href="#计算机硬件的主要技术指标" class="headerlink" title="计算机硬件的主要技术指标"></a>计算机硬件的主要技术指标</h3><p>机器字长；</p>
+<p>存储容量：MAR位数反映的存储单元的个数，MDR的位数反映了存储字长；</p>
+<p>运算速度：MIPS(百万条指令每秒)，CPI(执行一条指令所需的时钟周期)；</p>
+<h3 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h3><p>指令字长=存储字长=机器字长（三者可以相等也可以不等）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">机器字长：CPU一次能处理的二进制数据的最大位数。通常与CPU内寄存器的位数有关。栗子：windows 64位/32位，这里的64位和32位指的就是该操作系统的机器字长。</span><br><span class="line">存储字长指一个存储单元可存放的二进制代码的位数，即存储器中的MDR的位数。</span><br><span class="line">指令字长是计算机指令字的位数，指令字是指用二进制表示的指令，</span><br><span class="line">数据字长指的是计算机数据字的位数，数据字是指用二进制表示的数据</span><br></pre></td></tr></table></figure>
+<p>用以指定待执行指令所在地址的是程序计数器</p>
+<p>磁盘驱动器具有输入及输出功能</p>
+<p>完整的计算机系统应该包括配套的硬件设备和软件系统</p>
+<p>计算机与日常使用的袖珍计算器的本质区别在于自动化程度的高低。</p>
+<p>有些计算机将一部分软件永恒地存于只读存储器中，称为固件</p>
+<p>计算机系统软件包括：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">标准程序库，如监控程序，用于监视计算机工作</span><br><span class="line">服务型程序，如连接、编辑、调试、诊断</span><br><span class="line">语言处理程序，如编译程序、汇编程序、解释程序，将各种语言转换成机器语言</span><br><span class="line">操作系统，用来控制和管理计算机</span><br><span class="line">数据库管理系统</span><br><span class="line">各种计算机网络软件</span><br></pre></td></tr></table></figure>
+<p>存储元件（又称存储基元、存储元）用来存放一位二进制信息。存储单元由若干个存储元件组成，能存放多位二进制信息。每个存储单元中二进制代码的组合即为存储字，它可代表数值、指令、地址或逻辑。每个存储单元中二进制代码的位数就是存储字长。</p>
+
       
     </div>
 
@@ -1968,77 +2068,6 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/07/DIN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/07/DIN/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-10-07 20:54:24" itemprop="dateCreated datePublished" datetime="2021-10-07T20:54:24+08:00">2021-10-07</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>利用真实的下一个行为作为正样本；</li>
-<li>负例的选择或是从用户未交互过的商品中随机抽取，或是从已展示给用户但用户没有点击的商品中随机抽取；</li>
-</ul>
-<p>具体来讲，就是利用 t 时刻的行为 b(t+1) 作为监督去学习隐含层向量 ht。正负样本分别代表了用户 点击/未点击 的第 t 个物品embedding向量。</p>
-<p>关于mask的作用，这里结合 Transformer 再说一下：</p>
-<p>mask 表示掩码，它对某些值进行掩盖，使其在参数更新时不产生效果。Transformer 模型里面涉及两种 mask，分别是 padding mask 和 sequence mask。其中，padding mask 在所有的 scaled dot-product attention 里面都需要用到，而 sequence mask 只有在 decoder 的 self-attention 里面用到。</p>
-<h5 id="Padding-Mask"><a href="#Padding-Mask" class="headerlink" title="Padding Mask"></a>Padding Mask</h5><p>什么是 padding mask 呢？因为每个批次输入序列长度是不一样的也就是说，我们要对输入序列进行对齐。具体来说，就是给在较短的序列后面填充 0。但是如果输入的序列太长，则是截取左边的内容，把多余的直接舍弃。因为这些填充的位置，其实是没什么意义的，所以attention机制不应该把注意力放在这些位置上，需要进行一些处理。</p>
-<p>具体的做法是，把这些位置的值加上一个非常大的负数(负无穷)，这样的话，经过 softmax，这些位置的概率就会接近0！而我们的 padding mask 实际上是一个张量，每个值都是一个Boolean，值为 false 的地方就是我们要进行处理的地方。</p>
-<h5 id="Sequence-mask"><a href="#Sequence-mask" class="headerlink" title="Sequence mask"></a>Sequence mask</h5><p>sequence mask 是为了使得 decoder 不能看见未来的信息。也就是对于一个序列，在 time_step 为 t 的时刻，我们的解码输出应该只能依赖于 t 时刻之前的输出，而不能依赖 t 之后的输出。因此我们需要想一个办法，把 t 之后的信息给隐藏起来。</p>
-<p>那么具体怎么做呢？也很简单：产生一个上三角矩阵，上三角的值全为0。把这个矩阵作用在每一个序列上，就可以达到我们的目的。</p>
-<p>对于 decoder 的 self-attention，里面使用到的 scaled dot-product attention，同时需要padding mask 和 sequence mask 作为 attn_mask，具体实现就是两个mask相加作为attn_mask。</p>
-<p>其他情况，attn_mask 一律等于 padding mask。</p>
-<p><strong>DIN这里使用的是padding mask。</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2108,7 +2137,7 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

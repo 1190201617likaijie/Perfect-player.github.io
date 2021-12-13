@@ -145,6 +145,164 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/30/%E9%9B%86%E5%90%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/30/%E9%9B%86%E5%90%88/" class="post-title-link" itemprop="url">集合</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-30 10:18:34 / Modified: 13:41:05" itemprop="dateCreated datePublished" datetime="2021-06-30T10:18:34+08:00">2021-06-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="java集合框架"><a href="#java集合框架" class="headerlink" title="java集合框架"></a>java集合框架</h3><h4 id="集合接口与实现分离"><a href="#集合接口与实现分离" class="headerlink" title="集合接口与实现分离"></a>集合接口与实现分离</h4><p>与现代的数据结构类库的常见做法一样，java集合类库也将接口与实现分离。下面用我们熟悉的数据结构——队列来说明是如何分离的。</p>
+<p>队列接口指出可以在队列的尾部添加元素，在队列的头部删除元素，并且可以查找队列中元素的个数。当需要收集对象，并按照“先进先出”方式检索对象时就应该使用队列。</p>
+<p><img src="/2021/06/30/%E9%9B%86%E5%90%88/image-20210630104036075.png" alt="image-20210630104036075"></p>
+<p>队列接口的最简形式可能类似下面这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface Queue&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">    void add(E element);</span><br><span class="line">    E remove();</span><br><span class="line">    int size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个接口并没有说明队列是如何实现的。队列通常有两种实现方式：一种是使用循环数组；另一种是使用链表。</p>
+<p><img src="/2021/06/30/%E9%9B%86%E5%90%88/image-20210630104055147.png" alt="image-20210630104055147"></p>
+<p>每一个实现都可以用一个实现了Queue接口的类表示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class CircularArrayQueue&lt;E&gt; implements Queue&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">   private int head;</span><br><span class="line">   private int tail;</span><br><span class="line">   CircularArrayQueue(int capacity)&#123;...&#125;</span><br><span class="line">   public void add(E element)&#123;...&#125;</span><br><span class="line">   public E remove()&#123;...&#125;</span><br><span class="line">   public int size()&#123;...&#125;</span><br><span class="line">   private E[] elements;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class LinkedListQueue&lt;E&gt; implements Queue&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">   private Link head;</span><br><span class="line">   private Link tail;</span><br><span class="line">   </span><br><span class="line">   LinkedListQueue()&#123;...&#125;</span><br><span class="line">   public void add(E element)&#123;...&#125;</span><br><span class="line">   public E remove()&#123;...&#125;</span><br><span class="line">   public int size()&#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当在程序中使用队列时，一旦已经构造了集合，就不需要知道究竟使用了哪种实现。因此，只有在构造集合对象时，才会使用具体的类。可以使用接口类型存放集合引用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;Customer&gt; expresslane = new CircularArrayQueue&lt;&gt;(100);</span><br><span class="line">expressLane.add(new Customer(&quot;Harry&quot;));</span><br></pre></td></tr></table></figure>
+<p>利用这种方法，一旦改变了想法，就可以很轻松地使用另外一种不同的实现。只需要对程序的一个地方1做出修改，即调用构造器的地方。如果觉得LinkedListQueue是个更好的选择，就将代码修改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Queue1&lt;Customer&gt; expressLane =new LinkedListQueue&lt;&gt;();</span><br><span class="line">expressLane.add(new Customer(&quot;Harry&quot;));</span><br></pre></td></tr></table></figure>
+<p>为什么选择这种实现，而不选择那种实现呢？接口本身并不能说明哪种实现的效率究竟如何。循环数组要比链表更高效，因此多数人优先选择循环数组。不过，通常来讲，这样做也需要付出一定代价。</p>
+<p>循环数组是一个有界集合，即容量有限。如果程序中要收集的对象数量没有上限，就最好使用链表来实现。</p>
+<h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>Iterator接口包含4个方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public interface Iterator&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">   E next();</span><br><span class="line">   boolean hasNext();</span><br><span class="line">   void remove();</span><br><span class="line">   default void forEachRemaining(Consumer&lt;?super E&gt; action);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过反复调用next方法，可以逐个访问集合中的每个元素。但是，如果到达了集合的末尾，next方法将抛出一个NoSuchElementException。因此，需要在调用next之前调用hasNext方法。如果迭代器对象还有多个可以访问的元素，这个方法就返回true。如果想要查看集合中的所有元素，就请求一个迭代器，党hasNext返回true时就反复地调用next方法。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;String&gt; c=...;</span><br><span class="line">Iterator&lt;String&gt; iter=c.iterator();</span><br><span class="line">while(iter.hasNext())</span><br><span class="line">&#123;</span><br><span class="line">  String element-iter.next();</span><br><span class="line">  do something with element</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用”for each”循坏可以更加简练地表示同样的循环操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(String element : c)</span><br><span class="line">&#123;</span><br><span class="line">   do something with element</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译器简单地将”for each”循环转换为带有迭代器的循坏。</p>
+<p>“for each”循环可以处理任何实现了Iterable接口的对象，这个接口只包含一个抽象方法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Iterable&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">   Iterator&lt;E&gt; iterator();</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>访问元素的顺序取决于集合类型。如果迭代处理一个ArrayList，迭代器将从索引0开始，每迭代一次，索引值加1.不过，如果访问HashSet中的元素，会按照一种基本上随机的顺序获得元素。虽然可以确保在迭代过程中能够遍历到集合中的所有元素，但是无法预知访问各元素的顺序。这通常并不是什么问题，因为对于计算总和或统计匹配之类的计算，顺序并不重要。</p>
+<p>Java集合类库中的迭代器与其他类库中的迭代器在概念上有着重要的区别。在传统的集合类库中，例如，C++的标准模版库，迭代器是根据数组索引建模的。如果给定这样一个迭代器，就可以查看指定位置上的元素，就像知道数组索引i就可以查看数组元素a[i]一样。不需要查找元素，就可以将迭代器向前移动一个位置。这与不需要执行查找操作就可以通过i++将数组索引向前移动一样。但是，Java迭代器并不是这样操作的。查找操作与位置变更是紧密相连的。查找一个元素的唯一方法是调用next,而在执行查找操作的同时，迭代器的位置随之向前移动。<br>因此，应该将Java迭代器认为是位于两个元素之间。当调用next时，迭代器就越过下一个元素，并返回刚刚越过的那个元素的引用。</p>
+<p><img src="/2021/06/30/%E9%9B%86%E5%90%88/image-20210630113409750.png" alt="image-20210630113409750"></p>
+<p>Iterator接口的remove方法将会删除上次调用next方法时返回的元素。在大多数情况下，这是有道理的，在决定删除某个元素之前应该先看一下这个元素。不过，如果想要删除指定位置上的元素，仍然需要越过这个元素：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;String&gt; it =c.iterator();</span><br><span class="line">it.next;</span><br><span class="line">it.remove();</span><br></pre></td></tr></table></figure>
+<p>更重要的是，next方法和remove方法调用之间存在依赖性。如果调用remove之前没有调用next，将是不合法的。如果这样做，将会抛出一个IllegalStateException异常。</p>
+<p>如果想删掉两个相邻的元素，不能直接这样调用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">it.remove();</span><br><span class="line">it.remove();</span><br></pre></td></tr></table></figure>
+<p>实际上，必须先调用next越过要删除的元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">it.remove();</span><br><span class="line">it.next();</span><br><span class="line">it.remove();</span><br></pre></td></tr></table></figure>
+<h3 id="具体集合"><a href="#具体集合" class="headerlink" title="具体集合"></a>具体集合</h3><h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>链表是一个有序集合。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListIterator&lt;E&gt; ListIterator()</span><br></pre></td></tr></table></figure>
+<p>返回一个列表迭代器，用来访问列表中的元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListIterator&lt;E&gt; listIterator(int index)</span><br></pre></td></tr></table></figure>
+<p>返回一个列表迭代器，用来访问列表中的元素，第一次调用这个迭代器的next会返回给定索引的元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void add(int i,E element)</span><br></pre></td></tr></table></figure>
+<p>在给定位置添加一个元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void addAll(int i,Collection&lt;?extends E&gt;elements)</span><br></pre></td></tr></table></figure>
+<p>将一个集合中的所有元素添加到给定位置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E remove(int i)</span><br></pre></td></tr></table></figure>
+<p>删除给定位置的元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E get(int i)</span><br></pre></td></tr></table></figure>
+<p>获取给定位置的元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E set(int i,E element)</span><br></pre></td></tr></table></figure>
+<p>用一个新元素替换给定位置的元素，并返回原来那个元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int indexOf(Object element)</span><br></pre></td></tr></table></figure>
+<p>返回与指定元素相等的元素在列表中第一次出现的位置，如果没有这样的元素就返回-1.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int lastIndexOf(Object element)</span><br></pre></td></tr></table></figure>
+<p>返回与指定元素相等的元素在列表中最后一次出现的位置，如果没有这样的元素将返回-1.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void add(E newElement)</span><br></pre></td></tr></table></figure>
+<p>在当前位置添加一个元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void set(E newElement)</span><br></pre></td></tr></table></figure>
+<p>用新元素替换next或previous访问的上一个元素。如果在上一个next或previous调用之后列表结构被修改了，将抛出一个IllegalStateException异常。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boolean hasPrevious()</span><br></pre></td></tr></table></figure>
+<p>当反向迭代列表时，如果还有可以访问的元素，返回true。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E previous()</span><br></pre></td></tr></table></figure>
+<p>返回前一个对象。如果已经到达了列表的头部，就抛出一个NoSuchElementException异常。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int nextIndex()</span><br></pre></td></tr></table></figure>
+<p>返回下一次调用next方法时将返回的元素的索引。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int previousIndex()</span><br></pre></td></tr></table></figure>
+<p>返回下一次调用previous方法时将返回的元素的索引。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LinkedList()</span><br></pre></td></tr></table></figure>
+<p>构造一个空链表。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LinkedList(Collection&lt;?extends E&gt;elements)</span><br></pre></td></tr></table></figure>
+<p>构造一个链表，并将集合中所有的元素添加到这个链表中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void addFirst(E element)</span><br><span class="line">void addLast(E element)</span><br></pre></td></tr></table></figure>
+<p>将某个元素添加到列表的头部或尾部。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E getFirst()</span><br><span class="line">E getLast()</span><br></pre></td></tr></table></figure>
+<p>返回列表头部或尾部的元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E removeFirst()</span><br><span class="line">E removeLast()</span><br></pre></td></tr></table></figure>
+<p>删除并返回列表头部或尾部的元素。</p>
+<h4 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashSet()</span><br></pre></td></tr></table></figure>
+<p>构造一个空散列集。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashSet(Collection&lt;?extends E&gt;elements)</span><br></pre></td></tr></table></figure>
+<p>构造一个散列集，并将集合中所有元素添加到这个散列集中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashSet(int initialCapacity)</span><br></pre></td></tr></table></figure>
+<p>构造一个空的具有指定容量的散列集。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashSet(int initialCapacity,float loadFactor)</span><br></pre></td></tr></table></figure>
+<p>构造一个有指定容量和装填因子的空散列集。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int hashCode()</span><br></pre></td></tr></table></figure>
+<p>返回这个对象的散列码。</p>
+<h4 id="树集"><a href="#树集" class="headerlink" title="树集"></a>树集</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TreeSet()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TreeSet(Comparator&lt;?super E&gt; compartor)</span><br></pre></td></tr></table></figure>
+<p>构造一个空数集。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TreeSet(Collection&lt;?extends E&gt;elements)</span><br><span class="line">TreeSet(SortedSet&lt;E&gt; s)</span><br></pre></td></tr></table></figure>
+<p>构造一个树集，并增加一个集合或有序集中的所有元素。</p>
+<h4 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V get(Object key)</span><br></pre></td></tr></table></figure>
+<p>获取与键关联的值；返回与键关联的对象，或者映射中如果没有这个对象，就返回NULL。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V put(K key,V value)</span><br></pre></td></tr></table></figure>
+<p>将关联的一对键和值放到映射中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void putAll(Map&lt;?extends K,?extends V&gt;entries)</span><br></pre></td></tr></table></figure>
+<p>将给定映射中的所有映射条目添加到这个映射中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boolean containsKey(Object key)</span><br></pre></td></tr></table></figure>
+<p>如果在映射中已经有这个键，返回true。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boolean containsValue(Object value)</span><br></pre></td></tr></table></figure>
+<p>如果映射中已经有这个值，返回true。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E6%B3%9B%E5%9E%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1376,7 +1534,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
