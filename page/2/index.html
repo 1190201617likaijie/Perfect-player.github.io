@@ -145,6 +145,193 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/13/Verilog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/13/Verilog/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-13 21:49:51" itemprop="dateCreated datePublished" datetime="2021-10-13T21:49:51+08:00">2021-10-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Verilog"><a href="#Verilog" class="headerlink" title="Verilog"></a>Verilog</h2><h4 id="数字表示"><a href="#数字表示" class="headerlink" title="数字表示"></a>数字表示</h4><p>基本格式：&lt; 位宽 &gt;’&lt; 数制的符号 &gt;&lt; 数值 &gt;</p>
+<p>h十六进制</p>
+<p>d十进制</p>
+<p>o八进制</p>
+<p>b二进制</p>
+<h4 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h4><p>可直接进行加减等运算，方括号位于向量名前方。eg: reg [7:0] data</p>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>方括号位于数组名的后面。括号内的第一个数字为第一个元素的序号，第二 个数字为最后一个元素的序号，中间用冒号隔开。</p>
+<p>eg: wire array [15:0];</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>可以通过 parameter 关键字声明参数以增强模块可拓展性和可读性。</p>
+<p>在模块实例化时，可以使用 #() 将所需的实例参数覆盖模块的默认参数。</p>
+<p>局部参数可以用 localparam 关键字声明，它不能够进行参数重载。</p>
+<p>eg:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder #(</span><br><span class="line"><span class="keyword">parameter</span> WIDTH = <span class="number">4</span> <span class="comment">// 默认宽度为 4</span></span><br><span class="line">) (</span><br><span class="line"><span class="keyword">input</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] a,</span><br><span class="line"><span class="keyword">input</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] b,</span><br><span class="line"><span class="keyword">output</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] c</span><br><span class="line">);</span><br><span class="line"><span class="keyword">assign</span> c = a + b;</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在我们例化这个模块时，可以进行如下操作：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 覆盖宽度，修改为 6</span></span><br><span class="line">adder <span class="variable">#( .WIDTH (6) )</span> U_adder_0(</span><br><span class="line"><span class="variable">.a</span> (a ),</span><br><span class="line"><span class="variable">.b</span> (b ),</span><br><span class="line"><span class="variable">.c</span> (c )</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 使用默认的宽度 4</span></span><br><span class="line">adder U_adder_1(</span><br><span class="line"><span class="variable">.a</span> (a ),</span><br><span class="line"><span class="variable">.b</span> (b ),</span><br><span class="line"><span class="variable">.c</span> (c )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>局部参数 localparam 和参数类似，但是不能在例化时被覆盖。</p>
+<h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><h6 id="按位运算"><a href="#按位运算" class="headerlink" title="按位运算"></a>按位运算</h6><p>按位取反 ~</p>
+<p>按位与 &amp;</p>
+<p>按位或 |</p>
+<p>按位异或 ^</p>
+<h6 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h6><p>• 逻辑取反!</p>
+<p>• 逻辑与 &amp;&amp;</p>
+<p>• 逻辑或 ||</p>
+<h6 id="缩减运算"><a href="#缩减运算" class="headerlink" title="缩减运算"></a>缩减运算</h6><p>• 缩减与 &amp;：对一个多位操作数进行缩减与操作，计算所有位之间的与操作结果，例如：&amp;(4’b1011) 的结果为 0</p>
+<p> • 缩减或 |：对一个多位操作数进行缩减或操作，计算所有位之间的或操作结果。例如：|(4’b1011) 的结果为 1</p>
+<p> • 缩减异或 ^：对一个多位操作数进行缩减异或操作，计算所有位之间的异或操作结果。例如： ^(4’b1011) 的结果为 1 </p>
+<p>缩减或非、缩减异或、缩减同或是类似的。</p>
+<h6 id="移位运算"><a href="#移位运算" class="headerlink" title="移位运算"></a>移位运算</h6><p>• 逻辑右移&gt;&gt;：1 个操作数向右移位，产生的空位用 0 填充 </p>
+<p>• 逻辑左移&lt;&lt;：1 个操作数向左移位，产生的空位用 0 填充</p>
+<p> • 算术右移&gt;&gt;&gt;：1 个操作数向右移位。如果是无符号数，则产生的空位用 0 填充；有符号数则用其符号 位填充</p>
+<p> • 算术左移&lt;&lt;&lt;：1 个操作数向左移位，产生的空位用 0 填充</p>
+<h6 id="其他运算"><a href="#其他运算" class="headerlink" title="其他运算"></a>其他运算</h6><p>• 拼接 {,}：2 个操作数分别作为高低位进行拼接，例如：{2’b10,2’b11} 的结果是 4’b1011 </p>
+<p>• 重复 {n{m}}：将操作数 m 重复 n 次，拼接成一个多位的数。例如：a=2’b01，则 {2{a}} 的结果 是 4’b0101 </p>
+<p>• 条件? :：根据? 前的表达式是否为真，选择执行后面位于: 左右两个语句。例如：assign c = (a &gt; b) ? a : b，如果 a 大于 b，则将 a 的值赋给 c，否则将 b 的值赋给 c</p>
+<h4 id="组合逻辑"><a href="#组合逻辑" class="headerlink" title="组合逻辑"></a>组合逻辑</h4><h6 id="always"><a href="#always" class="headerlink" title="always"></a>always</h6><p>不推荐使用 always 块来表示组合逻辑。不正确的使用会生成大量锁存器。 </p>
+<p>下面的例子是一个 32-5 优先编码器，如果 tlb_hit_array 全为 0，那么 tlb_hit_index 也为 0。 always 块中被赋值的变量只能是 reg 类型，但是该编码器并不会综合出寄存器或者锁存器，这是因为 Verilog 中的寄存器 (reg) 和硬件上的寄存器不能完全等价。 如果去掉 tlb_hit_index = 5’d0; 一句，则会综合出锁存器。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">4</span> :<span class="number">0</span>] tlb_hit_index;</span><br><span class="line"><span class="keyword">wire</span> [<span class="number">31</span>:<span class="number">0</span>] tlb_hit_array;</span><br><span class="line"><span class="keyword">integer</span> i;</span><br><span class="line"><span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">tlb_hit_index = <span class="number">5&#x27;d0</span>;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i = i + <span class="number">1</span>) <span class="keyword">begin</span></span><br><span class="line"><span class="keyword">if</span> (tlb_hit_array[i]) <span class="keyword">begin</span></span><br><span class="line">tlb_hit_index = i;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="模块声明和例化"><a href="#模块声明和例化" class="headerlink" title="模块声明和例化"></a>模块声明和例化</h4><p>模块被包含在关键字 module、endmodule 之内。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder ( <span class="comment">// 模块名称声明</span></span><br><span class="line"><span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] a, <span class="comment">// 输入输出声明</span></span><br><span class="line"><span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] b,</span><br><span class="line"><span class="keyword">output</span> [<span class="number">31</span>:<span class="number">0</span>] c</span><br><span class="line">);</span><br><span class="line"><span class="keyword">assign</span> c = a + b; <span class="comment">// 变量声明、always 语句、assign 语句等</span></span><br><span class="line"><span class="keyword">endmodule</span> <span class="comment">// 模块结束</span></span><br></pre></td></tr></table></figure>
+<h4 id="Generate-块"><a href="#Generate-块" class="headerlink" title="Generate 块"></a>Generate 块</h4><p>这里只介绍 generate for 块。 </p>
+<p>generate for 的主要功能就是对模块或组件以及 always 块、assign 语句进行复制。 使用 generate for 的时候, 必须要注意以下几点要求 </p>
+<p>• 在使用 generate for 的时候必须先声明一个 genvar 变量，用作 for 的循环变量。genvar 是 generate 语句中的一种变量类型，用于在 generate for 语句中声明一个正整数的索引变量。</p>
+<p> • for 里面的内嵌语句, 必须写在 begin-end 里 </p>
+<p>• 尽量对 begin-end 顺序块进行命名</p>
+<p> generate for 的语法示例如下：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">genvar</span> i;</span><br><span class="line"><span class="keyword">generate</span> <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i = i + <span class="number">1</span>) <span class="keyword">begin</span>: gen_assign_temp</span><br><span class="line"><span class="keyword">assign</span> temp[i] = indata[<span class="number">2</span> * i + <span class="number">1</span> : <span class="number">2</span> * i];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">endgenerat</span><br></pre></td></tr></table></figure>
+<h4 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h4><h6 id="时延语句"><a href="#时延语句" class="headerlink" title="时延语句"></a>时延语句</h6><p>仿真中还经常使用时延来构造合适的仿真激励。它是不可综合的，仅能够在仿真中使用。时延分两类，一是 语句内部时延，二是语句间时延，其示例如下所示：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 语句内部时延</span></span><br><span class="line">A = #<span class="number">5</span> <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="comment">// 语句间时延</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">Temp = <span class="number">1&#x27;b1</span>;</span><br><span class="line">#<span class="number">5</span> A = Temp;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>两种方式都表达在五个时间单位后，将 A 的值赋为 1。</p>
+<h6 id="initial-语句"><a href="#initial-语句" class="headerlink" title="initial 语句"></a>initial 语句</h6><p>一般用来生成复位信号和激励。只在仿真开始时执行一次。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试代码中</span></span><br><span class="line"><span class="comment">// 假设`timescale 1ns / 1ps</span></span><br><span class="line"><span class="keyword">reg</span> rst_n, clk;</span><br><span class="line"><span class="keyword">always</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">rst_n = <span class="number">1&#x27;b0</span>;</span><br><span class="line">clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">#<span class="number">50</span> rst_n = <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>会生成一个 100MHz 的时钟，一个 50ns 有效的复位信号。</p>
+<h6 id="系统任务"><a href="#系统任务" class="headerlink" title="系统任务"></a>系统任务</h6><p>系统任务可以被用来执行一些系统设计所需的输入、输出、时序检查、仿真控制操作。所有的系统任务名称 前都带有符号 $ 使之与用户定义的任务和函数相区分。</p>
+<p>常见的系统任务：</p>
+<p> • $display：用于显示指定的字符串，然后自动换行（用法类似 C 语言中的 printf 函数）</p>
+<p> • $time：可以提取当前的仿真时间</p>
+<p> • $stop：暂停仿真</p>
+<p> • $finish：终止仿真</p>
+<p> • $random：生成随机数 </p>
+<p>• $readmemh：读入一个 16 进制数的文件以初始化 reg</p>
+<h6 id="测试设计"><a href="#测试设计" class="headerlink" title="测试设计"></a>测试设计</h6><p>测试最基本的结构包括信号声明、激励和模块例化。 测试模块声明时，一般不需要声明端口。因为激励信号一般都在测试模块内部，没有外部信号。 声明的变量应该能全部对应被测试模块的端口。当然，变量不一定要与被测试模块端口名字一样。但是被测试模块输入端对应的变量应该声明为 reg 型，输出端对应的变量应该声明为 wire 型。 仿真过程中可以使用 $display 显示当前仿真进度或者测试结果。 在测试完成或者发现错误时可以使用 $finish; 或者 $stop; 来停止仿真。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/11/R12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/11/R12/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-11 19:11:24" itemprop="dateCreated datePublished" datetime="2021-10-11T19:11:24+08:00">2021-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-14 19:59:35" itemprop="dateModified" datetime="2021-10-14T19:59:35+08:00">2021-10-14</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="session"><a href="#session" class="headerlink" title="session"></a>session</h4><p>Session：在计算机中，尤其是在网络应用中，称为“会话控制”。Session对象存储特定用户会话所需的属性及配置信息。这样，当用户在应用程序的Web页之间跳转时，存储在Session对象中的变量将不会丢失，而是在整个用户会话中一直存在下去。当用户请求来自应用程序的 Web页时，如果该用户还没有会话，则Web服务器将自动创建一个 Session对象。当会话过期或被放弃后，服务器将终止该会话。Session 对象最常见的一个用法就是存储用户的首选项。例如，如果用户指明不喜欢查看图形，就可以将该信息存储在Session对象中。有关使用Session 对象的详细信息，请参阅“ASP应用程序”部分的“管理会话”。注意会话状态仅在支持cookie的浏览器中保留。</p>
+<h4 id="多头注意力机制"><a href="#多头注意力机制" class="headerlink" title="多头注意力机制"></a>多头注意力机制</h4><p>从第二张图中可以多头函数看出：attention函数输入为由原来的Q，K，V变成了QW（上标为Q，下标为i），KW（上标为K，下标为i），VW（上标为V，下标为i）；即3个W都不相同；将Q，K，V由原来的512维度变成了64维度（因为采取了8个多头）；然后再拼接在一起变成512维，通过W(上标为O)进行线性转换；得到最终的多头注意力值；</p>
+<p>个人最终认为：多头的本质是多个独立的attention计算，作为一个集成的作用，防止过拟合；从attention is all your need论文中输入序列是完全一样的；相同的Q,K,V，通过线性转换，每个注意力机制函数只负责最终输出序列中一个子空间，即1/8，而且互相独立；</p>
+<h4 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h4><p>长短期记忆（Long short-term memory, LSTM）是一种特殊的RNN，主要是为了解决长序列训练过程中的梯度消失和梯度爆炸问题。简单来说，就是相比普通的RNN，LSTM能够在更长的序列中有更好的表现。</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32085405">人人都能看懂的LSTM - 知乎 (zhihu.com)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/07/DIN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -807,211 +994,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/26/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/26/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" class="post-title-link" itemprop="url">数据可视化</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-26 15:08:11 / Modified: 15:10:26" itemprop="dateCreated datePublished" datetime="2021-07-26T15:08:11+08:00">2021-07-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/12/Python%E5%A4%87%E5%BF%98%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/12/Python%E5%A4%87%E5%BF%98%E5%BD%95/" class="post-title-link" itemprop="url">Python备忘录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-07-12 15:32:04" itemprop="dateCreated datePublished" datetime="2021-07-12T15:32:04+08:00">2021-07-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-19 16:43:19" itemprop="dateModified" datetime="2021-07-19T16:43:19+08:00">2021-07-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Python编程备忘录"><a href="#Python编程备忘录" class="headerlink" title="Python编程备忘录"></a>Python编程备忘录</h2><h3 id="变量和简单数据类型"><a href="#变量和简单数据类型" class="headerlink" title="变量和简单数据类型"></a>变量和简单数据类型</h3><h4 id="变量的命名和使用"><a href="#变量的命名和使用" class="headerlink" title="变量的命名和使用"></a>变量的命名和使用</h4><p>（1）变量名只能包含字母，数字和下划线。</p>
-<p>（2）变量名不能包含空格，但能使用下划线来分割其中字符。</p>
-<p>（3）关键字和函数名不能忘用作变量。</p>
-<p>（4）变量名应简单又具有描述性。</p>
-<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>python中单引号和双引号引起来的都是字符串。</p>
-<p>name.title()以首字母大写显示。</p>
-<p>name.upper()全部大写。</p>
-<p>name.lower()全部小写。</p>
-<p>用f(format)来合并字符串。name=f“{firstname} {lastname}”</p>
-<p>name.strip()来消除空白。该删除为暂时，要永久需关联到变量。</p>
-<p>name.rstrip()消除右边空白。</p>
-<p>name.lstrip()消除左边空白。</p>
-<p>name1=name.rstrip()。</p>
-<h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><p>用两个乘号表示乘方运算。3**2=9</p>
-<p>将任意两个数相除时，结果总是浮点数，即便这两个数都是整数且能整数。</p>
-<p>在其他任意运算中，只要有操作数是浮点数，默认得到的总是浮点数。</p>
-<p>给多个变量赋值：x,y,z=0,0,0</p>
-<p>用全大写将某个变量视为常量。</p>
-<h3 id="列表简介"><a href="#列表简介" class="headerlink" title="列表简介"></a>列表简介</h3><p>python中，用[]表示列表，用逗号分隔其中元素。</p>
-<p>在python中，索引为负数表示访问倒数第几个元素。</p>
-<p>name.append(‘xyz’)在列表末尾添加元素。</p>
-<p>name.insert(0,’xyz’)在索引0处插入元素。</p>
-<p>用del name[0]永久删除索引0处的元素。</p>
-<p>用pop暂时删除末尾元素，加入数字可删除任意位置。name.pop() name.pop(1)</p>
-<p>用remove永久删除特定元素。name.remove(‘xyz’)。但是remove只删除第一个指定的值，若多次出现需循环删除。</p>
-<h4 id="组织列表"><a href="#组织列表" class="headerlink" title="组织列表"></a>组织列表</h4><p>用cars.sort()对列表进行永久排序。</p>
-<p>若要按相反的顺序排序，则向方法传递参数reverse=True,cars.sort(reverse.True)</p>
-<p>用cars.sorted()对列表进行临时排序。</p>
-<p>用cars.reverse()倒着打印列表，且会永久性的修改列表的顺序。</p>
-<p>用len(cars)可确定列表的长度。</p>
-<h3 id="操作列表"><a href="#操作列表" class="headerlink" title="操作列表"></a>操作列表</h3><p>range（1,4）只会打印1 2 3</p>
-<p>若range只输入一个参数，则将从0开始。</p>
-<p>可给range指定第三个参数，设定为步长。</p>
-<h4 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h4><p>将for循环和创建新元素的代码合并成一行，并自动附加新元素。</p>
-<p>squares=[value**2 for value in range(1,11)]</p>
-<h4 id="使用列表的一部分"><a href="#使用列表的一部分" class="headerlink" title="使用列表的一部分"></a>使用列表的一部分</h4><h5 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h5><p>与range函数一样，指定索引，cars[0:3]，将返回索引0,1,2的元素</p>
-<p>若不指定，cars[:3]，将从头开始索引，而cars[3:]将从第四个元素索引到末尾</p>
-<p>若访问后三位元素，可cars[-3:]</p>
-<p>也可加入第三个值，告诉Python间隔多少提取一个元素</p>
-<h5 id="复制列表"><a href="#复制列表" class="headerlink" title="复制列表"></a>复制列表</h5><p>省略起始索引与终止索引，cars1=cars[:]</p>
-<p>若只是单纯赋值，cars1=cars，则将两个指向同一个列表</p>
-<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><p>python将不可变的列表称为元组</p>
-<p>元组使用圆括号而非中括号进行标识</p>
-<p>如果你要定义的元组只包含一个元素，必须加上逗号，my_t=(3,)</p>
-<p>虽然不能修改元组的元素，但可以给存储元组的变量赋值</p>
-<p>dimensions=(200,50)</p>
-<p>dimensions=(400,100)</p>
-<p>这是合法的，相当于将一个新元组关联到变量dimension</p>
-<h3 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h3><h4 id="条件测试"><a href="#条件测试" class="headerlink" title="条件测试"></a>条件测试</h4><p>python在检查是否相等时区分大小写</p>
-<p>检查多个条件用 and 和 or</p>
-<p>要判断特定值是否已包含在列表中，可使用关键字in</p>
-<p>检查不包含，可用 not in</p>
-<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>在python中，字典是一系列键值对。每个键都与一个值相关联，你可以使用键来访问相关联的值。</p>
-<p>字典用在花括号中的一系列键值对表示。</p>
-<p>键值对是两个相关联的值，指定键时，Python将返回与之相关联的值。键和值之间用冒号分割，而键值对之间用逗号分割。</p>
-<p>要获取与键相关联的值，可依次指定字典名和放在方括号内的值。</p>
-<p>对于字典中不需要的信息，可用del语句将相应的键值对彻底删除。使用del语句时，必须要指定字典名和要删除的键。</p>
-<p>可使用get来访问值，可避免指定键不存在的情况。</p>
-<p>eg:point_value -alien.get(‘points’,’sorry’)</p>
-<h5 id="遍历字典"><a href="#遍历字典" class="headerlink" title="遍历字典"></a>遍历字典</h5><p>for k,v in users.items()//遍历键值对</p>
-<p>for k in users.keys()//遍历键</p>
-<p>for v in users.values()//遍历值    </p>
-<h3 id="用户输入和while循环"><a href="#用户输入和while循环" class="headerlink" title="用户输入和while循环"></a>用户输入和while循环</h3><p>要返回循环开头，并根据条件测试结果决定是否继续执行循环，可使用continue。</p>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>使用def定义函数</p>
-<p>def user():</p>
-<h5 id="关键字实参"><a href="#关键字实参" class="headerlink" title="关键字实参"></a>关键字实参</h5><p>def pet(type,name)</p>
-<p>不使用pet(hamster,harry)</p>
-<p>使用关键字实参pet(type=’hamster’,name=’harry’)//无视顺序</p>
-<h5 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h5><p>编写函数时，可给每个形参指定默认值，在调用时，若未指定实参，则使用默认形参。</p>
-<p>def pet(type=’dog’,name)</p>
-<h5 id="传递任意数量的实参"><a href="#传递任意数量的实参" class="headerlink" title="传递任意数量的实参"></a>传递任意数量的实参</h5><p>def make(*pizza)://即可接受任意数量的实参</p>
-<h5 id="使用任意数量的关键字实参"><a href="#使用任意数量的关键字实参" class="headerlink" title="使用任意数量的关键字实参"></a>使用任意数量的关键字实参</h5><p>def make(**pizza)://接受任意数量键值对</p>
-<h4 id="将函数存储在模块中"><a href="#将函数存储在模块中" class="headerlink" title="将函数存储在模块中"></a>将函数存储在模块中</h4><p>导入整个模块 import pizza</p>
-<p>导入模块中特定函数 from pizza import makepizza1,makepizza2</p>
-<p>可使用as给模块或者函数指定别名</p>
-<p>from pizza import make as m</p>
-<p>使用<em>号可导入模块中所有函数 from pizza import </em></p>
-<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>类中的 __init()方法会自动运行，并且开头和结尾各有两个下划线。</p>
-<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>class elecar(car):</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1077,7 +1063,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
