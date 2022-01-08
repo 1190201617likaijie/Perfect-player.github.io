@@ -145,6 +145,723 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">计算机组成原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-11-15 01:18:45" itemprop="dateCreated datePublished" datetime="2021-11-15T01:18:45+08:00">2021-11-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-19 20:18:31" itemprop="dateModified" datetime="2021-12-19T20:18:31+08:00">2021-12-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="计算机系统概论"><a href="#计算机系统概论" class="headerlink" title="计算机系统概论"></a>计算机系统概论</h2><p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/7E98C321CA302366D429FA58F7F0F1B8.jpg" alt="img" style="zoom: 25%;"></p>
+<h3 id="计算机的基本组成"><a href="#计算机的基本组成" class="headerlink" title="计算机的基本组成"></a>计算机的基本组成</h3><h4 id="冯诺依曼计算机的特点"><a href="#冯诺依曼计算机的特点" class="headerlink" title="冯诺依曼计算机的特点"></a>冯诺依曼计算机的特点</h4><p>（1）计算机由运算器，存储器，控制器，输入设备，输出设备五大部件组成。</p>
+<p>（2）指令和数据以同等地位存放于存储器内，可按地址访问。</p>
+<p>（3）指令和数据均用二进制数表示。</p>
+<p>（4）指令由操作码和地址码组成，操作码用来表示操作的性质，地址码用来表示操作数在存储器中的位置。</p>
+<p>（5）指令在存储器内顺序存放。</p>
+<p>（6）机器以运算器为中心，输入输出设备与存储器间的数据传送通过运算器完成。</p>
+<h4 id="计算机的硬件框图"><a href="#计算机的硬件框图" class="headerlink" title="计算机的硬件框图"></a>计算机的硬件框图</h4><p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/94750150D2C1C873C26D2D9976705CDC.jpg" alt="img" style="zoom: 25%;"></p>
+<p>通常把运算器与控制器统称为中央处理器，即CPU。把输入/输出设备成为I/O设备，也可称为外部设备。</p>
+<p>CPU与主存储器合起来称为主存。</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/997ACEF4162CFC523F026283A2A12F41.jpg" alt="img" style="zoom:25%;"></p>
+<p>控制元（CU）用来解释存储器中的指令，并发出各种操作命令来执行指令。</p>
+<h3 id="计算机硬件的主要技术指标"><a href="#计算机硬件的主要技术指标" class="headerlink" title="计算机硬件的主要技术指标"></a>计算机硬件的主要技术指标</h3><p>机器字长；</p>
+<p>存储容量：MAR位数反映的存储单元的个数，MDR的位数反映了存储字长；</p>
+<p>运算速度：MIPS(百万条指令每秒)，CPI(执行一条指令所需的时钟周期)；</p>
+<h3 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h3><p>指令字长=存储字长=机器字长（三者可以相等也可以不等）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">机器字长：CPU一次能处理的二进制数据的最大位数。通常与CPU内寄存器的位数有关。栗子：windows 64位/32位，这里的64位和32位指的就是该操作系统的机器字长。</span><br><span class="line">存储字长指一个存储单元可存放的二进制代码的位数，即存储器中的MDR的位数。</span><br><span class="line">指令字长是计算机指令字的位数，指令字是指用二进制表示的指令，</span><br><span class="line">数据字长指的是计算机数据字的位数，数据字是指用二进制表示的数据</span><br></pre></td></tr></table></figure>
+<p>用以指定待执行指令所在地址的是程序计数器</p>
+<p>磁盘驱动器具有输入及输出功能</p>
+<p>完整的计算机系统应该包括配套的硬件设备和软件系统</p>
+<p>计算机与日常使用的袖珍计算器的本质区别在于自动化程度的高低。</p>
+<p>有些计算机将一部分软件永恒地存于只读存储器中，称为固件</p>
+<p>计算机系统软件包括：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">标准程序库，如监控程序，用于监视计算机工作</span><br><span class="line">服务型程序，如连接、编辑、调试、诊断</span><br><span class="line">语言处理程序，如编译程序、汇编程序、解释程序，将各种语言转换成机器语言</span><br><span class="line">操作系统，用来控制和管理计算机</span><br><span class="line">数据库管理系统</span><br><span class="line">各种计算机网络软件</span><br></pre></td></tr></table></figure>
+<p>存储元件（又称存储基元、存储元）用来存放一位二进制信息。存储单元由若干个存储元件组成，能存放多位二进制信息。每个存储单元中二进制代码的组合即为存储字，它可代表数值、指令、地址或逻辑。每个存储单元中二进制代码的位数就是存储字长。</p>
+<h2 id="计算机系统量化分析基础"><a href="#计算机系统量化分析基础" class="headerlink" title="计算机系统量化分析基础"></a>计算机系统量化分析基础</h2><h3 id="计算机体系结构的概念"><a href="#计算机体系结构的概念" class="headerlink" title="计算机体系结构的概念"></a>计算机体系结构的概念</h3><h4 id="计算机体系结构概念的演变"><a href="#计算机体系结构概念的演变" class="headerlink" title="计算机体系结构概念的演变"></a>计算机体系结构概念的演变</h4><p>阿姆道尔首次明确计算机体系结构是程序员所看到的计算机的属性，即概念性结构与功能特性。</p>
+<p>对于通用寄存器型机器，这些属性主要是指：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">（1）数据表示：硬件能直接辨认和处理的数据类型</span><br><span class="line">（2）寻址规则：最小寻址单元、寻址方式及其表示</span><br><span class="line">（3）寄存器定义：寄存器的定义、数量和使用方式</span><br><span class="line">（4）指令系统：机器指令的操作类型和格式、指令间的排序和控制机构等</span><br><span class="line">（5）中断系统：中断的类型和中断响应硬件的功能等</span><br><span class="line">（6）机器工作状态的定义和切换：如管态和目态等</span><br><span class="line">（7）存储系统：程序员可用的最大存储容量</span><br><span class="line">（8）信息保护：信息保护方式和硬件的支持</span><br><span class="line">（9）I/O结构：I/O寻址方式、数据传送的方式等</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="计算机体系结构、组成和实现"><a href="#计算机体系结构、组成和实现" class="headerlink" title="计算机体系结构、组成和实现"></a>计算机体系结构、组成和实现</h4><p>体系结构包括以下三个方面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（1）计算机指令系统</span><br><span class="line">（2）计算机组成</span><br><span class="line">（3）计算机硬件实现</span><br></pre></td></tr></table></figure>
+<p>系列机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一种指令集结构可以有多种组成。同样，一种组成可以有多种物理实现。系列机就是指在一个厂家生产的具有相同的指令集结构，但具有不同组成和实现的一系列不同型号的机器。</span><br></pre></td></tr></table></figure>
+<p>兼容性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">向上(下)兼容指的是按某档机器编制的程序，不加修改的就能运行于比它高(低)档的机器</span><br><span class="line">向前(后)兼容指的是按某个时期投入市场的某种型号机器编制的程序，不加修改地就能运行于在它之前(后)投入市场的机器</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214131042867.png" alt="image-20211214131042867" style="zoom: 50%;"></p>
+<h3 id="计算机体系结构的发展"><a href="#计算机体系结构的发展" class="headerlink" title="计算机体系结构的发展"></a>计算机体系结构的发展</h3><p>并行性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">计算机系统在同一时刻或者同一时间间隔内进行多种运算或操作。</span><br></pre></td></tr></table></figure>
+<p>从执行程序的角度来看，并行性等级从低到高可分为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">指令内部并行：单条指令中各微操作之间的并行。</span><br><span class="line">指令级并行：并行执行两条或两条以上的指令。</span><br><span class="line">线程级并行：并行执行两个或两个以上的线程。</span><br><span class="line">      通常是以一个进程内派生的多个线程为调度单位。</span><br><span class="line">任务级或过程级并行：并行执行两个或两个以上的过程或任务（程序段）， 以子程序或进程为调度单元。</span><br><span class="line">作业或程序级并行：并行执行两个或两个以上的作业或程序。 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>从处理数据的角度来看，并行等级从低到高可分为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">字串位串：每次只对一个字的一位进行处理。</span><br><span class="line">     最基本的串行处理方式，不存在并行性。</span><br><span class="line">字串位并：同时对一个字的全部位进行处理，不</span><br><span class="line">       同字之间是串行的。</span><br><span class="line">   开始出现并行性。</span><br><span class="line">字并位串：同时对许多字的同一位（称为位片）</span><br><span class="line">       进行处理。</span><br><span class="line">    具有较高的并行性。</span><br><span class="line">全并行：同时对许多字的全部位或部分位进行处理。</span><br><span class="line">   最高一级的并行。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>按照指令和数据的关系，把计算机系统的结构分为4类。Flynn分类法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">单指令流单数据流SISD</span><br><span class="line">（Single Instruction stream Single Data stream）</span><br><span class="line">单指令流多数据流SIMD</span><br><span class="line">（Single Instruction stream Multiple Data stream）</span><br><span class="line">多指令流单数据流MISD</span><br><span class="line">（Multiple Instruction stream Single Data stream）</span><br><span class="line">多指令流多数据流MIMD</span><br><span class="line">（Multiple Instruction stream Multiple Data stream）</span><br></pre></td></tr></table></figure>
+<p>提高并行性的技术途径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">（1）时间重叠</span><br><span class="line">      引入时间因素，让多个处理过程在时间上相互错开，轮流重叠地使用同一套硬件设备的各个部分，以加快硬件周转而赢得速度。</span><br><span class="line">（2）资源重复</span><br><span class="line">      引入空间因素，以数量取胜。通过重复设置硬件资源，大幅度地提高计算机系统的性能。</span><br><span class="line">（3）资源共享</span><br><span class="line">    这是一种软件方法，它使多个任务按一定时间顺序轮流使用 同一套硬件设备。    </span><br></pre></td></tr></table></figure>
+<p>耦合度  反映多机系统中各机器之间物理连接的紧密程度和交互作用能力的强弱。</p>
+<p>量化设计的基本原则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1．大概率事件优先原则</span><br><span class="line">追求全局的最优结果</span><br><span class="line"></span><br><span class="line">2．Amdahl定律</span><br><span class="line">系统性能加速比，受限于该部件在系统中所占的重要性</span><br><span class="line">可以定量计算</span><br><span class="line"></span><br><span class="line">3．程序的局部性原理</span><br><span class="line">程序执行时所访问存储器在时-空上是相对地簇聚</span><br><span class="line">这种簇聚包括指令和数据两部分</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>具有高性能价格比的计算机系统是一个带宽平衡的系统，而不是看它使用的某些部件的性能</p>
+<p>CPU性能公式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">执行一个程序所需的CPU时间</span><br><span class="line">   CPU时间 = 执行程序所需的时钟周期数×时钟周期时间</span><br><span class="line">   其中：时钟周期时间是系统时钟频率的倒数。</span><br><span class="line">每条指令执行的平均时钟周期数CPI</span><br><span class="line">   CPI = 执行程序所需的时钟周期数／IC</span><br><span class="line">   IC：所执行的指令条数</span><br><span class="line">程序执行的CPU时间可以写成</span><br><span class="line">   CPU时间 = IC ×CPI ×时钟周期时间 </span><br><span class="line">   时钟周期时间：取决于硬件实现技术和计算机组成</span><br><span class="line">   CPI：取决于计算机组成和指令系统的结构；</span><br><span class="line">   IC：取决于指令系统的结构和编译技术</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214135037288.png" alt="image-20211214135037288" style="zoom:67%;"></p>
+<h2 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h2><h3 id="总线的基本概念"><a href="#总线的基本概念" class="headerlink" title="总线的基本概念"></a>总线的基本概念</h3><p>总线是连接多个部件的信息传输线，是各部件共享的传输介质。在某一时刻，只允许有一个部件向总线发送信息，而多个部件可以同时从总线上接受相同的信息。</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214142344175.png" alt="image-20211214142344175" style="zoom: 50%;"></p>
+<p>M总线：存储总线</p>
+<p>I/O总线：输入输出总线</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214142357607.png" alt="image-20211214142357607" style="zoom:50%;"></p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214142444806.png" alt="image-20211214142444806" style="zoom:50%;"></p>
+<h3 id="总线的分类"><a href="#总线的分类" class="headerlink" title="总线的分类"></a>总线的分类</h3><h4 id="片内总线"><a href="#片内总线" class="headerlink" title="片内总线"></a>片内总线</h4><p>芯片内部 的总线</p>
+<h4 id="系统总线"><a href="#系统总线" class="headerlink" title="系统总线"></a>系统总线</h4><p>计算机各部件之间 的信息传输线</p>
+<h5 id="数据总线"><a href="#数据总线" class="headerlink" title="数据总线"></a>数据总线</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用来传输各功能部件之间的数据信息</span><br><span class="line">双向  与机器字长、存储字长有关</span><br></pre></td></tr></table></figure>
+<h5 id="地址总线"><a href="#地址总线" class="headerlink" title="地址总线"></a>地址总线</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用来指出数据总线上的源数据或目的数据在主存单元的地址或I/O设备的地址。</span><br><span class="line">单向  与存储地址、 I/O地址有关</span><br></pre></td></tr></table></figure>
+<h5 id="控制总线"><a href="#控制总线" class="headerlink" title="控制总线"></a>控制总线</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">发出各种控制信号的传输线。</span><br><span class="line">中断请求，总线请求，存储器读，存储器写，总线允许，中断确认等</span><br></pre></td></tr></table></figure>
+<h4 id="通信总线"><a href="#通信总线" class="headerlink" title="通信总线"></a>通信总线</h4><p> 用于 计算机系统之间 或 计算机系统与其他系统（如控制仪表、移动通信等）之间的通信</p>
+<p>有串行通信和并行通信两种。</p>
+<h3 id="总线特性及性能指标"><a href="#总线特性及性能指标" class="headerlink" title="总线特性及性能指标"></a>总线特性及性能指标</h3><h4 id="总线特性"><a href="#总线特性" class="headerlink" title="总线特性"></a>总线特性</h4><p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214143223473.png" alt="image-20211214143223473" style="zoom:50%;"></p>
+<h4 id="总线的性能指标"><a href="#总线的性能指标" class="headerlink" title="总线的性能指标"></a>总线的性能指标</h4><p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214143356321.png" alt="image-20211214143356321" style="zoom: 50%;"></p>
+<h3 id="总线结构"><a href="#总线结构" class="headerlink" title="总线结构"></a>总线结构</h3><p>单总线结构</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214143726811.png" alt="image-20211214143726811" style="zoom:50%;"></p>
+<p>双总线结构</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214143750521.png" alt="image-20211214143750521" style="zoom:50%;"></p>
+<p>三总线结构</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214143816307.png" alt="image-20211214143816307" style="zoom:50%;"></p>
+<p>主存总线用于CPU与主存之间的传输；I/O总线供CPU与各类I/O设备之间传递信息；DMA总线用于高速I/O设备(磁盘，磁带等)与主存之间直接交换信息。</p>
+<p>另一种三总线结构</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214144022838.png" alt="image-20211214144022838" style="zoom:50%;"></p>
+<p>Cache可通过系统总线与主存传递信息；且I/O设备与主存之间的传输也不必通过CPU，还有一条扩展总线。</p>
+<p>SCSI：小型计算机接口；MODEM：调制解调器</p>
+<p>四总线结构</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214144314504.png" alt="image-20211214144314504" style="zoom:50%;"></p>
+<p>高速总线上挂了一些告诉的I/O设备。</p>
+<h3 id="总线控制"><a href="#总线控制" class="headerlink" title="总线控制"></a>总线控制</h3><h4 id="总线判优控制"><a href="#总线判优控制" class="headerlink" title="总线判优控制"></a>总线判优控制</h4><p>总线上所连接的各类设备，按其对总线有无控制功能可分为主设备（模块）和从设备（模块）两种。</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214144718951.png" alt="image-20211214144718951" style="zoom:50%;"></p>
+<p>集中式判优控制将控制逻辑集中在一处，如CPU；后者将控制逻辑分散在与总线连接的各个部件或设备上。</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214145237060.png" alt="image-20211214145237060" style="zoom:50%;"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">特点：只需要很少几根线就能按一定优先次序实现总线控制，并且很容易扩展设备，但对电路故障很敏感，且优先级别低的设备很难获得请求</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214145747620.png" alt="image-20211214145747620" style="zoom:50%;"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对电路故障不如链式查询方法敏感，但增加了控制线（设备地址)数,控制也较复杂。</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214145903975.png" alt="image-20211214145903975" style="zoom:50%;"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">响应速度快，优先次序控制灵活，但控制线数量多，总线控制更复杂。</span><br></pre></td></tr></table></figure>
+<h4 id="总线通信控制"><a href="#总线通信控制" class="headerlink" title="总线通信控制"></a>总线通信控制</h4><p>目的：解决通信双方 协调配合 问题</p>
+<p>总线传输周期（一次总线操作的时间）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">申请分配阶段 主模块申请，总线仲裁决定</span><br><span class="line">寻址阶段    模块向从模块 给出地址 和 命令</span><br><span class="line">传数阶段    主模块和从模块 交换数据</span><br><span class="line">结束阶段    主模块 撤消有关信息 </span><br></pre></td></tr></table></figure>
+<p>总线通信的四种方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">同步通信 由统一时标 控制数据传送</span><br><span class="line">异步通信 采用 应答方式 ，没有公共时钟标准</span><br><span class="line">半同步通信 同步，异步结合</span><br><span class="line">分离式通信 充分挖掘系统总线每个瞬间的潜力</span><br></pre></td></tr></table></figure>
+<p>同步式</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214150834077.png" alt="image-20211214150834077" style="zoom:50%;"></p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214150845552.png" alt="image-20211214150845552" style="zoom:50%;"></p>
+<p>异步</p>
+<p>应答方式又分为三种</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">不互锁方式：</span><br><span class="line">主模块发出请求后，不必等待接到从模块的回答信号，而是经过一段时间，确认从模块已收到请求信号后，便撤销其请求信号；从模块接到请求信号后，在条件允许时发出回答信号，并且经过一段时间（这段时间对不同设备不同）确认主模块已收到回答信号后，自动撤销回答信号。eg:CPU向主存写信息</span><br><span class="line">半互锁方式：</span><br><span class="line">主模块发出请求后，不许接到从模块的回答后再撤销；而从模块则不必，一方互锁，一方不互锁</span><br><span class="line">全互锁方式：双方互锁</span><br></pre></td></tr></table></figure>
+<p>异步串行通信的数据传送速率用波特率来衡量。波特率是指单位时间内传送二进制数据的位数，单位用bps(位/s)，记作波特。</p>
+<p>同步传送速度高于异步传送。</p>
+<p>半同步</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">同步   发送方 用系统 时钟前沿 发信号，接收方 用系统 时钟后沿 判断、识别</span><br><span class="line">异步   允许不同速度的模块和谐工作，增加一条  “等待”响应信号</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214152257639.png" alt="image-20211214152257639" style="zoom:50%;"></p>
+<p>适用于系统工作速度不高但又包含了由许多工作速度差异较大的各类设备组成的简单系统。半同步通信比异步通信简单，可靠性高。缺点是对系统时钟频率不能要求太高，故从整体看，系统工作速度还不是很高。</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211214152647243.png" alt="image-20211214152647243" style="zoom:50%;"></p>
+<p>分离式通信</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一个总线传输周期</span><br><span class="line">子周期1 主模块 申请 占用总线，使用完后即 放弃总线 的使用权</span><br><span class="line">子周期2 从模块 申请 占用总线，将各种信息送至总线上</span><br></pre></td></tr></table></figure>
+<p>特点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 各模块有权申请占用总线</span><br><span class="line">2. 采用同步方式通信，不等对方回答</span><br><span class="line">3. 各模块准备数据时，不占用总线</span><br><span class="line">4. 总线被占用时，无空闲</span><br><span class="line">充分提高了总线的有效占用</span><br></pre></td></tr></table></figure>
+<h3 id="附加-1"><a href="#附加-1" class="headerlink" title="附加"></a>附加</h3><p>影响总线带宽的因素：总线宽度，传输距离，总线发送和接受电路工作频率的限制以及数据传输形式。</p>
+<p>PCI总线是一个与处理器时钟频率无关的告诉外部总线。</p>
+<p>AGP总线是显卡专用的局部总线。</p>
+<p>计算机之间的远距离通信除了直接由网卡经网线传输外，还可用RS-232总线通过载波电话线传输。</p>
+<p>总线管理主要包括判优控制和通信控制。</p>
+<p>在高档PC机中，系统总线主要连接CPU和存储器；PCI总线主要连接多媒体卡，高速局域网适配器，高性能图形版等高速部件；ISA或EISA总线连接图文传真机、调制解调器，打印机等低速部件。系统总线和PCI通过PCI桥路相连，PCI总线又通过标准总线控制器与IS和EIS总线相连。     </p>
+<h2 id="指令系统"><a href="#指令系统" class="headerlink" title="指令系统"></a>指令系统</h2><h3 id="机器指令"><a href="#机器指令" class="headerlink" title="机器指令"></a>机器指令</h3><p>每一趟机器语言的语句称为机器指令，又将全部机器指令的集合称为机器的指令系统。</p>
+<p>指令由地址码和操作码构成。操作码可固定可不固定。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">扩展操作码技术：操作码的位数随地址数的减少而增加</span><br></pre></td></tr></table></figure>
+<p>四地址指令：<img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211215114537872.png" alt="image-20211215114537872" style="zoom:50%;"></p>
+<p>需进行四次访存，取指令一次，取两个操作数两次，存放结果一次</p>
+<p>三地址指令：<img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211215114740842.png" alt="image-20211215114740842" style="zoom:50%;"></p>
+<p>下条指令地址隐藏在程序计数器PC中，同样也需要进行四次访存。</p>
+<p>二地址指令：<img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211215114937575.png" alt="image-20211215114937575" style="zoom:50%;"></p>
+<p>一地址指令：<img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211215115213639.png" alt="image-20211215115213639" style="zoom:50%;"></p>
+<p>零地址指令：无地址码</p>
+<p>早起计算机指令字长、机器字长和存储字长均相等。</p>
+<h3 id="操作数类型和操作类型"><a href="#操作数类型和操作类型" class="headerlink" title="操作数类型和操作类型"></a>操作数类型和操作类型</h3><p>操作类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">数据传送；</span><br><span class="line">算术逻辑操作；</span><br><span class="line">移位；</span><br><span class="line">转移；</span><br><span class="line">输入输出；</span><br><span class="line">其他：等待，停机，空等指令</span><br></pre></td></tr></table></figure>
+<h3 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h3><p>分为数据寻址与指令寻址</p>
+<h4 id="指令寻址"><a href="#指令寻址" class="headerlink" title="指令寻址"></a>指令寻址</h4><p>分为顺序寻址和跳跃寻址。</p>
+<h4 id="数据寻址"><a href="#数据寻址" class="headerlink" title="数据寻址"></a>数据寻址</h4><p>指令地址码字段称为形式地址，记为A；而操作数的真实地址称为有效地址，记为EA。</p>
+<p><strong>立即寻址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">形式地址A就是操作数</span><br><span class="line">指令执行阶段不访存</span><br><span class="line">A 的位数限制了立即数的范围</span><br></pre></td></tr></table></figure>
+<p><strong>直接寻址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A=EA</span><br><span class="line">执行阶段访问一次存储器</span><br><span class="line">A 的位数决定了该指令操作数的寻址范围</span><br><span class="line">操作数的地址不易修改（必须修改A）</span><br></pre></td></tr></table></figure>
+<p><strong>隐含寻址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">操作数地址隐含在操作码中</span><br></pre></td></tr></table></figure>
+<p><strong>间接寻址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">有效地址由形式地址间接提供</span><br><span class="line">会多次访存</span><br><span class="line">可扩大寻址范围，便于编制程序</span><br></pre></td></tr></table></figure>
+<p><strong>寄存器寻址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">EA=R_i</span><br><span class="line">有效地址即为寄存器编号</span><br><span class="line">执行阶段不访存，只访问寄存器，执行速度快</span><br><span class="line">寄存器个数有限，可缩短指令字长</span><br></pre></td></tr></table></figure>
+<p><strong>寄存器间接寻址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EA=(R_i)有效地址在寄存器中</span><br><span class="line">操作数在存储器中，执行阶段访存</span><br></pre></td></tr></table></figure>
+<p><strong>基址寻址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">（1）采用专用寄存器作基址寄存器</span><br><span class="line">EA = ( BR ) + A </span><br><span class="line">BR 为基址寄存器</span><br><span class="line">可扩大寻址范围，有利于多道程序，BR内容由操作系统或管理程序确定，在程序的执行过程中BR内容不变，形式地址A可变</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(2) 采用通用寄存器作基址寄存器 R0 作基址寄存器</span><br><span class="line">由用户指定哪个通用寄存器作为基址寄存器</span><br><span class="line">基址寄存器的内容由操作系统确定</span><br><span class="line">在程序的执行过程中 R0  内容不变，形式地址 A 可变</span><br></pre></td></tr></table></figure>
+<p><strong>变址寻址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">EA = ( IX ) +A IX 为变址寄存器（专用）</span><br><span class="line">通用寄存器也可以作为变址寄存器</span><br><span class="line">可扩大寻址范围，IX的内容由用户给定，在程序的执行过程中IX可变，形式地址A不变，便于处理数组问题</span><br></pre></td></tr></table></figure>
+<p><strong>相对寻址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">EA = ( PC ) + A</span><br><span class="line">A 是相对于当前指令的位移量</span><br><span class="line">A的位数决定操作数的寻址范围，程序浮动，广泛用于转移指令</span><br></pre></td></tr></table></figure>
+<p><strong>堆栈寻址</strong></p>
+<p>多个寄存器可构成硬堆栈，指定的存储空间构成软堆栈。</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211215125935774.png" alt="image-20211215125935774" style="zoom:50%;"></p>
+<h3 id="指令系统结构的分类"><a href="#指令系统结构的分类" class="headerlink" title="指令系统结构的分类"></a>指令系统结构的分类</h3><p>CPU中用来存储操作数的存储单元主要有</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">堆栈，累加器，一组寄存器</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211215131719796.png" alt="image-20211215131719796" style="zoom:50%;"></p>
+<p>寄存器-寄存器型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">优点：指令字长固定，指令结构简洁，是一种简单的代码生成模型，各种指令的执行时钟周期数相近。</span><br><span class="line">缺点：与指令中含存储器操作数的指令系统结构相比，指令条数多，目标代码不够紧凑，因而程序占用的空间比较大。</span><br></pre></td></tr></table></figure>
+<p>寄存器-存储器型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">优点：可以在ALU指令中直接对存储器操作数进行引用，而不必先用load指令进行加载，容易对指令进行编码，目标代码比较紧凑。</span><br><span class="line">缺点：由于有一个操作数的内容将被破坏，所以指令中的两个操作数不对称。在一条指令中同时对寄存器操作数和存储器操作数进行编码，有可能限制指令所能够表示的寄存器个数。指令的执行时钟周期因操作数的来源（寄存器或存储器）的不同而差别比较大。</span><br></pre></td></tr></table></figure>
+<p>存储器-存储器型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">优点：目标代码最紧凑，不需要设置存储器来保存变量。</span><br><span class="line">缺点：指令字长变换很大，特别是3个操作数指令。而且每条指令完成的工作也差别很大。对存储器的频率访问会使存储器成为瓶颈。这种类型的指令系统现在已经不用了。</span><br></pre></td></tr></table></figure>
+<h3 id="指令系统的设计和优化"><a href="#指令系统的设计和优化" class="headerlink" title="指令系统的设计和优化"></a>指令系统的设计和优化</h3><h4 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则"></a>基本原则</h4><p>包括指令的功能设计和指令格式的设计</p>
+<p>在确定哪些基本功能用硬件来实现时，主要考虑3个因素：速度，成本，灵活性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">硬件实现：速度快，成本高。灵活性差</span><br><span class="line">软件实现：速度慢，价格便宜，灵活性好</span><br></pre></td></tr></table></figure>
+<p>对指令系统的基本要求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">完整性，规整性，正交性，高效率，兼容性</span><br><span class="line">完整性：在一个有限可用的存储空间内，对于任何可解的问题，编制计算程序时，指令系统所提供的指令足够使用。</span><br><span class="line">规整性：主要包括对称性和均匀性。</span><br><span class="line">正交性：在指令中各个不同含义的字段，如操作类型、数据类型、寻址方式字段等，在编码时应互不相关、相互独立。 </span><br><span class="line">高效率：指指令的执行速度快、使用频度高。</span><br><span class="line">兼容性：主要是要实现向后兼容，指令系统可以增加新指令，但不能删除指令或更改指令的功能。</span><br></pre></td></tr></table></figure>
+<h4 id="控制指令"><a href="#控制指令" class="headerlink" title="控制指令"></a>控制指令</h4><p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211215133256789.png" alt="image-20211215133256789" style="zoom:50%;"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">“调用者保存”（caller saving）方法：如果采用调用者保存策略，那么在一个调用者调用别的过程时，必须保存调用者所要保存的寄存器，以备调用结束返回后，能够再次访问调用者。</span><br><span class="line">“被调用者保存”（callee saving）方法：如果采用被调用者保存策略，那么被调用的过程必须保存它要用的寄存器，保证不会破坏过程调用者的程序执行环境，并在过程调用结束返回时，恢复这些寄存器的内容。</span><br></pre></td></tr></table></figure>
+<h4 id="指令操作码的优化"><a href="#指令操作码的优化" class="headerlink" title="指令操作码的优化"></a>指令操作码的优化</h4><p>等长扩展码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">便于分级译码</span><br></pre></td></tr></table></figure>
+<p>定长操作码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">固定长度的操作码：所有指令的操作码都是同一的长度。</span><br><span class="line">保证操作码的译码速度、减少译码的复杂度。</span><br><span class="line">以程序的存储空间为代价来换取硬件实现上的好处。</span><br></pre></td></tr></table></figure>
+<h3 id="指令系统的发展和改进"><a href="#指令系统的发展和改进" class="headerlink" title="指令系统的发展和改进"></a>指令系统的发展和改进</h3><p>一个方向是强化指令功能，实现软件功能向硬件功能转移，基于这种指令集结构而设计实现的计算机系统称为复杂指令集计算机（CISC）。<br>八十年代发展起来的精简指令集计算机（RISC），其目的是尽可能地降低指令集结构的复杂性，以达到简化实现，提高性能的目的。</p>
+<p>面向目标程序增强指令功能<br>提高运算型指令功能；<br>提高传送指令功能；<br>增加程序控制指令功能。<br>面向高级语言和编译程序改进指令系统<br>增加对高级语言和编译系统支持的指令功能；<br>高级语言计算机指令系统。</p>
+<h3 id="附加-2"><a href="#附加-2" class="headerlink" title="附加"></a>附加</h3><p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/054D743EE7F6A66C0E88E9C8CCDD883D.jpg" alt="img" style="zoom: 25%;"></p>
+<p>零操作数来自栈顶和次栈顶。</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/CDD93D766203697644D6DD8DCB3BBBCF.jpg" alt="img" style="zoom: 25%;"></p>
+<p>寄存器间址有利于编制循坏程序。</p>
+<p>在非立即寻址的一地址格式指令中，其中一个操作数通过指令的地址字段安排在寄存器或存储器中。</p>
+<p>一个较完善的指令系统应该包括数据传送，算术逻辑运算，程序控制，输入输出，其他。</p>
+<p>变址寻址只要用于处理数组程序；基址寻址支持多道程序的应用。</p>
+<p>RR型指令，执行指令时不访问存储器。</p>
+<p>RS型指令，执行指令时需访问存储器，且通过变址运算，时间最长。</p>
+<h2 id="CPU设计与实现"><a href="#CPU设计与实现" class="headerlink" title="CPU设计与实现"></a>CPU设计与实现</h2><h3 id="CPU的结构"><a href="#CPU的结构" class="headerlink" title="CPU的结构"></a>CPU的结构</h3><h4 id="CPU的寄存器"><a href="#CPU的寄存器" class="headerlink" title="CPU的寄存器"></a>CPU的寄存器</h4><p>用户可见寄存器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(1) 通用寄存器</span><br><span class="line">存放操作数 可作 某种寻址方式所需的 专用寄存器</span><br><span class="line">(2) 数据寄存器</span><br><span class="line">存放操作数（满足各种数据类型） 两个寄存器拼接存放双倍字长数据</span><br><span class="line">(3) 地址寄存器</span><br><span class="line">存放地址，其位数应满足最大的地址范围 用于特殊的寻址方式    段基值    栈指针</span><br><span class="line">(4) 条件码寄存器 存放条件码，可作程序分支的依据 如 正、负、零、溢出、进位等</span><br></pre></td></tr></table></figure>
+<p>控制寄存器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">其中 MAR、MDR、IR            用户不可见</span><br><span class="line">PC 用户可见</span><br></pre></td></tr></table></figure>
+<p>状态寄存器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PSW寄存器 存放程序状态字</span><br></pre></td></tr></table></figure>
+<h3 id="运算方法与ALU"><a href="#运算方法与ALU" class="headerlink" title="运算方法与ALU"></a>运算方法与ALU</h3><h4 id="算数移位运算"><a href="#算数移位运算" class="headerlink" title="算数移位运算"></a>算数移位运算</h4><p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211216135626230.png" alt="image-20211216135626230" style="zoom:50%;"></p>
+<p>有符号数移位称为算数移位，无符号数移位称为逻辑移位。</p>
+<p>单符号位判断溢出与双符号位判断溢出。</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211216142115187.png" alt="image-20211216142115187" style="zoom:50%;"></p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211216142130087.png" alt="image-20211216142130087" style="zoom:50%;"></p>
+<h4 id="浮点四则运算"><a href="#浮点四则运算" class="headerlink" title="浮点四则运算"></a>浮点四则运算</h4><p>浮点加减法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对阶：求阶差，小阶向大阶对其</span><br><span class="line">尾数求和</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211216143446776.png" alt="image-20211216143446776" style="zoom:50%;"></p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211216143528988.png" alt="image-20211216143528988" style="zoom:50%;"></p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211216143806564.png" alt="image-20211216143806564" style="zoom:50%;"></p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211216144000786.png" alt="image-20211216144000786" style="zoom:50%;"></p>
+<h3 id="多级时序系统"><a href="#多级时序系统" class="headerlink" title="多级时序系统"></a>多级时序系统</h3><h4 id="指令周期"><a href="#指令周期" class="headerlink" title="指令周期"></a>指令周期</h4><p>取出并执行一条指令所需的全部时间</p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211216144414073.png" alt="image-20211216144414073" style="zoom:50%;"></p>
+<p>微指令分析</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">取指阶段：</span><br><span class="line">PC-&gt;MAR 1-&gt;R (MAR)-&gt;MDR MDR-&gt;IR OP(IR)-&gt;CU (PC)+1-&gt;PC</span><br><span class="line">间址周期：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211216145209138.png" alt="image-20211216145209138" style="zoom:50%;"></p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211216145229814.png" alt="image-20211216145229814" style="zoom:50%;"></p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211216145259482.png" alt="image-20211216145259482" style="zoom:50%;"></p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211216145315443.png" alt="image-20211216145315443" style="zoom:50%;"></p>
+<p>在机器周期所含时钟周期数 相同 的前提下，<br>两机 平均指令执行速度之比  等于 两机主频之比</p>
+<p>一个指令周期包含若干个机器周期</p>
+<p>一个机器周期包含若干个时钟周期</p>
+<h3 id="附加-3"><a href="#附加-3" class="headerlink" title="附加"></a>附加</h3><h2 id="流水线"><a href="#流水线" class="headerlink" title="流水线"></a>流水线</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>流水线特点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">流水过程由多个相关的子过程组成，这些子过程称为流水线的“级”或“段”。段的数目称为流水线的“深度”。</span><br><span class="line">每个子过程由专用的功能段实现。</span><br><span class="line">各功能段的时间应基本相等，通常为1个时钟周期（1拍）。</span><br><span class="line">流水线需要经过一定的通过时间才能稳定。</span><br><span class="line">流水技术适合于大量重复的时序过程。</span><br></pre></td></tr></table></figure>
+<p>分类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">单功能流水线和多功能流水线</span><br><span class="line">按流水线所完成的功能分类</span><br><span class="line">单功能流水线，是指只能完成一种固定功能的流水线。</span><br><span class="line">	例如：功能单元流水线</span><br><span class="line">多功能流水线，是指各段可以进行不同的连接，从而完成不同的功能。</span><br><span class="line">	例如：TI ASC多功能流水线</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">静态流水线和动态流水线</span><br><span class="line">按同一时间内流水段的连接方式划分</span><br><span class="line">静态流水线，是指在同一时间内，流水线的各段只能按同一种功能的连接方式工作。</span><br><span class="line">	例如：TI ASC的流水线</span><br><span class="line">	适合于处理一串相同的运算操作</span><br><span class="line">动态流水线，是指在同一时间内，当某些段正在实现某种运算时，另一些段却在实现另一种运算，会使流水线的控制变得很复杂</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">部件级、处理机级及处理机间流水线 </span><br><span class="line">按流水的级别划分</span><br><span class="line">部件级流水线，又叫运算操作流水线，是把处理机的算术逻辑部件分段，使得各种数据类型的操作能够进行流水。</span><br><span class="line">处理机级流水线，又叫指令流水线，是把解释指令的过程按照流水方式处理。</span><br><span class="line">处理机间流水线，又叫宏流水线，是由两个以上的处理机串行地对同一数据流进行处理，每个处理机完成一项任务。 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">标量流水处理机和向量流水处理机</span><br><span class="line">按照数据表示来进行分类</span><br><span class="line">标量流水处理机，是指处理机不具有向量数据表示，仅对标量数据进行流水处理。</span><br><span class="line">	例如：IBM 360/91，Amdahl 470V/6等 </span><br><span class="line">向量流水处理机，是指处理机具有向量数据表示，并通过向量指令对向量的各元素进行处理。</span><br><span class="line">	例如：TI ASC、STAR-100、CYBER-205、CRAY-1、YH-1等</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">线性流水线和非线性流水线</span><br><span class="line">按照是否有反馈回路来进行分类</span><br><span class="line">线性流水线是指流水线的各段串行连接，没有反馈回路。</span><br><span class="line">非线性流水线是指流水线中除有串行连接的通路外，还有反馈回路。</span><br><span class="line">	存在流水线调度问题。</span><br><span class="line">	确定什么时候向流水线引进新的输入，从而使新输入的数据和先前操作的反馈数据在流水线中不产生冲突，此即所谓流水线调度问题。 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="基本流水线"><a href="#基本流水线" class="headerlink" title="基本流水线"></a>基本流水线</h3><p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211219111100347.png" alt="image-20211219111100347"></p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211219111939127.png" alt="image-20211219111939127" style="zoom:67%;"></p>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211219111951893.png" alt="image-20211219111951893" style="zoom:67%;"></p>
+<h4 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h4><p>吞吐率</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">吞吐率是指单位时间内流水线所完成的任务数或输出结果的数量。</span><br><span class="line">最大吞吐率TPmax是指流水线在达到稳定状态后所得到的吞吐率。</span><br><span class="line">设流水线由m段组成，完成n个任务的吞吐率称为实际吞吐率，记作TP。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">最大吞吐率取决于流水线中最慢一段所需的时间，该段成为流水线的瓶颈</span><br><span class="line">消除瓶颈的方法</span><br><span class="line">细分瓶颈段</span><br><span class="line">重复设置瓶颈段</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211219123308211.png" alt="image-20211219123308211" style="zoom: 50%;"></p>
+<p>加速比</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">流水线速度与等功能的非流水线速度之比</span><br></pre></td></tr></table></figure>
+<p>效率</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">流水线的设备利用率</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/image-20211219123457264.png" alt="image-20211219123457264" style="zoom:50%;"></p>
+<p>效率是实际加速比S与最大加速比m之比。</p>
+<p>当△t0不变时，流水线的效率与吞吐率呈正比。为提高效率而采取的措施，也有助于提高吞吐率。</p>
+<p>注</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">流水线并不能减少（而且一般是增加）单条指令的执行时间，但能够提高吞吐率</span><br><span class="line">增加流水线的深度可以提高流水线性能</span><br><span class="line">流水线深度受限于流水线的延迟和额外开销</span><br><span class="line">需要用高速锁存器作为流水线寄存器</span><br><span class="line">Earle锁存器</span><br><span class="line">指令之间存在的相关，产生了流水线的冲突，进而限制了流水线的性能</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="流水线冲突"><a href="#流水线冲突" class="headerlink" title="流水线冲突"></a>流水线冲突</h3><p>流水线冲突是指相邻或相近的两条指令因存在某种关联，后一条指令不能在原先指定的时钟周期开始执行。</p>
+<p>三种不同类型的冲突</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">结构冲突（Structural Hazard）：当指令在重叠执行过程中，硬件资源满足不了指令重叠执行的要求而发生的冲突。</span><br><span class="line">数据冲突（Data Hazard）：因一条指令需要用到前面指令的结果，而无法与产生结果的指令重叠执行时发生的冲突。</span><br><span class="line">控制冲突（Control Hazard）：当流水线遇到分支指令和其它会改变PC值的指令所引起的冲突。</span><br></pre></td></tr></table></figure>
+<p>导致结构冲突的常见原因：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">功能部件不是全流水</span><br><span class="line">重复设置的资源数量不足</span><br></pre></td></tr></table></figure>
+<p> 避免结构冲突的方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">所有功能单元完全流水化</span><br><span class="line">设置足够多的硬件资源</span><br><span class="line">但是，硬件代价很大！</span><br></pre></td></tr></table></figure>
+<p>有些设计方案允许结构冲突存在</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">降低成本</span><br><span class="line">减少功能单元的延迟</span><br></pre></td></tr></table></figure>
+<p>数据冲突</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">产生原因：当指令在流水线中重叠执行时，流水线有可能改变指令读/写操作数的顺序，使之不同于它们在非流水实现时的顺序，这将导致数据冲突。</span><br><span class="line">	消除方法：向流水线中插入暂停周期</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">通过定向技术减少数据冲突带来的暂停</span><br><span class="line">进一步推广：一个结果不仅可以从某一功能单元的输出定向到其自身的输入，而且还可以定向到其它功能单元的输入。	(举例)</span><br><span class="line">在MIPS中，任何流水寄存器到任何功能单元的输入都可能需要定向路径，将形成复杂的旁路网络。</span><br><span class="line">两条指令访问同一存储单元，也可能引起数据冲突，例如访问数据Cache失效时。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>编译调度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">编译器可以通过重新排列代码的顺序来消除这种暂停，这种技术就是“流水线调度”或“指令调度”</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">指令发射(Issue)：指令从流水线的译码段进入执行段的过程称为指令发射。</span><br><span class="line">检测数据冲突</span><br><span class="line">ID段可以检测所有数据冲突</span><br><span class="line">也可以在使用一个操作数的时钟周期的开始(EX和MEM段的开始)检测相关，并确定必需的定向</span><br><span class="line">流水线相关硬件可以检测到的各种冲突情况</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="指令级并行"><a href="#指令级并行" class="headerlink" title="指令级并行"></a>指令级并行</h2><p>记分牌的性能受限于以下几个方面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">程序代码中可开发的并行性，即是否存在可以并行执行的不相关的指令。</span><br><span class="line">记分牌的容量。</span><br><span class="line">记分牌的容量决定了流水线能在多大范围内寻找不相关指令。流水线中可以同时容纳的指令数量称为指令窗口。</span><br><span class="line">功能部件的数目和种类。</span><br><span class="line">功能部件的总数决定了结构冲突的严重程度。</span><br><span class="line">反相关和输出相关。</span><br><span class="line">它们引起计分牌中更多的WAR和WAW冲突 。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Tomasulo算法的优点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">分布式硬件冲突检测。</span><br><span class="line">利用寄存器换名，彻底消除WAW和WAR这两种名相关</span><br><span class="line">如果多个保留站等待同一个操作数，当操作数在CDB上广播时，他们可以同时获得所需的数据</span><br><span class="line">对于存储器访问，动态存储器地址判别技术可解决RAW冲突（取操作数时判断）、WAR和WAW冲突（存操作数时判断）。</span><br><span class="line">能够达到很高的性能。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>缺点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">高复杂性：需要大量硬件</span><br><span class="line">存在瓶颈：单个公共数据总线（CDB）引发竞争</span><br><span class="line">额外的CDB：在每个保留站上需要为每条CDB设置重复的硬件接口</span><br><span class="line">为了保证正确的异常行为，对指令的执行有一个限制：一旦有一条分支指令还没有执行完，其后的指令是不允许进入执行段</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="分支预测"><a href="#分支预测" class="headerlink" title="分支预测"></a>分支预测</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">最简单的分支预测策略</span><br><span class="line">BPB也被称为BHT（Branch History Table，BHT）</span><br><span class="line">分支预测缓冲是一个小的存储器阵列</span><br><span class="line">每个单元最小可以只有1位，记录最近一次分支是否成功的信息</span><br><span class="line">预测位为1时，表示预测分支成功，并从目标位置开始取指令</span><br><span class="line">在预测错误时，要作废已经预取和分析的指令，恢复现场，并从另一条分支路径重新取指令。</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/10/machine-learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/10/machine-learning/" class="post-title-link" itemprop="url">machine learning</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-11-10 21:03:53" itemprop="dateCreated datePublished" datetime="2021-11-10T21:03:53+08:00">2021-11-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-20 12:10:39" itemprop="dateModified" datetime="2021-11-20T12:10:39+08:00">2021-11-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>奥卡姆剃刀：若有多个假设与观察一致，则选择最简单的那个。</p>
+<p>NFL定理（No Free Lunch Theorem）：所有学习算法期望性能相同。</p>
+<p> Independent and identically distributed，独立同分布，IID</p>
+<h2 id="模型评估与选择"><a href="#模型评估与选择" class="headerlink" title="模型评估与选择"></a>模型评估与选择</h2><h3 id="经验误差与过拟合"><a href="#经验误差与过拟合" class="headerlink" title="经验误差与过拟合"></a>经验误差与过拟合</h3><p>若在m个样本中有a个样本分类错误，则称错误率为E=a/m;</p>
+<p>精度=1-错误率；</p>
+<p>学习器在训练集上的误差称为训练误差或经验误差，在新样本的误差称为泛化误差。</p>
+<p>过拟合：把训练样本自身的一些特点当成了所有潜在样本都会具有的一般性质，这样就会导致泛化性能下降。</p>
+<p>欠拟合：训练样本的一般性质尚未学好。</p>
+<h3 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h3><h4 id="留出法"><a href="#留出法" class="headerlink" title="留出法"></a>留出法</h4><p>直接将数据集划分为两个互斥的集合，其中一个集合作为训练集，另一个作为测试集。</p>
+<p>分层采样：保留类别比例的采样方式。</p>
+<h4 id="交叉验证法"><a href="#交叉验证法" class="headerlink" title="交叉验证法"></a>交叉验证法</h4><p>先将数据集D划分为k个大小相似的互斥子集，每次用k-1个子集的并集作为训练集，余下的那个子集作为测试集，从而进行k次训练和测试，最终返回k个测试的均值。通常把交叉验证法称为k折交叉验证法。</p>
+<p>当k=m时，得到交叉验证法的特例：留一法(Leave-One-Out,简称LOC)。留一法评估结果往往比较准确，但计算开销较大。</p>
+<h4 id="自助法"><a href="#自助法" class="headerlink" title="自助法"></a>自助法</h4><p>以自主采样为基础，给定包含m个样本的数据集，每次随机从中挑选一个并放回，重复执行m次，则得到一个包含m个样本的数据集$D’$，样本在m次采样中始终不被取得的概率取极限为0.368.这样的测试结果，也称为包外估计。</p>
+<p>自助法在数据集较小，难以有效划分训练/测试集时很有用。但是自助法产生的数据集会改变初始数据集分布，这会引入估计偏差，因此，在数据量足够时，留出法和交叉验证法更加常用。</p>
+<h3 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h3><p>在预测任务中，给定样例集$D={(x_1,y_1),(x_2,y_2),…,(x_m,y_m)}$,其中$y_i$是示例$x_i$的真实标记。</p>
+<p>回归任务最常用的性能度量是均方误差。</p>
+<script type="math/tex; mode=display">E(f;D)=\frac{1}{m}\sum_{i=1}^{m}(f(x_i)-y_i)^2</script><p>下面是一些常用的性能度量。</p>
+<h4 id="错误率与精度"><a href="#错误率与精度" class="headerlink" title="错误率与精度"></a>错误率与精度</h4><p>对样本集D，分类错误率定义为</p>
+<script type="math/tex; mode=display">E(f;D)=\frac{1}{m}\sum_{i=1}^{m}\Pi(f(x_i)\ne y_i)</script><p>精度定义为</p>
+<script type="math/tex; mode=display">acc(f;D)=1-E(f;D)</script><h4 id="查准率、查全率与F1"><a href="#查准率、查全率与F1" class="headerlink" title="查准率、查全率与F1"></a>查准率、查全率与F1</h4><p><img src="/2021/11/10/machine-learning/31EA8B0CF299E7E13C8472E403A80D1B.jpg" alt="img" style="zoom:50%;"></p>
+<p>查准率P：$P=\frac{TP}{TP+FP}$</p>
+<p>查全率R:$R=\frac{TP}{TP+FN}$</p>
+<p>查准率与查全率为一对矛盾的度量。通常只有在一些简单任务中，才可能使查准率与查全率都很高。</p>
+<p><img src="/2021/11/10/machine-learning/A90737E4B9198F7B34D54BE9AB6D1E74.jpg" alt="img" style="zoom:50%;"></p>
+<p>若一个学习器的PR曲线完全被另一个学习器的曲线包住，则可断言，后者的性能优于前者。</p>
+<p>平衡点(Break-Even Point,简称BEP)为查准率与查全率相等时的取值。</p>
+<p>但BEP度量还是简单一点，更为常用的是F1度量：</p>
+<script type="math/tex; mode=display">F1=\frac{2*P*R}{P+R}=\frac{2*TP}{样例总数+TP-TN}</script><p>F1度量的一般形式-$F_\beta$</p>
+<script type="math/tex; mode=display">F_\beta=\frac{(1+\beta^2)*P*R}{\beta^2*P+R}</script><p>$\beta$&gt;1查全率有更大影响。</p>
+<p><img src="/2021/11/10/machine-learning/E572FFA93ACC986F8A70D8FFF6DB9AAE.jpg" alt="img" style="zoom:50%;"></p>
+<h4 id="ROC与AOC"><a href="#ROC与AOC" class="headerlink" title="ROC与AOC"></a>ROC与AOC</h4><p>ROC曲线的纵轴是真正例率(True Positive Rate,TPR)，横轴是假正例率(False Positive Rate,FPR)</p>
+<script type="math/tex; mode=display">TPR=\frac{TP}{TP+FN}</script><script type="math/tex; mode=display">FPR=\frac{FP}{TN+FP}</script><p><img src="/2021/11/10/machine-learning/96C927242A7BA45CCE302EDEADE623B2.jpg" alt="img" style="zoom:50%;"></p>
+<p>若一个学习器的ROC曲线被另一个学习器的曲线完全“包住”，则可断言后者性能优于前者。但是当有交叉时，一般难以判断，此时较为合理的依据是比较ROC曲线下的面积，即AUC.(Area Under ROC Curve)</p>
+<p>$l_{rank}$定义为</p>
+<p><img src="/2021/11/10/machine-learning/C80967EA3A665CF6EB8EB5DE6DFA7996.jpg" alt="img"></p>
+<p>AUC=1-$l_{rank}$</p>
+<p>以下为对$l_{rank}$的通俗解释：</p>
+<p>假设我们在做一个手写数字识别，识别样本数字是否为5，输入12个数字，经过算法得出每个数字的打分从小到大如下(分越高表示算法认为这个数字越接近5，用A表示正例，B表示反例)：B1,B2,B3,B4,A1,B5,A2,A3,B6,A4,A5,A6</p>
+<p>对于第一个正例A1，有两个反例比他大，则为2，对于第二三个正例，有一个，其余没有，则分子为2+1+1+0+0+0=4，分母为正例数，反例数=6*6=36，则此时$l_{rank}$为4/36=1/9</p>
+<h4 id="代价敏感错误率与代价曲线"><a href="#代价敏感错误率与代价曲线" class="headerlink" title="代价敏感错误率与代价曲线"></a>代价敏感错误率与代价曲线</h4><p><img src="/2021/11/10/machine-learning/B71F120E1D85FE164FAEFD745AD1E202.jpg" alt="img" style="zoom:50%;"></p>
+<p>代价敏感错误率为</p>
+<script type="math/tex; mode=display">E(f;D;cost)=\frac1m(\sum_{x_i\in D^+}^{}\Pi (f(x_i)\ne y_i )*cost_{01}+\sum_{x_i\in D^-}^{}\Pi (f(x_i)\ne y_i )*cost_{10})</script><p>在非均等代价下，ROC曲线不能直接反映出学习器的期望总体代价，而代价曲线则可达到该目的。</p>
+<p>代价曲线图的横轴是取值为[0,1]的正概率代价</p>
+<script type="math/tex; mode=display">P(+)cost=\frac{p*cost_{01}}{p*cost_{01}+(1-p)*cost_{10}}</script><p>代价曲线图的横轴是取值为[0,1]的正例概率代价</p>
+<script type="math/tex; mode=display">P(+)cost=\frac{p*cost_{01}}{p*cost_{01}+(1-p)*cost_{10}}</script><p>其中p是样例为正例的概率；纵轴是取值为[0,1]的归一化代价</p>
+<script type="math/tex; mode=display">cost_{norm}=\frac{FNR*p*cost{01}+FPR*(1-p)*cost_{10}}{p*cost_{01}+(1-p)*cost_{10}}</script><p>代价曲线绘制很简单：ROC曲线上每一点对应了代价平面上的一条线段，设ROC曲线上点的坐标为(FPR,TPR),则可计算出FNR，然后在代价平面上绘制一条从(0,FPR)到(1,FNR)的线段，线段下的面积表示了该条件下的期望总体代价。</p>
+<p><img src="/2021/11/10/machine-learning/5F373773E2879FE3B9027F166C1263DC.jpg" alt="img" style="zoom:50%;"></p>
+<h3 id="比较检验"><a href="#比较检验" class="headerlink" title="比较检验"></a>比较检验</h3><p>本节默认以错误率为性能度量，用$\epsilon$表示</p>
+<h4 id="假设检验"><a href="#假设检验" class="headerlink" title="假设检验"></a>假设检验</h4><p>泛化错误率为$\epsilon$的学习器在一个样本上犯错的概率是$\epsilon$;测试错误率$\hat{\epsilon } $意味着在m个测试样本中恰好有$\hat{\epsilon } $*m个被误分类。</p>
+<p>我们可使用“二项检验”来对“$\epsilon$&lt;=$\hat{\epsilon}_0$”这样的假设进行检验。</p>
+<p>在很多时候我们并不是做一次留出法估计，而是通过多次重复留出法或是交叉验证法等进行多次训练和测试，这样会得到多个测试错误率，此时可用”t-检验”。平均测试错误率$\mu$和方差$\sigma^2$为</p>
+<script type="math/tex; mode=display">\mu=\frac{1}{k}\sum_{i=1}^{k}\hat{\epsilon_i}</script><script type="math/tex; mode=display">\sigma^2=\frac{1}{k-1}\sum_{i=1}^{k}(\hat{\epsilon_i}a-\mu)^2</script><p>考虑到k个测试错误率可看作泛化错误率$\epsilon_0$的独立采样，则变量</p>
+<script type="math/tex; mode=display">\tau_t=\frac{\sqrt{k}(\mu-\epsilon_0)}{\sigma}</script><p>服从自由度为k-1的t分布。</p>
+<p><img src="/2021/11/10/machine-learning/6CCFB550F4DE45AAE64650B826C88341.jpg" alt="img" style="zoom:33%;"></p>
+<h4 id="交叉验证t检验"><a href="#交叉验证t检验" class="headerlink" title="交叉验证t检验"></a>交叉验证t检验</h4><p>对于两个学习器A和B，若我们使用k折交叉验证法得到的错误测试率分别为$\epsilon^A_1$…和$\epsilon_1^B$…，则可使用k折交叉验证”成对t检验”来进行比较检验。可根据差值来对学习器A与B性能相同这个假设做t检验，计算出插值的均值$\mu$和方差$\sigma^2$，在显著度$\alpha$下，若变量</p>
+<script type="math/tex; mode=display">\tau_t=|\frac{\sqrt{k}\mu}{\sigma}|</script><p>小于临界值，则假设不能被拒绝。</p>
+<h4 id="McNemar检验"><a href="#McNemar检验" class="headerlink" title="McNemar检验"></a>McNemar检验</h4><p><img src="/2021/11/10/machine-learning/A988E7FEA95CDC7D31315BF9096EBD7A.jpg" alt="img" style="zoom:33%;"></p>
+<p>若我们做的假设是两学习器性能相同，则应有$e<em>{01}=e</em>{10}$，那么变量$|e<em>{01}-e</em>{10}|$应当服从正态分布。McNemar检验考虑变量</p>
+<script type="math/tex; mode=display">\tau_{\chi^2}=\frac{(|e_{01}-e_{10}|-1)^2}{e_{01}+e_{10}}</script><p>服从自由度为1的$\chi^2$分布</p>
+<h4 id="Friedman检验与Nemenyi后续检验"><a href="#Friedman检验与Nemenyi后续检验" class="headerlink" title="Friedman检验与Nemenyi后续检验"></a>Friedman检验与Nemenyi后续检验</h4><p>之前介绍的都是在一个数据集上比较两个算法的性能，而在很多时候，我们会在一组数据集上比较多个算法。此时可以使用基于算法排序的Friedman检验。</p>
+<p>当所有算法性能相同这个假设被拒绝，则说明算法的性能显著不同，这时需要后续检验来区分，常用的有Nemenyi后续检验。</p>
+<h3 id="偏差与方差"><a href="#偏差与方差" class="headerlink" title="偏差与方差"></a>偏差与方差</h3><p>偏差度量了学习算法的期望预测与真实结果的偏离程度，即刻画了学习算法本身的拟合能力。</p>
+<p>方差度量了同样大小的训练集的变动所导致的学习性能的变化，即刻画了数据扰动所造成的影响。</p>
+<p>噪声则表达在当前任务上任何学习算法所能达到的期望泛化误差的下界，即刻画了学习问题本身的难度，</p>
+<p>泛化误差可分解为偏差、方差与噪声之和。</p>
+<h2 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h2><h3 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h3><p>f(x)=w1x1+w2x2+…+wdxd+b</p>
+<p>一般用向量形式写成</p>
+<script type="math/tex; mode=display">
+f(x)=\omega^Tx+b</script><h3 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h3><p> 线性回归试图学得</p>
+<script type="math/tex; mode=display">
+f(x_i)=wx_i+b,st :f(x_i)\approx y_i</script><p>多元线性回归</p>
+<script type="math/tex; mode=display">
+   f(x_i)=\omega^T x_i+b,st :f(x_i)\approx y_i</script><p>对数线性回归</p>
+<script type="math/tex; mode=display">
+lny=\omega^T x+b</script><p>广义线性模型</p>
+<script type="math/tex; mode=display">
+y=g^-1(\omega^T x+b)</script><h3 id="对数几率回归"><a href="#对数几率回归" class="headerlink" title="对数几率回归"></a>对数几率回归</h3><p>对数几率函数，“Sigmod函数”，将Z值转换为1个接近0或1的y值，并且其输出在z=0附近变化很陡。</p>
+<script type="math/tex; mode=display">
+y=\frac{1}{1+e^{-z}}</script><p>带入得</p>
+<script type="math/tex; mode=display">
+y=\frac{1}{1+e^{-(w^Tx+b)}}</script><p>将上述式子变换得</p>
+<script type="math/tex; mode=display">
+ln\frac{y}{1-y}=w^Tx+b</script><p>注：极大似然估计，梯度下降法，牛顿法，请参考实验。</p>
+<h3 id="线性判别分析"><a href="#线性判别分析" class="headerlink" title="线性判别分析"></a>线性判别分析</h3><p>线性判别分析(Linear Discriminant Analysis,简称LDA)是一种经典的线性学习方法。</p>
+<p>LDA的思想非常朴素：给定训练样例集，设法将样例投影到一条直线上，使得同类样例的投影点尽可能接近、异类样例的投影点尽可能远离；在对新样本进行分类时，将其投影到同样的这条直线上，再根据投影点的位置来确定新样本的类别。</p>
+<p><img src="/2021/11/10/machine-learning/F4BAAC59D4585EE05971A98DC99EA6C4.jpg" alt="img" style="zoom:33%;">           </p>
+<p><img src="/2021/11/10/machine-learning/97DB1639B86ED8B3021436B71378A6FE.jpg" alt="img" style="zoom: 33%;"></p>
+<p><img src="/2021/11/10/machine-learning/2D144DC0F1851483569B8FCFBC4AA36D.jpg" alt="img" style="zoom:50%;"></p>
+<p>定义类内散度矩阵</p>
+<script type="math/tex; mode=display">
+$S_w=\sum_0+\sum_1=\sum_{x\in X_0}^{}(x-\mu_0)(x-\mu_0)^T+\sum_{x\in X_1}^{}(x-\mu_1)(x-\mu_1)^T</script><p>类间散度矩阵$S_b=(\mu_0-\mu_1)(\mu_0-\mu_1)^T$                        </p>
+<p>则有最大化目标</p>
+<script type="math/tex; mode=display">
+J=\frac{w^TS_bw}{w^TS_ww}</script><p>这就是LDA想要最大化的目标，即$S_b与S_w$的“广义瑞利商”。   </p>
+<p>上述式子只与$w$的方向有关，与长度无关，故不是一般性，令$w^TS_ww=1$,根据拉格朗日乘子法，等价于</p>
+<script type="math/tex; mode=display">
+S_bw=\lambda S_ww</script><p>注意到$S_bw$的方向恒为$\mu_0-\mu_1$          </p>
+<p>则令$S_bw=\lambda(\mu_0-\mu_1)$     </p>
+<p>代入得$w=S^{-1}_w(\mu_0-\mu_1)$  </p>
+<p>考虑到数值解的稳定性，在实践中通常是对$S_w$进行奇异值分解，即$S_w=U\Sigma V^T$</p>
+<p>值得一提的是,LDA可从贝叶斯决策理论的角度来阐述，并可以证明，当两类数据同先验、满足高斯分布且协方差相等时，LDA可达到最优分类。</p>
+<p>可将LDA推广到多分类任务。</p>
+<h3 id="多分类学习"><a href="#多分类学习" class="headerlink" title="多分类学习"></a>多分类学习</h3><p>多分类学习的基本思路是拆解法，即将多分类任务拆为若干个二分类任务求解 。最经典的拆分策略有三种，一对一(one vs one,OvO)，一对其余(one vs rest,OvR)，多对多(manay vs many,MvM)。</p>
+<p>OvO将这N个类别两两配对，从而产生N(N-1)/2个二分类任务。</p>
+<p>OvR则是每次将一个类的样例作为正例，所有其他类的样例作为反例来训练N个分类器。在测试时若仅有一个分类器预测为正类，则对应的类别标记作为最终分类结果。若有多个分类器预测为正类，则通常考虑各分类器的预测置信度，选择置信度最大的类别标记作为分类结果。</p>
+<p><img src="/2021/11/10/machine-learning/04D2A99C0BCF59320FCA0EC8557E268E.jpg" alt="img" style="zoom:33%;">                                         </p>
+<p>可以看出，OvR只需要训练N个分类器，而OvO需训练N(N-1)/2个分类器，因此，OvO的存储开销和测试时间开销通常比OvR大。但在训练时，OvR的每个分类器均使用全部训练样例，而OvO的每个分类器仅用到两个类的样例，因此，在类别很多时，OvO的训练时间开销通常比OvR更小。至于预测性能，多数情况下二者差不多。</p>
+<p>介绍一种MvM最常用的技术，纠错输出码(Erroe Correcting Output Codes,ECOC)，它是将编码的思想引入类别拆分，并尽可能在解码过程中具有容错性。EOOC工作过程主要分为两步：</p>
+<p>编码：对N个类别做M次划分，每次划分将一部分划分为正类，一部分划分为反类，从而形成一个二分类训练器；这样一共产生M个训练集，可训练出M个分类器。</p>
+<p>解码：M个分类器对测试样本进行预测，这些预测标记组成一个编码。将这个预测编码与每个类别各自的编码进行比较，返回其中距离最小的类别作为最终预测结果。</p>
+<p>对于同一个学习任务，EOOC编码越长，纠错能力越强。</p>
+<h3 id="类别不平衡问题"><a href="#类别不平衡问题" class="headerlink" title="类别不平衡问题"></a>类别不平衡问题</h3><p>一个基本策略是再缩放。</p>
+<p>大体有三种做法：</p>
+<p>欠采样:去除一些样例使得正反例数目接近</p>
+<p>过采样：增加一些样例使得正反例数目接近</p>
+<p>第三类是基于原始数据训练，，再进行阈值转移。</p>
+<p>欠采样法的时间开销通常远小于过采样。过采样法不能简单对初始样本进行重复采样，否则会过拟合。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </p>
+<h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><p>决策树学习基本算法</p>
+<p><img src="/2021/11/10/machine-learning/E898624B5F73D1A43DCABE5689B64E31.jpg" alt="img" style="zoom: 25%;"></p>
+<h3 id="划分选择"><a href="#划分选择" class="headerlink" title="划分选择"></a>划分选择</h3><h4 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h4><p>信息熵为度量样本集合纯度最常用的一种指标。假定样本集合D中第k类样本所占的比例为$p_k$,则D的信息熵定义为</p>
+<script type="math/tex; mode=display">
+Ent(D)=-\sum_{k=1}^{|y|} p_klog_2p_k</script><p>Ent(D)的值越小，则D的纯度越高。</p>
+<p>假定离散属性有v个可能的取值，若使用a来对样本集D进行划分，则会产生V个分支结点，其中第v个分支结点包括了D中所有在属性a上取值为$a^v$的样本，记为$D^v$。则可又获得信息增益：</p>
+<script type="math/tex; mode=display">
+Gain(D,a)=Ent(D)-\sum_{v=1}^{V}\frac{|D^v|}{|D|}Ent(D^v)</script><p>著名的ID3决策树学习算法就是以信息增益为准则来选择划分属性的。</p>
+<p>X和Y的交互信息</p>
+<script type="math/tex; mode=display">
+I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)=H(X)+H(Y)-H(X,Y)</script><p>样本熵：各类样本熵之和</p>
+<h4 id="增益率"><a href="#增益率" class="headerlink" title="增益率"></a>增益率</h4><p>但是，显而易见，信息增益准则对于可取数目较多的属性有所偏好，所以我们引入增益率。著名的C4.5决策树算法便是使用增益率来哈分最优划分属性的。增益率定义为</p>
+<script type="math/tex; mode=display">
+Gain\_ratio(D,a)=\frac{Gain(D,a)}{IV(a)} 
+其中
+IV(a)=-\sum_{v=1}^{V}\frac{|D^v|}{|D|} log_2\frac{|D^v|}{|D|}</script><p>需要注意，增益率准则对于可取纸2数目较少的属性有所偏好，因此C4.5并不是直接使用增益率准则来进行划分的，而是采用了一个启发式算法，先从候选划分属性中zhaochu1信息增益高于平均水平的属性，再从中选择增益率最高的。</p>
+<h4 id="基尼系数"><a href="#基尼系数" class="headerlink" title="基尼系数"></a>基尼系数</h4><p>CART决策树采用基尼指数来选择划分属性。数据集D的纯度可用基尼系数来度量：</p>
+<script type="math/tex; mode=display">
+Gini(D)=\sum_{k=1}^{|y|}\sum_{k'\ne k }^{} p_k p_{k'}
+       =1-\sum_{k=1}^{|y|}p_k^2</script><p>直观理解的话，基尼系数反应了从数据集D中随机抽取两个样本，其分类不一致的概率。</p>
+<p>属性a的基尼系数定义为</p>
+<script type="math/tex; mode=display">
+Gini\_index(D,a)=\sum_{v=1}^{V}\frac{|D^v|}{|D|}Gini(D^v)</script><h3 id="剪枝处理"><a href="#剪枝处理" class="headerlink" title="剪枝处理"></a>剪枝处理</h3><p>剪枝(pruning)是决策树学习算法对应过拟合的主要手段。决策树基本策略有预剪枝(prepruning)和后剪枝(postpruning)。</p>
+<p>预剪枝是在决策树生成过程中，对每个结点在划分前进行估计，若当前结点的划分不能带来决策树泛化性能提升，则停止划分并将当前结点标记为叶结点；后剪枝则是先从训练集生成一颗完整的决策树，然后自底向上地对非叶结点进行考察，若将该节点对应的子树替换为叶结点能带来决策树泛化性能提升，则将该子树替换为叶结点。</p>
+<p>预剪枝使决策树很多分支都没有展开，降低了过拟合风险，减少了决策树训练时间开销和测试时间开销，但会带来欠拟合的风险。</p>
+<p>后剪枝决策树的欠拟合风险很小，泛化性能往往优于预剪枝决策树。</p>
+<h3 id="连续与缺失值"><a href="#连续与缺失值" class="headerlink" title="连续与缺失值"></a>连续与缺失值</h3><h4 id="连续值处理"><a href="#连续值处理" class="headerlink" title="连续值处理"></a>连续值处理</h4><p>由于连续属性的可取数目不再有限，因此不能直接根据连续属性的可取值来对结点进行划分。此时，连续属性离散化技术派上用处。最简单策略就是采用二分法，正是C4.5决策树算法采用的机制。</p>
+<h4 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h4><h5 id="在以下三方面影响到决策树构建"><a href="#在以下三方面影响到决策树构建" class="headerlink" title="在以下三方面影响到决策树构建"></a>在以下三方面影响到决策树构建</h5><p>影响杂质测量计算方式；影响如何将缺失值的实例分配到子节点；影响具有缺失值的测试实例如何被分配</p>
+<p>原信息增益=去除缺失值信息增益*（去除后的样本数/总样本数）</p>
+<h3 id="多变量决策树"><a href="#多变量决策树" class="headerlink" title="多变量决策树"></a>多变量决策树</h3><p>每个节点划分为线性分类器。对属性的线性组合进行测试。</p>
+<h3 id="考点"><a href="#考点" class="headerlink" title="考点"></a>考点</h3><h4 id="基于决策树分类的优点"><a href="#基于决策树分类的优点" class="headerlink" title="基于决策树分类的优点"></a>基于决策树分类的优点</h4><p>构建过程计算资源开销小；</p>
+<p>分类未知样本速度极快；</p>
+<p>对于小规模的树比较容易解释；</p>
+<p>在许多小的简单数据集合性能与其他方法相近。</p>
+<h4 id="TOP-DOWN决策树"><a href="#TOP-DOWN决策树" class="headerlink" title="TOP-DOWN决策树"></a>TOP-DOWN决策树</h4><p><img src="/2021/11/10/machine-learning/image-20211117162908027.png" alt="image-20211117162908027" style="zoom:50%;"></p>
+<h4 id="过拟合"><a href="#过拟合" class="headerlink" title="过拟合"></a>过拟合</h4><h5 id="pre-pruning"><a href="#pre-pruning" class="headerlink" title="pre-pruning"></a>pre-pruning</h5><p>如果所有的实例都属于同一类别就停止；如果所有的属性值都一样就停止。</p>
+<p>更加具有限制性的，如果实例的数量少于用户指定的阈值；如果实例的类别分布与可用的特征无关；如果扩展当前节点不能改善纯度。（基尼系数或信息增益）</p>
+<h5 id="post-pruning"><a href="#post-pruning" class="headerlink" title="post-pruning"></a>post-pruning</h5><p>将决策树增长到其全部内容，以自下而上的方式修剪。若修剪后泛化错误得到改善，则将子树替换为叶子。可使用MDL修剪。</p>
+<h4 id="MDL"><a href="#MDL" class="headerlink" title="MDL"></a>MDL</h4><p>最小描述长度准则—Minimum Description Length</p>
+<p><img src="/2021/11/10/machine-learning/image-20211117203144245.png" alt="image-20211117203144245" style="zoom:50%;"></p>
+<p>分发实例的过程，将缺失值按照权重分别分发给不同的分支。如下图：</p>
+<p><img src="/2021/11/10/machine-learning/image-20211117203735045.png" alt="image-20211117203735045" style="zoom:50%;"></p>
+<p>对于新实例有缺失值的情况下如何分类，也要利用概率来看。</p>
+<h4 id="惩罚项"><a href="#惩罚项" class="headerlink" title="惩罚项"></a>惩罚项</h4><p>惩罚项比重影响 ：比重大时降低模型复杂度 ；比重适当时模型复杂度与问题匹配 ；比重小时、退化成原模型</p>
+<h2 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h2><p>support vector machine,SVM</p>
+<h3 id="间隔与支持向量"><a href="#间隔与支持向量" class="headerlink" title="间隔与支持向量"></a>间隔与支持向量</h3><p>给定训练集样本D，分类学习最基本的想法就是基于训练集D在样本空间中找到一个划分超平面。</p>
+<p>在样本空间中，划分超平面可通过如下线性方程来描述：$w^T x+b$</p>
+<p>其中$w$为法向量，决定了超平面的方向，b为位移量。我们将该平面记做(w,b)</p>
+<p>样本空间中任一点x到该超平面的距离可写为</p>
+<script type="math/tex; mode=display">
+r=\frac{|w^T x+b|}{||w||}</script><p>假设超平面可将训练样本正确分类，对于$(x_i,y_i)$,若$y_i=1$,则有$w^T x+b&gt;$0,若为-1则&lt;0</p>
+<p>令</p>
+<script type="math/tex; mode=display">
+w^T x+b\ge+1,y_i=+1</script><script type="math/tex; mode=display">
+w^T x+b\le-1,y_i=-1</script><p>如图所示，距离超平面最近的这几个训练样本使上述等号成立，他们被称为支持向量，两个异类支持向量，两个异类支持向量到超平面的距离之和为$\gamma=\frac{2}{||w||}$,它被称为间隔。</p>
+<p><img src="/2021/11/10/machine-learning/36EFD86F17078452CE4BAFE7406E7716.jpg" alt="img" style="zoom:33%;"></p>
+<p>想要找到最大间隔，即找到最大$w与b$，使得$\lambda$最大。</p>
+<p>显然，为了最大化间隔，仅需要最大化$||w||^{-1}$，这等价于最小化$||w||^2$，于是便有</p>
+<script type="math/tex; mode=display">
+min\frac12 ||w||^2</script><script type="math/tex; mode=display">
+st\  y_i(w^Tx_i+b)\ge1，i=1,2,...,m</script><p>这就是SVM的基本型。</p>
+<h3 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h3><p>对于SVM的基本型，添加拉格朗日乘子$\alpha\ge0$，则该问题拉格朗日函数可以写为</p>
+<script type="math/tex; mode=display">
+L(w,b,\alpha)=\frac12 ||w||^2+\sum_{i=1}^{m}\alpha_i(1-y_i(w^Tx_i+b))</script><p>其中$\alpha_i=(\alpha_1,\alpha_2,…,\alpha_m)$</p>
+<p>分别求偏导，$w=\sum<em>{i=1}^{m}\alpha_i y_i x_i，0=\sum</em>{i=1}^{m}\alpha_i y_i$</p>
+<p>代入，可得对偶问题如下</p>
+<script type="math/tex; mode=display">
+max:\sum_{i=1}^{m}\alpha_i-\frac12 \sum_{i=1}^{m}\sum_{j=1}^m \alpha_i \alpha_j y_i y_j x_i^T x_j（11）
+\\
+st\sum_{i=1}^m\alpha_i y_i=0,\alpha_i\ge0</script><p>解出$\alpha$后，求出w与b即可得到模型</p>
+<script type="math/tex; mode=display">
+f(x)=\sum_{i=1}^m \alpha_i y_i x_i^Tx+b(12)</script><p>因为上述过程需要满足KK条件，即要求</p>
+<p>$\alpha_i\ge0$</p>
+<p>$y_if(x_i)-1\ge0$</p>
+<p>$\alpha_i(y_if(x_i)-1)=0$（13）    </p>
+<p>若$\alpha_i$=0，则该样本不会在12的求和中出现，也就不会对f(x)有影响‘</p>
+<p>若后面等于0，则所对应的样本点位于最大间隔边界上，是一个支持向量。</p>
+<p>如何求解11呢？我们介绍一种高效的SMO算法。</p>
+<p>暂且跳过这部分。</p>
+<h3 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h3><p>若在原始样本空间内不存在一个能正确划分两类样本的超平面，面对这类问题，我们可将样本从原始空间映射到一个高维的特征空间，使得样本在这个高维空间内线性可分。并且若原始空间有限，则一定存在一个高维特征空间使样本可分。</p>
+<p>令$\phi(x)$表示将x映射后的特征向量，于是，在特征空间中划分超平面所对应的模型可以表示为</p>
+<p>$f(x)=w^T\phi(x)+b$</p>
+<p>同上，其对偶问题是</p>
+<script type="math/tex; mode=display">
+max:\sum_{i=1}^{m}\alpha_i-\frac12 \sum_{i=1}^{m}\sum_{j=1}^m \alpha_i \alpha_j y_i y_j \phi(x_i)^T \phi(x_j)
+$$（21）
+
+$st\sum_{i=1}^m\alpha_i y_i=0,\alpha_i\ge0$</script><p>求解21会涉及到计算$\phi(x_i)^T\phi(x_i)$，这是样本$x_i与x_j$映射到特征空间后的内积，计算困难，为了避开这个障碍，可以设想一个这样的函数</p>
+<script type="math/tex; mode=display">
+\kappa(x_i,x_j)=<\phi(x_i),\phi(x_j)> =\phi(x_i)^T\phi(x_i)(22)</script><p>即$x_i与x_j$在特征空间的内积等于他们在原始样本空间中通过函数$\kappa$计算的结果。</p>
+<p>则可进行求解，求解得</p>
+<script type="math/tex; mode=display">
+f(x)=w^T\phi(x_i)+b=\sum_{i=1}^{m}\alpha_i y_i \phi(x_i)^T \phi(x) +b=\sum_{i=1}^{m}\alpha_i y_i \kappa(x,x_i)+b$$（24）</script><p>这里的$\kappa(,)$就是核函数，24显示出模型最优解可通过训练样本的核函数展开，这一展开式也称为“支持向量展式”。</p>
+<p>关于核函数，我们有以下定理：</p>
+<p>暂且略过</p>
+<h3 id="软间隔与正则化"><a href="#软间隔与正则化" class="headerlink" title="软间隔与正则化"></a>软间隔与正则化</h3><p>大多数时候我们很难找到合适的核函数，所以为了缓解这一问题，我们会允许支持向量机在一些样本上出错。为此要引入软间隔的概念。</p>
+<p> <img src="/2021/11/10/machine-learning/4A16DFA62BFB67D6662A8F6552B5C427.jpg" alt="img" style="zoom:33%;"></p>
+<p>软间隔则是允许某些样本不满足约束</p>
+<p>$y_i(w^Tx_i+b)\ge1$(28)</p>
+<p>当然，在最大化间隔的同时，不满足约束的样本应尽可能少。于是，优化目标可以写为</p>
+<script type="math/tex; mode=display">
+\hat{P}(c)=\frac{|D_c|+1}{|D|+N}</script><h2 id="贝叶斯分类器"><a href="#贝叶斯分类器" class="headerlink" title="贝叶斯分类器"></a>贝叶斯分类器</h2><h3 id="贝叶斯决策论"><a href="#贝叶斯决策论" class="headerlink" title="贝叶斯决策论"></a>贝叶斯决策论</h3><p>[最大后验估计(Maximum-a-Posteriori (MAP) Estimation) ]</p>
+<p>最大似然估计（MLE）选择值 使观察到的数据的概率最大化<br>最大后验估计（MAP） 选择在观察到的数据和先验条件下最有可能的值 </p>
+<p>缺点<br>MLE: 如果数据集太小，就会过度拟合<br>MAP: 两个有不同预设的人最终会导致不同的估计值</p>
+<p><img src="/2021/11/10/machine-learning/image-20211117223857004.png" alt="image-20211117223857004" style="zoom:50%;"></p>
+<p><img src="/2021/11/10/machine-learning/A6BDD93CCCCCC047DE2609620E7D78C3.jpg" alt="img" style="zoom:50%;"></p>
+<p><img src="/2021/11/10/machine-learning/A044609FAA1AD73C2A0217EC28158122.jpg" alt="img" style="zoom:50%;"></p>
+<h3 id="极大似然估计"><a href="#极大似然估计" class="headerlink" title="极大似然估计"></a>极大似然估计</h3><p><img src="/2021/11/10/machine-learning/9A0C04058645739BD9C5D62DD3AB2700.jpg" alt="img" style="zoom: 33%;"></p>
+<p><img src="/2021/11/10/machine-learning/B45A21D4483D97DDD0C96A6805892B6C.jpg" alt="img" style="zoom:33%;"></p>
+<h3 id="朴素贝叶斯分类器"><a href="#朴素贝叶斯分类器" class="headerlink" title="朴素贝叶斯分类器"></a>朴素贝叶斯分类器</h3><p><img src="/2021/11/10/machine-learning/1E8135079EBCC4628459CF2B8B7EE87A.jpg" alt="img" style="zoom:33%;"></p>
+<h3 id="半朴素贝叶斯分类器"><a href="#半朴素贝叶斯分类器" class="headerlink" title="半朴素贝叶斯分类器"></a>半朴素贝叶斯分类器</h3><p><img src="/2021/11/10/machine-learning/1E8135079EBCC4628459CF2B8B7EE87A-16371597889032.jpg" alt="img" style="zoom:33%;"></p>
+<script type="math/tex; mode=display">
+P(c|x)\propto\ P(c)\prod{i=1}^{d}P(x_i|c,pa_i)$$（21）</script><p>其中$pa_i$为属性$x_i$所依赖的属性，称为$x_i$的父属性。问题的关键转换为如何确定每个属性的父属性，不同的做法产生不同的独依赖分类器。</p>
+<p>最直接的做法是假设所有属性都依赖于同一个属性，称为“超父”，然后通过交叉验证等模型选择方法来确定超父属性，由此形成了SPODE(Super-Parent ODE)方法，例如(b)中，$x_1$是超父属性。</p>
+<p><img src="/2021/11/10/machine-learning/55A690BDCFCF2088CC674065B8172013.jpg" alt="img" style="zoom: 50%;"></p>
+<p>TAN则是在最大带权生成树算法的基础上，通过以下步骤化简为(c)的树形结构。</p>
+<p><img src="/2021/11/10/machine-learning/38DEA55FFF99EC16FC86A14D9523652D.jpg" alt="img" style="zoom:50%;"></p>
+<h3 id="贝叶斯网"><a href="#贝叶斯网" class="headerlink" title="贝叶斯网"></a>贝叶斯网</h3><p>Directed Acyclic Graph(DAG)：有向无环图</p>
+<p>Conditional Probability Table(CPT)：条件概率表</p>
+<p>具体来说，一个贝叶斯网B由结构G和参数$\theta$两部分构成，即$B=<G,\theta>$。</G,\theta></p>
+<p>网络结构G为DAG，其每个结点对应于一个属性，若两个属性有直接依赖关系，则他们由一条边连接起来；参数$\theta$定量描述这种依赖关系，假设属性$x<em>i$在G中的父节点为$\pi_i$,则$\theta$包含了每个属性的条件概率表$\theta</em>{x_i|\pi_i}=P_B(x_i|\pi_i)$</p>
+<h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><p>给定父节点集，贝叶斯网假设每个属性与它的非后裔属性独立。</p>
+<p><img src="/2021/11/10/machine-learning/79D783BCFC662B14C00191FCE9BFE39E.jpg" alt="img" style="zoom:50%;"></p>
+<p>为了分析有向图中变量间的条件独立性，可使用有向分离。我们先把有向图转变成为一个无向图：</p>
+<p>*找出有向图中的所有V型结构，在V型结构的两个父节点之间加上一条无向边；</p>
+<p>*将所有有向边改为无向边</p>
+<p>由此产生的无向图称为道德图，令父节点相连的过程称为道德化。</p>
+<p>若变量x和y能在图上z分开，即从道德图中将变量集合z去除后，x和y分属两个连通分支，则称x和y被z有向分离，$x\perp y|z$成立。</p>
+<h4 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h4><p>贝叶斯网学习的首要任务就是根据训练数据集来找出结构最恰当的贝叶斯网。评分搜索是求解这一问题的常用办法。具体来说，我们先定义一个评分函数，以此来评估贝叶斯网与训练数据的契合程度，然后基于这个评分函数来寻找结构最优的贝叶斯网。</p>
+<p>常用评分函数通常基于信息论准则，此类准则将学习问题看作一个数据压缩任务，学习的目标是找到一个能以最短编码长度描述训练数据的模型，此时编码的长度包括了描述模型自身所需的编码位数和使用该模型描述数据所需的编码位数。对于贝叶斯网学习而言，模型就是一个贝叶斯网，同时，每个贝叶斯网描述了一个在训练数据上的概率分布，我们应选择那个综合编码长度最短的贝叶斯网，这就是最小描述长度准则。(Minimal Description Length,MDL)</p>
+<p>给定训练集D，贝叶斯网$B=<G,\theta>$在D上的评分函数可写为</G,\theta></p>
+<script type="math/tex; mode=display">
+s(B|D)=f(\theta)|B|-LL(B|D)(28)</script><p>其中，|B|是贝叶斯网的参数个数；$f(\theta)$表示描述每个参数$\theta$所需的编码位数。而</p>
+<script type="math/tex; mode=display">
+LL(B|D)=\sum_{i=1}^{m}logP_B(x_i)(29)</script><p>是贝叶斯网B的对数似然。显然，28的第一项是计算编码贝叶斯网B所需的编码位数，第二项是表述B所对应的概率分布$P_B$对D的描述有多好。此时，学习任务转换为优化任务，寻找一个贝叶斯网B使得评分函数最小。</p>
+<p>若$f(\theta)=1$，则得到AIC评分函数。</p>
+<p>若$f(\theta) =\frac12log\ m$，则得到BIC评分函数。</p>
+<p>当=0时，评分函数退化为负对数似然函数，学习任务退化为极大似然估计。</p>
+<p>为最小化评分函数，只需要对网络结构进行搜索，而候选结构的最优参数可直接在训练集计算得到。</p>
+<p>但是，在所有可能的网络空间搜索最优贝叶斯网络是一个NP问题。一般有两种策略在有限时间内求得近似解，第一种为贪心法，第二种是通过给网络结构施加约束来削减搜索空间。</p>
+<h4 id="推断"><a href="#推断" class="headerlink" title="推断"></a>推断</h4><p>贝叶斯网络的近似推断常使用吉布斯采样来完成，这是一种随机采样方法。</p>
+<p><img src="/2021/11/10/machine-learning/E2B301816200CD704A7D700DBB22FC31.jpg" alt="img" style="zoom:50%;"></p>
+<p><img src="/2021/11/10/machine-learning/78E3A5A0E31E197592EDE4D8AF528331.jpg" alt="img" style="zoom:50%;"></p>
+<h4 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h4><p>在现实中，会存在许多未观测变量。未观测变量的学名是隐变量，令X表示已观测变量集，Z表示隐变量集，$\theta$表示模型参数，若想要对$\theta$做极大似然估计，则应最大化对数似然</p>
+<p>$LL(\theta|X,Z)ln\ P(X,Z|\theta)$</p>
+<p>由于Z是隐变量，我们可通过对Z计算期望，来最大化已观测数据的对数“边际似然”</p>
+<p>$LL(\theta|X)=ln\ P(X|\theta)=ln\sum_{Z}P(X,Z|\theta)$（35）</p>
+<p><img src="/2021/11/10/machine-learning/A675D81C9F372B741728116344652037.jpg" alt="img" style="zoom:50%;"></p>
+<h2 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h2><h3 id="聚类任务"><a href="#聚类任务" class="headerlink" title="聚类任务"></a>聚类任务</h3><p>在无监督学习中，训练样本的标记信息是未知的，目标是通过对无标记训练样本的学习来揭示数据的内在性质及规律，为进一步的数据分析提供基础，此类学习任务应用最广的是聚类。</p>
+<p>聚类试图将数据集中的样本划分为若干个通常是不相交的子集，每个子集称为一个簇。</p>
+<p><img src="/2021/11/10/machine-learning/4C60C854BC237111701519B848988BBC.jpg" alt="img"></p>
+<h3 id="性能度量-1"><a href="#性能度量-1" class="headerlink" title="性能度量"></a>性能度量</h3><p>聚类性能度量也称为聚类“有效性指标”。</p>
+<p>聚类性能度量大致有两类，一类是将聚类结果与某个“参考模型”进行比较，称为“外部指标”；另一类是直接考察聚类结果而不利用任何参考模型，称为“内部指标”。</p>
+<p><img src="/2021/11/10/machine-learning/75BD1DD109F66E6E202DCF1D6A7E5356.jpg" alt="img" style="zoom:50%;"></p>
+<p><img src="/2021/11/10/machine-learning/02B3276E333E4A1D2CB5F7C7BA8C5CCA.jpg" alt="img" style="zoom:50%;"></p>
+<h3 id="距离计算"><a href="#距离计算" class="headerlink" title="距离计算"></a>距离计算</h3><p>对函数$dist$，若他是一个距离度量，则需要满足一些基本性质</p>
+<p>非负性：$dist(x_i,x_j)\ge0$</p>
+<p>同一性：$dist(x_i,x_j)=0当且仅当x_i=x_j$</p>
+<p>对称性</p>
+<p>直递性</p>
+<p>对于给定样本</p>
+<script type="math/tex; mode=display">
+x_i=(x_{i1};x_{i2};...;x_{in})与x_j</script><p>最常用的闵可夫斯基距离</p>
+<script type="math/tex; mode=display">
+dist_{mk}(x_i,x_j)=(\sum_{u=1}^n |x_{iu}-x_{ju}|^p)^{\frac1p}（18）</script><p>当p=2时，闵可夫斯基距离即为欧氏距离</p>
+<script type="math/tex; mode=display">
+dist_{ed}(x_i,x_j)=||x_i-x_j||_2=\sqrt{\sum_{u=1}^n |x_{iu}-x_{ju}|^2}（19）</script><p>当p=1时，闵可夫斯基距离即为曼哈顿距离</p>
+<script type="math/tex; mode=display">
+dist_{man}(x_i,x_j)=||x_i-x_j||_1=\sum_{u=1}^n |x_{iu}-x_{ju}|（20）</script><p>定义域为{1,2,3}这样的属性为有序属性，而定义域为{飞机，轮船，火车}则为无序属性，闵可夫斯基距离用于有序属性。</p>
+<p>对无序属性可采用VDM(Value Difference Metric)。令$m<em>{u,a}$表示属性u上取值为a的样本数，$m</em>{u,a,i}$表示在第i个样本簇中在属性u上取值为a的样本数，k为样本簇数，则属性u上两个离散值a与b之间的VDM距离为</p>
+<script type="math/tex; mode=display">
+VDM_p(a,b)=\sum_{i=1}^k | \frac{m_{u,a,i}}{m_{u,a}}-\frac{m_{u,b,i}}{m_{u,b}} |^p（21）</script><p>于是，将闵可夫斯基距离和VDM结合即可处理混合属性。假定有$n_c$个有序属性、$n-n_c$个无序属性，不失一般性，令有序属性排列在无序属性之前，</p>
+<script type="math/tex; mode=display">
+MinkovDM_p(x_i,x_j)=(\sum_{u=1}^{n_c}|x_{iu}-x_{ju}|^p+\sum_{u=n_c+1}^{n}VDM_p(x_{iu},x_{ju}))^{\frac12}（22）</script><p>当空间中不同属性的重要性不同时，可使用加权距离。</p>
+<p>需要注意的是，通常我们是基于某种形式的距离来定义“相似度度量”，距离越大，相似度越小，然而用于相似度度量的距离未必一定要满足距离度量的所有基本性质。不满足直递性的距离称为非度量距离。</p>
+<h3 id="原型聚类"><a href="#原型聚类" class="headerlink" title="原型聚类"></a>原型聚类</h3><p>也称为基于原型的聚类，此类算法假设聚类结构能通过一组原型刻画。通常对原型进行初始化，然后对原型进行迭代更新求解。</p>
+<h4 id="k均值算法"><a href="#k均值算法" class="headerlink" title="k均值算法"></a>k均值算法</h4><p>给定样本集$D={x_1,x_2,..,x_m}$，“k均值”算法针对聚类所得簇划分$C={C_1,C_2,…,C_k}$最小化平方误差</p>
+<script type="math/tex; mode=display">
+E=\sum_{i=1}^{k}\sum_{x\in C_i} ||x-\mu_i||_2^2（24）</script><p>k均值算法采用了贪心策略，通过迭代优化来近似求解式。</p>
+<h4 id="学习向量量化"><a href="#学习向量量化" class="headerlink" title="学习向量量化"></a>学习向量量化</h4><p>Learning Vector Quantization（LVQ)与一般的聚类算法不同，LVQ假设数据样本带有标记类别，学习过程利用样本的这些监督信息来辅助聚类。</p>
+<p>给定样本集</p>
+<script type="math/tex; mode=display">
+D={(x_1,y_1),(x_2,y_2),...,(x_m,y_m)}</script><p>每个样本$x<em>j$是由n个属性描述的特征向量$(x</em>{j1};x<em>{j2};…;x</em>{jn})$,$y_i\in \gamma$是样本$x_j$的类别标记。LVQ的目标是学得一组n维向量${p_1,p_2,…,p_n}$,每个原型向量代表一个聚类簇，簇标记$t_i \in \gamma$。</p>
+<p><img src="/2021/11/10/machine-learning/6B4E7175C6A70D74E89E1D5803B11140.jpg" alt="img" style="zoom:50%;"></p>
+<h4 id="高斯混合模型"><a href="#高斯混合模型" class="headerlink" title="高斯混合模型"></a>高斯混合模型</h4><p>参考下面这篇文章</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30483076">https://zhuanlan.zhihu.com/p/30483076</a></p>
+<h3 id="密度聚类"><a href="#密度聚类" class="headerlink" title="密度聚类"></a>密度聚类</h3><p>此类算法假设聚类结构能通过样本分布的紧密程度确定。</p>
+<p>DBSCAN是一种著名的密度聚类算法，它基于一组“邻域”参数$(\varepsilon,MinPts)$来刻画样本分布的紧密程度。给定数据集$D={x_1,x_2,…,x_m}$,定义以下概念</p>
+<p>$\varepsilon-$邻域：对于x，其$\varepsilon$邻域包含样本集D中与$x_j$的距离不大于$\varepsilon$的样本</p>
+<p>核心对象：若x的$\varepsilon$邻域至少包含MinPts个样本，则为一个核心对象</p>
+<p>密度直达：若$x_j$位于$x_i$的$\varepsilon$邻域中，且$x_i$是核心对象，则称$x_j$由$x_i$密度直达</p>
+<p>密度可达：对$x_i$与$x_j$，若存在样本序列</p>
+<script type="math/tex; mode=display">
+$p_1,p_2,...,p_n</script><p>其中$p<em>1=x_i,p_n=x_j$且$p</em>{i+1}$由$p_i$密度直达，则称$x_j$由$x_i$密度可达</p>
+<p>密度相连：对$x_i$与$x_j$，若存在$x_k$使得$x_k$使得二者均由$x_k$密度可达，则称二者密度相连。</p>
+<p>DBSCAN将簇定义为：由密度可达关系导出的最大的密度相连样本集合。</p>
+<p><img src="/2021/11/10/machine-learning/EDC190CDAD019755FE8DB3451CDB741C.jpg" alt="img" style="zoom:50%;"></p>
+<h3 id="层次聚类"><a href="#层次聚类" class="headerlink" title="层次聚类"></a>层次聚类</h3><p>层次聚类试图在不同层次上对数据集进行划分，从而形成树形的聚类结构。数据集的划分可采用“自顶向上”的聚合策略，也可采用“自顶向下”的分拆策略。</p>
+<p>AGNES是一种采用自底向上聚合策略的层次聚类算法。它先将数据集中的每个样本看作一个初始聚类簇，然后在算法运行的每一步中找出距离最近的两个聚类簇进行合并。</p>
+<p>当聚类簇距离由</p>
+<script type="math/tex; mode=display">
+d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单链接，全链接和均链接算法。</p>
+<p><img src="/2021/11/10/machine-learning/38F2CE5A44DBE19A0FC3066D27AB8B2A.jpg" alt="img" style="zoom:50%;"></p>
+<h2 id="降维与度量学习"><a href="#降维与度量学习" class="headerlink" title="降维与度量学习"></a>降维与度量学习</h2><h3 id="k近邻学习"><a href="#k近邻学习" class="headerlink" title="k近邻学习"></a>k近邻学习</h3><p>k-Nearest Neighbor，简称kNN学习是一种常用的监督学习方法。</p>
+<p>其工作机制是：给定测试样本，基于某种距离度量找出训练集中与其最靠近的k个训练样本，然后基于这k个邻居的信息来进行预测。</p>
+<p>k近邻学习没有显示的训练过程，是“懒惰学习”的主要代表，此类学习技术在训练阶段仅仅是把样本保存起来，训练时间开销为0，待收到测试样本后再进行处理；相应的，那些在训练阶段就对样本进行学习处理的方法称为急切学习。</p>
+<p>k近邻的错误率小于贝叶斯的两倍。    </p>
+<h3 id="低维嵌入"><a href="#低维嵌入" class="headerlink" title="低维嵌入"></a>低维嵌入</h3><p>通过某种数学变换将原始高维属性空间转变为一个低维子空间。</p>
+<p>若要求原始空间中样本之间的距离在低维空间中得以保持，即得到多维缩放(Multiple Dimensional Scaling,MDS)这样一种经典的降维方法。</p>
+<h3 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h3><p>Principal Component Analysis,PCA</p>
+<p>​    </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/13/Verilog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -837,163 +1554,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/29/Latex/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/29/Latex/" class="post-title-link" itemprop="url">Latex</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-29 08:16:31 / Modified: 09:52:16" itemprop="dateCreated datePublished" datetime="2021-07-29T08:16:31+08:00">2021-07-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Latex入门教程"><a href="#Latex入门教程" class="headerlink" title="Latex入门教程"></a>Latex入门教程</h2><p>在编辑框中输入一下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">% 这里是导言区</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">Hello, world!</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-<p>则会有如下显示</p>
-<p><img src="/2021/07/29/Latex/image-20210729082909909.png" alt="image-20210729082909909"></p>
-<p>同时会自动生成PDF文件在<code>.tex</code>文件所保存的目录下。</p>
-<p>此处的第一行<code>\documentclass&#123;article&#125;</code>中包含了一个<strong>控制序列</strong>（或称命令 / 标记）。所谓<strong>控制序列</strong>，是以反斜杠<code>\</code>开头，以第一个<em>空格或非字母</em> 的字符结束的一串文字，他们并不被输出，但是他们会影响输出文档的效果。这里的控制序列是<code>documentclass</code>，它后面紧跟着的<code>&#123;article&#125;</code>代表这个控制序列有一个必要的参数，该参数的值为<code>article</code>. 这个控制序列的作用，是调用名为 “article” 的<strong>文档类</strong>。</p>
-<p>其后出现了控制序列<code>begin</code>，这个控制序列总是与<code>end</code>成对出现。这两个控制序列以及他们中间的内容被称为<strong>“环境”</strong>；他们之后的第一个必要参数总是一致的，被称为环境名。</p>
-<p>只有在 “document” 环境中的内容，才会被正常输出到文档中去或是作为控制序列对文档产生影响。因此，在<code>\end&#123;document&#125;</code>之后插入任何内容都是无效的。</p>
-<p><code>\begin&#123;document&#125;</code>与<code>\documentclass&#123;article&#125;</code>之间的部分被称为<strong>导言区</strong>。导言区中的控制序列，通常会影响到整个输出文档。</p>
-<h3 id="中英混排"><a href="#中英混排" class="headerlink" title="中英混排"></a>中英混排</h3><p>在编辑框中输入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\documentclass[UTF8]&#123;ctexart&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">你好，world!</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-<p>会产生以下结果</p>
-<p><img src="/2021/07/29/Latex/image-20210729083704740.png" alt="image-20210729083704740"></p>
-<p>相较于之前的例子，代码有了细微的差别：</p>
-<p>1.文档类从 <code>article</code> 变为 <code>ctexart</code></p>
-<p>2.增加了文档类选项 <code>UTF8</code></p>
-<h3 id="组织文章"><a href="#组织文章" class="headerlink" title="组织文章"></a>组织文章</h3><p><code>article</code>/<code>ctexart</code> 中，定义了五个控制序列来调整行文组织结构。他们分别是：</p>
-<p>\section{.}</p>
-<p>\subsection{.}</p>
-<p>\subsubsection{.}</p>
-<p>\paragraph{.}</p>
-<p>\subparagraph{.}</p>
-<p>在编辑框输入以下文本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">\documentclass[UTF8]&#123;ctexart&#125;</span><br><span class="line">\title&#123;你好，world!&#125;</span><br><span class="line">\author&#123;李凯杰&#125;</span><br><span class="line">\date&#123;\today&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">	\maketitle</span><br><span class="line">	\section&#123;你好中国&#125;</span><br><span class="line">	中国在 East Asia.</span><br><span class="line">	\subsection&#123;Hello Beijing&#125;</span><br><span class="line">	北京是 capital of China.</span><br><span class="line">	\subsubsection&#123;Hello Dongcheng District&#125;</span><br><span class="line">	\paragraph&#123;Tian&#x27;anmen Square&#125;</span><br><span class="line">	is in the center of Beijing</span><br><span class="line">	\subparagraph&#123;Chairman Mao&#125;</span><br><span class="line">	is in the center of 天安门广场。</span><br><span class="line">	\subsection&#123;Hello 北京&#125;</span><br><span class="line">	\paragraph&#123;北京&#125; is an international city。</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-<p>会产生以下结果：</p>
-<p><img src="/2021/07/29/Latex/image-20210729084810750.png" alt="image-20210729084810750"></p>
-<h3 id="文献引用"><a href="#文献引用" class="headerlink" title="文献引用"></a>文献引用</h3><h3 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h3><p>为了使用 AMS-LaTeX 提供的数学功能，我们需要在导言区加载<code>amsmath</code>宏包：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;amsmath&#125;</span><br></pre></td></tr></table></figure>
-<p>数学模式</p>
-<p>LaTeX 的数学模式有两种：行内模式 (inline) 和行间模式 (display)。前者在正文的行文中，插入数学公式；后者独立排列单独成行。</p>
-<p>在行文中，使用<script type="math/tex">...</script>可以插入行内公式，使用<code>\[ ... \]</code>可以插入行间公式，如果需要对行间公式进行编号，可以使用<code>equation</code>环境： \begin{equaion} … \end{equation}</p>
-<p>Latex在线工具编辑器：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.codecogs.com/latex/eqneditor.php</span><br></pre></td></tr></table></figure>
-<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>Latex在线表格编辑器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.tablesgenerator.com/</span><br></pre></td></tr></table></figure>
-<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>在 LaTeX 中插入图片，有很多种方式。最好用的应当属利用<code>graphicx</code>宏包提供的<code>\includegraphics</code>命令。比如你在你的 TeX 源文件同目录下，有名为 a.jpg 的图片，你可以用这样的方式将它插入到输出文档中：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\usepackage&#123;graphicx&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">\includegraphics&#123;a.jpg&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-<p>图片可能很大，超过了输出文件的纸张大小，或者干脆就是你自己觉得输出的效果不爽。这时候你可以用</p>
-<p><code>\includegraphics</code>控制序列的可选参数来控制。比如</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\includegraphics[width = .8\textwidth]&#123;a.jpg&#125;</span><br></pre></td></tr></table></figure>
-<p>这样图片的宽度会被缩放至页面宽度的百分之八十，图片的总高度会按比例缩放。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/26/%E6%B8%B8%E6%88%8F%E5%A4%96%E6%98%9F%E4%BA%BA%E5%85%A5%E4%BE%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/26/%E6%B8%B8%E6%88%8F%E5%A4%96%E6%98%9F%E4%BA%BA%E5%85%A5%E4%BE%B5/" class="post-title-link" itemprop="url">游戏外星人入侵</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-26 15:10:45 / Modified: 16:50:07" itemprop="dateCreated datePublished" datetime="2021-07-26T15:10:45+08:00">2021-07-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1063,7 +1623,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1091,7 +1651,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1150,6 +1710,61 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

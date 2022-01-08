@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="绪论什么是编译编译：将高级语言翻译成汇编语言或机器语言的过程。  预处理器：把存储在不同文件中的源程序聚合在一起；把被称为宏的缩写语句转换为原始语句。 可重定位：在内存中存放的起始位置L不是固定的 加载器：修改可重定位地址；将修改后的指令和数据放到内存中适当的位置。 链接器：将多个可重定位的机器代码文件连接到一起；解决外部内存地址问题 编译系统的结构 词法分析概述词法分析的主要任务： 12从左向右">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译原理">
+<meta property="og:url" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="绪论什么是编译编译：将高级语言翻译成汇编语言或机器语言的过程。  预处理器：把存储在不同文件中的源程序聚合在一起；把被称为宏的缩写语句转换为原始语句。 可重定位：在内存中存放的起始位置L不是固定的 加载器：修改可重定位地址；将修改后的指令和数据放到内存中适当的位置。 链接器：将多个可重定位的机器代码文件连接到一起；解决外部内存地址问题 编译系统的结构 词法分析概述词法分析的主要任务： 12从左向右">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104110715843.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104113047587.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220105104115216.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095418057.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095933969.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107105320903.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110153976.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110227112.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110401057.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220108100026833.png">
+<meta property="article:published_time" content="2022-01-04T02:47:20.000Z">
+<meta property="article:modified_time" content="2022-01-08T02:22:54.307Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104110715843.png">
+
+<link rel="canonical" href="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>编译原理 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          编译原理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-04 10:47:20" itemprop="dateCreated datePublished" datetime="2022-01-04T10:47:20+08:00">2022-01-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-08 10:22:54" itemprop="dateModified" datetime="2022-01-08T10:22:54+08:00">2022-01-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><h3 id="什么是编译"><a href="#什么是编译" class="headerlink" title="什么是编译"></a>什么是编译</h3><p>编译：将高级语言翻译成汇编语言或机器语言的过程。</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104110715843.png" alt="image-20220104110715843" style="zoom:50%;"></p>
+<p>预处理器：把存储在不同文件中的源程序聚合在一起；把被称为宏的缩写语句转换为原始语句。</p>
+<p>可重定位：在内存中存放的起始位置L不是固定的</p>
+<p>加载器：修改可重定位地址；将修改后的指令和数据放到内存中适当的位置。</p>
+<p>链接器：将多个可重定位的机器代码文件连接到一起；解决外部内存地址问题</p>
+<h3 id="编译系统的结构"><a href="#编译系统的结构" class="headerlink" title="编译系统的结构"></a>编译系统的结构</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104113047587.png" alt="image-20220104113047587" style="zoom:50%;"></p>
+<h3 id="词法分析概述"><a href="#词法分析概述" class="headerlink" title="词法分析概述"></a>词法分析概述</h3><p>词法分析的主要任务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">从左向右逐行扫描源程序的字符，识别出各个单词，确定单词的类型。将识别出的单词转换成统一的机内表示——词法单元(token)形式。</span><br><span class="line">token:&lt;种别码，属性值&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220105104115216.png" alt="image-20220105104115216" style="zoom:50%;"></p>
+<h3 id="语法分析概述"><a href="#语法分析概述" class="headerlink" title="语法分析概述"></a>语法分析概述</h3><p>语法分析器从词法分析器输出的token序列中识别出各类短语，并构造语法分析树。</p>
+<h3 id="语义分析概述"><a href="#语义分析概述" class="headerlink" title="语义分析概述"></a>语义分析概述</h3><p>主要任务：</p>
+<p>任务一：收集标识符的属性信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">：</span><br><span class="line">种属</span><br><span class="line">类型</span><br><span class="line">存储类型，长度</span><br><span class="line">值</span><br><span class="line">作用域</span><br><span class="line">参数和返回值信息</span><br></pre></td></tr></table></figure>
+<p>符号表：用来存放标识符的属性信息的数据结构</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095418057.png" alt="image-20220106095418057" style="zoom:50%;"></p>
+<p>任务二：语义检查</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">变量或过程未经声明就使用；</span><br><span class="line">变量或过程名重复声明；</span><br><span class="line">运算分量类型不匹配；</span><br><span class="line">操作符与操作数之间的类型不匹配</span><br></pre></td></tr></table></figure>
+<h3 id="中间代码生成及编译器后端"><a href="#中间代码生成及编译器后端" class="headerlink" title="中间代码生成及编译器后端"></a>中间代码生成及编译器后端</h3><p>常用的中间表示形式：</p>
+<p>三地址码；语法结构树/语法树</p>
+<h4 id="三地址码"><a href="#三地址码" class="headerlink" title="三地址码"></a>三地址码</h4><p>三地址码由类似于汇编语言的指令序列组成，每个指令最多有三个操作数。</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095933969.png" alt="image-20220106095933969" style="zoom:50%;"></p>
+<p>三地址指令的表示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">四元式(op.y.z.x)</span><br><span class="line">三元式</span><br><span class="line">间接三元式</span><br></pre></td></tr></table></figure>
+<p>目标代码生成以源程序的中间表示形式作为输入，并把它映射到目标语言；目标代码生成的一个重要任务是为程序中使用的变量合理分配寄存器。</p>
+<p>代码优化：为改进代码，所进行的等价程序变换，使其运行得更快一些，占用空间更小一些。</p>
+<h2 id="语言及其文法"><a href="#语言及其文法" class="headerlink" title="语言及其文法"></a>语言及其文法</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>字母表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个有穷符号集合。</span><br></pre></td></tr></table></figure>
+<p>字母表运算</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">乘积</span><br><span class="line">n次幂</span><br><span class="line">正闭包（正数次幂的并集）</span><br><span class="line">克林闭包(正闭包的基础上加个空串)</span><br></pre></td></tr></table></figure>
+<p>串：字母表中符号的一个有穷序列</p>
+<p>串的运算</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">连接，空串是连接运算的单位元</span><br><span class="line">串的幂运算</span><br></pre></td></tr></table></figure>
+<h3 id="文法的定义"><a href="#文法的定义" class="headerlink" title="文法的定义"></a>文法的定义</h3><p>文法</p>
+<p>$G=(V_T,V_N,P,S)$</p>
+<p>$V_T$:终结符集合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">终结符是文法所定义的语言的基本符号，有事也称为token</span><br></pre></td></tr></table></figure>
+<p>$V_N$：非终结符集合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">非终结符是用来表示语法成分的符号，有时也称为&quot;语法变量&quot;</span><br></pre></td></tr></table></figure>
+<p>$V_T$与$V_N$不相交，二者相并统称为文法符号集。</p>
+<p>P：产生式集合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">描述了将终结符和非终结符组合成串的方法</span><br></pre></td></tr></table></figure>
+<p>S:开始符号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开始符号表示的是该文法中最大的语法成分</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107105320903.png" alt="image-20220107105320903" style="zoom:50%;"></p>
+<p>符号约定</p>
+<p>终结符</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110153976.png" alt="image-20220107110153976" style="zoom:50%;"></p>
+<p>非终结符</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110227112.png" alt="image-20220107110227112" style="zoom:50%;"></p>
+<p>注</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110401057.png" alt="image-20220107110401057" style="zoom:50%;"></p>
+<h3 id="语言的定义"><a href="#语言的定义" class="headerlink" title="语言的定义"></a>语言的定义</h3><p>符号串$a<em>0$经过n步推导出$a_n$,可简记为$a_0\Longrightarrow </em>{}^{n}a_n $</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220108100026833.png" alt="image-20220108100026833" style="zoom:50%;"></p>
+<h3 id="文法的分类"><a href="#文法的分类" class="headerlink" title="文法的分类"></a>文法的分类</h3><p>Chomsky文法分类体系</p>
+<h4 id="0型文法"><a href="#0型文法" class="headerlink" title="0型文法"></a>0型文法</h4><p>$\alpha \longrightarrow \beta $</p>
+<p>无限制文法，其中$\alpha$中至少包含一个非终结符。</p>
+<p>由0型文法G生成的语言称为 <strong>0型语言</strong></p>
+<h4 id="1型文法"><a href="#1型文法" class="headerlink" title="1型文法"></a>1型文法</h4><p>$\alpha \longrightarrow \beta $</p>
+<p>上下文有关文法，CSG</p>
+<script type="math/tex; mode=display">
+|\alpha| < |\beta|</script><p>产生式的一般形式:</p>
+<script type="math/tex; mode=display">
+\alpha_1A\alpha_2\longrightarrow\alpha_1\beta\alpha_2(\beta\ne\varepsilon)</script><h4 id="2型文法"><a href="#2型文法" class="headerlink" title="2型文法"></a>2型文法</h4><p>$\alpha \longrightarrow \beta $</p>
+<p>上下文无关文法，CFG</p>
+<p>其中$\alpha\in V_N$</p>
+<p>产生式的一般形式：</p>
+<script type="math/tex; mode=display">
+A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="headerlink" title="3型文法"></a>3型文法</h4><p>$\alpha \longrightarrow \beta $</p>
+<p>正则文法，RG</p>
+<p>右线性文法：$A\longrightarrow wB或A\longrightarrow w$</p>
+<p>左线性文法：$A\longrightarrow Bw或A\longrightarrow w$</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/24/NLP/" rel="prev" title="NLP">
+      <i class="fa fa-chevron-left"></i> NLP
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/01/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="next" title="操作系统">
+      操作系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%AA%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%96%E8%AF%91"><span class="nav-number">1.1.</span> <span class="nav-text">什么是编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">编译系统的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.</span> <span class="nav-text">词法分析概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0"><span class="nav-number">1.4.</span> <span class="nav-text">语法分析概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0"><span class="nav-number">1.5.</span> <span class="nav-text">语义分析概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%8F%8A%E7%BC%96%E8%AF%91%E5%99%A8%E5%90%8E%E7%AB%AF"><span class="nav-number">1.6.</span> <span class="nav-text">中间代码生成及编译器后端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E5%9C%B0%E5%9D%80%E7%A0%81"><span class="nav-number">1.6.1.</span> <span class="nav-text">三地址码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E5%8F%8A%E5%85%B6%E6%96%87%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">语言及其文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.2.</span> <span class="nav-text">文法的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.3.</span> <span class="nav-text">语言的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%B3%95%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">2.4.</span> <span class="nav-text">文法的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0%E5%9E%8B%E6%96%87%E6%B3%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">0型文法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E5%9E%8B%E6%96%87%E6%B3%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">1型文法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E5%9E%8B%E6%96%87%E6%B3%95"><span class="nav-number">2.4.3.</span> <span class="nav-text">2型文法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E5%9E%8B%E6%96%87%E6%B3%95"><span class="nav-number">2.4.4.</span> <span class="nav-text">3型文法</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
