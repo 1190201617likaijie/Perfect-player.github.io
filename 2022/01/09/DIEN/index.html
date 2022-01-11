@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Deep Interest Evolution Network for Click-Through Rate Prediction前言阿里CTR预估模型—-DIEN（深度兴趣演化网络） 这是一篇一篇阿里2019发表在AAAI上的CTR预估的论文，本文亮点主要是作者提出了兴趣提取层与兴趣演化层两个网络层。 附一个原文链接 1https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1809.03672v1 背景每">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DIEN">
+<meta property="og:url" content="http://example.com/2022/01/09/DIEN/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Deep Interest Evolution Network for Click-Through Rate Prediction前言阿里CTR预估模型—-DIEN（深度兴趣演化网络） 这是一篇一篇阿里2019发表在AAAI上的CTR预估的论文，本文亮点主要是作者提出了兴趣提取层与兴趣演化层两个网络层。 附一个原文链接 1https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1809.03672v1 背景每">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/01/09/DIEN/image-20220110103347882.png">
+<meta property="og:image" content="http://example.com/2022/01/09/DIEN/image-20220110103434044.png">
+<meta property="og:image" content="http://example.com/2022/01/09/DIEN/image-20220110104128810.png">
+<meta property="og:image" content="http://example.com/2022/01/09/DIEN/image-20220110115254821.png">
+<meta property="og:image" content="http://example.com/2022/01/09/DIEN/image-20220110120300856.png">
+<meta property="og:image" content="http://example.com/2022/01/09/DIEN/image-20220110122005893.png">
+<meta property="og:image" content="http://example.com/2022/01/09/DIEN/image-20220110122133352.png">
+<meta property="og:image" content="http://example.com/2022/01/09/DIEN/image-20220110122118801.png">
+<meta property="og:image" content="http://example.com/2022/01/09/DIEN/image-20220110122639019.png">
+<meta property="article:published_time" content="2022-01-09T12:04:42.000Z">
+<meta property="article:modified_time" content="2022-01-11T01:53:17.826Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/01/09/DIEN/image-20220110103347882.png">
+
+<link rel="canonical" href="http://example.com/2022/01/09/DIEN/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>DIEN | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/09/DIEN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DIEN
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-09 20:04:42" itemprop="dateCreated datePublished" datetime="2022-01-09T20:04:42+08:00">2022-01-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-11 09:53:17" itemprop="dateModified" datetime="2022-01-11T09:53:17+08:00">2022-01-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Deep-Interest-Evolution-Network-for-Click-Through-Rate-Prediction"><a href="#Deep-Interest-Evolution-Network-for-Click-Through-Rate-Prediction" class="headerlink" title="Deep Interest Evolution Network for Click-Through Rate Prediction"></a>Deep Interest Evolution Network for Click-Through Rate Prediction</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>阿里CTR预估模型—-DIEN（深度兴趣演化网络）</p>
+<p>这是一篇一篇阿里2019发表在AAAI上的CTR预估的论文，本文亮点主要是作者提出了兴趣提取层与兴趣演化层两个网络层。</p>
+<p>附一个原文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/abs/1809.03672v1</span><br></pre></td></tr></table></figure>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p><strong>每点击付费(CPC)</strong> 是广告系统中最常见的计费形式之一，广告商对广告的每次点击进行收费。在CPC广告系统中，点击率(CTR)预测的效果不仅影响整个平台的最终收益，还会影响用户体验和满意度。</p>
+<p>在大多数<strong>非搜索</strong>的电子商务场景中，用户不主动表达自己当前的意愿。因此设计能够捕捉用户动态兴趣的模型是提高CTR预测性能的关键。</p>
+<h3 id="研究状态"><a href="#研究状态" class="headerlink" title="研究状态"></a>研究状态</h3><p>注，本文的研究状态为到2019年以前。</p>
+<p>a.由于深度学习在特征表示上的强学习能力，目前大部分CTR模型从传统的线性或非线性模型（例如FM）转换到深度模型。</p>
+<p>b.大多数深度模型遵循Embedding+多层感知器(MLP)的结构， 但这些模型只关注从不同的领域捕获特征之间的交互，【没有考虑到用户兴趣的表示】。</p>
+<p>c.DIN引入了一个attention机制来激活具有意义的历史行为。但</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DIN很难捕捉潜在的用户兴趣；</span><br><span class="line">用户兴趣是不断发展，DIN在捕获用户序列的行为之间的依赖有所欠缺。</span><br></pre></td></tr></table></figure>
+<p>d.大多数基于RNN的模型都【连续且均等地处理相邻行为之间的所有依赖关系】。但并非所有用户的行为都严格取决于每个相邻的行为。 每个用户都有不同的兴趣，并且每个兴趣都有其自己的发展轨迹，例如书籍和衣服的发展过程几乎是各自独立的。 对于目标物品，这些模型只能获得一个固定的兴趣演化轨迹，可能会受到兴趣漂移的干扰。【简而言之，就是缺少Attention机制】</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">兴趣漂移：兴趣漂移对行为的影响是用户可能在一段时间内对各种书籍产生兴趣，在另一段时间内又需要衣服。</span><br></pre></td></tr></table></figure>
+<h3 id="创新"><a href="#创新" class="headerlink" title="创新"></a>创新</h3><p>a.兴趣提取器层（interest extractor layer）：首先DIEN选择GRU来建模两行为之间的依赖性。其次由于隐藏状态缺乏对兴趣表示的监督，作者提出了<strong>辅助损失</strong>，即<strong>使用下一个行为来监督当前隐藏状态的学习</strong>。作者把这些有额外监督的隐藏状态称为【兴趣状态】，有助于捕获更多的语义意义用于兴趣表示，推动GRU的隐藏状态，从而有效地表示兴趣。</p>
+<p>b.兴趣演化层（interest evolving layer）：兴趣的多样性会导致兴趣偏移的现象。在相邻的访问中，用户的意图可能非常不同，用户的一个行为可能依赖于很久以前的行为。因此，作者提出<strong>建立与目标物相关的兴趣演化轨迹模型</strong>，设计了带有注意力机制更新门的GRU—-AUGRU。<strong>运用兴趣状态和目标物体去计算相关性</strong>。AUGRU增强了在兴趣演化中相关兴趣的影响，同时削弱了兴趣漂移所产生的非相关兴趣效应。通过在更新门中引入注意机制，AUGRU可以实现针对不同目标物体的特定兴趣演化过程。</p>
+<h3 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h3><p>a.提出一个新的网络结构来对兴趣演化过程进行建模。兴趣表示更具有表达性，CTR预估更精确。</p>
+<p>b.设计了一个兴趣提取层。指出GRU对兴趣表示的针对性弱，故提出辅助损失。</p>
+<p>c.设计了一个兴趣演化层，AUGRU增强了相关兴趣对目标物体的影响。</p>
+<h3 id="具体细节"><a href="#具体细节" class="headerlink" title="具体细节"></a>具体细节</h3><h4 id="DIN与DIEN的总体思路"><a href="#DIN与DIEN的总体思路" class="headerlink" title="DIN与DIEN的总体思路"></a>DIN与DIEN的总体思路</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在MLP的基础上，引入先验知识，加速模型训练，提高模型准确性。</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/09/DIEN/image-20220110103347882.png" alt="image-20220110103347882" style="zoom: 25%;">到<img src="/2022/01/09/DIEN/image-20220110103434044.png" alt="image-20220110103434044" style="zoom:25%;"></p>
+<p>兴趣</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">兴趣是用来表达行为，行为则是挖掘兴趣。</span><br><span class="line">对兴趣建模的任务就是从用户的历史行为中，挖掘出用户的兴趣，将兴趣</span><br><span class="line">这个抽象的概念量化表达。</span><br><span class="line">因此训练数据中，需要引入用户的历史点击行为。</span><br></pre></td></tr></table></figure>
+<p>DIN与DIEN的区别就是兴趣的建模方式不同。</p>
+<h4 id="DIN兴趣建模思路与缺点"><a href="#DIN兴趣建模思路与缺点" class="headerlink" title="DIN兴趣建模思路与缺点"></a>DIN兴趣建模思路与缺点</h4><p><img src="/2022/01/09/DIEN/image-20220110104128810.png" alt="image-20220110104128810" style="zoom:50%;"></p>
+<p>在DIN中，直接将每个历史行为等价于用户兴趣(方框处)。然后通过注意力机制，模拟处候选广告与每个历史点击之间的相关性，从而判断用户对候选广告感兴趣的程度。</p>
+<p>缺点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">对兴趣的表达，不能完全贴合实际情况。</span><br><span class="line">a.直接吧行为等价成兴趣</span><br><span class="line">b.很难通过已表现出来的行为，来反映出用户的潜在兴趣</span><br><span class="line">c.之前的方法，忽略了去挖掘潜藏在用户行为背后的兴趣</span><br><span class="line">eg:假设你当下点击了鞋子，则DIN认为你是对于鞋子感兴趣的，但是你背后的兴趣可能是多样的，例如还可能对衣服感兴趣。</span><br><span class="line">DIN忽略了序列信息，容易基于用户所有购买历史行为综合推荐，而不是针对下一次购买推荐。</span><br></pre></td></tr></table></figure>
+<p>兴趣的实际情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a.人的兴趣是多样的，在同一个时刻，拥有多种不同的兴趣应该用兴趣状态来描述。但是DIN只能捕捉到用户的一个兴趣。</span><br><span class="line">b.兴趣是动态变换，都有属于自己的演化过程。但是DIN没有动态演化过程，例如你买完鞋子以后你可能对鞋子不感兴趣了，但是DIN还是会认为你对鞋子感兴趣。</span><br><span class="line">c.兴趣的发展是有前后关联的</span><br><span class="line">d.兴趣会存在兴趣漂移</span><br></pre></td></tr></table></figure>
+<h4 id="DIEN对兴趣的建模思路"><a href="#DIEN对兴趣的建模思路" class="headerlink" title="DIEN对兴趣的建模思路"></a>DIEN对兴趣的建模思路</h4><p>循环神经网络满足上述兴趣的特点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.使用循环神经网络，从用户的序列行为信息中，提取出用户的兴趣状态</span><br><span class="line">b.每个时刻下的兴趣状态用一个向量来表征，这个向量相当于一个黑盒，当中包含了丰富的语义信息，例如用户当前有哪些兴趣、对各个兴趣的强烈程度。</span><br><span class="line">c.利用循环神经网络的串联结构，以及记忆特性，找到用户兴趣演化的规律。</span><br></pre></td></tr></table></figure>
+<p>步骤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.从用户历史行为中提取出每个时刻的兴趣状态</span><br><span class="line">b.利用注意力机制，找到与候选广告相关的那部分兴趣的演化过程，判断用户下一时刻对该兴趣的感兴趣程度</span><br></pre></td></tr></table></figure>
+<h4 id="DIEN详解"><a href="#DIEN详解" class="headerlink" title="DIEN详解"></a>DIEN详解</h4><p><img src="/2022/01/09/DIEN/image-20220110115254821.png" alt="image-20220110115254821"></p>
+<p>核心为历史行为处理部分，往右依次是目标广告，上下文特征，用户行为特征。</p>
+<p>核心部分分为三层，从下到上为行为序列层，兴趣抽取层，兴趣进化层</p>
+<h5 id="兴趣抽取层"><a href="#兴趣抽取层" class="headerlink" title="兴趣抽取层"></a>兴趣抽取层</h5><p>作用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">挖缺并提取出每个时刻下，用户行为背后潜藏的兴趣状态。</span><br></pre></td></tr></table></figure>
+<p>采用的序列模型为GRU，具有记忆特性，可以缓解梯度消失，训练参数小于LSTM。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">具体可参考：</span><br><span class="line">https://zhuanlan.zhihu.com/p/32481747</span><br></pre></td></tr></table></figure>
+<p>结构：多输入，多输出</p>
+<p>为更好的提取，设计了auxiliary loss</p>
+<p><img src="/2022/01/09/DIEN/image-20220110120300856.png" alt="image-20220110120300856" style="zoom: 50%;"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">这里设计了一个二分类模型来计算兴趣抽取的准确性，</span><br><span class="line">我们将用户下一时刻真实的行为e(t+1)作为正例，</span><br><span class="line">负采样得到的行为作为负例e(t+1)&#x27;，</span><br><span class="line">分别于抽取出的兴趣h(t)结合输入到设计的辅助网络中，得到预测结果，并通过logloss计算一个辅助的损失</span><br></pre></td></tr></table></figure>
+<p>原因</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果只采用最后的label去监督，则隐藏层所有状态都是为最后一个状态服务，则提取出的隐藏层状态显然失真。</span><br></pre></td></tr></table></figure>
+<p>训练方式：引入负采样训练</p>
+<h5 id="兴趣进化层"><a href="#兴趣进化层" class="headerlink" title="兴趣进化层"></a>兴趣进化层</h5><p>兴趣演化的特点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">存在兴趣漂移，每个兴趣都有自己的演化过程</span><br></pre></td></tr></table></figure>
+<p>作用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">模拟出与目标广告相关的进化机制</span><br></pre></td></tr></table></figure>
+<p>DIEN创新点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把这个注意力操作嵌入到GRU的更新门里面去，形成了一个AUGRU的结构，用这个层来更有针对性的模拟与目标广告相关的兴趣进化路径</span><br></pre></td></tr></table></figure>
+<p>得到过程</p>
+<h6 id="AIGRU"><a href="#AIGRU" class="headerlink" title="AIGRU"></a>AIGRU</h6><p><img src="/2022/01/09/DIEN/image-20220110122005893.png" alt="image-20220110122005893"></p>
+<p><img src="/2022/01/09/DIEN/image-20220110122133352.png" alt="image-20220110122133352"></p>
+<p>直接拿$a_t$乘上了兴趣抽取层的隐藏兴趣状态，但会使不相干的兴趣会影响到兴趣演化层的学习</p>
+<h6 id="AGRU"><a href="#AGRU" class="headerlink" title="AGRU"></a>AGRU</h6><p><img src="/2022/01/09/DIEN/image-20220110122118801.png" alt="image-20220110122118801"></p>
+<p>拿$a_t$替换掉了更新门。</p>
+<p>若某个时刻t的兴趣$h_t$与当前候选广告一点关系没有，即$a_t$为0，这个时候的隐藏状态会直接使用上一时刻的。</p>
+<p>通过这种机制保障只关注和当前候选广告相关的兴趣演化过程。</p>
+<p>问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在替换时用标量替换向量，忽视了不同维度上值的重要性</span><br></pre></td></tr></table></figure>
+<h6 id="AUGRU"><a href="#AUGRU" class="headerlink" title="AUGRU"></a>AUGRU</h6><p><img src="/2022/01/09/DIEN/image-20220110122639019.png" alt="image-20220110122639019"></p>
+<p>克服了AGRU忽略维度的问题。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文提出了一种新的深层网络结构，即深层兴趣演化网络(DIEN)，来模拟兴趣的演化过程。在在线广告系统中，DIEN极大地提高了CTR预测的性能。具体地说，作者设计了</p>
+<ul>
+<li>兴趣提取层来捕获兴趣序列，利用辅助损失来提供对兴趣状态的更多监督。</li>
+<li>兴趣演化层，使用带有注意力更新门(AUGRU)的GRU来模拟与目标物品相关的兴趣演化过程。在AUGRU的帮助下，DIEN克服了兴趣漂移的干扰。兴趣演化建模有助于有效捕获兴趣，进一步提高CTR预测的性能。</li>
+</ul>
+<h3 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h3><p>B站，老弓的学习日记</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="prev" title="操作系统">
+      <i class="fa fa-chevron-left"></i> 操作系统
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Deep-Interest-Evolution-Network-for-Click-Through-Rate-Prediction"><span class="nav-number">1.</span> <span class="nav-text">Deep Interest Evolution Network for Click-Through Rate Prediction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.2.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E7%8A%B6%E6%80%81"><span class="nav-number">1.3.</span> <span class="nav-text">研究状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E6%96%B0"><span class="nav-number">1.4.</span> <span class="nav-text">创新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E8%B4%A1%E7%8C%AE"><span class="nav-number">1.5.</span> <span class="nav-text">主要贡献</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E7%BB%86%E8%8A%82"><span class="nav-number">1.6.</span> <span class="nav-text">具体细节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DIN%E4%B8%8EDIEN%E7%9A%84%E6%80%BB%E4%BD%93%E6%80%9D%E8%B7%AF"><span class="nav-number">1.6.1.</span> <span class="nav-text">DIN与DIEN的总体思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DIN%E5%85%B4%E8%B6%A3%E5%BB%BA%E6%A8%A1%E6%80%9D%E8%B7%AF%E4%B8%8E%E7%BC%BA%E7%82%B9"><span class="nav-number">1.6.2.</span> <span class="nav-text">DIN兴趣建模思路与缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DIEN%E5%AF%B9%E5%85%B4%E8%B6%A3%E7%9A%84%E5%BB%BA%E6%A8%A1%E6%80%9D%E8%B7%AF"><span class="nav-number">1.6.3.</span> <span class="nav-text">DIEN对兴趣的建模思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DIEN%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.6.4.</span> <span class="nav-text">DIEN详解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B4%E8%B6%A3%E6%8A%BD%E5%8F%96%E5%B1%82"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">兴趣抽取层</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B4%E8%B6%A3%E8%BF%9B%E5%8C%96%E5%B1%82"><span class="nav-number">1.6.4.2.</span> <span class="nav-text">兴趣进化层</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#AIGRU"><span class="nav-number">1.6.4.2.1.</span> <span class="nav-text">AIGRU</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#AGRU"><span class="nav-number">1.6.4.2.2.</span> <span class="nav-text">AGRU</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#AUGRU"><span class="nav-number">1.6.4.2.3.</span> <span class="nav-text">AUGRU</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%B8%A3%E8%B0%A2"><span class="nav-number">1.8.</span> <span class="nav-text">鸣谢</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -145,6 +145,141 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/09/DIEN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/09/DIEN/" class="post-title-link" itemprop="url">DIEN</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-09 20:04:42" itemprop="dateCreated datePublished" datetime="2022-01-09T20:04:42+08:00">2022-01-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-11 09:53:17" itemprop="dateModified" datetime="2022-01-11T09:53:17+08:00">2022-01-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Deep-Interest-Evolution-Network-for-Click-Through-Rate-Prediction"><a href="#Deep-Interest-Evolution-Network-for-Click-Through-Rate-Prediction" class="headerlink" title="Deep Interest Evolution Network for Click-Through Rate Prediction"></a>Deep Interest Evolution Network for Click-Through Rate Prediction</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>阿里CTR预估模型—-DIEN（深度兴趣演化网络）</p>
+<p>这是一篇一篇阿里2019发表在AAAI上的CTR预估的论文，本文亮点主要是作者提出了兴趣提取层与兴趣演化层两个网络层。</p>
+<p>附一个原文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/abs/1809.03672v1</span><br></pre></td></tr></table></figure>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p><strong>每点击付费(CPC)</strong> 是广告系统中最常见的计费形式之一，广告商对广告的每次点击进行收费。在CPC广告系统中，点击率(CTR)预测的效果不仅影响整个平台的最终收益，还会影响用户体验和满意度。</p>
+<p>在大多数<strong>非搜索</strong>的电子商务场景中，用户不主动表达自己当前的意愿。因此设计能够捕捉用户动态兴趣的模型是提高CTR预测性能的关键。</p>
+<h3 id="研究状态"><a href="#研究状态" class="headerlink" title="研究状态"></a>研究状态</h3><p>注，本文的研究状态为到2019年以前。</p>
+<p>a.由于深度学习在特征表示上的强学习能力，目前大部分CTR模型从传统的线性或非线性模型（例如FM）转换到深度模型。</p>
+<p>b.大多数深度模型遵循Embedding+多层感知器(MLP)的结构， 但这些模型只关注从不同的领域捕获特征之间的交互，【没有考虑到用户兴趣的表示】。</p>
+<p>c.DIN引入了一个attention机制来激活具有意义的历史行为。但</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DIN很难捕捉潜在的用户兴趣；</span><br><span class="line">用户兴趣是不断发展，DIN在捕获用户序列的行为之间的依赖有所欠缺。</span><br></pre></td></tr></table></figure>
+<p>d.大多数基于RNN的模型都【连续且均等地处理相邻行为之间的所有依赖关系】。但并非所有用户的行为都严格取决于每个相邻的行为。 每个用户都有不同的兴趣，并且每个兴趣都有其自己的发展轨迹，例如书籍和衣服的发展过程几乎是各自独立的。 对于目标物品，这些模型只能获得一个固定的兴趣演化轨迹，可能会受到兴趣漂移的干扰。【简而言之，就是缺少Attention机制】</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">兴趣漂移：兴趣漂移对行为的影响是用户可能在一段时间内对各种书籍产生兴趣，在另一段时间内又需要衣服。</span><br></pre></td></tr></table></figure>
+<h3 id="创新"><a href="#创新" class="headerlink" title="创新"></a>创新</h3><p>a.兴趣提取器层（interest extractor layer）：首先DIEN选择GRU来建模两行为之间的依赖性。其次由于隐藏状态缺乏对兴趣表示的监督，作者提出了<strong>辅助损失</strong>，即<strong>使用下一个行为来监督当前隐藏状态的学习</strong>。作者把这些有额外监督的隐藏状态称为【兴趣状态】，有助于捕获更多的语义意义用于兴趣表示，推动GRU的隐藏状态，从而有效地表示兴趣。</p>
+<p>b.兴趣演化层（interest evolving layer）：兴趣的多样性会导致兴趣偏移的现象。在相邻的访问中，用户的意图可能非常不同，用户的一个行为可能依赖于很久以前的行为。因此，作者提出<strong>建立与目标物相关的兴趣演化轨迹模型</strong>，设计了带有注意力机制更新门的GRU—-AUGRU。<strong>运用兴趣状态和目标物体去计算相关性</strong>。AUGRU增强了在兴趣演化中相关兴趣的影响，同时削弱了兴趣漂移所产生的非相关兴趣效应。通过在更新门中引入注意机制，AUGRU可以实现针对不同目标物体的特定兴趣演化过程。</p>
+<h3 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h3><p>a.提出一个新的网络结构来对兴趣演化过程进行建模。兴趣表示更具有表达性，CTR预估更精确。</p>
+<p>b.设计了一个兴趣提取层。指出GRU对兴趣表示的针对性弱，故提出辅助损失。</p>
+<p>c.设计了一个兴趣演化层，AUGRU增强了相关兴趣对目标物体的影响。</p>
+<h3 id="具体细节"><a href="#具体细节" class="headerlink" title="具体细节"></a>具体细节</h3><h4 id="DIN与DIEN的总体思路"><a href="#DIN与DIEN的总体思路" class="headerlink" title="DIN与DIEN的总体思路"></a>DIN与DIEN的总体思路</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在MLP的基础上，引入先验知识，加速模型训练，提高模型准确性。</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/09/DIEN/image-20220110103347882.png" alt="image-20220110103347882" style="zoom: 25%;">到<img src="/2022/01/09/DIEN/image-20220110103434044.png" alt="image-20220110103434044" style="zoom:25%;"></p>
+<p>兴趣</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">兴趣是用来表达行为，行为则是挖掘兴趣。</span><br><span class="line">对兴趣建模的任务就是从用户的历史行为中，挖掘出用户的兴趣，将兴趣</span><br><span class="line">这个抽象的概念量化表达。</span><br><span class="line">因此训练数据中，需要引入用户的历史点击行为。</span><br></pre></td></tr></table></figure>
+<p>DIN与DIEN的区别就是兴趣的建模方式不同。</p>
+<h4 id="DIN兴趣建模思路与缺点"><a href="#DIN兴趣建模思路与缺点" class="headerlink" title="DIN兴趣建模思路与缺点"></a>DIN兴趣建模思路与缺点</h4><p><img src="/2022/01/09/DIEN/image-20220110104128810.png" alt="image-20220110104128810" style="zoom:50%;"></p>
+<p>在DIN中，直接将每个历史行为等价于用户兴趣(方框处)。然后通过注意力机制，模拟处候选广告与每个历史点击之间的相关性，从而判断用户对候选广告感兴趣的程度。</p>
+<p>缺点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">对兴趣的表达，不能完全贴合实际情况。</span><br><span class="line">a.直接吧行为等价成兴趣</span><br><span class="line">b.很难通过已表现出来的行为，来反映出用户的潜在兴趣</span><br><span class="line">c.之前的方法，忽略了去挖掘潜藏在用户行为背后的兴趣</span><br><span class="line">eg:假设你当下点击了鞋子，则DIN认为你是对于鞋子感兴趣的，但是你背后的兴趣可能是多样的，例如还可能对衣服感兴趣。</span><br><span class="line">DIN忽略了序列信息，容易基于用户所有购买历史行为综合推荐，而不是针对下一次购买推荐。</span><br></pre></td></tr></table></figure>
+<p>兴趣的实际情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a.人的兴趣是多样的，在同一个时刻，拥有多种不同的兴趣应该用兴趣状态来描述。但是DIN只能捕捉到用户的一个兴趣。</span><br><span class="line">b.兴趣是动态变换，都有属于自己的演化过程。但是DIN没有动态演化过程，例如你买完鞋子以后你可能对鞋子不感兴趣了，但是DIN还是会认为你对鞋子感兴趣。</span><br><span class="line">c.兴趣的发展是有前后关联的</span><br><span class="line">d.兴趣会存在兴趣漂移</span><br></pre></td></tr></table></figure>
+<h4 id="DIEN对兴趣的建模思路"><a href="#DIEN对兴趣的建模思路" class="headerlink" title="DIEN对兴趣的建模思路"></a>DIEN对兴趣的建模思路</h4><p>循环神经网络满足上述兴趣的特点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.使用循环神经网络，从用户的序列行为信息中，提取出用户的兴趣状态</span><br><span class="line">b.每个时刻下的兴趣状态用一个向量来表征，这个向量相当于一个黑盒，当中包含了丰富的语义信息，例如用户当前有哪些兴趣、对各个兴趣的强烈程度。</span><br><span class="line">c.利用循环神经网络的串联结构，以及记忆特性，找到用户兴趣演化的规律。</span><br></pre></td></tr></table></figure>
+<p>步骤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.从用户历史行为中提取出每个时刻的兴趣状态</span><br><span class="line">b.利用注意力机制，找到与候选广告相关的那部分兴趣的演化过程，判断用户下一时刻对该兴趣的感兴趣程度</span><br></pre></td></tr></table></figure>
+<h4 id="DIEN详解"><a href="#DIEN详解" class="headerlink" title="DIEN详解"></a>DIEN详解</h4><p><img src="/2022/01/09/DIEN/image-20220110115254821.png" alt="image-20220110115254821"></p>
+<p>核心为历史行为处理部分，往右依次是目标广告，上下文特征，用户行为特征。</p>
+<p>核心部分分为三层，从下到上为行为序列层，兴趣抽取层，兴趣进化层</p>
+<h5 id="兴趣抽取层"><a href="#兴趣抽取层" class="headerlink" title="兴趣抽取层"></a>兴趣抽取层</h5><p>作用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">挖缺并提取出每个时刻下，用户行为背后潜藏的兴趣状态。</span><br></pre></td></tr></table></figure>
+<p>采用的序列模型为GRU，具有记忆特性，可以缓解梯度消失，训练参数小于LSTM。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">具体可参考：</span><br><span class="line">https://zhuanlan.zhihu.com/p/32481747</span><br></pre></td></tr></table></figure>
+<p>结构：多输入，多输出</p>
+<p>为更好的提取，设计了auxiliary loss</p>
+<p><img src="/2022/01/09/DIEN/image-20220110120300856.png" alt="image-20220110120300856" style="zoom: 50%;"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">这里设计了一个二分类模型来计算兴趣抽取的准确性，</span><br><span class="line">我们将用户下一时刻真实的行为e(t+1)作为正例，</span><br><span class="line">负采样得到的行为作为负例e(t+1)&#x27;，</span><br><span class="line">分别于抽取出的兴趣h(t)结合输入到设计的辅助网络中，得到预测结果，并通过logloss计算一个辅助的损失</span><br></pre></td></tr></table></figure>
+<p>原因</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果只采用最后的label去监督，则隐藏层所有状态都是为最后一个状态服务，则提取出的隐藏层状态显然失真。</span><br></pre></td></tr></table></figure>
+<p>训练方式：引入负采样训练</p>
+<h5 id="兴趣进化层"><a href="#兴趣进化层" class="headerlink" title="兴趣进化层"></a>兴趣进化层</h5><p>兴趣演化的特点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">存在兴趣漂移，每个兴趣都有自己的演化过程</span><br></pre></td></tr></table></figure>
+<p>作用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">模拟出与目标广告相关的进化机制</span><br></pre></td></tr></table></figure>
+<p>DIEN创新点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把这个注意力操作嵌入到GRU的更新门里面去，形成了一个AUGRU的结构，用这个层来更有针对性的模拟与目标广告相关的兴趣进化路径</span><br></pre></td></tr></table></figure>
+<p>得到过程</p>
+<h6 id="AIGRU"><a href="#AIGRU" class="headerlink" title="AIGRU"></a>AIGRU</h6><p><img src="/2022/01/09/DIEN/image-20220110122005893.png" alt="image-20220110122005893"></p>
+<p><img src="/2022/01/09/DIEN/image-20220110122133352.png" alt="image-20220110122133352"></p>
+<p>直接拿$a_t$乘上了兴趣抽取层的隐藏兴趣状态，但会使不相干的兴趣会影响到兴趣演化层的学习</p>
+<h6 id="AGRU"><a href="#AGRU" class="headerlink" title="AGRU"></a>AGRU</h6><p><img src="/2022/01/09/DIEN/image-20220110122118801.png" alt="image-20220110122118801"></p>
+<p>拿$a_t$替换掉了更新门。</p>
+<p>若某个时刻t的兴趣$h_t$与当前候选广告一点关系没有，即$a_t$为0，这个时候的隐藏状态会直接使用上一时刻的。</p>
+<p>通过这种机制保障只关注和当前候选广告相关的兴趣演化过程。</p>
+<p>问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在替换时用标量替换向量，忽视了不同维度上值的重要性</span><br></pre></td></tr></table></figure>
+<h6 id="AUGRU"><a href="#AUGRU" class="headerlink" title="AUGRU"></a>AUGRU</h6><p><img src="/2022/01/09/DIEN/image-20220110122639019.png" alt="image-20220110122639019"></p>
+<p>克服了AGRU忽略维度的问题。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文提出了一种新的深层网络结构，即深层兴趣演化网络(DIEN)，来模拟兴趣的演化过程。在在线广告系统中，DIEN极大地提高了CTR预测的性能。具体地说，作者设计了</p>
+<ul>
+<li>兴趣提取层来捕获兴趣序列，利用辅助损失来提供对兴趣状态的更多监督。</li>
+<li>兴趣演化层，使用带有注意力更新门(AUGRU)的GRU来模拟与目标物品相关的兴趣演化过程。在AUGRU的帮助下，DIEN克服了兴趣漂移的干扰。兴趣演化建模有助于有效捕获兴趣，进一步提高CTR预测的性能。</li>
+</ul>
+<h3 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h3><p>B站，老弓的学习日记</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,7 +368,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-08 10:22:54" itemprop="dateModified" datetime="2022-01-08T10:22:54+08:00">2022-01-08</time>
+                <time title="Modified: 2022-01-09 10:56:40" itemprop="dateModified" datetime="2022-01-09T10:56:40+08:00">2022-01-09</time>
               </span>
 
           
@@ -319,6 +454,12 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
 <p>正则文法，RG</p>
 <p>右线性文法：$A\longrightarrow wB或A\longrightarrow w$</p>
 <p>左线性文法：$A\longrightarrow Bw或A\longrightarrow w$</p>
+<h3 id="CFG的分析树"><a href="#CFG的分析树" class="headerlink" title="CFG的分析树"></a>CFG的分析树</h3><p>给定一个句型，其分析树中的每一棵子树的边缘称为该句型的一个短语。</p>
+<p>直接短语：高度为2的子树的边缘。</p>
+<p>二义性文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果一个文法可以为某个句子生成多颗分析树，则称这个文法是二义性的。</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105001704.png" alt="image-20220109105001704" style="zoom:50%;"></p>
+<h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105354813.png" alt="image-20220109105354813" style="zoom:50%;"></p>
 
       
     </div>
@@ -1873,93 +2014,6 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/21/MySQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/21/MySQL/" class="post-title-link" itemprop="url">MySQL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-11-21 10:52:34 / Modified: 23:57:28" itemprop="dateCreated datePublished" datetime="2021-11-21T10:52:34+08:00">2021-11-21</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><h2 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h2><h3 id="数据库系统概述"><a href="#数据库系统概述" class="headerlink" title="数据库系统概述"></a>数据库系统概述</h3><p>DB :database数据库</p>
-<p>DBMS :Database Management System数据库管理系统</p>
-<p>SQL :Structure Query Language专门用来与数据库通信的语言</p>
-<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>数据模型由数据结构，数据操作和完整性约束构成。</p>
-<h4 id="常见的数据模型"><a href="#常见的数据模型" class="headerlink" title="常见的数据模型"></a>常见的数据模型</h4><p>层次模型：用树形结构表示实体类型及实体间的联系的数据模型称为层次模型。</p>
-<p><img src="/2021/11/21/MySQL/0251C980E3935BE8B502DB12BF4E28AA.jpg" alt="img" style="zoom: 33%;"></p>
-<p>网状模型：用有向图结构表示实体类型以及实体间联系的数据模型称为网状模型。用网状模型编写应用程序及其复杂，数据的独立性较差。</p>
-<p><img src="/2021/11/21/MySQL/814994B32C68AB40E0CCAD787BDBAE45.jpg" alt="img" style="zoom:50%;"></p>
-<p>关系模型：以二维表来描述数据。</p>
-<p><img src="/2021/11/21/MySQL/52A9A70E94E089277537417FF9770065.jpg" alt="img" style="zoom: 33%;"></p>
-<p><img src="/2021/11/21/MySQL/520D0BD20FC882EBF07D1707CA7EC95B.jpg" alt="img" style="zoom: 33%;"></p>
-<h4 id="关系数据库的规范化"><a href="#关系数据库的规范化" class="headerlink" title="关系数据库的规范化"></a>关系数据库的规范化</h4><p>根据满足规范的条件不同，可以分为五个等级：第一范式（1NF）、…，第五范式（5NF）。一般情况下，只要把数据规范到第三范式标准就可以。</p>
-<h5 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h5><p>在第一范式中，数据表的每一行只包含一个实体的信息，并且每一行的每一列只能存放实体的一个属性。</p>
-<p><img src="/2021/11/21/MySQL/4223C3CA9AD1A5D76E8D9C0FD3C5020D.jpg" alt="img" style="zoom: 25%;"></p>
-<h5 id="第二范式"><a href="#第二范式" class="headerlink" title="第二范式"></a>第二范式</h5><p>第二范式应该首先满足第一范式，第二范式要求数据库表中的每个实体必须可以被唯一的区分。为了实现区分各行记录，通常需要为表设置一个区分列，用以存储各个实体的唯一标识。</p>
-<h5 id="第三范式"><a href="#第三范式" class="headerlink" title="第三范式"></a>第三范式</h5><p>第三范式要求一个关系表中不包含已在其他表中已包含的非关键字信息。</p>
-<h4 id="关系数据库的设计原则"><a href="#关系数据库的设计原则" class="headerlink" title="关系数据库的设计原则"></a>关系数据库的设计原则</h4><p>○数据库内数据文件的数据组织应该获得最大限度的共享、最小的冗余度，消除数据及数据依赖关系中的冗余部分，是依赖于同一个数据模型的数据达到有效的分离。</p>
-<p>○保证输入、修改数据时数据的一致性与正确性。</p>
-<p>○保证数据与使用数据的应用程序之间的高度独立性。</p>
-<h4 id="实体与关系"><a href="#实体与关系" class="headerlink" title="实体与关系"></a>实体与关系</h4><p>一对一关系</p>
-<p>一对多关系</p>
-<p>多对多关系</p>
-<h3 id="数据库的体系结构"><a href="#数据库的体系结构" class="headerlink" title="数据库的体系结构"></a>数据库的体系结构</h3><h4 id="数据库三级模式结构"><a href="#数据库三级模式结构" class="headerlink" title="数据库三级模式结构"></a>数据库三级模式结构</h4><h5 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h5><p>也称逻辑模式或概念模式，是数据库中全体数据的逻辑结构和特征的描述，是所有用户的公共数据拼图。一个数据库只有一个模式，模式处于三级结构中的中间层。</p>
-<h5 id="外模式"><a href="#外模式" class="headerlink" title="外模式"></a>外模式</h5><p>也称用户模式，是数据库用户能够看见和使用的局部数据的逻辑结构和特征的描述，是数据库用户的数据视图，是与某一应用有关的数据的逻辑表示。外模式是模式的子集，一个数据库可以有多个外模式。</p>
-<p>外模式是保证数据安全性的一个有力措施。</p>
-<h5 id="内模式"><a href="#内模式" class="headerlink" title="内模式"></a>内模式</h5><p>也称存储模式，一个数据库只有一个内模式。他是数据结构和存储方式的描述，是数据在数据库内部的表示方式。</p>
-<h4 id="三级模式之间的映射"><a href="#三级模式之间的映射" class="headerlink" title="三级模式之间的映射"></a>三级模式之间的映射</h4><p>数据库管理系统在三级模式之间提供了两层映射，分别为</p>
-<h5 id="外模式-模式映射"><a href="#外模式-模式映射" class="headerlink" title="外模式/模式映射"></a>外模式/模式映射</h5><p>对于同一个模式可以由多个外模式。对于每一个外模式，数据库系统都有一个外模式/模式映射。当模式改变时，由数据库管理员作出改变，保证数据与程序的逻辑独立性。</p>
-<h5 id="模式-内模式映射"><a href="#模式-内模式映射" class="headerlink" title="模式/内模式映射"></a>模式/内模式映射</h5><p>唯一，定义了数据库的全局逻辑结构与存储之间的对应关系。当数据库的存储结构改变时，有数据库管理员对其作出改变。保证数据与程序的物理独立性。</p>
-<h2 id><a href="#" class="headerlink" title=" "></a> </h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2029,7 +2083,7 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
