@@ -368,7 +368,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-09 10:56:40" itemprop="dateModified" datetime="2022-01-09T10:56:40+08:00">2022-01-09</time>
+                <time title="Modified: 2022-01-15 15:21:13" itemprop="dateModified" datetime="2022-01-15T15:21:13+08:00">2022-01-15</time>
               </span>
 
           
@@ -460,6 +460,35 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果一个文法可以为某个句子生成多颗分析树，则称这个文法是二义性的。</span><br></pre></td></tr></table></figure>
 <p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105001704.png" alt="image-20220109105001704" style="zoom:50%;"></p>
 <h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105354813.png" alt="image-20220109105354813" style="zoom:50%;"></p>
+<h3 id="正则定义"><a href="#正则定义" class="headerlink" title="正则定义"></a>正则定义</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111100400281.png" alt="image-20220111100400281" style="zoom:50%;"></p>
+<h3 id="有穷自动机"><a href="#有穷自动机" class="headerlink" title="有穷自动机"></a>有穷自动机</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111101353306.png" alt="image-20220111101353306" style="zoom:50%;"></p>
+<h3 id="有穷自动机的分类"><a href="#有穷自动机的分类" class="headerlink" title="有穷自动机的分类"></a>有穷自动机的分类</h3><p>DFA确定的有穷自动机</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104246612.png" alt="image-20220112104246612" style="zoom:50%;"></p>
+<p>NFA非确定的有穷自动机</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104402251.png" alt="image-20220112104402251" style="zoom:50%;"></p>
+<p>正则文法与正则表达式与有穷自动机等价</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104637911.png" alt="image-20220112104637911" style="zoom:50%;"></p>
+<p>带有空边的NFA与不带空边的NFA有等价性</p>
+<h3 id="从正则表达式到有穷自动机"><a href="#从正则表达式到有穷自动机" class="headerlink" title="从正则表达式到有穷自动机"></a>从正则表达式到有穷自动机</h3><p>先构造NFA,再从NFA到DFA。</p>
+<h3 id="从NFA到DFA的转换"><a href="#从NFA到DFA的转换" class="headerlink" title="从NFA到DFA的转换"></a>从NFA到DFA的转换</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100302890.png" alt="image-20220114100302890" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100719876.png" alt="image-20220114100719876" style="zoom: 50%;"></p>
+<h3 id="识别单词的DFA"><a href="#识别单词的DFA" class="headerlink" title="识别单词的DFA"></a>识别单词的DFA</h3><p> 词法分析阶段可检测错误的类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">单词拼写错误</span><br><span class="line">非法字符</span><br></pre></td></tr></table></figure>
+<p>错误恢复策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">最简单的错误恢复策略：恐慌模式</span><br><span class="line">从剩余的输入中不断删除字符，直到词法分析器能够在剩余的开头发现一个正确的字符为止。</span><br></pre></td></tr></table></figure>
+<h2 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h2><h3 id="自顶向下分析概述"><a href="#自顶向下分析概述" class="headerlink" title="自顶向下分析概述"></a>自顶向下分析概述</h3><p>从分析树的顶部向底部方向构造分析树。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最左推导：总是选择每个句型的最左非终结符进行替换。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最右推导：总是选择每个句型的最右非终结符进行替换。</span><br></pre></td></tr></table></figure>
+<p>在自底向上的分析中，总是采用最左规约的方式，因此把最左规约称为规范规约，而最右推导相应的称为规范推导。</p>
+<p>自顶向下选择最左推导。</p>
+<p>需要回溯的分析器叫不确定分析器。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">预测分析：递归下降分析技术的一个特例，通过在输入中向前看固定个数符号来选择正确的A-产生式。</span><br><span class="line">预测分析不需要回溯，是一种确定的自顶向下分析方法。</span><br></pre></td></tr></table></figure>
+<h3 id="文法转换"><a href="#文法转换" class="headerlink" title="文法转换"></a>文法转换</h3><p>问题一</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当同一个非终结符的多个候选式存在共同前缀，将导致回溯现象 </span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101308032.png" alt="image-20220115101308032" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101415801.png" alt="image-20220115101415801" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101523666.png" alt="image-20220115101523666" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101639910.png" alt="image-20220115101639910" style="zoom:50%;"></p>
 
       
     </div>

@@ -1457,7 +1457,7 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-05 21:07:42" itemprop="dateModified" datetime="2021-10-05T21:07:42+08:00">2021-10-05</time>
+                <time title="Modified: 2022-01-18 17:33:59" itemprop="dateModified" datetime="2022-01-18T17:33:59+08:00">2022-01-18</time>
               </span>
 
           
@@ -1490,7 +1490,7 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
 <p>base模型缺点：（1）用户的历史行为特征和当前的候选广告特征在全都拼起来给神经网络之前，是一点交互的过程都没有。</p>
 <p>（2）拼起来之后给神经网络，虽然有了交互，但也丢失了部分信息，并引入了噪声。</p>
 <p>DIN模型：DIN模型在基准模型的基础上，增加了注意力机制，就是模型在对候选商品预测的时候，对用户不同行为的注意力是不一样的。“相关”的行为历史看重一些，“不相关”的历史甚至可以忽略。下图展示了DIN模型的网络结构图。DIN的模型结构中增加了 Activation Unit模块，该模块主要提取当前候选商品与历史行为中的商品的权重值。<img src="/2021/09/27/CTR/image-20210927194403979.png" alt="image-20210927194403979"></p>
-<h4 id="单层注意力模型与多层注意力模型"><a href="#单层注意力模型与多层注意力模型" class="headerlink" title="单层注意力模型与多层注意力模型"></a>单层注意力模型与多层注意力模型</h4><p>在最一般的情形下，注意力权重是仅仅是由注意力模型的原始的输入序列算出来的，这一注意力模型可被称为<strong><em>单层注意力模型\</em></strong>。另一方面，我们可对输入序列进行多次抽象，这样可以使得底层抽象的上下文向量成为下一次抽象的查询状态。这种对输入数据叠加若干层注意力模块实现对序列数据多层抽象的方法可被称为<strong><em>多层注意力模型\</em></strong>。更具体地来说，多层注意力模型又可按照模型的权重是自顶向下学习还是自底向上学习的方式进行划分。</p>
+<h4 id="单层注意力模型与多层注意力模型"><a href="#单层注意力模型与多层注意力模型" class="headerlink" title="单层注意力模型与多层注意力模型"></a>单层注意力模型与多层注意力模型</h4><p>在最一般的情形下，注意力权重是仅仅是由注意力模型的原始的输入序列算出来的，这一注意力模型可被称为<strong><em>单层注意力模型</em></strong>。另一方面，我们可对输入序列进行多次抽象，这样可以使得底层抽象的上下文向量成为下一次抽象的查询状态。这种对输入数据叠加若干层注意力模块实现对序列数据多层抽象的方法可被称为<strong>多层注意力模型</strong>。更具体地来说，多层注意力模型又可按照模型的权重是自顶向下学习还是自底向上学习的方式进行划分。</p>
 <p>多层注意力机制的一个典型应用是通过对文本进行两层抽象实现对文本的分类。这一模型称为“层次和注意力模型(Hierarchical Attention Model,HAM)”。文本是由不同的句子组合而成的，而每个句子又包含不同的单词，HAM能够对文章这种自然的层次化结构进行抽取。具体来说，其首先对每个句子建立一个注意力模型，该注意力模型的输入是每个句子中的基本单词，从而得到这个句子的特征表示；然后将句子的特征的表示输入到后续的注意力模型中来构建整段文本的特征表示。这一最后得到的整段文本的特征表示可以用于后面分类任务分类器的输入。</p>
 <h4 id="特征表示的数量"><a href="#特征表示的数量" class="headerlink" title="特征表示的数量"></a>特征表示的数量</h4><p>在大多数的应用场景下，我们只会对输入数据进行一种特征表示。然而在有些场景下，对输入数据进行单一的特征表示可能不能够为后续的过程提供足够的信息。在这种情形下，我们可以对同样的输入数据进行多种特征表示。利用注意力机制可以为这些不同的特征表示指定相关的权重，从而丢弃掉输入数据中的噪声信息和重复冗余信息。我们称这种模型为<strong><em>多表示注意力模型\</em></strong>。这种多表示注意力模型能够决定不同特征表示的权重从而有助于后面对这一表示的应用。最后得到的输入的特征表示是多个特征表示的加权组合，这一模型的一个优势在于针对不同的后处理任务能够决定哪些特征表示更适合当前的任务场景。</p>
 <p>基于类似的想法，还有一种称为<strong><em>多维度注意力模型\</em></strong>的方法。其核心观点是对特征表示向量的各个维度之间的依赖关系进行建模，这样我们便能够选择特征中更为有用的属性来帮助我们处理后续的任务。这一思想在自然语言处理领域至关重要因为相同的单词往往会出现多义性。</p>
@@ -1502,6 +1502,193 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
 <li>将输入属性转化为类型one-hot编码的形式, 在tensorflow中这个过程是通过 tf.SparseTensor 来完成的,实际上就是构建了一个字典矩阵,key为坐标,value为1或者0表示是否有值,对于一个样本 如样本1来说就是构建了一个矩阵[[1,1,0,0]]表示有物品1和2,这个矩阵的规模为 [batch_size,num_items] ,这个过程即为 multi-hot 编码</li>
 <li>将构建好的类似于one-hot编码的矩阵与embedding矩阵相乘, embedding矩阵的规模为 [num_items, embedding_size] ,相乘之后得到的输出规模为 [batchi_size, embedding_size] , 即对多维多属性的特征构建了embedding vector</li>
 </ol>
+<h2 id="CTR模型整理"><a href="#CTR模型整理" class="headerlink" title="CTR模型整理"></a>CTR模型整理</h2><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/shenweichen/DeepCTR</span><br><span class="line">https://github.com/DSXiangLi/CTR</span><br><span class="line">https://github.com/shenweichen/DeepCTR-Torch</span><br><span class="line">https://github.com/qiaoguan/deep-ctr-prediction</span><br></pre></td></tr></table></figure>
+<h3 id="Convolutional-Click-Prediction-Model-卷积点击预测模型CCPM"><a href="#Convolutional-Click-Prediction-Model-卷积点击预测模型CCPM" class="headerlink" title="Convolutional Click Prediction Model(卷积点击预测模型CCPM)"></a>Convolutional Click Prediction Model(卷积点击预测模型CCPM)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[CIKM 2015]A Convolutional Click Prediction Model</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://wnzhang.net/share/rtb-papers/cnn-ctr.pdf</span><br></pre></td></tr></table></figure>
+<h4 id="算法细节"><a href="#算法细节" class="headerlink" title="算法细节"></a>算法细节</h4><p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Avazu：包括数天的广告点击数据，按时间顺序排列。在每一份点击数据中，有17个数据字段</span><br><span class="line">如广告ID，网站ID，点击等。</span><br><span class="line">Yoochoose：包含了一个在线零售商的许多浏览和购买事件的会议。其中每个会话封装了单个用户的点击事件。</span><br></pre></td></tr></table></figure>
+<p>结果分析</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCPM和其他竞争性方法在单一广告印象和连续广告印象上的点击预测性能相比较优。(FM,LR.RNN)</span><br></pre></td></tr></table></figure>
+<p>超参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">the parameter impacts of the filter width w and the number of feature map m in corresponding layer are studied</span><br><span class="line">filter width 与feature map</span><br><span class="line">具体在论文第四页有提及，没有说明修正位置、默认值以及可设置范围。</span><br></pre></td></tr></table></figure>
+<h3 id="Factorization-supported-Neural-Network-因子分解支持的神经网络FNN"><a href="#Factorization-supported-Neural-Network-因子分解支持的神经网络FNN" class="headerlink" title="Factorization-supported Neural Network(因子分解支持的神经网络FNN)"></a>Factorization-supported Neural Network(因子分解支持的神经网络FNN)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ECIR 2016]Deep Learning over Multi-field Categorical Data: A Case Study on User Response Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1601.02376.pdf</span><br></pre></td></tr></table></figure>
+<p>带有演示数据的源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/wnzhang/deep-ctr</span><br></pre></td></tr></table></figure>
+<h4 id="算法细节-1"><a href="#算法细节-1" class="headerlink" title="算法细节"></a>算法细节</h4><p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iPinYou：iPinYou数据集是一个公开的真实世界的显示广告数据集，其中有每个广告显示信息和相应的</span><br><span class="line">用户点击反馈。</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.使用随机梯度下降法来学习所有模型的大部分参数。</span><br><span class="line">2.学习率，从1、0.1、0.01、0.001到0.0001</span><br><span class="line">3.尝试了每个领域的负样本数m=1、2和4，并发现m=2在大多数情况下产生最好的结果。</span><br><span class="line">4.对于激活函数(如公式(3)和(2))，我们尝试了线性函数、sigmoid函数和tanh函数，并发现tanh函数的结果是最优的。</span><br><span class="line">5.通过固定3、4和5个隐藏层来研究架构，具有3个隐藏层（即总共5层）的架构在AUC性能方面是最好的。</span><br><span class="line">6.每个隐藏层的训练范围是隐含单元的范围从100到500，增量为100。</span><br></pre></td></tr></table></figure>
+<h3 id="Product-based-Neural-Network-PNN"><a href="#Product-based-Neural-Network-PNN" class="headerlink" title="Product-based Neural Network(PNN)"></a>Product-based Neural Network(PNN)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ICDM 2016]Product-based neural networks for user response prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1611.00144.pdf</span><br></pre></td></tr></table></figure>
+<p>可重复的实验代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/Atomu2014/product-nets </span><br><span class="line">tensorflow</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Criteo：一个著名的广告技术行业的基准数据集。</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.在这个数据集上应用了负向下采样。定义下采样率为w，预测的CTR为p，重新校准的CTR q</span><br><span class="line">2.在实验中比较了7个模型，它们是用TensorFlow4实现(LR,FM,FNN,CCPM,IPNN,OPNN,PNN),用随机梯度下降法（SGD）进行训练。采用了dropout作为正则化方法来防止训练神经网络时的过度拟合。</span><br><span class="line">3.we set dropout rate at 0.5 on networkhidden layers.将网络隐层的滤除率设置为0.5。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><p> Follow the instructions and update the soft link <code>data</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XXX/product-nets$ ln -sfn XXX/make-ipinyou-data/2997 data</span><br></pre></td></tr></table></figure>
+<p>run <code>main.py</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd python</span><br><span class="line">python main.py</span><br></pre></td></tr></table></figure>
+<h3 id="Wide-amp-Deep"><a href="#Wide-amp-Deep" class="headerlink" title="Wide &amp; Deep"></a>Wide &amp; Deep</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[DLRS 2016]Wide &amp; Deep Learning for Recommender Systems</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1606.07792.pdf</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.模型训练时为每个分类特征学习一个 32 维嵌入向量</span><br></pre></td></tr></table></figure>
+<h3 id="DeepFM"><a href="#DeepFM" class="headerlink" title="DeepFM"></a>DeepFM</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[IJCAI 2017]DeepFM: A Factorization-Machine based Neural Network for CTR Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.ijcai.org/proceedings/2017/0239.pdf</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Criteo：包括4500万用户的点击记录。</span><br><span class="line">Company</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.for FNN and PNN: (1)dropout: 0.5; (2) network structure: 400-400-400; (3) optimizer: Adam; (4) activation function: tanh for IPNN, relu forother deep models.</span><br><span class="line">2.研究了不同深度模型的不同超参数，对公司数据集的影响。顺序是：1）激活函数；2）辍学率；3）每层的神经元数量；4）隐藏层数量；5）网络形状。dropout设置为1.0、0.9、0.8、0.7。每层的神经元数量200，400，800。网络形状：constant, increasing,decreasing, and diamond. </span><br></pre></td></tr></table></figure>
+<p>注：这篇文章对于超参数进行了大量实验</p>
+<h3 id="Piece-wise-Linear-Model"><a href="#Piece-wise-Linear-Model" class="headerlink" title="Piece-wise Linear Model"></a>Piece-wise Linear Model</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[arxiv 2017]Learning Piece-wise Linear Models from Large Scale Data for Ad Click Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/abs/1704.05194</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.LS-PLM是一个分片线性模型，割数m控制模型的容量。尝试m=6、12、24、36。m=12的测试AUC明显好于m=6，而m=24，36的改善相对较小。</span><br><span class="line">温和。因此，在下面的所有实验中，LS-PLM模型的参数m被设定为12。</span><br></pre></td></tr></table></figure>
+<h3 id="Deep-amp-Cross-Network"><a href="#Deep-amp-Cross-Network" class="headerlink" title="Deep &amp; Cross Network"></a>Deep &amp; Cross Network</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ADKDD 2017]Deep &amp; Cross Network for Ad Click Predictions</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/abs/1708.05123</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Criteo Display Ads2</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.batch size is set at 512</span><br><span class="line">2.gradient clip norm was set at 100.</span><br><span class="line">3.隐层的数量从2到5不等。</span><br><span class="line">4.隐藏层大小从32到1024</span><br><span class="line">5.初始学习率从0.0001到0.001，增量为0.0001</span><br></pre></td></tr></table></figure>
+<p>最佳超参数选择</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The optimal hyperparameter seings were 2 deep layers of size 1024 and 6 cross layers for</span><br><span class="line">the DCN model, 5 deep layers of size 1024 for the DNN, 5 residual units with input dimension 424 and cross dimension 537 forthe DC, and 42 cross features for the LR model</span><br></pre></td></tr></table></figure>
+<p>注：本文对于超参数有详细的实验，具体请参考原文。所列不全。</p>
+<h3 id="Attentional-Factorization-Machine-AFM"><a href="#Attentional-Factorization-Machine-AFM" class="headerlink" title="Attentional Factorization Machine(AFM)"></a>Attentional Factorization Machine(AFM)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[IJCAI 2017]Attentional Factorization Machines: Learning the Weight of Feature Interactions via Attention Networks</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.ijcai.org/proceedings/2017/0435.pdf</span><br></pre></td></tr></table></figure>
+<p>一个对该论文的实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/hexiangnan/attentional_factorization_machine</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Frappe ：被用于情境感知推荐，它包含了96,203个不同情境下的用户应用日志。该数据集包含96,203个用户在不同情境下的使用日志。</span><br><span class="line">MovieLens：被用于个性化标签推荐</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.对于AFM，Frappe和MovieLens上的最佳滤波率是0.2和0.5</span><br></pre></td></tr></table></figure>
+<h4 id="to-use"><a href="#to-use" class="headerlink" title="to use"></a>to use</h4><p>代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AFM.py</span><br><span class="line">FM.py</span><br><span class="line">LoadData.py</span><br></pre></td></tr></table></figure>
+<p>数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ml-tag</span><br><span class="line">ml-tag.train.libfm</span><br><span class="line">ml-tag.validation.libfm</span><br><span class="line">ml-tag.test.libfm</span><br></pre></td></tr></table></figure>
+<p>训练</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># step into the code folder</span><br><span class="line">cd code</span><br><span class="line"># train FM model with optimal parameters</span><br><span class="line">python FM.py --dataset ml-tag --epoch 20 --pretrain -1 --batch_size 4096 --hidden_factor 16 --lr 0.01 --keep 0.7</span><br><span class="line"># train AFM model with optimal parameters</span><br><span class="line">python AFM.py --dataset ml-tag --epoch 20 --pretrain 1 --batch_size 4096 --hidden_factor [16,16] --keep [1.0,0.5] --lamda_attention 100.0 --lr 0.1</span><br></pre></td></tr></table></figure>
+<p>注：该复现非原作者</p>
+<p>参考文章</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://zhuanlan.zhihu.com/p/110375283</span><br></pre></td></tr></table></figure>
+<h3 id="Neural-Factorization-Machine"><a href="#Neural-Factorization-Machine" class="headerlink" title="Neural Factorization Machine"></a>Neural Factorization Machine</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[SIGIR 2017]Neural Factorization Machines for Sparse Predictive Analytics</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1708.05027.pdf</span><br></pre></td></tr></table></figure>
+<p>论文开源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/hexiangnan/neural_factorization_machine</span><br></pre></td></tr></table></figure>
+<p> 数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Frappe：包含96,203个应用程序在不同背景下的用户使用日志。</span><br><span class="line">MovieLens</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.学习率都在[0.005, 0.01, 0.02, 0.05]，在[0, 0.1, 0.2, ..., 0.9]的辍学率</span><br><span class="line">2.辍学率为NFM最重要的超参数，后设置为0.5</span><br><span class="line">3.ReLU作为激活函数</span><br></pre></td></tr></table></figure>
+<p>to use</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python NeuralFM.py --dataset frappe --hidden_factor 64 --layers [64] --keep_prob [0.8,0.5] --loss_type square_loss --activation relu --pretrain 0 --optimizer AdagradOptimizer --lr 0.05 --batch_norm 1 --verbose 1 --early_stop 1 --epoch 200</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">We use the same input format as the LibFM toolkit (http://www.libfm.org/).</span><br><span class="line"></span><br><span class="line">Split the data to train/test/validation files to run the codes directly (examples see data/frappe/).</span><br></pre></td></tr></table></figure>
+<h3 id="xDeepFM"><a href="#xDeepFM" class="headerlink" title="xDeepFM"></a>xDeepFM</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[KDD 2018]xDeepFM: Combining Explicit and Implicit Feature Interactions for Recommender Systems</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1803.05170.pdf</span><br></pre></td></tr></table></figure>
+<p>源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/Leavingseason/xDeepFM</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Criteo：一个著名的行业基准数据集用于开发预测广告点击率的模型，并且可以公开访问</span><br><span class="line">Dianping：中国最大的消费者评论网站。</span><br><span class="line">Bing News：微软的必应搜索引擎的一部分</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.学习率被设置为0.001</span><br><span class="line">2.每一层的神经元数量的默认设置是。(1) 400个用于DNN层；(2)Criteo数据集的CIN层为200，大众点评和必应的CIN层为100。</span><br><span class="line">3.对于超参数设置不同数据集有不同设置，详见论文第8页Q3</span><br></pre></td></tr></table></figure>
+<h3 id="Deep-Interest-Network"><a href="#Deep-Interest-Network" class="headerlink" title="Deep Interest Network"></a>Deep Interest Network</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[KDD 2018]Deep Interest Network for Click-Through Rate Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1706.06978.pdf</span><br></pre></td></tr></table></figure>
+<p>源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/zhougr1993/DeepInterestNetwork</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Amazon</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.学习率从1开始，衰减率设置为0.1。</span><br><span class="line">2.小批量学习率从0.001开始，衰减率设置为0.001。</span><br></pre></td></tr></table></figure>
+<p>注：DIN这篇论文中，代码质量较差，不建议使用该版本，在后期DIEN论文中会进行调整。</p>
+<h3 id="Deep-Interest-Evolution-Network"><a href="#Deep-Interest-Evolution-Network" class="headerlink" title="Deep Interest Evolution Network"></a>Deep Interest Evolution Network</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[AAAI 2019]Deep Interest Evolution Network for Click-Through Rate Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1809.03672.pdf</span><br></pre></td></tr></table></figure>
+<p>源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/mouna99/dien</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public and industrial datasets</span><br></pre></td></tr></table></figure>
+<h4 id="to-use-1"><a href="#to-use-1" class="headerlink" title="to use"></a>to use</h4><p>准备数据</p>
+<p>法一</p>
+<p>从亚马逊网站获取数据，并使用脚本进行处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh prepare_data.sh</span><br></pre></td></tr></table></figure>
+<p>法二，推荐</p>
+<p>解压后直接使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar -jxvf data.tar.gz</span><br><span class="line">mv data/* .</span><br><span class="line">tar -jxvf data1.tar.gz</span><br><span class="line">mv data1/* .</span><br><span class="line">tar -jxvf data2.tar.gz</span><br><span class="line">mv data2/* .</span><br></pre></td></tr></table></figure>
+<p>训练模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py train [model name] </span><br></pre></td></tr></table></figure>
+<h3 id="AutoInt"><a href="#AutoInt" class="headerlink" title="AutoInt"></a>AutoInt</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[CIKM 2019]AutoInt: Automatic Feature Interaction Learning via Self-Attentive Neural Networks</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[CIKM 2019]AutoInt: Automatic Feature Interaction Learning via Self-Attentive Neural Networks</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Criteo：一个CTR预测的基准数据集，它有4500万用户的点击广告的记录。</span><br><span class="line">Avazu：包含用户的移动行为，包括一个显示的移动广告是否被用户点击。</span><br><span class="line">KDD12</span><br><span class="line">MovieLens-1M</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.在&#123;0.1 - 0.9&#125;范围内为MovieLens-1M数据集选择辍学率</span><br><span class="line">2.文章分析了Influence of Residual Structure，nfluence of Network Depths.Influence of Different Dimensions.</span><br></pre></td></tr></table></figure>
+<h3 id="ONN"><a href="#ONN" class="headerlink" title="ONN"></a>ONN</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[arxiv 2019]Operation-aware Neural Networks for User Response Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1904.12579.pdf</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Criteo</span><br><span class="line">Tencent Ad</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.非线性隐藏层的数量对于Criteo数据集，隐藏的大小被设置为[400, 400, 400]，而非线性隐藏层的数量被设置为3。</span><br><span class="line">2.对于腾讯广告数据集，隐藏尺寸被设置为[200，200, 200]. </span><br><span class="line">3.Adam学习率是通过网格搜索从[0.0001,0.00025, 0.0005, 0.00075, 0.001]，</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="FiBiNET"><a href="#FiBiNET" class="headerlink" title="FiBiNET"></a>FiBiNET</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[RecSys 2019]FiBiNET: Combining Feature Importance and Bilinear feature Interaction for Click-Through Rate Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1905.09433.pdf</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Criteo</span><br><span class="line">Avazu：由数天的广告点击数据组成。</span><br></pre></td></tr></table></figure>
+<p>细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">对于嵌入层，Criteo数据集的嵌入层维度被设置为10，Avazu数据集的嵌入层维度被设置为50。</span><br><span class="line">Avazu数据集为50。对于优化方法，我们使用Adam。</span><br><span class="line">对于Criteo数据集和Avazu数据集，小型批次大小为1000，Avazu数据集为500。</span><br><span class="line">学习率被设置为0.0001。对于所有的深度模型，层的深度设置为3，所有的激活函数都是RELU，每层的神经元数量为400。</span><br><span class="line">每层的神经元数量在Criteo数据集为400个，在Avazu数据集为2000个。</span><br><span class="line">数据集的每层神经元数量为400个，Avazu数据集为2000个，辍学率设置为0.5。对于SENET部分，两个FC的激活函数为</span><br><span class="line">对于SENET部分，两个FC中的激活函数是RELU函数，还原率设置为3。 </span><br></pre></td></tr></table></figure>
+<h3 id="IFM"><a href="#IFM" class="headerlink" title="IFM"></a>IFM</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[IJCAI 2019]An Input-aware Factorization Machine for Sparse Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.ijcai.org/Proceedings/2019/0203.pdf</span><br></pre></td></tr></table></figure>
+<p>源代码链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/gulyfish/Input-aware-Factorization-Machine</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Frappe</span><br><span class="line">MovieLens</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.学习率：0.01</span><br><span class="line">2. the number of hidden layers，the dropout ratio， activation functions</span><br><span class="line">3.IFM的性能在开始时随着网络的增加而提高。然而，当网络的深度大于2(Frappe)或3(Movielens)时，模型的性能开始下降。</span><br><span class="line">4.Fraith的Frappe和MovieLens的最佳辍学率分别为0.3和0.4，</span><br><span class="line">5.ReLU更适合这两个数据集</span><br></pre></td></tr></table></figure>
+<p>注：本文进行了详细的超参数实验</p>
+<h3 id="DCN-V2"><a href="#DCN-V2" class="headerlink" title="DCN V2"></a>DCN V2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[arxiv 2020]DCN V2: Improved Deep &amp; Cross Network and Practical Lessons for Web-scale Learning to Rank Systems</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/abs/2008.13535</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Criteo</span><br><span class="line">MovieLen-1M</span><br><span class="line">Production</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. learning rate was tuned from 10−4 to 10−1 ，再到10-4到5×10-4</span><br><span class="line">2.隐蔽层的数量在&#123;1，2，3，4&#125;之间，大小为&#123;562, 768, 1024&#125;。</span><br><span class="line">3.正则化参数𝜆的范围为&#123;0, 3 × 10−5, 10−4&#125;</span><br><span class="line">4.研究的超参数：depth of cross layers，matrix rank of DCN-Mix，number of experts in DCN-Mix</span><br></pre></td></tr></table></figure>
+<h3 id="DIFM"><a href="#DIFM" class="headerlink" title="DIFM"></a>DIFM</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[IJCAI 2020]A Dual Input-aware Factorization Machine for CTR Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.ijcai.org/Proceedings/2020/0434.pdf</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Avazu</span><br><span class="line">Criteo</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.所有模型的学习都是通过使用Adam（学习率：0.001）</span><br><span class="line">2.Criteo和Avazu的嵌入大小分别被设定为20和40。</span><br><span class="line">3.批量大小对这两个数据集都设置为2000</span><br><span class="line">4.所研究的超参数：the number of attention heads n，the attention key size dk， activation functions (the vector-wise part)，the number of hidden layers in DNNs</span><br><span class="line">5.the number of attention heads n，进行了从1-16的实验，最后将数量固定在16</span><br><span class="line">6.the attention key size dk，在Avazu上将注意因子的大小从20增加到100时，Avazu数据集的模型性能稳步提高，而在Criteo数据集上，80是一个更合适的注意因子大小设置。为避免模型过于复杂，我们将Avazu的注意力系数固定为100，Criteo为80。</span><br><span class="line">7.Relu作为向量部分的神经元的激活函数</span><br><span class="line">8.对于Avazu最好的性能是我们只使用一个隐藏层，对于Criteo数据集采用两个</span><br></pre></td></tr></table></figure>
+<h3 id="AFN"><a href="#AFN" class="headerlink" title="AFN"></a>AFN</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[AAAI 2020]Adaptive Factorization Network: Learning Adaptive-Order Feature Interactions</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1909.03276.pdf</span><br></pre></td></tr></table></figure>
+<p>源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/WeiyuCheng/AFN-AAAI-20</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Criteo</span><br><span class="line">Avazu</span><br><span class="line">Movielens</span><br><span class="line">Frappe</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.超参数Number of logarithmic neurons，Depth of hidden layers，Number of neurons in hidden layers</span><br><span class="line">2.Number of neurons in hidden layers超过600性能开始下降touse</span><br></pre></td></tr></table></figure>
+<p>to use</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">数据集</span><br><span class="line">cd src</span><br><span class="line">python download_criteo_and_avazu.py</span><br><span class="line">代码</span><br><span class="line">cd src</span><br><span class="line">sh ./run_experiments.sh</span><br></pre></td></tr></table></figure>
+<h2 id="pytorch统一接口"><a href="#pytorch统一接口" class="headerlink" title="pytorch统一接口"></a>pytorch统一接口</h2><p>链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/shenweichen/DeepCTR-Torch</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/09/27/CTR/image-20220118172936135.png" alt="image-20220118172936135"></p>
+<h3 id="统一视角"><a href="#统一视角" class="headerlink" title="统一视角"></a>统一视角</h3><p>DeepCTR通过对现有的基于深度学习的点击率预测模型的结构进行抽象总结，在设计过程中采用模块化的思路，各个模块自身具有高复用性，各个模块之间互相独立。 基于深度学习的点击率预测模型按模型内部组件的功能可以划分成以下4个模块：输入模块，嵌入模块，特征提取模块，预测输出模块。</p>
+<p><img src="/2021/09/27/CTR/image-20220118173022237.png" alt="image-20220118173022237"></p>
 
       
     </div>
