@@ -1457,7 +1457,7 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-18 17:33:59" itemprop="dateModified" datetime="2022-01-18T17:33:59+08:00">2022-01-18</time>
+                <time title="Modified: 2022-01-19 16:50:42" itemprop="dateModified" datetime="2022-01-19T16:50:42+08:00">2022-01-19</time>
               </span>
 
           
@@ -1502,7 +1502,9 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
 <li>将输入属性转化为类型one-hot编码的形式, 在tensorflow中这个过程是通过 tf.SparseTensor 来完成的,实际上就是构建了一个字典矩阵,key为坐标,value为1或者0表示是否有值,对于一个样本 如样本1来说就是构建了一个矩阵[[1,1,0,0]]表示有物品1和2,这个矩阵的规模为 [batch_size,num_items] ,这个过程即为 multi-hot 编码</li>
 <li>将构建好的类似于one-hot编码的矩阵与embedding矩阵相乘, embedding矩阵的规模为 [num_items, embedding_size] ,相乘之后得到的输出规模为 [batchi_size, embedding_size] , 即对多维多属性的特征构建了embedding vector</li>
 </ol>
-<h2 id="CTR模型整理"><a href="#CTR模型整理" class="headerlink" title="CTR模型整理"></a>CTR模型整理</h2><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/shenweichen/DeepCTR</span><br><span class="line">https://github.com/DSXiangLi/CTR</span><br><span class="line">https://github.com/shenweichen/DeepCTR-Torch</span><br><span class="line">https://github.com/qiaoguan/deep-ctr-prediction</span><br></pre></td></tr></table></figure>
+<h2 id="CTR模型整理"><a href="#CTR模型整理" class="headerlink" title="CTR模型整理"></a>CTR模型整理</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>参考部分所列出的为遵循原论文所整理，若原论文中有源码则均以附出，实现基本均为tf实现。</p>
+<p>pytorch统一接口部分所给出的链接，是一个pytorch实现的ctr库。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/shenweichen/DeepCTR</span><br><span class="line">https://github.com/DSXiangLi/CTR</span><br><span class="line">https://github.com/shenweichen/DeepCTR-Torch</span><br><span class="line">https://github.com/qiaoguan/deep-ctr-prediction</span><br></pre></td></tr></table></figure>
 <h3 id="Convolutional-Click-Prediction-Model-卷积点击预测模型CCPM"><a href="#Convolutional-Click-Prediction-Model-卷积点击预测模型CCPM" class="headerlink" title="Convolutional Click Prediction Model(卷积点击预测模型CCPM)"></a>Convolutional Click Prediction Model(卷积点击预测模型CCPM)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[CIKM 2015]A Convolutional Click Prediction Model</span><br></pre></td></tr></table></figure>
 <p>论文链接</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://wnzhang.net/share/rtb-papers/cnn-ctr.pdf</span><br></pre></td></tr></table></figure>
