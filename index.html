@@ -145,6 +145,178 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/24/CTR%E4%BC%98%E5%8A%A3%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/24/CTR%E4%BC%98%E5%8A%A3%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">CTR优劣总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-24 18:26:09" itemprop="dateCreated datePublished" datetime="2022-01-24T18:26:09+08:00">2022-01-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-26 16:51:32" itemprop="dateModified" datetime="2022-01-26T16:51:32+08:00">2022-01-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="CTR各模型优劣总结"><a href="#CTR各模型优劣总结" class="headerlink" title="CTR各模型优劣总结"></a>CTR各模型优劣总结</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本文是依照上一篇文章的顺序来进行整理，现附上上一篇链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://perfect-player.github.io/2021/09/27/CTR/</span><br></pre></td></tr></table></figure>
+<h3 id="Convolutional-Click-Prediction-Model-卷积点击预测模型CCPM"><a href="#Convolutional-Click-Prediction-Model-卷积点击预测模型CCPM" class="headerlink" title="Convolutional Click Prediction Model(卷积点击预测模型CCPM)"></a>Convolutional Click Prediction Model(卷积点击预测模型CCPM)</h3><p>由于循环神经网络在连续广告印象上的不可改变的传播方式，在有效建模动态点击预测方面有局限性，而深度CNN架构的池化和卷积层可以从连续的广告印象中充分提取局部-全局的关键特征。</p>
+<p>CCPM就是基于CNN的一个架构，CCPM可以从具有不同元素的输入实例中提取局部-全局关键特征，这不仅可以针对单个广告印象，也可以针对连续的广告印象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">CCPM can extract local-global key features from an input instance with varied elements, which can be implemented for not only single ad impression but also sequential ad impression.</span><br></pre></td></tr></table></figure>
+<h3 id="Factorization-supported-Neural-Network-因子分解支持的神经网络FNN"><a href="#Factorization-supported-Neural-Network-因子分解支持的神经网络FNN" class="headerlink" title="Factorization-supported Neural Network(因子分解支持的神经网络FNN)"></a>Factorization-supported Neural Network(因子分解支持的神经网络FNN)</h3><p>出发点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.之前运用的CTR模型大多是线性的，都是基于大量的稀疏特征的编码。性能相对较低，因为在学习非微观模式时，无法捕捉到假定的（有条件的）独立原始特征之间的相互作用。</span><br><span class="line">2.当时的非线性模型不能利用所有可能的不同特征的组合。</span><br><span class="line">3.大多数预测模型有浅层的结构，对复杂的海量数据的基础模型表达有限，数据建模和泛化能力仍然受到限制。</span><br></pre></td></tr></table></figure>
+<p>基于上述出发点引入了深度学习模型。</p>
+<p>带有监督学习嵌入层的FNN使用因子化机器被提出来，以有效地减少从稀疏特征到密集的连续特征。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">Specifically,FNN with a supervised-learning embedding layer using factorisation machines is proposed to efficiently reduce the dimension from sparse features to dense continuous features. </span><br></pre></td></tr></table></figure>
+<h3 id="Product-based-Neural-Network-PNN"><a href="#Product-based-Neural-Network-PNN" class="headerlink" title="Product-based Neural Network(PNN)"></a>Product-based Neural Network(PNN)</h3><p>背景</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深度神经网络（DNNs）在分类和回归任务中显示了巨大的能力，在用户反应预测中采用DNNs是很有前途的。之前为了改善多领域分类数据的交互，提出的一种基于因子预训练的方法，基于串联的嵌入向量，构建多层感知器（MLPs）来探索特征的相互作用。嵌入初始化的质量在很大程度上受到因式分解机的限制。</span><br></pre></td></tr></table></figure>
+<p>为了利用神经网络的学习能力和挖掘以一种比MLPs更有效的方式挖掘数据的潜在模式，所以提出PNN。PNN有望在多领域的分类数据上学习高阶潜在模式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">To utilize the learning ability of neural networks and mine the latent patterns of data in a more effective way than MLPs,in this paper we propose Product-based Neural Network。</span><br><span class="line">PNN is promising to learn high-order latent patterns on multi-field categorical data. </span><br></pre></td></tr></table></figure>
+<h3 id="Wide-amp-Deep"><a href="#Wide-amp-Deep" class="headerlink" title="Wide &amp; Deep"></a>Wide &amp; Deep</h3><p>谷歌曾经的主流推荐模型，业界影响巨大。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">记忆能力：可以被理解为模型直接学习并利用历史数据中物品和特征的“共现频率”的能力</span><br></pre></td></tr></table></figure>
+<p>提出动机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">利用手工构造的交叉组合特征来使线性模型具有记忆性会得到一个不错的效果，但特征工程需要耗费大量精力，对于未曾出现过的特征组合，权重系数为0，无法进行泛化。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">线性模型，记忆力较强，但泛化能力弱</span><br><span class="line">embedding模型，记忆能力弱，泛化能力强</span><br></pre></td></tr></table></figure>
+<p>基于优势互补，提出Wide &amp; Deep，左边Wide部分是一个简单的线性模型，右边Deep部分是一个经典的DNN模型。</p>
+<p>WDL的深层部分将稀疏的特征嵌入连接起来作为MLP的输入，宽层部分使用手工制作的特征作为输入。深度部分和宽度部分的对数相加，得到预测概率。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">WDL’s deep part concatenates sparse feature embeddings as the input of MLP,the wide part use handcrafted feature as input. The logits of deep part and wide part are added to get the prediction probability.</span><br></pre></td></tr></table></figure>
+<h3 id="DeepFM"><a href="#DeepFM" class="headerlink" title="DeepFM"></a>DeepFM</h3><p>整合了FM和深度神经网络（DNN）的架构。它像FM一样对低阶特征的交互进行建模，像DNN一样对高阶特征的交互进行建模。不同于</p>
+<p>Wide &amp; Deep，DeepFM可以在没有任何特征工程的情况下进行端到端训练。但复杂性较大。</p>
+<p>优点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.它不需要任何预训练</span><br><span class="line">2.它同时学习高阶和低阶特征的相互作用；</span><br><span class="line">3.它引入了特征嵌入的共享策略以避免特征工程</span><br></pre></td></tr></table></figure>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1) it does not need any pre-training; </span><br><span class="line">2) it learns both high- and loworder feature interactions; </span><br><span class="line">3) it introduces a sharing strategy of feature embedding to avoid feature engineering</span><br></pre></td></tr></table></figure>
+<p>DeepFM可以看作是WDL和FNN的改进。与WDL相比，DeepFM在广义部分使用FM而不是LR，在深义部分使用嵌入向量的连接作为MLP的输入。与FNN相比，FM的嵌入向量和MLP的输入是相同的。而且它们不需要FM预训练向量来初始化，它们是端对端学习。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">DeepFM can be seen as an improvement of WDL and FNN.Compared with WDL,DeepFM use FM instead of LR in the wide part and use concatenation of embedding vectors as the input of MLP in the deep part. Compared with FNN,the embedding vector of FM and input to MLP are same. And they do not need a FM pretrained vector to initialiaze,they are learned end2end.</span><br></pre></td></tr></table></figure>
+<h3 id="Piece-wise-Linear-Model"><a href="#Piece-wise-Linear-Model" class="headerlink" title="Piece-wise Linear Model"></a>Piece-wise Linear Model</h3><p>背景</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CTR预测问题是一个高度非线性的问题。LR很难抓住非线性因素，基于树的方法不适合非常稀疏和高维的数据，FM不能适应数据中所有的一般非线性模式</span><br></pre></td></tr></table></figure>
+<p>提出了一个用于大规模数据的片状线性模型及其训练算法LS-PLM,遵循分而治之的策略。首先将特征空间划分为几个局部区域，然后在每个区域内拟合一个线性模型。结果是输出加权线性预测的组合。它可以从稀疏数据中捕捉到稀疏数据中的非线性模式，并将我们从繁重的特征工程工作中解救出来，这对于实际的工业应用是至关重要的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">优势</span><br><span class="line">LS-PLM的优势在于在三个方面对网络规模的数据挖掘具有优势。</span><br><span class="line">非线性。有了足够的划分区域，LS-PLM可以适应任何复杂的非线性函数。</span><br><span class="line">可扩展性。与LR模型类似，LS-PLM可以扩展到大量样本和高维特征。</span><br><span class="line">稀疏性。</span><br><span class="line">工业模型，可以处理具有1000万个参数的10亿个样本的问题，这就是典型的工业数据量。</span><br></pre></td></tr></table></figure>
+<p>由于其能够捕获非线性模式的能力和对海量数据的可扩展性，LS-PLMs已经成为在线显示广告系统中主要的CTR预测榜样，自2012年以来为数亿用户提供服务，成为阿里巴巴在线展示广告系统中主要的点击率预测模型。</p>
+<h3 id="Deep-amp-Cross-Network"><a href="#Deep-amp-Cross-Network" class="headerlink" title="Deep &amp; Cross Network"></a>Deep &amp; Cross Network</h3><p>applies feature crossing in an automatic fashion.</p>
+<p>以自动的方式进行特征交叉，可以处理大量的稀疏和密集的特征集，并与传统的深层网络共同学习程度有限的显性交叉特征。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">can handle a large set of sparse and dense features, and learns explicit cross features</span><br><span class="line">of bounded degree jointly with traditional deep representations.</span><br></pre></td></tr></table></figure>
+<h3 id="Attentional-Factorization-Machine-AFM"><a href="#Attentional-Factorization-Machine-AFM" class="headerlink" title="Attentional Factorization Machine(AFM)"></a>Attentional Factorization Machine(AFM)</h3><p>AFM是FM的一个变种，传统的FM是将嵌入向量的内积均匀地加起来。AFM可以被看作是特征相互作用的加权和。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">AFM is a variant of FM,tradional FM sums the inner product of embedding vector uniformly. AFM can be seen as weighted sum of feature interactions.The weight is learned by a small MLP.</span><br></pre></td></tr></table></figure>
+<p>AFM弥补了FM对于不同的特征交互不能赋予不同权重的问题。</p>
+<h3 id="Neural-Factorization-Machine"><a href="#Neural-Factorization-Machine" class="headerlink" title="Neural Factorization Machine"></a>Neural Factorization Machine</h3><p>NFM使用一个双交互池层来学习嵌入向量之间的特征交互，并将结果压缩成一个单一的向量，其大小与单一嵌入向量相同。MLP的输出对数和线性部分的输出对数相加，得到预测概率。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">NFM use a bi-interaction pooling layer to learn feature interaction between embedding vectors and compress the result into a singe vector which has the same size as a single embedding vector. And then fed it into a MLP.The output logit of MLP and the output logit of linear part are added to get the prediction probability.</span><br></pre></td></tr></table></figure>
+<p>FM的性能可能受到其线性的限制，以及仅对成对（即二阶）特征的相互作用进行建模。特别是，对于具有复杂和非线性基础结构的真实世界数据，FM可能无法表达。</p>
+<p>NFMs:一个用于稀疏数据预测的新模型,将线性分解机的有效性与非线性神经网络的强大表示能力结合起来，用于稀疏预测分析。通过对高阶和非线性特征的相互作用的建模，增强了FMs的功能。NFM结构的关键是新提出的双交互操作。</p>
+<h3 id="xDeepFM"><a href="#xDeepFM" class="headerlink" title="xDeepFM"></a>xDeepFM</h3><p>xDeepFM可以自动学习显性和隐性的高阶特征交互，这对于减少人工特征工程的工作具有重要意义。它是将一个CIN和一个DNN纳入一个端到端的框架中所产生的。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thus xDeepFM can automatically learn high-order feature interactions in both explicit and implicit fashions, which is of great significance to reducing manual feature engineering work.</span><br></pre></td></tr></table></figure>
+<p>xDeepFM使用压缩交互网络（CIN）来显式学习低阶和高阶特征交互，并使用MLP来隐式学习特征交互。在CIN的每一层，首先计算$x^k$和$x<em>0$之间的外积，得到一个张量$Z</em>{k+1}$，然后使用1DConv来学习这个张量上的特征图$H_{k+1}$。最后，对所有的特征图$H_k$应用总和池，得到一个向量。该向量用于计算CIN的贡献对数。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xDeepFM use a Compressed Interaction Network (CIN) to learn both low and high order feature interaction explicitly,and use a MLP to learn feature interaction implicitly. In each layer of CIN,first compute outer products between $x^k$ and $x_0$ to get a tensor $Z_&#123;k+1&#125;$,then use a 1DConv to learn feature maps $H_&#123;k+1&#125;$ on this tensor. Finally,apply sum pooling on all the feature maps $H_k$ to get one vector.The vector is used to compute the logit that CIN contributes.</span><br></pre></td></tr></table></figure>
+<h3 id="Deep-Interest-Network"><a href="#Deep-Interest-Network" class="headerlink" title="Deep Interest Network"></a>Deep Interest Network</h3><p>出发点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在传统的深度CTR模型中，使用固定长度的表示法是捕捉用户兴趣多样性的一个瓶颈。用户的各种兴趣被压缩到一个固定长度的向量中，这限制了嵌入和MLP方法的表达能力。</span><br></pre></td></tr></table></figure>
+<p>深度兴趣网络（DIN），它通过考虑到候选广告的历史行为的相关性，自适应地计算用户兴趣的表示向量。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deep Interest Network (DIN), which adaptively calculates the representation vector of user interests by taking into consideration the relevance of historical behaviors given a candidate ad. </span><br></pre></td></tr></table></figure>
+<p>DIN引入了一种注意力方法来学习序列（多值）特征。传统的方法通常在序列特征上使用和/均值池。DIN使用一个局部激活单元来获得候选项目和历史项目之间的激活分数。用户的兴趣由用户行为的加权和表示，用户的兴趣向量和其他嵌入向量被连接起来，并输入MLP得到预测。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DIN introduce a attention method to learn from sequence(multi-valued) feature. Tradional method usually use sum/mean pooling on sequence feature. DIN use a local activation unit to get the activation score between candidate item and history items. User’s interest are represented by weighted sum of user behaviors. user’s interest vector and other embedding vectors are concatenated and fed into a MLP to get the prediction.</span><br></pre></td></tr></table></figure>
+<h3 id="Deep-Interest-Evolution-Network"><a href="#Deep-Interest-Evolution-Network" class="headerlink" title="Deep Interest Evolution Network"></a>Deep Interest Evolution Network</h3><p>出发点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.包括DIN在内的大多数兴趣模型都将行为直接视为兴趣，而潜在的兴趣则很难通过显性行为完全反映出来。</span><br><span class="line">2.用户的兴趣是不断变化的，捕捉兴趣的动态对于兴趣的表达是非常重要的。</span><br></pre></td></tr></table></figure>
+<p>深度兴趣进化网络（DIEN）使用兴趣提取器层，从历史行为序列中捕捉时间性兴趣。在这一层，提出了一个辅助损失来监督每一步的兴趣提取。由于用户的兴趣是多样化的，特别是在电子商务系统中，兴趣演化层被提出来捕捉与目标项目有关的兴趣演化过程。在兴趣演化层，注意力机制被新颖地嵌入到顺序结构中，并且在兴趣演化过程中加强了相对兴趣的影响。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deep Interest Evolution Network (DIEN) uses interest extractor layer to capture temporal interests from history behavior sequence. At this layer, an auxiliary loss is proposed to supervise interest extracting at each step. As user interests are diverse, especially in the e-commerce system, interest evolving layer is proposed to capture interest evolving process that is relative to the target item. At interest evolving layer, attention mechanism is embedded into the sequential structure novelly, and the effects of relative interests are strengthened during interest evolution.</span><br></pre></td></tr></table></figure>
+<p>关于DIEN详情可参照本人的另一篇博客</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://perfect-player.github.io/2022/01/09/DIEN/</span><br></pre></td></tr></table></figure>
+<h3 id="AutoInt"><a href="#AutoInt" class="headerlink" title="AutoInt"></a>AutoInt</h3><p>该模型能够以明确的方式自动学习高阶特征的相互作用。方法的关键的关键是新引入的交互层，它允许每个特征与其他特征交互，并通过学习来确定相关性。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The key to our method is the newly-introduced interacting layer, which allows each feature to interact with the others and to determine the relevance through learning.</span><br></pre></td></tr></table></figure>
+<p>AutoInt使用交互层来模拟不同特征之间的相互作用。在每个交互层中，每个特征都被允许与其他所有的特征进行交互，并且能够自动识别相关的特征，通过多头关注机制形成有意义的高阶特征。通过堆叠多个交互层，AutoInt能够对不同等级的特征交互进行建模。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AutoInt use a interacting layer to model the interactions between different features. Within each interacting layer, each feature is allowed to interact with all the other features and is able to automatically identify relevant features to form meaningful higher-order features via the multi-head attention mechanism. By stacking multiple interacting layers,AutoInt is able to model different orders of feature interactions.</span><br></pre></td></tr></table></figure>
+<h3 id="ONN"><a href="#ONN" class="headerlink" title="ONN"></a>ONN</h3><p>出发点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">很少有工作专注于改进由嵌入层学习的特征表示</span><br></pre></td></tr></table></figure>
+<p>与传统的特征嵌入方法相比，操作感知嵌入方法为所有操作学习一种表征。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Compared with the traditional feature embedding method which learns one representation for all operations, operation-aware embedding can learn various representations for different operations.</span><br></pre></td></tr></table></figure>
+<p>ONN对二阶特征交互进行建模，就像FFM一样，并尽可能地保留二阶交互信息。此外，深度神经网络被用来学习高阶特征交互。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ONN models second order feature interactions like like FFM and preserves second-order interaction information as much as possible.Further more,deep neural network is used to learn higher-ordered feature interactions.</span><br></pre></td></tr></table></figure>
+<h3 id="FiBiNET-Feature-Importance-and-Bilinear-feature-Interaction-NETwork"><a href="#FiBiNET-Feature-Importance-and-Bilinear-feature-Interaction-NETwork" class="headerlink" title="FiBiNET(Feature Importance and Bilinear feature Interaction NETwork)"></a>FiBiNET(Feature Importance and Bilinear feature Interaction NETwork)</h3><p>提出了特征重要性和双线性特征交互网络，以动态学习特征重要性和细粒度的特征交互。一方面，FiBiNET可以通过Squeeze-Excitation网络（SENET）机制动态地学习特征的重要性；另一方面，它能够通过双线性函数有效地学习特征的相互作用。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Feature Importance and Bilinear feature Interaction NETwork is proposed to dynamically learn the feature importance and fine-grained feature interactions. On the one hand, the FiBiNET can dynamically learn the importance of fea- tures via the Squeeze-Excitation network (SENET) mechanism; on the other hand, it is able to effectively learn the feature interactions via bilinear function.</span><br></pre></td></tr></table></figure>
+<p>目的</p>
+<p>于动态学习特征重要性和细粒度的特征相互作用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proposed to dynamically learn the feature importance and finegrained feature interactions. </span><br></pre></td></tr></table></figure>
+<p>优势</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.对于CTR任务。SENET模块可以动态地学习特征的重要性。它提高了重要特征的权重，抑制了不重要特征的权重。</span><br><span class="line">2.引入了三种类型的双线性交互层来学习特征的交互作用，而不是通过计算特征的交互作用。</span><br><span class="line">3.在浅层模型中，将SENET机制与双线性特征交互结合起来，优于其他浅层、</span><br><span class="line">4.将经典的深度神经网络（DNN）组件与浅层模型相结合，成为一个深度模型。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> 1) For CTR task,the SENET module can learn the importance of features dynamically. It boosts the weight of the important feature and suppresses the weight of unimportant features. </span><br><span class="line"> 2) We introduce three types of Bilinear-Interaction layers to learn feature interaction rather</span><br><span class="line">than calculating the feature interactions with Hadamard product or inner product.</span><br><span class="line">3) Combining the SENET mechanism with bilinear feature interaction in our shallow model outperforms other shallow models such as FM and FFM.</span><br><span class="line">4) In order to improve performance further, we combine a classical deep neural network(DNN) component with the shallow model to be a deep model. The deep FiBiNET consistently outperforms the other state-of-the-art deep models such as DeepFM and XdeepFM.</span><br></pre></td></tr></table></figure>
+<h3 id="IFM"><a href="#IFM" class="headerlink" title="IFM"></a>IFM</h3><p>输入感知因子机（IFM）通过神经网络为不同实例中的同一特征学习一个独特的输入感知因子。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Input-aware Factorization Machine (IFM) learns a unique input-aware factor for the same feature in different instances via a neural network.</span><br></pre></td></tr></table></figure>
+<p>适用于稀疏的数据集。它的目的是通过有目的地学习更灵活、更准确的特征，来增强传统的FM。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">It aims to enhance traditional FMs by purposefully learning more flexible and accurate representation of features for different instances with the help of a factor estimating network. </span><br></pre></td></tr></table></figure>
+<p>IFM的两个主要优势</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.与现有的技术相比，它能产生更好的预测结果</span><br><span class="line">2.它能更深入地了解每个特征在预测任务中的作用。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">i). it produces better prediction results compared to existing techniques</span><br><span class="line">ii). it provides deeper insights into the role that each feature plays in the prediction task.</span><br></pre></td></tr></table></figure>
+<h3 id="DCN-V2"><a href="#DCN-V2" class="headerlink" title="DCN V2"></a>DCN V2</h3><p>以一种富有表现力而又简单的方式为显式交叉建模，观察到交叉网络中权重矩阵的低秩性质。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Observing the low-rank nature of the weight matrix in the cross network</span><br></pre></td></tr></table></figure>
+<h3 id="DIFM"><a href="#DIFM" class="headerlink" title="DIFM"></a>DIFM</h3><p>双输入感知因式分解机（DIFM）可以同时在比特级和矢量级对原始特征表示进行自适应的重新加权。此外，DIFM战略性地将包括多头自适应、残差网络和DNN在内的各种组件整合到一个统一的端到端模型中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Dual Inputaware Factorization Machines (DIFM) can adaptively reweight the original feature representations at the bit-wise and vector-wise levels simultaneously.Furthermore, DIFMs strategically integrate various components including Multi-Head Self-Attention, Residual Networks and DNNs into a unified end-to-end model.</span><br></pre></td></tr></table></figure>
+<p>目的是根据不同的输入实例，借助DIFMs，自适应地学习一个给定特征的灵活表示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">It aims to adaptively learn flexible representations of a given feature according to different input instances with the help of the Dual-Factor Estimating Network (Dual-FEN).</span><br></pre></td></tr></table></figure>
+<p>主要优点是它不仅能在比特级，而且能在矢量级同时有效地学习输入感知因子（用于重新加权原始特征表示）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The major advantage of DIFM is that it can effectively learn the inputaware factors (used to reweight the original feature representations) not only at the bit-wise level but also at the vectorwise level imultaneously.</span><br></pre></td></tr></table></figure>
+<h3 id="AFN"><a href="#AFN" class="headerlink" title="AFN"></a>AFN</h3><p>自适应因子化网络（AFN）可以从数据中自适应地学习任意等级的交叉特征。AFN的核心是一个对数转换层，将特征组合中每个特征的功率转换成要学习的系数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Adaptive Factorization Network (AFN) can learn arbitrary-order cross features adaptively from data. The core of AFN is a logarith- mic transformation layer to convert the power of each feature in a feature combination into the coefficient to be learned.</span><br></pre></td></tr></table></figure>
+<p>AFN能够从数据中自适应地学习任意顺序的特征互动。而不是在一个固定的最大顺序内对所有的交叉特征进行明确的建模。<br>AFN能够自动生成辨别性的交叉特征和相应特征的权重。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">learns arbitrary-order feature interactions adaptively from data. Instead of explicitly modeling all the cross features within a fixed maximum order,AFN is able to generate discriminative cross features and</span><br><span class="line">the weights of the corresponding features automatically.</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/09/DIEN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1753,307 +1925,6 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/24/SQL-SERVER/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/24/SQL-SERVER/" class="post-title-link" itemprop="url">SQL SERVER</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-24 22:27:21" itemprop="dateCreated datePublished" datetime="2021-11-24T22:27:21+08:00">2021-11-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-08 10:23:07" itemprop="dateModified" datetime="2021-12-08T10:23:07+08:00">2021-12-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="库"><a href="#库" class="headerlink" title="库"></a>库</h2><h3 id="Transact-SQL语言"><a href="#Transact-SQL语言" class="headerlink" title="Transact-SQL语言"></a>Transact-SQL语言</h3><h4 id="DCL数据控制语言（进行安全性管理）"><a href="#DCL数据控制语言（进行安全性管理）" class="headerlink" title="DCL数据控制语言（进行安全性管理）"></a>DCL数据控制语言（进行安全性管理）</h4><p>GRANT 授予权限</p>
-<p>REVOKE 收回权限(不影响该用户从其他角色作为成员继承许可权限)</p>
-<p>DENY 收回权限(禁止该用户从其他角色作为成员继承许可权限)</p>
-<h4 id="DDL数据定义语言（执行数据库任务）"><a href="#DDL数据定义语言（执行数据库任务）" class="headerlink" title="DDL数据定义语言（执行数据库任务）"></a>DDL数据定义语言（执行数据库任务）</h4><p>CREATE 创建数据库或数据库对象</p>
-<p>ALTER 修改——</p>
-<p>DROP 删除——</p>
-<h4 id="DML数据操作语言（操作数据库中各对象）"><a href="#DML数据操作语言（操作数据库中各对象）" class="headerlink" title="DML数据操作语言（操作数据库中各对象）"></a>DML数据操作语言（操作数据库中各对象）</h4><p>select 从表或试图中检索数据</p>
-<p>insert ——插入数据</p>
-<p>update ——修改</p>
-<p>delete ——删除</p>
-<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>包含三个基本文件</p>
-<p>（1）基本数据文件：有且只有一个 .mdf</p>
-<p>（2）辅助数据文件：自由选择，0,1,2  .ndf</p>
-<p>（3）日志文件：由于恢复数据库所需要的事务日志信息，至少一个。 .ldf</p>
-<h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><p><img src="/2021/11/24/SQL-SERVER/image-20211125152935936.png" alt="image-20211125152935936" style="zoom:50%;"></p>
-<p><img src="/2021/11/24/SQL-SERVER/{}UQFN2@5NI@UMA3V@]KCK.png" alt="img" style="zoom: 33%;"></p>
-<p>附一个源码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">create database DB2</span><br><span class="line">on primary</span><br><span class="line">(</span><br><span class="line">name=&#x27;f1&#x27;,</span><br><span class="line">filename=&#x27;F:\sqlserve\sqlwj\f1.mdf&#x27;,</span><br><span class="line">size=3mb,</span><br><span class="line">maxsize=unlimited,</span><br><span class="line">filegrowth=3%</span><br><span class="line">),</span><br><span class="line">(</span><br><span class="line">name=&#x27;f2&#x27;,</span><br><span class="line">filename=&#x27;F:\sqlserve\sqlwj\f2.ndf&#x27;,</span><br><span class="line">size=10mb,</span><br><span class="line">maxsize=500mb,</span><br><span class="line">filegrowth=6mb</span><br><span class="line">)</span><br><span class="line">log on</span><br><span class="line">(</span><br><span class="line">name=&#x27;f3&#x27;,</span><br><span class="line">filename=&#x27;F:\sqlserve\sqlwj\f3.ldf&#x27;,</span><br><span class="line">size=1mb,</span><br><span class="line">maxsize=unlimited,</span><br><span class="line">filegrowth=2%</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>修改数据库名字</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--修改数据库的名字</span><br><span class="line">alter database DB2</span><br><span class="line">modify name=DB1</span><br></pre></td></tr></table></figure>
-<p>添加辅助文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--在DB1中添加一个辅助文件日志文件</span><br><span class="line">alter database DB1</span><br><span class="line">add file</span><br><span class="line">(</span><br><span class="line">name=&#x27;f2a&#x27;,</span><br><span class="line">filename=&#x27;F:\sqlserver\sqlwj\f2a.ndf&#x27;,</span><br><span class="line">size=3mb,</span><br><span class="line">maxsize=unlimited,</span><br><span class="line">filegrowth=2mb</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>添加日志文件</p>
-<p>add log file</p>
-<p>删除数据库</p>
-<p>drop database 数据库名</p>
-<h2 id="表"><a href="#表" class="headerlink" title="表"></a>表</h2><h3 id="设计表"><a href="#设计表" class="headerlink" title="设计表"></a>设计表</h3><p>创建需要确定下列特征：</p>
-<p>要包含的数据类型；</p>
-<p>表中的列数，每一列中数据的类型和长度；</p>
-<p>哪些列允许空值；</p>
-<p>是否要使用以及何处使用约束；</p>
-<p>哪些是主键，哪些为外键。</p>
-<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>Bigint 大整型 8字节</p>
-<p>int 常用的整型 4字节</p>
-<p>smallint 小整型 2字节</p>
-<p>tinyint 微整型 1字节</p>
-<p>Bit 位类型 其取值只有0/1</p>
-<p>decimal[(p[,s])]和numeric[(p[,s])] p总位数，s小数位 p默认为18，s默认为0</p>
-<p>Money存储的货币值由八个字节，前四个代表整数，后四代表小数</p>
-<h4 id="日期和时间"><a href="#日期和时间" class="headerlink" title="日期和时间"></a>日期和时间</h4><p>Datetime 长度8字节</p>
-<p>1753.1.1-9999.12.31</p>
-<p>Smalldatetime 四字节</p>
-<p>1900.1.1-2079.12.31</p>
-<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>Char(n) n单位为字节，表示输入字符串的最大值，若超过则不存，小于则添加空格</p>
-<p>varchar(n) 变动长度</p>
-<h4 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h4><p>Nchar</p>
-<p>Nvarchar</p>
-<h4 id="二进制字符串"><a href="#二进制字符串" class="headerlink" title="二进制字符串"></a>二进制字符串</h4><p>Binary：binary(n)存储图像等数据</p>
-<p>varbinary(n)</p>
-<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><p>切换数据库名字 use 数据库名字</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--创建课程表（课程编号，课程名称，课程教师，上课时间）</span><br><span class="line">create table 课程表</span><br><span class="line">(</span><br><span class="line">课程编号 varchar(15) not null,</span><br><span class="line">课程名称 varchar(20) not null,</span><br><span class="line">任课教师 char(10) not null,</span><br><span class="line">上课时间 varchar(30) </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h3 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h3><p>添加列：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table 课程表</span><br><span class="line">add 上课教室 varchar(20) not null</span><br></pre></td></tr></table></figure>
-<p>修改数据类型</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table 课程表</span><br><span class="line">alter column 任课教师 varchar(10) not null</span><br></pre></td></tr></table></figure>
-<p>删除列</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table 课程表</span><br><span class="line">drop column 任课教师 </span><br></pre></td></tr></table></figure>
-<p>修改列名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec sp_rename&#x27;表名.列名&#x27;,‘新列名&#x27;</span><br></pre></td></tr></table></figure>
-<p>修改表名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec sp_rename&#x27;原表名&#x27;,‘新表名&#x27;</span><br></pre></td></tr></table></figure>
-<h3 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h3><p>主键约束PRIMARY KEY</p>
-<p>唯一确定表中每一按条记录的表示符</p>
-<p>外键约束FOREIGN KEY</p>
-<p>用于建立和加强两个表数据之间的连接</p>
-<p>唯一约束UNIQUE</p>
-<p>指定一个列或多个列的值具有唯一性，可为空</p>
-<p>检查约束CHECK</p>
-<p>限制输入值</p>
-<p>默认约束DEFAULT</p>
-<p>插入操作中没有提供输入值时系统会自动添加指定值</p>
-<h5 id="创建约束"><a href="#创建约束" class="headerlink" title="创建约束"></a>创建约束</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名</span><br><span class="line">add constraint 约束名 约束类型 具体的约束说明</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-对表中的课程编号添加主键约束</span><br><span class="line">alter table 课程表 </span><br><span class="line">add constraint PK_课程编号 primary key (课程编号)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--对课程名称添加一个唯一约束unique</span><br><span class="line">alter table 课程表</span><br><span class="line">add constraint UN_课程名称 unique(课程名称)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--给上课教室添加默认约束</span><br><span class="line">alter table 课程表</span><br><span class="line">add constraint DF_教室 default &#x27;正兴&#x27; for 上课教室</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--给上课教室添加检查约束</span><br><span class="line">alter table 课程表</span><br><span class="line">add constraint CK_教室 check (上课教室=&#x27;正兴&#x27; or 上课教室=&#x27;诚意&#x27; or 上课教室=&#x27;致知&#x27;)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/11/24/SQL-SERVER/image-20211125213841519.png" alt="image-20211125213841519"></p>
-<p>外界约束前提，列中的数据类型必须保持一致。引用的列必须为主键约束或者唯一约束。两个表的列名尽量一致。</p>
-<h4 id="删除约束"><a href="#删除约束" class="headerlink" title="删除约束"></a>删除约束</h4><p>alter table 表名</p>
-<p>drop constraint 约束名</p>
-<p>若被引用要先删除外界约束再删除主键约束</p>
-<h4 id="在定义时约束"><a href="#在定义时约束" class="headerlink" title="在定义时约束"></a>在定义时约束</h4><p><img src="/2021/11/24/SQL-SERVER/image-20211126105437185.png" alt="image-20211126105437185"></p>
-<h2 id="T-SQL语言"><a href="#T-SQL语言" class="headerlink" title="T-SQL语言"></a>T-SQL语言</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>标识符：数据库对象的名称</p>
-<p>常规标识符与分隔标识符</p>
-<h4 id="常规标识符规则"><a href="#常规标识符规则" class="headerlink" title="常规标识符规则"></a>常规标识符规则</h4><p>第一个字符必须是英文大小写字母；_;@;#</p>
-<p>后续字符除了第一字符，还有十进制数字，美元符号($)</p>
-<p>批处理：一次处理多条语句</p>
-<h3 id="常量和变量"><a href="#常量和变量" class="headerlink" title="常量和变量"></a>常量和变量</h3><p>局部变量用DECLARE语句声明，作用范围仅在程序内部，局部变量的名称自己定义，以@开头。</p>
-<p>声明语法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @name datatype</span><br></pre></td></tr></table></figure>
-<p>对局部变量赋值</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET @NAME=expression</span><br><span class="line">SELECT @name=expression[,..n]</span><br></pre></td></tr></table></figure>
-<p>SET只能对一个变量赋值</p>
-<p>SELECT可以对多个赋值</p>
-<p>PRINT输出</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">--声明两个变量</span><br><span class="line">declare @name varchar(10),@age int</span><br><span class="line"></span><br><span class="line">--赋值</span><br><span class="line">set @name=&#x27;张三&#x27;</span><br><span class="line">set @age=18</span><br><span class="line"></span><br><span class="line">--select</span><br><span class="line">select @name=&#x27;李四&#x27;,@age=19</span><br><span class="line"></span><br><span class="line">print @name</span><br><span class="line">print @age</span><br></pre></td></tr></table></figure>
-<p>全局变量是事先定义好的，不允许创建修改，以@@开头</p>
-<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><p>算数运算符</p>
-<p>赋值运算符=</p>
-<p>位运算符：两个整数类型表达式</p>
-<p>比较运算符：除text,ntext.image数据类型外都可以用</p>
-<p>逻辑运算符：</p>
-<p>AND如果两个表达式都为true，则结果为true</p>
-<p>BETWEEN如果操作数在某个范围，则结果为true</p>
-<p>IN</p>
-<p>LIKE</p>
-<p>NOT</p>
-<p>OR</p>
-<p>一元运算符</p>
-<h3 id="流控制语句"><a href="#流控制语句" class="headerlink" title="流控制语句"></a>流控制语句</h3><p>BEGIN…END用于将多个语句组合为一个逻辑块</p>
-<p>IF…ELSE</p>
-<p>WHILE</p>
-<p>BREAK</p>
-<p>CONTINUE</p>
-<p>CASE</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">case </span><br><span class="line">when ...then...</span><br><span class="line">when ...then...</span><br><span class="line">else </span><br></pre></td></tr></table></figure>
-<p>WAITFOR延迟语句可以将它之后的语句在一个指定的时间间隔后执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Waitfor delay &#x27;time&#x27;|time&#x27;time&#x27;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">waitfor delay &#x27;00:00:03&#x27;</span><br><span class="line">print &#x27;傻瓜你好&#x27;</span><br><span class="line"></span><br><span class="line">waitfor time &#x27;17:34:59&#x27;</span><br><span class="line">print &#x27;傻瓜你好&#x27;</span><br></pre></td></tr></table></figure>
-<p>GOTO</p>
-<p>return无条件退出语句</p>
-<h2 id="数据库操作实例"><a href="#数据库操作实例" class="headerlink" title="数据库操作实例"></a>数据库操作实例</h2><h3 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h3><h4 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--查询教师</span><br><span class="line">select 任课教师,上课时间 --列名</span><br><span class="line">from 课程表 --表名</span><br></pre></td></tr></table></figure>
-<p>select *为查询所有列</p>
-<h5 id="DISTINCT"><a href="#DISTINCT" class="headerlink" title="DISTINCT"></a>DISTINCT</h5><p>删除重复行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--去重复</span><br><span class="line">select distinct 任课教师</span><br><span class="line">from 课程表</span><br></pre></td></tr></table></figure>
-<p>distinct后只能跟一个列</p>
-<h5 id="TOP"><a href="#TOP" class="headerlink" title="TOP"></a>TOP</h5><p>用于规定要返回的查询结果的数目</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">--返回前3行所有数据</span><br><span class="line">select top 3 *</span><br><span class="line">from 课程表</span><br><span class="line"></span><br><span class="line">--返回前三行的任课教师和时间</span><br><span class="line">select top 3 任课教师,上课时间</span><br><span class="line">from 课程表</span><br></pre></td></tr></table></figure>
-<p>去掉重复数据后，后面的数据往前补</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select distinct top 3 任课教师</span><br><span class="line">from 课程表</span><br></pre></td></tr></table></figure>
-<h5 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--别名查询，方式一</span><br><span class="line">select 任课教师 &#x27;教师&#x27;, 上课时间 &#x27;时间&#x27;</span><br><span class="line">from 课程表</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方式二</span><br><span class="line">select &#x27;别名&#x27;=列名</span><br><span class="line">from 表名</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方式三</span><br><span class="line">select 列名 as &#x27;别名&#x27;</span><br><span class="line">from 表名</span><br></pre></td></tr></table></figure>
-<h5 id="计算列"><a href="#计算列" class="headerlink" title="计算列"></a>计算列</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seclect &#x27;原始学号&#x27;=学号,&#x27;调整学号&#x27;=学号-10</span><br><span class="line">from 表名</span><br></pre></td></tr></table></figure>
-<h4 id="选择查询"><a href="#选择查询" class="headerlink" title="选择查询"></a>选择查询</h4><p>基本语法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT LIST</span><br><span class="line">FROM TABLE</span><br><span class="line">WHERE CONDITIONS</span><br></pre></td></tr></table></figure>
-<h5 id="比较搜索条件"><a href="#比较搜索条件" class="headerlink" title="比较搜索条件"></a>比较搜索条件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&gt;不等于</span><br><span class="line"></span><br><span class="line">!=不等于</span><br><span class="line">！&gt;不大于</span><br><span class="line">!&lt;不小于</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--查询任课教师为孙大烈的课程名称</span><br><span class="line">select 课程名称</span><br><span class="line">from 课程表</span><br><span class="line">where 任课教师=&#x27;孙大烈&#x27; 后可接逻辑运算符</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h5 id="范围搜索条件"><a href="#范围搜索条件" class="headerlink" title="范围搜索条件"></a>范围搜索条件</h5><p>包括范围</p>
-<p>排他范围</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select 课程编号</span><br><span class="line">from 课程表</span><br><span class="line">where 课程编号 (not) between 3 and 5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h5 id="列表搜索条件"><a href="#列表搜索条件" class="headerlink" title="列表搜索条件"></a>列表搜索条件</h5><p>IN关键字使用户可以与列表中的任意值匹配。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select 课程编号</span><br><span class="line">from 课程表</span><br><span class="line">where 课程编号 in (&#x27;3&#x27;,&#x27;4&#x27;)</span><br></pre></td></tr></table></figure>
-<h5 id="搜索条件中的字符匹配符"><a href="#搜索条件中的字符匹配符" class="headerlink" title="搜索条件中的字符匹配符"></a>搜索条件中的字符匹配符</h5><p>LIKE搜索匹配指定模式字符串</p>
-<p>通配符</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">% 替代0/多个字符</span><br><span class="line">_ 替代一个字符</span><br><span class="line">[] 代表指定范围内的单个字符，[]中可以是单个字符([acef])，也可以为范围([a-f])</span><br><span class="line">[^] 代表不在范围内的单个字符[^]中可以是单个字符([^acef])，也可以为范围([^a-f])</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查询出姓王的老师</span><br><span class="line">select 任课教师</span><br><span class="line">from 课程表</span><br><span class="line">where 任课教师 like &#x27;王%&#x27;</span><br></pre></td></tr></table></figure>
-<h5 id="涉及空置的查询"><a href="#涉及空置的查询" class="headerlink" title="涉及空置的查询"></a>涉及空置的查询</h5><p>NULL在数据库中表示不确定的值</p>
-<p>判断为空</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">列名 is (not) null</span><br></pre></td></tr></table></figure>
-<h4 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h4><p>对一组值执行计算，并返回单个值。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SUM([distinct]&lt;列名&gt;)</span><br><span class="line">AVG([distinct]&lt;列名&gt;)</span><br><span class="line">MAX([distinct]&lt;列名&gt;)</span><br><span class="line">MIN([distinct]&lt;列名&gt;)</span><br><span class="line">COUNT (*)统计元组个数</span><br><span class="line">COUNT ([distinct]&lt;列名&gt;)统计本列列值个数</span><br><span class="line">除count外，其他函数均计算NULL</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 聚合函数 from 表名</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select sum (grade) as &#x27;总成绩&#x27;</span><br><span class="line">from stu</span><br></pre></td></tr></table></figure>
-<h4 id="数据分组"><a href="#数据分组" class="headerlink" title="数据分组"></a>数据分组</h4><p>group by根据一个或多个列对结果进行分组</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select 年级,SUM(人数) as &#x27;总人数&#x27;，</span><br><span class="line">COUNIT(班级编号) as &#x27;班级总量&#x27;</span><br><span class="line">from 班级信息</span><br><span class="line">group by 年纪</span><br></pre></td></tr></table></figure>
-<p>having通常与group by子句一起使用。</p>
-<p>后跟查询条件</p>
-<p>having子句可以包含聚合函数，where不可以</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select 学号,SUM(成绩) as &#x27;总成绩&#x27;</span><br><span class="line">from 成绩表</span><br><span class="line">group by 学号</span><br><span class="line">having SUM(成绩)&lt;100</span><br></pre></td></tr></table></figure>
-<h4 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h4><p>用于对指定结果进行排序，默认升序</p>
-<p>降序排序可以用DESC关键字</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查看成绩表</span><br><span class="line">select *</span><br><span class="line">from 成绩表</span><br><span class="line">order by 成绩</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select *</span><br><span class="line">from 成绩表</span><br><span class="line">order by 成绩 desc</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/11/24/SQL-SERVER/image-20211130204224089.png" alt="image-20211130204224089" style="zoom:50%;"></p>
-<h4 id="表连接"><a href="#表连接" class="headerlink" title="表连接"></a>表连接</h4><p>从多个相关表中查询数据</p>
-<h5 id="内部连接"><a href="#内部连接" class="headerlink" title="内部连接"></a>内部连接</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select list from 表名1，表名2</span><br><span class="line">where 表1.列=表2.列</span><br><span class="line">或</span><br><span class="line">select list from 表1 [inner] join 表2</span><br><span class="line">on 表1.列=表2.列</span><br></pre></td></tr></table></figure>
-<p>查询学生的学号，姓名，性别，以及所在的班级名称和年级</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select 学生信息.姓名,学生信息.学号,学生信息.性别,班级信息.班级名称,班级信息.年级</span><br><span class="line">from 学生信息,班级信息</span><br><span class="line">where 学生信息.班级编号=班级信息.班级编号</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select 学生信息.姓名,学号,性别,//偷懒写法</span><br><span class="line">班级信息.班级名称,年级</span><br><span class="line">from 学生信息.inner join 班级信息</span><br><span class="line">on 学生信息.班级编号=班级信息.班级编号</span><br></pre></td></tr></table></figure>
-<p>内部连接只有共同匹配到的结果才会有输出</p>
-<h5 id="外部连接"><a href="#外部连接" class="headerlink" title="外部连接"></a>外部连接</h5><p>外部连接会返回from子句中提到的至少一个表的所有行。</p>
-<p>分为左外部连接、右外部链接和全外部连接</p>
-<p>左外部连接对连接条件中左边的表不加限制，其余同理。</p>
-<p>先写为左表，后写为右表。</p>
-<p>left outer join，若左表的某行在右表没有找到匹配的行，则结果集中的右表的相对应的位置为null</p>
-<p>right outer join</p>
-<p>full outer join</p>
-<h4 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h4><p>用来表示where子句的条件</p>
-<p>子查询用圆括号括起来</p>
-<p>嵌套子查询与相关子查询</p>
-<h5 id="嵌套子查询"><a href="#嵌套子查询" class="headerlink" title="嵌套子查询"></a>嵌套子查询</h5><p>一个子查询可以包含另一个查询</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">--查询计算机系学生选修了哪些课程</span><br><span class="line">select *</span><br><span class="line">from sc</span><br><span class="line">where sno in</span><br><span class="line">(select sno</span><br><span class="line">from student</span><br><span class="line">where sdept=&#x27;计算机系&#x27;)</span><br></pre></td></tr></table></figure>
-<p>where子句后条件要什么，子查询就查什么</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select sno,grade</span><br><span class="line">from sc</span><br><span class="line">where cno=&#x27;c02&#x27;</span><br><span class="line">and grade &gt;</span><br><span class="line">(select AVG(grade)</span><br><span class="line">from sc</span><br><span class="line">where cno=&#x27;c02&#x27;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h5 id="相关子查询（单值子查询）"><a href="#相关子查询（单值子查询）" class="headerlink" title="相关子查询（单值子查询）"></a>相关子查询（单值子查询）</h5><p>这样的子查询只返回一个值，然后将一列值与查询返回的值进行比较</p>
-<h5 id="在查询基础上创建新表"><a href="#在查询基础上创建新表" class="headerlink" title="在查询基础上创建新表"></a>在查询基础上创建新表</h5><p>使用select …into语句可以在查询的基础上创建新表。</p>
-<p>语法为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select list</span><br><span class="line">into新表名</span><br><span class="line">from表名</span><br></pre></td></tr></table></figure>
-<h3 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h3><h5 id="使用Insert和values插入"><a href="#使用Insert和values插入" class="headerlink" title="使用Insert和values插入"></a>使用Insert和values插入</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert[into] 表名[列名]</span><br><span class="line">values(...)</span><br></pre></td></tr></table></figure>
-<h5 id="使用insert和select插入行"><a href="#使用insert和select插入行" class="headerlink" title="使用insert和select插入行"></a>使用insert和select插入行</h5><p>使用select子句将一个表或多个表的值添加到另一个表中。</p>
-<h3 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h3><p>update修改表中数据语法形式</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update 表名 set 列名=表达式</span><br><span class="line">where//加条件</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">update 成绩表</span><br><span class="line">set 学号=&#x27;3&#x27;</span><br><span class="line">where 成绩=&#x27;95&#x27;</span><br><span class="line">and 课程编号 between &#x27;1002&#x27; and &#x27;1003&#x27;</span><br></pre></td></tr></table></figure>
-<p>如果条件不统一，更改的值也不一样，则分开来写。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update 成绩表</span><br><span class="line">set 成绩=&#x27;89&#x27;</span><br><span class="line">where 课程编号=&#x27;1001&#x27;</span><br></pre></td></tr></table></figure>
-<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete from 表名</span><br><span class="line">where 选择条件</span><br></pre></td></tr></table></figure>
-<p>(删除行)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">删除固定行</span><br><span class="line">delete top (20) percent from 表名//删除前20%</span><br><span class="line">delete top (20) percent from 表名//删除前20行</span><br></pre></td></tr></table></figure>
-<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p>视图是基于某个查询结果的虚表。</p>
-<p>标准视图、索引视图、分区视图。</p>
-<h4 id="视图的优点"><a href="#视图的优点" class="headerlink" title="视图的优点"></a>视图的优点</h4><p>着重于特定数据</p>
-<p>简化数据操作</p>
-<p>自定义数据</p>
-<p>导出和导入数据</p>
-<p>跨服务器组合分区数据</p>
-<h4 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create view [数据库名 ] 视图名</span><br><span class="line">AS</span><br><span class="line">select_statement</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create view View_班级信息</span><br><span class="line">as</span><br><span class="line">select *from 班级信息</span><br></pre></td></tr></table></figure>
-<h4 id="修改视图名字"><a href="#修改视图名字" class="headerlink" title="修改视图名字"></a>修改视图名字</h4><p>sp_rename修改视图名字</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec sp_rename &#x27;view_班级信息&#x27;,&#x27;view_班级信息2&#x27;</span><br></pre></td></tr></table></figure>
-<p>对于表的操作，视图同样可以使用。</p>
-<h4 id="管理视图"><a href="#管理视图" class="headerlink" title="管理视图"></a>管理视图</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inbseret into view_学生信息</span><br><span class="line">values(&#x27;7&#x27;,&#x27;13&#x27;,&#x27;aa&#x27;,&#x27;nv&#x27;,&#x27;beijing&#x27;)</span><br></pre></td></tr></table></figure>
-<p>视图信息更改，原表信息也会更改。</p>
-<p>alter既能修改数据内容，修改数据结构。</p>
-<h4 id="删除视图"><a href="#删除视图" class="headerlink" title="删除视图"></a>删除视图</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop view 视图名1,视图名2</span><br></pre></td></tr></table></figure>
-<p>有条件删除</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete from 视图名</span><br><span class="line">where 条件</span><br></pre></td></tr></table></figure>
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>对数据库表中一个或多个列的值进行排序的结构。用来定位。</p>
-<p>作用</p>
-<p>加快数据检索；保持数据一致性；实现表与表之间参照完整性。</p>
-<h5 id="选择创建索引的数据列"><a href="#选择创建索引的数据列" class="headerlink" title="选择创建索引的数据列"></a>选择创建索引的数据列</h5><p>定义有主键和外键的列；在指定范围中快速或频繁查询的列；连接中频繁使用的列；需要按排序顺序快速或频繁检索的列</p>
-<h5 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h5><p>聚集索引：</p>
-<p>索引的顺序决定了表中行的存储顺序，因此每个表中只能有一个聚集索引。</p>
-<p>非聚集索引：</p>
-<p>索引中的逻辑顺序并不等同与表中行的物理顺序。</p>
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>事务是作为单个逻辑单元执行的一系列操作。不可分割。</p>
-<p>四大特性：</p>
-<p>原子性；一致性；隔离性；永久性。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">begin transaction</span><br><span class="line">rollback transaction//恢复</span><br><span class="line">commit transaction//提交</span><br></pre></td></tr></table></figure>
-<h2 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h2><h3 id="系统存储过程"><a href="#系统存储过程" class="headerlink" title="系统存储过程"></a>系统存储过程</h3><h3 id><a href="#" class="headerlink" title></a><img src="/2021/11/24/SQL-SERVER/image-20211208074620892.png" alt="image-20211208074620892"></h3><p>exec执行</p>
-<p>用户自定义存储过程</p>
-<p>参数有输入和输出参数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create proc[edure] 存储过程名</span><br><span class="line">@参数一 数据类型=默认值 output</span><br><span class="line">AS</span><br><span class="line">SQL语句</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
-<p>参数可以设置默认值</p>
-<p><img src="/2021/11/24/SQL-SERVER/image-20211208081112318.png" alt="image-20211208081112318"></p>
-<p><img src="/2021/11/24/SQL-SERVER/image-20211208102301639.png" alt="image-20211208102301639"></p>
-<h2 id="数据库设计基础"><a href="#数据库设计基础" class="headerlink" title="数据库设计基础"></a>数据库设计基础</h2><h3 id="E-R图"><a href="#E-R图" class="headerlink" title="E-R图"></a>E-R图</h3><p><img src="/2021/11/24/SQL-SERVER/image-20211208081720924.png" alt="image-20211208081720924"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2123,7 +1994,7 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

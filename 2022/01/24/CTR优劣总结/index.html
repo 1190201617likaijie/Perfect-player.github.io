@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="CTR各模型优劣总结前言本文是依照上一篇文章的顺序来进行整理，现附上上一篇链接 1https:&#x2F;&#x2F;perfect-player.github.io&#x2F;2021&#x2F;09&#x2F;27&#x2F;CTR&#x2F; Convolutional Click Prediction Model(卷积点击预测模型CCPM)由于循环神经网络在连续广告印象上的不可改变的传播方式，在有效建模动态点击预测方面有局限性，而深度CNN架构的池化和卷积层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTR优劣总结">
+<meta property="og:url" content="http://example.com/2022/01/24/CTR%E4%BC%98%E5%8A%A3%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CTR各模型优劣总结前言本文是依照上一篇文章的顺序来进行整理，现附上上一篇链接 1https:&#x2F;&#x2F;perfect-player.github.io&#x2F;2021&#x2F;09&#x2F;27&#x2F;CTR&#x2F; Convolutional Click Prediction Model(卷积点击预测模型CCPM)由于循环神经网络在连续广告印象上的不可改变的传播方式，在有效建模动态点击预测方面有局限性，而深度CNN架构的池化和卷积层">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-24T10:26:09.000Z">
+<meta property="article:modified_time" content="2022-01-26T08:51:32.431Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/01/24/CTR%E4%BC%98%E5%8A%A3%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>CTR优劣总结 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/24/CTR%E4%BC%98%E5%8A%A3%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CTR优劣总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-24 18:26:09" itemprop="dateCreated datePublished" datetime="2022-01-24T18:26:09+08:00">2022-01-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-26 16:51:32" itemprop="dateModified" datetime="2022-01-26T16:51:32+08:00">2022-01-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="CTR各模型优劣总结"><a href="#CTR各模型优劣总结" class="headerlink" title="CTR各模型优劣总结"></a>CTR各模型优劣总结</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本文是依照上一篇文章的顺序来进行整理，现附上上一篇链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://perfect-player.github.io/2021/09/27/CTR/</span><br></pre></td></tr></table></figure>
+<h3 id="Convolutional-Click-Prediction-Model-卷积点击预测模型CCPM"><a href="#Convolutional-Click-Prediction-Model-卷积点击预测模型CCPM" class="headerlink" title="Convolutional Click Prediction Model(卷积点击预测模型CCPM)"></a>Convolutional Click Prediction Model(卷积点击预测模型CCPM)</h3><p>由于循环神经网络在连续广告印象上的不可改变的传播方式，在有效建模动态点击预测方面有局限性，而深度CNN架构的池化和卷积层可以从连续的广告印象中充分提取局部-全局的关键特征。</p>
+<p>CCPM就是基于CNN的一个架构，CCPM可以从具有不同元素的输入实例中提取局部-全局关键特征，这不仅可以针对单个广告印象，也可以针对连续的广告印象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">CCPM can extract local-global key features from an input instance with varied elements, which can be implemented for not only single ad impression but also sequential ad impression.</span><br></pre></td></tr></table></figure>
+<h3 id="Factorization-supported-Neural-Network-因子分解支持的神经网络FNN"><a href="#Factorization-supported-Neural-Network-因子分解支持的神经网络FNN" class="headerlink" title="Factorization-supported Neural Network(因子分解支持的神经网络FNN)"></a>Factorization-supported Neural Network(因子分解支持的神经网络FNN)</h3><p>出发点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.之前运用的CTR模型大多是线性的，都是基于大量的稀疏特征的编码。性能相对较低，因为在学习非微观模式时，无法捕捉到假定的（有条件的）独立原始特征之间的相互作用。</span><br><span class="line">2.当时的非线性模型不能利用所有可能的不同特征的组合。</span><br><span class="line">3.大多数预测模型有浅层的结构，对复杂的海量数据的基础模型表达有限，数据建模和泛化能力仍然受到限制。</span><br></pre></td></tr></table></figure>
+<p>基于上述出发点引入了深度学习模型。</p>
+<p>带有监督学习嵌入层的FNN使用因子化机器被提出来，以有效地减少从稀疏特征到密集的连续特征。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">Specifically,FNN with a supervised-learning embedding layer using factorisation machines is proposed to efficiently reduce the dimension from sparse features to dense continuous features. </span><br></pre></td></tr></table></figure>
+<h3 id="Product-based-Neural-Network-PNN"><a href="#Product-based-Neural-Network-PNN" class="headerlink" title="Product-based Neural Network(PNN)"></a>Product-based Neural Network(PNN)</h3><p>背景</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深度神经网络（DNNs）在分类和回归任务中显示了巨大的能力，在用户反应预测中采用DNNs是很有前途的。之前为了改善多领域分类数据的交互，提出的一种基于因子预训练的方法，基于串联的嵌入向量，构建多层感知器（MLPs）来探索特征的相互作用。嵌入初始化的质量在很大程度上受到因式分解机的限制。</span><br></pre></td></tr></table></figure>
+<p>为了利用神经网络的学习能力和挖掘以一种比MLPs更有效的方式挖掘数据的潜在模式，所以提出PNN。PNN有望在多领域的分类数据上学习高阶潜在模式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">To utilize the learning ability of neural networks and mine the latent patterns of data in a more effective way than MLPs,in this paper we propose Product-based Neural Network。</span><br><span class="line">PNN is promising to learn high-order latent patterns on multi-field categorical data. </span><br></pre></td></tr></table></figure>
+<h3 id="Wide-amp-Deep"><a href="#Wide-amp-Deep" class="headerlink" title="Wide &amp; Deep"></a>Wide &amp; Deep</h3><p>谷歌曾经的主流推荐模型，业界影响巨大。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">记忆能力：可以被理解为模型直接学习并利用历史数据中物品和特征的“共现频率”的能力</span><br></pre></td></tr></table></figure>
+<p>提出动机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">利用手工构造的交叉组合特征来使线性模型具有记忆性会得到一个不错的效果，但特征工程需要耗费大量精力，对于未曾出现过的特征组合，权重系数为0，无法进行泛化。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">线性模型，记忆力较强，但泛化能力弱</span><br><span class="line">embedding模型，记忆能力弱，泛化能力强</span><br></pre></td></tr></table></figure>
+<p>基于优势互补，提出Wide &amp; Deep，左边Wide部分是一个简单的线性模型，右边Deep部分是一个经典的DNN模型。</p>
+<p>WDL的深层部分将稀疏的特征嵌入连接起来作为MLP的输入，宽层部分使用手工制作的特征作为输入。深度部分和宽度部分的对数相加，得到预测概率。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">WDL’s deep part concatenates sparse feature embeddings as the input of MLP,the wide part use handcrafted feature as input. The logits of deep part and wide part are added to get the prediction probability.</span><br></pre></td></tr></table></figure>
+<h3 id="DeepFM"><a href="#DeepFM" class="headerlink" title="DeepFM"></a>DeepFM</h3><p>整合了FM和深度神经网络（DNN）的架构。它像FM一样对低阶特征的交互进行建模，像DNN一样对高阶特征的交互进行建模。不同于</p>
+<p>Wide &amp; Deep，DeepFM可以在没有任何特征工程的情况下进行端到端训练。但复杂性较大。</p>
+<p>优点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.它不需要任何预训练</span><br><span class="line">2.它同时学习高阶和低阶特征的相互作用；</span><br><span class="line">3.它引入了特征嵌入的共享策略以避免特征工程</span><br></pre></td></tr></table></figure>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1) it does not need any pre-training; </span><br><span class="line">2) it learns both high- and loworder feature interactions; </span><br><span class="line">3) it introduces a sharing strategy of feature embedding to avoid feature engineering</span><br></pre></td></tr></table></figure>
+<p>DeepFM可以看作是WDL和FNN的改进。与WDL相比，DeepFM在广义部分使用FM而不是LR，在深义部分使用嵌入向量的连接作为MLP的输入。与FNN相比，FM的嵌入向量和MLP的输入是相同的。而且它们不需要FM预训练向量来初始化，它们是端对端学习。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">DeepFM can be seen as an improvement of WDL and FNN.Compared with WDL,DeepFM use FM instead of LR in the wide part and use concatenation of embedding vectors as the input of MLP in the deep part. Compared with FNN,the embedding vector of FM and input to MLP are same. And they do not need a FM pretrained vector to initialiaze,they are learned end2end.</span><br></pre></td></tr></table></figure>
+<h3 id="Piece-wise-Linear-Model"><a href="#Piece-wise-Linear-Model" class="headerlink" title="Piece-wise Linear Model"></a>Piece-wise Linear Model</h3><p>背景</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CTR预测问题是一个高度非线性的问题。LR很难抓住非线性因素，基于树的方法不适合非常稀疏和高维的数据，FM不能适应数据中所有的一般非线性模式</span><br></pre></td></tr></table></figure>
+<p>提出了一个用于大规模数据的片状线性模型及其训练算法LS-PLM,遵循分而治之的策略。首先将特征空间划分为几个局部区域，然后在每个区域内拟合一个线性模型。结果是输出加权线性预测的组合。它可以从稀疏数据中捕捉到稀疏数据中的非线性模式，并将我们从繁重的特征工程工作中解救出来，这对于实际的工业应用是至关重要的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">优势</span><br><span class="line">LS-PLM的优势在于在三个方面对网络规模的数据挖掘具有优势。</span><br><span class="line">非线性。有了足够的划分区域，LS-PLM可以适应任何复杂的非线性函数。</span><br><span class="line">可扩展性。与LR模型类似，LS-PLM可以扩展到大量样本和高维特征。</span><br><span class="line">稀疏性。</span><br><span class="line">工业模型，可以处理具有1000万个参数的10亿个样本的问题，这就是典型的工业数据量。</span><br></pre></td></tr></table></figure>
+<p>由于其能够捕获非线性模式的能力和对海量数据的可扩展性，LS-PLMs已经成为在线显示广告系统中主要的CTR预测榜样，自2012年以来为数亿用户提供服务，成为阿里巴巴在线展示广告系统中主要的点击率预测模型。</p>
+<h3 id="Deep-amp-Cross-Network"><a href="#Deep-amp-Cross-Network" class="headerlink" title="Deep &amp; Cross Network"></a>Deep &amp; Cross Network</h3><p>applies feature crossing in an automatic fashion.</p>
+<p>以自动的方式进行特征交叉，可以处理大量的稀疏和密集的特征集，并与传统的深层网络共同学习程度有限的显性交叉特征。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">can handle a large set of sparse and dense features, and learns explicit cross features</span><br><span class="line">of bounded degree jointly with traditional deep representations.</span><br></pre></td></tr></table></figure>
+<h3 id="Attentional-Factorization-Machine-AFM"><a href="#Attentional-Factorization-Machine-AFM" class="headerlink" title="Attentional Factorization Machine(AFM)"></a>Attentional Factorization Machine(AFM)</h3><p>AFM是FM的一个变种，传统的FM是将嵌入向量的内积均匀地加起来。AFM可以被看作是特征相互作用的加权和。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">AFM is a variant of FM,tradional FM sums the inner product of embedding vector uniformly. AFM can be seen as weighted sum of feature interactions.The weight is learned by a small MLP.</span><br></pre></td></tr></table></figure>
+<p>AFM弥补了FM对于不同的特征交互不能赋予不同权重的问题。</p>
+<h3 id="Neural-Factorization-Machine"><a href="#Neural-Factorization-Machine" class="headerlink" title="Neural Factorization Machine"></a>Neural Factorization Machine</h3><p>NFM使用一个双交互池层来学习嵌入向量之间的特征交互，并将结果压缩成一个单一的向量，其大小与单一嵌入向量相同。MLP的输出对数和线性部分的输出对数相加，得到预测概率。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">NFM use a bi-interaction pooling layer to learn feature interaction between embedding vectors and compress the result into a singe vector which has the same size as a single embedding vector. And then fed it into a MLP.The output logit of MLP and the output logit of linear part are added to get the prediction probability.</span><br></pre></td></tr></table></figure>
+<p>FM的性能可能受到其线性的限制，以及仅对成对（即二阶）特征的相互作用进行建模。特别是，对于具有复杂和非线性基础结构的真实世界数据，FM可能无法表达。</p>
+<p>NFMs:一个用于稀疏数据预测的新模型,将线性分解机的有效性与非线性神经网络的强大表示能力结合起来，用于稀疏预测分析。通过对高阶和非线性特征的相互作用的建模，增强了FMs的功能。NFM结构的关键是新提出的双交互操作。</p>
+<h3 id="xDeepFM"><a href="#xDeepFM" class="headerlink" title="xDeepFM"></a>xDeepFM</h3><p>xDeepFM可以自动学习显性和隐性的高阶特征交互，这对于减少人工特征工程的工作具有重要意义。它是将一个CIN和一个DNN纳入一个端到端的框架中所产生的。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thus xDeepFM can automatically learn high-order feature interactions in both explicit and implicit fashions, which is of great significance to reducing manual feature engineering work.</span><br></pre></td></tr></table></figure>
+<p>xDeepFM使用压缩交互网络（CIN）来显式学习低阶和高阶特征交互，并使用MLP来隐式学习特征交互。在CIN的每一层，首先计算$x^k$和$x<em>0$之间的外积，得到一个张量$Z</em>{k+1}$，然后使用1DConv来学习这个张量上的特征图$H_{k+1}$。最后，对所有的特征图$H_k$应用总和池，得到一个向量。该向量用于计算CIN的贡献对数。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xDeepFM use a Compressed Interaction Network (CIN) to learn both low and high order feature interaction explicitly,and use a MLP to learn feature interaction implicitly. In each layer of CIN,first compute outer products between $x^k$ and $x_0$ to get a tensor $Z_&#123;k+1&#125;$,then use a 1DConv to learn feature maps $H_&#123;k+1&#125;$ on this tensor. Finally,apply sum pooling on all the feature maps $H_k$ to get one vector.The vector is used to compute the logit that CIN contributes.</span><br></pre></td></tr></table></figure>
+<h3 id="Deep-Interest-Network"><a href="#Deep-Interest-Network" class="headerlink" title="Deep Interest Network"></a>Deep Interest Network</h3><p>出发点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在传统的深度CTR模型中，使用固定长度的表示法是捕捉用户兴趣多样性的一个瓶颈。用户的各种兴趣被压缩到一个固定长度的向量中，这限制了嵌入和MLP方法的表达能力。</span><br></pre></td></tr></table></figure>
+<p>深度兴趣网络（DIN），它通过考虑到候选广告的历史行为的相关性，自适应地计算用户兴趣的表示向量。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deep Interest Network (DIN), which adaptively calculates the representation vector of user interests by taking into consideration the relevance of historical behaviors given a candidate ad. </span><br></pre></td></tr></table></figure>
+<p>DIN引入了一种注意力方法来学习序列（多值）特征。传统的方法通常在序列特征上使用和/均值池。DIN使用一个局部激活单元来获得候选项目和历史项目之间的激活分数。用户的兴趣由用户行为的加权和表示，用户的兴趣向量和其他嵌入向量被连接起来，并输入MLP得到预测。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DIN introduce a attention method to learn from sequence(multi-valued) feature. Tradional method usually use sum/mean pooling on sequence feature. DIN use a local activation unit to get the activation score between candidate item and history items. User’s interest are represented by weighted sum of user behaviors. user’s interest vector and other embedding vectors are concatenated and fed into a MLP to get the prediction.</span><br></pre></td></tr></table></figure>
+<h3 id="Deep-Interest-Evolution-Network"><a href="#Deep-Interest-Evolution-Network" class="headerlink" title="Deep Interest Evolution Network"></a>Deep Interest Evolution Network</h3><p>出发点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.包括DIN在内的大多数兴趣模型都将行为直接视为兴趣，而潜在的兴趣则很难通过显性行为完全反映出来。</span><br><span class="line">2.用户的兴趣是不断变化的，捕捉兴趣的动态对于兴趣的表达是非常重要的。</span><br></pre></td></tr></table></figure>
+<p>深度兴趣进化网络（DIEN）使用兴趣提取器层，从历史行为序列中捕捉时间性兴趣。在这一层，提出了一个辅助损失来监督每一步的兴趣提取。由于用户的兴趣是多样化的，特别是在电子商务系统中，兴趣演化层被提出来捕捉与目标项目有关的兴趣演化过程。在兴趣演化层，注意力机制被新颖地嵌入到顺序结构中，并且在兴趣演化过程中加强了相对兴趣的影响。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deep Interest Evolution Network (DIEN) uses interest extractor layer to capture temporal interests from history behavior sequence. At this layer, an auxiliary loss is proposed to supervise interest extracting at each step. As user interests are diverse, especially in the e-commerce system, interest evolving layer is proposed to capture interest evolving process that is relative to the target item. At interest evolving layer, attention mechanism is embedded into the sequential structure novelly, and the effects of relative interests are strengthened during interest evolution.</span><br></pre></td></tr></table></figure>
+<p>关于DIEN详情可参照本人的另一篇博客</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://perfect-player.github.io/2022/01/09/DIEN/</span><br></pre></td></tr></table></figure>
+<h3 id="AutoInt"><a href="#AutoInt" class="headerlink" title="AutoInt"></a>AutoInt</h3><p>该模型能够以明确的方式自动学习高阶特征的相互作用。方法的关键的关键是新引入的交互层，它允许每个特征与其他特征交互，并通过学习来确定相关性。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The key to our method is the newly-introduced interacting layer, which allows each feature to interact with the others and to determine the relevance through learning.</span><br></pre></td></tr></table></figure>
+<p>AutoInt使用交互层来模拟不同特征之间的相互作用。在每个交互层中，每个特征都被允许与其他所有的特征进行交互，并且能够自动识别相关的特征，通过多头关注机制形成有意义的高阶特征。通过堆叠多个交互层，AutoInt能够对不同等级的特征交互进行建模。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AutoInt use a interacting layer to model the interactions between different features. Within each interacting layer, each feature is allowed to interact with all the other features and is able to automatically identify relevant features to form meaningful higher-order features via the multi-head attention mechanism. By stacking multiple interacting layers,AutoInt is able to model different orders of feature interactions.</span><br></pre></td></tr></table></figure>
+<h3 id="ONN"><a href="#ONN" class="headerlink" title="ONN"></a>ONN</h3><p>出发点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">很少有工作专注于改进由嵌入层学习的特征表示</span><br></pre></td></tr></table></figure>
+<p>与传统的特征嵌入方法相比，操作感知嵌入方法为所有操作学习一种表征。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Compared with the traditional feature embedding method which learns one representation for all operations, operation-aware embedding can learn various representations for different operations.</span><br></pre></td></tr></table></figure>
+<p>ONN对二阶特征交互进行建模，就像FFM一样，并尽可能地保留二阶交互信息。此外，深度神经网络被用来学习高阶特征交互。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ONN models second order feature interactions like like FFM and preserves second-order interaction information as much as possible.Further more,deep neural network is used to learn higher-ordered feature interactions.</span><br></pre></td></tr></table></figure>
+<h3 id="FiBiNET-Feature-Importance-and-Bilinear-feature-Interaction-NETwork"><a href="#FiBiNET-Feature-Importance-and-Bilinear-feature-Interaction-NETwork" class="headerlink" title="FiBiNET(Feature Importance and Bilinear feature Interaction NETwork)"></a>FiBiNET(Feature Importance and Bilinear feature Interaction NETwork)</h3><p>提出了特征重要性和双线性特征交互网络，以动态学习特征重要性和细粒度的特征交互。一方面，FiBiNET可以通过Squeeze-Excitation网络（SENET）机制动态地学习特征的重要性；另一方面，它能够通过双线性函数有效地学习特征的相互作用。</p>
+<p>原文表述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Feature Importance and Bilinear feature Interaction NETwork is proposed to dynamically learn the feature importance and fine-grained feature interactions. On the one hand, the FiBiNET can dynamically learn the importance of fea- tures via the Squeeze-Excitation network (SENET) mechanism; on the other hand, it is able to effectively learn the feature interactions via bilinear function.</span><br></pre></td></tr></table></figure>
+<p>目的</p>
+<p>于动态学习特征重要性和细粒度的特征相互作用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proposed to dynamically learn the feature importance and finegrained feature interactions. </span><br></pre></td></tr></table></figure>
+<p>优势</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.对于CTR任务。SENET模块可以动态地学习特征的重要性。它提高了重要特征的权重，抑制了不重要特征的权重。</span><br><span class="line">2.引入了三种类型的双线性交互层来学习特征的交互作用，而不是通过计算特征的交互作用。</span><br><span class="line">3.在浅层模型中，将SENET机制与双线性特征交互结合起来，优于其他浅层、</span><br><span class="line">4.将经典的深度神经网络（DNN）组件与浅层模型相结合，成为一个深度模型。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> 1) For CTR task,the SENET module can learn the importance of features dynamically. It boosts the weight of the important feature and suppresses the weight of unimportant features. </span><br><span class="line"> 2) We introduce three types of Bilinear-Interaction layers to learn feature interaction rather</span><br><span class="line">than calculating the feature interactions with Hadamard product or inner product.</span><br><span class="line">3) Combining the SENET mechanism with bilinear feature interaction in our shallow model outperforms other shallow models such as FM and FFM.</span><br><span class="line">4) In order to improve performance further, we combine a classical deep neural network(DNN) component with the shallow model to be a deep model. The deep FiBiNET consistently outperforms the other state-of-the-art deep models such as DeepFM and XdeepFM.</span><br></pre></td></tr></table></figure>
+<h3 id="IFM"><a href="#IFM" class="headerlink" title="IFM"></a>IFM</h3><p>输入感知因子机（IFM）通过神经网络为不同实例中的同一特征学习一个独特的输入感知因子。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Input-aware Factorization Machine (IFM) learns a unique input-aware factor for the same feature in different instances via a neural network.</span><br></pre></td></tr></table></figure>
+<p>适用于稀疏的数据集。它的目的是通过有目的地学习更灵活、更准确的特征，来增强传统的FM。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">It aims to enhance traditional FMs by purposefully learning more flexible and accurate representation of features for different instances with the help of a factor estimating network. </span><br></pre></td></tr></table></figure>
+<p>IFM的两个主要优势</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.与现有的技术相比，它能产生更好的预测结果</span><br><span class="line">2.它能更深入地了解每个特征在预测任务中的作用。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">i). it produces better prediction results compared to existing techniques</span><br><span class="line">ii). it provides deeper insights into the role that each feature plays in the prediction task.</span><br></pre></td></tr></table></figure>
+<h3 id="DCN-V2"><a href="#DCN-V2" class="headerlink" title="DCN V2"></a>DCN V2</h3><p>以一种富有表现力而又简单的方式为显式交叉建模，观察到交叉网络中权重矩阵的低秩性质。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Observing the low-rank nature of the weight matrix in the cross network</span><br></pre></td></tr></table></figure>
+<h3 id="DIFM"><a href="#DIFM" class="headerlink" title="DIFM"></a>DIFM</h3><p>双输入感知因式分解机（DIFM）可以同时在比特级和矢量级对原始特征表示进行自适应的重新加权。此外，DIFM战略性地将包括多头自适应、残差网络和DNN在内的各种组件整合到一个统一的端到端模型中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Dual Inputaware Factorization Machines (DIFM) can adaptively reweight the original feature representations at the bit-wise and vector-wise levels simultaneously.Furthermore, DIFMs strategically integrate various components including Multi-Head Self-Attention, Residual Networks and DNNs into a unified end-to-end model.</span><br></pre></td></tr></table></figure>
+<p>目的是根据不同的输入实例，借助DIFMs，自适应地学习一个给定特征的灵活表示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">It aims to adaptively learn flexible representations of a given feature according to different input instances with the help of the Dual-Factor Estimating Network (Dual-FEN).</span><br></pre></td></tr></table></figure>
+<p>主要优点是它不仅能在比特级，而且能在矢量级同时有效地学习输入感知因子（用于重新加权原始特征表示）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The major advantage of DIFM is that it can effectively learn the inputaware factors (used to reweight the original feature representations) not only at the bit-wise level but also at the vectorwise level imultaneously.</span><br></pre></td></tr></table></figure>
+<h3 id="AFN"><a href="#AFN" class="headerlink" title="AFN"></a>AFN</h3><p>自适应因子化网络（AFN）可以从数据中自适应地学习任意等级的交叉特征。AFN的核心是一个对数转换层，将特征组合中每个特征的功率转换成要学习的系数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Adaptive Factorization Network (AFN) can learn arbitrary-order cross features adaptively from data. The core of AFN is a logarith- mic transformation layer to convert the power of each feature in a feature combination into the coefficient to be learned.</span><br></pre></td></tr></table></figure>
+<p>AFN能够从数据中自适应地学习任意顺序的特征互动。而不是在一个固定的最大顺序内对所有的交叉特征进行明确的建模。<br>AFN能够自动生成辨别性的交叉特征和相应特征的权重。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">learns arbitrary-order feature interactions adaptively from data. Instead of explicitly modeling all the cross features within a fixed maximum order,AFN is able to generate discriminative cross features and</span><br><span class="line">the weights of the corresponding features automatically.</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/09/DIEN/" rel="prev" title="DIEN">
+      <i class="fa fa-chevron-left"></i> DIEN
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CTR%E5%90%84%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8A%A3%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">CTR各模型优劣总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Convolutional-Click-Prediction-Model-%E5%8D%B7%E7%A7%AF%E7%82%B9%E5%87%BB%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8BCCPM"><span class="nav-number">1.2.</span> <span class="nav-text">Convolutional Click Prediction Model(卷积点击预测模型CCPM)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Factorization-supported-Neural-Network-%E5%9B%A0%E5%AD%90%E5%88%86%E8%A7%A3%E6%94%AF%E6%8C%81%E7%9A%84%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CFNN"><span class="nav-number">1.3.</span> <span class="nav-text">Factorization-supported Neural Network(因子分解支持的神经网络FNN)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Product-based-Neural-Network-PNN"><span class="nav-number">1.4.</span> <span class="nav-text">Product-based Neural Network(PNN)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wide-amp-Deep"><span class="nav-number">1.5.</span> <span class="nav-text">Wide &amp; Deep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DeepFM"><span class="nav-number">1.6.</span> <span class="nav-text">DeepFM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Piece-wise-Linear-Model"><span class="nav-number">1.7.</span> <span class="nav-text">Piece-wise Linear Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deep-amp-Cross-Network"><span class="nav-number">1.8.</span> <span class="nav-text">Deep &amp; Cross Network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Attentional-Factorization-Machine-AFM"><span class="nav-number">1.9.</span> <span class="nav-text">Attentional Factorization Machine(AFM)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Neural-Factorization-Machine"><span class="nav-number">1.10.</span> <span class="nav-text">Neural Factorization Machine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xDeepFM"><span class="nav-number">1.11.</span> <span class="nav-text">xDeepFM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deep-Interest-Network"><span class="nav-number">1.12.</span> <span class="nav-text">Deep Interest Network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deep-Interest-Evolution-Network"><span class="nav-number">1.13.</span> <span class="nav-text">Deep Interest Evolution Network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AutoInt"><span class="nav-number">1.14.</span> <span class="nav-text">AutoInt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ONN"><span class="nav-number">1.15.</span> <span class="nav-text">ONN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FiBiNET-Feature-Importance-and-Bilinear-feature-Interaction-NETwork"><span class="nav-number">1.16.</span> <span class="nav-text">FiBiNET(Feature Importance and Bilinear feature Interaction NETwork)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IFM"><span class="nav-number">1.17.</span> <span class="nav-text">IFM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCN-V2"><span class="nav-number">1.18.</span> <span class="nav-text">DCN V2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DIFM"><span class="nav-number">1.19.</span> <span class="nav-text">DIFM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AFN"><span class="nav-number">1.20.</span> <span class="nav-text">AFN</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
