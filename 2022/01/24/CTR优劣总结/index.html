@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="CTR各模型优劣总结前言本文是依照上一篇文章的顺序来进行整理，现附上上一篇链接 1https:&#x2F;&#x2F;perfect-player.github.io&#x2F;2021&#x2F;09&#x2F;27&#x2F;CTR&#x2F; Convolutional Click Prediction Model(卷积点击预测模型CCPM)由于循环神经网络在连续广告印象上的不可改变的传播方式，在有效建模动态点击预测方面有局限性，而深度CNN架构的池化和卷积层">
+  <meta name="description" content="CTR各模型优劣总结前言本文是依照上一篇文章的顺序来进行整理，现附上上一篇链接 1https:&#x2F;&#x2F;perfect-player.github.io&#x2F;2021&#x2F;09&#x2F;27&#x2F;CTR&#x2F; 本文参考原论文（主）与网络资料（次）编写而成。 Convolutional Click Prediction Model(卷积点击预测模型CCPM)由于循环神经网络在连续广告印象上的不可改变的传播方式，在有效建模动态点击">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CTR优劣总结">
 <meta property="og:url" content="http://example.com/2022/01/24/CTR%E4%BC%98%E5%8A%A3%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="CTR各模型优劣总结前言本文是依照上一篇文章的顺序来进行整理，现附上上一篇链接 1https:&#x2F;&#x2F;perfect-player.github.io&#x2F;2021&#x2F;09&#x2F;27&#x2F;CTR&#x2F; Convolutional Click Prediction Model(卷积点击预测模型CCPM)由于循环神经网络在连续广告印象上的不可改变的传播方式，在有效建模动态点击预测方面有局限性，而深度CNN架构的池化和卷积层">
+<meta property="og:description" content="CTR各模型优劣总结前言本文是依照上一篇文章的顺序来进行整理，现附上上一篇链接 1https:&#x2F;&#x2F;perfect-player.github.io&#x2F;2021&#x2F;09&#x2F;27&#x2F;CTR&#x2F; 本文参考原论文（主）与网络资料（次）编写而成。 Convolutional Click Prediction Model(卷积点击预测模型CCPM)由于循环神经网络在连续广告印象上的不可改变的传播方式，在有效建模动态点击">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-24T10:26:09.000Z">
-<meta property="article:modified_time" content="2022-01-26T08:51:32.431Z">
+<meta property="article:modified_time" content="2022-01-26T09:27:32.595Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -180,7 +180,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-26 16:51:32" itemprop="dateModified" datetime="2022-01-26T16:51:32+08:00">2022-01-26</time>
+                <time title="Modified: 2022-01-26 17:27:32" itemprop="dateModified" datetime="2022-01-26T17:27:32+08:00">2022-01-26</time>
               </span>
 
           
@@ -196,6 +196,7 @@
       
         <h2 id="CTR各模型优劣总结"><a href="#CTR各模型优劣总结" class="headerlink" title="CTR各模型优劣总结"></a>CTR各模型优劣总结</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本文是依照上一篇文章的顺序来进行整理，现附上上一篇链接</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://perfect-player.github.io/2021/09/27/CTR/</span><br></pre></td></tr></table></figure>
+<p>本文参考原论文（主）与网络资料（次）编写而成。</p>
 <h3 id="Convolutional-Click-Prediction-Model-卷积点击预测模型CCPM"><a href="#Convolutional-Click-Prediction-Model-卷积点击预测模型CCPM" class="headerlink" title="Convolutional Click Prediction Model(卷积点击预测模型CCPM)"></a>Convolutional Click Prediction Model(卷积点击预测模型CCPM)</h3><p>由于循环神经网络在连续广告印象上的不可改变的传播方式，在有效建模动态点击预测方面有局限性，而深度CNN架构的池化和卷积层可以从连续的广告印象中充分提取局部-全局的关键特征。</p>
 <p>CCPM就是基于CNN的一个架构，CCPM可以从具有不同元素的输入实例中提取局部-全局关键特征，这不仅可以针对单个广告印象，也可以针对连续的广告印象。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文表述</span><br><span class="line">CCPM can extract local-global key features from an input instance with varied elements, which can be implemented for not only single ad impression but also sequential ad impression.</span><br></pre></td></tr></table></figure>
