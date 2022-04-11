@@ -145,6 +145,149 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/12/Python%E5%A4%87%E5%BF%98%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/12/Python%E5%A4%87%E5%BF%98%E5%BD%95/" class="post-title-link" itemprop="url">Python备忘录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-12 15:32:04" itemprop="dateCreated datePublished" datetime="2021-07-12T15:32:04+08:00">2021-07-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-19 16:43:19" itemprop="dateModified" datetime="2021-07-19T16:43:19+08:00">2021-07-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Python编程备忘录"><a href="#Python编程备忘录" class="headerlink" title="Python编程备忘录"></a>Python编程备忘录</h2><h3 id="变量和简单数据类型"><a href="#变量和简单数据类型" class="headerlink" title="变量和简单数据类型"></a>变量和简单数据类型</h3><h4 id="变量的命名和使用"><a href="#变量的命名和使用" class="headerlink" title="变量的命名和使用"></a>变量的命名和使用</h4><p>（1）变量名只能包含字母，数字和下划线。</p>
+<p>（2）变量名不能包含空格，但能使用下划线来分割其中字符。</p>
+<p>（3）关键字和函数名不能忘用作变量。</p>
+<p>（4）变量名应简单又具有描述性。</p>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>python中单引号和双引号引起来的都是字符串。</p>
+<p>name.title()以首字母大写显示。</p>
+<p>name.upper()全部大写。</p>
+<p>name.lower()全部小写。</p>
+<p>用f(format)来合并字符串。name=f“{firstname} {lastname}”</p>
+<p>name.strip()来消除空白。该删除为暂时，要永久需关联到变量。</p>
+<p>name.rstrip()消除右边空白。</p>
+<p>name.lstrip()消除左边空白。</p>
+<p>name1=name.rstrip()。</p>
+<h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><p>用两个乘号表示乘方运算。3**2=9</p>
+<p>将任意两个数相除时，结果总是浮点数，即便这两个数都是整数且能整数。</p>
+<p>在其他任意运算中，只要有操作数是浮点数，默认得到的总是浮点数。</p>
+<p>给多个变量赋值：x,y,z=0,0,0</p>
+<p>用全大写将某个变量视为常量。</p>
+<h3 id="列表简介"><a href="#列表简介" class="headerlink" title="列表简介"></a>列表简介</h3><p>python中，用[]表示列表，用逗号分隔其中元素。</p>
+<p>在python中，索引为负数表示访问倒数第几个元素。</p>
+<p>name.append(‘xyz’)在列表末尾添加元素。</p>
+<p>name.insert(0,’xyz’)在索引0处插入元素。</p>
+<p>用del name[0]永久删除索引0处的元素。</p>
+<p>用pop暂时删除末尾元素，加入数字可删除任意位置。name.pop() name.pop(1)</p>
+<p>用remove永久删除特定元素。name.remove(‘xyz’)。但是remove只删除第一个指定的值，若多次出现需循环删除。</p>
+<h4 id="组织列表"><a href="#组织列表" class="headerlink" title="组织列表"></a>组织列表</h4><p>用cars.sort()对列表进行永久排序。</p>
+<p>若要按相反的顺序排序，则向方法传递参数reverse=True,cars.sort(reverse.True)</p>
+<p>用cars.sorted()对列表进行临时排序。</p>
+<p>用cars.reverse()倒着打印列表，且会永久性的修改列表的顺序。</p>
+<p>用len(cars)可确定列表的长度。</p>
+<h3 id="操作列表"><a href="#操作列表" class="headerlink" title="操作列表"></a>操作列表</h3><p>range（1,4）只会打印1 2 3</p>
+<p>若range只输入一个参数，则将从0开始。</p>
+<p>可给range指定第三个参数，设定为步长。</p>
+<h4 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h4><p>将for循环和创建新元素的代码合并成一行，并自动附加新元素。</p>
+<p>squares=[value**2 for value in range(1,11)]</p>
+<h4 id="使用列表的一部分"><a href="#使用列表的一部分" class="headerlink" title="使用列表的一部分"></a>使用列表的一部分</h4><h5 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h5><p>与range函数一样，指定索引，cars[0:3]，将返回索引0,1,2的元素</p>
+<p>若不指定，cars[:3]，将从头开始索引，而cars[3:]将从第四个元素索引到末尾</p>
+<p>若访问后三位元素，可cars[-3:]</p>
+<p>也可加入第三个值，告诉Python间隔多少提取一个元素</p>
+<h5 id="复制列表"><a href="#复制列表" class="headerlink" title="复制列表"></a>复制列表</h5><p>省略起始索引与终止索引，cars1=cars[:]</p>
+<p>若只是单纯赋值，cars1=cars，则将两个指向同一个列表</p>
+<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><p>python将不可变的列表称为元组</p>
+<p>元组使用圆括号而非中括号进行标识</p>
+<p>如果你要定义的元组只包含一个元素，必须加上逗号，my_t=(3,)</p>
+<p>虽然不能修改元组的元素，但可以给存储元组的变量赋值</p>
+<p>dimensions=(200,50)</p>
+<p>dimensions=(400,100)</p>
+<p>这是合法的，相当于将一个新元组关联到变量dimension</p>
+<h3 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h3><h4 id="条件测试"><a href="#条件测试" class="headerlink" title="条件测试"></a>条件测试</h4><p>python在检查是否相等时区分大小写</p>
+<p>检查多个条件用 and 和 or</p>
+<p>要判断特定值是否已包含在列表中，可使用关键字in</p>
+<p>检查不包含，可用 not in</p>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>在python中，字典是一系列键值对。每个键都与一个值相关联，你可以使用键来访问相关联的值。</p>
+<p>字典用在花括号中的一系列键值对表示。</p>
+<p>键值对是两个相关联的值，指定键时，Python将返回与之相关联的值。键和值之间用冒号分割，而键值对之间用逗号分割。</p>
+<p>要获取与键相关联的值，可依次指定字典名和放在方括号内的值。</p>
+<p>对于字典中不需要的信息，可用del语句将相应的键值对彻底删除。使用del语句时，必须要指定字典名和要删除的键。</p>
+<p>可使用get来访问值，可避免指定键不存在的情况。</p>
+<p>eg:point_value -alien.get(‘points’,’sorry’)</p>
+<h5 id="遍历字典"><a href="#遍历字典" class="headerlink" title="遍历字典"></a>遍历字典</h5><p>for k,v in users.items()//遍历键值对</p>
+<p>for k in users.keys()//遍历键</p>
+<p>for v in users.values()//遍历值    </p>
+<h3 id="用户输入和while循环"><a href="#用户输入和while循环" class="headerlink" title="用户输入和while循环"></a>用户输入和while循环</h3><p>要返回循环开头，并根据条件测试结果决定是否继续执行循环，可使用continue。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>使用def定义函数</p>
+<p>def user():</p>
+<h5 id="关键字实参"><a href="#关键字实参" class="headerlink" title="关键字实参"></a>关键字实参</h5><p>def pet(type,name)</p>
+<p>不使用pet(hamster,harry)</p>
+<p>使用关键字实参pet(type=’hamster’,name=’harry’)//无视顺序</p>
+<h5 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h5><p>编写函数时，可给每个形参指定默认值，在调用时，若未指定实参，则使用默认形参。</p>
+<p>def pet(type=’dog’,name)</p>
+<h5 id="传递任意数量的实参"><a href="#传递任意数量的实参" class="headerlink" title="传递任意数量的实参"></a>传递任意数量的实参</h5><p>def make(*pizza)://即可接受任意数量的实参</p>
+<h5 id="使用任意数量的关键字实参"><a href="#使用任意数量的关键字实参" class="headerlink" title="使用任意数量的关键字实参"></a>使用任意数量的关键字实参</h5><p>def make(**pizza)://接受任意数量键值对</p>
+<h4 id="将函数存储在模块中"><a href="#将函数存储在模块中" class="headerlink" title="将函数存储在模块中"></a>将函数存储在模块中</h4><p>导入整个模块 import pizza</p>
+<p>导入模块中特定函数 from pizza import makepizza1,makepizza2</p>
+<p>可使用as给模块或者函数指定别名</p>
+<p>from pizza import make as m</p>
+<p>使用<em>号可导入模块中所有函数 from pizza import </em></p>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>类中的 __init()方法会自动运行，并且开头和结尾各有两个下划线。</p>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>class elecar(car):</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/30/%E9%9B%86%E5%90%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1534,7 +1677,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
