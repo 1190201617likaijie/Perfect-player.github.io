@@ -145,6 +145,493 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">编译原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-04 10:47:20" itemprop="dateCreated datePublished" datetime="2022-01-04T10:47:20+08:00">2022-01-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-19 11:31:04" itemprop="dateModified" datetime="2022-01-19T11:31:04+08:00">2022-01-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><h3 id="什么是编译"><a href="#什么是编译" class="headerlink" title="什么是编译"></a>什么是编译</h3><p>编译：将高级语言翻译成汇编语言或机器语言的过程。</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104110715843.png" alt="image-20220104110715843" style="zoom:50%;"></p>
+<p>预处理器：把存储在不同文件中的源程序聚合在一起；把被称为宏的缩写语句转换为原始语句。</p>
+<p>可重定位：在内存中存放的起始位置L不是固定的</p>
+<p>加载器：修改可重定位地址；将修改后的指令和数据放到内存中适当的位置。</p>
+<p>链接器：将多个可重定位的机器代码文件连接到一起；解决外部内存地址问题</p>
+<h3 id="编译系统的结构"><a href="#编译系统的结构" class="headerlink" title="编译系统的结构"></a>编译系统的结构</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104113047587.png" alt="image-20220104113047587" style="zoom:50%;"></p>
+<h3 id="词法分析概述"><a href="#词法分析概述" class="headerlink" title="词法分析概述"></a>词法分析概述</h3><p>词法分析的主要任务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">从左向右逐行扫描源程序的字符，识别出各个单词，确定单词的类型。将识别出的单词转换成统一的机内表示——词法单元(token)形式。</span><br><span class="line">token:&lt;种别码，属性值&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220105104115216.png" alt="image-20220105104115216" style="zoom:50%;"></p>
+<h3 id="语法分析概述"><a href="#语法分析概述" class="headerlink" title="语法分析概述"></a>语法分析概述</h3><p>语法分析器从词法分析器输出的token序列中识别出各类短语，并构造语法分析树。</p>
+<h3 id="语义分析概述"><a href="#语义分析概述" class="headerlink" title="语义分析概述"></a>语义分析概述</h3><p>主要任务：</p>
+<p>任务一：收集标识符的属性信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">：</span><br><span class="line">种属</span><br><span class="line">类型</span><br><span class="line">存储类型，长度</span><br><span class="line">值</span><br><span class="line">作用域</span><br><span class="line">参数和返回值信息</span><br></pre></td></tr></table></figure>
+<p>符号表：用来存放标识符的属性信息的数据结构</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095418057.png" alt="image-20220106095418057" style="zoom:50%;"></p>
+<p>任务二：语义检查</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">变量或过程未经声明就使用；</span><br><span class="line">变量或过程名重复声明；</span><br><span class="line">运算分量类型不匹配；</span><br><span class="line">操作符与操作数之间的类型不匹配</span><br></pre></td></tr></table></figure>
+<h3 id="中间代码生成及编译器后端"><a href="#中间代码生成及编译器后端" class="headerlink" title="中间代码生成及编译器后端"></a>中间代码生成及编译器后端</h3><p>常用的中间表示形式：</p>
+<p>三地址码；语法结构树/语法树</p>
+<h4 id="三地址码"><a href="#三地址码" class="headerlink" title="三地址码"></a>三地址码</h4><p>三地址码由类似于汇编语言的指令序列组成，每个指令最多有三个操作数。</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095933969.png" alt="image-20220106095933969" style="zoom:50%;"></p>
+<p>三地址指令的表示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">四元式(op.y.z.x)</span><br><span class="line">三元式</span><br><span class="line">间接三元式</span><br></pre></td></tr></table></figure>
+<p>目标代码生成以源程序的中间表示形式作为输入，并把它映射到目标语言；目标代码生成的一个重要任务是为程序中使用的变量合理分配寄存器。</p>
+<p>代码优化：为改进代码，所进行的等价程序变换，使其运行得更快一些，占用空间更小一些。</p>
+<h2 id="语言及其文法"><a href="#语言及其文法" class="headerlink" title="语言及其文法"></a>语言及其文法</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>字母表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个有穷符号集合。</span><br></pre></td></tr></table></figure>
+<p>字母表运算</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">乘积</span><br><span class="line">n次幂</span><br><span class="line">正闭包（正数次幂的并集）</span><br><span class="line">克林闭包(正闭包的基础上加个空串)</span><br></pre></td></tr></table></figure>
+<p>串：字母表中符号的一个有穷序列</p>
+<p>串的运算</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">连接，空串是连接运算的单位元</span><br><span class="line">串的幂运算</span><br></pre></td></tr></table></figure>
+<h3 id="文法的定义"><a href="#文法的定义" class="headerlink" title="文法的定义"></a>文法的定义</h3><p>文法</p>
+<p>$G=(V_T,V_N,P,S)$</p>
+<p>$V_T$:终结符集合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">终结符是文法所定义的语言的基本符号，有事也称为token</span><br></pre></td></tr></table></figure>
+<p>$V_N$：非终结符集合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">非终结符是用来表示语法成分的符号，有时也称为&quot;语法变量&quot;</span><br></pre></td></tr></table></figure>
+<p>$V_T$与$V_N$不相交，二者相并统称为文法符号集。</p>
+<p>P：产生式集合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">描述了将终结符和非终结符组合成串的方法</span><br></pre></td></tr></table></figure>
+<p>S:开始符号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开始符号表示的是该文法中最大的语法成分</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107105320903.png" alt="image-20220107105320903" style="zoom:50%;"></p>
+<p>符号约定</p>
+<p>终结符</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110153976.png" alt="image-20220107110153976" style="zoom:50%;"></p>
+<p>非终结符</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110227112.png" alt="image-20220107110227112" style="zoom:50%;"></p>
+<p>注</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110401057.png" alt="image-20220107110401057" style="zoom:50%;"></p>
+<h3 id="语言的定义"><a href="#语言的定义" class="headerlink" title="语言的定义"></a>语言的定义</h3><p>符号串$a<em>0$经过n步推导出$a_n$,可简记为$a_0\Longrightarrow </em>{}^{n}a_n $</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220108100026833.png" alt="image-20220108100026833" style="zoom:50%;"></p>
+<h3 id="文法的分类"><a href="#文法的分类" class="headerlink" title="文法的分类"></a>文法的分类</h3><p>Chomsky文法分类体系</p>
+<h4 id="0型文法"><a href="#0型文法" class="headerlink" title="0型文法"></a>0型文法</h4><p>$\alpha \longrightarrow \beta $</p>
+<p>无限制文法，其中$\alpha$中至少包含一个非终结符。</p>
+<p>由0型文法G生成的语言称为 <strong>0型语言</strong></p>
+<h4 id="1型文法"><a href="#1型文法" class="headerlink" title="1型文法"></a>1型文法</h4><p>$\alpha \longrightarrow \beta $</p>
+<p>上下文有关文法，CSG</p>
+<script type="math/tex; mode=display">
+|\alpha| < |\beta|</script><p>产生式的一般形式:</p>
+<script type="math/tex; mode=display">
+\alpha_1A\alpha_2\longrightarrow\alpha_1\beta\alpha_2(\beta\ne\varepsilon)</script><h4 id="2型文法"><a href="#2型文法" class="headerlink" title="2型文法"></a>2型文法</h4><p>$\alpha \longrightarrow \beta $</p>
+<p>上下文无关文法，CFG</p>
+<p>其中$\alpha\in V_N$</p>
+<p>产生式的一般形式：</p>
+<script type="math/tex; mode=display">
+A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="headerlink" title="3型文法"></a>3型文法</h4><p>$\alpha \longrightarrow \beta $</p>
+<p>正则文法，RG</p>
+<p>右线性文法：$A\longrightarrow wB或A\longrightarrow w$</p>
+<p>左线性文法：$A\longrightarrow Bw或A\longrightarrow w$</p>
+<h3 id="CFG的分析树"><a href="#CFG的分析树" class="headerlink" title="CFG的分析树"></a>CFG的分析树</h3><p>给定一个句型，其分析树中的每一棵子树的边缘称为该句型的一个短语。</p>
+<p>直接短语：高度为2的子树的边缘。</p>
+<p>二义性文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果一个文法可以为某个句子生成多颗分析树，则称这个文法是二义性的。</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105001704.png" alt="image-20220109105001704" style="zoom:50%;"></p>
+<h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105354813.png" alt="image-20220109105354813" style="zoom:50%;"></p>
+<h3 id="正则定义"><a href="#正则定义" class="headerlink" title="正则定义"></a>正则定义</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111100400281.png" alt="image-20220111100400281" style="zoom:50%;"></p>
+<h3 id="有穷自动机"><a href="#有穷自动机" class="headerlink" title="有穷自动机"></a>有穷自动机</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111101353306.png" alt="image-20220111101353306" style="zoom:50%;"></p>
+<h3 id="有穷自动机的分类"><a href="#有穷自动机的分类" class="headerlink" title="有穷自动机的分类"></a>有穷自动机的分类</h3><p>DFA确定的有穷自动机</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104246612.png" alt="image-20220112104246612" style="zoom:50%;"></p>
+<p>NFA非确定的有穷自动机</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104402251.png" alt="image-20220112104402251" style="zoom:50%;"></p>
+<p>正则文法与正则表达式与有穷自动机等价</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104637911.png" alt="image-20220112104637911" style="zoom:50%;"></p>
+<p>带有空边的NFA与不带空边的NFA有等价性</p>
+<h3 id="从正则表达式到有穷自动机"><a href="#从正则表达式到有穷自动机" class="headerlink" title="从正则表达式到有穷自动机"></a>从正则表达式到有穷自动机</h3><p>先构造NFA,再从NFA到DFA。</p>
+<h3 id="从NFA到DFA的转换"><a href="#从NFA到DFA的转换" class="headerlink" title="从NFA到DFA的转换"></a>从NFA到DFA的转换</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100302890.png" alt="image-20220114100302890" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100719876.png" alt="image-20220114100719876" style="zoom: 50%;"></p>
+<h3 id="识别单词的DFA"><a href="#识别单词的DFA" class="headerlink" title="识别单词的DFA"></a>识别单词的DFA</h3><p> 词法分析阶段可检测错误的类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">单词拼写错误</span><br><span class="line">非法字符</span><br></pre></td></tr></table></figure>
+<p>错误恢复策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">最简单的错误恢复策略：恐慌模式</span><br><span class="line">从剩余的输入中不断删除字符，直到词法分析器能够在剩余的开头发现一个正确的字符为止。</span><br></pre></td></tr></table></figure>
+<h2 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h2><h3 id="自顶向下分析概述"><a href="#自顶向下分析概述" class="headerlink" title="自顶向下分析概述"></a>自顶向下分析概述</h3><p>从分析树的顶部向底部方向构造分析树。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最左推导：总是选择每个句型的最左非终结符进行替换。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最右推导：总是选择每个句型的最右非终结符进行替换。</span><br></pre></td></tr></table></figure>
+<p>在自底向上的分析中，总是采用最左规约的方式，因此把最左规约称为规范规约，而最右推导相应的称为规范推导。</p>
+<p>自顶向下选择最左推导。</p>
+<p>需要回溯的分析器叫不确定分析器。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">预测分析：递归下降分析技术的一个特例，通过在输入中向前看固定个数符号来选择正确的A-产生式。</span><br><span class="line">预测分析不需要回溯，是一种确定的自顶向下分析方法。</span><br></pre></td></tr></table></figure>
+<h3 id="文法转换"><a href="#文法转换" class="headerlink" title="文法转换"></a>文法转换</h3><p>问题一</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当同一个非终结符的多个候选式存在共同前缀，将导致回溯现象 </span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101308032.png" alt="image-20220115101308032" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101415801.png" alt="image-20220115101415801" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101523666.png" alt="image-20220115101523666" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101639910.png" alt="image-20220115101639910" style="zoom:50%;"></p>
+<h3 id="LL-1-文法"><a href="#LL-1-文法" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119105058524.png" alt="image-20220119105058524" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119105540074.png" alt="image-20220119105540074" style="zoom:50%;"></p>
+<p>非终结符的后继符号集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可能在某个句型中紧跟在A后边的终结符a的集合</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119105852021.png" alt="image-20220119105852021" style="zoom:50%;"></p>
+<p>q_文法中不含右部以非终结符打头的产生式</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110032971.png" alt="image-20220119110032971" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110441801.png" alt="image-20220119110441801" style="zoom:50%;"></p>
+<p>LL(1)文法</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110545417.png" alt="image-20220119110545417" style="zoom:50%;"></p>
+<h3 id="FIRST集和FOLLOW集"><a href="#FIRST集和FOLLOW集" class="headerlink" title="FIRST集和FOLLOW集"></a>FIRST集和FOLLOW集</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110913536.png" alt="image-20220119110913536" style="zoom:50%;"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/24/NLP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/24/NLP/" class="post-title-link" itemprop="url">NLP</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-24 17:08:09" itemprop="dateCreated datePublished" datetime="2021-12-24T17:08:09+08:00">2021-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-29 00:31:44" itemprop="dateModified" datetime="2021-12-29T00:31:44+08:00">2021-12-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>NLP任务：分词、词性标注、未登录词识别</p>
+<p>语言的性质：共时性；历时性</p>
+<p>语法单位</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">句子是语言中最大的语法单位</span><br><span class="line">词组是词的组合，它是句子里面作用相当于词而本身又是由词组成的大于词的单位。</span><br><span class="line">词是最重要的一级语法单位，它是造句的时候能够独立运用的最小单位。</span><br><span class="line">语素是语言中音义结合的最小单位。就汉语来说，大抵一个汉字就是一个语素，但是也有两个字表示一个语素的，如：“咖啡”</span><br></pre></td></tr></table></figure>
+<h2 id="语料库"><a href="#语料库" class="headerlink" title="语料库"></a>语料库</h2><p>• 语料库（corpus）一词在语言学上意指大量的文本，通常经过整理， 具有既定格式与标记</p>
+<p>语料库的种类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">共时语料库与历时语料库</span><br><span class="line">通用语料库与专用语料库</span><br></pre></td></tr></table></figure>
+<h3 id="语料加工"><a href="#语料加工" class="headerlink" title="语料加工"></a>语料加工</h3><p>文本处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">垃圾格式问题</span><br><span class="line">大小写</span><br><span class="line">标记化</span><br><span class="line">空格</span><br><span class="line">连字符</span><br><span class="line">词法</span><br><span class="line">句子定义—启发式算法</span><br><span class="line">句子边界的研究</span><br></pre></td></tr></table></figure>
+<p>格式标注</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">通用标记语言SGML</span><br><span class="line">SGML是超文本格式的最高层次标准，是可以定义标记语言的元语言</span><br><span class="line">语法标注</span><br></pre></td></tr></table></figure>
+<p>Zipf法则 • 一个词地频率f和它的词频排序位置r： f*r=k (k为常数)</p>
+<p><img src="/2021/12/24/NLP/image-20211227150000774.png" alt="image-20211227150000774"></p>
+<p>如果设置参数B=1, ρ=0，Mandelbrot公式就简化为Zipf法则</p>
+<p>搭配抽取</p>
+<p><img src="/2021/12/24/NLP/image-20211227150045052.png" alt="image-20211227150045052" style="zoom:50%;"></p>
+<h2 id="语料库加工-双语句子自动对齐-amp-双语词典获取"><a href="#语料库加工-双语句子自动对齐-amp-双语词典获取" class="headerlink" title="语料库加工_双语句子自动对齐&amp; 双语词典获取"></a>语料库加工_双语句子自动对齐&amp; 双语词典获取</h2><h3 id="句子对齐问题描述"><a href="#句子对齐问题描述" class="headerlink" title="句子对齐问题描述"></a>句子对齐问题描述</h3><p>基于长度的句子对齐  基本思想：源语言和目标语言的句子长度存在一定 的比例关系</p>
+<p>要求：最小（句珠内无句珠）； 唯一（一个句子仅属于一个句珠）； 无交叉（后句对齐一定在前句对齐位置之后）</p>
+<h3 id="基于共现的双语词典的获取"><a href="#基于共现的双语词典的获取" class="headerlink" title="基于共现的双语词典的获取"></a>基于共现的双语词典的获取</h3><p>基本思想：如果汉语词出现在某个双语句对 中，其译文也必定在这个句对中。</p>
+<p>汉英词典的迭代获取策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">迭代策略</span><br><span class="line">1) 初始化；</span><br><span class="line">2) 使用对数相似性模型计算汉英翻译词对候选；</span><br><span class="line">3) 选取前n个汉英对译词对；</span><br><span class="line">4) 双语句对中剔除选定的翻译词对；</span><br><span class="line">5) 若不满足终止条件，重复步骤2；</span><br><span class="line"> 几点说明：复合词暂未考虑；可加入交互方式;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>基于共现的词汇对译模型</p>
+<p>评价方式：专家独立于上下文进行判别</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">评价1：每5000个翻译词对候选中正确的译文数</span><br><span class="line">评价2：综合考虑翻译词典的性能</span><br></pre></td></tr></table></figure>
+<h2 id="汉语自动分词"><a href="#汉语自动分词" class="headerlink" title="汉语自动分词"></a>汉语自动分词</h2><h3 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h3><p>词干提取vs词形还原：分别用于IR 和 NLP</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">词干提取（stemming）是抽取词的词干或词根形式（不一定能够表达完整语义</span><br><span class="line">词形还原（lemmatization），是把一个任何形式的语言词汇还原为一般形式（能表达完整语义）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">词干提取主要是采用“缩减”的方法</span><br><span class="line">词形还原主要采用“转变”的方法</span><br><span class="line">在复杂性上：词干提取方法相对简单，词形还原更复杂</span><br><span class="line">在实现方法上：主流方法类似，但具体实现上各有侧重</span><br></pre></td></tr></table></figure>
+<p>词性标注</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">词性标注（part-of-speech tagging）,又称为词类标注或者简称</span><br><span class="line">标注，是指为分词结果中的每个单词标注一个正确的词性的程序，</span><br><span class="line">也即确定每个词是名词、动词、形容词或者其他词性的过程</span><br><span class="line">• 词性标注是很多NLP任务的预处理步骤，如句法分析，经过词性</span><br><span class="line">标注后的文本会带来很大的便利性，但也不是不可或缺的步骤</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="分词算法"><a href="#分词算法" class="headerlink" title="分词算法"></a>分词算法</h3><p>正向最大匹配分词(Forward Maximum  Matching method, FMM)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">基本思想：将当前能够匹配的最长词输出</span><br><span class="line">• 1. 设自动分词词典中最长词条所含汉字个数为I</span><br><span class="line">• 2. 取被处理材料当前字符串序数中的I个字作为匹配字段，查找分词词典。</span><br><span class="line">若词典中有这样的一个I字词，则匹配成功，匹配字段作为一个词被切分出</span><br><span class="line">来，转6</span><br><span class="line">• 3. 如果词典中找不到这样的一个I字词，则匹配失败</span><br><span class="line">• 4. 匹配字段去掉最后一个汉字，I--</span><br><span class="line">• 5. 重复2-4，直至切分成功为止</span><br><span class="line">• 6. I重新赋初值，转2，直到切分出所有词为止</span><br></pre></td></tr></table></figure>
+<p>逆向最大匹配分词(Backward  Maximum Matching method, BMM法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">分词过程与FMM方法相同，不过是从句子(或文</span><br><span class="line">章)末尾开始处理，每次匹配不成功时去掉的是</span><br><span class="line">最前面的一个汉字</span><br></pre></td></tr></table></figure>
+<p>实验表明：逆向最大匹配法比最大匹配法更有效</p>
+<p>最大匹配法的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">• 存在分词错误：增加知识、局部修改</span><br><span class="line">• 局部修改：增加歧义词表，排歧规则</span><br><span class="line">无法发现分词歧义-&gt;从单向匹配改为双向最大匹配</span><br></pre></td></tr></table></figure>
+<p>双向匹配法（Bi-direction Matching  method, BM法）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">双向最大匹配法是将正向最大匹配法（FMM）得到的分词</span><br><span class="line">结果和逆向最大匹配法（BMM）得到的结果进行比较，从</span><br><span class="line">而决定正确的分词方法</span><br></pre></td></tr></table></figure>
+<p>最少分词法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">• 分词结果中含词数最少</span><br><span class="line">• 优化代替了贪心</span><br><span class="line">• 等价于最短路径</span><br><span class="line">•算法：</span><br><span class="line">• 动态规划算法</span><br><span class="line">• 优点：好于单向的最大匹配方法</span><br><span class="line">• 最大匹配：独立自主/和平/等/互利/的/原则</span><br><span class="line">• 最短路径：独立自主/和/平等互利/的/原则</span><br><span class="line">• 缺点：忽略了所有覆盖歧义，也无法解决大部分交叉歧义</span><br><span class="line">• 结合成分子时</span><br><span class="line">• 结合|成分|子 &#123;&#125; 结|合成|分子 &#123;&#125; 结合|成|分</span><br></pre></td></tr></table></figure>
+<h3 id="分词问题：歧义"><a href="#分词问题：歧义" class="headerlink" title="分词问题：歧义"></a>分词问题：歧义</h3><p>交集型切分歧义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">汉字串AJB被称作交集型切分歧义，如果满足AJ、JB同时</span><br><span class="line">为词(A、J、B分别为汉字串)。此时汉字串J被称作交集串。</span><br></pre></td></tr></table></figure>
+<p>组合型切分歧义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">• 汉字串AB被称作组合型切分歧义，如果满足条件：A、</span><br><span class="line">B、AB同时为词</span><br></pre></td></tr></table></figure>
+<p>交集型歧义字段中含有交集字段的个数，称为链长</p>
+<p>“真歧义”和“伪歧义”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">• 真歧义指存在两种或两种以上的可实现的切分形式</span><br><span class="line">• 伪歧义一般只有一种正确的切分形式</span><br></pre></td></tr></table></figure>
+<p>分词问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">歧义</span><br><span class="line">未登录词</span><br><span class="line">新词</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>分词质量评价</p>
+<p><img src="/2021/12/24/NLP/image-20211227193857156.png" alt="image-20211227193857156" style="zoom:50%;"></p>
+<h2 id="中文分词-统计建模"><a href="#中文分词-统计建模" class="headerlink" title="中文分词_统计建模"></a>中文分词_统计建模</h2><h3 id="基于N元文法的分词（MM）"><a href="#基于N元文法的分词（MM）" class="headerlink" title="基于N元文法的分词（MM）"></a>基于N元文法的分词（MM）</h3><p>MM(马尔可夫模型/过程) ：有限历史假设，仅依 赖前n-1个词</p>
+<p>一种最简化的情况：一元文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">P（S）=p(w1) ·p(w2) ·p(w3)….p(wn)</span><br><span class="line"> 等价于最大频率分词</span><br><span class="line"> 即把切分路径上每一个词的概率相乘得到该切</span><br><span class="line">分路径的概率</span><br><span class="line"> 把词概率的负对数理解成路径“代价”，输出</span><br><span class="line">结果就是整体代价最“小”分词序列</span><br></pre></td></tr></table></figure>
+<p>采用二元语法(bi-gram)：性能进一步提高</p>
+<p><img src="/2021/12/24/NLP/image-20211227195204331.png" alt="image-20211227195204331" style="zoom:50%;"></p>
+<p> 更大的n：对下一个词出现的约束性信息更多，更大的辨别力。  更小的n：出现的次数更多，更可靠的统计结果，更高的可靠性。</p>
+<p>等价类映射：降低语言模型参数空间</p>
+<p>数据平滑（smoothing）：保持模型的辨别能力</p>
+<h3 id="基于HMM的分词-词性标注一体化"><a href="#基于HMM的分词-词性标注一体化" class="headerlink" title="基于HMM的分词/词性标注一体化"></a>基于HMM的分词/词性标注一体化</h3><p>输入：待处理句子S </p>
+<p> 输出：S的 词序列 W = w1 ,w2…wn </p>
+<p>词性序列 T = t1 ,t2…tn </p>
+<p> 提示  W可以代表S  分词结果即观测序列  词性序列是状态序列</p>
+<p>公式推导</p>
+<p><img src="/2021/12/24/NLP/image-20211227200001707.png" alt="image-20211227200001707" style="zoom:50%;"></p>
+<p><img src="/2021/12/24/NLP/image-20211227200011651.png" alt="image-20211227200011651" style="zoom:50%;"></p>
+<p><img src="/2021/12/24/NLP/image-20211227200200077.png" alt="image-20211227200200077"></p>
+<h3 id="由字构词的汉语分词方法"><a href="#由字构词的汉语分词方法" class="headerlink" title="由字构词的汉语分词方法"></a>由字构词的汉语分词方法</h3><p>基本思路  分词过程：一个字的分类问题；  每个字在词语中属于一个确定位置</p>
+<p>字的的标注过程中，对所有的字根据预定义的特 征进行词位特征学习，获得一个概率模型</p>
+<p>由字构词的分词技术的优势</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> 简化了分词系统的设计  文本中的词表词和未登录词都是用统一的字 标注过程来实现的，分词过程成为字重组的 简单过程。  既可以不必专门强调词表词信息，也不用专 门设计特定的未登录词识别模块</span><br></pre></td></tr></table></figure>
+<h3 id="汉语分词方法的后处理方法"><a href="#汉语分词方法的后处理方法" class="headerlink" title="汉语分词方法的后处理方法"></a>汉语分词方法的后处理方法</h3><p>为什么不采用更精巧的模型？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">四元或更高阶...  不可行，需要大量的参数  不得不做一些平滑或差值  难度随模型复杂度而加剧</span><br></pre></td></tr></table></figure>
+<p>两个重要组成部分：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 允许的错误校正转换的详细说明</span><br><span class="line"> 学习算法</span><br></pre></td></tr></table></figure>
+<p>输入数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一个已经标注好的语料库，</span><br><span class="line">*一个词典</span><br></pre></td></tr></table></figure>
+<p>基于转换错误驱动的规则方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> 学习和标注在该方法种都是简单和直观的</span><br><span class="line"> 成功用于词性标注、句法分析、介词附着以及</span><br><span class="line">语义消歧</span><br><span class="line"> 经验上，没有出现过拟合现象</span><br><span class="line"> 可以被用来解决大部分后处理问题</span><br><span class="line"> 效率的提升优化，考验工程能力</span><br></pre></td></tr></table></figure>
+<p>标注可以采用 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> 隐马尔科夫模型（HMM）  最大熵（ME）  最大熵马尔科夫模型（MEMM）  条件随机场（CRF）等</span><br></pre></td></tr></table></figure>
+<h2 id="隐马尔科夫模型"><a href="#隐马尔科夫模型" class="headerlink" title="隐马尔科夫模型"></a>隐马尔科夫模型</h2><h3 id="马尔科夫-Markov-模型"><a href="#马尔科夫-Markov-模型" class="headerlink" title="马尔科夫(Markov)模型"></a>马尔科夫(Markov)模型</h3><p>马尔科夫模型是一种统计模型，广泛的应用在语音识别， 词性自动标注，音字转换，概率文法等各个自然语言处理 的应用领域。</p>
+<p>随机过程又称为随机函数，是随时间随机变化的过程。马 尔科夫模型描述了一类重要随机过程。</p>
+<p>系统在时间t处于状态𝑠𝑗的概率取决于其在时间1,2,…t-1的 状态，该概率为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">𝑃(𝑞𝑡 = 𝑠𝑗|𝑞𝑡−1 = 𝑠𝑖, 𝑞𝑡−2 = 𝑠𝑘, … )</span><br></pre></td></tr></table></figure>
+<p>离散的一阶马尔科夫链：系统在时间t的状态只与时间t-1 的状态有关。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">𝑃(𝑞𝑡 = 𝑠𝑗|𝑞𝑡−1 = 𝑠𝑖, 𝑞𝑡−2 = 𝑠𝑘, … ) = 𝑃(𝑞𝑡 = 𝑠𝑗|𝑞𝑡−1 = 𝑠𝑖)</span><br></pre></td></tr></table></figure>
+<p>状态转移概率𝑎𝑖𝑗必须满足以下条件：</p>
+<p><img src="/2021/12/24/NLP/image-20211227203707059.png" alt="image-20211227203707059" style="zoom:50%;"></p>
+<p>N个状态的一阶马尔科夫过程有𝑁2，可以表示成为一个状 态转移矩阵</p>
+<p>eg:状态𝑠1：名词 状态𝑠2：动词 状态𝑠3：形容词</p>
+<p>如果在该文字中某句子的第一个词为名词，那么该句子 中三类词出现顺序为O=“名动形名”的概率。</p>
+<p><img src="/2021/12/24/NLP/image-20211227203903492.png" alt="image-20211227203903492" style="zoom:50%;"></p>
+<p>马尔科夫(Markov)模型：有限状态机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">马尔科夫模型可视为随机的有限状态机。</span><br><span class="line">圆圈表示状态，状态之间的转移用带箭头的弧表示，弧上</span><br><span class="line">的数字为状态转移的概率。</span><br><span class="line">初始状态用标记为start的输入箭头表示。</span><br><span class="line">假设任何状态都可作为终止状态。</span><br><span class="line">对每个状态来说，发出弧上的概率和为1。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>eg:</p>
+<p><img src="/2021/12/24/NLP/image-20211227204121800.png" alt="image-20211227204121800" style="zoom:50%;"></p>
+<p>一般地，一个HMM记为一个五元组μ＝（S，K， A，B，π），其中，S为状态的集合，K为输出符 号的集合，π，A和B分别是初始状态的概率分布、 状态转移概率和符号发射概率。为了简单，有时也将其记为三元组μ＝（A，B，π）</p>
+<p>隐马尔可夫模型：三个基本问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.估值问题：给定一个观察序列 O = 𝑂1𝑂2 … 𝑂𝑇 和模型μ＝(A，</span><br><span class="line">B，π)，如何快速地计算出给定模型μ情况下，观察序列O的</span><br><span class="line">概率，即𝑃 𝑂 𝜇 ?</span><br><span class="line">2.序列问题：给定一个观察序列 O = 𝑂1𝑂2 … 𝑂𝑇 和模型μ＝(A，</span><br><span class="line">B，π),如何快速有效的选择在一定意义下“最优”的状态序</span><br><span class="line">列 𝑄 = 𝑞1𝑞2 … 𝑞𝑇 ，使得该状态序列“最好的解释”观察序列？</span><br><span class="line">3.参数估计问题：给定一个观察序列O = 𝑂1𝑂2 … 𝑂𝑇，如何根</span><br><span class="line">据最大似然估计来求模型的参数值？即如何调节模型μ＝(A，</span><br><span class="line">B，π)的参数，使得𝑃 𝑂 𝜇 最大？</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="隐马尔可夫模型：求解观察序列的概率"><a href="#隐马尔可夫模型：求解观察序列的概率" class="headerlink" title="隐马尔可夫模型：求解观察序列的概率"></a>隐马尔可夫模型：求解观察序列的概率</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给定观察序列O = 𝑂1𝑂2 … 𝑂𝑇和模型𝜇 =(𝐴, 𝐵, π)，快速的计算出给定模型𝜇情况下观察序列O的概率，即𝑃 （𝑂|𝜇） 。</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/12/24/NLP/image-20211227210645264.png" alt="image-20211227210645264" style="zoom:50%;"></p>
+<p>隐马尔可夫模型：前向算法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基本思想：定义前向变量𝛼𝑡(𝑖)，前向变量𝛼𝑡(𝑖)是在时间t，HMM输出了序列𝑂1𝑂2 … 𝑂𝑡 ，并且位于状态𝑠𝑖的概率。</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/12/24/NLP/image-20211227211103464.png" alt="image-20211227211103464" style="zoom:50%;"></p>
+<p>前向算法总的复杂度为O(𝑁2𝑇)</p>
+<p>隐马尔可夫模型：后向算法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">后向变量𝛽𝑡(𝑖)是在给定模型𝜇 = (𝐴, 𝐵, π)，并且在时间t状态为𝑠𝑖的条件下，HMM输出观察序列𝑂𝑡+1 … 𝑂𝑇的概率。</span><br></pre></td></tr></table></figure>
+<p>与计算前向变量一样，可以用动态规划的算法计算后向变量。</p>
+<p><img src="/2021/12/24/NLP/image-20211227211441031.png" alt="image-20211227211441031" style="zoom:50%;"></p>
+<p>时间复杂度：O(𝑁2𝑇)</p>
+<h4 id="序列问题"><a href="#序列问题" class="headerlink" title="序列问题"></a>序列问题</h4><p>隐马尔可夫模型：维特比算法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">维特比算法用于求解HMM中的第二个问题，给定一个观</span><br><span class="line">察序列O = 𝑂1𝑂2 … 𝑂𝑇和模型𝜇 = (𝐴, 𝐵, π)，如何快速有效</span><br><span class="line">的选择在一定意义下最优的状态序列𝑄 = 𝑞1𝑞2 … 𝑞𝑇，使得</span><br><span class="line">该状态序列“最好的解释”观察序列。</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/12/24/NLP/image-20211227211917788.png" alt="image-20211227211917788" style="zoom:50%;"></p>
+<p><img src="/2021/12/24/NLP/image-20211227211938609.png" alt="image-20211227211938609" style="zoom:50%;"></p>
+<p>存在问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">单独最优不一定整体最优</span><br></pre></td></tr></table></figure>
+<h4 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h4><p>最 大似然估计</p>
+<p>EM</p>
+<h2 id="句法分析"><a href="#句法分析" class="headerlink" title="句法分析"></a>句法分析</h2><h3 id="句法分析概述"><a href="#句法分析概述" class="headerlink" title="句法分析概述"></a>句法分析概述</h3><p>基本任务：确定句子的句法结构或句子中词汇之间的依存关系。</p>
+<p>定义：判断单词序列（一般为句子）判读其构成是否合乎 给定的语法(recognition)，如果是，则给出其（树）结构 (parsing)</p>
+<p>描述一种语言可以有三种途径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">穷举法：把语言中的所有句子都枚举出来。显然，这种方法只适合句子数目有限的语</span><br><span class="line">语法/文法描述：语言中的每个句子用严格定义的规则来构造，利用规则生成语言中合法的句子</span><br><span class="line">自动机法：通过对输入句子进行合法性检验，区别哪些是语言中的句子，哪些不是语言中的句子</span><br></pre></td></tr></table></figure>
+<p>形式语法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">四元组 𝐺 = &#123;𝑁, Σ, 𝑃, 𝑆&#125;</span><br><span class="line">𝑁是非终结符(non-terminal symbol)的有限集合(有时也称变量集或句法种类集)</span><br><span class="line">Σ是终结符号(terminal symbol)的有限集合，𝑁 ∩ Σ = ∅</span><br><span class="line">𝑃是一组重写规则的有限集合：𝑃 = 𝛼 → 𝛽 ，其中𝛼, 𝛽是由V中元素构成的串，但是𝛼中至少应含一个非终结符</span><br><span class="line">𝑆 ∈ 𝑁称为句子符或初始符</span><br></pre></td></tr></table></figure>
+<p>形式语法种类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">正则文法</span><br><span class="line">上下文无关文法</span><br><span class="line">上下文相关文法</span><br><span class="line">无约束文法</span><br></pre></td></tr></table></figure>
+<p>控制策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">自顶向下、自底向上</span><br><span class="line">移进-归约是自底向上语法分析的一种形式</span><br><span class="line"> 使用一个栈来保存文法符号，并用一个输入缓冲区来存放将要进行语</span><br><span class="line">法分析的其余符号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>搜索策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深搜广搜</span><br></pre></td></tr></table></figure>
+<p>扫描策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">自左至右，自右至左</span><br></pre></td></tr></table></figure>
+<p>移进-归约是自底向上语法分析的一种形式</p>
+<p>CFG缺陷</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> 对于一个中等长度的输入句子来说，要利用大覆盖度的语法规</span><br><span class="line">则分析出所有可能的句子结构是非常困难的，分析过程的复杂</span><br><span class="line">度往往使程序无法实现</span><br><span class="line"> 即使能分析出句子所有可能的结构，也难以在巨大的句法分析</span><br><span class="line">结果集中实现有效的消歧，并选择出最有可能的分析结果</span><br><span class="line"> 手工编写的规则一般带有一定的主观性，对于实际应用系统来</span><br><span class="line">说，往往难以覆盖大领域的所有复杂语言</span><br><span class="line"> 写规则本身是一件大工作量的复杂劳动，而且编写的规则对特</span><br><span class="line">定的领域有密切的相关性，不利于句法分析系统向其他领域移</span><br><span class="line">植</span><br></pre></td></tr></table></figure>
+<h3 id="概率上下文无关文法-PCFG"><a href="#概率上下文无关文法-PCFG" class="headerlink" title="概率上下文无关文法(PCFG)"></a>概率上下文无关文法(PCFG)</h3><p>概率上下文无关文法就是一个为规则增添了概率的简单CFG， 指明了不同重写规则的可能性大小</p>
+<p>在基于PCFG的句法分析模型中，假设满足以下三个条件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">上下文无关性</span><br><span class="line">祖先无关性</span><br><span class="line">位置不变性</span><br></pre></td></tr></table></figure>
+<p>剪枝策略：Beam search（集束搜索）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一种启发式图搜索算法，为了减少搜索占用的时间和空间，在每一步深度扩展的时候，</span><br><span class="line">减掉一些质量比较差的节点，保留质量较高的一些节点</span><br><span class="line">优点是减少空间消耗，提高时间效率</span><br><span class="line">缺点是有可能存在潜在的最佳方案被丢弃，beam search算法是不完全的</span><br></pre></td></tr></table></figure>
+<p>PCFG的优点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">可利用概率减少分析过程的搜索空间</span><br><span class="line">可以利用概率对概率较小的子树剪枝，加快分析效</span><br><span class="line">率</span><br><span class="line">可以定量地比较两个语法的性能</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>PCFG的缺陷</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">结构相关性</span><br><span class="line">词汇相关性</span><br></pre></td></tr></table></figure>
+<h2 id="词义消歧"><a href="#词义消歧" class="headerlink" title="词义消歧"></a>词义消歧</h2><p>word sense disambiguation     WSD</p>
+<p>义位：语义系统中能独立存在的基本语义单位</p>
+<p>WSD需要解决三个问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(1)如何判断一个词是不是多义词？ 如何表示一个多义词的不同意思？</span><br><span class="line">(2)对每个多义词，预先要有关于它的 各个不同义项的清晰的区分标准</span><br><span class="line">(3)对出现在具体语境中的每个多义词，为它确定一个合适的义项</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">基于机器词典的WSD</span><br><span class="line">基于义类词典的WSD</span><br><span class="line">基于语料库的WSD</span><br><span class="line">基于统计方法的WSD</span><br><span class="line">基于规则的WSD</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">总结：</span><br><span class="line">用词典资源进行词义排歧，是利用词典中对多义</span><br><span class="line">词的各个义项的描写，求多义词的释义跟其上下</span><br><span class="line">文环境词的释义之间的交集，判断词义的亲和程</span><br><span class="line">度，来确定词义；</span><br><span class="line">由于词典释义的概括性，这种方法应用于实际语</span><br><span class="line">料中多义词的排歧，效果不一定理想</span><br></pre></td></tr></table></figure>
+<p>基于义类词典的WSD方法</p>
+<p><img src="/2021/12/24/NLP/image-20211227233833336.png" alt="image-20211227233833336" style="zoom:50%;"></p>
+<p>互信息：I（X；Y）反映的是在知道了Y的值 以后X的不确定性的减少量。</p>
+<p>基于Bayes判别的WSD方法</p>
+<p><img src="/2021/12/24/NLP/image-20211227235729108.png" alt="image-20211227235729108" style="zoom:50%;"></p>
+<p>词义消歧——基于多分类器集成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">总结</span><br><span class="line">还有很多问题需要探讨</span><br><span class="line">❖如何选用更有效的分类器</span><br><span class="line">❖单分类器的结果怎样更高效地集成</span><br><span class="line">❖如何在单分类器中选取更有效的特征</span><br><span class="line"> 集成学习的研究对自然语言处理中的其他任务</span><br></pre></td></tr></table></figure>
+<h2 id="篇章"><a href="#篇章" class="headerlink" title="篇章"></a>篇章</h2><p>概念</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Anaphor:指代语</span><br><span class="line">Entity(referent):实体（指称对象）</span><br><span class="line">Reference:指称。用于指称实体的语言表示</span><br><span class="line">Antecedent:先行语。语篇中引入的一个相对明确的指称意义表述（如张三）；</span><br><span class="line">Coreference:共指（同指）。当两种表述均指称相同对象（实体）时，这两种表述具有共指关系</span><br></pre></td></tr></table></figure>
+<p>六类指称表示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> Indefinite NPs（不定名词）: 一辆汽车</span><br><span class="line"> Definite NPs （有定名词）: 那个人</span><br><span class="line"> Pronouns （人称代词）: 它，他</span><br><span class="line"> Demonstratives （指示代词）: 这，那</span><br><span class="line"> One-anaphora （one指代）: one (in English)</span><br><span class="line"> Zero anaphora （0型指代）: 省略</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>指代一般包括两种情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">– 回指(Anaphora)：强调指代语与另一个表述之间的关</span><br><span class="line">系。指代语的指称对象通常不明确，需要确定其与先行</span><br><span class="line">语之间的关系来解释指代语的语义</span><br><span class="line">• 张先生走过来，给大家看他的新作品</span><br><span class="line">– 共指(coreference)：强调一个表述与另一个表述是否</span><br><span class="line">指向相同的实体，可以独立于上下文存在</span><br><span class="line">• 第44任美国总统 与奥巴马</span><br></pre></td></tr></table></figure>
+<h3 id="衔接和连贯"><a href="#衔接和连贯" class="headerlink" title="衔接和连贯"></a>衔接和连贯</h3><p>以词汇表示的关联，通常称为“衔接(cohesion)，强调其构成成分</p>
+<p>通过句子意义表示的关联称为连贯Coherence，强调整体上表达某种意义</p>
+<h3 id="篇章表示和相似度计算"><a href="#篇章表示和相似度计算" class="headerlink" title="篇章表示和相似度计算"></a>篇章表示和相似度计算</h3><p>将文档表示为如下所示的向量： 𝑑𝑗 = (𝑤1,𝑗 , 𝑤2,𝑗 , 𝑤3,𝑗 , … , 𝑤𝑡,𝑗)  向量的每一维都对应于词表中的一个词。  如果某个词出现在了文档中，那它在向量中的值就非 零。  这个值有很多计算方法，我们使用词语在文档中出现 的次数表示。</p>
+<h2 id="机器翻译"><a href="#机器翻译" class="headerlink" title="机器翻译"></a>机器翻译</h2><h3 id="传统机器翻译方法"><a href="#传统机器翻译方法" class="headerlink" title="传统机器翻译方法"></a>传统机器翻译方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">直接翻译法</span><br></pre></td></tr></table></figure>
+<p>基于规则的翻译方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对源语言和目标语言均进行适当描述</span><br><span class="line">吧翻译机制与语法分开</span><br><span class="line">用规则描述语法的翻译方式</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">▪优点：</span><br><span class="line">▪ 可以较好地保持原文的结构，产生的译文结构与源文的结构关系密切</span><br><span class="line">▪ 尤其对于语言现象的或句法结构的明确的源语言语句具有较强的处理能力</span><br><span class="line">▪弱点：</span><br><span class="line">▪ 规则一般由人工编写，工作量大，主观性强，一致性难以保障</span><br><span class="line">▪ 不利于系统扩充，对非规范语言现 象缺乏相应的处理能力</span><br></pre></td></tr></table></figure>
+<p>基于实例的翻译方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">方法：输入语句-&gt;与事例相似度比较-&gt;翻译结果</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">▪ 方法优点</span><br><span class="line">▪ 不要求源语言句子必须符合语法规定;</span><br><span class="line">▪ 翻译机制一般不需要对源语言句子做深入分析;</span><br><span class="line">▪ 方法弱点</span><br><span class="line">▪ 两个不同的句子之间的相似性(包括结构相似性和语义相似性)往往难以把握</span><br><span class="line">▪ 在口语中，句子结构一般比较松散，成分冗余和成分省略都较严重;</span><br><span class="line">▪ 系统往往难以处理事例库中没有记录的陌生的语言现象；</span><br><span class="line">▪ 当事例库达到一定规模时，其事例检索的效率较低;</span><br></pre></td></tr></table></figure>
+<h3 id="基于统计的机器翻译模型"><a href="#基于统计的机器翻译模型" class="headerlink" title="基于统计的机器翻译模型"></a>基于统计的机器翻译模型</h3><p>噪声信道模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一种语言T 由于经过一个噪声信道而发生变形从而在信道的另一端呈现为另一种语言 S</span><br></pre></td></tr></table></figure>
+<p>翻译问题可定义为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">▪ 如何根据观察到的 S，恢复最为可能的T 问题。</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/12/24/NLP/image-20211228101907190.png" alt="image-20211228101907190" style="zoom:50%;"></p>
+<p>▪三个关键问题 ▪ (1)估计语言模型概率 p(T)； ▪ (2)估计翻译概率 p(S|T)； ▪ (3)快速有效地搜索T 使得 p(T)×p(S | T) 最大</p>
+<h4 id="基于词的统计机器翻译模型"><a href="#基于词的统计机器翻译模型" class="headerlink" title="基于词的统计机器翻译模型"></a>基于词的统计机器翻译模型</h4><p>IBM模型1：词汇翻译（词对齐）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">▪ 基于词的统计翻译模型</span><br><span class="line">▪ 引入了词对齐的问题</span><br><span class="line">▪ 通过EM算法学习词对齐</span><br><span class="line">▪ 缺陷</span><br><span class="line">▪ 无法刻画翻译过程中重排序、添词、舍词等情况；</span><br><span class="line">▪ 例如：</span><br><span class="line">▪ Seldom do I go to work by bus.</span><br><span class="line">▪ 我很少乘公共汽车上班</span><br></pre></td></tr></table></figure>
+<p>IBM模型2：增加绝对对齐模型</p>
+<p>IBM模型3：引入繁衍率模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">前述模型存在的问题</span><br><span class="line">▪ 在随机选择对位关系的情况下，与目标语言句子中的单词t对应的源语言句子中的单</span><br><span class="line">词数目是一个随机变量；</span><br></pre></td></tr></table></figure>
+<p>繁衍率</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">定义：与目标语言句子中的单词t对应的源语言句子中的单词数目的变量</span><br><span class="line">▪ 记做Фt，称该变量为单词t的繁衍能力或产出率(fertility)。一个具体的取值记做：Фt</span><br><span class="line">▪ 繁衍率刻画的是目标语言单词与源语言单词之间一对多的关系</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="基于短语的统计机器翻译模型"><a href="#基于短语的统计机器翻译模型" class="headerlink" title="基于短语的统计机器翻译模型"></a>基于短语的统计机器翻译模型</h4><p>基本思想</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">▪ 把训练语料库中所有对齐的短语及其翻译概率存储起来，作为一部带</span><br><span class="line">概率的短语词典</span><br><span class="line">▪ 这里所说的短语是任意连续的词串，不一定是一个独立的语言单位</span><br><span class="line">▪ 翻译的时候将输入的句子与短语词典进行匹配，选择最好的短语划分，</span><br><span class="line">将得到的短语译文重新排序，得到最优的译文.</span><br></pre></td></tr></table></figure>
+<h3 id="系统融合"><a href="#系统融合" class="headerlink" title="系统融合"></a>系统融合</h3><p>几个相似的系统执行同一个任务时，可能有多个输出结果，系统融合将这些结果进行融 合，抽取其有用信息，归纳得到任务的最终输出结果。</p>
+<p>目标：最终的输出比之前的输入结果都要好</p>
+<p>句子级系统融合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">两种技术</span><br><span class="line">最小贝叶斯风险解码；通用线性模型</span><br></pre></td></tr></table></figure>
+<p>句子级系统融合方法不会产生新的翻译句子，而是在已有的翻 译句子中挑选出最好的一个</p>
+<p>短语级系统融合 ▪ 利用多个翻译系统的输出结果，重新抽取短语翻译规则集合，并利用 新的短语翻译规则进行重新解码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">基本思想：首先合并参与融合的所有系统的短语表，从中抽取</span><br><span class="line">一个新的源语言到目标语言的短语表，然后使用新的短语表和</span><br><span class="line">语言模型去重新解码源语言句子。</span><br></pre></td></tr></table></figure>
+<p>词语级系统融合 ▪ 首先将多个翻译系统的译文输出进行词语对齐，构建一个混淆网络， 对混淆网络中的每个位置的候选词进行置信度估计， 最后进行混淆网 络解码</p>
+<p>小结</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">句子级系统融合</span><br><span class="line">▪ 未生成新的翻译假设，有效的保护原来翻译假设中短语的连续性和句子词序，但</span><br><span class="line">是也没有吸收借鉴其他翻译假设中词或者短语层次的知识。</span><br><span class="line">▪ 短语级系统融合</span><br><span class="line">▪ 借鉴其他翻译系统的短语表知识，利用传统的基于短语的翻译引擎来重新解码源</span><br><span class="line">语言的句子。有效的保持短语的连续性和译文的局部词序。但是不能很好的利用</span><br><span class="line">非连续短语和句法知识来克服译文的远距离调序问题</span><br><span class="line">▪ 词语级系统融合</span><br><span class="line">▪ 从词的粒度重组了输出译文，充分利用了各个翻译假设的词汇级别的知识，取长</span><br><span class="line">补短。但是在混淆网络解码时，并不能保证新生成的翻译句子的词序一致性和短</span><br><span class="line">语连续性</span><br></pre></td></tr></table></figure>
+<h2 id="应用：语言自动生成"><a href="#应用：语言自动生成" class="headerlink" title="应用：语言自动生成"></a>应用：语言自动生成</h2><h3 id="自然语言生成概述"><a href="#自然语言生成概述" class="headerlink" title="自然语言生成概述"></a>自然语言生成概述</h3><p>NLG生成模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1. 马尔可夫链：通过当前单词可以预测句子中的下一个单</span><br><span class="line">词。</span><br><span class="line">缺点：无法探测当前单词与句子中其他单词的关系以及句</span><br><span class="line">子的结构，使得预测结果不够准确。</span><br><span class="line">2. 循环神经网络(RNN)：通过前馈网络传递序列的每个项目</span><br><span class="line">信息，并将模型的输出作为序列中下一项的输入，每个项</span><br><span class="line">目存储前面步骤中的信息。</span><br><span class="line">优点：能够捕捉输入数据的序列特征</span><br><span class="line">缺点：第一，RNN短期记忆无法生成连贯的长句子；第二，</span><br><span class="line">因为 RNN 不能并行计算，无法适应主流趋势。</span><br><span class="line">3. 长短期记忆网络(LSTM)，解决梯度消失问题，但难以并行化</span><br><span class="line">4. Seq2Seq，能够解决大部分序列不等长的问题</span><br><span class="line">5. Attention模型</span><br><span class="line">6. Transformer模型，能够在不考虑单词位置的情况</span><br><span class="line">下，直接捕捉句子中所有单词之间的关系</span><br><span class="line">7. ELMO模型</span><br><span class="line">8. BERT模型</span><br></pre></td></tr></table></figure>
+<h3 id="数据到文本的生成"><a href="#数据到文本的生成" class="headerlink" title="数据到文本的生成"></a>数据到文本的生成</h3><p>以包含键值对的数据作为输入，旨在 自动生成流畅的、贴近事实的文本以描 述输入数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 信号分析模块(Siganl Analysis)</span><br><span class="line"> 数据阐释模块(Data Interpretation)</span><br><span class="line"> 文档规划模块(Document Planning)</span><br><span class="line"> 微规划与实现模块(Microplanning and Realisation)</span><br></pre></td></tr></table></figure>
+<p>应用领域：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> 天气预报领域的文本生成系统</span><br><span class="line"> 针对空气质量的文本生成系统</span><br><span class="line"> 针对财经数据的文本生成系统</span><br><span class="line"> 面向医疗诊断数据的文本生成系统</span><br><span class="line"> 基于体育数据生成文本摘要</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="文本到文本的生成"><a href="#文本到文本的生成" class="headerlink" title="文本到文本的生成"></a>文本到文本的生成</h3><p>对给定文本进行变换和处理从而获得新文本的技术</p>
+<p>应用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> 对联自动生成</span><br><span class="line"> 诗歌自动生成</span><br><span class="line"> 作文自动生成</span><br><span class="line"> 对话生成*---这个任务现阶段一般不作为NLG的研究分支来探讨</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="词和文档表示与相似度计算"><a href="#词和文档表示与相似度计算" class="headerlink" title="词和文档表示与相似度计算"></a>词和文档表示与相似度计算</h2><h3 id="词的表示"><a href="#词的表示" class="headerlink" title="词的表示"></a>词的表示</h3><p>独热表示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">每个词对应一个向量，向量的维度等于词典的大小，向量中只有一个元素值为1，其余的元素均为0 ，值为1的元素对应的下标为该词在词典中的位置</span><br></pre></td></tr></table></figure>
+<p>词频 -逆文档频率(TF -IDF)</p>
+<p>词嵌入方法的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">静态词向量</span><br><span class="line">词向量无法随语境变化</span><br><span class="line">不能处理一词多义</span><br><span class="line">多义词无法区分多个含义</span><br><span class="line">不能有效区分反义词</span><br><span class="line">反义词的上下文很相似</span><br></pre></td></tr></table></figure>
+<p>词向量</p>
+<p>skip-gram</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 将目标词和邻近的 </span><br><span class="line">语境词作为正面例子。</span><br><span class="line">2.随机抽取词库中的其他词 </span><br><span class="line">词库中的其他词，以获得负面样本。</span><br><span class="line">3. 使用逻辑回归来训练一个分类器，以区分这两种情况。</span><br><span class="line">区分这两种情况。</span><br><span class="line">4. 使用权重作为嵌入。</span><br></pre></td></tr></table></figure>
+<h3 id="文档表示"><a href="#文档表示" class="headerlink" title="文档表示"></a>文档表示</h3><p><img src="/2021/12/24/NLP/image-20211228162546651.png" alt="image-20211228162546651" style="zoom:50%;"></p>
+<h3 id="文本相似度计算"><a href="#文本相似度计算" class="headerlink" title="文本相似度计算"></a>文本相似度计算</h3><p>编辑距离，动态规划</p>
+<h2 id="信息抽取"><a href="#信息抽取" class="headerlink" title="信息抽取"></a>信息抽取</h2><h3 id="信息抽取的定义、任务及发展"><a href="#信息抽取的定义、任务及发展" class="headerlink" title="信息抽取的定义、任务及发展"></a>信息抽取的定义、任务及发展</h3><p>信息抽取中的主要任务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">命名实体识别：</span><br><span class="line">识别和分类文本中出现的“实体提及”</span><br><span class="line">实体链接：</span><br><span class="line">将“实体提及”链接到知识库中对应的实体</span><br><span class="line">关系抽取：</span><br><span class="line">找到句子中有关系的两个实体，并识别出他们之间的关系类型</span><br><span class="line">事件抽取：</span><br><span class="line">事件抽取就要是找到一个事件对应的元素。</span><br></pre></td></tr></table></figure>
+<h3 id="命名实体识别"><a href="#命名实体识别" class="headerlink" title="命名实体识别"></a>命名实体识别</h3><p>挑战</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">种类繁多，命名方式灵活多样</span><br><span class="line">同一实体对应很多变体</span><br><span class="line">相同的词或者短语可以表示不同类别的实</span><br><span class="line">体</span><br><span class="line">存在嵌套</span><br><span class="line">细粒度</span><br><span class="line">语言不断进化，新的挑战不断出现</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>主要方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基于规则的方法 基于词典的方法 机器学习方法 ◼最大熵 ◼条件随机场 ◼深度学</span><br></pre></td></tr></table></figure>
+<p>命名实体识别的评价</p>
+<p><img src="/2021/12/24/NLP/image-20211228163639194.png" alt="image-20211228163639194" style="zoom:50%;"></p>
+<p><img src="/2021/12/24/NLP/image-20211228163649954.png" alt="image-20211228163649954" style="zoom:50%;"></p>
+<h3 id="实体链接"><a href="#实体链接" class="headerlink" title="实体链接"></a>实体链接</h3><p>将“实体提及”链接到知识库中对应的实体</p>
+<h3 id="关系抽取"><a href="#关系抽取" class="headerlink" title="关系抽取"></a>关系抽取</h3><p>自动识别由一对实体和联系这对实体的关系构成的 相关三元组</p>
+<p>预定义关系抽取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">任务</span><br><span class="line">给定实体关系类别，给定语料，抽取目标关系对</span><br><span class="line">评测语料（MUC, ACE, KBP, SemEval）</span><br><span class="line">专家标注语料，语料质量高</span><br><span class="line">抽取的目标类别已经定义好</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>基于神经网络的关系抽取方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主要问题：如何设计合理的网络结构，从而捕捉更多的信息，进而更准确的完成关系的抽取</span><br><span class="line">网络结构：不同的网络结构捕捉文本中不同的信息</span><br></pre></td></tr></table></figure>
+<p>开放域关系抽取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">实体类别和关系类别不固定、数量大</span><br><span class="line">难点问题</span><br><span class="line"> 如何获取训练语料</span><br><span class="line"> 如何获取实体关系类别</span><br><span class="line"> 如何针对不同类型目标文本抽取关系</span><br><span class="line">需要研究新的抽取方法</span><br><span class="line"> 基于句法的方法</span><br><span class="line"> 基于知识监督的方法</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="深度学习简介"><a href="#深度学习简介" class="headerlink" title="深度学习简介"></a>深度学习简介</h2><p>常用的深度学习模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">激活函数</span><br><span class="line">深度神经网络（Deep Neural Network, DNN）</span><br><span class="line">卷积神经网络（Convolutional Neural Network,CNN)</span><br><span class="line">循环神经网络 (Recurrent Neural Network, RNN) </span><br><span class="line">注意力机制（Attention Mechanisms）</span><br></pre></td></tr></table></figure>
+<p>pooling</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">目的：</span><br><span class="line">扩大视野：就如同先从近处看一张图片，然后离远一些再看同一张图片，有些细节就会被忽略。</span><br><span class="line">降维：在保留图片局部特征的前提下，使得图片更小，更易于计算。</span><br><span class="line">平移不变性，轻微扰动不会影响输出。</span><br><span class="line">维持同尺寸，便于后端处理。</span><br></pre></td></tr></table></figure>
+<p>深度学习模型的应用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DBN的应用</span><br><span class="line">基于DBN的问答对挖掘</span><br><span class="line">CNN的应用</span><br><span class="line">关系分类</span><br><span class="line">句子分类</span><br><span class="line">LSTM-RNN的应用</span><br><span class="line">命名实体识别</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1787,520 +2274,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/10/machine-learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/10/machine-learning/" class="post-title-link" itemprop="url">machine learning</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-10 21:03:53" itemprop="dateCreated datePublished" datetime="2021-11-10T21:03:53+08:00">2021-11-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-20 12:10:39" itemprop="dateModified" datetime="2021-11-20T12:10:39+08:00">2021-11-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>奥卡姆剃刀：若有多个假设与观察一致，则选择最简单的那个。</p>
-<p>NFL定理（No Free Lunch Theorem）：所有学习算法期望性能相同。</p>
-<p> Independent and identically distributed，独立同分布，IID</p>
-<h2 id="模型评估与选择"><a href="#模型评估与选择" class="headerlink" title="模型评估与选择"></a>模型评估与选择</h2><h3 id="经验误差与过拟合"><a href="#经验误差与过拟合" class="headerlink" title="经验误差与过拟合"></a>经验误差与过拟合</h3><p>若在m个样本中有a个样本分类错误，则称错误率为E=a/m;</p>
-<p>精度=1-错误率；</p>
-<p>学习器在训练集上的误差称为训练误差或经验误差，在新样本的误差称为泛化误差。</p>
-<p>过拟合：把训练样本自身的一些特点当成了所有潜在样本都会具有的一般性质，这样就会导致泛化性能下降。</p>
-<p>欠拟合：训练样本的一般性质尚未学好。</p>
-<h3 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h3><h4 id="留出法"><a href="#留出法" class="headerlink" title="留出法"></a>留出法</h4><p>直接将数据集划分为两个互斥的集合，其中一个集合作为训练集，另一个作为测试集。</p>
-<p>分层采样：保留类别比例的采样方式。</p>
-<h4 id="交叉验证法"><a href="#交叉验证法" class="headerlink" title="交叉验证法"></a>交叉验证法</h4><p>先将数据集D划分为k个大小相似的互斥子集，每次用k-1个子集的并集作为训练集，余下的那个子集作为测试集，从而进行k次训练和测试，最终返回k个测试的均值。通常把交叉验证法称为k折交叉验证法。</p>
-<p>当k=m时，得到交叉验证法的特例：留一法(Leave-One-Out,简称LOC)。留一法评估结果往往比较准确，但计算开销较大。</p>
-<h4 id="自助法"><a href="#自助法" class="headerlink" title="自助法"></a>自助法</h4><p>以自主采样为基础，给定包含m个样本的数据集，每次随机从中挑选一个并放回，重复执行m次，则得到一个包含m个样本的数据集$D’$，样本在m次采样中始终不被取得的概率取极限为0.368.这样的测试结果，也称为包外估计。</p>
-<p>自助法在数据集较小，难以有效划分训练/测试集时很有用。但是自助法产生的数据集会改变初始数据集分布，这会引入估计偏差，因此，在数据量足够时，留出法和交叉验证法更加常用。</p>
-<h3 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h3><p>在预测任务中，给定样例集$D={(x_1,y_1),(x_2,y_2),…,(x_m,y_m)}$,其中$y_i$是示例$x_i$的真实标记。</p>
-<p>回归任务最常用的性能度量是均方误差。</p>
-<script type="math/tex; mode=display">E(f;D)=\frac{1}{m}\sum_{i=1}^{m}(f(x_i)-y_i)^2</script><p>下面是一些常用的性能度量。</p>
-<h4 id="错误率与精度"><a href="#错误率与精度" class="headerlink" title="错误率与精度"></a>错误率与精度</h4><p>对样本集D，分类错误率定义为</p>
-<script type="math/tex; mode=display">E(f;D)=\frac{1}{m}\sum_{i=1}^{m}\Pi(f(x_i)\ne y_i)</script><p>精度定义为</p>
-<script type="math/tex; mode=display">acc(f;D)=1-E(f;D)</script><h4 id="查准率、查全率与F1"><a href="#查准率、查全率与F1" class="headerlink" title="查准率、查全率与F1"></a>查准率、查全率与F1</h4><p><img src="/2021/11/10/machine-learning/31EA8B0CF299E7E13C8472E403A80D1B.jpg" alt="img" style="zoom:50%;"></p>
-<p>查准率P：$P=\frac{TP}{TP+FP}$</p>
-<p>查全率R:$R=\frac{TP}{TP+FN}$</p>
-<p>查准率与查全率为一对矛盾的度量。通常只有在一些简单任务中，才可能使查准率与查全率都很高。</p>
-<p><img src="/2021/11/10/machine-learning/A90737E4B9198F7B34D54BE9AB6D1E74.jpg" alt="img" style="zoom:50%;"></p>
-<p>若一个学习器的PR曲线完全被另一个学习器的曲线包住，则可断言，后者的性能优于前者。</p>
-<p>平衡点(Break-Even Point,简称BEP)为查准率与查全率相等时的取值。</p>
-<p>但BEP度量还是简单一点，更为常用的是F1度量：</p>
-<script type="math/tex; mode=display">F1=\frac{2*P*R}{P+R}=\frac{2*TP}{样例总数+TP-TN}</script><p>F1度量的一般形式-$F_\beta$</p>
-<script type="math/tex; mode=display">F_\beta=\frac{(1+\beta^2)*P*R}{\beta^2*P+R}</script><p>$\beta$&gt;1查全率有更大影响。</p>
-<p><img src="/2021/11/10/machine-learning/E572FFA93ACC986F8A70D8FFF6DB9AAE.jpg" alt="img" style="zoom:50%;"></p>
-<h4 id="ROC与AOC"><a href="#ROC与AOC" class="headerlink" title="ROC与AOC"></a>ROC与AOC</h4><p>ROC曲线的纵轴是真正例率(True Positive Rate,TPR)，横轴是假正例率(False Positive Rate,FPR)</p>
-<script type="math/tex; mode=display">TPR=\frac{TP}{TP+FN}</script><script type="math/tex; mode=display">FPR=\frac{FP}{TN+FP}</script><p><img src="/2021/11/10/machine-learning/96C927242A7BA45CCE302EDEADE623B2.jpg" alt="img" style="zoom:50%;"></p>
-<p>若一个学习器的ROC曲线被另一个学习器的曲线完全“包住”，则可断言后者性能优于前者。但是当有交叉时，一般难以判断，此时较为合理的依据是比较ROC曲线下的面积，即AUC.(Area Under ROC Curve)</p>
-<p>$l_{rank}$定义为</p>
-<p><img src="/2021/11/10/machine-learning/C80967EA3A665CF6EB8EB5DE6DFA7996.jpg" alt="img"></p>
-<p>AUC=1-$l_{rank}$</p>
-<p>以下为对$l_{rank}$的通俗解释：</p>
-<p>假设我们在做一个手写数字识别，识别样本数字是否为5，输入12个数字，经过算法得出每个数字的打分从小到大如下(分越高表示算法认为这个数字越接近5，用A表示正例，B表示反例)：B1,B2,B3,B4,A1,B5,A2,A3,B6,A4,A5,A6</p>
-<p>对于第一个正例A1，有两个反例比他大，则为2，对于第二三个正例，有一个，其余没有，则分子为2+1+1+0+0+0=4，分母为正例数，反例数=6*6=36，则此时$l_{rank}$为4/36=1/9</p>
-<h4 id="代价敏感错误率与代价曲线"><a href="#代价敏感错误率与代价曲线" class="headerlink" title="代价敏感错误率与代价曲线"></a>代价敏感错误率与代价曲线</h4><p><img src="/2021/11/10/machine-learning/B71F120E1D85FE164FAEFD745AD1E202.jpg" alt="img" style="zoom:50%;"></p>
-<p>代价敏感错误率为</p>
-<script type="math/tex; mode=display">E(f;D;cost)=\frac1m(\sum_{x_i\in D^+}^{}\Pi (f(x_i)\ne y_i )*cost_{01}+\sum_{x_i\in D^-}^{}\Pi (f(x_i)\ne y_i )*cost_{10})</script><p>在非均等代价下，ROC曲线不能直接反映出学习器的期望总体代价，而代价曲线则可达到该目的。</p>
-<p>代价曲线图的横轴是取值为[0,1]的正概率代价</p>
-<script type="math/tex; mode=display">P(+)cost=\frac{p*cost_{01}}{p*cost_{01}+(1-p)*cost_{10}}</script><p>代价曲线图的横轴是取值为[0,1]的正例概率代价</p>
-<script type="math/tex; mode=display">P(+)cost=\frac{p*cost_{01}}{p*cost_{01}+(1-p)*cost_{10}}</script><p>其中p是样例为正例的概率；纵轴是取值为[0,1]的归一化代价</p>
-<script type="math/tex; mode=display">cost_{norm}=\frac{FNR*p*cost{01}+FPR*(1-p)*cost_{10}}{p*cost_{01}+(1-p)*cost_{10}}</script><p>代价曲线绘制很简单：ROC曲线上每一点对应了代价平面上的一条线段，设ROC曲线上点的坐标为(FPR,TPR),则可计算出FNR，然后在代价平面上绘制一条从(0,FPR)到(1,FNR)的线段，线段下的面积表示了该条件下的期望总体代价。</p>
-<p><img src="/2021/11/10/machine-learning/5F373773E2879FE3B9027F166C1263DC.jpg" alt="img" style="zoom:50%;"></p>
-<h3 id="比较检验"><a href="#比较检验" class="headerlink" title="比较检验"></a>比较检验</h3><p>本节默认以错误率为性能度量，用$\epsilon$表示</p>
-<h4 id="假设检验"><a href="#假设检验" class="headerlink" title="假设检验"></a>假设检验</h4><p>泛化错误率为$\epsilon$的学习器在一个样本上犯错的概率是$\epsilon$;测试错误率$\hat{\epsilon } $意味着在m个测试样本中恰好有$\hat{\epsilon } $*m个被误分类。</p>
-<p>我们可使用“二项检验”来对“$\epsilon$&lt;=$\hat{\epsilon}_0$”这样的假设进行检验。</p>
-<p>在很多时候我们并不是做一次留出法估计，而是通过多次重复留出法或是交叉验证法等进行多次训练和测试，这样会得到多个测试错误率，此时可用”t-检验”。平均测试错误率$\mu$和方差$\sigma^2$为</p>
-<script type="math/tex; mode=display">\mu=\frac{1}{k}\sum_{i=1}^{k}\hat{\epsilon_i}</script><script type="math/tex; mode=display">\sigma^2=\frac{1}{k-1}\sum_{i=1}^{k}(\hat{\epsilon_i}a-\mu)^2</script><p>考虑到k个测试错误率可看作泛化错误率$\epsilon_0$的独立采样，则变量</p>
-<script type="math/tex; mode=display">\tau_t=\frac{\sqrt{k}(\mu-\epsilon_0)}{\sigma}</script><p>服从自由度为k-1的t分布。</p>
-<p><img src="/2021/11/10/machine-learning/6CCFB550F4DE45AAE64650B826C88341.jpg" alt="img" style="zoom:33%;"></p>
-<h4 id="交叉验证t检验"><a href="#交叉验证t检验" class="headerlink" title="交叉验证t检验"></a>交叉验证t检验</h4><p>对于两个学习器A和B，若我们使用k折交叉验证法得到的错误测试率分别为$\epsilon^A_1$…和$\epsilon_1^B$…，则可使用k折交叉验证”成对t检验”来进行比较检验。可根据差值来对学习器A与B性能相同这个假设做t检验，计算出插值的均值$\mu$和方差$\sigma^2$，在显著度$\alpha$下，若变量</p>
-<script type="math/tex; mode=display">\tau_t=|\frac{\sqrt{k}\mu}{\sigma}|</script><p>小于临界值，则假设不能被拒绝。</p>
-<h4 id="McNemar检验"><a href="#McNemar检验" class="headerlink" title="McNemar检验"></a>McNemar检验</h4><p><img src="/2021/11/10/machine-learning/A988E7FEA95CDC7D31315BF9096EBD7A.jpg" alt="img" style="zoom:33%;"></p>
-<p>若我们做的假设是两学习器性能相同，则应有$e<em>{01}=e</em>{10}$，那么变量$|e<em>{01}-e</em>{10}|$应当服从正态分布。McNemar检验考虑变量</p>
-<script type="math/tex; mode=display">\tau_{\chi^2}=\frac{(|e_{01}-e_{10}|-1)^2}{e_{01}+e_{10}}</script><p>服从自由度为1的$\chi^2$分布</p>
-<h4 id="Friedman检验与Nemenyi后续检验"><a href="#Friedman检验与Nemenyi后续检验" class="headerlink" title="Friedman检验与Nemenyi后续检验"></a>Friedman检验与Nemenyi后续检验</h4><p>之前介绍的都是在一个数据集上比较两个算法的性能，而在很多时候，我们会在一组数据集上比较多个算法。此时可以使用基于算法排序的Friedman检验。</p>
-<p>当所有算法性能相同这个假设被拒绝，则说明算法的性能显著不同，这时需要后续检验来区分，常用的有Nemenyi后续检验。</p>
-<h3 id="偏差与方差"><a href="#偏差与方差" class="headerlink" title="偏差与方差"></a>偏差与方差</h3><p>偏差度量了学习算法的期望预测与真实结果的偏离程度，即刻画了学习算法本身的拟合能力。</p>
-<p>方差度量了同样大小的训练集的变动所导致的学习性能的变化，即刻画了数据扰动所造成的影响。</p>
-<p>噪声则表达在当前任务上任何学习算法所能达到的期望泛化误差的下界，即刻画了学习问题本身的难度，</p>
-<p>泛化误差可分解为偏差、方差与噪声之和。</p>
-<h2 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h2><h3 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h3><p>f(x)=w1x1+w2x2+…+wdxd+b</p>
-<p>一般用向量形式写成</p>
-<script type="math/tex; mode=display">
-f(x)=\omega^Tx+b</script><h3 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h3><p> 线性回归试图学得</p>
-<script type="math/tex; mode=display">
-f(x_i)=wx_i+b,st :f(x_i)\approx y_i</script><p>多元线性回归</p>
-<script type="math/tex; mode=display">
-   f(x_i)=\omega^T x_i+b,st :f(x_i)\approx y_i</script><p>对数线性回归</p>
-<script type="math/tex; mode=display">
-lny=\omega^T x+b</script><p>广义线性模型</p>
-<script type="math/tex; mode=display">
-y=g^-1(\omega^T x+b)</script><h3 id="对数几率回归"><a href="#对数几率回归" class="headerlink" title="对数几率回归"></a>对数几率回归</h3><p>对数几率函数，“Sigmod函数”，将Z值转换为1个接近0或1的y值，并且其输出在z=0附近变化很陡。</p>
-<script type="math/tex; mode=display">
-y=\frac{1}{1+e^{-z}}</script><p>带入得</p>
-<script type="math/tex; mode=display">
-y=\frac{1}{1+e^{-(w^Tx+b)}}</script><p>将上述式子变换得</p>
-<script type="math/tex; mode=display">
-ln\frac{y}{1-y}=w^Tx+b</script><p>注：极大似然估计，梯度下降法，牛顿法，请参考实验。</p>
-<h3 id="线性判别分析"><a href="#线性判别分析" class="headerlink" title="线性判别分析"></a>线性判别分析</h3><p>线性判别分析(Linear Discriminant Analysis,简称LDA)是一种经典的线性学习方法。</p>
-<p>LDA的思想非常朴素：给定训练样例集，设法将样例投影到一条直线上，使得同类样例的投影点尽可能接近、异类样例的投影点尽可能远离；在对新样本进行分类时，将其投影到同样的这条直线上，再根据投影点的位置来确定新样本的类别。</p>
-<p><img src="/2021/11/10/machine-learning/F4BAAC59D4585EE05971A98DC99EA6C4.jpg" alt="img" style="zoom:33%;">           </p>
-<p><img src="/2021/11/10/machine-learning/97DB1639B86ED8B3021436B71378A6FE.jpg" alt="img" style="zoom: 33%;"></p>
-<p><img src="/2021/11/10/machine-learning/2D144DC0F1851483569B8FCFBC4AA36D.jpg" alt="img" style="zoom:50%;"></p>
-<p>定义类内散度矩阵</p>
-<script type="math/tex; mode=display">
-$S_w=\sum_0+\sum_1=\sum_{x\in X_0}^{}(x-\mu_0)(x-\mu_0)^T+\sum_{x\in X_1}^{}(x-\mu_1)(x-\mu_1)^T</script><p>类间散度矩阵$S_b=(\mu_0-\mu_1)(\mu_0-\mu_1)^T$                        </p>
-<p>则有最大化目标</p>
-<script type="math/tex; mode=display">
-J=\frac{w^TS_bw}{w^TS_ww}</script><p>这就是LDA想要最大化的目标，即$S_b与S_w$的“广义瑞利商”。   </p>
-<p>上述式子只与$w$的方向有关，与长度无关，故不是一般性，令$w^TS_ww=1$,根据拉格朗日乘子法，等价于</p>
-<script type="math/tex; mode=display">
-S_bw=\lambda S_ww</script><p>注意到$S_bw$的方向恒为$\mu_0-\mu_1$          </p>
-<p>则令$S_bw=\lambda(\mu_0-\mu_1)$     </p>
-<p>代入得$w=S^{-1}_w(\mu_0-\mu_1)$  </p>
-<p>考虑到数值解的稳定性，在实践中通常是对$S_w$进行奇异值分解，即$S_w=U\Sigma V^T$</p>
-<p>值得一提的是,LDA可从贝叶斯决策理论的角度来阐述，并可以证明，当两类数据同先验、满足高斯分布且协方差相等时，LDA可达到最优分类。</p>
-<p>可将LDA推广到多分类任务。</p>
-<h3 id="多分类学习"><a href="#多分类学习" class="headerlink" title="多分类学习"></a>多分类学习</h3><p>多分类学习的基本思路是拆解法，即将多分类任务拆为若干个二分类任务求解 。最经典的拆分策略有三种，一对一(one vs one,OvO)，一对其余(one vs rest,OvR)，多对多(manay vs many,MvM)。</p>
-<p>OvO将这N个类别两两配对，从而产生N(N-1)/2个二分类任务。</p>
-<p>OvR则是每次将一个类的样例作为正例，所有其他类的样例作为反例来训练N个分类器。在测试时若仅有一个分类器预测为正类，则对应的类别标记作为最终分类结果。若有多个分类器预测为正类，则通常考虑各分类器的预测置信度，选择置信度最大的类别标记作为分类结果。</p>
-<p><img src="/2021/11/10/machine-learning/04D2A99C0BCF59320FCA0EC8557E268E.jpg" alt="img" style="zoom:33%;">                                         </p>
-<p>可以看出，OvR只需要训练N个分类器，而OvO需训练N(N-1)/2个分类器，因此，OvO的存储开销和测试时间开销通常比OvR大。但在训练时，OvR的每个分类器均使用全部训练样例，而OvO的每个分类器仅用到两个类的样例，因此，在类别很多时，OvO的训练时间开销通常比OvR更小。至于预测性能，多数情况下二者差不多。</p>
-<p>介绍一种MvM最常用的技术，纠错输出码(Erroe Correcting Output Codes,ECOC)，它是将编码的思想引入类别拆分，并尽可能在解码过程中具有容错性。EOOC工作过程主要分为两步：</p>
-<p>编码：对N个类别做M次划分，每次划分将一部分划分为正类，一部分划分为反类，从而形成一个二分类训练器；这样一共产生M个训练集，可训练出M个分类器。</p>
-<p>解码：M个分类器对测试样本进行预测，这些预测标记组成一个编码。将这个预测编码与每个类别各自的编码进行比较，返回其中距离最小的类别作为最终预测结果。</p>
-<p>对于同一个学习任务，EOOC编码越长，纠错能力越强。</p>
-<h3 id="类别不平衡问题"><a href="#类别不平衡问题" class="headerlink" title="类别不平衡问题"></a>类别不平衡问题</h3><p>一个基本策略是再缩放。</p>
-<p>大体有三种做法：</p>
-<p>欠采样:去除一些样例使得正反例数目接近</p>
-<p>过采样：增加一些样例使得正反例数目接近</p>
-<p>第三类是基于原始数据训练，，再进行阈值转移。</p>
-<p>欠采样法的时间开销通常远小于过采样。过采样法不能简单对初始样本进行重复采样，否则会过拟合。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </p>
-<h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><p>决策树学习基本算法</p>
-<p><img src="/2021/11/10/machine-learning/E898624B5F73D1A43DCABE5689B64E31.jpg" alt="img" style="zoom: 25%;"></p>
-<h3 id="划分选择"><a href="#划分选择" class="headerlink" title="划分选择"></a>划分选择</h3><h4 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h4><p>信息熵为度量样本集合纯度最常用的一种指标。假定样本集合D中第k类样本所占的比例为$p_k$,则D的信息熵定义为</p>
-<script type="math/tex; mode=display">
-Ent(D)=-\sum_{k=1}^{|y|} p_klog_2p_k</script><p>Ent(D)的值越小，则D的纯度越高。</p>
-<p>假定离散属性有v个可能的取值，若使用a来对样本集D进行划分，则会产生V个分支结点，其中第v个分支结点包括了D中所有在属性a上取值为$a^v$的样本，记为$D^v$。则可又获得信息增益：</p>
-<script type="math/tex; mode=display">
-Gain(D,a)=Ent(D)-\sum_{v=1}^{V}\frac{|D^v|}{|D|}Ent(D^v)</script><p>著名的ID3决策树学习算法就是以信息增益为准则来选择划分属性的。</p>
-<p>X和Y的交互信息</p>
-<script type="math/tex; mode=display">
-I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)=H(X)+H(Y)-H(X,Y)</script><p>样本熵：各类样本熵之和</p>
-<h4 id="增益率"><a href="#增益率" class="headerlink" title="增益率"></a>增益率</h4><p>但是，显而易见，信息增益准则对于可取数目较多的属性有所偏好，所以我们引入增益率。著名的C4.5决策树算法便是使用增益率来哈分最优划分属性的。增益率定义为</p>
-<script type="math/tex; mode=display">
-Gain\_ratio(D,a)=\frac{Gain(D,a)}{IV(a)} 
-其中
-IV(a)=-\sum_{v=1}^{V}\frac{|D^v|}{|D|} log_2\frac{|D^v|}{|D|}</script><p>需要注意，增益率准则对于可取纸2数目较少的属性有所偏好，因此C4.5并不是直接使用增益率准则来进行划分的，而是采用了一个启发式算法，先从候选划分属性中zhaochu1信息增益高于平均水平的属性，再从中选择增益率最高的。</p>
-<h4 id="基尼系数"><a href="#基尼系数" class="headerlink" title="基尼系数"></a>基尼系数</h4><p>CART决策树采用基尼指数来选择划分属性。数据集D的纯度可用基尼系数来度量：</p>
-<script type="math/tex; mode=display">
-Gini(D)=\sum_{k=1}^{|y|}\sum_{k'\ne k }^{} p_k p_{k'}
-       =1-\sum_{k=1}^{|y|}p_k^2</script><p>直观理解的话，基尼系数反应了从数据集D中随机抽取两个样本，其分类不一致的概率。</p>
-<p>属性a的基尼系数定义为</p>
-<script type="math/tex; mode=display">
-Gini\_index(D,a)=\sum_{v=1}^{V}\frac{|D^v|}{|D|}Gini(D^v)</script><h3 id="剪枝处理"><a href="#剪枝处理" class="headerlink" title="剪枝处理"></a>剪枝处理</h3><p>剪枝(pruning)是决策树学习算法对应过拟合的主要手段。决策树基本策略有预剪枝(prepruning)和后剪枝(postpruning)。</p>
-<p>预剪枝是在决策树生成过程中，对每个结点在划分前进行估计，若当前结点的划分不能带来决策树泛化性能提升，则停止划分并将当前结点标记为叶结点；后剪枝则是先从训练集生成一颗完整的决策树，然后自底向上地对非叶结点进行考察，若将该节点对应的子树替换为叶结点能带来决策树泛化性能提升，则将该子树替换为叶结点。</p>
-<p>预剪枝使决策树很多分支都没有展开，降低了过拟合风险，减少了决策树训练时间开销和测试时间开销，但会带来欠拟合的风险。</p>
-<p>后剪枝决策树的欠拟合风险很小，泛化性能往往优于预剪枝决策树。</p>
-<h3 id="连续与缺失值"><a href="#连续与缺失值" class="headerlink" title="连续与缺失值"></a>连续与缺失值</h3><h4 id="连续值处理"><a href="#连续值处理" class="headerlink" title="连续值处理"></a>连续值处理</h4><p>由于连续属性的可取数目不再有限，因此不能直接根据连续属性的可取值来对结点进行划分。此时，连续属性离散化技术派上用处。最简单策略就是采用二分法，正是C4.5决策树算法采用的机制。</p>
-<h4 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h4><h5 id="在以下三方面影响到决策树构建"><a href="#在以下三方面影响到决策树构建" class="headerlink" title="在以下三方面影响到决策树构建"></a>在以下三方面影响到决策树构建</h5><p>影响杂质测量计算方式；影响如何将缺失值的实例分配到子节点；影响具有缺失值的测试实例如何被分配</p>
-<p>原信息增益=去除缺失值信息增益*（去除后的样本数/总样本数）</p>
-<h3 id="多变量决策树"><a href="#多变量决策树" class="headerlink" title="多变量决策树"></a>多变量决策树</h3><p>每个节点划分为线性分类器。对属性的线性组合进行测试。</p>
-<h3 id="考点"><a href="#考点" class="headerlink" title="考点"></a>考点</h3><h4 id="基于决策树分类的优点"><a href="#基于决策树分类的优点" class="headerlink" title="基于决策树分类的优点"></a>基于决策树分类的优点</h4><p>构建过程计算资源开销小；</p>
-<p>分类未知样本速度极快；</p>
-<p>对于小规模的树比较容易解释；</p>
-<p>在许多小的简单数据集合性能与其他方法相近。</p>
-<h4 id="TOP-DOWN决策树"><a href="#TOP-DOWN决策树" class="headerlink" title="TOP-DOWN决策树"></a>TOP-DOWN决策树</h4><p><img src="/2021/11/10/machine-learning/image-20211117162908027.png" alt="image-20211117162908027" style="zoom:50%;"></p>
-<h4 id="过拟合"><a href="#过拟合" class="headerlink" title="过拟合"></a>过拟合</h4><h5 id="pre-pruning"><a href="#pre-pruning" class="headerlink" title="pre-pruning"></a>pre-pruning</h5><p>如果所有的实例都属于同一类别就停止；如果所有的属性值都一样就停止。</p>
-<p>更加具有限制性的，如果实例的数量少于用户指定的阈值；如果实例的类别分布与可用的特征无关；如果扩展当前节点不能改善纯度。（基尼系数或信息增益）</p>
-<h5 id="post-pruning"><a href="#post-pruning" class="headerlink" title="post-pruning"></a>post-pruning</h5><p>将决策树增长到其全部内容，以自下而上的方式修剪。若修剪后泛化错误得到改善，则将子树替换为叶子。可使用MDL修剪。</p>
-<h4 id="MDL"><a href="#MDL" class="headerlink" title="MDL"></a>MDL</h4><p>最小描述长度准则—Minimum Description Length</p>
-<p><img src="/2021/11/10/machine-learning/image-20211117203144245.png" alt="image-20211117203144245" style="zoom:50%;"></p>
-<p>分发实例的过程，将缺失值按照权重分别分发给不同的分支。如下图：</p>
-<p><img src="/2021/11/10/machine-learning/image-20211117203735045.png" alt="image-20211117203735045" style="zoom:50%;"></p>
-<p>对于新实例有缺失值的情况下如何分类，也要利用概率来看。</p>
-<h4 id="惩罚项"><a href="#惩罚项" class="headerlink" title="惩罚项"></a>惩罚项</h4><p>惩罚项比重影响 ：比重大时降低模型复杂度 ；比重适当时模型复杂度与问题匹配 ；比重小时、退化成原模型</p>
-<h2 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h2><p>support vector machine,SVM</p>
-<h3 id="间隔与支持向量"><a href="#间隔与支持向量" class="headerlink" title="间隔与支持向量"></a>间隔与支持向量</h3><p>给定训练集样本D，分类学习最基本的想法就是基于训练集D在样本空间中找到一个划分超平面。</p>
-<p>在样本空间中，划分超平面可通过如下线性方程来描述：$w^T x+b$</p>
-<p>其中$w$为法向量，决定了超平面的方向，b为位移量。我们将该平面记做(w,b)</p>
-<p>样本空间中任一点x到该超平面的距离可写为</p>
-<script type="math/tex; mode=display">
-r=\frac{|w^T x+b|}{||w||}</script><p>假设超平面可将训练样本正确分类，对于$(x_i,y_i)$,若$y_i=1$,则有$w^T x+b&gt;$0,若为-1则&lt;0</p>
-<p>令</p>
-<script type="math/tex; mode=display">
-w^T x+b\ge+1,y_i=+1</script><script type="math/tex; mode=display">
-w^T x+b\le-1,y_i=-1</script><p>如图所示，距离超平面最近的这几个训练样本使上述等号成立，他们被称为支持向量，两个异类支持向量，两个异类支持向量到超平面的距离之和为$\gamma=\frac{2}{||w||}$,它被称为间隔。</p>
-<p><img src="/2021/11/10/machine-learning/36EFD86F17078452CE4BAFE7406E7716.jpg" alt="img" style="zoom:33%;"></p>
-<p>想要找到最大间隔，即找到最大$w与b$，使得$\lambda$最大。</p>
-<p>显然，为了最大化间隔，仅需要最大化$||w||^{-1}$，这等价于最小化$||w||^2$，于是便有</p>
-<script type="math/tex; mode=display">
-min\frac12 ||w||^2</script><script type="math/tex; mode=display">
-st\  y_i(w^Tx_i+b)\ge1，i=1,2,...,m</script><p>这就是SVM的基本型。</p>
-<h3 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h3><p>对于SVM的基本型，添加拉格朗日乘子$\alpha\ge0$，则该问题拉格朗日函数可以写为</p>
-<script type="math/tex; mode=display">
-L(w,b,\alpha)=\frac12 ||w||^2+\sum_{i=1}^{m}\alpha_i(1-y_i(w^Tx_i+b))</script><p>其中$\alpha_i=(\alpha_1,\alpha_2,…,\alpha_m)$</p>
-<p>分别求偏导，$w=\sum<em>{i=1}^{m}\alpha_i y_i x_i，0=\sum</em>{i=1}^{m}\alpha_i y_i$</p>
-<p>代入，可得对偶问题如下</p>
-<script type="math/tex; mode=display">
-max:\sum_{i=1}^{m}\alpha_i-\frac12 \sum_{i=1}^{m}\sum_{j=1}^m \alpha_i \alpha_j y_i y_j x_i^T x_j（11）
-\\
-st\sum_{i=1}^m\alpha_i y_i=0,\alpha_i\ge0</script><p>解出$\alpha$后，求出w与b即可得到模型</p>
-<script type="math/tex; mode=display">
-f(x)=\sum_{i=1}^m \alpha_i y_i x_i^Tx+b(12)</script><p>因为上述过程需要满足KK条件，即要求</p>
-<p>$\alpha_i\ge0$</p>
-<p>$y_if(x_i)-1\ge0$</p>
-<p>$\alpha_i(y_if(x_i)-1)=0$（13）    </p>
-<p>若$\alpha_i$=0，则该样本不会在12的求和中出现，也就不会对f(x)有影响‘</p>
-<p>若后面等于0，则所对应的样本点位于最大间隔边界上，是一个支持向量。</p>
-<p>如何求解11呢？我们介绍一种高效的SMO算法。</p>
-<p>暂且跳过这部分。</p>
-<h3 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h3><p>若在原始样本空间内不存在一个能正确划分两类样本的超平面，面对这类问题，我们可将样本从原始空间映射到一个高维的特征空间，使得样本在这个高维空间内线性可分。并且若原始空间有限，则一定存在一个高维特征空间使样本可分。</p>
-<p>令$\phi(x)$表示将x映射后的特征向量，于是，在特征空间中划分超平面所对应的模型可以表示为</p>
-<p>$f(x)=w^T\phi(x)+b$</p>
-<p>同上，其对偶问题是</p>
-<script type="math/tex; mode=display">
-max:\sum_{i=1}^{m}\alpha_i-\frac12 \sum_{i=1}^{m}\sum_{j=1}^m \alpha_i \alpha_j y_i y_j \phi(x_i)^T \phi(x_j)
-$$（21）
-
-$st\sum_{i=1}^m\alpha_i y_i=0,\alpha_i\ge0$</script><p>求解21会涉及到计算$\phi(x_i)^T\phi(x_i)$，这是样本$x_i与x_j$映射到特征空间后的内积，计算困难，为了避开这个障碍，可以设想一个这样的函数</p>
-<script type="math/tex; mode=display">
-\kappa(x_i,x_j)=<\phi(x_i),\phi(x_j)> =\phi(x_i)^T\phi(x_i)(22)</script><p>即$x_i与x_j$在特征空间的内积等于他们在原始样本空间中通过函数$\kappa$计算的结果。</p>
-<p>则可进行求解，求解得</p>
-<script type="math/tex; mode=display">
-f(x)=w^T\phi(x_i)+b=\sum_{i=1}^{m}\alpha_i y_i \phi(x_i)^T \phi(x) +b=\sum_{i=1}^{m}\alpha_i y_i \kappa(x,x_i)+b$$（24）</script><p>这里的$\kappa(,)$就是核函数，24显示出模型最优解可通过训练样本的核函数展开，这一展开式也称为“支持向量展式”。</p>
-<p>关于核函数，我们有以下定理：</p>
-<p>暂且略过</p>
-<h3 id="软间隔与正则化"><a href="#软间隔与正则化" class="headerlink" title="软间隔与正则化"></a>软间隔与正则化</h3><p>大多数时候我们很难找到合适的核函数，所以为了缓解这一问题，我们会允许支持向量机在一些样本上出错。为此要引入软间隔的概念。</p>
-<p> <img src="/2021/11/10/machine-learning/4A16DFA62BFB67D6662A8F6552B5C427.jpg" alt="img" style="zoom:33%;"></p>
-<p>软间隔则是允许某些样本不满足约束</p>
-<p>$y_i(w^Tx_i+b)\ge1$(28)</p>
-<p>当然，在最大化间隔的同时，不满足约束的样本应尽可能少。于是，优化目标可以写为</p>
-<script type="math/tex; mode=display">
-\hat{P}(c)=\frac{|D_c|+1}{|D|+N}</script><h2 id="贝叶斯分类器"><a href="#贝叶斯分类器" class="headerlink" title="贝叶斯分类器"></a>贝叶斯分类器</h2><h3 id="贝叶斯决策论"><a href="#贝叶斯决策论" class="headerlink" title="贝叶斯决策论"></a>贝叶斯决策论</h3><p>[最大后验估计(Maximum-a-Posteriori (MAP) Estimation) ]</p>
-<p>最大似然估计（MLE）选择值 使观察到的数据的概率最大化<br>最大后验估计（MAP） 选择在观察到的数据和先验条件下最有可能的值 </p>
-<p>缺点<br>MLE: 如果数据集太小，就会过度拟合<br>MAP: 两个有不同预设的人最终会导致不同的估计值</p>
-<p><img src="/2021/11/10/machine-learning/image-20211117223857004.png" alt="image-20211117223857004" style="zoom:50%;"></p>
-<p><img src="/2021/11/10/machine-learning/A6BDD93CCCCCC047DE2609620E7D78C3.jpg" alt="img" style="zoom:50%;"></p>
-<p><img src="/2021/11/10/machine-learning/A044609FAA1AD73C2A0217EC28158122.jpg" alt="img" style="zoom:50%;"></p>
-<h3 id="极大似然估计"><a href="#极大似然估计" class="headerlink" title="极大似然估计"></a>极大似然估计</h3><p><img src="/2021/11/10/machine-learning/9A0C04058645739BD9C5D62DD3AB2700.jpg" alt="img" style="zoom: 33%;"></p>
-<p><img src="/2021/11/10/machine-learning/B45A21D4483D97DDD0C96A6805892B6C.jpg" alt="img" style="zoom:33%;"></p>
-<h3 id="朴素贝叶斯分类器"><a href="#朴素贝叶斯分类器" class="headerlink" title="朴素贝叶斯分类器"></a>朴素贝叶斯分类器</h3><p><img src="/2021/11/10/machine-learning/1E8135079EBCC4628459CF2B8B7EE87A.jpg" alt="img" style="zoom:33%;"></p>
-<h3 id="半朴素贝叶斯分类器"><a href="#半朴素贝叶斯分类器" class="headerlink" title="半朴素贝叶斯分类器"></a>半朴素贝叶斯分类器</h3><p><img src="/2021/11/10/machine-learning/1E8135079EBCC4628459CF2B8B7EE87A-16371597889032.jpg" alt="img" style="zoom:33%;"></p>
-<script type="math/tex; mode=display">
-P(c|x)\propto\ P(c)\prod{i=1}^{d}P(x_i|c,pa_i)$$（21）</script><p>其中$pa_i$为属性$x_i$所依赖的属性，称为$x_i$的父属性。问题的关键转换为如何确定每个属性的父属性，不同的做法产生不同的独依赖分类器。</p>
-<p>最直接的做法是假设所有属性都依赖于同一个属性，称为“超父”，然后通过交叉验证等模型选择方法来确定超父属性，由此形成了SPODE(Super-Parent ODE)方法，例如(b)中，$x_1$是超父属性。</p>
-<p><img src="/2021/11/10/machine-learning/55A690BDCFCF2088CC674065B8172013.jpg" alt="img" style="zoom: 50%;"></p>
-<p>TAN则是在最大带权生成树算法的基础上，通过以下步骤化简为(c)的树形结构。</p>
-<p><img src="/2021/11/10/machine-learning/38DEA55FFF99EC16FC86A14D9523652D.jpg" alt="img" style="zoom:50%;"></p>
-<h3 id="贝叶斯网"><a href="#贝叶斯网" class="headerlink" title="贝叶斯网"></a>贝叶斯网</h3><p>Directed Acyclic Graph(DAG)：有向无环图</p>
-<p>Conditional Probability Table(CPT)：条件概率表</p>
-<p>具体来说，一个贝叶斯网B由结构G和参数$\theta$两部分构成，即$B=<G,\theta>$。</G,\theta></p>
-<p>网络结构G为DAG，其每个结点对应于一个属性，若两个属性有直接依赖关系，则他们由一条边连接起来；参数$\theta$定量描述这种依赖关系，假设属性$x<em>i$在G中的父节点为$\pi_i$,则$\theta$包含了每个属性的条件概率表$\theta</em>{x_i|\pi_i}=P_B(x_i|\pi_i)$</p>
-<h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><p>给定父节点集，贝叶斯网假设每个属性与它的非后裔属性独立。</p>
-<p><img src="/2021/11/10/machine-learning/79D783BCFC662B14C00191FCE9BFE39E.jpg" alt="img" style="zoom:50%;"></p>
-<p>为了分析有向图中变量间的条件独立性，可使用有向分离。我们先把有向图转变成为一个无向图：</p>
-<p>*找出有向图中的所有V型结构，在V型结构的两个父节点之间加上一条无向边；</p>
-<p>*将所有有向边改为无向边</p>
-<p>由此产生的无向图称为道德图，令父节点相连的过程称为道德化。</p>
-<p>若变量x和y能在图上z分开，即从道德图中将变量集合z去除后，x和y分属两个连通分支，则称x和y被z有向分离，$x\perp y|z$成立。</p>
-<h4 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h4><p>贝叶斯网学习的首要任务就是根据训练数据集来找出结构最恰当的贝叶斯网。评分搜索是求解这一问题的常用办法。具体来说，我们先定义一个评分函数，以此来评估贝叶斯网与训练数据的契合程度，然后基于这个评分函数来寻找结构最优的贝叶斯网。</p>
-<p>常用评分函数通常基于信息论准则，此类准则将学习问题看作一个数据压缩任务，学习的目标是找到一个能以最短编码长度描述训练数据的模型，此时编码的长度包括了描述模型自身所需的编码位数和使用该模型描述数据所需的编码位数。对于贝叶斯网学习而言，模型就是一个贝叶斯网，同时，每个贝叶斯网描述了一个在训练数据上的概率分布，我们应选择那个综合编码长度最短的贝叶斯网，这就是最小描述长度准则。(Minimal Description Length,MDL)</p>
-<p>给定训练集D，贝叶斯网$B=<G,\theta>$在D上的评分函数可写为</G,\theta></p>
-<script type="math/tex; mode=display">
-s(B|D)=f(\theta)|B|-LL(B|D)(28)</script><p>其中，|B|是贝叶斯网的参数个数；$f(\theta)$表示描述每个参数$\theta$所需的编码位数。而</p>
-<script type="math/tex; mode=display">
-LL(B|D)=\sum_{i=1}^{m}logP_B(x_i)(29)</script><p>是贝叶斯网B的对数似然。显然，28的第一项是计算编码贝叶斯网B所需的编码位数，第二项是表述B所对应的概率分布$P_B$对D的描述有多好。此时，学习任务转换为优化任务，寻找一个贝叶斯网B使得评分函数最小。</p>
-<p>若$f(\theta)=1$，则得到AIC评分函数。</p>
-<p>若$f(\theta) =\frac12log\ m$，则得到BIC评分函数。</p>
-<p>当=0时，评分函数退化为负对数似然函数，学习任务退化为极大似然估计。</p>
-<p>为最小化评分函数，只需要对网络结构进行搜索，而候选结构的最优参数可直接在训练集计算得到。</p>
-<p>但是，在所有可能的网络空间搜索最优贝叶斯网络是一个NP问题。一般有两种策略在有限时间内求得近似解，第一种为贪心法，第二种是通过给网络结构施加约束来削减搜索空间。</p>
-<h4 id="推断"><a href="#推断" class="headerlink" title="推断"></a>推断</h4><p>贝叶斯网络的近似推断常使用吉布斯采样来完成，这是一种随机采样方法。</p>
-<p><img src="/2021/11/10/machine-learning/E2B301816200CD704A7D700DBB22FC31.jpg" alt="img" style="zoom:50%;"></p>
-<p><img src="/2021/11/10/machine-learning/78E3A5A0E31E197592EDE4D8AF528331.jpg" alt="img" style="zoom:50%;"></p>
-<h4 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h4><p>在现实中，会存在许多未观测变量。未观测变量的学名是隐变量，令X表示已观测变量集，Z表示隐变量集，$\theta$表示模型参数，若想要对$\theta$做极大似然估计，则应最大化对数似然</p>
-<p>$LL(\theta|X,Z)ln\ P(X,Z|\theta)$</p>
-<p>由于Z是隐变量，我们可通过对Z计算期望，来最大化已观测数据的对数“边际似然”</p>
-<p>$LL(\theta|X)=ln\ P(X|\theta)=ln\sum_{Z}P(X,Z|\theta)$（35）</p>
-<p><img src="/2021/11/10/machine-learning/A675D81C9F372B741728116344652037.jpg" alt="img" style="zoom:50%;"></p>
-<h2 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h2><h3 id="聚类任务"><a href="#聚类任务" class="headerlink" title="聚类任务"></a>聚类任务</h3><p>在无监督学习中，训练样本的标记信息是未知的，目标是通过对无标记训练样本的学习来揭示数据的内在性质及规律，为进一步的数据分析提供基础，此类学习任务应用最广的是聚类。</p>
-<p>聚类试图将数据集中的样本划分为若干个通常是不相交的子集，每个子集称为一个簇。</p>
-<p><img src="/2021/11/10/machine-learning/4C60C854BC237111701519B848988BBC.jpg" alt="img"></p>
-<h3 id="性能度量-1"><a href="#性能度量-1" class="headerlink" title="性能度量"></a>性能度量</h3><p>聚类性能度量也称为聚类“有效性指标”。</p>
-<p>聚类性能度量大致有两类，一类是将聚类结果与某个“参考模型”进行比较，称为“外部指标”；另一类是直接考察聚类结果而不利用任何参考模型，称为“内部指标”。</p>
-<p><img src="/2021/11/10/machine-learning/75BD1DD109F66E6E202DCF1D6A7E5356.jpg" alt="img" style="zoom:50%;"></p>
-<p><img src="/2021/11/10/machine-learning/02B3276E333E4A1D2CB5F7C7BA8C5CCA.jpg" alt="img" style="zoom:50%;"></p>
-<h3 id="距离计算"><a href="#距离计算" class="headerlink" title="距离计算"></a>距离计算</h3><p>对函数$dist$，若他是一个距离度量，则需要满足一些基本性质</p>
-<p>非负性：$dist(x_i,x_j)\ge0$</p>
-<p>同一性：$dist(x_i,x_j)=0当且仅当x_i=x_j$</p>
-<p>对称性</p>
-<p>直递性</p>
-<p>对于给定样本</p>
-<script type="math/tex; mode=display">
-x_i=(x_{i1};x_{i2};...;x_{in})与x_j</script><p>最常用的闵可夫斯基距离</p>
-<script type="math/tex; mode=display">
-dist_{mk}(x_i,x_j)=(\sum_{u=1}^n |x_{iu}-x_{ju}|^p)^{\frac1p}（18）</script><p>当p=2时，闵可夫斯基距离即为欧氏距离</p>
-<script type="math/tex; mode=display">
-dist_{ed}(x_i,x_j)=||x_i-x_j||_2=\sqrt{\sum_{u=1}^n |x_{iu}-x_{ju}|^2}（19）</script><p>当p=1时，闵可夫斯基距离即为曼哈顿距离</p>
-<script type="math/tex; mode=display">
-dist_{man}(x_i,x_j)=||x_i-x_j||_1=\sum_{u=1}^n |x_{iu}-x_{ju}|（20）</script><p>定义域为{1,2,3}这样的属性为有序属性，而定义域为{飞机，轮船，火车}则为无序属性，闵可夫斯基距离用于有序属性。</p>
-<p>对无序属性可采用VDM(Value Difference Metric)。令$m<em>{u,a}$表示属性u上取值为a的样本数，$m</em>{u,a,i}$表示在第i个样本簇中在属性u上取值为a的样本数，k为样本簇数，则属性u上两个离散值a与b之间的VDM距离为</p>
-<script type="math/tex; mode=display">
-VDM_p(a,b)=\sum_{i=1}^k | \frac{m_{u,a,i}}{m_{u,a}}-\frac{m_{u,b,i}}{m_{u,b}} |^p（21）</script><p>于是，将闵可夫斯基距离和VDM结合即可处理混合属性。假定有$n_c$个有序属性、$n-n_c$个无序属性，不失一般性，令有序属性排列在无序属性之前，</p>
-<script type="math/tex; mode=display">
-MinkovDM_p(x_i,x_j)=(\sum_{u=1}^{n_c}|x_{iu}-x_{ju}|^p+\sum_{u=n_c+1}^{n}VDM_p(x_{iu},x_{ju}))^{\frac12}（22）</script><p>当空间中不同属性的重要性不同时，可使用加权距离。</p>
-<p>需要注意的是，通常我们是基于某种形式的距离来定义“相似度度量”，距离越大，相似度越小，然而用于相似度度量的距离未必一定要满足距离度量的所有基本性质。不满足直递性的距离称为非度量距离。</p>
-<h3 id="原型聚类"><a href="#原型聚类" class="headerlink" title="原型聚类"></a>原型聚类</h3><p>也称为基于原型的聚类，此类算法假设聚类结构能通过一组原型刻画。通常对原型进行初始化，然后对原型进行迭代更新求解。</p>
-<h4 id="k均值算法"><a href="#k均值算法" class="headerlink" title="k均值算法"></a>k均值算法</h4><p>给定样本集$D={x_1,x_2,..,x_m}$，“k均值”算法针对聚类所得簇划分$C={C_1,C_2,…,C_k}$最小化平方误差</p>
-<script type="math/tex; mode=display">
-E=\sum_{i=1}^{k}\sum_{x\in C_i} ||x-\mu_i||_2^2（24）</script><p>k均值算法采用了贪心策略，通过迭代优化来近似求解式。</p>
-<h4 id="学习向量量化"><a href="#学习向量量化" class="headerlink" title="学习向量量化"></a>学习向量量化</h4><p>Learning Vector Quantization（LVQ)与一般的聚类算法不同，LVQ假设数据样本带有标记类别，学习过程利用样本的这些监督信息来辅助聚类。</p>
-<p>给定样本集</p>
-<script type="math/tex; mode=display">
-D={(x_1,y_1),(x_2,y_2),...,(x_m,y_m)}</script><p>每个样本$x<em>j$是由n个属性描述的特征向量$(x</em>{j1};x<em>{j2};…;x</em>{jn})$,$y_i\in \gamma$是样本$x_j$的类别标记。LVQ的目标是学得一组n维向量${p_1,p_2,…,p_n}$,每个原型向量代表一个聚类簇，簇标记$t_i \in \gamma$。</p>
-<p><img src="/2021/11/10/machine-learning/6B4E7175C6A70D74E89E1D5803B11140.jpg" alt="img" style="zoom:50%;"></p>
-<h4 id="高斯混合模型"><a href="#高斯混合模型" class="headerlink" title="高斯混合模型"></a>高斯混合模型</h4><p>参考下面这篇文章</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30483076">https://zhuanlan.zhihu.com/p/30483076</a></p>
-<h3 id="密度聚类"><a href="#密度聚类" class="headerlink" title="密度聚类"></a>密度聚类</h3><p>此类算法假设聚类结构能通过样本分布的紧密程度确定。</p>
-<p>DBSCAN是一种著名的密度聚类算法，它基于一组“邻域”参数$(\varepsilon,MinPts)$来刻画样本分布的紧密程度。给定数据集$D={x_1,x_2,…,x_m}$,定义以下概念</p>
-<p>$\varepsilon-$邻域：对于x，其$\varepsilon$邻域包含样本集D中与$x_j$的距离不大于$\varepsilon$的样本</p>
-<p>核心对象：若x的$\varepsilon$邻域至少包含MinPts个样本，则为一个核心对象</p>
-<p>密度直达：若$x_j$位于$x_i$的$\varepsilon$邻域中，且$x_i$是核心对象，则称$x_j$由$x_i$密度直达</p>
-<p>密度可达：对$x_i$与$x_j$，若存在样本序列</p>
-<script type="math/tex; mode=display">
-$p_1,p_2,...,p_n</script><p>其中$p<em>1=x_i,p_n=x_j$且$p</em>{i+1}$由$p_i$密度直达，则称$x_j$由$x_i$密度可达</p>
-<p>密度相连：对$x_i$与$x_j$，若存在$x_k$使得$x_k$使得二者均由$x_k$密度可达，则称二者密度相连。</p>
-<p>DBSCAN将簇定义为：由密度可达关系导出的最大的密度相连样本集合。</p>
-<p><img src="/2021/11/10/machine-learning/EDC190CDAD019755FE8DB3451CDB741C.jpg" alt="img" style="zoom:50%;"></p>
-<h3 id="层次聚类"><a href="#层次聚类" class="headerlink" title="层次聚类"></a>层次聚类</h3><p>层次聚类试图在不同层次上对数据集进行划分，从而形成树形的聚类结构。数据集的划分可采用“自顶向上”的聚合策略，也可采用“自顶向下”的分拆策略。</p>
-<p>AGNES是一种采用自底向上聚合策略的层次聚类算法。它先将数据集中的每个样本看作一个初始聚类簇，然后在算法运行的每一步中找出距离最近的两个聚类簇进行合并。</p>
-<p>当聚类簇距离由</p>
-<script type="math/tex; mode=display">
-d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单链接，全链接和均链接算法。</p>
-<p><img src="/2021/11/10/machine-learning/38F2CE5A44DBE19A0FC3066D27AB8B2A.jpg" alt="img" style="zoom:50%;"></p>
-<h2 id="降维与度量学习"><a href="#降维与度量学习" class="headerlink" title="降维与度量学习"></a>降维与度量学习</h2><h3 id="k近邻学习"><a href="#k近邻学习" class="headerlink" title="k近邻学习"></a>k近邻学习</h3><p>k-Nearest Neighbor，简称kNN学习是一种常用的监督学习方法。</p>
-<p>其工作机制是：给定测试样本，基于某种距离度量找出训练集中与其最靠近的k个训练样本，然后基于这k个邻居的信息来进行预测。</p>
-<p>k近邻学习没有显示的训练过程，是“懒惰学习”的主要代表，此类学习技术在训练阶段仅仅是把样本保存起来，训练时间开销为0，待收到测试样本后再进行处理；相应的，那些在训练阶段就对样本进行学习处理的方法称为急切学习。</p>
-<p>k近邻的错误率小于贝叶斯的两倍。    </p>
-<h3 id="低维嵌入"><a href="#低维嵌入" class="headerlink" title="低维嵌入"></a>低维嵌入</h3><p>通过某种数学变换将原始高维属性空间转变为一个低维子空间。</p>
-<p>若要求原始空间中样本之间的距离在低维空间中得以保持，即得到多维缩放(Multiple Dimensional Scaling,MDS)这样一种经典的降维方法。</p>
-<h3 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h3><p>Principal Component Analysis,PCA</p>
-<p>​    </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/13/Verilog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/13/Verilog/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-10-13 21:49:51" itemprop="dateCreated datePublished" datetime="2021-10-13T21:49:51+08:00">2021-10-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Verilog"><a href="#Verilog" class="headerlink" title="Verilog"></a>Verilog</h2><h4 id="数字表示"><a href="#数字表示" class="headerlink" title="数字表示"></a>数字表示</h4><p>基本格式：&lt; 位宽 &gt;’&lt; 数制的符号 &gt;&lt; 数值 &gt;</p>
-<p>h十六进制</p>
-<p>d十进制</p>
-<p>o八进制</p>
-<p>b二进制</p>
-<h4 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h4><p>可直接进行加减等运算，方括号位于向量名前方。eg: reg [7:0] data</p>
-<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>方括号位于数组名的后面。括号内的第一个数字为第一个元素的序号，第二 个数字为最后一个元素的序号，中间用冒号隔开。</p>
-<p>eg: wire array [15:0];</p>
-<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>可以通过 parameter 关键字声明参数以增强模块可拓展性和可读性。</p>
-<p>在模块实例化时，可以使用 #() 将所需的实例参数覆盖模块的默认参数。</p>
-<p>局部参数可以用 localparam 关键字声明，它不能够进行参数重载。</p>
-<p>eg:</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder #(</span><br><span class="line"><span class="keyword">parameter</span> WIDTH = <span class="number">4</span> <span class="comment">// 默认宽度为 4</span></span><br><span class="line">) (</span><br><span class="line"><span class="keyword">input</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] a,</span><br><span class="line"><span class="keyword">input</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] b,</span><br><span class="line"><span class="keyword">output</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] c</span><br><span class="line">);</span><br><span class="line"><span class="keyword">assign</span> c = a + b;</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>在我们例化这个模块时，可以进行如下操作：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 覆盖宽度，修改为 6</span></span><br><span class="line">adder <span class="variable">#( .WIDTH (6) )</span> U_adder_0(</span><br><span class="line"><span class="variable">.a</span> (a ),</span><br><span class="line"><span class="variable">.b</span> (b ),</span><br><span class="line"><span class="variable">.c</span> (c )</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 使用默认的宽度 4</span></span><br><span class="line">adder U_adder_1(</span><br><span class="line"><span class="variable">.a</span> (a ),</span><br><span class="line"><span class="variable">.b</span> (b ),</span><br><span class="line"><span class="variable">.c</span> (c )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>局部参数 localparam 和参数类似，但是不能在例化时被覆盖。</p>
-<h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><h6 id="按位运算"><a href="#按位运算" class="headerlink" title="按位运算"></a>按位运算</h6><p>按位取反 ~</p>
-<p>按位与 &amp;</p>
-<p>按位或 |</p>
-<p>按位异或 ^</p>
-<h6 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h6><p>• 逻辑取反!</p>
-<p>• 逻辑与 &amp;&amp;</p>
-<p>• 逻辑或 ||</p>
-<h6 id="缩减运算"><a href="#缩减运算" class="headerlink" title="缩减运算"></a>缩减运算</h6><p>• 缩减与 &amp;：对一个多位操作数进行缩减与操作，计算所有位之间的与操作结果，例如：&amp;(4’b1011) 的结果为 0</p>
-<p> • 缩减或 |：对一个多位操作数进行缩减或操作，计算所有位之间的或操作结果。例如：|(4’b1011) 的结果为 1</p>
-<p> • 缩减异或 ^：对一个多位操作数进行缩减异或操作，计算所有位之间的异或操作结果。例如： ^(4’b1011) 的结果为 1 </p>
-<p>缩减或非、缩减异或、缩减同或是类似的。</p>
-<h6 id="移位运算"><a href="#移位运算" class="headerlink" title="移位运算"></a>移位运算</h6><p>• 逻辑右移&gt;&gt;：1 个操作数向右移位，产生的空位用 0 填充 </p>
-<p>• 逻辑左移&lt;&lt;：1 个操作数向左移位，产生的空位用 0 填充</p>
-<p> • 算术右移&gt;&gt;&gt;：1 个操作数向右移位。如果是无符号数，则产生的空位用 0 填充；有符号数则用其符号 位填充</p>
-<p> • 算术左移&lt;&lt;&lt;：1 个操作数向左移位，产生的空位用 0 填充</p>
-<h6 id="其他运算"><a href="#其他运算" class="headerlink" title="其他运算"></a>其他运算</h6><p>• 拼接 {,}：2 个操作数分别作为高低位进行拼接，例如：{2’b10,2’b11} 的结果是 4’b1011 </p>
-<p>• 重复 {n{m}}：将操作数 m 重复 n 次，拼接成一个多位的数。例如：a=2’b01，则 {2{a}} 的结果 是 4’b0101 </p>
-<p>• 条件? :：根据? 前的表达式是否为真，选择执行后面位于: 左右两个语句。例如：assign c = (a &gt; b) ? a : b，如果 a 大于 b，则将 a 的值赋给 c，否则将 b 的值赋给 c</p>
-<h4 id="组合逻辑"><a href="#组合逻辑" class="headerlink" title="组合逻辑"></a>组合逻辑</h4><h6 id="always"><a href="#always" class="headerlink" title="always"></a>always</h6><p>不推荐使用 always 块来表示组合逻辑。不正确的使用会生成大量锁存器。 </p>
-<p>下面的例子是一个 32-5 优先编码器，如果 tlb_hit_array 全为 0，那么 tlb_hit_index 也为 0。 always 块中被赋值的变量只能是 reg 类型，但是该编码器并不会综合出寄存器或者锁存器，这是因为 Verilog 中的寄存器 (reg) 和硬件上的寄存器不能完全等价。 如果去掉 tlb_hit_index = 5’d0; 一句，则会综合出锁存器。</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">4</span> :<span class="number">0</span>] tlb_hit_index;</span><br><span class="line"><span class="keyword">wire</span> [<span class="number">31</span>:<span class="number">0</span>] tlb_hit_array;</span><br><span class="line"><span class="keyword">integer</span> i;</span><br><span class="line"><span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">tlb_hit_index = <span class="number">5&#x27;d0</span>;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i = i + <span class="number">1</span>) <span class="keyword">begin</span></span><br><span class="line"><span class="keyword">if</span> (tlb_hit_array[i]) <span class="keyword">begin</span></span><br><span class="line">tlb_hit_index = i;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h4 id="模块声明和例化"><a href="#模块声明和例化" class="headerlink" title="模块声明和例化"></a>模块声明和例化</h4><p>模块被包含在关键字 module、endmodule 之内。</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder ( <span class="comment">// 模块名称声明</span></span><br><span class="line"><span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] a, <span class="comment">// 输入输出声明</span></span><br><span class="line"><span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] b,</span><br><span class="line"><span class="keyword">output</span> [<span class="number">31</span>:<span class="number">0</span>] c</span><br><span class="line">);</span><br><span class="line"><span class="keyword">assign</span> c = a + b; <span class="comment">// 变量声明、always 语句、assign 语句等</span></span><br><span class="line"><span class="keyword">endmodule</span> <span class="comment">// 模块结束</span></span><br></pre></td></tr></table></figure>
-<h4 id="Generate-块"><a href="#Generate-块" class="headerlink" title="Generate 块"></a>Generate 块</h4><p>这里只介绍 generate for 块。 </p>
-<p>generate for 的主要功能就是对模块或组件以及 always 块、assign 语句进行复制。 使用 generate for 的时候, 必须要注意以下几点要求 </p>
-<p>• 在使用 generate for 的时候必须先声明一个 genvar 变量，用作 for 的循环变量。genvar 是 generate 语句中的一种变量类型，用于在 generate for 语句中声明一个正整数的索引变量。</p>
-<p> • for 里面的内嵌语句, 必须写在 begin-end 里 </p>
-<p>• 尽量对 begin-end 顺序块进行命名</p>
-<p> generate for 的语法示例如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">genvar</span> i;</span><br><span class="line"><span class="keyword">generate</span> <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i = i + <span class="number">1</span>) <span class="keyword">begin</span>: gen_assign_temp</span><br><span class="line"><span class="keyword">assign</span> temp[i] = indata[<span class="number">2</span> * i + <span class="number">1</span> : <span class="number">2</span> * i];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">endgenerat</span><br></pre></td></tr></table></figure>
-<h4 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h4><h6 id="时延语句"><a href="#时延语句" class="headerlink" title="时延语句"></a>时延语句</h6><p>仿真中还经常使用时延来构造合适的仿真激励。它是不可综合的，仅能够在仿真中使用。时延分两类，一是 语句内部时延，二是语句间时延，其示例如下所示：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 语句内部时延</span></span><br><span class="line">A = #<span class="number">5</span> <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="comment">// 语句间时延</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">Temp = <span class="number">1&#x27;b1</span>;</span><br><span class="line">#<span class="number">5</span> A = Temp;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>两种方式都表达在五个时间单位后，将 A 的值赋为 1。</p>
-<h6 id="initial-语句"><a href="#initial-语句" class="headerlink" title="initial 语句"></a>initial 语句</h6><p>一般用来生成复位信号和激励。只在仿真开始时执行一次。</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试代码中</span></span><br><span class="line"><span class="comment">// 假设`timescale 1ns / 1ps</span></span><br><span class="line"><span class="keyword">reg</span> rst_n, clk;</span><br><span class="line"><span class="keyword">always</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">rst_n = <span class="number">1&#x27;b0</span>;</span><br><span class="line">clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">#<span class="number">50</span> rst_n = <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>会生成一个 100MHz 的时钟，一个 50ns 有效的复位信号。</p>
-<h6 id="系统任务"><a href="#系统任务" class="headerlink" title="系统任务"></a>系统任务</h6><p>系统任务可以被用来执行一些系统设计所需的输入、输出、时序检查、仿真控制操作。所有的系统任务名称 前都带有符号 $ 使之与用户定义的任务和函数相区分。</p>
-<p>常见的系统任务：</p>
-<p> • $display：用于显示指定的字符串，然后自动换行（用法类似 C 语言中的 printf 函数）</p>
-<p> • $time：可以提取当前的仿真时间</p>
-<p> • $stop：暂停仿真</p>
-<p> • $finish：终止仿真</p>
-<p> • $random：生成随机数 </p>
-<p>• $readmemh：读入一个 16 进制数的文件以初始化 reg</p>
-<h6 id="测试设计"><a href="#测试设计" class="headerlink" title="测试设计"></a>测试设计</h6><p>测试最基本的结构包括信号声明、激励和模块例化。 测试模块声明时，一般不需要声明端口。因为激励信号一般都在测试模块内部，没有外部信号。 声明的变量应该能全部对应被测试模块的端口。当然，变量不一定要与被测试模块端口名字一样。但是被测试模块输入端对应的变量应该声明为 reg 型，输出端对应的变量应该声明为 wire 型。 仿真过程中可以使用 $display 显示当前仿真进度或者测试结果。 在测试完成或者发现错误时可以使用 $finish; 或者 $stop; 来停止仿真。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2366,7 +2343,7 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

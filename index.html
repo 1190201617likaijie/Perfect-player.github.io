@@ -145,6 +145,311 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">任务管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-04-14 18:39:21" itemprop="dateCreated datePublished" datetime="2022-04-14T18:39:21+08:00">2022-04-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-15 16:46:32" itemprop="dateModified" datetime="2022-04-15T16:46:32+08:00">2022-04-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="任务管理"><a href="#任务管理" class="headerlink" title="任务管理"></a>任务管理</h1><h2 id="任务管理概述"><a href="#任务管理概述" class="headerlink" title="任务管理概述"></a>任务管理概述</h2><p>一个任务是一个处理器可以调度、执行和暂停的工作单位。它可以用来执行一个程序，一个任务或进程，一个操作系统服务工具，一个中断或异常处理程序，或一个内核或执行实用程序。</p>
+<p>IA-32结构提供了一种机制，用于保存任务的状态，调度任务的执行，以及从一个任务切换到另一个任务。当在保护模式下运行时，所有的处理器执行都是在任务内进行的，即使是简单的系统也必须至少定义一个任务。更复杂的系统可以使用处理器的任务管理设施来支持多任务的应用。</p>
+<p>一个过程调用包括将数据（以<strong>参数</strong>和<strong>返回值</strong>的形式）与控制从代码的一部分传递到另一部分。除此之外，在进入时为过程的局部变量分配空间，在退出的时候释放这些空间。数据传递、局部变量的分配和释放通过操纵程序栈来实现。</p>
+<p>操作系统实现宏观上并行任务的效果，其本质是微观上在多个任务之间切换。因此，当操作系统由任务A切换到任务B时，需要暂停任务A的执行，并将处理器执行任务A时各个寄存器的值保存到内存的某个位置上，这个过程叫做保存现场；之后将处理器上一次执行任务B时各个寄存器的值由内存中的某个位置回复到处理的寄存器当中，这个过程叫做恢复现场。当操作系统在调度时由任务A切换到任务B时，对任务A保存现场，对任务B恢复现场，这个整体的过程称之为：上下文切换。</p>
+<p>在每一个任务在执行之前，操作系统都需要为其分配一个专属的内存区域供其使用，这个内存区域通常被称为此任务的栈（stack）。Cortex-M有两个堆栈寄存器，主栈指针（MSP）与进程栈指针（PSP）。主程序操作系统和各个中断函数使用的是MSP指针，而各个被调度的任务（进程）使用的是PSP指针。本质上它是处理器的一个寄存器，PSP寄存器的值就是内存中任务的栈地址。</p>
+<h3 id="任务的结构"><a href="#任务的结构" class="headerlink" title="任务的结构"></a>任务的结构</h3><p>一个任务由两部分组成：一个任务执行空间和一个任务状态段（TSS）。任务执行空间由一个代码段、一个堆栈段和一个或多个数据段组成（见图7-1）。如果操作系统或执行程序使用处理器的特权级别保护机制，任务执行空间也会为每个特权提供一个单独的堆栈。<br>TSS指定了组成任务执行空间的段，并为任务状态信息提供了一个存储位置信息。在多任务系统中，TSS还提供了一种连接任务的机制。<br>一个任务由其TSS的段选择器来识别。当一个任务被加载到处理器中执行时，它的段选择器、基地址、限制和段描述符属性被加载到任务的寄存器。如果任务实现了分页，任务所使用的页面目录的基地址被加载到控制寄存器CR3。</p>
+<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414193049801.png" alt="image-20220414193049801"></p>
+<h3 id="任务状态"><a href="#任务状态" class="headerlink" title="任务状态"></a>任务状态</h3><p>以下项目定义了当前执行的任务的状态：</p>
+<ul>
+<li>任务的当前执行空间，由段寄存器（CS、DS、SS、ES、GS、FS和GS）中的段选择器定义。</li>
+<li>通用寄存器的状态。</li>
+<li>EFLAGS寄存器的状态。</li>
+<li>EIP寄存器的状态。</li>
+<li>控制寄存器CR3的状态。</li>
+<li>任务寄存器的状态。</li>
+<li>LDTR寄存器的状态。</li>
+<li>I/O地图的基址和I/O地图（包含在TSS中）。</li>
+<li>特权0、1和2堆栈的堆栈指针（包含在TSS中）。</li>
+<li>与先前执行的任务的链接（包含在TSS中）。<br>在调度任务之前，所有这些项目都包含在任务的TSS中，除了任务寄存器的状态。另外，LDTR寄存器的全部内容不包含在TSS中，只有LDT的段选择器。</li>
+</ul>
+<h3 id="任务的执行"><a href="#任务的执行" class="headerlink" title="任务的执行"></a>任务的执行</h3><p>软件或处理器可以通过以下方式之一调度一个任务的执行。</p>
+<ul>
+<li>用CALL指令明确调用一个任务。</li>
+<li>用JMP指令显式跳转到一个任务。</li>
+<li>隐式调用（由处理器）到一个中断处理任务。</li>
+<li>对一个异常处理任务的隐式调用。</li>
+<li>当EFLAGS寄存器中的NT标志被设置时，返回（用IRET指令启动）。</li>
+</ul>
+<p>所有这些调度任务的方法都是用一个段选择器来识别要调度的任务，这个段选择器指向任务门或任务的TSS。当用CALL或JMP指令调度任务时，指令中的选择器可以直接选择TSS或持有TSS的选择器的任务门。当调度一个任务来处理一个中断或异常时，中断或异常的IDT条目必须包含一个任务门，它持有中断或异常处理程序TSS的选择器。<br>当一个任务被调度执行时，在当前运行的任务和被调度的任务之间会发生一个任务切换。在任务切换期间，当前执行的任务的执行环境（称为任务的状态或上下文）被保存在其TSS中，任务的执行被暂停。被派遣任务的上下文被加载到处理器中，该任务的执行从新加载的EIP寄存器所指向的指令开始。如果任务在系统上次初始化后没有运行过，EIP将指向任务代码的第一条指令；否则，它将指向任务最后执行的指令之后的下一条指令。<br>如果当前执行的任务（调用任务）调用了被派发的任务（被调用任务），则段选择器被存储在被调用任务的TSS中，以提供与调用任务的链接。<br>对于所有IA-32处理器，任务不是递归的。一个任务不能调用或跳转到自身。中断和异常可以通过任务切换到一个处理任务来处理。在这里，处理器执行一个任务来处理中断或异常，从中断处理任务或异常处理任务返回后，自动切换回被中断的任务。这种机制也可以处理在中断任务中发生的中断。<br>作为任务切换的一部分，处理器也可以切换到另一个LDT，允许每个任务对基于LDT的段有不同的逻辑到物理地址的映射。在任务切换时，页面目录基础寄存器（CR3）也被重新加载，允许每个任务有它自己的一套页表。这些保护设施有助于隔离任务并防止它们相互干扰。<br>如果不使用保护机制，处理器不提供任务之间的保护。这一点即使在操作系统也是如此，该系统使用多个特权级别进行保护。一个运行在特权级别3的任务，使用与其他任务相同的LDT和页表。</p>
+<h2 id="任务的数据结构"><a href="#任务的数据结构" class="headerlink" title="任务的数据结构"></a>任务的数据结构</h2><p>处理器定义了五个数据结构来处理与任务有关的活动。</p>
+<ul>
+<li>任务状态段（TSS）。</li>
+<li>任务门描述符。</li>
+<li>TSS描述符。</li>
+<li>任务寄存器。</li>
+<li>EFLAGS寄存器中的NT标志。</li>
+</ul>
+<p>当在保护模式下运行时，必须为至少一个任务创建一个TSS和TSS描述符，并且TSS的段选择器必须被加载到任务寄存器中（使用LTR指令）。</p>
+<h3 id="任务状态段-Task-State-Segment-TSS"><a href="#任务状态段-Task-State-Segment-TSS" class="headerlink" title="任务状态段 Task-State Segment (TSS)"></a>任务状态段 Task-State Segment (TSS)</h3><p>恢复一个任务所需的处理器状态信息被保存在一个叫做任务状态段（TSS）的系统段中。图7-2显示了为32位CPU设计的任务的TSS的格式。TSS的字段被分为两个主要类别：动态字段和静态字段。<br><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414195850785.png" alt="image-20220414195850785"></p>
+<p>在任务切换期间，当一个任务被暂停时，处理器会更新动态字段。以下是动态字段。</p>
+<ul>
+<li>通用寄存器字段 - EAX, ECX, EDX, EBX, ESP, EBP, ESI, 和 EDI 寄存器在任务切换前的状态。</li>
+<li>分段选择器字段—在任务切换前存储在ES、CS、SS、DS、FS和GS寄存器中的分段选择器。</li>
+<li>EFLAGS寄存器字段 - 任务切换前EFAGS寄存器的状态。</li>
+<li>EIP（指令指针）字段 - 任务切换前EIP寄存器的状态。</li>
+<li>前一个任务链接字段—包含前一个任务的TSS的段选择器（在由调用、中断或异常启动的任务切换中更新）。这个字段（有时被称为后端链接字段）允许通过使用IRET指令将任务切换到前一个任务。处理器读取静态字段，但通常不改变它们。这些字段是在一个任务被创建时设置的。<br>以下是静态字段。</li>
+<li>LDT段选择器字段 - 包含任务的LDT的段选择器。</li>
+<li>CR3控制寄存器字段 - 包含任务要使用的页面目录的基本物理地址。控制寄存器CR3也被称为页面目录基础寄存器（PDBR）。</li>
+<li>权限级别-0、-1和-2的堆栈指针字段—这些堆栈指针包括一个逻辑地址，由堆栈段的段选择器（SS0、SS1和SS2）和堆栈的偏移量（ESP0, ESP1和ESP2）组成。注意，这些字段的值对于一个特定的任务来说是静态的；而SS和ESP的值会在任务中发生堆栈切换时改变。</li>
+<li>T（调试陷阱）标志（字节100，位0）—当设置时，T标志会使处理器在任务切换到这个任务时引发一个调试异常。</li>
+<li>I/O地图基址字段 - 包含从TSS的基点到I/O权限位的图和中断重定向位图的16位偏移。当存在时，这些地图以更高的地址存储在TSS中。</li>
+<li>避免在处理器在任务切换时读取的TSS部分（前104字节）放置页面边界。如果边界出现在这个区域，处理器可能无法正确执行地址转换。在任务切换过程中，处理器在每个TSS的前104个字节中进行读写（使用连续的物理地址，从任务的物理地址开始）。所以，在TSS访问开始后，如果104字节中的一部分 不是物理上连续的，处理器将访问不正确的信息，而不会产生页面错误异常。</li>
+<li>与前一个任务的TSS、当前任务的TSS相对应的页面，以及每个任务的描述符表项都应该被标记为读/写。</li>
+</ul>
+<p>如果包含这些结构的页面在任务切换开始前就已经存在于内存中，那么任务切换的速度会更快。</p>
+<h3 id="TSS-描述符"><a href="#TSS-描述符" class="headerlink" title="TSS 描述符"></a>TSS 描述符</h3><p>TSS，像所有其他段一样，是由段描述符定义的。图7-3显示了TSS的格式 。TSS描述符只能放在GDT中，它们不能放在LDT或IDT中。<br>试图使用设置了TI标志（表示当前的LDT）的段选择器访问一个TSS，会导致在CALLs和JMPs期间会产生一个一般保护异常（#GP）；在IRETs期间会产生一个无效的TSS异常（#TS）。如果试图将一个TSS的段选择器加载到一个段寄存器中，也会产生一般保护异常。<br>类型字段中的繁忙标志（B）表示任务是否繁忙。一个繁忙的任务目前正在运行或暂停。类型字段的值为1001B表示一个不活动的任务；值为1011B表示一个繁忙的任务。<br>处理器使用繁忙标志来检测调用一个执行被中断的任务的尝试。为了确保只有一个繁忙标志与一个任务相关联，每个TSS应该只有一个TSS描述符指向它。</p>
+<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414201925534.png" alt="image-20220414201925534"></p>
+<p>基数、极限和DPL字段以及粒度和当前标志的功能与它们在数据段描述符中的使用类似。当32位TSS描述符中的G标志为0时，极限字段必须是32位TSS描述符中的极限。TSS描述符中G标志为0时，极限字段的值必须等于或大于67H，比TSS的最小尺寸少一个字节。<br>试图切换到一个TSS描述符的极限值小于67H的任务，会产生一个无效的TSS异常（#TS）。如果包括一个I/O权限位图或操作系统存储了额外的数据，则需要一个更大的限制。处理器不检查任务开关上是否有大于67H的限制；但是，当访问I/O权限位图或中断重定向位图时，它将进行检查。<br>任何可以访问TSS描述符的程序或过程（即其CPL在数字上等于或小于的DPL）可以通过调用或跳转来调度任务。<br>在大多数系统中，TSS描述符的DPL被设置为小于3的值，因此只有特权软件才能进行任务切换。然而，在多任务应用程序中，一些TSS描述符的DPLs可能被设置为3，以便允许在应用程序（或用户）权限级别进行任务切换。</p>
+<h3 id="任务寄存器"><a href="#任务寄存器" class="headerlink" title="任务寄存器"></a>任务寄存器</h3><p>任务寄存器持有16位段选择器和整个段描述符（32位基本地址（在IA-32e模式下为64位 ），16位段限制和描述符属性），用于当前任务的TSS。<br>这个信息是从当前任务的GDT中的TSS描述符中复制过来的。图7-5显示了处理器访问TSS的路径 （使用任务寄存器中的信息）。任务寄存器有一个可见的部分（可以被软件读取和改变）和一个不可见的部分（由处理器维护，不能访问）。可见部分的段选择器指向GDT中的一个TSS描述符。处理器使用任务寄存器的不可见部分来缓存段描述符 。在寄存器中缓存这些值使得任务的执行更加有效。LTR（加载任务<br>寄存器）和STR（存储任务寄存器）指令加载和读取任务寄存器的可见部分。<br>LTR指令将段选择器（源操作数）加载到任务寄存器中，指向GDT中的TSS描述符。然后它用TSS描述符的信息加载任务寄存器的不可见部分。LTR是一个 特权指令，只有当CPL为0时才能执行。之后，当任务切换发生时，任务寄存器的内容会被隐含地改变。<br>STR(存储任务寄存器)指令将任务寄存器的可见部分存储在一个通用寄存器或内存中。这条指令可以被运行在任何权限级别的代码执行，以识别当前的运行的任务。然而，它通常只被操作系统软件使用。在处理器上电或复位时，段选择器和基地址被设置为默认值0；极限值<br>被设置为FFFH。</p>
+<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414203302131.png" alt="image-20220414203302131"></p>
+<h3 id="任务门描述符"><a href="#任务门描述符" class="headerlink" title="任务门描述符"></a>任务门描述符</h3><p>任务门描述符提供了对一个任务的间接的、受保护的引用（见图7-6）。它可以被放置在GDT、LDT或IDT中。任务门描述符中的TSS段选择器字段指向GDT中的一个TSS描述符。该段选择器中的RPL不被使用。任务门描述符的DPL在任务切换期间控制对TSS描述符的访问。当一个程序或过程通过任务门调用或跳转到一个任务时，指向任务门的门选择器的CPL和RPL域必须小于或等于任务门描述符的DPL。请注意，当任务门被使用时 ，目标TSS描述符的DPL不被使用。</p>
+<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414204423254.png" alt="image-20220414204423254"></p>
+<p>一个任务可以通过一个任务门描述符或一个TSS描述符来访问。这两种结构都满足以下需求。</p>
+<ul>
+<li>一个任务只需要一个繁忙标志 - 因为一个任务的繁忙标志是存储在TSS描述符中，每个任务应该只有一个TSS描述符。然而，可能有几个任务门会引用同一个TSS描述符。</li>
+<li>需要提供对任务的选择性访问—任务门满足这一需求，因为它们可以驻留在一个LDT中，并且可以有一个与TSS描述符的DPL不同的DPL。一个程序或过程如果没有足够的权限访问GDT中任务的TSS描述符（通常DPL为0）的程序或过程可以通过一个具有更高DPL的任务门来访问该任务。任务门给了操作系统更大的限制对特定任务的访问的自由度。</li>
+<li>需要一个独立的任务来处理中断或异常 - 任务门也可以驻留在IDT中。在IDT中，它允许中断和异常由处理任务来处理。当一个中断或异常向量指向一个任务门时，处理器会切换到指定的任务。图7-7说明了LDT中的任务门、GDT中的任务门和IDT中的任务门如何都能指向同一个任务。</li>
+</ul>
+<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414210542784.png" alt="image-20220414210542784"></p>
+<h2 id="任务切换"><a href="#任务切换" class="headerlink" title="任务切换"></a>任务切换</h2><p>处理器在四种情况中的一种将执行转移到另一个任务。</p>
+<ul>
+<li>当前程序、任务或过程执行JMP或CALL指令到GDT中的TSS描述符。</li>
+<li>当前程序、任务或过程执行JMP或CALL指令到GDT或当前LDT中的任务门描述符。</li>
+<li>中断或异常向量指向IDT中的一个任务门描述符。</li>
+<li>当EFLAGS寄存器中的NT标志被设置时，当前任务执行一个IRET。JMP、CALL和IRET指令，以及中断和异常，都是重定向程序的机制。对TSS描述符或任务门的引用（当调用或跳转到一个任务时）或NT标志的状态（当执行IRET时）都是重定向的机制。NT标志的状态（执行IRET指令时）决定是否发生任务切换。当切换到一个新的任务时，处理器会执行以下操作：</li>
+</ul>
+<ol>
+<li>获得新任务的TSS段选择器，作为JMP或CALL指令的操作数，从任务门或前一个任务链接字段（对于用IRET指令启动的任务切换）获得新任务的TSS段选择器。</li>
+<li>检查当前（旧）任务是否被允许切换到新任务。数据访问权限规则适用于JMP和CALL指令。当前（旧）任务的CPL和新任务的段选择器的RPL必须小于或等于被引用的TSS描述符或任务门的DPL。例外的情况，中断（由INT n指令产生的中断除外）和IRET指令被允许切换任务，而不考虑TSS描述符的DPL。对于INT n指令产生的中断，要检查DPL。</li>
+<li>检查新任务的TSS描述符是否被标记为存在，并且有一个有效的限制（大于或等于67H）。</li>
+<li>检查新任务是否可用（调用、跳转、异常或中断）或繁忙（IRET返回）。</li>
+<li>检查当前（旧）TSS、新TSS和任务切换中使用的所有段描述符是否被分页到系统内存中。</li>
+<li>如果任务切换是由JMP或IRET指令启动的，处理器将清除当前（旧）任务的TSS中的忙（B）标志；如果用CALL指令、异常或中断启动：忙（B）标志保持不变。</li>
+<li>如果任务切换是由IRET指令启动的，处理器将清除EFLAGS寄存器中临时保存的NT标志；如果是由CALL或JMP指令、异常或中断启动的，则NT标志在EFLAGS寄存器中保持不变。</li>
+<li>在当前任务的TSS中保存当前（旧）任务的状态。处理器在任务寄存器中找到当前TSS的基地址 ，然后将下列寄存器的状态复制到当前的TSS中：所有的通用寄存器，段寄存器中的段选择器，临时保存的EFLAGS寄存器的映像，以及指令指针寄存器（EIP）。</li>
+<li>如果任务切换是由CALL指令、异常或中断启动的，处理器将设置EFLAGS寄存器中的NT标志。如果是用IRET指令或JMP指令启动的，NT标志将反映新任务中加载的EFLAGS的NT状态（见表7-2）。</li>
+<li>如果任务切换是由CALL指令、JMP指令、异常或中断启动的，处理器就会在新任务的TSS描述符中设置繁忙(B)标志；如果是由IRET指令启动的，繁忙(B)标志就保持不变。</li>
+<li>用段选择器和新任务的TSS的描述符加载任务寄存器。</li>
+<li>TSS状态被加载到处理器中。这包括LDTR寄存器，PDBR(控制寄存器CR3)，EFLAGS寄存器，EFLAGS寄存器，<br>EIP寄存器，通用寄存器，以及段选择器。在这个状态的加载过程中出现的故障可能会破坏架构状态。(如果没有启用分页，PDBR值会从新任务的TSS中读出，但它不会被加载到CR3中）。</li>
+<li>与段选择器相关的描述符被加载和限定。与此相关的任何错误都发生在新任务的上下文中，并可能破坏架构状态。</li>
+</ol>
+<p><strong>注意事项</strong><br>如果所有的检查和保存都成功进行了，处理器就会提交给任务开关。如果在步骤1到11中发生了不可恢复的错误，处理器不会完成任务切换，并确保处理器返回到执行启动任务切换的指令之前的状态。<br>如果一个不可恢复的错误发生在步骤12，架构状态可能会被破坏，但会试图将在先前的执行环境中处理该错误。如果一个不可恢复的错误发生在提交点之后（在步骤13），处理器完成了任务切换（不执行额外的访问和段可用性检查），并在开始执行新的任务之前产生适当的异常。<br>如果异常发生在提交点之后，异常处理程序必须完成任务切换本身然后才允许处理器开始执行新的任务。</p>
+<ol>
+<li>开始执行新任务。(对于异常处理程序来说，新任务的第一条指令似乎没有被执行）。</li>
+</ol>
+<p>当一个成功的任务切换发生时，当前执行的任务的状态总是被保存。如果该任务被恢复 ，执行将从保存的EIP值所指向的指令开始，并且寄存器被恢复到 任务暂停时的值。<br>当切换任务时，新任务的权限级别不会继承被暂停的任务的权限级别。新的任务以CS寄存器的CPL字段中指定的权限级别开始执行，CS寄存器是由TSS加载的。因为任务被它们独立的地址空间和TSS所隔离，并且因为特权规则控制对TSS的访问，所以任务在执行时，需要有足够的权限。<br>表7-1显示了处理器在切换任务时检查的异常条件。它还显示了如果检测到错误，每个检查都会产生异常，以及错误代码所引用的段。<br><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414215039998.png" alt="image-20220414215039998"></p>
+<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414215048323.png" alt="image-20220414215048323"></p>
+<p><strong>注意</strong></p>
+<ol>
+<li><h1 id="NP是段不存在异常，-GP是一般保护异常，-TS是无效TSS异常，-SS是堆栈故障异常。"><a href="#NP是段不存在异常，-GP是一般保护异常，-TS是无效TSS异常，-SS是堆栈故障异常。" class="headerlink" title="NP是段不存在异常，#GP是一般保护异常，#TS是无效TSS异常，#SS是堆栈故障异常。"></a>NP是段不存在异常，#GP是一般保护异常，#TS是无效TSS异常，#SS是堆栈故障异常。</h1></li>
+<li>错误代码包含了这一列中引用的段描述符的索引。</li>
+<li>如果一个段选择器在一个兼容类型的表中（GDT或LDT），在表的段限制内占据一个地址，那么它是有效的。<br>并且指向兼容的描述符类型（例如，CS寄存器中的段选择器只有当它指向代码段描述符时才有效）。</li>
+</ol>
+<p>每次发生任务切换时，控制寄存器CR0中的TS（任务切换）标志被设置。在产生浮点异常时，系统软件使用TS标志来协调浮点单元与处理器其他部分的行动。</p>
+<h2 id="任务链"><a href="#任务链" class="headerlink" title="任务链"></a>任务链</h2><p>TSS的前一个任务链接字段（有时称为 “反向链接”）和EFLAGS寄存器中的NT标志被用来返回到前一个任务的执行。EFLAGS.NT=1表示当前执行的任务被嵌套在另一个任务的执行中。<br>当CALL指令、中断或异常导致任务切换时：处理器将当前TSS的选择器复制到新任务的TSS的前一个任务链接字段；然后设置EFLAGS.NT=1。如果软件使用IRET指令来暂停新任务，处理器检查EFLAGS.NT=1；然后使用<br>它使用前一个任务链接字段中的值来返回到前一个任务。见图7-8。<br>当JMP指令引起任务切换时，新任务不被嵌套。前一个任务链接字段不被使用，并且EFLAGS.NT=0。当不需要嵌套时，使用JMP指令来调度一个新任务。</p>
+<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220415161736123.png" alt="image-20220415161736123"></p>
+<p>表7-2显示了任务切换过程中的繁忙标志（在TSS段描述符中）、NT标志、前一个任务链接字段和TS标志(在控制寄存器CR0中)在任务切换期间。<br>NT标志可以被任何权限级别的软件所修改。一个程序有可能在设置NT标志的同时执行IRET指令。这可能会随机地调用当前任务的TSS的前一个链接字段中指定的任务。为了防止这种虚假的任务切换成功，操作系统应该把它所创建的每个TSS中的前一个任务链接字段初始化为0。</p>
+<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220415162023949.png" alt="image-20220415162023949"></p>
+<h3 id="使用繁忙标志来防止递归任务的切换"><a href="#使用繁忙标志来防止递归任务的切换" class="headerlink" title="使用繁忙标志来防止递归任务的切换"></a>使用繁忙标志来防止递归任务的切换</h3><p>一个TSS只允许为一个任务保存一个上下文；因此，一旦一个任务被调用（派发），对任务的递归（或重入）调用该任务将导致该任务的当前状态丢失。TSS段中的繁忙标志 是为了防止重入式任务切换和随后的任务状态信息的丢失。处理器对繁忙标志的管理如下 ：</p>
+<ol>
+<li>当调度一个任务时，处理器设置新任务的繁忙标志。</li>
+<li>如果在任务切换过程中，当前任务被放置在一个嵌套链中（任务切换是由一个CALL指令、一个中断或异常产生的），那么新任务的繁忙标志将被设置。</li>
+<li>当切换到新的任务时（由CALL指令、中断或异常启动），处理器产生一个一般保护异常。如果新任务的繁忙标志已经被设置，处理器会产生一个一般保护的异常（#GP）。如果任务切换是由IRET指令发起的，那么异常就不会产生，因为处理器希望繁忙标志被设置。</li>
+<li>当一个任务被跳转到一个新的任务（由任务代码中的JMP指令发起）或由任务代码中的IRET指令终止时，将产生一个异常。任务代码中的IRET指令终止时，处理器会清除繁忙标志，使任务回到 “不忙 “状态。</li>
+</ol>
+<p>处理器通过防止一个任务切换到它自己或一个嵌套的任务链中的任何任务来防止递归任务切换。由于多个调用、中断或异常，嵌套的暂停任务链可能增长到任何长度。如果一个任务在这个链中，忙碌标志会阻止它被调用。繁忙标志可以在多处理器配置中使用，因为处理器遵循一个LOCK协议（在总线上或缓存中），当它设置或清除繁忙标志时。这个锁使两个处理器不会同时调用同一个任务。</p>
+<h3 id="修改任务链"><a href="#修改任务链" class="headerlink" title="修改任务链"></a>修改任务链</h3><p>在单处理器系统中，如果有必要从链接的任务链中删除一个任务，请使用以下程序来删除<br>使用以下程序来删除任务。</p>
+<ol>
+<li>禁用中断。</li>
+<li>改变抢占式任务（暂停要删除的任务的任务）的TSS中的前一个任务链接字段。假设抢占式任务是要删除的任务链中的下一个任务（较新的任务）。改变前一个任务的链接字段，使其指向链中下一个最老的任务的TSS，或者指向链中更老的任务。</li>
+<li>清除被删除的任务的TSS段描述符中的繁忙（B）标志。如果有一个以上的任务被从链上删除，必须清除每个被删除的任务的繁忙标志。</li>
+<li>启用中断。</li>
+</ol>
+<p>在多进程系统中，必须在此过程中增加同步和序列化操作，以确保在改变前一个任务链接字段时，TSS和它的段描述符都被锁定并且繁忙标志被清除。</p>
+<h2 id="任务地址空间"><a href="#任务地址空间" class="headerlink" title="任务地址空间"></a>任务地址空间</h2><p>一个任务的地址空间由该任务可以访问的段组成。这些段包括代码、数据、堆栈和在TSS中引用的系统段以及任务代码所访问的任何其他段。这些段被映射到处理器的线性地址空间，而线性地址空间又被映射到处理器的物理地址空间（直接或通过分页）。<br>TSS中的LDT段字段可以用来给每个任务提供它自己的LDT。给予一个任务它自己的LDT允许任务地址空间与其他任务隔离，将与该任务相关的所有段描述符放在该任务的LDT中。也可以让几个任务使用同一个LDT。这是一种节省内存的方式，允许特定的任务互相通信或控制，而不丢掉整个系统的保护屏障。因为所有的任务都可以访问GDT，所以也有可能创建共享段，通过该表的段描述符来访问。<br>如果分页功能被启用，TSS中的CR3寄存器（PDBR）字段允许每个任务有自己的一套页表，用于将线性地址映射到物理地址。或者，几个任务可以共享同一组页表。</p>
+<h3 id="将任务映射到线性和物理地址空间"><a href="#将任务映射到线性和物理地址空间" class="headerlink" title="将任务映射到线性和物理地址空间"></a>将任务映射到线性和物理地址空间</h3><p>任务可以通过两种方式之一被映射到线性地址空间和物理地址空间。</p>
+<ul>
+<li>一个线性到物理地址空间的映射在所有任务之间共享。- 当分页未被启用时，这是唯一的选择。没有分页，所有线性地址都映射到相同的物理地址。当启用时，这种形式的线性到物理地址空间映射是通过为所有任务使用一个页目录来获得。如果支持需求分页，线性地址空间可能超过可用的物理空间。</li>
+<li>每个任务都有自己的线性地址空间，被映射到物理地址空间。- 这种形式的映射是通过为每个任务使用不同的页面目录来完成的。因为PDBR（控制寄存器CR3）被加载到任务开关上，每个任务可能有一个不同的页面目录。</li>
+</ul>
+<p>不同任务的线性地址空间可能映射到完全不同的物理地址。如果不同页面目录的条目 指向不同的页表，而页表指向内存的不同页面，那么这些任务就不会共享物理地址。<br>无论采用哪种方法来映射任务的线性地址空间，所有任务的TSS必须位于物理空间的一个共享区域，这个区域是所有任务都可以访问的。这种映射是必需的，当处理器在任务切换过程中读取和更新TSSs时不会改变。线性地址空间也应该被映射到物理空间的一个共享区域；否则，GDT的目的就会落空。<br>图7-9显示了两个任务的线性地址空间是如何通过共享页表可在物理空间中重叠通过共享页表。</p>
+<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220415163751118.png" alt="image-20220415163751118"></p>
+<h3 id="任务逻辑地址空间"><a href="#任务逻辑地址空间" class="headerlink" title="任务逻辑地址空间"></a>任务逻辑地址空间</h3><p>为了允许任务之间共享数据，使用以下技术为数据段创建共享的逻辑-物理地址空间映射。</p>
+<ul>
+<li><strong>通过GDT中的段描述符</strong> - 所有任务必须能够访问GDT中的段描述符。如果GDT中的一些段描述符指向线性地址空间中的段，这些段被映射到所有任务共有的物理地址空间的一个区域，那么所有任务都可以共享这些段的数据和代码。</li>
+<li><strong>通过一个共享的LDT</strong> - 如果两个或更多的任务的TSSs中的LDT字段指向同一个LDT，那么它们可以使用同一个LDT。如果共享LDT中的一些段描述符指向被映射到物理地址空间的一个共同区域的段 ，这些段的数据和代码可以在共享LDT的任务之间共享。这种共享方法比通过GDT共享更具选择性，因为共享可以被限制在特定的任务中。系统中的其他任务可能有不同的LDT，不允许他们访问共享段。</li>
+<li><strong>通过不同的LDT中的段描述符，这些描述符被映射到线性空间的公共地址上</strong> -如果这个线性地址空间的公共区域被映射到每个任务的物理地址空间的相同区域，这些段描述符允许任务共享段。这种段描述符 通常被称为别名。这种共享方法比上面列出的方法更具有选择性。因为，LDT中的其他段描述符可能指向独立的线性地址，而这些段描述符并没有被共享。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/12/%E6%97%B6%E9%97%B4%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/12/%E6%97%B6%E9%97%B4%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">时间记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-04-12 09:33:47" itemprop="dateCreated datePublished" datetime="2022-04-12T09:33:47+08:00">2022-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-15 16:19:02" itemprop="dateModified" datetime="2022-04-15T16:19:02+08:00">2022-04-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="4-12"><a href="#4-12" class="headerlink" title="4.12"></a>4.12</h2><p>9.30-9.39 背单词</p>
+<p>9.39-9.54 看编译原理慕课</p>
+<p>10.02-11.07 线代第一讲</p>
+<p>11.30-11.45 线代第一讲</p>
+<p>13.26-14.56 午觉 </p>
+<p>15.00-15.28  15.38- 16.06 线代第一讲完成</p>
+<p>16.22-17.00 背单词</p>
+<p>17.16-17.35 看《Linux内核完全剖析》</p>
+<p>17.45-20.00 健身</p>
+<p>20.09-20.44背单词</p>
+<p>21.20-21.51 看《Linux内核完全剖析》</p>
+<p>21.56-22.08 看实验</p>
+<p>22.11-22.20 线代第二章</p>
+<h2 id="4-13"><a href="#4-13" class="headerlink" title="4.13"></a>4.13</h2><p>8.49-8.56 英语单词</p>
+<p>9.05-9.45 线代第二章</p>
+<p>10.-11.45上课</p>
+<p>12.39 吃完饭</p>
+<p>12.40-14.26 睡午觉</p>
+<p>14.31 -14.53 15.00-16.58 17.10-17.17线代第二章</p>
+<p>17.18-17.33 英语单词</p>
+<p>17.45-20.08 锻炼</p>
+<p>20.20-22.00 讨论</p>
+<p>22.10-22.36 英语单词</p>
+<h2 id="4-14"><a href="#4-14" class="headerlink" title="4.14"></a>4.14</h2><p>10.00-11.47 健身</p>
+<p>12.40-12.54 线代第二章</p>
+<p>12.55-13.45午觉</p>
+<p>13.45-15.30 上课，顺便完成线代第二章</p>
+<p>15.30-16.40 打电话与学长</p>
+<p>16.40-17.45 看实验</p>
+<p>18.30-21.00实验课</p>
+<p>21.00-21.52 读书笔记四</p>
+<p>22.00-22.30 背单词</p>
+<h2 id="4-15"><a href="#4-15" class="headerlink" title="4.15"></a>4.15</h2><p>9.00-10.00 考试</p>
+<p>10.2-10.10 单词</p>
+<p>10.40-11.00英语听力</p>
+<p>12.20-13.48 睡午觉</p>
+<p>13.59-14.43 做核酸</p>
+<p>14.43-16.05 线代第三章</p>
+<p>16.15-</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/10/%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1136,497 +1441,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">编译原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-04 10:47:20" itemprop="dateCreated datePublished" datetime="2022-01-04T10:47:20+08:00">2022-01-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-19 11:31:04" itemprop="dateModified" datetime="2022-01-19T11:31:04+08:00">2022-01-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><h3 id="什么是编译"><a href="#什么是编译" class="headerlink" title="什么是编译"></a>什么是编译</h3><p>编译：将高级语言翻译成汇编语言或机器语言的过程。</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104110715843.png" alt="image-20220104110715843" style="zoom:50%;"></p>
-<p>预处理器：把存储在不同文件中的源程序聚合在一起；把被称为宏的缩写语句转换为原始语句。</p>
-<p>可重定位：在内存中存放的起始位置L不是固定的</p>
-<p>加载器：修改可重定位地址；将修改后的指令和数据放到内存中适当的位置。</p>
-<p>链接器：将多个可重定位的机器代码文件连接到一起；解决外部内存地址问题</p>
-<h3 id="编译系统的结构"><a href="#编译系统的结构" class="headerlink" title="编译系统的结构"></a>编译系统的结构</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104113047587.png" alt="image-20220104113047587" style="zoom:50%;"></p>
-<h3 id="词法分析概述"><a href="#词法分析概述" class="headerlink" title="词法分析概述"></a>词法分析概述</h3><p>词法分析的主要任务：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">从左向右逐行扫描源程序的字符，识别出各个单词，确定单词的类型。将识别出的单词转换成统一的机内表示——词法单元(token)形式。</span><br><span class="line">token:&lt;种别码，属性值&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220105104115216.png" alt="image-20220105104115216" style="zoom:50%;"></p>
-<h3 id="语法分析概述"><a href="#语法分析概述" class="headerlink" title="语法分析概述"></a>语法分析概述</h3><p>语法分析器从词法分析器输出的token序列中识别出各类短语，并构造语法分析树。</p>
-<h3 id="语义分析概述"><a href="#语义分析概述" class="headerlink" title="语义分析概述"></a>语义分析概述</h3><p>主要任务：</p>
-<p>任务一：收集标识符的属性信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">：</span><br><span class="line">种属</span><br><span class="line">类型</span><br><span class="line">存储类型，长度</span><br><span class="line">值</span><br><span class="line">作用域</span><br><span class="line">参数和返回值信息</span><br></pre></td></tr></table></figure>
-<p>符号表：用来存放标识符的属性信息的数据结构</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095418057.png" alt="image-20220106095418057" style="zoom:50%;"></p>
-<p>任务二：语义检查</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">变量或过程未经声明就使用；</span><br><span class="line">变量或过程名重复声明；</span><br><span class="line">运算分量类型不匹配；</span><br><span class="line">操作符与操作数之间的类型不匹配</span><br></pre></td></tr></table></figure>
-<h3 id="中间代码生成及编译器后端"><a href="#中间代码生成及编译器后端" class="headerlink" title="中间代码生成及编译器后端"></a>中间代码生成及编译器后端</h3><p>常用的中间表示形式：</p>
-<p>三地址码；语法结构树/语法树</p>
-<h4 id="三地址码"><a href="#三地址码" class="headerlink" title="三地址码"></a>三地址码</h4><p>三地址码由类似于汇编语言的指令序列组成，每个指令最多有三个操作数。</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095933969.png" alt="image-20220106095933969" style="zoom:50%;"></p>
-<p>三地址指令的表示</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">四元式(op.y.z.x)</span><br><span class="line">三元式</span><br><span class="line">间接三元式</span><br></pre></td></tr></table></figure>
-<p>目标代码生成以源程序的中间表示形式作为输入，并把它映射到目标语言；目标代码生成的一个重要任务是为程序中使用的变量合理分配寄存器。</p>
-<p>代码优化：为改进代码，所进行的等价程序变换，使其运行得更快一些，占用空间更小一些。</p>
-<h2 id="语言及其文法"><a href="#语言及其文法" class="headerlink" title="语言及其文法"></a>语言及其文法</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>字母表</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个有穷符号集合。</span><br></pre></td></tr></table></figure>
-<p>字母表运算</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">乘积</span><br><span class="line">n次幂</span><br><span class="line">正闭包（正数次幂的并集）</span><br><span class="line">克林闭包(正闭包的基础上加个空串)</span><br></pre></td></tr></table></figure>
-<p>串：字母表中符号的一个有穷序列</p>
-<p>串的运算</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">连接，空串是连接运算的单位元</span><br><span class="line">串的幂运算</span><br></pre></td></tr></table></figure>
-<h3 id="文法的定义"><a href="#文法的定义" class="headerlink" title="文法的定义"></a>文法的定义</h3><p>文法</p>
-<p>$G=(V_T,V_N,P,S)$</p>
-<p>$V_T$:终结符集合</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">终结符是文法所定义的语言的基本符号，有事也称为token</span><br></pre></td></tr></table></figure>
-<p>$V_N$：非终结符集合</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">非终结符是用来表示语法成分的符号，有时也称为&quot;语法变量&quot;</span><br></pre></td></tr></table></figure>
-<p>$V_T$与$V_N$不相交，二者相并统称为文法符号集。</p>
-<p>P：产生式集合</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">描述了将终结符和非终结符组合成串的方法</span><br></pre></td></tr></table></figure>
-<p>S:开始符号</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开始符号表示的是该文法中最大的语法成分</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107105320903.png" alt="image-20220107105320903" style="zoom:50%;"></p>
-<p>符号约定</p>
-<p>终结符</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110153976.png" alt="image-20220107110153976" style="zoom:50%;"></p>
-<p>非终结符</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110227112.png" alt="image-20220107110227112" style="zoom:50%;"></p>
-<p>注</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110401057.png" alt="image-20220107110401057" style="zoom:50%;"></p>
-<h3 id="语言的定义"><a href="#语言的定义" class="headerlink" title="语言的定义"></a>语言的定义</h3><p>符号串$a<em>0$经过n步推导出$a_n$,可简记为$a_0\Longrightarrow </em>{}^{n}a_n $</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220108100026833.png" alt="image-20220108100026833" style="zoom:50%;"></p>
-<h3 id="文法的分类"><a href="#文法的分类" class="headerlink" title="文法的分类"></a>文法的分类</h3><p>Chomsky文法分类体系</p>
-<h4 id="0型文法"><a href="#0型文法" class="headerlink" title="0型文法"></a>0型文法</h4><p>$\alpha \longrightarrow \beta $</p>
-<p>无限制文法，其中$\alpha$中至少包含一个非终结符。</p>
-<p>由0型文法G生成的语言称为 <strong>0型语言</strong></p>
-<h4 id="1型文法"><a href="#1型文法" class="headerlink" title="1型文法"></a>1型文法</h4><p>$\alpha \longrightarrow \beta $</p>
-<p>上下文有关文法，CSG</p>
-<script type="math/tex; mode=display">
-|\alpha| < |\beta|</script><p>产生式的一般形式:</p>
-<script type="math/tex; mode=display">
-\alpha_1A\alpha_2\longrightarrow\alpha_1\beta\alpha_2(\beta\ne\varepsilon)</script><h4 id="2型文法"><a href="#2型文法" class="headerlink" title="2型文法"></a>2型文法</h4><p>$\alpha \longrightarrow \beta $</p>
-<p>上下文无关文法，CFG</p>
-<p>其中$\alpha\in V_N$</p>
-<p>产生式的一般形式：</p>
-<script type="math/tex; mode=display">
-A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="headerlink" title="3型文法"></a>3型文法</h4><p>$\alpha \longrightarrow \beta $</p>
-<p>正则文法，RG</p>
-<p>右线性文法：$A\longrightarrow wB或A\longrightarrow w$</p>
-<p>左线性文法：$A\longrightarrow Bw或A\longrightarrow w$</p>
-<h3 id="CFG的分析树"><a href="#CFG的分析树" class="headerlink" title="CFG的分析树"></a>CFG的分析树</h3><p>给定一个句型，其分析树中的每一棵子树的边缘称为该句型的一个短语。</p>
-<p>直接短语：高度为2的子树的边缘。</p>
-<p>二义性文法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果一个文法可以为某个句子生成多颗分析树，则称这个文法是二义性的。</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105001704.png" alt="image-20220109105001704" style="zoom:50%;"></p>
-<h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105354813.png" alt="image-20220109105354813" style="zoom:50%;"></p>
-<h3 id="正则定义"><a href="#正则定义" class="headerlink" title="正则定义"></a>正则定义</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111100400281.png" alt="image-20220111100400281" style="zoom:50%;"></p>
-<h3 id="有穷自动机"><a href="#有穷自动机" class="headerlink" title="有穷自动机"></a>有穷自动机</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111101353306.png" alt="image-20220111101353306" style="zoom:50%;"></p>
-<h3 id="有穷自动机的分类"><a href="#有穷自动机的分类" class="headerlink" title="有穷自动机的分类"></a>有穷自动机的分类</h3><p>DFA确定的有穷自动机</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104246612.png" alt="image-20220112104246612" style="zoom:50%;"></p>
-<p>NFA非确定的有穷自动机</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104402251.png" alt="image-20220112104402251" style="zoom:50%;"></p>
-<p>正则文法与正则表达式与有穷自动机等价</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104637911.png" alt="image-20220112104637911" style="zoom:50%;"></p>
-<p>带有空边的NFA与不带空边的NFA有等价性</p>
-<h3 id="从正则表达式到有穷自动机"><a href="#从正则表达式到有穷自动机" class="headerlink" title="从正则表达式到有穷自动机"></a>从正则表达式到有穷自动机</h3><p>先构造NFA,再从NFA到DFA。</p>
-<h3 id="从NFA到DFA的转换"><a href="#从NFA到DFA的转换" class="headerlink" title="从NFA到DFA的转换"></a>从NFA到DFA的转换</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100302890.png" alt="image-20220114100302890" style="zoom:50%;"></p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100719876.png" alt="image-20220114100719876" style="zoom: 50%;"></p>
-<h3 id="识别单词的DFA"><a href="#识别单词的DFA" class="headerlink" title="识别单词的DFA"></a>识别单词的DFA</h3><p> 词法分析阶段可检测错误的类型：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">单词拼写错误</span><br><span class="line">非法字符</span><br></pre></td></tr></table></figure>
-<p>错误恢复策略</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">最简单的错误恢复策略：恐慌模式</span><br><span class="line">从剩余的输入中不断删除字符，直到词法分析器能够在剩余的开头发现一个正确的字符为止。</span><br></pre></td></tr></table></figure>
-<h2 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h2><h3 id="自顶向下分析概述"><a href="#自顶向下分析概述" class="headerlink" title="自顶向下分析概述"></a>自顶向下分析概述</h3><p>从分析树的顶部向底部方向构造分析树。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最左推导：总是选择每个句型的最左非终结符进行替换。</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最右推导：总是选择每个句型的最右非终结符进行替换。</span><br></pre></td></tr></table></figure>
-<p>在自底向上的分析中，总是采用最左规约的方式，因此把最左规约称为规范规约，而最右推导相应的称为规范推导。</p>
-<p>自顶向下选择最左推导。</p>
-<p>需要回溯的分析器叫不确定分析器。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">预测分析：递归下降分析技术的一个特例，通过在输入中向前看固定个数符号来选择正确的A-产生式。</span><br><span class="line">预测分析不需要回溯，是一种确定的自顶向下分析方法。</span><br></pre></td></tr></table></figure>
-<h3 id="文法转换"><a href="#文法转换" class="headerlink" title="文法转换"></a>文法转换</h3><p>问题一</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当同一个非终结符的多个候选式存在共同前缀，将导致回溯现象 </span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101308032.png" alt="image-20220115101308032" style="zoom:50%;"></p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101415801.png" alt="image-20220115101415801" style="zoom:50%;"></p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101523666.png" alt="image-20220115101523666" style="zoom:50%;"></p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101639910.png" alt="image-20220115101639910" style="zoom:50%;"></p>
-<h3 id="LL-1-文法"><a href="#LL-1-文法" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119105058524.png" alt="image-20220119105058524" style="zoom:50%;"></p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119105540074.png" alt="image-20220119105540074" style="zoom:50%;"></p>
-<p>非终结符的后继符号集</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可能在某个句型中紧跟在A后边的终结符a的集合</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119105852021.png" alt="image-20220119105852021" style="zoom:50%;"></p>
-<p>q_文法中不含右部以非终结符打头的产生式</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110032971.png" alt="image-20220119110032971" style="zoom:50%;"></p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110441801.png" alt="image-20220119110441801" style="zoom:50%;"></p>
-<p>LL(1)文法</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110545417.png" alt="image-20220119110545417" style="zoom:50%;"></p>
-<h3 id="FIRST集和FOLLOW集"><a href="#FIRST集和FOLLOW集" class="headerlink" title="FIRST集和FOLLOW集"></a>FIRST集和FOLLOW集</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110913536.png" alt="image-20220119110913536" style="zoom:50%;"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/24/NLP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/24/NLP/" class="post-title-link" itemprop="url">NLP</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-12-24 17:08:09" itemprop="dateCreated datePublished" datetime="2021-12-24T17:08:09+08:00">2021-12-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-29 00:31:44" itemprop="dateModified" datetime="2021-12-29T00:31:44+08:00">2021-12-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>NLP任务：分词、词性标注、未登录词识别</p>
-<p>语言的性质：共时性；历时性</p>
-<p>语法单位</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">句子是语言中最大的语法单位</span><br><span class="line">词组是词的组合，它是句子里面作用相当于词而本身又是由词组成的大于词的单位。</span><br><span class="line">词是最重要的一级语法单位，它是造句的时候能够独立运用的最小单位。</span><br><span class="line">语素是语言中音义结合的最小单位。就汉语来说，大抵一个汉字就是一个语素，但是也有两个字表示一个语素的，如：“咖啡”</span><br></pre></td></tr></table></figure>
-<h2 id="语料库"><a href="#语料库" class="headerlink" title="语料库"></a>语料库</h2><p>• 语料库（corpus）一词在语言学上意指大量的文本，通常经过整理， 具有既定格式与标记</p>
-<p>语料库的种类</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">共时语料库与历时语料库</span><br><span class="line">通用语料库与专用语料库</span><br></pre></td></tr></table></figure>
-<h3 id="语料加工"><a href="#语料加工" class="headerlink" title="语料加工"></a>语料加工</h3><p>文本处理</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">垃圾格式问题</span><br><span class="line">大小写</span><br><span class="line">标记化</span><br><span class="line">空格</span><br><span class="line">连字符</span><br><span class="line">词法</span><br><span class="line">句子定义—启发式算法</span><br><span class="line">句子边界的研究</span><br></pre></td></tr></table></figure>
-<p>格式标注</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">通用标记语言SGML</span><br><span class="line">SGML是超文本格式的最高层次标准，是可以定义标记语言的元语言</span><br><span class="line">语法标注</span><br></pre></td></tr></table></figure>
-<p>Zipf法则 • 一个词地频率f和它的词频排序位置r： f*r=k (k为常数)</p>
-<p><img src="/2021/12/24/NLP/image-20211227150000774.png" alt="image-20211227150000774"></p>
-<p>如果设置参数B=1, ρ=0，Mandelbrot公式就简化为Zipf法则</p>
-<p>搭配抽取</p>
-<p><img src="/2021/12/24/NLP/image-20211227150045052.png" alt="image-20211227150045052" style="zoom:50%;"></p>
-<h2 id="语料库加工-双语句子自动对齐-amp-双语词典获取"><a href="#语料库加工-双语句子自动对齐-amp-双语词典获取" class="headerlink" title="语料库加工_双语句子自动对齐&amp; 双语词典获取"></a>语料库加工_双语句子自动对齐&amp; 双语词典获取</h2><h3 id="句子对齐问题描述"><a href="#句子对齐问题描述" class="headerlink" title="句子对齐问题描述"></a>句子对齐问题描述</h3><p>基于长度的句子对齐  基本思想：源语言和目标语言的句子长度存在一定 的比例关系</p>
-<p>要求：最小（句珠内无句珠）； 唯一（一个句子仅属于一个句珠）； 无交叉（后句对齐一定在前句对齐位置之后）</p>
-<h3 id="基于共现的双语词典的获取"><a href="#基于共现的双语词典的获取" class="headerlink" title="基于共现的双语词典的获取"></a>基于共现的双语词典的获取</h3><p>基本思想：如果汉语词出现在某个双语句对 中，其译文也必定在这个句对中。</p>
-<p>汉英词典的迭代获取策略</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">迭代策略</span><br><span class="line">1) 初始化；</span><br><span class="line">2) 使用对数相似性模型计算汉英翻译词对候选；</span><br><span class="line">3) 选取前n个汉英对译词对；</span><br><span class="line">4) 双语句对中剔除选定的翻译词对；</span><br><span class="line">5) 若不满足终止条件，重复步骤2；</span><br><span class="line"> 几点说明：复合词暂未考虑；可加入交互方式;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>基于共现的词汇对译模型</p>
-<p>评价方式：专家独立于上下文进行判别</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">评价1：每5000个翻译词对候选中正确的译文数</span><br><span class="line">评价2：综合考虑翻译词典的性能</span><br></pre></td></tr></table></figure>
-<h2 id="汉语自动分词"><a href="#汉语自动分词" class="headerlink" title="汉语自动分词"></a>汉语自动分词</h2><h3 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h3><p>词干提取vs词形还原：分别用于IR 和 NLP</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">词干提取（stemming）是抽取词的词干或词根形式（不一定能够表达完整语义</span><br><span class="line">词形还原（lemmatization），是把一个任何形式的语言词汇还原为一般形式（能表达完整语义）</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">词干提取主要是采用“缩减”的方法</span><br><span class="line">词形还原主要采用“转变”的方法</span><br><span class="line">在复杂性上：词干提取方法相对简单，词形还原更复杂</span><br><span class="line">在实现方法上：主流方法类似，但具体实现上各有侧重</span><br></pre></td></tr></table></figure>
-<p>词性标注</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">词性标注（part-of-speech tagging）,又称为词类标注或者简称</span><br><span class="line">标注，是指为分词结果中的每个单词标注一个正确的词性的程序，</span><br><span class="line">也即确定每个词是名词、动词、形容词或者其他词性的过程</span><br><span class="line">• 词性标注是很多NLP任务的预处理步骤，如句法分析，经过词性</span><br><span class="line">标注后的文本会带来很大的便利性，但也不是不可或缺的步骤</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="分词算法"><a href="#分词算法" class="headerlink" title="分词算法"></a>分词算法</h3><p>正向最大匹配分词(Forward Maximum  Matching method, FMM)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">基本思想：将当前能够匹配的最长词输出</span><br><span class="line">• 1. 设自动分词词典中最长词条所含汉字个数为I</span><br><span class="line">• 2. 取被处理材料当前字符串序数中的I个字作为匹配字段，查找分词词典。</span><br><span class="line">若词典中有这样的一个I字词，则匹配成功，匹配字段作为一个词被切分出</span><br><span class="line">来，转6</span><br><span class="line">• 3. 如果词典中找不到这样的一个I字词，则匹配失败</span><br><span class="line">• 4. 匹配字段去掉最后一个汉字，I--</span><br><span class="line">• 5. 重复2-4，直至切分成功为止</span><br><span class="line">• 6. I重新赋初值，转2，直到切分出所有词为止</span><br></pre></td></tr></table></figure>
-<p>逆向最大匹配分词(Backward  Maximum Matching method, BMM法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">分词过程与FMM方法相同，不过是从句子(或文</span><br><span class="line">章)末尾开始处理，每次匹配不成功时去掉的是</span><br><span class="line">最前面的一个汉字</span><br></pre></td></tr></table></figure>
-<p>实验表明：逆向最大匹配法比最大匹配法更有效</p>
-<p>最大匹配法的问题</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">• 存在分词错误：增加知识、局部修改</span><br><span class="line">• 局部修改：增加歧义词表，排歧规则</span><br><span class="line">无法发现分词歧义-&gt;从单向匹配改为双向最大匹配</span><br></pre></td></tr></table></figure>
-<p>双向匹配法（Bi-direction Matching  method, BM法）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">双向最大匹配法是将正向最大匹配法（FMM）得到的分词</span><br><span class="line">结果和逆向最大匹配法（BMM）得到的结果进行比较，从</span><br><span class="line">而决定正确的分词方法</span><br></pre></td></tr></table></figure>
-<p>最少分词法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">• 分词结果中含词数最少</span><br><span class="line">• 优化代替了贪心</span><br><span class="line">• 等价于最短路径</span><br><span class="line">•算法：</span><br><span class="line">• 动态规划算法</span><br><span class="line">• 优点：好于单向的最大匹配方法</span><br><span class="line">• 最大匹配：独立自主/和平/等/互利/的/原则</span><br><span class="line">• 最短路径：独立自主/和/平等互利/的/原则</span><br><span class="line">• 缺点：忽略了所有覆盖歧义，也无法解决大部分交叉歧义</span><br><span class="line">• 结合成分子时</span><br><span class="line">• 结合|成分|子 &#123;&#125; 结|合成|分子 &#123;&#125; 结合|成|分</span><br></pre></td></tr></table></figure>
-<h3 id="分词问题：歧义"><a href="#分词问题：歧义" class="headerlink" title="分词问题：歧义"></a>分词问题：歧义</h3><p>交集型切分歧义</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">汉字串AJB被称作交集型切分歧义，如果满足AJ、JB同时</span><br><span class="line">为词(A、J、B分别为汉字串)。此时汉字串J被称作交集串。</span><br></pre></td></tr></table></figure>
-<p>组合型切分歧义</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">• 汉字串AB被称作组合型切分歧义，如果满足条件：A、</span><br><span class="line">B、AB同时为词</span><br></pre></td></tr></table></figure>
-<p>交集型歧义字段中含有交集字段的个数，称为链长</p>
-<p>“真歧义”和“伪歧义”</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">• 真歧义指存在两种或两种以上的可实现的切分形式</span><br><span class="line">• 伪歧义一般只有一种正确的切分形式</span><br></pre></td></tr></table></figure>
-<p>分词问题</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">歧义</span><br><span class="line">未登录词</span><br><span class="line">新词</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>分词质量评价</p>
-<p><img src="/2021/12/24/NLP/image-20211227193857156.png" alt="image-20211227193857156" style="zoom:50%;"></p>
-<h2 id="中文分词-统计建模"><a href="#中文分词-统计建模" class="headerlink" title="中文分词_统计建模"></a>中文分词_统计建模</h2><h3 id="基于N元文法的分词（MM）"><a href="#基于N元文法的分词（MM）" class="headerlink" title="基于N元文法的分词（MM）"></a>基于N元文法的分词（MM）</h3><p>MM(马尔可夫模型/过程) ：有限历史假设，仅依 赖前n-1个词</p>
-<p>一种最简化的情况：一元文法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">P（S）=p(w1) ·p(w2) ·p(w3)….p(wn)</span><br><span class="line"> 等价于最大频率分词</span><br><span class="line"> 即把切分路径上每一个词的概率相乘得到该切</span><br><span class="line">分路径的概率</span><br><span class="line"> 把词概率的负对数理解成路径“代价”，输出</span><br><span class="line">结果就是整体代价最“小”分词序列</span><br></pre></td></tr></table></figure>
-<p>采用二元语法(bi-gram)：性能进一步提高</p>
-<p><img src="/2021/12/24/NLP/image-20211227195204331.png" alt="image-20211227195204331" style="zoom:50%;"></p>
-<p> 更大的n：对下一个词出现的约束性信息更多，更大的辨别力。  更小的n：出现的次数更多，更可靠的统计结果，更高的可靠性。</p>
-<p>等价类映射：降低语言模型参数空间</p>
-<p>数据平滑（smoothing）：保持模型的辨别能力</p>
-<h3 id="基于HMM的分词-词性标注一体化"><a href="#基于HMM的分词-词性标注一体化" class="headerlink" title="基于HMM的分词/词性标注一体化"></a>基于HMM的分词/词性标注一体化</h3><p>输入：待处理句子S </p>
-<p> 输出：S的 词序列 W = w1 ,w2…wn </p>
-<p>词性序列 T = t1 ,t2…tn </p>
-<p> 提示  W可以代表S  分词结果即观测序列  词性序列是状态序列</p>
-<p>公式推导</p>
-<p><img src="/2021/12/24/NLP/image-20211227200001707.png" alt="image-20211227200001707" style="zoom:50%;"></p>
-<p><img src="/2021/12/24/NLP/image-20211227200011651.png" alt="image-20211227200011651" style="zoom:50%;"></p>
-<p><img src="/2021/12/24/NLP/image-20211227200200077.png" alt="image-20211227200200077"></p>
-<h3 id="由字构词的汉语分词方法"><a href="#由字构词的汉语分词方法" class="headerlink" title="由字构词的汉语分词方法"></a>由字构词的汉语分词方法</h3><p>基本思路  分词过程：一个字的分类问题；  每个字在词语中属于一个确定位置</p>
-<p>字的的标注过程中，对所有的字根据预定义的特 征进行词位特征学习，获得一个概率模型</p>
-<p>由字构词的分词技术的优势</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> 简化了分词系统的设计  文本中的词表词和未登录词都是用统一的字 标注过程来实现的，分词过程成为字重组的 简单过程。  既可以不必专门强调词表词信息，也不用专 门设计特定的未登录词识别模块</span><br></pre></td></tr></table></figure>
-<h3 id="汉语分词方法的后处理方法"><a href="#汉语分词方法的后处理方法" class="headerlink" title="汉语分词方法的后处理方法"></a>汉语分词方法的后处理方法</h3><p>为什么不采用更精巧的模型？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">四元或更高阶...  不可行，需要大量的参数  不得不做一些平滑或差值  难度随模型复杂度而加剧</span><br></pre></td></tr></table></figure>
-<p>两个重要组成部分：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 允许的错误校正转换的详细说明</span><br><span class="line"> 学习算法</span><br></pre></td></tr></table></figure>
-<p>输入数据</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一个已经标注好的语料库，</span><br><span class="line">*一个词典</span><br></pre></td></tr></table></figure>
-<p>基于转换错误驱动的规则方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> 学习和标注在该方法种都是简单和直观的</span><br><span class="line"> 成功用于词性标注、句法分析、介词附着以及</span><br><span class="line">语义消歧</span><br><span class="line"> 经验上，没有出现过拟合现象</span><br><span class="line"> 可以被用来解决大部分后处理问题</span><br><span class="line"> 效率的提升优化，考验工程能力</span><br></pre></td></tr></table></figure>
-<p>标注可以采用 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> 隐马尔科夫模型（HMM）  最大熵（ME）  最大熵马尔科夫模型（MEMM）  条件随机场（CRF）等</span><br></pre></td></tr></table></figure>
-<h2 id="隐马尔科夫模型"><a href="#隐马尔科夫模型" class="headerlink" title="隐马尔科夫模型"></a>隐马尔科夫模型</h2><h3 id="马尔科夫-Markov-模型"><a href="#马尔科夫-Markov-模型" class="headerlink" title="马尔科夫(Markov)模型"></a>马尔科夫(Markov)模型</h3><p>马尔科夫模型是一种统计模型，广泛的应用在语音识别， 词性自动标注，音字转换，概率文法等各个自然语言处理 的应用领域。</p>
-<p>随机过程又称为随机函数，是随时间随机变化的过程。马 尔科夫模型描述了一类重要随机过程。</p>
-<p>系统在时间t处于状态𝑠𝑗的概率取决于其在时间1,2,…t-1的 状态，该概率为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">𝑃(𝑞𝑡 = 𝑠𝑗|𝑞𝑡−1 = 𝑠𝑖, 𝑞𝑡−2 = 𝑠𝑘, … )</span><br></pre></td></tr></table></figure>
-<p>离散的一阶马尔科夫链：系统在时间t的状态只与时间t-1 的状态有关。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">𝑃(𝑞𝑡 = 𝑠𝑗|𝑞𝑡−1 = 𝑠𝑖, 𝑞𝑡−2 = 𝑠𝑘, … ) = 𝑃(𝑞𝑡 = 𝑠𝑗|𝑞𝑡−1 = 𝑠𝑖)</span><br></pre></td></tr></table></figure>
-<p>状态转移概率𝑎𝑖𝑗必须满足以下条件：</p>
-<p><img src="/2021/12/24/NLP/image-20211227203707059.png" alt="image-20211227203707059" style="zoom:50%;"></p>
-<p>N个状态的一阶马尔科夫过程有𝑁2，可以表示成为一个状 态转移矩阵</p>
-<p>eg:状态𝑠1：名词 状态𝑠2：动词 状态𝑠3：形容词</p>
-<p>如果在该文字中某句子的第一个词为名词，那么该句子 中三类词出现顺序为O=“名动形名”的概率。</p>
-<p><img src="/2021/12/24/NLP/image-20211227203903492.png" alt="image-20211227203903492" style="zoom:50%;"></p>
-<p>马尔科夫(Markov)模型：有限状态机</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">马尔科夫模型可视为随机的有限状态机。</span><br><span class="line">圆圈表示状态，状态之间的转移用带箭头的弧表示，弧上</span><br><span class="line">的数字为状态转移的概率。</span><br><span class="line">初始状态用标记为start的输入箭头表示。</span><br><span class="line">假设任何状态都可作为终止状态。</span><br><span class="line">对每个状态来说，发出弧上的概率和为1。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>eg:</p>
-<p><img src="/2021/12/24/NLP/image-20211227204121800.png" alt="image-20211227204121800" style="zoom:50%;"></p>
-<p>一般地，一个HMM记为一个五元组μ＝（S，K， A，B，π），其中，S为状态的集合，K为输出符 号的集合，π，A和B分别是初始状态的概率分布、 状态转移概率和符号发射概率。为了简单，有时也将其记为三元组μ＝（A，B，π）</p>
-<p>隐马尔可夫模型：三个基本问题</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.估值问题：给定一个观察序列 O = 𝑂1𝑂2 … 𝑂𝑇 和模型μ＝(A，</span><br><span class="line">B，π)，如何快速地计算出给定模型μ情况下，观察序列O的</span><br><span class="line">概率，即𝑃 𝑂 𝜇 ?</span><br><span class="line">2.序列问题：给定一个观察序列 O = 𝑂1𝑂2 … 𝑂𝑇 和模型μ＝(A，</span><br><span class="line">B，π),如何快速有效的选择在一定意义下“最优”的状态序</span><br><span class="line">列 𝑄 = 𝑞1𝑞2 … 𝑞𝑇 ，使得该状态序列“最好的解释”观察序列？</span><br><span class="line">3.参数估计问题：给定一个观察序列O = 𝑂1𝑂2 … 𝑂𝑇，如何根</span><br><span class="line">据最大似然估计来求模型的参数值？即如何调节模型μ＝(A，</span><br><span class="line">B，π)的参数，使得𝑃 𝑂 𝜇 最大？</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="隐马尔可夫模型：求解观察序列的概率"><a href="#隐马尔可夫模型：求解观察序列的概率" class="headerlink" title="隐马尔可夫模型：求解观察序列的概率"></a>隐马尔可夫模型：求解观察序列的概率</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给定观察序列O = 𝑂1𝑂2 … 𝑂𝑇和模型𝜇 =(𝐴, 𝐵, π)，快速的计算出给定模型𝜇情况下观察序列O的概率，即𝑃 （𝑂|𝜇） 。</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/12/24/NLP/image-20211227210645264.png" alt="image-20211227210645264" style="zoom:50%;"></p>
-<p>隐马尔可夫模型：前向算法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基本思想：定义前向变量𝛼𝑡(𝑖)，前向变量𝛼𝑡(𝑖)是在时间t，HMM输出了序列𝑂1𝑂2 … 𝑂𝑡 ，并且位于状态𝑠𝑖的概率。</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/12/24/NLP/image-20211227211103464.png" alt="image-20211227211103464" style="zoom:50%;"></p>
-<p>前向算法总的复杂度为O(𝑁2𝑇)</p>
-<p>隐马尔可夫模型：后向算法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">后向变量𝛽𝑡(𝑖)是在给定模型𝜇 = (𝐴, 𝐵, π)，并且在时间t状态为𝑠𝑖的条件下，HMM输出观察序列𝑂𝑡+1 … 𝑂𝑇的概率。</span><br></pre></td></tr></table></figure>
-<p>与计算前向变量一样，可以用动态规划的算法计算后向变量。</p>
-<p><img src="/2021/12/24/NLP/image-20211227211441031.png" alt="image-20211227211441031" style="zoom:50%;"></p>
-<p>时间复杂度：O(𝑁2𝑇)</p>
-<h4 id="序列问题"><a href="#序列问题" class="headerlink" title="序列问题"></a>序列问题</h4><p>隐马尔可夫模型：维特比算法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">维特比算法用于求解HMM中的第二个问题，给定一个观</span><br><span class="line">察序列O = 𝑂1𝑂2 … 𝑂𝑇和模型𝜇 = (𝐴, 𝐵, π)，如何快速有效</span><br><span class="line">的选择在一定意义下最优的状态序列𝑄 = 𝑞1𝑞2 … 𝑞𝑇，使得</span><br><span class="line">该状态序列“最好的解释”观察序列。</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/12/24/NLP/image-20211227211917788.png" alt="image-20211227211917788" style="zoom:50%;"></p>
-<p><img src="/2021/12/24/NLP/image-20211227211938609.png" alt="image-20211227211938609" style="zoom:50%;"></p>
-<p>存在问题</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">单独最优不一定整体最优</span><br></pre></td></tr></table></figure>
-<h4 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h4><p>最 大似然估计</p>
-<p>EM</p>
-<h2 id="句法分析"><a href="#句法分析" class="headerlink" title="句法分析"></a>句法分析</h2><h3 id="句法分析概述"><a href="#句法分析概述" class="headerlink" title="句法分析概述"></a>句法分析概述</h3><p>基本任务：确定句子的句法结构或句子中词汇之间的依存关系。</p>
-<p>定义：判断单词序列（一般为句子）判读其构成是否合乎 给定的语法(recognition)，如果是，则给出其（树）结构 (parsing)</p>
-<p>描述一种语言可以有三种途径</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">穷举法：把语言中的所有句子都枚举出来。显然，这种方法只适合句子数目有限的语</span><br><span class="line">语法/文法描述：语言中的每个句子用严格定义的规则来构造，利用规则生成语言中合法的句子</span><br><span class="line">自动机法：通过对输入句子进行合法性检验，区别哪些是语言中的句子，哪些不是语言中的句子</span><br></pre></td></tr></table></figure>
-<p>形式语法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">四元组 𝐺 = &#123;𝑁, Σ, 𝑃, 𝑆&#125;</span><br><span class="line">𝑁是非终结符(non-terminal symbol)的有限集合(有时也称变量集或句法种类集)</span><br><span class="line">Σ是终结符号(terminal symbol)的有限集合，𝑁 ∩ Σ = ∅</span><br><span class="line">𝑃是一组重写规则的有限集合：𝑃 = 𝛼 → 𝛽 ，其中𝛼, 𝛽是由V中元素构成的串，但是𝛼中至少应含一个非终结符</span><br><span class="line">𝑆 ∈ 𝑁称为句子符或初始符</span><br></pre></td></tr></table></figure>
-<p>形式语法种类</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">正则文法</span><br><span class="line">上下文无关文法</span><br><span class="line">上下文相关文法</span><br><span class="line">无约束文法</span><br></pre></td></tr></table></figure>
-<p>控制策略</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">自顶向下、自底向上</span><br><span class="line">移进-归约是自底向上语法分析的一种形式</span><br><span class="line"> 使用一个栈来保存文法符号，并用一个输入缓冲区来存放将要进行语</span><br><span class="line">法分析的其余符号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>搜索策略</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深搜广搜</span><br></pre></td></tr></table></figure>
-<p>扫描策略</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">自左至右，自右至左</span><br></pre></td></tr></table></figure>
-<p>移进-归约是自底向上语法分析的一种形式</p>
-<p>CFG缺陷</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> 对于一个中等长度的输入句子来说，要利用大覆盖度的语法规</span><br><span class="line">则分析出所有可能的句子结构是非常困难的，分析过程的复杂</span><br><span class="line">度往往使程序无法实现</span><br><span class="line"> 即使能分析出句子所有可能的结构，也难以在巨大的句法分析</span><br><span class="line">结果集中实现有效的消歧，并选择出最有可能的分析结果</span><br><span class="line"> 手工编写的规则一般带有一定的主观性，对于实际应用系统来</span><br><span class="line">说，往往难以覆盖大领域的所有复杂语言</span><br><span class="line"> 写规则本身是一件大工作量的复杂劳动，而且编写的规则对特</span><br><span class="line">定的领域有密切的相关性，不利于句法分析系统向其他领域移</span><br><span class="line">植</span><br></pre></td></tr></table></figure>
-<h3 id="概率上下文无关文法-PCFG"><a href="#概率上下文无关文法-PCFG" class="headerlink" title="概率上下文无关文法(PCFG)"></a>概率上下文无关文法(PCFG)</h3><p>概率上下文无关文法就是一个为规则增添了概率的简单CFG， 指明了不同重写规则的可能性大小</p>
-<p>在基于PCFG的句法分析模型中，假设满足以下三个条件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">上下文无关性</span><br><span class="line">祖先无关性</span><br><span class="line">位置不变性</span><br></pre></td></tr></table></figure>
-<p>剪枝策略：Beam search（集束搜索）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一种启发式图搜索算法，为了减少搜索占用的时间和空间，在每一步深度扩展的时候，</span><br><span class="line">减掉一些质量比较差的节点，保留质量较高的一些节点</span><br><span class="line">优点是减少空间消耗，提高时间效率</span><br><span class="line">缺点是有可能存在潜在的最佳方案被丢弃，beam search算法是不完全的</span><br></pre></td></tr></table></figure>
-<p>PCFG的优点</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">可利用概率减少分析过程的搜索空间</span><br><span class="line">可以利用概率对概率较小的子树剪枝，加快分析效</span><br><span class="line">率</span><br><span class="line">可以定量地比较两个语法的性能</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>PCFG的缺陷</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">结构相关性</span><br><span class="line">词汇相关性</span><br></pre></td></tr></table></figure>
-<h2 id="词义消歧"><a href="#词义消歧" class="headerlink" title="词义消歧"></a>词义消歧</h2><p>word sense disambiguation     WSD</p>
-<p>义位：语义系统中能独立存在的基本语义单位</p>
-<p>WSD需要解决三个问题：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(1)如何判断一个词是不是多义词？ 如何表示一个多义词的不同意思？</span><br><span class="line">(2)对每个多义词，预先要有关于它的 各个不同义项的清晰的区分标准</span><br><span class="line">(3)对出现在具体语境中的每个多义词，为它确定一个合适的义项</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">基于机器词典的WSD</span><br><span class="line">基于义类词典的WSD</span><br><span class="line">基于语料库的WSD</span><br><span class="line">基于统计方法的WSD</span><br><span class="line">基于规则的WSD</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">总结：</span><br><span class="line">用词典资源进行词义排歧，是利用词典中对多义</span><br><span class="line">词的各个义项的描写，求多义词的释义跟其上下</span><br><span class="line">文环境词的释义之间的交集，判断词义的亲和程</span><br><span class="line">度，来确定词义；</span><br><span class="line">由于词典释义的概括性，这种方法应用于实际语</span><br><span class="line">料中多义词的排歧，效果不一定理想</span><br></pre></td></tr></table></figure>
-<p>基于义类词典的WSD方法</p>
-<p><img src="/2021/12/24/NLP/image-20211227233833336.png" alt="image-20211227233833336" style="zoom:50%;"></p>
-<p>互信息：I（X；Y）反映的是在知道了Y的值 以后X的不确定性的减少量。</p>
-<p>基于Bayes判别的WSD方法</p>
-<p><img src="/2021/12/24/NLP/image-20211227235729108.png" alt="image-20211227235729108" style="zoom:50%;"></p>
-<p>词义消歧——基于多分类器集成</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">总结</span><br><span class="line">还有很多问题需要探讨</span><br><span class="line">❖如何选用更有效的分类器</span><br><span class="line">❖单分类器的结果怎样更高效地集成</span><br><span class="line">❖如何在单分类器中选取更有效的特征</span><br><span class="line"> 集成学习的研究对自然语言处理中的其他任务</span><br></pre></td></tr></table></figure>
-<h2 id="篇章"><a href="#篇章" class="headerlink" title="篇章"></a>篇章</h2><p>概念</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Anaphor:指代语</span><br><span class="line">Entity(referent):实体（指称对象）</span><br><span class="line">Reference:指称。用于指称实体的语言表示</span><br><span class="line">Antecedent:先行语。语篇中引入的一个相对明确的指称意义表述（如张三）；</span><br><span class="line">Coreference:共指（同指）。当两种表述均指称相同对象（实体）时，这两种表述具有共指关系</span><br></pre></td></tr></table></figure>
-<p>六类指称表示</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> Indefinite NPs（不定名词）: 一辆汽车</span><br><span class="line"> Definite NPs （有定名词）: 那个人</span><br><span class="line"> Pronouns （人称代词）: 它，他</span><br><span class="line"> Demonstratives （指示代词）: 这，那</span><br><span class="line"> One-anaphora （one指代）: one (in English)</span><br><span class="line"> Zero anaphora （0型指代）: 省略</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>指代一般包括两种情况</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">– 回指(Anaphora)：强调指代语与另一个表述之间的关</span><br><span class="line">系。指代语的指称对象通常不明确，需要确定其与先行</span><br><span class="line">语之间的关系来解释指代语的语义</span><br><span class="line">• 张先生走过来，给大家看他的新作品</span><br><span class="line">– 共指(coreference)：强调一个表述与另一个表述是否</span><br><span class="line">指向相同的实体，可以独立于上下文存在</span><br><span class="line">• 第44任美国总统 与奥巴马</span><br></pre></td></tr></table></figure>
-<h3 id="衔接和连贯"><a href="#衔接和连贯" class="headerlink" title="衔接和连贯"></a>衔接和连贯</h3><p>以词汇表示的关联，通常称为“衔接(cohesion)，强调其构成成分</p>
-<p>通过句子意义表示的关联称为连贯Coherence，强调整体上表达某种意义</p>
-<h3 id="篇章表示和相似度计算"><a href="#篇章表示和相似度计算" class="headerlink" title="篇章表示和相似度计算"></a>篇章表示和相似度计算</h3><p>将文档表示为如下所示的向量： 𝑑𝑗 = (𝑤1,𝑗 , 𝑤2,𝑗 , 𝑤3,𝑗 , … , 𝑤𝑡,𝑗)  向量的每一维都对应于词表中的一个词。  如果某个词出现在了文档中，那它在向量中的值就非 零。  这个值有很多计算方法，我们使用词语在文档中出现 的次数表示。</p>
-<h2 id="机器翻译"><a href="#机器翻译" class="headerlink" title="机器翻译"></a>机器翻译</h2><h3 id="传统机器翻译方法"><a href="#传统机器翻译方法" class="headerlink" title="传统机器翻译方法"></a>传统机器翻译方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">直接翻译法</span><br></pre></td></tr></table></figure>
-<p>基于规则的翻译方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对源语言和目标语言均进行适当描述</span><br><span class="line">吧翻译机制与语法分开</span><br><span class="line">用规则描述语法的翻译方式</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">▪优点：</span><br><span class="line">▪ 可以较好地保持原文的结构，产生的译文结构与源文的结构关系密切</span><br><span class="line">▪ 尤其对于语言现象的或句法结构的明确的源语言语句具有较强的处理能力</span><br><span class="line">▪弱点：</span><br><span class="line">▪ 规则一般由人工编写，工作量大，主观性强，一致性难以保障</span><br><span class="line">▪ 不利于系统扩充，对非规范语言现 象缺乏相应的处理能力</span><br></pre></td></tr></table></figure>
-<p>基于实例的翻译方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">方法：输入语句-&gt;与事例相似度比较-&gt;翻译结果</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">▪ 方法优点</span><br><span class="line">▪ 不要求源语言句子必须符合语法规定;</span><br><span class="line">▪ 翻译机制一般不需要对源语言句子做深入分析;</span><br><span class="line">▪ 方法弱点</span><br><span class="line">▪ 两个不同的句子之间的相似性(包括结构相似性和语义相似性)往往难以把握</span><br><span class="line">▪ 在口语中，句子结构一般比较松散，成分冗余和成分省略都较严重;</span><br><span class="line">▪ 系统往往难以处理事例库中没有记录的陌生的语言现象；</span><br><span class="line">▪ 当事例库达到一定规模时，其事例检索的效率较低;</span><br></pre></td></tr></table></figure>
-<h3 id="基于统计的机器翻译模型"><a href="#基于统计的机器翻译模型" class="headerlink" title="基于统计的机器翻译模型"></a>基于统计的机器翻译模型</h3><p>噪声信道模型</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一种语言T 由于经过一个噪声信道而发生变形从而在信道的另一端呈现为另一种语言 S</span><br></pre></td></tr></table></figure>
-<p>翻译问题可定义为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">▪ 如何根据观察到的 S，恢复最为可能的T 问题。</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/12/24/NLP/image-20211228101907190.png" alt="image-20211228101907190" style="zoom:50%;"></p>
-<p>▪三个关键问题 ▪ (1)估计语言模型概率 p(T)； ▪ (2)估计翻译概率 p(S|T)； ▪ (3)快速有效地搜索T 使得 p(T)×p(S | T) 最大</p>
-<h4 id="基于词的统计机器翻译模型"><a href="#基于词的统计机器翻译模型" class="headerlink" title="基于词的统计机器翻译模型"></a>基于词的统计机器翻译模型</h4><p>IBM模型1：词汇翻译（词对齐）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">▪ 基于词的统计翻译模型</span><br><span class="line">▪ 引入了词对齐的问题</span><br><span class="line">▪ 通过EM算法学习词对齐</span><br><span class="line">▪ 缺陷</span><br><span class="line">▪ 无法刻画翻译过程中重排序、添词、舍词等情况；</span><br><span class="line">▪ 例如：</span><br><span class="line">▪ Seldom do I go to work by bus.</span><br><span class="line">▪ 我很少乘公共汽车上班</span><br></pre></td></tr></table></figure>
-<p>IBM模型2：增加绝对对齐模型</p>
-<p>IBM模型3：引入繁衍率模型</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">前述模型存在的问题</span><br><span class="line">▪ 在随机选择对位关系的情况下，与目标语言句子中的单词t对应的源语言句子中的单</span><br><span class="line">词数目是一个随机变量；</span><br></pre></td></tr></table></figure>
-<p>繁衍率</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">定义：与目标语言句子中的单词t对应的源语言句子中的单词数目的变量</span><br><span class="line">▪ 记做Фt，称该变量为单词t的繁衍能力或产出率(fertility)。一个具体的取值记做：Фt</span><br><span class="line">▪ 繁衍率刻画的是目标语言单词与源语言单词之间一对多的关系</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="基于短语的统计机器翻译模型"><a href="#基于短语的统计机器翻译模型" class="headerlink" title="基于短语的统计机器翻译模型"></a>基于短语的统计机器翻译模型</h4><p>基本思想</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">▪ 把训练语料库中所有对齐的短语及其翻译概率存储起来，作为一部带</span><br><span class="line">概率的短语词典</span><br><span class="line">▪ 这里所说的短语是任意连续的词串，不一定是一个独立的语言单位</span><br><span class="line">▪ 翻译的时候将输入的句子与短语词典进行匹配，选择最好的短语划分，</span><br><span class="line">将得到的短语译文重新排序，得到最优的译文.</span><br></pre></td></tr></table></figure>
-<h3 id="系统融合"><a href="#系统融合" class="headerlink" title="系统融合"></a>系统融合</h3><p>几个相似的系统执行同一个任务时，可能有多个输出结果，系统融合将这些结果进行融 合，抽取其有用信息，归纳得到任务的最终输出结果。</p>
-<p>目标：最终的输出比之前的输入结果都要好</p>
-<p>句子级系统融合</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">两种技术</span><br><span class="line">最小贝叶斯风险解码；通用线性模型</span><br></pre></td></tr></table></figure>
-<p>句子级系统融合方法不会产生新的翻译句子，而是在已有的翻 译句子中挑选出最好的一个</p>
-<p>短语级系统融合 ▪ 利用多个翻译系统的输出结果，重新抽取短语翻译规则集合，并利用 新的短语翻译规则进行重新解码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">基本思想：首先合并参与融合的所有系统的短语表，从中抽取</span><br><span class="line">一个新的源语言到目标语言的短语表，然后使用新的短语表和</span><br><span class="line">语言模型去重新解码源语言句子。</span><br></pre></td></tr></table></figure>
-<p>词语级系统融合 ▪ 首先将多个翻译系统的译文输出进行词语对齐，构建一个混淆网络， 对混淆网络中的每个位置的候选词进行置信度估计， 最后进行混淆网 络解码</p>
-<p>小结</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">句子级系统融合</span><br><span class="line">▪ 未生成新的翻译假设，有效的保护原来翻译假设中短语的连续性和句子词序，但</span><br><span class="line">是也没有吸收借鉴其他翻译假设中词或者短语层次的知识。</span><br><span class="line">▪ 短语级系统融合</span><br><span class="line">▪ 借鉴其他翻译系统的短语表知识，利用传统的基于短语的翻译引擎来重新解码源</span><br><span class="line">语言的句子。有效的保持短语的连续性和译文的局部词序。但是不能很好的利用</span><br><span class="line">非连续短语和句法知识来克服译文的远距离调序问题</span><br><span class="line">▪ 词语级系统融合</span><br><span class="line">▪ 从词的粒度重组了输出译文，充分利用了各个翻译假设的词汇级别的知识，取长</span><br><span class="line">补短。但是在混淆网络解码时，并不能保证新生成的翻译句子的词序一致性和短</span><br><span class="line">语连续性</span><br></pre></td></tr></table></figure>
-<h2 id="应用：语言自动生成"><a href="#应用：语言自动生成" class="headerlink" title="应用：语言自动生成"></a>应用：语言自动生成</h2><h3 id="自然语言生成概述"><a href="#自然语言生成概述" class="headerlink" title="自然语言生成概述"></a>自然语言生成概述</h3><p>NLG生成模型</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1. 马尔可夫链：通过当前单词可以预测句子中的下一个单</span><br><span class="line">词。</span><br><span class="line">缺点：无法探测当前单词与句子中其他单词的关系以及句</span><br><span class="line">子的结构，使得预测结果不够准确。</span><br><span class="line">2. 循环神经网络(RNN)：通过前馈网络传递序列的每个项目</span><br><span class="line">信息，并将模型的输出作为序列中下一项的输入，每个项</span><br><span class="line">目存储前面步骤中的信息。</span><br><span class="line">优点：能够捕捉输入数据的序列特征</span><br><span class="line">缺点：第一，RNN短期记忆无法生成连贯的长句子；第二，</span><br><span class="line">因为 RNN 不能并行计算，无法适应主流趋势。</span><br><span class="line">3. 长短期记忆网络(LSTM)，解决梯度消失问题，但难以并行化</span><br><span class="line">4. Seq2Seq，能够解决大部分序列不等长的问题</span><br><span class="line">5. Attention模型</span><br><span class="line">6. Transformer模型，能够在不考虑单词位置的情况</span><br><span class="line">下，直接捕捉句子中所有单词之间的关系</span><br><span class="line">7. ELMO模型</span><br><span class="line">8. BERT模型</span><br></pre></td></tr></table></figure>
-<h3 id="数据到文本的生成"><a href="#数据到文本的生成" class="headerlink" title="数据到文本的生成"></a>数据到文本的生成</h3><p>以包含键值对的数据作为输入，旨在 自动生成流畅的、贴近事实的文本以描 述输入数据。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 信号分析模块(Siganl Analysis)</span><br><span class="line"> 数据阐释模块(Data Interpretation)</span><br><span class="line"> 文档规划模块(Document Planning)</span><br><span class="line"> 微规划与实现模块(Microplanning and Realisation)</span><br></pre></td></tr></table></figure>
-<p>应用领域：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> 天气预报领域的文本生成系统</span><br><span class="line"> 针对空气质量的文本生成系统</span><br><span class="line"> 针对财经数据的文本生成系统</span><br><span class="line"> 面向医疗诊断数据的文本生成系统</span><br><span class="line"> 基于体育数据生成文本摘要</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="文本到文本的生成"><a href="#文本到文本的生成" class="headerlink" title="文本到文本的生成"></a>文本到文本的生成</h3><p>对给定文本进行变换和处理从而获得新文本的技术</p>
-<p>应用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> 对联自动生成</span><br><span class="line"> 诗歌自动生成</span><br><span class="line"> 作文自动生成</span><br><span class="line"> 对话生成*---这个任务现阶段一般不作为NLG的研究分支来探讨</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="词和文档表示与相似度计算"><a href="#词和文档表示与相似度计算" class="headerlink" title="词和文档表示与相似度计算"></a>词和文档表示与相似度计算</h2><h3 id="词的表示"><a href="#词的表示" class="headerlink" title="词的表示"></a>词的表示</h3><p>独热表示</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">每个词对应一个向量，向量的维度等于词典的大小，向量中只有一个元素值为1，其余的元素均为0 ，值为1的元素对应的下标为该词在词典中的位置</span><br></pre></td></tr></table></figure>
-<p>词频 -逆文档频率(TF -IDF)</p>
-<p>词嵌入方法的问题</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">静态词向量</span><br><span class="line">词向量无法随语境变化</span><br><span class="line">不能处理一词多义</span><br><span class="line">多义词无法区分多个含义</span><br><span class="line">不能有效区分反义词</span><br><span class="line">反义词的上下文很相似</span><br></pre></td></tr></table></figure>
-<p>词向量</p>
-<p>skip-gram</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 将目标词和邻近的 </span><br><span class="line">语境词作为正面例子。</span><br><span class="line">2.随机抽取词库中的其他词 </span><br><span class="line">词库中的其他词，以获得负面样本。</span><br><span class="line">3. 使用逻辑回归来训练一个分类器，以区分这两种情况。</span><br><span class="line">区分这两种情况。</span><br><span class="line">4. 使用权重作为嵌入。</span><br></pre></td></tr></table></figure>
-<h3 id="文档表示"><a href="#文档表示" class="headerlink" title="文档表示"></a>文档表示</h3><p><img src="/2021/12/24/NLP/image-20211228162546651.png" alt="image-20211228162546651" style="zoom:50%;"></p>
-<h3 id="文本相似度计算"><a href="#文本相似度计算" class="headerlink" title="文本相似度计算"></a>文本相似度计算</h3><p>编辑距离，动态规划</p>
-<h2 id="信息抽取"><a href="#信息抽取" class="headerlink" title="信息抽取"></a>信息抽取</h2><h3 id="信息抽取的定义、任务及发展"><a href="#信息抽取的定义、任务及发展" class="headerlink" title="信息抽取的定义、任务及发展"></a>信息抽取的定义、任务及发展</h3><p>信息抽取中的主要任务</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">命名实体识别：</span><br><span class="line">识别和分类文本中出现的“实体提及”</span><br><span class="line">实体链接：</span><br><span class="line">将“实体提及”链接到知识库中对应的实体</span><br><span class="line">关系抽取：</span><br><span class="line">找到句子中有关系的两个实体，并识别出他们之间的关系类型</span><br><span class="line">事件抽取：</span><br><span class="line">事件抽取就要是找到一个事件对应的元素。</span><br></pre></td></tr></table></figure>
-<h3 id="命名实体识别"><a href="#命名实体识别" class="headerlink" title="命名实体识别"></a>命名实体识别</h3><p>挑战</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">种类繁多，命名方式灵活多样</span><br><span class="line">同一实体对应很多变体</span><br><span class="line">相同的词或者短语可以表示不同类别的实</span><br><span class="line">体</span><br><span class="line">存在嵌套</span><br><span class="line">细粒度</span><br><span class="line">语言不断进化，新的挑战不断出现</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>主要方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基于规则的方法 基于词典的方法 机器学习方法 ◼最大熵 ◼条件随机场 ◼深度学</span><br></pre></td></tr></table></figure>
-<p>命名实体识别的评价</p>
-<p><img src="/2021/12/24/NLP/image-20211228163639194.png" alt="image-20211228163639194" style="zoom:50%;"></p>
-<p><img src="/2021/12/24/NLP/image-20211228163649954.png" alt="image-20211228163649954" style="zoom:50%;"></p>
-<h3 id="实体链接"><a href="#实体链接" class="headerlink" title="实体链接"></a>实体链接</h3><p>将“实体提及”链接到知识库中对应的实体</p>
-<h3 id="关系抽取"><a href="#关系抽取" class="headerlink" title="关系抽取"></a>关系抽取</h3><p>自动识别由一对实体和联系这对实体的关系构成的 相关三元组</p>
-<p>预定义关系抽取</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">任务</span><br><span class="line">给定实体关系类别，给定语料，抽取目标关系对</span><br><span class="line">评测语料（MUC, ACE, KBP, SemEval）</span><br><span class="line">专家标注语料，语料质量高</span><br><span class="line">抽取的目标类别已经定义好</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>基于神经网络的关系抽取方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主要问题：如何设计合理的网络结构，从而捕捉更多的信息，进而更准确的完成关系的抽取</span><br><span class="line">网络结构：不同的网络结构捕捉文本中不同的信息</span><br></pre></td></tr></table></figure>
-<p>开放域关系抽取</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">实体类别和关系类别不固定、数量大</span><br><span class="line">难点问题</span><br><span class="line"> 如何获取训练语料</span><br><span class="line"> 如何获取实体关系类别</span><br><span class="line"> 如何针对不同类型目标文本抽取关系</span><br><span class="line">需要研究新的抽取方法</span><br><span class="line"> 基于句法的方法</span><br><span class="line"> 基于知识监督的方法</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="深度学习简介"><a href="#深度学习简介" class="headerlink" title="深度学习简介"></a>深度学习简介</h2><p>常用的深度学习模型</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">激活函数</span><br><span class="line">深度神经网络（Deep Neural Network, DNN）</span><br><span class="line">卷积神经网络（Convolutional Neural Network,CNN)</span><br><span class="line">循环神经网络 (Recurrent Neural Network, RNN) </span><br><span class="line">注意力机制（Attention Mechanisms）</span><br></pre></td></tr></table></figure>
-<p>pooling</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">目的：</span><br><span class="line">扩大视野：就如同先从近处看一张图片，然后离远一些再看同一张图片，有些细节就会被忽略。</span><br><span class="line">降维：在保留图片局部特征的前提下，使得图片更小，更易于计算。</span><br><span class="line">平移不变性，轻微扰动不会影响输出。</span><br><span class="line">维持同尺寸，便于后端处理。</span><br></pre></td></tr></table></figure>
-<p>深度学习模型的应用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DBN的应用</span><br><span class="line">基于DBN的问答对挖掘</span><br><span class="line">CNN的应用</span><br><span class="line">关系分类</span><br><span class="line">句子分类</span><br><span class="line">LSTM-RNN的应用</span><br><span class="line">命名实体识别</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1692,7 +1510,7 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
