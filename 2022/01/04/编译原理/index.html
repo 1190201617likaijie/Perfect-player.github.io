@@ -20,23 +20,33 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="绪论什么是编译编译：将高级语言翻译成汇编语言或机器语言的过程。  预处理器：把存储在不同文件中的源程序聚合在一起；把被称为宏的缩写语句转换为原始语句。 可重定位：在内存中存放的起始位置L不是固定的 加载器：修改可重定位地址；将修改后的指令和数据放到内存中适当的位置。 链接器：将多个可重定位的机器代码文件连接到一起；解决外部内存地址问题 编译系统的结构 词法分析概述词法分析的主要任务： 12从左向右">
+  <meta name="description" content="存疑z&#x3D;x+1;的中间代码生成 移植问题(已解决)  虚属性？ 中间代码生成，修改  习题8.4 是否存在和这些规则一致的求值过程 9.1 9 10 12.2  13.3 14.6 15.4 15.5  重点消除左递归 递归下降语法分析器 非递归下降语法分析器 句柄 判断是否为LL文法 LR文法的四种判断 1关系：LR(0)&lt;SLR(1)&lt;LALR(1)&lt;LR(1) 1.判断LR">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编译原理">
 <meta property="og:url" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="绪论什么是编译编译：将高级语言翻译成汇编语言或机器语言的过程。  预处理器：把存储在不同文件中的源程序聚合在一起；把被称为宏的缩写语句转换为原始语句。 可重定位：在内存中存放的起始位置L不是固定的 加载器：修改可重定位地址；将修改后的指令和数据放到内存中适当的位置。 链接器：将多个可重定位的机器代码文件连接到一起；解决外部内存地址问题 编译系统的结构 词法分析概述词法分析的主要任务： 12从左向右">
+<meta property="og:description" content="存疑z&#x3D;x+1;的中间代码生成 移植问题(已解决)  虚属性？ 中间代码生成，修改  习题8.4 是否存在和这些规则一致的求值过程 9.1 9 10 12.2  13.3 14.6 15.4 15.5  重点消除左递归 递归下降语法分析器 非递归下降语法分析器 句柄 判断是否为LL文法 LR文法的四种判断 1关系：LR(0)&lt;SLR(1)&lt;LALR(1)&lt;LR(1) 1.判断LR">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419121711994.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514151221654.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220518170348404.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220518170539086.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220518170614471.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220517011523873.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104110715843.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104113047587.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220105104115216.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095418057.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095933969.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419112048151.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419112803975.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419112828085.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107105320903.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110153976.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110227112.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110401057.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220108100026833.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220429171644864.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105001704.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105354813.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111100400281.png">
@@ -44,24 +54,126 @@
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104246612.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104402251.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104637911.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220501150009650.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220501150031625.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100302890.png">
 <meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100719876.png">
-<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101308032.png">
-<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101415801.png">
-<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101523666.png">
-<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101639910.png">
-<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119105058524.png">
-<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119105540074.png">
-<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119105852021.png">
-<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110032971.png">
-<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110441801.png">
-<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110545417.png">
-<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110913536.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192055179.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192124252.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192544030.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192836269.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192935922.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512193513607.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512193523610.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512212721662.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512220412044.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512220850395.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512221720701.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512221741289.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513095056700.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513100212940.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513100150507.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513102223085.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513102611274.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513103304315.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513103407672.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513103852131.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513104546195.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513104843423.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513104852180.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513105245484.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513105343336.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513105500066.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513135613449.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513135724655.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513143948062.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513144511943.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513145829960.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513151319857.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513155754626.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513164603555.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513164616906.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513164754145.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513205659076.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514094900862.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514095400390.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514114112824.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514142140992.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514142202241.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514142237490.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514143929654.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144057301.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144152954.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144250284.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144701666.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144801933.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514145311289.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514145338517.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514162527513.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514162534065.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514162733153.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514163207424.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514163839643.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514194257711.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514194518053.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514195326335.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514195613542.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514195658467.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514203627726.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514203641791.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514203739336.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514205925465.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514213155111.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515003940960.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144138737.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144511396.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144602509.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144738742.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144412561.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155110137.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155325874.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155539821.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155645902.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155911362.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515160301603.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515165840678.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515170431350.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515170613886.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515172411560.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515173505087.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515193957942.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515194252677.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515194545925.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515194801190.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515195118328.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515195158344.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515195547361.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515195949826.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200001241.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200350777.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200456345.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200548207.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200759125.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515201036529.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515201237286.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515201248830.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515201356302.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515211020194.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515215146285.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515215844342.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220019625.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220152288.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220242413.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220310043.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220624081.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515221133482.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515221317333.png">
+<meta property="og:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515221332913.png">
 <meta property="article:published_time" content="2022-01-04T02:47:20.000Z">
-<meta property="article:modified_time" content="2022-01-19T03:31:04.400Z">
+<meta property="article:modified_time" content="2022-05-18T16:13:35.819Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104110715843.png">
+<meta name="twitter:image" content="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419121711994.png">
 
 <link rel="canonical" href="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
 
@@ -211,7 +323,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-19 11:31:04" itemprop="dateModified" datetime="2022-01-19T11:31:04+08:00">2022-01-19</time>
+                <time title="Modified: 2022-05-19 00:13:35" itemprop="dateModified" datetime="2022-05-19T00:13:35+08:00">2022-05-19</time>
               </span>
 
           
@@ -225,7 +337,56 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><h3 id="什么是编译"><a href="#什么是编译" class="headerlink" title="什么是编译"></a>什么是编译</h3><p>编译：将高级语言翻译成汇编语言或机器语言的过程。</p>
+        <h2 id="存疑"><a href="#存疑" class="headerlink" title="存疑"></a>存疑</h2><p>z=x+1;的中间代码生成</p>
+<p>移植问题(已解决)</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419121711994.png" alt="image-20220419121711994"></p>
+<p>虚属性？</p>
+<p>中间代码生成，修改</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514151221654.png" alt="image-20220514151221654" style="zoom:25%;"></p>
+<p>习题8.4 是否存在和这些规则一致的求值过程</p>
+<p>9.1</p>
+<p>9 10</p>
+<p>12.2 </p>
+<p>13.3</p>
+<p>14.6</p>
+<p>15.4 15.5 </p>
+<h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><p>消除左递归</p>
+<p>递归下降语法分析器</p>
+<p>非递归下降语法分析器</p>
+<p>句柄</p>
+<p>判断是否为LL文法</p>
+<p>LR文法的四种判断</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">关系：LR(0)&lt;SLR(1)&lt;LALR(1)&lt;LR(1)</span><br></pre></td></tr></table></figure>
+<p>1.判断LR(0)文法：<br>看项目中是否有归约-归约和移进-归约冲突。<br>如果无冲突则是LR(0)文法（如果是LR(0)文法则四种都是）；如果有冲突则不是LR(0)文法。（就要向下判断）</p>
+<p>2.判断SLR(1)文法：<br>a:DFA中存在冲突项目（归约-归约，归约-移进）<br>b:{a1,a2,…,an},FOLLOW(B1),FOLLOW(B2)两两互不相交，（交集=空集）时是SLR(1)项目。<br>【也就是说，同时满足两个条件才是SLR（1）文法】</p>
+<p>若不是再向下判断。</p>
+<p>3.判断LR(1)文法：<br>构造带向前搜索符的DFA，无归约-归约冲突则是LR(1)文法。</p>
+<p>【此处意思是如果有向前搜索符还有冲突的话就不是LR（1）文法，就要再向下判断】</p>
+<p>4.判断LALR(1)文法：<br>合并同心集后无（归约-归约）冲突（在之前的基础上）<br>（核相同，向前搜索符不同）</p>
+<p>（B-&gt;a,a<br>B-&gt;a,a|b<br>同心集）<br><strong>LR(0)项目集规范族的构造和分析的构造</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/m0_37154839/article/details/80316089</span><br></pre></td></tr></table></figure>
+<p>设计SDD</p>
+<p>改写SDT</p>
+<p>四元式序列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/abc123lzf/article/details/103753507</span><br></pre></td></tr></table></figure>
+<p><strong>中间代码生成</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220518170348404.png" alt="image-20220518170348404" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220518170539086.png" alt="image-20220518170539086" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220518170614471.png" alt="image-20220518170614471" style="zoom:50%;"></p>
+<p>赋值语句的翻译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">newtemp( )：生成一个新的临时变量t，返回t的地址</span><br><span class="line">gen(code)：生成三地址指令code</span><br><span class="line">lookup(name)：查询符号表返回name 对应的记录</span><br></pre></td></tr></table></figure>
+<p>数组引用的翻译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L的综合属性</span><br><span class="line">L.type：L生成的数组元素的类型</span><br><span class="line">L.offset：指示一个临时变量，该临时变量用于累加公式中的ij × wj项，从而计算数组元素的偏移量</span><br><span class="line">L.array：数组名在符号表的入口地址</span><br></pre></td></tr></table></figure>
+<p>控制语句的翻译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">继承属性</span><br><span class="line">B.true：是一个地址，该地址用来存放当B为真时控制流转向的指令的标号</span><br><span class="line">B.false：是一个地址，该地址用来存放当B为假时控制流转向的指令的标号</span><br><span class="line">S.next：是一个地址，该地址用来存放紧跟在S代码之后执行的指令(S的后继指令)的标号</span><br></pre></td></tr></table></figure>
+<p><strong>回填</strong></p>
+<p>非终结符B的综合属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B.truelist：指向一个包含跳转指令的列表，这些指令最终获得的目标标号就是当B为真时控制流应该转向的指令的标号</span><br><span class="line">B.falselist：指向一个包含跳转指令的列表，这些指令最终获得的目标标号就是当B为假时控制流应该转向的指令的标号</span><br></pre></td></tr></table></figure>
+<p>函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">makelist( i )</span><br><span class="line">创建一个只包含i的列表，i是跳转指令的标号，函数返回指向新创建的列表的指针</span><br><span class="line">merge( p1, p2 )</span><br><span class="line">将 p1 和 p2 指向的列表进行合并，返回指向合并后的列表的指针</span><br><span class="line">backpatch( p, i )</span><br><span class="line">将 i 作为目标标号插入到 p所指列表中的各指令中</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nextquad：即将生成的下一条指令的标号</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220517011523873.png" alt="image-20220517011523873" style="zoom: 25%;"></p>
+<h2 id="什么是编译"><a href="#什么是编译" class="headerlink" title="什么是编译"></a>什么是编译</h2><p>编译：将<strong>高级语言</strong>翻译成<strong>汇编语言</strong>或<strong>机器语言</strong>的过程。</p>
 <p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104110715843.png" alt="image-20220104110715843" style="zoom:50%;"></p>
 <p>预处理器：把存储在不同文件中的源程序聚合在一起；把被称为宏的缩写语句转换为原始语句。</p>
 <p>可重定位：在内存中存放的起始位置L不是固定的</p>
@@ -238,7 +399,7 @@
 <h3 id="语法分析概述"><a href="#语法分析概述" class="headerlink" title="语法分析概述"></a>语法分析概述</h3><p>语法分析器从词法分析器输出的token序列中识别出各类短语，并构造语法分析树。</p>
 <h3 id="语义分析概述"><a href="#语义分析概述" class="headerlink" title="语义分析概述"></a>语义分析概述</h3><p>主要任务：</p>
 <p>任务一：收集标识符的属性信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">：</span><br><span class="line">种属</span><br><span class="line">类型</span><br><span class="line">存储类型，长度</span><br><span class="line">值</span><br><span class="line">作用域</span><br><span class="line">参数和返回值信息</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">：</span><br><span class="line">种属:简单变量、复合变量(数组，记录)、过程</span><br><span class="line">类型:整型、实型、字符型、布尔型、指针型</span><br><span class="line">存储类型，长度</span><br><span class="line">值</span><br><span class="line">作用域</span><br><span class="line">参数和返回值信息</span><br></pre></td></tr></table></figure>
 <p>符号表：用来存放标识符的属性信息的数据结构</p>
 <p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095418057.png" alt="image-20220106095418057" style="zoom:50%;"></p>
 <p>任务二：语义检查</p>
@@ -248,9 +409,12 @@
 <h4 id="三地址码"><a href="#三地址码" class="headerlink" title="三地址码"></a>三地址码</h4><p>三地址码由类似于汇编语言的指令序列组成，每个指令最多有三个操作数。</p>
 <p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095933969.png" alt="image-20220106095933969" style="zoom:50%;"></p>
 <p>三地址指令的表示</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">四元式(op.y.z.x)</span><br><span class="line">三元式</span><br><span class="line">间接三元式</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">四元式(op,arg1,arg2,result)</span><br><span class="line">三元式(op,arg1,arg2)</span><br><span class="line">间接三元式</span><br></pre></td></tr></table></figure>
 <p>目标代码生成以源程序的中间表示形式作为输入，并把它映射到目标语言；目标代码生成的一个重要任务是为程序中使用的变量合理分配寄存器。</p>
 <p>代码优化：为改进代码，所进行的等价程序变换，使其运行得更快一些，占用空间更小一些。</p>
+<h3 id="编译程序的生成"><a href="#编译程序的生成" class="headerlink" title="编译程序的生成"></a>编译程序的生成</h3><h4 id="编译器的T形图"><a href="#编译器的T形图" class="headerlink" title="编译器的T形图"></a>编译器的T形图</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419112048151.png" alt="image-20220419112048151" style="zoom:25%;"></p>
+<h4 id="自展"><a href="#自展" class="headerlink" title="自展"></a>自展</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419112803975.png" alt="image-20220419112803975" style="zoom:25%;"></p>
+<h4 id="移植"><a href="#移植" class="headerlink" title="移植"></a>移植</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419112828085.png" alt="image-20220419112828085" style="zoom: 25%;"></p>
 <h2 id="语言及其文法"><a href="#语言及其文法" class="headerlink" title="语言及其文法"></a>语言及其文法</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>字母表</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个有穷符号集合。</span><br></pre></td></tr></table></figure>
 <p>字母表运算</p>
@@ -269,16 +433,17 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">描述了将终结符和非终结符组合成串的方法</span><br></pre></td></tr></table></figure>
 <p>S:开始符号</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开始符号表示的是该文法中最大的语法成分</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107105320903.png" alt="image-20220107105320903" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107105320903.png" alt="image-20220107105320903" style="zoom: 25%;"></p>
 <p>符号约定</p>
 <p>终结符</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110153976.png" alt="image-20220107110153976" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110153976.png" alt="image-20220107110153976" style="zoom: 25%;"></p>
 <p>非终结符</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110227112.png" alt="image-20220107110227112" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110227112.png" alt="image-20220107110227112" style="zoom: 25%;"></p>
 <p>注</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110401057.png" alt="image-20220107110401057" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110401057.png" alt="image-20220107110401057" style="zoom: 25%;"></p>
 <h3 id="语言的定义"><a href="#语言的定义" class="headerlink" title="语言的定义"></a>语言的定义</h3><p>符号串$a<em>0$经过n步推导出$a_n$,可简记为$a_0\Longrightarrow </em>{}^{n}a_n $</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220108100026833.png" alt="image-20220108100026833" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220108100026833.png" alt="image-20220108100026833" style="zoom: 25%;"></p>
+<p>句子是不包含非终结符的句型。</p>
 <h3 id="文法的分类"><a href="#文法的分类" class="headerlink" title="文法的分类"></a>文法的分类</h3><p>Chomsky文法分类体系</p>
 <h4 id="0型文法"><a href="#0型文法" class="headerlink" title="0型文法"></a>0型文法</h4><p>$\alpha \longrightarrow \beta $</p>
 <p>无限制文法，其中$\alpha$中至少包含一个非终结符。</p>
@@ -297,24 +462,31 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
 <p>正则文法，RG</p>
 <p>右线性文法：$A\longrightarrow wB或A\longrightarrow w$</p>
 <p>左线性文法：$A\longrightarrow Bw或A\longrightarrow w$</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220429171644864.png" alt="image-20220429171644864" style="zoom: 25%;"></p>
 <h3 id="CFG的分析树"><a href="#CFG的分析树" class="headerlink" title="CFG的分析树"></a>CFG的分析树</h3><p>给定一个句型，其分析树中的每一棵子树的边缘称为该句型的一个短语。</p>
 <p>直接短语：高度为2的子树的边缘。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">直接短语一定是某产生式的右部</span><br><span class="line">但产生式的右部不一定是给定句型的直接短语</span><br></pre></td></tr></table></figure>
 <p>二义性文法</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果一个文法可以为某个句子生成多颗分析树，则称这个文法是二义性的。</span><br></pre></td></tr></table></figure>
 <p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105001704.png" alt="image-20220109105001704" style="zoom:50%;"></p>
-<h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105354813.png" alt="image-20220109105354813" style="zoom:50%;"></p>
-<h3 id="正则定义"><a href="#正则定义" class="headerlink" title="正则定义"></a>正则定义</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111100400281.png" alt="image-20220111100400281" style="zoom:50%;"></p>
-<h3 id="有穷自动机"><a href="#有穷自动机" class="headerlink" title="有穷自动机"></a>有穷自动机</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111101353306.png" alt="image-20220111101353306" style="zoom:50%;"></p>
+<h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105354813.png" alt="image-20220109105354813" style="zoom: 25%;"></p>
+<h3 id="正则定义"><a href="#正则定义" class="headerlink" title="正则定义"></a>正则定义</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111100400281.png" alt="image-20220111100400281" style="zoom: 25%;"></p>
+<h3 id="有穷自动机"><a href="#有穷自动机" class="headerlink" title="有穷自动机"></a>有穷自动机</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111101353306.png" alt="image-20220111101353306" style="zoom: 25%;"></p>
+<p><strong>最长子串匹配原则</strong>：当输入串的多个前缀与一个或多个模式匹配时，总是选择最长的前缀进行匹配</p>
 <h3 id="有穷自动机的分类"><a href="#有穷自动机的分类" class="headerlink" title="有穷自动机的分类"></a>有穷自动机的分类</h3><p>DFA确定的有穷自动机</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104246612.png" alt="image-20220112104246612" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104246612.png" alt="image-20220112104246612" style="zoom: 25%;"></p>
 <p>NFA非确定的有穷自动机</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104402251.png" alt="image-20220112104402251" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104402251.png" alt="image-20220112104402251" style="zoom: 25%;"></p>
 <p>正则文法与正则表达式与有穷自动机等价</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104637911.png" alt="image-20220112104637911" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104637911.png" alt="image-20220112104637911" style="zoom: 25%;"></p>
 <p>带有空边的NFA与不带空边的NFA有等价性</p>
 <h3 id="从正则表达式到有穷自动机"><a href="#从正则表达式到有穷自动机" class="headerlink" title="从正则表达式到有穷自动机"></a>从正则表达式到有穷自动机</h3><p>先构造NFA,再从NFA到DFA。</p>
-<h3 id="从NFA到DFA的转换"><a href="#从NFA到DFA的转换" class="headerlink" title="从NFA到DFA的转换"></a>从NFA到DFA的转换</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100302890.png" alt="image-20220114100302890" style="zoom:50%;"></p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100719876.png" alt="image-20220114100719876" style="zoom: 50%;"></p>
+<p>根据RE构造NFA</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220501150009650.png" alt="image-20220501150009650" style="zoom:25%;"></p>
+<p>假设正则表达式r1和r2对应的NFA分别为N(r1)和N(r2)</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220501150031625.png" alt="image-20220501150031625" style="zoom:25%;"></p>
+<h3 id="从NFA到DFA的转换"><a href="#从NFA到DFA的转换" class="headerlink" title="从NFA到DFA的转换"></a>从NFA到DFA的转换</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100302890.png" alt="image-20220114100302890" style="zoom: 25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100719876.png" alt="image-20220114100719876" style="zoom: 25%;"></p>
 <h3 id="识别单词的DFA"><a href="#识别单词的DFA" class="headerlink" title="识别单词的DFA"></a>识别单词的DFA</h3><p> 词法分析阶段可检测错误的类型：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">单词拼写错误</span><br><span class="line">非法字符</span><br></pre></td></tr></table></figure>
 <p>错误恢复策略</p>
@@ -324,25 +496,505 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最右推导：总是选择每个句型的最右非终结符进行替换。</span><br></pre></td></tr></table></figure>
 <p>在自底向上的分析中，总是采用最左规约的方式，因此把最左规约称为规范规约，而最右推导相应的称为规范推导。</p>
 <p>自顶向下选择最左推导。</p>
-<p>需要回溯的分析器叫不确定分析器。</p>
+<h4 id="自顶向下分析存在的问题"><a href="#自顶向下分析存在的问题" class="headerlink" title="自顶向下分析存在的问题"></a>自顶向下分析存在的问题</h4><p>同一非终结符的多个候选式存在共同前缀，将导致回溯现象</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192055179.png" alt="image-20220512192055179" style="zoom: 50%;"></p>
+<p>左递归文法会使递归下降分析器陷入无限循环</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192124252.png" alt="image-20220512192124252" style="zoom:50%;"></p>
+<h4 id="消除直接左递归"><a href="#消除直接左递归" class="headerlink" title="消除直接左递归"></a>消除直接左递归</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192544030.png" alt="image-20220512192544030" style="zoom: 50%;"></p>
+<p>消除直接左递归的一般形式</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192836269.png" alt="image-20220512192836269" style="zoom:50%;"></p>
+<h4 id="消除间接左递归"><a href="#消除间接左递归" class="headerlink" title="消除间接左递归"></a>消除间接左递归</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192935922.png" alt="image-20220512192935922" style="zoom:50%;"></p>
+<h4 id="提取左公因子"><a href="#提取左公因子" class="headerlink" title="提取左公因子"></a>提取左公因子</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512193513607.png" alt="image-20220512193513607" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512193523610.png" alt="image-20220512193523610" style="zoom:50%;"></p>
+<h4 id="预测分析"><a href="#预测分析" class="headerlink" title="预测分析"></a>预测分析</h4><p>需要回溯的分析器叫不确定分析器。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">预测分析：递归下降分析技术的一个特例，通过在输入中向前看固定个数符号来选择正确的A-产生式。</span><br><span class="line">预测分析不需要回溯，是一种确定的自顶向下分析方法。</span><br></pre></td></tr></table></figure>
-<h3 id="文法转换"><a href="#文法转换" class="headerlink" title="文法转换"></a>文法转换</h3><p>问题一</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当同一个非终结符的多个候选式存在共同前缀，将导致回溯现象 </span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101308032.png" alt="image-20220115101308032" style="zoom:50%;"></p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101415801.png" alt="image-20220115101415801" style="zoom:50%;"></p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101523666.png" alt="image-20220115101523666" style="zoom:50%;"></p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220115101639910.png" alt="image-20220115101639910" style="zoom:50%;"></p>
-<h3 id="LL-1-文法"><a href="#LL-1-文法" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119105058524.png" alt="image-20220119105058524" style="zoom:50%;"></p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119105540074.png" alt="image-20220119105540074" style="zoom:50%;"></p>
-<p>非终结符的后继符号集</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可能在某个句型中紧跟在A后边的终结符a的集合</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119105852021.png" alt="image-20220119105852021" style="zoom:50%;"></p>
-<p>q_文法中不含右部以非终结符打头的产生式</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110032971.png" alt="image-20220119110032971" style="zoom:50%;"></p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110441801.png" alt="image-20220119110441801" style="zoom:50%;"></p>
+<p>可以对某些文法构造出向前看k个输入符号的预测分析器，该类文法有时也称为LL(k) 文法类</p>
+<h3 id="预测分析法"><a href="#预测分析法" class="headerlink" title="预测分析法"></a>预测分析法</h3><h4 id="LL-1-文法"><a href="#LL-1-文法" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h4><p>S_文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">每个产生式的右部都以终结符开始</span><br><span class="line">同一非终结符的各个候选式的首终结符都不同</span><br><span class="line">S_文法不含ε产生式</span><br></pre></td></tr></table></figure>
+<p>什么时候使用ε产生式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果当前某非终结符A与当前输入符a不匹配时，若存在A→ε，可以通过检查a是否可以出现在 A的后面，来决定是否使用产生式 A→ε（若文法中无 A→ε ，则应报错）</span><br></pre></td></tr></table></figure>
+<p>后继符号集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">可能在某个句型中紧跟在A后边的终结符a的集合，记为FOLLOW(A)</span><br><span class="line">	FOLLOW(A)=&#123;a| S -&gt;* αAaβ, a∈VT，α,β∈(VT∪VN)*&#125;</span><br><span class="line">如果 A是某个句型的的最右符号，则将结束符“$”添加到FOLLOW(A)中</span><br></pre></td></tr></table></figure>
+<p>产生式的可选集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">产生式A→β的可选集是指可以选用该产生式进行推导时对应的输入符号的集合，记为SELECT( A→β )</span><br><span class="line">SELECT( A→aβ ) = &#123; a &#125;</span><br><span class="line">SELECT( A→ε )=FOLLOW( A )</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512212721662.png" alt="image-20220512212721662" style="zoom:50%;"></p>
+<p>q_文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">每个产生式的右部或为ε ，或以终结符开始</span><br><span class="line">具有相同左部的产生式有不相交的可选集</span><br><span class="line">q_文法不含右部以非终结符打头的产生式</span><br></pre></td></tr></table></figure>
+<p>串首终结符集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给定一个文法符号串α， α的串首终结符集FIRST(α)被定义为可以从α推导出的所有串首终结符构成的集合。如果α * ε，那么ε也在FIRST(α)中</span><br></pre></td></tr></table></figure>
 <p>LL(1)文法</p>
-<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110545417.png" alt="image-20220119110545417" style="zoom:50%;"></p>
-<h3 id="FIRST集和FOLLOW集"><a href="#FIRST集和FOLLOW集" class="headerlink" title="FIRST集和FOLLOW集"></a>FIRST集和FOLLOW集</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220119110913536.png" alt="image-20220119110913536" style="zoom:50%;"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">当且仅当G的任意两个具有相同左部的产生式A → α | β 满足下面的条件：</span><br><span class="line">不存在终结符a使得α 和β都能够推导出以a开头的串</span><br><span class="line">α 和β至多有一个能推导出ε </span><br><span class="line">如果 β -&gt;* ε，则FIRST (α)∩FOLLOW(A) =Φ；</span><br><span class="line">如果 α -&gt;* ε，则FIRST (β)∩FOLLOW(A) =Φ；</span><br></pre></td></tr></table></figure>
+<p>即同一非终结符的各个产生式的可选集互不相交</p>
+<p>第一个L表示从左向右扫描输入，第二个L表示最左推导</p>
+<p>follow(A)计算方法</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512220412044.png" alt="image-20220512220412044" style="zoom:50%;"></p>
+<p>预测分析表</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512220850395.png" alt="image-20220512220850395" style="zoom:33%;"></p>
+<p>预测分析</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">递归的方式：基于预测分析表对递归下降分析法进行扩展</span><br><span class="line">非递归的方式：显式地维护一个栈结构来模拟最左推导过程</span><br></pre></td></tr></table></figure>
+<h4 id="递归的预测分析法"><a href="#递归的预测分析法" class="headerlink" title="递归的预测分析法"></a>递归的预测分析法</h4><h4 id="非递归的预测分析法"><a href="#非递归的预测分析法" class="headerlink" title="非递归的预测分析法"></a>非递归的预测分析法</h4><p>非递归的预测分析显式地维护一个栈结构，而不是通过递归调用的方式隐式地维护栈。这样的语法分析器可以模拟最左推导过程</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512221720701.png" alt="image-20220512221720701" style="zoom:33%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512221741289.png" alt="image-20220512221741289" style="zoom:33%;"></p>
+<p>预测分析步骤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.构造文法</span><br><span class="line">2.改造文法：消除二义性、消除左递归、消除回溯</span><br><span class="line">3.求每个变量的FIRST集和FOLLOW集，从而求得每个候选式的SELECT集</span><br><span class="line">4.检查是不是 LL(1) 文法。若是，构造预测分析表</span><br><span class="line">5.对于递归的预测分析，根据预测分析表为每一个非终结符编写一个过程；对于非递归的预测分析，实现表驱动</span><br><span class="line">  的预测分析算法</span><br></pre></td></tr></table></figure>
+<p>二义性判定</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于任一个上下文无关文法，不存在一个算法判断其是否为二义性，但能给出一个充分条件，满足则无二义性，不满足也未必有二义性</span><br></pre></td></tr></table></figure>
+<h4 id="预测分析中的错误检测"><a href="#预测分析中的错误检测" class="headerlink" title="预测分析中的错误检测"></a>预测分析中的错误检测</h4><p>两种情况下可以检测到错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">栈顶的终结符和当前输入符号不匹配</span><br><span class="line">栈顶非终结符与当前输入符号在预测分析表对应项中的信息为空</span><br></pre></td></tr></table></figure>
+<p>错误恢复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">恐慌模式：忽略输入中的一些符号，直到输入中出现由设计者选定的同步词法单元(synchronizing token)集合中的某个词法单元；如果终结符在栈顶而不能匹配，一个简单的办法就是弹出此终结符</span><br></pre></td></tr></table></figure>
+<h3 id="自底向上的分析"><a href="#自底向上的分析" class="headerlink" title="自底向上的分析"></a>自底向上的分析</h3><p>自底向上的语法分析采用最左归约方式（反向构造句子的最右推导）</p>
+<h4 id="移入-归约分析"><a href="#移入-归约分析" class="headerlink" title="移入-归约分析"></a>移入-归约分析</h4><p>工作过程</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513095056700.png" alt="image-20220513095056700" style="zoom: 25%;"></p>
+<p>四种动作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">移入：将下一个输入符号移到栈的顶端</span><br><span class="line">归约：被归约的符号串的右端必然处于栈顶。语法分析器在栈中确定这个串的左端，并决定用哪个非终结符来替换这个串</span><br><span class="line">接收：宣布语法分析过程成功完成</span><br><span class="line">报错：发现一个语法错误，并调用错误恢复子例程</span><br></pre></td></tr></table></figure>
+<p>存在问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">归约-归约冲突</span><br><span class="line">移入-归约冲突</span><br></pre></td></tr></table></figure>
+<p><strong>归约-归约冲突</strong></p>
+<p>造成错误的原因：错误地识别了句柄</p>
+<p>句柄：句型的最左直接短语</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513100212940.png" alt="image-20220513100212940" style="zoom:25%;"></p>
+<p><strong>移入-归约冲突</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513100150507.png" alt="image-20220513100150507" style="zoom: 25%;"></p>
+<h3 id="LR分析法"><a href="#LR分析法" class="headerlink" title="LR分析法"></a>LR分析法</h3><p>是最大的、可以构造出相应移入-归约语法分析器的文法类<br>L: 对输入进行从左到右的扫描<br>R: 反向构造出一个最右推导序列</p>
+<p>LR(k)分析<br>需要向前查看k个输入符号的LR分析</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513102223085.png" alt="image-20220513102223085" style="zoom: 25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513102611274.png" alt="image-20220513102611274" style="zoom:25%;"></p>
+<p>看PPT例题分析</p>
+<h4 id="LR-0-分析"><a href="#LR-0-分析" class="headerlink" title="LR(0) 分析"></a>LR(0) 分析</h4><p>右部某位置标有圆点的产生式称为相应文法的一个LR(0)项目（简称为项目）</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513103304315.png" alt="image-20220513103304315" style="zoom:25%;"></p>
+<p>产生式A→ε 只生成一个项目A→ · </p>
+<p>增广文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果G 是一个以S为开始符号的文法，则G的增广文法 G&#x27; 就是在G中加上新开始符号S&#x27; 和产生式S&#x27; → S而得到的文法</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513103407672.png" alt="image-20220513103407672" style="zoom:25%;"></p>
+<p>引入这个新的开始产生式的目的是使得文法开始符号仅出现在一个产生式的左边，从而使得分析器只有一个接受状态</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513103852131.png" alt="image-20220513103852131" style="zoom: 25%;"></p>
+<p>初始项目：S’→·S</p>
+<p>接收项目：S’→S·</p>
+<p>归约项目：·在末尾的项目</p>
+<p>后继项目：同属于一个产生式的项目，但圆点的位置只相差一个符号，  则称后者是前者的后继项目</p>
+<p>A→α· Xβ的后继项目是A→αX·β</p>
+<p>可以把等价的项目组成一个项目集( I ) ，称为项目集闭包(Closure of Item Sets)，每个项目集闭包对应着自动机的一个状态</p>
+<p>eg：</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513104546195.png" alt="image-20220513104546195" style="zoom: 25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513104843423.png" alt="image-20220513104843423" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513104852180.png" alt="image-20220513104852180" style="zoom:25%;"></p>
+<p>LR(0)分析过程的冲突</p>
+<p>移进归约冲突</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513105245484.png" alt="image-20220513105245484" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513105343336.png" alt="image-20220513105343336" style="zoom:25%;"></p>
+<p>在状态2时，当遇到*号时，不清楚应该移入还是归约。</p>
+<p>归约归约冲突</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513105500066.png" alt="image-20220513105500066" style="zoom:25%;"></p>
+<p>状态二有两个归约和一个移入，移进/归约冲突和归约/归约冲突混合。</p>
+<p>如果LR(0)分析表中没有语法分析动作冲突，那么给定的文法就称为LR(0)文法</p>
+<p>不是所有CFG(上下文无关文法)都能用LR(0)方法进行分析，也就是说，CFG不总是LR(0)文法。</p>
+<h4 id="SLR-分析"><a href="#SLR-分析" class="headerlink" title="SLR 分析"></a>SLR 分析</h4><p>LR(0)解决不了冲突的原因</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">句柄都是相对一个句型而言的，因此应该将句柄的识别放在句型这样一个上下文环境中考虑</span><br><span class="line">LR(0)考虑了A的上文（规范句型的前缀），但未考虑A的下文，因此消解冲突能力有限</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513135613449.png" alt="image-20220513135613449" style="zoom:25%;"></p>
+<p>SLR冲突</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513135724655.png" alt="image-20220513135724655" style="zoom:25%;"></p>
+<p>当状态2遇到=时，会有移入归约冲突。</p>
+<p>存在问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SLR只是简单地考察下一个输入符号b是否属于与归约项目A→α相关联的FOLLOW(A)，但b∈FOLLOW(A)只是归约α的一个必要条件，而非充分条件</span><br></pre></td></tr></table></figure>
+<h4 id="LR-1-分析"><a href="#LR-1-分析" class="headerlink" title="LR(1)分析"></a>LR(1)分析</h4><p>在特定位置，A的后继符集合是FOLLOW(A)的子集，而SLR分析法则将其全部考虑了进去。</p>
+<p>将一般形式为 [A→α·β, a]的项称为 LR(1) 项，其中A→αβ 是一个产生式，a 是一个终结符(这里将$视为一个特殊的终结符)它表示在当前状态下，A后面必须紧跟的终结符，称为该项的展望符(lookahead)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LR(1) 中的1指的是项的第二个分量的长度</span><br><span class="line">在形如[A→α·β, a]且β ≠ ε的项中，展望符a没有任何作用</span><br><span class="line">但是一个形如[A→α·, a]的项在只有在下一个输入符号等于a时才可以按照A→α 进行归约</span><br><span class="line">这样的a的集合总是FOLLOW(A)的子集，而且它通常是一个真子集</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513143948062.png" alt="image-20220513143948062" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513144511943.png" alt="image-20220513144511943" style="zoom:25%;"></p>
+<p>如果除展望符外，两个LR(1)项目集是相同的，则称这两个LR(1)项目集是同心的</p>
+<p>LR(1)分析实际上是根据后继符集合的不同，将原始的LR(0)状态分裂成不同的LR(1)状态</p>
+<h4 id="LALR分析"><a href="#LALR分析" class="headerlink" title="LALR分析"></a>LALR分析</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">寻找具有相同核心的LR  (1) 项集，并将这些项集合并为一个项集。 所谓项集的核心就是其第一分量的集合</span><br><span class="line">然后根据合并后得到的项集族构造语法分析表</span><br><span class="line">如果分析表中没有语法分析动作冲突，给定的文法就称为LALR  (1) 文法，就可以根据该分析表进行语法分析</span><br></pre></td></tr></table></figure>
+<p>合并同心项集时产生归约-归约冲突的例子</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513145829960.png" alt="image-20220513145829960" style="zoom:25%;"></p>
+<p>合并同心项集不会产生移进-归约冲突</p>
+<p>合并同心项集后，虽然不产生冲突，但可能会推迟错误的发现</p>
+<p>LALR分析法可能会作多余的归约动作，但绝不会作错误的移进操作</p>
+<p>LALR(1)的特点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">形式上与LR(1)相同</span><br><span class="line">大小上与LR(0)/SLR相当</span><br><span class="line">分析能力介于SLR和LR(1)二者之间：LR(0)&lt; SLR&lt;LALR(1)&lt;LR(1)</span><br><span class="line">合并后的展望符集合仍为FOLLOW集的子集</span><br></pre></td></tr></table></figure>
+<h4 id="二义性文法的LR分析"><a href="#二义性文法的LR分析" class="headerlink" title="二义性文法的LR分析"></a>二义性文法的LR分析</h4><p>每个二义性文法都不是LR的<br>某些类型的二义性文法在语言的描述和实现中很有用</p>
+<p>用优先级和结合性解决冲突</p>
+<p>应该保守地使用二义性文法，并且必须在严格控制之下使用，因为稍有不慎就会导致语法分析器所识别的语言出现偏差</p>
+<h4 id="LR分析中的错误处理"><a href="#LR分析中的错误处理" class="headerlink" title="LR分析中的错误处理"></a>LR分析中的错误处理</h4><p>语法错误的检测</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当LR分析器在查询语法分析动作表并发现一个报错条目时，就检测到了一个语法错误</span><br></pre></td></tr></table></figure>
+<p>错误恢复策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">恐慌模式错误恢复</span><br><span class="line">短语层次错误恢复</span><br></pre></td></tr></table></figure>
+<p>恐慌错误恢复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">从栈顶向下扫描，直到发现某个状态si，它有一个对应于某个非终结符A的GOTO目标，可以认为从这个A推导出的串中包含错误</span><br><span class="line">然后丢弃0个或多个输入符号，直到发现一个可能合法地紧跟在A之后的符号a为止</span><br><span class="line">之后将si+1 = GOTO(si , A)压入栈中，继续进行正常的语法分析</span><br><span class="line">实践中可能会选择多个这样的非终结符A。通常这些非终结符代表了主要的程序段，比如表达式、语句或块</span><br></pre></td></tr></table></figure>
+<p>短语层次错误恢复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">检查LR分析表中的每一个报错条目，并根据语言的使用方法来决定程序员所犯的何种错误最有可能引起这个语法错误</span><br><span class="line">然后构造出适当的恢复过程</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513151319857.png" alt="image-20220513151319857" style="zoom:25%;"></p>
+<h2 id="语法制导翻译"><a href="#语法制导翻译" class="headerlink" title="语法制导翻译"></a>语法制导翻译</h2><p>语法制导翻译使用CFG来引导对语言的翻译，是一种面向文法的翻译技术</p>
+<p>基本思想</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如何表示语义信息：为CFG中的文法符号设置语义属性，用来表示语法成分对应的语义信息</span><br><span class="line">如何计算语义属性：文法符号的语义属性值是用与文法符号所在产生式（语法规则）相关联的语义规则来计算的</span><br><span class="line">对于给定的输入串x ，构建x的语法分析树，并利用与产生式（语法规则）相关联的语义规则来计算分析树中各结点对应的语义属性值</span><br></pre></td></tr></table></figure>
+<p>语法制导定义(Syntax-Directed Definitions, SDD)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SDD是对CFG的推广</span><br><span class="line">将每个文法符号和一个语义属性集合相关联</span><br><span class="line">将每个产生式和一组语义规则相关联，这些规则用于计算该产生式中各文法符号的属性值</span><br><span class="line">如果X是一个文法符号，a是X的一个属性，则用X.a表示属性a在某个标号为X的分析树结点上的值</span><br></pre></td></tr></table></figure>
+<p>语法制导翻译方案 (Syntax-Directed Translation Scheme , SDT )</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SDT是在产生式右部嵌入了程序片段的CFG，这些程序片段称为语义动作。一个语义动作在产生式中的位置决定了这个动作的执行时间</span><br></pre></td></tr></table></figure>
+<h3 id="语法制导定义SDD"><a href="#语法制导定义SDD" class="headerlink" title="语法制导定义SDD"></a>语法制导定义SDD</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>语法制导定义SDD是对CFG的推广</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将每个文法符号和一个语义属性集合相关联</span><br><span class="line">将每个产生式和一组语义规则相关联，用来计算该产生式中各文法符号的属性值</span><br></pre></td></tr></table></figure>
+<p>文法符号的属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">综合属性 (synthesized attribute)</span><br><span class="line">继承属性 (inherited attribute)</span><br></pre></td></tr></table></figure>
+<p>综合属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在分析树结点 N上的非终结符A的综合属性只能通过 N的子结点或 N本身的属性值来定义</span><br><span class="line">终结符可以具有综合属性。终结符的综合属性值是由词法分析器提供的词法值，因此在SDD中没有计算终结符属性值的语义规则</span><br></pre></td></tr></table></figure>
+<p>继承属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在分析树结点 N上的非终结符A的继承属性只能通过 N的父结点、N的兄弟结点或 N本身的属性值来定义</span><br><span class="line">终结符没有继承属性。终结符从词法分析器处获得的属性值被归为综合属性值</span><br></pre></td></tr></table></figure>
+<p>属性文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一个没有副作用的SDD有时也称为属性文法</span><br><span class="line">属性文法的规则仅仅通过其它属性值和常量来定义一个属性值</span><br></pre></td></tr></table></figure>
+<h4 id="SDD的求值顺序"><a href="#SDD的求值顺序" class="headerlink" title="SDD的求值顺序"></a>SDD的求值顺序</h4><p>语义规则建立了属性之间的依赖关系，在对语法分析树节点的一个属性求值之前，必须首先求出这个属性值所依赖的所有属性值</p>
+<p>依赖图</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">依赖图是一个描述了分析树中结点属性间依赖关系的有向图</span><br><span class="line">分析树中每个标号为X的结点的每个属性a都对应着依赖图中的一个结点</span><br><span class="line">如果属性X.a的值依赖于属性Y.b的值，则依赖图中有一条从Y.b的结点指向X.a的结点的有向边</span><br></pre></td></tr></table></figure>
+<p>eg：<img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513155754626.png" alt="image-20220513155754626" style="zoom:25%;"></p>
+<p>属性值计算顺序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这样的排序将一个有向图变成了一个线性排序，这个排序称为这个图的拓扑排序</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对于只具有综合属性的SDD ，可以按照任何自底向上的顺序计算它们的值</span><br><span class="line">对于同时具有继承属性和综合属性的SDD，不能保证存在一个顺序来对各个节点上的属性进行求值</span><br><span class="line">如果图中没有环，那么至少存在一个拓扑排序</span><br></pre></td></tr></table></figure>
+<h3 id="S-属性定义与L-属性定义"><a href="#S-属性定义与L-属性定义" class="headerlink" title="S-属性定义与L-属性定义"></a>S-属性定义与L-属性定义</h3><p>仅仅使用综合属性的SDD称为S属性的SDD，或S-属性定义、S-SDD</p>
+<p>如果一个SDD是S属性的，可以按照语法分析树节点的任何自底向上顺序来计算它的各个属性值</p>
+<p>L-属性定义(也称为L属性的SDD或L-SDD)的直观含义：在一个产生式所关联的各属性之间，依赖图的边可以从左到右，但不能从右到左</p>
+<p>正式定义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一个SDD是L-属性定义，当且仅当它的每个属性要么是一个综合属性，要么是满足如下条件的继承属性：假设存在一个产生式A→X1X2…Xn，其右部符号Xi (1&lt;= i &lt;= n)的继承属性仅依赖于下列属性：</span><br><span class="line">A的继承属性</span><br><span class="line">产生式中Xi左边的符号 X1, X2, … , Xi-1 的属性</span><br><span class="line">Xi本身的属性，但Xi 的全部属性不能在依赖图中形成环路</span><br></pre></td></tr></table></figure>
+<p>虚属性：就是一个动作，不干其他事情。</p>
+<h3 id="语法制导翻译方案SDT"><a href="#语法制导翻译方案SDT" class="headerlink" title="语法制导翻译方案SDT"></a>语法制导翻译方案SDT</h3><p>语法制导翻译方案(SDT )是在产生式右部中嵌入了程序片段(称为语义动作)的CFG</p>
+<p>SDD定义了各属性的计算方法（计算规则），SDT进一步明确了各属性的计算时机（计算顺序）</p>
+<p>这两种情况下，SDT可在语法分析过程中实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">基本文法可以使用LR分析技术，且SDD是S属性的</span><br><span class="line">基本文法可以使用LL分析技术，且SDD是L属性的</span><br></pre></td></tr></table></figure>
+<h4 id="S-SDD转换为SDT"><a href="#S-SDD转换为SDT" class="headerlink" title="S-SDD转换为SDT"></a>S-SDD转换为SDT</h4><p>将每个语义动作都放在产生式的最后</p>
+<p>S-属性定义的SDT 实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果一个S-SDD的基本文法可以使用LR分析技术，那么它的SDT可以在LR语法分析过程中实现</span><br><span class="line">当归约发生时执行相应的语义动作</span><br></pre></td></tr></table></figure>
+<p>语法分析器的扩展</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">为每个栈记录增加属性值字段，存放文法符号的综合属性值</span><br><span class="line">在每次归约时调用计算综合属性值的语义子程序</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513164603555.png" alt="image-20220513164603555" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513164616906.png" alt="image-20220513164616906" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513164754145.png" alt="image-20220513164754145" style="zoom:25%;"></p>
+<h4 id="将L-SDD转换为SDT"><a href="#将L-SDD转换为SDT" class="headerlink" title="将L-SDD转换为SDT"></a>将L-SDD转换为SDT</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将计算某个非终结符号A的继承属性的动作插入到产生式右部中紧靠在A的本次出现之前的位置上</span><br><span class="line">将计算一个产生式左部符号的综合属性的动作放置在这个产生式右部的最右端</span><br></pre></td></tr></table></figure>
+<p>如果一个L-SDD的基本文法可以使用LL分析技术，那么它的SDT可以在LL或LR语法分析过程中实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在非递归的预测分析过程中进行语义翻译</span><br><span class="line">在递归的预测分析过程中进行语义翻译</span><br><span class="line">在LR分析过程中进行语义翻译</span><br></pre></td></tr></table></figure>
+<h3 id="L-属性定义的自顶向下翻译"><a href="#L-属性定义的自顶向下翻译" class="headerlink" title="L-属性定义的自顶向下翻译"></a>L-属性定义的自顶向下翻译</h3><h4 id="在非递归的预测分析过程中进行翻译"><a href="#在非递归的预测分析过程中进行翻译" class="headerlink" title="在非递归的预测分析过程中进行翻译"></a>在非递归的预测分析过程中进行翻译</h4><p>扩展语法分析栈</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513205659076.png" alt="image-20220513205659076" style="zoom: 50%;"></p>
+<p>看例题</p>
+<p>分析栈中的每一个记录都对应着一段执行代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">综合记录出栈时，要将综合属性值复制给后面特定的语义动作</span><br><span class="line">变量展开时（即变量本身的记录出栈时），如果其含有继承属性，则要将继承属性值复制给后面特定的语义动作</span><br></pre></td></tr></table></figure>
+<h4 id="在递归的预测分析过程中进行翻译"><a href="#在递归的预测分析过程中进行翻译" class="headerlink" title="在递归的预测分析过程中进行翻译"></a>在递归的预测分析过程中进行翻译</h4><p>为每个非终结符A构造一个函数，A的每个继承属性对应该函数的一个形参，函数的返回值是A的综合属性值</p>
+<p>对出现在A产生式右部中的每个文法符号的每个属性都设置一个局部变量</p>
+<p>例题</p>
+<p>算法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">为每个非终结符A构造一个函数，A的每个继承属性对应该函数的一个形参，函数的返回值是A的综合属性值。对出现在A产生式中的每个文法符号的每个属性都设置一个局部变量</span><br><span class="line">非终结符A的代码根据当前的输入决定使用哪个产生式</span><br></pre></td></tr></table></figure>
+<h3 id="L-属性定义的自底向上翻译"><a href="#L-属性定义的自底向上翻译" class="headerlink" title="L-属性定义的自底向上翻译"></a>L-属性定义的自底向上翻译</h3><p>给定一个以LL文法为基础的L-SDD，可以修改这个文法，并在LR语法分析过程中计算这个新文法之上的SDD</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">给定一个以LL文法为基础的L-属性定义，可以修改这个文法，并在LR语法分析过程中计算这个新文法之上的SDD</span><br><span class="line">首先构造SDT，在各个非终结符之前放置语义动作来计算它的继承属性， 并在产生式后端放置语义动作计算综合属性</span><br><span class="line">对每个内嵌的语义动作，向文法中引入一个标记非终结符来替换它。每个这样的位置都有一个不同的标记，并且对于任意一个标记M都有一个产生式M→ε</span><br><span class="line">如果标记非终结符M在某个产生式A→α&#123;a&#125;β中替换了语义动作a，对a进行修改得到a&#x27; ，并且将a&#x27;关联到M→ε 上。动作a&#x27;</span><br><span class="line">(a) 将动作a需要的A或α中符号的任何属性作为M的继承属性进行复制</span><br><span class="line">(b) 按照a中的方法计算各个属性，但是将计算得到的这些属性作为M的综合属性</span><br></pre></td></tr></table></figure>
+<h2 id="中间代码生成"><a href="#中间代码生成" class="headerlink" title="中间代码生成"></a>中间代码生成</h2><h3 id="声明语句的翻译"><a href="#声明语句的翻译" class="headerlink" title="声明语句的翻译"></a>声明语句的翻译</h3><p>主要任务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">收集标识符的类型等属性信息，并为每一个名字分配一个相对地址</span><br></pre></td></tr></table></figure>
+<p>名字的类型和相对地址信息保存在相应的符号表记录中</p>
+<h4 id="类型表达式"><a href="#类型表达式" class="headerlink" title="类型表达式"></a>类型表达式</h4><p>基本类型是类型表达式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">integer</span><br><span class="line">real</span><br><span class="line">char</span><br><span class="line">boolean</span><br><span class="line">type_error (出错类型)</span><br><span class="line">void (无类型)</span><br></pre></td></tr></table></figure>
+<p>可以为类型表达式命名，类型名也是类型表达式</p>
+<p>将类型构造符(type constructor)作用于类型表达式可以构成新的类型表达式</p>
+<p><strong>数组构造符array</strong></p>
+<p>若T是类型表达式，则array ( I, T )是类型表达式( I是一个整数)</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514094900862.png" alt="image-20220514094900862" style="zoom:25%;"></p>
+<p><strong>指针构造符pointer</strong></p>
+<p>若T 是类型表达式，则 pointer ( T ) 是类型表达式，它表示一个指针类型</p>
+<p><strong>笛卡尔乘积构造符X</strong></p>
+<p>若T1 和T2是类型表达式，则笛卡尔乘积T1 X T2 是类型表达式</p>
+<p><strong>函数构造符→</strong></p>
+<p>若T1、T2、…、Tn 和R是类型表达式，则T1T2 …Tn→ R是类型表达式</p>
+<p><strong>记录构造符record</strong></p>
+<p>若有标识符N1 、N2 、…、Nn 与类型表达式T1 、T2 、…、Tn ， 则    record ( ( N1  X T1 ) X ( N2 X T2 )X …X ( Nn X Tn )) 是一个类型表达式</p>
+<p>eg：<img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514095400390.png" alt="image-20220514095400390" style="zoom: 25%;"></p>
+<h4 id="局部变量的存储分配"><a href="#局部变量的存储分配" class="headerlink" title="局部变量的存储分配"></a>局部变量的存储分配</h4><p>对于声明语句，语义分析的主要任务就是收集标识符的类型等属性信息，并为每一个名字分配一个相对地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">从类型表达式可以知道该类型在运行时刻所需的存储单元数量称为类型的宽度(width)</span><br><span class="line">在编译时刻，可以使用类型的宽度为每一个名字分配一个相对地址</span><br></pre></td></tr></table></figure>
+<p>名字的类型和相对地址信息保存在相应的符号表记录中</p>
+<h3 id="赋值语句的翻译"><a href="#赋值语句的翻译" class="headerlink" title="赋值语句的翻译"></a>赋值语句的翻译</h3><h4 id="简单赋值语句的翻译"><a href="#简单赋值语句的翻译" class="headerlink" title="简单赋值语句的翻译"></a>简单赋值语句的翻译</h4><p>newtemp( )：生成一个新的临时变量t，返回t的地址</p>
+<p>gen(code)：生成三地址指令code</p>
+<p>lookup(name)：查询符号表返回name 对应的记录</p>
+<p>增量翻译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在增量方法中，gen( )不仅要构造出一个新的三地址指令，还要将它添加到至今为止已生成的指令序列之后</span><br></pre></td></tr></table></figure>
+<p>ppt例子</p>
+<h4 id="数组引用的翻译"><a href="#数组引用的翻译" class="headerlink" title="数组引用的翻译"></a>数组引用的翻译</h4><p>将数组引用翻译成三地址码时要解决的主要问题是确定数组元素的存放地址，也就是数组元素的寻址</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514114112824.png" alt="image-20220514114112824" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514142140992.png" alt="image-20220514142140992" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514142202241.png" alt="image-20220514142202241" style="zoom:25%;"></p>
+<p>符号表的组织——数组</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514142237490.png" alt="image-20220514142237490" style="zoom:25%;"></p>
+<h3 id="控制语句的翻译"><a href="#控制语句的翻译" class="headerlink" title="控制语句的翻译"></a>控制语句的翻译</h3><h4 id="控制流语句"><a href="#控制流语句" class="headerlink" title="控制流语句"></a>控制流语句</h4><p>继承属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B.true：是一个地址，该地址用来存放当B为真时控制流转向的指令的标号</span><br><span class="line">B.false：是一个地址，该地址用来存放当B为假时控制流转向的指令的标号</span><br><span class="line">S.next：是一个地址，该地址用来存放紧跟在S代码之后执行的指令(S的后继指令)的标号</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514143929654.png" alt="image-20220514143929654" style="zoom:25%;"></p>
+<p>if-then-else</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144057301.png" alt="image-20220514144057301" style="zoom:25%;"></p>
+<p>if-then</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144152954.png" alt="image-20220514144152954" style="zoom:25%;"></p>
+<p>while-do</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144250284.png" alt="image-20220514144250284" style="zoom:25%;"></p>
+<p>控制流语句SDT编写要点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">分析每一个非终结符之前</span><br><span class="line">先计算继承属性</span><br><span class="line">再观察代码结构图中该非终结符对应的方框顶部是否有导入箭头。如果有，调用label( )函数</span><br><span class="line">上一个代码框执行完不顺序执行下一个代码框时，生成一条显式跳转指令</span><br><span class="line">有自下而上的箭头时，设置begin属性。且定义后直接调用label( )函数绑定地址</span><br></pre></td></tr></table></figure>
+<h4 id="布尔表达式的翻译"><a href="#布尔表达式的翻译" class="headerlink" title="布尔表达式的翻译"></a>布尔表达式的翻译</h4><p>在跳转代码中，逻辑运算符&amp;&amp;、|| 和 ! 被翻译成跳转指令。运算符本身不出现在代码中，布尔表达式的值是通过代码序列中的位置来表示的</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144701666.png" alt="image-20220514144701666" style="zoom:25%;"></p>
+<p>布尔表达式的SDT</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144801933.png" alt="image-20220514144801933" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514145311289.png" alt="image-20220514145311289" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514145338517.png" alt="image-20220514145338517" style="zoom:25%;"></p>
+<h4 id="SDT的通用实现方法"><a href="#SDT的通用实现方法" class="headerlink" title="SDT的通用实现方法"></a>SDT的通用实现方法</h4><p>任何SDT都可以通过下面的方法实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">首先建立一棵语法分析树</span><br><span class="line">然后按照从左到右的深度优先顺序来执行这些动作</span><br></pre></td></tr></table></figure>
+<p>例题</p>
+<p>存疑，修改</p>
+<h3 id="回填"><a href="#回填" class="headerlink" title="回填"></a>回填</h3><h4 id="布尔表达式回填"><a href="#布尔表达式回填" class="headerlink" title="布尔表达式回填"></a>布尔表达式回填</h4><p>基本思想</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">生成一个跳转指令时，暂时不指定该跳转指令的目标标号。这样的指令都被放入由跳转指令组成的列表中。同一个列表中的所有跳转指令具有相同的目标标号。等到 能够确定正确的目标标号时，才去填充这些指令的目标标号</span><br></pre></td></tr></table></figure>
+<p>非终结符B的综合属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B.truelist：指向一个包含跳转指令的列表，这些指令最终获得的目标标号就是当B为真时控制流应该转向的指令的标号</span><br><span class="line">B.falselist：指向一个包含跳转指令的列表，这些指令最终获得的目标标号就是当B为假时控制流应该转向的指令的标号</span><br></pre></td></tr></table></figure>
+<p>函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">makelist( i )</span><br><span class="line">创建一个只包含i的列表，i是跳转指令的标号，函数返回指向新创建的列表的指针</span><br><span class="line">merge( p1, p2 )</span><br><span class="line">将 p1 和 p2 指向的列表进行合并，返回指向合并后的列表的指针</span><br><span class="line">backpatch( p, i )</span><br><span class="line">将 i 作为目标标号插入到 p所指列表中的各指令中</span><br></pre></td></tr></table></figure>
+<p>例题</p>
+<h4 id="控制流语句回填"><a href="#控制流语句回填" class="headerlink" title="控制流语句回填"></a>控制流语句回填</h4><p>综合属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">S.next1ist：指向一个包含跳转指令的列表，这些指令最终获得的目标标号就是按照运行顺序紧跟在S代码之后的指令的标号</span><br></pre></td></tr></table></figure>
+<p>例题</p>
+<p>回填技术SDT编写要点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">文法改造</span><br><span class="line">在list箭头指向的位置设置标记非终结符M</span><br><span class="line">在产生式末尾的语义动作中</span><br><span class="line">计算综合属性</span><br><span class="line">调用backpatch ( )函数回填各个list</span><br></pre></td></tr></table></figure>
+<h3 id="switch语句的翻译"><a href="#switch语句的翻译" class="headerlink" title="switch语句的翻译"></a>switch语句的翻译</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514162527513.png" alt="image-20220514162527513" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514162534065.png" alt="image-20220514162534065" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514162733153.png" alt="image-20220514162733153" style="zoom:25%;"></p>
+<h3 id="过程调用语句的翻译"><a href="#过程调用语句的翻译" class="headerlink" title="过程调用语句的翻译"></a>过程调用语句的翻译</h3><p>需要一个队列q存放E1.addr 、E2.addr、…、 En.addr，以生成</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514163207424.png" alt="image-20220514163207424" style="zoom:25%;"></p>
+<p>例子</p>
+<h2 id="运行存储分配"><a href="#运行存储分配" class="headerlink" title="运行存储分配"></a>运行存储分配</h2><h3 id="存储组织"><a href="#存储组织" class="headerlink" title="存储组织"></a>存储组织</h3><p>一个目标程序运行所需的存储空间主要包括</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514163839643.png" alt="image-20220514163839643" style="zoom:25%;"></p>
+<p><strong>存储分配策略</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">对于那些在编译时刻就可以确定大小的数据对象，可以在编译时刻就为它们分配存储空间，这样的分配策略称为静态存储分配</span><br><span class="line">反之，如果不能在编译时完全确定数据对象的大小，就要采用动态存储分配的策略。即在编译时仅产生各种必要的信息，而在运行时刻，再动态地分配数据对象的存储空间</span><br><span class="line">栈式存储分配</span><br><span class="line">堆式存储分配</span><br><span class="line">静态和动态分别对应编译时刻和运行时刻</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514194257711.png" alt="image-20220514194257711" style="zoom:25%;"></p>
+<p><strong>活动记录</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">使用过程(或函数、方法)作为用户自定义动作的单元的语言，其编译器通常以过程为单位分配存储空间</span><br><span class="line">过程体的每次执行称为该过程的一个活动(activation)</span><br><span class="line">过程每执行一次，就为它分配一块连续存储区，用来管理过程一次执行所需的信息，这块连续存储区称为活动记录( activation record )</span><br></pre></td></tr></table></figure>
+<p><strong>活动记录的一般形式</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514194518053.png" alt="image-20220514194518053" style="zoom:25%;"></p>
+<h3 id="静态存储分配"><a href="#静态存储分配" class="headerlink" title="静态存储分配"></a>静态存储分配</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在静态存储分配中，编译器为每个过程确定其活动记录在目标程序中的位置</span><br><span class="line">这样，过程中每个名字的存储位置就确定了</span><br><span class="line">因此，这些名字的存储地址可以被编译到目标代码中</span><br><span class="line">过程每次执行时，它的名字都绑定到同样的存储单元</span><br></pre></td></tr></table></figure>
+<p>适合静态存储分配的语言必须满足以下条件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">数组上下界必须是常数</span><br><span class="line">不允许过程的递归调用</span><br><span class="line">不允许用户动态建立数据实体</span><br></pre></td></tr></table></figure>
+<p>满足这些条件的语言有BASIC和FORTRAN等</p>
+<p>常用的静态存储分配方法：顺序分配法、层次分配法</p>
+<p><strong>顺序分配法</strong></p>
+<p>按照过程出现的先后顺序逐段分配存储空间<br>各过程的活动记录占用互不相交的存储空间</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514195326335.png" alt="image-20220514195326335" style="zoom:25%;"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">优点：处理上简单</span><br><span class="line">缺点：对内存空间的使用不够经济合理</span><br></pre></td></tr></table></figure>
+<p><strong>层次分配法</strong></p>
+<p>通过对过程间的调用关系进行分析，凡属无相互调用关系的并列过程，尽量使其局部数据共享存储空间</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514195613542.png" alt="image-20220514195613542" style="zoom:25%;"></p>
+<p>层次分配算法</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514195658467.png" alt="image-20220514195658467" style="zoom:25%;"></p>
+<h3 id="栈式存储分配"><a href="#栈式存储分配" class="headerlink" title="栈式存储分配"></a>栈式存储分配</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">有些语言使用过程、函数或方法作为用户自定义动作的单元，几乎所有针对这些语言的编译器都把它们的(至少一部分的)运行时刻存储以栈的形式进行管理，称为栈式存储分配</span><br><span class="line">当一个过程被调用时，该过程的活动记录被压入栈；当过程结束时，该活动记录被弹出栈</span><br><span class="line">这种安排不仅允许活跃时段不交叠的多个过程调用之间共享空间，而且允许以如下方式为一个过程编译代码：它的非局部变量的相对地址总是固定的，和过程调用序列无关</span><br></pre></td></tr></table></figure>
+<p><strong>活动树</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用来描述程序运行期间控制进入和离开各个活动的情况的树称为活动树</span><br><span class="line">树中的每个结点对应于一个活动。根结点是启动程序执行的main过程的活动</span><br><span class="line">在表示过程p的某个活动的结点上，其子结点对应于被p的这次活动调用的各个过程的活动。按照这些活动被调用的顺序，自左向右地显示它们。一个子结点必须在其右兄弟结点的活动开始之前结束</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">每个活跃的活动都有一个位于控制栈中的活动记录</span><br><span class="line">活动树的根的活动记录位于栈底</span><br><span class="line">程序控制所在的活动的记录位于栈顶</span><br><span class="line">栈中全部活动记录的序列对应于在活动树中到达当前控制所在的活动结点的路径</span><br></pre></td></tr></table></figure>
+<p>设计活动记录的一些原则</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在调用者和被调用者之间传递的值一般被放在被调用者的活动记录的开始位置，这样它们可以尽可能地靠近调用者的活动记录</span><br><span class="line">固定长度的项被放置在中间位置:控制连、访问链、机器状态字</span><br><span class="line">在早期不知道大小的项被放置在活动记录的尾部</span><br><span class="line">栈顶指针寄存器top_sp指向活动记录中局部数据开始的位置，以该位置作为基地址</span><br></pre></td></tr></table></figure>
+<h4 id="调用序列和返回序列"><a href="#调用序列和返回序列" class="headerlink" title="调用序列和返回序列"></a>调用序列和返回序列</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">过程调用和过程返回都需要执行一些代码来管理活动记录栈，保存或恢复机器状态等</span><br><span class="line">调用序列</span><br><span class="line">实现过程调用的代码段。为一个活动记录在栈中分配空间，并在此记录的字段中填写信息</span><br><span class="line">返回序列</span><br><span class="line">恢复机器状态，使得调用过程能够在调用结束之后继续执行</span><br><span class="line">一个调用代码序列中的代码通常被分割到调用过程（调用者）和被调用过程（被调用者）中。返回序列也是如此</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514203627726.png" alt="image-20220514203627726" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514203641791.png" alt="image-20220514203641791" style="zoom:25%;"></p>
+<p><strong>调用者和被调用者之间的任务划分</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514203739336.png" alt="image-20220514203739336" style="zoom:25%;"></p>
+<p><strong>变长数据的存储分配</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在现代程序设计语言中，在编译时刻不能确定大小的对象将被分配在堆区。但是，如果它们是过程的局部对象，也可以将它们分配在运行时刻栈中。尽量将对象放置在栈区的原因：可以避免对它们的空间进行垃圾回收，也就减少了相应的开销</span><br><span class="line">只有一个数据对象局部于某个过程，且当此过程结束时它变得不可访问，才可以使用栈为这个对象分配空间</span><br></pre></td></tr></table></figure>
+<h3 id="非局部数据的访问"><a href="#非局部数据的访问" class="headerlink" title="非局部数据的访问"></a>非局部数据的访问</h3><p>一个过程除了可以使用过程自身声明的局部数据以外，还可以使用过程外声明的非局部数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">全局数据</span><br><span class="line">外围过程定义的数据</span><br></pre></td></tr></table></figure>
+<p>如何访问非局部数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">访问链（静态链）</span><br><span class="line">display表（嵌套层次显示表）</span><br></pre></td></tr></table></figure>
+<h4 id="访问链"><a href="#访问链" class="headerlink" title="访问链"></a>访问链</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">静态作用域规则：只要过程b的声明嵌套在过程a的声明中，过程b就可以访问过程a中声明的对象</span><br><span class="line">可以在相互嵌套的过程的活动记录之间建立一种称为访问链(Access link)的指针，使得内嵌的过程可以访问外层过程中声明的对象</span><br><span class="line">如果过程b在源代码中直接嵌套在过程a中(b的嵌套深度比a的嵌套深度多1)，那么b的任何活动中的访问链都指向最近的a的活动</span><br></pre></td></tr></table></figure>
+<p><strong>嵌套深度</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514205925465.png" alt="image-20220514205925465" style="zoom: 50%;"></p>
+<p>例子</p>
+<p><strong>访问链的建立</strong></p>
+<p>假设嵌套深度为nx的过程x调用嵌套深度为ny的过程y (x→y)</p>
+<p>nx &lt; ny的情况(外层调用内层)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y一定是直接在x中定义的 (例如：s→q,  q→p) ，因此，ny=nx +1</span><br><span class="line">在调用代码序列中增加一个步骤：在y的访问链中放置一个指向x的活动记录的指针</span><br></pre></td></tr></table></figure>
+<p>nx = ny的情况(本层调用本层 )</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">例如：递归调用 (q→q )</span><br><span class="line">被调用者的活动记录的访问链与调用者的活动记录的访问链是相同的，可以直接复制</span><br></pre></td></tr></table></figure>
+<p>nx &gt; ny的情况(内层调用外层，如： p→e )</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">调用者x必定嵌套在某个过程z中，而z中直接定义了被调用者y</span><br><span class="line">从x的活动记录开始，沿着访问链经过nx - ny + 1步就可以找到离栈顶最近的z的活动记录。 y的访问链必须指向z的这个活动记录</span><br></pre></td></tr></table></figure>
+<p>嵌套深度是在编译阶段通过静态分析就能确定的</p>
+<p><strong>display表</strong></p>
+<p>慕课没有</p>
+<p>看例题，注意嵌套深度与树无关，在编译阶段就决定。</p>
+<h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>形式参数（formal parameter）：在过程定义中使用的参数<br>实际参数（actual parameter）：在调用过程时使用的参数</p>
+<p>形参和实参相关联的几种方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">传值（Call- by-Value）</span><br><span class="line">传地址（Call- by-Reference）</span><br><span class="line">传值结果（Call- by-Value-Result）</span><br><span class="line">传名（Call- by-Name）</span><br></pre></td></tr></table></figure>
+<h4 id="传值"><a href="#传值" class="headerlink" title="传值"></a>传值</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">把实参的值传递给相应的形参</span><br><span class="line">实现方法</span><br><span class="line">调用过程把实参的值计算出来，并传递到被调用过程相应的形式单元中</span><br><span class="line">被调用过程中，像引用局部数据一样引用形式参数，直接访问对应的形式单元</span><br></pre></td></tr></table></figure>
+<h4 id="传地址"><a href="#传地址" class="headerlink" title="传地址"></a>传地址</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">把实参的地址传递给相应的形参</span><br><span class="line">实现方法</span><br><span class="line">调用过程把实参的地址传递到被调用过程相应的形式单元中</span><br><span class="line">被调用过程中，对形参的引用或赋值被处理成对形式单元的间接访问</span><br></pre></td></tr></table></figure>
+<h4 id="传值结果"><a href="#传值结果" class="headerlink" title="传值结果"></a>传值结果</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">传地址的一种变形</span><br><span class="line">实现方法</span><br><span class="line">每个形参对应两个形式单元。第一个形式单元存放实参的地址，第二个形式单元存放实参的值</span><br><span class="line">在过程体中，对形参的引用或赋值看作对它的第二个形式单元的直接访问</span><br><span class="line">过程完成返回前，把第二个单元的内容存放到第一个单元所指的实参单元中</span><br></pre></td></tr></table></figure>
+<h4 id="传名"><a href="#传名" class="headerlink" title="传名"></a>传名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">相当于把被调用过程的过程体抄到调用出现的地方，但把其中出现的形参都替换成相应的实参</span><br><span class="line">实现方法</span><br><span class="line">在进入被调用过程之前不对实参预先进行计值，而是让过程体中每当使用到相应的实参时才逐次对它实行计值（或计算地址）</span><br><span class="line">通常把实参处理成一个子程序（称为参数子程序），每当过程体中使用到相应的实参时就调用这个子程序</span><br></pre></td></tr></table></figure>
+<h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><p>符号表是用于存放标识符的属性信息的数据结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">种属 (Kind)</span><br><span class="line">类型 (Type)</span><br><span class="line">存储位置、长度</span><br><span class="line">作用域 </span><br><span class="line">参数和返回值信息</span><br></pre></td></tr></table></figure>
+<p>符号表的作用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">辅助代码生成</span><br><span class="line">一致性检查</span><br></pre></td></tr></table></figure>
+<p>例子</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514213155111.png" alt="image-20220514213155111"></p>
+<p>标识符的基本处理方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">当在某一层的声明语句中识别出一个标识符(id的定义性出现)时，以此标识符查相应于本层的符号表</span><br><span class="line">如果查到，则报错并发出诊断信息“id重复声明”</span><br><span class="line">否则，在符号表中加入新登记项，将标识符及有关信息填入</span><br><span class="line">当在可执行语句部分扫视到标识符时( id的应用性出现)</span><br><span class="line">首先在该层符号表中查找该id，如果找不到，则到直接外层符号表中去查，如此等等，一旦找到，则在表中取出有关信息并作相应处理</span><br><span class="line">如果查遍所有外层符号表均未找到该id，则报错并发出诊断信息“id未声明”</span><br></pre></td></tr></table></figure>
+<p>符号表的建立？</p>
+<h2 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h2><h4 id="流图"><a href="#流图" class="headerlink" title="流图"></a>流图</h4><p>基本块(Basic Block)是满足下列条件的最大的连续三地址指令序列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">控制流只能从基本块的第一条指令进入该块。也就是说，没有跳转到基本块中间或末尾指令的转移指令</span><br><span class="line">除了基本块的最后一条指令，控制流在离开基本块之前不会跳转或者停机</span><br></pre></td></tr></table></figure>
+<p>每个基本块由一组总是一起执行的指令组成</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515003940960.png" alt="image-20220515003940960" style="zoom:25%;"></p>
+<p>流图的每个结点是一个基本块<br>从基本块B到基本块C之间有一条边当且仅当基本块C的第一条指令可能紧跟在B的最后一条指令之后执行，此时称B是C的前驱(predecessor) ，   C是B的后继(successor)</p>
+<h3 id="优化的分类"><a href="#优化的分类" class="headerlink" title="优化的分类"></a>优化的分类</h3><p>机器无关优化：针对中间代码<br>机器相关优化：针对目标代码<br>局部代码优化：单个基本块范围内的优化<br>全局代码优化：面向多个基本块的优化</p>
+<p>常用的优化方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">删除公共子表达式</span><br><span class="line">删除无用代码</span><br><span class="line">代码移动</span><br><span class="line">强度削弱</span><br><span class="line">删除归纳变量</span><br></pre></td></tr></table></figure>
+<h4 id="删除公共子表达式"><a href="#删除公共子表达式" class="headerlink" title="删除公共子表达式"></a>删除公共子表达式</h4><p>如果表达式x op y先前已被计算过，并且从先前的计算到现在，x op y中变量的值没有改变，那么x op y的这次出现就称为公共子表达式</p>
+<p>局部公共子表达式；全局公共子表达式</p>
+<p>例子</p>
+<h4 id="删除无用代码"><a href="#删除无用代码" class="headerlink" title="删除无用代码"></a>删除无用代码</h4><p>复制传播</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">常用的公共子表达式消除算法和其它一些优化算法会引入一些复制语句(形如x = y的赋值语句)</span><br><span class="line"> 复制传播：在复制语句x = y之后尽可能地用y代替x</span><br></pre></td></tr></table></figure>
+<p>复制传播给删除无用代码带来机会</p>
+<p>无用代码(死代码Dead-Code ) ：其计算结果永远不会被使用的语句</p>
+<p>例子</p>
+<p><strong>常量合并</strong></p>
+<p>如果在编译时刻推导出一个表达式的值是常量，就可以使用该常量来替代这个表达式。该技术被称为常量合并</p>
+<h4 id="代码移动"><a href="#代码移动" class="headerlink" title="代码移动"></a>代码移动</h4><p>这个转换处理的是那些不管循环执行多少次都得到相同结果的表达式(即循环不变计算，loop-invariant computation) ，在进入循环之前就对它们求值</p>
+<p>对于多重嵌套的循环，循环不变计算是相对于某个循环而言的。可能对于更加外层的循环，它就不是循环不变计算</p>
+<h4 id="强度削弱"><a href="#强度削弱" class="headerlink" title="强度削弱"></a>强度削弱</h4><p>用较快的操作代替较慢的操作，如用加代替乘</p>
+<p>归纳变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于一个变量x ，如果存在一个正的或负的常数c使得每次x被赋值时它的值总增加c ，那么x就称为归纳变量(Induction Variable)</span><br></pre></td></tr></table></figure>
+<h4 id="删除归纳变量"><a href="#删除归纳变量" class="headerlink" title="删除归纳变量"></a>删除归纳变量</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在沿着循环运行时，如果有一组归纳变量的值的变化保持步调一致，常常可以将这组变量删除为只剩一个</span><br></pre></td></tr></table></figure>
+<h3 id="基本块的优化"><a href="#基本块的优化" class="headerlink" title="基本块的优化"></a>基本块的优化</h3><p>很多重要的局部优化技术首先把一个基本块转换成为一个无环有向图</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144138737.png" alt="image-20220515144138737" style="zoom:25%;"></p>
+<p>基于基本块的 DAG 删除无用代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">从一个DAG上删除所有没有附加活跃变量（活跃变量是指其值可能会在以后被使用的变量）的根结点(即没有父结点的结点) 。重复应用这样的处理过程就可以从DAG中消除所有对应于无用代码的结点</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144511396.png" alt="image-20220515144511396" style="zoom:25%;"></p>
+<p>数组元素赋值指令的表示</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144602509.png" alt="image-20220515144602509" style="zoom:25%;"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在a[j]=y时，有可能改变a[i]的值</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144738742.png" alt="image-20220515144738742" style="zoom:25%;"></p>
+<p>根据基本块的DAG可以获得一些非常有用的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">确定哪些变量的值在该基本块中赋值前被引用过</span><br><span class="line">在DAG中创建了叶结点的那些变量</span><br><span class="line">确定哪些语句计算的值可以在基本块外被引用</span><br><span class="line">在DAG构造过程中为语句s（该语句为变量x定值）创建的节点N，在DAG构造结束时x仍然是N的定值变量</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144412561.png" alt="image-20220515144412561" style="zoom:25%;"></p>
+<p>例子</p>
+<h3 id="数据流分析"><a href="#数据流分析" class="headerlink" title="数据流分析"></a>数据流分析</h3><p>一组用来获取有关数据如何沿着程序执行路径流动的相关信息的技术</p>
+<p>在每一种数据流分析应用中，都会把每个程序点和一个数据流值关联起来</p>
+<p>数据流分析的主要应用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">到达-定值分析 (Reaching-Definition Analysis)</span><br><span class="line">活跃变量分析 (Live-Variable Analysis)</span><br><span class="line">可用表达式分析 (Available-Expression Analysis)</span><br></pre></td></tr></table></figure>
+<p>数据流分析模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">语句的数据流模式</span><br><span class="line"> IN[s]:	语句s之前的数据流值</span><br><span class="line">	 OUT[s]:	语句s之后的数据流值</span><br><span class="line"> fs：语句s的传递函数(transfer function)</span><br><span class="line">     一个赋值语句s之前和之后的数据流值的关系</span><br><span class="line">     传递函数的两种风格</span><br><span class="line">        信息沿执行路径前向传播 (前向数据流问题)：OUT[s] = fs (IN[s])</span><br><span class="line">        信息沿执行路径逆向传播 (逆向数据流问题)：IN[s] = fs (OUT[s])</span><br></pre></td></tr></table></figure>
+<h4 id="到达定值分析"><a href="#到达定值分析" class="headerlink" title="到达定值分析"></a>到达定值分析</h4><p>定值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">变量x的定值是(可能)将一个值赋给x的语句</span><br></pre></td></tr></table></figure>
+<p>到达定值(Reaching Definition)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果存在一条从紧跟在x的定值d后面的点到达某一程序点p的路径，而且在此路径上d没有被“杀死” (如果在此路径上有对变量x的其它定值d′，则称定值d被定值d′“杀死”了) ，则称定值d到达程序点p</span><br><span class="line">直观地讲，如果某个变量x的一个定值d到达点p，在点p处使用的x的值可能就是由d最后赋予的</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155110137.png" alt="image-20220515155110137" style="zoom:25%;"></p>
+<p><strong>到达定值分析的主要用途</strong></p>
+<p>循环不变计算的检测</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果循环中含有赋值x=y+z ，而y和z所有可能的定值都在循环外面(包括y或z是常数的特殊情况) ，那么y+z就是循环不变计算</span><br></pre></td></tr></table></figure>
+<p>常量合并</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果对变量x的某次使用只有一个定值可以到达，并且该定值把一个常量赋给x ，那么可以简单地把x替换为该常量</span><br></pre></td></tr></table></figure>
+<p>判定变量x在p点上是否未经定值就被引用</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155325874.png" alt="image-20220515155325874" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155539821.png" alt="image-20220515155539821" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155645902.png" alt="image-20220515155645902" style="zoom:25%;"></p>
+<p>例子</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155911362.png" alt="image-20220515155911362" style="zoom:25%;"></p>
+<p><strong>到达定值的计算</strong></p>
+<p>例题</p>
+<p>引用-定值链</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515160301603.png" alt="image-20220515160301603" style="zoom:25%;"></p>
+<h4 id="活跃变量分析"><a href="#活跃变量分析" class="headerlink" title="活跃变量分析"></a>活跃变量分析</h4><p>活跃变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于变量x和程序点p，如果在流图中沿着从p开始的某条路径会引用变量x在p点的值，则称变量x在点p是活跃(live)的，否则称变量x在点p不活跃(dead)</span><br></pre></td></tr></table></figure>
+<p>例子</p>
+<p><strong>活跃变量信息的主要用途</strong></p>
+<p>删除无用赋值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无用赋值：如果x在点p的定值在基本块内所有后继点都不被引用，且x在基本块出口之后又是不活跃的，那么x在点p的定值就是无用的</span><br></pre></td></tr></table></figure>
+<p>为基本块分配寄存器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果所有寄存器都被占用，并且还需要申请一个寄存器，则应该考虑使用已经存放了死亡值的寄存器，因为这个值不需要保存到内存</span><br><span class="line"> 如果一个值在基本块结尾处是死的就不必在结尾处保存这个值</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515165840678.png" alt="image-20220515165840678" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515170431350.png" alt="image-20220515170431350" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515170613886.png" alt="image-20220515170613886" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515172411560.png" alt="image-20220515172411560" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515173505087.png" alt="image-20220515173505087" style="zoom:25%;"></p>
+<h4 id="可用表达式分析"><a href="#可用表达式分析" class="headerlink" title="可用表达式分析"></a>可用表达式分析</h4><p>可用表达式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果从流图的首节点到达程序点 p的每条路径都对表达式x op y进行计算，并且从最后一个这样的计算到点p之间没有再次对x或y定值，那么表达式x op y在点 p是可用的(available)</span><br></pre></td></tr></table></figure>
+<p>表达式可用的直观意义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在点 p上，x op y已经在之前被计算过，不需要重新计算</span><br></pre></td></tr></table></figure>
+<p><strong>主要通途</strong></p>
+<p>消除全局公共子表达式</p>
+<p>进行复制传播</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515193957942.png" alt="image-20220515193957942" style="zoom:25%;"></p>
+<p><strong>可用表达式传递函数</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515194252677.png" alt="image-20220515194252677" style="zoom:25%;"></p>
+<p><strong>可用表达式的数据流方程</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515194545925.png" alt="image-20220515194545925" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515194801190.png" alt="image-20220515194801190" style="zoom:25%;"></p>
+<p>注意此处初始化</p>
+<h3 id="流图中的循环"><a href="#流图中的循环" class="headerlink" title="流图中的循环"></a>流图中的循环</h3><p>支配结点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果从流图的入口结点到结点n的每条路径都经过结点d，则称结点d支配(dominate)结点n，记为d dom n</span><br></pre></td></tr></table></figure>
+<p>寻找支配节点</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515195118328.png" alt="image-20220515195118328" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515195158344.png" alt="image-20220515195158344" style="zoom:25%;"></p>
+<p><strong>回边</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果存在从结点n到d的有向边n→d，且d dom n，那么这条边称为回边</span><br></pre></td></tr></table></figure>
+<p><strong>自然循环</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515195547361.png" alt="image-20220515195547361" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515195949826.png" alt="image-20220515195949826" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200001241.png" alt="image-20220515200001241" style="zoom:25%;"></p>
+<p>自然循环的一个重要性质</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果两个自然循环的首结点不相同，则这两个循环要么互不相交，要么一个完全包含(嵌入)在另外一个里面</span><br></pre></td></tr></table></figure>
+<p>最内循环 (Innermost Loops): 不包含其它循环的循环</p>
+<p>如果两个循环具有相同的首结点，那么很难说哪个是最内循环。此时把两个循环合并</p>
+<h3 id="全局优化"><a href="#全局优化" class="headerlink" title="全局优化"></a>全局优化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">删除全局公共子表达式</span><br><span class="line">删除复制语句</span><br><span class="line">代码移动</span><br><span class="line">作用于递归变量的强度削弱</span><br><span class="line">删除递归变量</span><br></pre></td></tr></table></figure>
+<h4 id="删除全局公共子表达式"><a href="#删除全局公共子表达式" class="headerlink" title="删除全局公共子表达式"></a>删除全局公共子表达式</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200350777.png" alt="image-20220515200350777" style="zoom:25%;"></p>
+<h4 id="删除复制语句"><a href="#删除复制语句" class="headerlink" title="删除复制语句"></a><strong>删除复制语句</strong></h4><p>对于复制语句s: x=y，如果在x的所有引用点都可以用对y的引用代替对x的引用(复制传播)，那么可以删除复制语句 x=y</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200456345.png" alt="image-20220515200456345" style="zoom:25%;"></p>
+<h4 id="代码移动-1"><a href="#代码移动-1" class="headerlink" title="代码移动"></a>代码移动</h4><p><strong>循环不变计算检测算法</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200548207.png" alt="image-20220515200548207" style="zoom:25%;"></p>
+<p><strong>代码外提</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200759125.png" alt="image-20220515200759125" style="zoom:25%;"></p>
+<p><strong>循环不变计算语句 s : x = y + z 移动的条件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(1) s所在的基本块是循环所有出口结点(有后继结点在循环外的结点)的支配结点</span><br><span class="line">(2) 循环中没有其它语句对x赋值</span><br><span class="line">(3) 循环中对x的引用仅由s到达</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515201036529.png" alt="image-20220515201036529" style="zoom:25%;"></p>
+<p>例子</p>
+<h4 id="作用于归纳变量的强度削弱"><a href="#作用于归纳变量的强度削弱" class="headerlink" title="作用于归纳变量的强度削弱"></a>作用于归纳变量的强度削弱</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">对于一个变量x ，如果存在一个正的或负的常量c ，使得每次x被赋值时，它的值总是增加c ，则称x为归纳变量</span><br><span class="line">如果循环L中的变量i 只有形如i =i+c的定值(c是常量)，则称i为循环L的基本归纳变量</span><br><span class="line">如果j = c×i+d，其中i是基本归纳变量，c和d是常量，则j也是一个归纳变量，称j属于i族</span><br><span class="line">每个归纳变量都关联一个三元组。如果j = c×i+d，其中i是基本归纳变量，c和d是常量，则与j相关联的三元组是( i, c, d )</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515201237286.png" alt="image-20220515201237286" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515201248830.png" alt="image-20220515201248830" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515201356302.png" alt="image-20220515201356302" style="zoom:25%;"></p>
+<h4 id="归纳变量的删除"><a href="#归纳变量的删除" class="headerlink" title="归纳变量的删除"></a>归纳变量的删除</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对于在强度削弱算法中引入的复制语句j=t，如果在归纳变量j的所有引用点都可以用对t的引用代替对j的引用，并且j在循环的出口处不活跃，则可以删除复制语句j=t</span><br><span class="line"></span><br><span class="line">强度削弱后，有些归纳变量的作用只是用于测试。如果可以用对其它归纳变量的测试代替对这种归纳变量的测试，那么可以删除这种归纳变量</span><br></pre></td></tr></table></figure>
+<p>删除仅用于测试的归纳变量</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515211020194.png" alt="image-20220515211020194" style="zoom:25%;"></p>
+<h2 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h2><h3 id="代码生成器的主要任务"><a href="#代码生成器的主要任务" class="headerlink" title="代码生成器的主要任务"></a>代码生成器的主要任务</h3><p>指令选择</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">选择适当的目标机指令来实现中间表示(IR)语句</span><br></pre></td></tr></table></figure>
+<p>寄存器分配（allocation）和指派（assignment）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把哪个值放在哪个寄存器中</span><br></pre></td></tr></table></figure>
+<p>指令排序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">按照什么顺序来安排指令的执行</span><br></pre></td></tr></table></figure>
+<h3 id="一个简单的目标机模型"><a href="#一个简单的目标机模型" class="headerlink" title="一个简单的目标机模型"></a>一个简单的目标机模型</h3><p>三地址机器模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">加载、保存、运算、跳转等操作</span><br><span class="line">内存按字节寻址</span><br><span class="line">n个通用寄存器R0, R1, …, Rn-1</span><br><span class="line">假设所有的运算分量都是整数</span><br><span class="line">指令之间可能有一个标号</span><br></pre></td></tr></table></figure>
+<h3 id="指令选择"><a href="#指令选择" class="headerlink" title="指令选择"></a>指令选择</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515215146285.png" alt="image-20220515215146285" style="zoom:25%;"></p>
+<p><strong>过程调用和返回的目标代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用静态内存分配的方式</span><br><span class="line">使用栈式内存分配的方式</span><br></pre></td></tr></table></figure>
+<p>callee的活动记录在静态区中的起始位置</p>
+<p>callee的目标代码在代码区中的起始位置</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515215844342.png" alt="image-20220515215844342" style="zoom:25%;"></p>
+<h3 id="寄存器的选择"><a href="#寄存器的选择" class="headerlink" title="寄存器的选择"></a>寄存器的选择</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220019625.png" alt="image-20220515220019625" style="zoom:25%;"></p>
+<p><strong>寄存器描述符和地址描述符</strong></p>
+<p>寄存器描述符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">记录每个寄存器当前存放的是哪些变量的值</span><br></pre></td></tr></table></figure>
+<p>地址描述符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">记录运行时每个名字的当前值存放在哪个或哪些位置</span><br><span class="line">该位置可能是寄存器、栈单元、内存地址或者是它们的某个集合</span><br><span class="line">这些信息可以存放在该变量名对应的符号表条目中</span><br></pre></td></tr></table></figure>
+<p><strong>基本块的收尾处理</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在基本块结束之前，基本块中使用的变量可能仅存放在某个寄存器中</span><br><span class="line">如果这个变量是一个只在基本块内部使用的临时变量，当基本块结束时，可以忘记这些临时变量的值并假设这些寄存器是空的</span><br><span class="line">对于一个在基本块的出口处可能活跃的变量x ,  如果它的地址描述符表明它的值没有存放在x的内存位置上,  则生成指令“ST x, R” ( R是在基本块结尾处存放 x值的寄存器 )</span><br></pre></td></tr></table></figure>
+<p><strong>管理寄存器和地址描述符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当代码生成算法生成加载、保存和其他指令时，它必须同时更新寄存器和地址描述符</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220152288.png" alt="image-20220515220152288" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220242413.png" alt="image-20220515220242413" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220310043.png" alt="image-20220515220310043" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220624081.png" alt="image-20220515220624081" style="zoom:25%;"></p>
+<h4 id="寄存器选择函getReg"><a href="#寄存器选择函getReg" class="headerlink" title="寄存器选择函getReg"></a>寄存器选择函getReg</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515221133482.png" alt="image-20220515221133482" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515221317333.png" alt="image-20220515221317333" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515221332913.png" alt="image-20220515221332913" style="zoom:25%;"></p>
+<h3 id="窥孔优化"><a href="#窥孔优化" class="headerlink" title="窥孔优化"></a>窥孔优化</h3><p><strong>窥孔</strong>(peephole)是程序上的一个小的滑动窗口</p>
+<p><strong>窥孔优化</strong>是指在优化的时候，检查目标指令的一个滑动窗口(即窥孔) ，并且只要有可能就在窥孔内用更快或更短的指令来替换窗口中的指令序列</p>
+<p>也可以在中间代码生成之后直接应用窥孔优化来提高中间表示形式的质量</p>
+<p><strong>具有窥孔优化特点的程序变换的例子</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">冗余指令删除</span><br><span class="line">控制流优化</span><br><span class="line">代数优化</span><br><span class="line">机器特有指令的使用</span><br></pre></td></tr></table></figure>
+<h2 id="习题总结"><a href="#习题总结" class="headerlink" title="习题总结"></a>习题总结</h2><h3 id="重点-1"><a href="#重点-1" class="headerlink" title="重点"></a>重点</h3><p>已掌握</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3.1 4.1 4.2  5.1(5.1.2重点) 6.1 6.2 7.1 7.2 7.3 7.4 7.5 (规范LR项集族) 7.6 7.7 7.8  7.9</span><br><span class="line">8.1 8.3 9.2(设计SDD) 9.3(设计SDD) 9.4(改写SDT) 12.2(四元式) 12.3(翻译赋值语句) 13.1(控制流处理方案) 13.2 13.3(控制流四元式) 14.1(求truelist) 14.2 14.3 14.4(构造SDT) 14.6(设计sdt) 15.1 15.2(快排) 15.3(Fibonacci) 15.4(栈问题，考前再看一下) 15.5 15.6(符号表) 16.3 16.4(DAG) 16.5 16.6(带跳转和[]=的DAG) 16.7 16.8(基本块) </span><br><span class="line">17.1(到达定值分析) 18.1(可用表达式分析) 18.2(活跃变量分析,逆分析) 18.3(到达定值分析应用) 19.1(重点，各种值的找取)</span><br><span class="line">19.2(重点，代码优化) 19.6</span><br></pre></td></tr></table></figure>
+<p>未掌握</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">4.1.3的消除左递归方法 </span><br><span class="line">9.1 扩展SDD</span><br><span class="line">10.1(构造递归下降SDD)</span><br><span class="line">13.4 13.5 *13.6(翻译方案) </span><br><span class="line">14.5(超级复杂的SDT构造)</span><br><span class="line">19.5</span><br></pre></td></tr></table></figure>
+<h3 id="非重点"><a href="#非重点" class="headerlink" title="非重点"></a>非重点</h3><p>已掌握</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.2 2.1 8.2 8.4(是否存在一致的求值过程)</span><br></pre></td></tr></table></figure>
+<p>未掌握</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.1 6.3 18.4 18.5</span><br></pre></td></tr></table></figure>
+<p>各种链</p>
 
     </div>
 
@@ -423,7 +1075,7 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%AA%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%96%E8%AF%91"><span class="nav-number">1.1.</span> <span class="nav-text">什么是编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">编译系统的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.</span> <span class="nav-text">词法分析概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0"><span class="nav-number">1.4.</span> <span class="nav-text">语法分析概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0"><span class="nav-number">1.5.</span> <span class="nav-text">语义分析概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%8F%8A%E7%BC%96%E8%AF%91%E5%99%A8%E5%90%8E%E7%AB%AF"><span class="nav-number">1.6.</span> <span class="nav-text">中间代码生成及编译器后端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E5%9C%B0%E5%9D%80%E7%A0%81"><span class="nav-number">1.6.1.</span> <span class="nav-text">三地址码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E5%8F%8A%E5%85%B6%E6%96%87%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">语言及其文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.2.</span> <span class="nav-text">文法的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.3.</span> <span class="nav-text">语言的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%B3%95%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">2.4.</span> <span class="nav-text">文法的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0%E5%9E%8B%E6%96%87%E6%B3%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">0型文法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E5%9E%8B%E6%96%87%E6%B3%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">1型文法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E5%9E%8B%E6%96%87%E6%B3%95"><span class="nav-number">2.4.3.</span> <span class="nav-text">2型文法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E5%9E%8B%E6%96%87%E6%B3%95"><span class="nav-number">2.4.4.</span> <span class="nav-text">3型文法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CFG%E7%9A%84%E5%88%86%E6%9E%90%E6%A0%91"><span class="nav-number">2.5.</span> <span class="nav-text">CFG的分析树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">词法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E5%AE%9A%E4%B9%89"><span class="nav-number">3.2.</span> <span class="nav-text">正则定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">3.3.</span> <span class="nav-text">有穷自动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">3.4.</span> <span class="nav-text">有穷自动机的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%88%B0%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">3.5.</span> <span class="nav-text">从正则表达式到有穷自动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8ENFA%E5%88%B0DFA%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.6.</span> <span class="nav-text">从NFA到DFA的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%86%E5%88%AB%E5%8D%95%E8%AF%8D%E7%9A%84DFA"><span class="nav-number">3.7.</span> <span class="nav-text">识别单词的DFA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">语法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.</span> <span class="nav-text">自顶向下分析概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%B3%95%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.2.</span> <span class="nav-text">文法转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LL-1-%E6%96%87%E6%B3%95"><span class="nav-number">4.3.</span> <span class="nav-text">LL(1)文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FIRST%E9%9B%86%E5%92%8CFOLLOW%E9%9B%86"><span class="nav-number">4.4.</span> <span class="nav-text">FIRST集和FOLLOW集</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E7%96%91"><span class="nav-number">1.</span> <span class="nav-text">存疑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">重点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%96%E8%AF%91"><span class="nav-number">3.</span> <span class="nav-text">什么是编译</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.</span> <span class="nav-text">编译系统的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0"><span class="nav-number">3.2.</span> <span class="nav-text">词法分析概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0"><span class="nav-number">3.3.</span> <span class="nav-text">语法分析概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0"><span class="nav-number">3.4.</span> <span class="nav-text">语义分析概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%8F%8A%E7%BC%96%E8%AF%91%E5%99%A8%E5%90%8E%E7%AB%AF"><span class="nav-number">3.5.</span> <span class="nav-text">中间代码生成及编译器后端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E5%9C%B0%E5%9D%80%E7%A0%81"><span class="nav-number">3.5.1.</span> <span class="nav-text">三地址码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%94%9F%E6%88%90"><span class="nav-number">3.6.</span> <span class="nav-text">编译程序的生成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84T%E5%BD%A2%E5%9B%BE"><span class="nav-number">3.6.1.</span> <span class="nav-text">编译器的T形图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%B1%95"><span class="nav-number">3.6.2.</span> <span class="nav-text">自展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E6%A4%8D"><span class="nav-number">3.6.3.</span> <span class="nav-text">移植</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E5%8F%8A%E5%85%B6%E6%96%87%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">语言及其文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">4.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">4.2.</span> <span class="nav-text">文法的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">4.3.</span> <span class="nav-text">语言的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%B3%95%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">4.4.</span> <span class="nav-text">文法的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0%E5%9E%8B%E6%96%87%E6%B3%95"><span class="nav-number">4.4.1.</span> <span class="nav-text">0型文法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E5%9E%8B%E6%96%87%E6%B3%95"><span class="nav-number">4.4.2.</span> <span class="nav-text">1型文法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E5%9E%8B%E6%96%87%E6%B3%95"><span class="nav-number">4.4.3.</span> <span class="nav-text">2型文法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E5%9E%8B%E6%96%87%E6%B3%95"><span class="nav-number">4.4.4.</span> <span class="nav-text">3型文法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CFG%E7%9A%84%E5%88%86%E6%9E%90%E6%A0%91"><span class="nav-number">4.5.</span> <span class="nav-text">CFG的分析树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">词法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.1.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E5%AE%9A%E4%B9%89"><span class="nav-number">5.2.</span> <span class="nav-text">正则定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">5.3.</span> <span class="nav-text">有穷自动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">5.4.</span> <span class="nav-text">有穷自动机的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%88%B0%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">5.5.</span> <span class="nav-text">从正则表达式到有穷自动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8ENFA%E5%88%B0DFA%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">5.6.</span> <span class="nav-text">从NFA到DFA的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%86%E5%88%AB%E5%8D%95%E8%AF%8D%E7%9A%84DFA"><span class="nav-number">5.7.</span> <span class="nav-text">识别单词的DFA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">6.</span> <span class="nav-text">语法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0"><span class="nav-number">6.1.</span> <span class="nav-text">自顶向下分析概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E5%88%86%E6%9E%90%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">6.1.1.</span> <span class="nav-text">自顶向下分析存在的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B6%88%E9%99%A4%E7%9B%B4%E6%8E%A5%E5%B7%A6%E9%80%92%E5%BD%92"><span class="nav-number">6.1.2.</span> <span class="nav-text">消除直接左递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B6%88%E9%99%A4%E9%97%B4%E6%8E%A5%E5%B7%A6%E9%80%92%E5%BD%92"><span class="nav-number">6.1.3.</span> <span class="nav-text">消除间接左递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E5%B7%A6%E5%85%AC%E5%9B%A0%E5%AD%90"><span class="nav-number">6.1.4.</span> <span class="nav-text">提取左公因子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%84%E6%B5%8B%E5%88%86%E6%9E%90"><span class="nav-number">6.1.5.</span> <span class="nav-text">预测分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E6%B5%8B%E5%88%86%E6%9E%90%E6%B3%95"><span class="nav-number">6.2.</span> <span class="nav-text">预测分析法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LL-1-%E6%96%87%E6%B3%95"><span class="nav-number">6.2.1.</span> <span class="nav-text">LL(1)文法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E7%9A%84%E9%A2%84%E6%B5%8B%E5%88%86%E6%9E%90%E6%B3%95"><span class="nav-number">6.2.2.</span> <span class="nav-text">递归的预测分析法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E9%80%92%E5%BD%92%E7%9A%84%E9%A2%84%E6%B5%8B%E5%88%86%E6%9E%90%E6%B3%95"><span class="nav-number">6.2.3.</span> <span class="nav-text">非递归的预测分析法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%84%E6%B5%8B%E5%88%86%E6%9E%90%E4%B8%AD%E7%9A%84%E9%94%99%E8%AF%AF%E6%A3%80%E6%B5%8B"><span class="nav-number">6.2.4.</span> <span class="nav-text">预测分析中的错误检测</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E7%9A%84%E5%88%86%E6%9E%90"><span class="nav-number">6.3.</span> <span class="nav-text">自底向上的分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E5%85%A5-%E5%BD%92%E7%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">6.3.1.</span> <span class="nav-text">移入-归约分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LR%E5%88%86%E6%9E%90%E6%B3%95"><span class="nav-number">6.4.</span> <span class="nav-text">LR分析法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LR-0-%E5%88%86%E6%9E%90"><span class="nav-number">6.4.1.</span> <span class="nav-text">LR(0) 分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SLR-%E5%88%86%E6%9E%90"><span class="nav-number">6.4.2.</span> <span class="nav-text">SLR 分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LR-1-%E5%88%86%E6%9E%90"><span class="nav-number">6.4.3.</span> <span class="nav-text">LR(1)分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LALR%E5%88%86%E6%9E%90"><span class="nav-number">6.4.4.</span> <span class="nav-text">LALR分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E4%B9%89%E6%80%A7%E6%96%87%E6%B3%95%E7%9A%84LR%E5%88%86%E6%9E%90"><span class="nav-number">6.4.5.</span> <span class="nav-text">二义性文法的LR分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LR%E5%88%86%E6%9E%90%E4%B8%AD%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">6.4.6.</span> <span class="nav-text">LR分析中的错误处理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91"><span class="nav-number">7.</span> <span class="nav-text">语法制导翻译</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E5%AE%9A%E4%B9%89SDD"><span class="nav-number">7.1.</span> <span class="nav-text">语法制导定义SDD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">7.1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SDD%E7%9A%84%E6%B1%82%E5%80%BC%E9%A1%BA%E5%BA%8F"><span class="nav-number">7.1.2.</span> <span class="nav-text">SDD的求值顺序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S-%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E4%B8%8EL-%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89"><span class="nav-number">7.2.</span> <span class="nav-text">S-属性定义与L-属性定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%96%B9%E6%A1%88SDT"><span class="nav-number">7.3.</span> <span class="nav-text">语法制导翻译方案SDT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S-SDD%E8%BD%AC%E6%8D%A2%E4%B8%BASDT"><span class="nav-number">7.3.1.</span> <span class="nav-text">S-SDD转换为SDT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86L-SDD%E8%BD%AC%E6%8D%A2%E4%B8%BASDT"><span class="nav-number">7.3.2.</span> <span class="nav-text">将L-SDD转换为SDT</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L-%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E7%9A%84%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E7%BF%BB%E8%AF%91"><span class="nav-number">7.4.</span> <span class="nav-text">L-属性定义的自顶向下翻译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E9%9D%9E%E9%80%92%E5%BD%92%E7%9A%84%E9%A2%84%E6%B5%8B%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B%E4%B8%AD%E8%BF%9B%E8%A1%8C%E7%BF%BB%E8%AF%91"><span class="nav-number">7.4.1.</span> <span class="nav-text">在非递归的预测分析过程中进行翻译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E9%80%92%E5%BD%92%E7%9A%84%E9%A2%84%E6%B5%8B%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B%E4%B8%AD%E8%BF%9B%E8%A1%8C%E7%BF%BB%E8%AF%91"><span class="nav-number">7.4.2.</span> <span class="nav-text">在递归的预测分析过程中进行翻译</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L-%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E7%9A%84%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E7%BF%BB%E8%AF%91"><span class="nav-number">7.5.</span> <span class="nav-text">L-属性定义的自底向上翻译</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90"><span class="nav-number">8.</span> <span class="nav-text">中间代码生成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E8%AF%AD%E5%8F%A5%E7%9A%84%E7%BF%BB%E8%AF%91"><span class="nav-number">8.1.</span> <span class="nav-text">声明语句的翻译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">8.1.1.</span> <span class="nav-text">类型表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D"><span class="nav-number">8.1.2.</span> <span class="nav-text">局部变量的存储分配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%AF%AD%E5%8F%A5%E7%9A%84%E7%BF%BB%E8%AF%91"><span class="nav-number">8.2.</span> <span class="nav-text">赋值语句的翻译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%B5%8B%E5%80%BC%E8%AF%AD%E5%8F%A5%E7%9A%84%E7%BF%BB%E8%AF%91"><span class="nav-number">8.2.1.</span> <span class="nav-text">简单赋值语句的翻译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%BC%95%E7%94%A8%E7%9A%84%E7%BF%BB%E8%AF%91"><span class="nav-number">8.2.2.</span> <span class="nav-text">数组引用的翻译</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5%E7%9A%84%E7%BF%BB%E8%AF%91"><span class="nav-number">8.3.</span> <span class="nav-text">控制语句的翻译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%B5%81%E8%AF%AD%E5%8F%A5"><span class="nav-number">8.3.1.</span> <span class="nav-text">控制流语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E7%BF%BB%E8%AF%91"><span class="nav-number">8.3.2.</span> <span class="nav-text">布尔表达式的翻译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SDT%E7%9A%84%E9%80%9A%E7%94%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="nav-number">8.3.3.</span> <span class="nav-text">SDT的通用实现方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E5%A1%AB"><span class="nav-number">8.4.</span> <span class="nav-text">回填</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%9B%9E%E5%A1%AB"><span class="nav-number">8.4.1.</span> <span class="nav-text">布尔表达式回填</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%B5%81%E8%AF%AD%E5%8F%A5%E5%9B%9E%E5%A1%AB"><span class="nav-number">8.4.2.</span> <span class="nav-text">控制流语句回填</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch%E8%AF%AD%E5%8F%A5%E7%9A%84%E7%BF%BB%E8%AF%91"><span class="nav-number">8.5.</span> <span class="nav-text">switch语句的翻译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E8%AF%AD%E5%8F%A5%E7%9A%84%E7%BF%BB%E8%AF%91"><span class="nav-number">8.6.</span> <span class="nav-text">过程调用语句的翻译</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D"><span class="nav-number">9.</span> <span class="nav-text">运行存储分配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E7%BB%84%E7%BB%87"><span class="nav-number">9.1.</span> <span class="nav-text">存储组织</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D"><span class="nav-number">9.2.</span> <span class="nav-text">静态存储分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88%E5%BC%8F%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D"><span class="nav-number">9.3.</span> <span class="nav-text">栈式存储分配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%BA%8F%E5%88%97%E5%92%8C%E8%BF%94%E5%9B%9E%E5%BA%8F%E5%88%97"><span class="nav-number">9.3.1.</span> <span class="nav-text">调用序列和返回序列</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%B1%80%E9%83%A8%E6%95%B0%E6%8D%AE%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="nav-number">9.4.</span> <span class="nav-text">非局部数据的访问</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E9%93%BE"><span class="nav-number">9.4.1.</span> <span class="nav-text">访问链</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="nav-number">9.5.</span> <span class="nav-text">参数传递</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E5%80%BC"><span class="nav-number">9.5.1.</span> <span class="nav-text">传值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E5%9C%B0%E5%9D%80"><span class="nav-number">9.5.2.</span> <span class="nav-text">传地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E5%80%BC%E7%BB%93%E6%9E%9C"><span class="nav-number">9.5.3.</span> <span class="nav-text">传值结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E5%90%8D"><span class="nav-number">9.5.4.</span> <span class="nav-text">传名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A1%A8"><span class="nav-number">9.6.</span> <span class="nav-text">符号表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">10.</span> <span class="nav-text">代码优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E5%9B%BE"><span class="nav-number">10.0.1.</span> <span class="nav-text">流图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">10.1.</span> <span class="nav-text">优化的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%85%AC%E5%85%B1%E5%AD%90%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">10.1.1.</span> <span class="nav-text">删除公共子表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%97%A0%E7%94%A8%E4%BB%A3%E7%A0%81"><span class="nav-number">10.1.2.</span> <span class="nav-text">删除无用代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A7%BB%E5%8A%A8"><span class="nav-number">10.1.3.</span> <span class="nav-text">代码移动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%BA%E5%BA%A6%E5%89%8A%E5%BC%B1"><span class="nav-number">10.1.4.</span> <span class="nav-text">强度削弱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%BD%92%E7%BA%B3%E5%8F%98%E9%87%8F"><span class="nav-number">10.1.5.</span> <span class="nav-text">删除归纳变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%9D%97%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">10.2.</span> <span class="nav-text">基本块的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90"><span class="nav-number">10.3.</span> <span class="nav-text">数据流分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%B0%E8%BE%BE%E5%AE%9A%E5%80%BC%E5%88%86%E6%9E%90"><span class="nav-number">10.3.1.</span> <span class="nav-text">到达定值分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B4%BB%E8%B7%83%E5%8F%98%E9%87%8F%E5%88%86%E6%9E%90"><span class="nav-number">10.3.2.</span> <span class="nav-text">活跃变量分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E7%94%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%88%86%E6%9E%90"><span class="nav-number">10.3.3.</span> <span class="nav-text">可用表达式分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E5%9B%BE%E4%B8%AD%E7%9A%84%E5%BE%AA%E7%8E%AF"><span class="nav-number">10.4.</span> <span class="nav-text">流图中的循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E4%BC%98%E5%8C%96"><span class="nav-number">10.5.</span> <span class="nav-text">全局优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%85%A8%E5%B1%80%E5%85%AC%E5%85%B1%E5%AD%90%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">10.5.1.</span> <span class="nav-text">删除全局公共子表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%A4%8D%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">10.5.2.</span> <span class="nav-text">删除复制语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A7%BB%E5%8A%A8-1"><span class="nav-number">10.5.3.</span> <span class="nav-text">代码移动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E4%BA%8E%E5%BD%92%E7%BA%B3%E5%8F%98%E9%87%8F%E7%9A%84%E5%BC%BA%E5%BA%A6%E5%89%8A%E5%BC%B1"><span class="nav-number">10.5.4.</span> <span class="nav-text">作用于归纳变量的强度削弱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%92%E7%BA%B3%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%A0%E9%99%A4"><span class="nav-number">10.5.5.</span> <span class="nav-text">归纳变量的删除</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90"><span class="nav-number">11.</span> <span class="nav-text">代码生成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E7%9A%84%E4%B8%BB%E8%A6%81%E4%BB%BB%E5%8A%A1"><span class="nav-number">11.1.</span> <span class="nav-text">代码生成器的主要任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E7%9B%AE%E6%A0%87%E6%9C%BA%E6%A8%A1%E5%9E%8B"><span class="nav-number">11.2.</span> <span class="nav-text">一个简单的目标机模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E9%80%89%E6%8B%A9"><span class="nav-number">11.3.</span> <span class="nav-text">指令选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">11.4.</span> <span class="nav-text">寄存器的选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E9%80%89%E6%8B%A9%E5%87%BDgetReg"><span class="nav-number">11.4.1.</span> <span class="nav-text">寄存器选择函getReg</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AA%A5%E5%AD%94%E4%BC%98%E5%8C%96"><span class="nav-number">11.5.</span> <span class="nav-text">窥孔优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98%E6%80%BB%E7%BB%93"><span class="nav-number">12.</span> <span class="nav-text">习题总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E7%82%B9-1"><span class="nav-number">12.1.</span> <span class="nav-text">重点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E9%87%8D%E7%82%B9"><span class="nav-number">12.2.</span> <span class="nav-text">非重点</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -437,7 +1089,7 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

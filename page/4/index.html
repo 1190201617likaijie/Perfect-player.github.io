@@ -145,6 +145,891 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/13/Verilog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/13/Verilog/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-13 21:49:51" itemprop="dateCreated datePublished" datetime="2021-10-13T21:49:51+08:00">2021-10-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Verilog"><a href="#Verilog" class="headerlink" title="Verilog"></a>Verilog</h2><h4 id="数字表示"><a href="#数字表示" class="headerlink" title="数字表示"></a>数字表示</h4><p>基本格式：&lt; 位宽 &gt;’&lt; 数制的符号 &gt;&lt; 数值 &gt;</p>
+<p>h十六进制</p>
+<p>d十进制</p>
+<p>o八进制</p>
+<p>b二进制</p>
+<h4 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h4><p>可直接进行加减等运算，方括号位于向量名前方。eg: reg [7:0] data</p>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>方括号位于数组名的后面。括号内的第一个数字为第一个元素的序号，第二 个数字为最后一个元素的序号，中间用冒号隔开。</p>
+<p>eg: wire array [15:0];</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>可以通过 parameter 关键字声明参数以增强模块可拓展性和可读性。</p>
+<p>在模块实例化时，可以使用 #() 将所需的实例参数覆盖模块的默认参数。</p>
+<p>局部参数可以用 localparam 关键字声明，它不能够进行参数重载。</p>
+<p>eg:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder #(</span><br><span class="line"><span class="keyword">parameter</span> WIDTH = <span class="number">4</span> <span class="comment">// 默认宽度为 4</span></span><br><span class="line">) (</span><br><span class="line"><span class="keyword">input</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] a,</span><br><span class="line"><span class="keyword">input</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] b,</span><br><span class="line"><span class="keyword">output</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] c</span><br><span class="line">);</span><br><span class="line"><span class="keyword">assign</span> c = a + b;</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在我们例化这个模块时，可以进行如下操作：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 覆盖宽度，修改为 6</span></span><br><span class="line">adder <span class="variable">#( .WIDTH (6) )</span> U_adder_0(</span><br><span class="line"><span class="variable">.a</span> (a ),</span><br><span class="line"><span class="variable">.b</span> (b ),</span><br><span class="line"><span class="variable">.c</span> (c )</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 使用默认的宽度 4</span></span><br><span class="line">adder U_adder_1(</span><br><span class="line"><span class="variable">.a</span> (a ),</span><br><span class="line"><span class="variable">.b</span> (b ),</span><br><span class="line"><span class="variable">.c</span> (c )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>局部参数 localparam 和参数类似，但是不能在例化时被覆盖。</p>
+<h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><h6 id="按位运算"><a href="#按位运算" class="headerlink" title="按位运算"></a>按位运算</h6><p>按位取反 ~</p>
+<p>按位与 &amp;</p>
+<p>按位或 |</p>
+<p>按位异或 ^</p>
+<h6 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h6><p>• 逻辑取反!</p>
+<p>• 逻辑与 &amp;&amp;</p>
+<p>• 逻辑或 ||</p>
+<h6 id="缩减运算"><a href="#缩减运算" class="headerlink" title="缩减运算"></a>缩减运算</h6><p>• 缩减与 &amp;：对一个多位操作数进行缩减与操作，计算所有位之间的与操作结果，例如：&amp;(4’b1011) 的结果为 0</p>
+<p> • 缩减或 |：对一个多位操作数进行缩减或操作，计算所有位之间的或操作结果。例如：|(4’b1011) 的结果为 1</p>
+<p> • 缩减异或 ^：对一个多位操作数进行缩减异或操作，计算所有位之间的异或操作结果。例如： ^(4’b1011) 的结果为 1 </p>
+<p>缩减或非、缩减异或、缩减同或是类似的。</p>
+<h6 id="移位运算"><a href="#移位运算" class="headerlink" title="移位运算"></a>移位运算</h6><p>• 逻辑右移&gt;&gt;：1 个操作数向右移位，产生的空位用 0 填充 </p>
+<p>• 逻辑左移&lt;&lt;：1 个操作数向左移位，产生的空位用 0 填充</p>
+<p> • 算术右移&gt;&gt;&gt;：1 个操作数向右移位。如果是无符号数，则产生的空位用 0 填充；有符号数则用其符号 位填充</p>
+<p> • 算术左移&lt;&lt;&lt;：1 个操作数向左移位，产生的空位用 0 填充</p>
+<h6 id="其他运算"><a href="#其他运算" class="headerlink" title="其他运算"></a>其他运算</h6><p>• 拼接 {,}：2 个操作数分别作为高低位进行拼接，例如：{2’b10,2’b11} 的结果是 4’b1011 </p>
+<p>• 重复 {n{m}}：将操作数 m 重复 n 次，拼接成一个多位的数。例如：a=2’b01，则 {2{a}} 的结果 是 4’b0101 </p>
+<p>• 条件? :：根据? 前的表达式是否为真，选择执行后面位于: 左右两个语句。例如：assign c = (a &gt; b) ? a : b，如果 a 大于 b，则将 a 的值赋给 c，否则将 b 的值赋给 c</p>
+<h4 id="组合逻辑"><a href="#组合逻辑" class="headerlink" title="组合逻辑"></a>组合逻辑</h4><h6 id="always"><a href="#always" class="headerlink" title="always"></a>always</h6><p>不推荐使用 always 块来表示组合逻辑。不正确的使用会生成大量锁存器。 </p>
+<p>下面的例子是一个 32-5 优先编码器，如果 tlb_hit_array 全为 0，那么 tlb_hit_index 也为 0。 always 块中被赋值的变量只能是 reg 类型，但是该编码器并不会综合出寄存器或者锁存器，这是因为 Verilog 中的寄存器 (reg) 和硬件上的寄存器不能完全等价。 如果去掉 tlb_hit_index = 5’d0; 一句，则会综合出锁存器。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">4</span> :<span class="number">0</span>] tlb_hit_index;</span><br><span class="line"><span class="keyword">wire</span> [<span class="number">31</span>:<span class="number">0</span>] tlb_hit_array;</span><br><span class="line"><span class="keyword">integer</span> i;</span><br><span class="line"><span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">tlb_hit_index = <span class="number">5&#x27;d0</span>;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i = i + <span class="number">1</span>) <span class="keyword">begin</span></span><br><span class="line"><span class="keyword">if</span> (tlb_hit_array[i]) <span class="keyword">begin</span></span><br><span class="line">tlb_hit_index = i;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="模块声明和例化"><a href="#模块声明和例化" class="headerlink" title="模块声明和例化"></a>模块声明和例化</h4><p>模块被包含在关键字 module、endmodule 之内。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder ( <span class="comment">// 模块名称声明</span></span><br><span class="line"><span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] a, <span class="comment">// 输入输出声明</span></span><br><span class="line"><span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] b,</span><br><span class="line"><span class="keyword">output</span> [<span class="number">31</span>:<span class="number">0</span>] c</span><br><span class="line">);</span><br><span class="line"><span class="keyword">assign</span> c = a + b; <span class="comment">// 变量声明、always 语句、assign 语句等</span></span><br><span class="line"><span class="keyword">endmodule</span> <span class="comment">// 模块结束</span></span><br></pre></td></tr></table></figure>
+<h4 id="Generate-块"><a href="#Generate-块" class="headerlink" title="Generate 块"></a>Generate 块</h4><p>这里只介绍 generate for 块。 </p>
+<p>generate for 的主要功能就是对模块或组件以及 always 块、assign 语句进行复制。 使用 generate for 的时候, 必须要注意以下几点要求 </p>
+<p>• 在使用 generate for 的时候必须先声明一个 genvar 变量，用作 for 的循环变量。genvar 是 generate 语句中的一种变量类型，用于在 generate for 语句中声明一个正整数的索引变量。</p>
+<p> • for 里面的内嵌语句, 必须写在 begin-end 里 </p>
+<p>• 尽量对 begin-end 顺序块进行命名</p>
+<p> generate for 的语法示例如下：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">genvar</span> i;</span><br><span class="line"><span class="keyword">generate</span> <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i = i + <span class="number">1</span>) <span class="keyword">begin</span>: gen_assign_temp</span><br><span class="line"><span class="keyword">assign</span> temp[i] = indata[<span class="number">2</span> * i + <span class="number">1</span> : <span class="number">2</span> * i];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">endgenerat</span><br></pre></td></tr></table></figure>
+<h4 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h4><h6 id="时延语句"><a href="#时延语句" class="headerlink" title="时延语句"></a>时延语句</h6><p>仿真中还经常使用时延来构造合适的仿真激励。它是不可综合的，仅能够在仿真中使用。时延分两类，一是 语句内部时延，二是语句间时延，其示例如下所示：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 语句内部时延</span></span><br><span class="line">A = #<span class="number">5</span> <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="comment">// 语句间时延</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">Temp = <span class="number">1&#x27;b1</span>;</span><br><span class="line">#<span class="number">5</span> A = Temp;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>两种方式都表达在五个时间单位后，将 A 的值赋为 1。</p>
+<h6 id="initial-语句"><a href="#initial-语句" class="headerlink" title="initial 语句"></a>initial 语句</h6><p>一般用来生成复位信号和激励。只在仿真开始时执行一次。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试代码中</span></span><br><span class="line"><span class="comment">// 假设`timescale 1ns / 1ps</span></span><br><span class="line"><span class="keyword">reg</span> rst_n, clk;</span><br><span class="line"><span class="keyword">always</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">rst_n = <span class="number">1&#x27;b0</span>;</span><br><span class="line">clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">#<span class="number">50</span> rst_n = <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>会生成一个 100MHz 的时钟，一个 50ns 有效的复位信号。</p>
+<h6 id="系统任务"><a href="#系统任务" class="headerlink" title="系统任务"></a>系统任务</h6><p>系统任务可以被用来执行一些系统设计所需的输入、输出、时序检查、仿真控制操作。所有的系统任务名称 前都带有符号 $ 使之与用户定义的任务和函数相区分。</p>
+<p>常见的系统任务：</p>
+<p> • $display：用于显示指定的字符串，然后自动换行（用法类似 C 语言中的 printf 函数）</p>
+<p> • $time：可以提取当前的仿真时间</p>
+<p> • $stop：暂停仿真</p>
+<p> • $finish：终止仿真</p>
+<p> • $random：生成随机数 </p>
+<p>• $readmemh：读入一个 16 进制数的文件以初始化 reg</p>
+<h6 id="测试设计"><a href="#测试设计" class="headerlink" title="测试设计"></a>测试设计</h6><p>测试最基本的结构包括信号声明、激励和模块例化。 测试模块声明时，一般不需要声明端口。因为激励信号一般都在测试模块内部，没有外部信号。 声明的变量应该能全部对应被测试模块的端口。当然，变量不一定要与被测试模块端口名字一样。但是被测试模块输入端对应的变量应该声明为 reg 型，输出端对应的变量应该声明为 wire 型。 仿真过程中可以使用 $display 显示当前仿真进度或者测试结果。 在测试完成或者发现错误时可以使用 $finish; 或者 $stop; 来停止仿真。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/11/R12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/11/R12/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-11 19:11:24" itemprop="dateCreated datePublished" datetime="2021-10-11T19:11:24+08:00">2021-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-14 19:59:35" itemprop="dateModified" datetime="2021-10-14T19:59:35+08:00">2021-10-14</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="session"><a href="#session" class="headerlink" title="session"></a>session</h4><p>Session：在计算机中，尤其是在网络应用中，称为“会话控制”。Session对象存储特定用户会话所需的属性及配置信息。这样，当用户在应用程序的Web页之间跳转时，存储在Session对象中的变量将不会丢失，而是在整个用户会话中一直存在下去。当用户请求来自应用程序的 Web页时，如果该用户还没有会话，则Web服务器将自动创建一个 Session对象。当会话过期或被放弃后，服务器将终止该会话。Session 对象最常见的一个用法就是存储用户的首选项。例如，如果用户指明不喜欢查看图形，就可以将该信息存储在Session对象中。有关使用Session 对象的详细信息，请参阅“ASP应用程序”部分的“管理会话”。注意会话状态仅在支持cookie的浏览器中保留。</p>
+<h4 id="多头注意力机制"><a href="#多头注意力机制" class="headerlink" title="多头注意力机制"></a>多头注意力机制</h4><p>从第二张图中可以多头函数看出：attention函数输入为由原来的Q，K，V变成了QW（上标为Q，下标为i），KW（上标为K，下标为i），VW（上标为V，下标为i）；即3个W都不相同；将Q，K，V由原来的512维度变成了64维度（因为采取了8个多头）；然后再拼接在一起变成512维，通过W(上标为O)进行线性转换；得到最终的多头注意力值；</p>
+<p>个人最终认为：多头的本质是多个独立的attention计算，作为一个集成的作用，防止过拟合；从attention is all your need论文中输入序列是完全一样的；相同的Q,K,V，通过线性转换，每个注意力机制函数只负责最终输出序列中一个子空间，即1/8，而且互相独立；</p>
+<h4 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h4><p>长短期记忆（Long short-term memory, LSTM）是一种特殊的RNN，主要是为了解决长序列训练过程中的梯度消失和梯度爆炸问题。简单来说，就是相比普通的RNN，LSTM能够在更长的序列中有更好的表现。</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32085405">人人都能看懂的LSTM - 知乎 (zhihu.com)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/07/DIN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/07/DIN/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-07 20:54:24" itemprop="dateCreated datePublished" datetime="2021-10-07T20:54:24+08:00">2021-10-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>利用真实的下一个行为作为正样本；</li>
+<li>负例的选择或是从用户未交互过的商品中随机抽取，或是从已展示给用户但用户没有点击的商品中随机抽取；</li>
+</ul>
+<p>具体来讲，就是利用 t 时刻的行为 b(t+1) 作为监督去学习隐含层向量 ht。正负样本分别代表了用户 点击/未点击 的第 t 个物品embedding向量。</p>
+<p>关于mask的作用，这里结合 Transformer 再说一下：</p>
+<p>mask 表示掩码，它对某些值进行掩盖，使其在参数更新时不产生效果。Transformer 模型里面涉及两种 mask，分别是 padding mask 和 sequence mask。其中，padding mask 在所有的 scaled dot-product attention 里面都需要用到，而 sequence mask 只有在 decoder 的 self-attention 里面用到。</p>
+<h5 id="Padding-Mask"><a href="#Padding-Mask" class="headerlink" title="Padding Mask"></a>Padding Mask</h5><p>什么是 padding mask 呢？因为每个批次输入序列长度是不一样的也就是说，我们要对输入序列进行对齐。具体来说，就是给在较短的序列后面填充 0。但是如果输入的序列太长，则是截取左边的内容，把多余的直接舍弃。因为这些填充的位置，其实是没什么意义的，所以attention机制不应该把注意力放在这些位置上，需要进行一些处理。</p>
+<p>具体的做法是，把这些位置的值加上一个非常大的负数(负无穷)，这样的话，经过 softmax，这些位置的概率就会接近0！而我们的 padding mask 实际上是一个张量，每个值都是一个Boolean，值为 false 的地方就是我们要进行处理的地方。</p>
+<h5 id="Sequence-mask"><a href="#Sequence-mask" class="headerlink" title="Sequence mask"></a>Sequence mask</h5><p>sequence mask 是为了使得 decoder 不能看见未来的信息。也就是对于一个序列，在 time_step 为 t 的时刻，我们的解码输出应该只能依赖于 t 时刻之前的输出，而不能依赖 t 之后的输出。因此我们需要想一个办法，把 t 之后的信息给隐藏起来。</p>
+<p>那么具体怎么做呢？也很简单：产生一个上三角矩阵，上三角的值全为0。把这个矩阵作用在每一个序列上，就可以达到我们的目的。</p>
+<p>对于 decoder 的 self-attention，里面使用到的 scaled dot-product attention，同时需要padding mask 和 sequence mask 作为 attn_mask，具体实现就是两个mask相加作为attn_mask。</p>
+<p>其他情况，attn_mask 一律等于 padding mask。</p>
+<p><strong>DIN这里使用的是padding mask。</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/05/tensorflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/05/tensorflow/" class="post-title-link" itemprop="url">tensorflow</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-05 21:08:48" itemprop="dateCreated datePublished" datetime="2021-10-05T21:08:48+08:00">2021-10-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-07 20:54:27" itemprop="dateModified" datetime="2021-10-07T20:54:27+08:00">2021-10-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="placeholder"><a href="#placeholder" class="headerlink" title="placeholder"></a>placeholder</h4><p>函数形式：<img src="/2021/10/05/tensorflow/image-20211005211038432.png" alt="image-20211005211038432"></p>
+<p>参数：</p>
+<p>dtype：数据类型。常用的是tf.float32,tf.float64等数值类型</p>
+<p>shape：数据形状。默认是None，就是一维值，也可以是多维（比如[2,3], [None, 3]表示列是3，行不定）</p>
+<p>name：名称</p>
+<p>使用原因： Tensorflow的设计理念称之为计算流图，在编写程序时，首先构筑整个系统的graph，代码并不会直接生效，这一点和python的其他数值计算库（如Numpy等）不同，graph为静态的，类似于docker中的镜像。然后，在实际的运行时，启动一个session，程序才会真正的运行。这样做的好处就是：避免反复地切换底层程序实际运行的上下文，tensorflow帮你优化整个系统的代码。我们知道，很多python程序的底层为C语言或者其他语言，执行一行脚本，就要切换一次，是有成本的，tensorflow通过计算流图的方式，帮你优化整个session需要执行的代码，还是很有优势的。</p>
+<p>​        所以placeholder()函数是在神经网络构建graph的时候在模型中的占位，此时并没有把要输入的数据传入模型，它只会分配必要的内存。等建立session，在会话中，运行模型的时候通过feed_dict()函数向占位符喂入数据。</p>
+<h4 id="get-variable"><a href="#get-variable" class="headerlink" title="get_variable"></a>get_variable</h4><p>该函数共有十一个参数，常用的有：名称name、变量规格shape、变量类型dtype、变量初始化方式initializer、所属于的集合collections。</p>
+<p>该函数的作用是创建新的tensorflow变量，常见的initializer有：常量初始化器tf.constant_initializer、正太分布初始化器tf.random_normal_initializer、截断正态分布初始化器tf.truncated_normal_initializer、均匀分布初始化器tf.random_uniform_initializer。</p>
+<h4 id="张量"><a href="#张量" class="headerlink" title="张量"></a>张量</h4><p>关于张量的学习，可参考：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/140260245">什么是张量？ - 知乎 (zhihu.com)</a></p>
+<h4 id="convert-to-tensor"><a href="#convert-to-tensor" class="headerlink" title="convert_to_tensor"></a>convert_to_tensor</h4><p>将给定值转换为张量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.convert_to_tensor(</span><br><span class="line">    value,</span><br><span class="line">    dtype=<span class="literal">None</span>,</span><br><span class="line">    dtype_hint=<span class="literal">None</span>,</span><br><span class="line">    name=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>该函数将各种类型的Python对象转换为张量对象。它接受张量对象、数字数组、Python列表和Python标量。</p>
+<h5 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h5><p>value:类型具有注册张量转换函数的对象。<br>dtype:返回张量的可选元素类型。如果缺少，则从值的类型推断类型。<br>dtype_hint:返回张量的可选元素类型，当dtype为None时使用。在某些情况下，调用者在转换为张量时可能没有考虑到dtype，因此dtype_hint可以用作软首选项。如果不能转换为dtype_hint，则此参数没有效果。<br>name:创建新张量时使用的可选名称。</p>
+<h5 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h5><p>一个基于值的张量。</p>
+<h4 id="embedding-lookup"><a href="#embedding-lookup" class="headerlink" title="embedding_lookup()"></a>embedding_lookup()</h4><p>用途主要是选取一个张量里面索引对应的元素。</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6e61528acad9">tf.nn.embedding_lookup() 详解 - 简书 (jianshu.com)</a></p>
+<h4 id="expand-dims"><a href="#expand-dims" class="headerlink" title="expand_dims()"></a>expand_dims()</h4><p>tf.expand_dims()函数用于给函数增加维度。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.expand_dims(</span><br><span class="line">    input,</span><br><span class="line">    axis=None,</span><br><span class="line">    name=None,</span><br><span class="line">    dim=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h5 id="参数：-1"><a href="#参数：-1" class="headerlink" title="参数："></a>参数：</h5><ul>
+<li>input是输入张量。</li>
+<li>axis是指定扩大输入张量形状的维度索引值。</li>
+<li>dim等同于轴，一般不推荐使用。</li>
+</ul>
+<p>函数的功能是在给定一个input时，在axis轴处给input增加一个维度。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/TeFuirnever/article/details/88797810">(5条消息) tf.expand<em>dims()函数解析（最清晰的解释）</em>种树最好的时间是10年前，其次是现在！！！-CSDN博客_tf.expand_dim</a></p>
+<h4 id="tf-tile"><a href="#tf-tile" class="headerlink" title="tf.tile()"></a>tf.tile()</h4><p>tensorflow中的tile()函数是用来对张量(Tensor)进行扩展的，其特点是对当前张量内的数据进行一定规则的复制。最终的输出张量维度不变。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tf.tile(</span><br><span class="line">    input,</span><br><span class="line">    multiples,</span><br><span class="line">    name=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>input是待扩展的张量，multiples是扩展方法。<br>假如input是一个3维的张量。那么mutiples就必须是一个1x3的1维张量。这个张量的三个值依次表示input的第1，第2，第3维数据扩展几倍。 </p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chamie/p/11124314.html">tf.tile()函数理解 - chamie - 博客园 (cnblogs.com)</a></p>
+<h4 id="concact"><a href="#concact" class="headerlink" title="concact"></a>concact</h4><p>tensorflow中用来拼接张量的函数tf.concat()，用法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.concat([tensor1, tensor2, tensor3,...], axis)</span><br></pre></td></tr></table></figure>
+<p>axis=0   代表在第0个维度拼接</p>
+<p>axis=1   代表在第1个维度拼接 </p>
+<p>对于一个二维矩阵，第0个维度代表最外层方括号所框下的子集，第1个维度代表内部方括号所框下的子集。维度越高，括号越小。</p>
+<h4 id="tf-layers-batch-normalization"><a href="#tf-layers-batch-normalization" class="headerlink" title="tf.layers.batch_normalization"></a>tf.layers.batch_normalization</h4><p>用来构建待训练的神经网络模型,方法接口如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">tf.layers.batch_normalization(</span><br><span class="line">    inputs,</span><br><span class="line">    axis=-1,</span><br><span class="line">    momentum=0.99,</span><br><span class="line">    epsilon=0.001,</span><br><span class="line">    center=True,</span><br><span class="line">    scale=True,</span><br><span class="line">    beta_initializer=tf.zeros_initializer(),</span><br><span class="line">    gamma_initializer=tf.ones_initializer(),</span><br><span class="line">    moving_mean_initializer=tf.zeros_initializer(),</span><br><span class="line">    moving_variance_initializer=tf.ones_initializer(),</span><br><span class="line">    beta_regularizer=None,</span><br><span class="line">    gamma_regularizer=None,</span><br><span class="line">    beta_constraint=None,</span><br><span class="line">    gamma_constraint=None,</span><br><span class="line">    training=False,</span><br><span class="line">    trainable=True,</span><br><span class="line">    name=None,</span><br><span class="line">    reuse=None,</span><br><span class="line">    renorm=False,</span><br><span class="line">    renorm_clipping=None,</span><br><span class="line">    renorm_momentum=0.99,</span><br><span class="line">    fused=None,</span><br><span class="line">    virtual_batch_size=None,</span><br><span class="line">    adjustment=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>这里有几个重要参数需要注意：</p>
+<ul>
+<li><code>axis</code>的值取决于按照<code>input</code>的哪一个维度进行BN，例如输入为<code>channel_last</code> format，即<code>[batch_size, height, width, channel]</code>，则<code>axis</code>应该设定为4，如果为<code>channel_first</code> format，则<code>axis</code>应该设定为1.</li>
+<li><code>momentum</code>的值用在训练时，滑动平均的方式计算滑动平均值<code>moving_mean</code>和滑动方差<code>moving_variance</code>。</li>
+<li><code>center</code>为<code>True</code>时，添加位移因子<code>beta</code>到该BN层，否则不添加。添加<code>beta</code>是对BN层的变换加入位移操作。注意，<code>beta</code>一般设定为可训练参数，即<code>trainable=True</code>。</li>
+<li><code>scale</code>为<code>True</code>是，添加缩放因子<code>gamma</code>到该BN层，否则不添加。添加<code>gamma</code>是对BN层的变化加入缩放操作。注意，<code>gamma</code>一般设定为可训练参数，即<code>trainable=True</code>。</li>
+<li><code>training</code>表示模型当前的模式，如果为<code>True</code>，则模型在训练模式，否则为推理模式。要非常注意这个模式的设定，这个参数默认值为<code>False</code>。如果在训练时采用了默认值<code>False</code>，则滑动均值<code>moving_mean</code>和滑动方差<code>moving_variance</code>都不会根据当前batch的数据更新，这就意味着在推理模式下，均值和方差都是其初始值，因为这两个值并没有在训练迭代过程中滑动更新。</li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fclbky/p/12636842.html">tf.layers.batch_normalization 介绍 - 大雄fcl - 博客园 (cnblogs.com)</a></li>
+</ul>
+<h4 id="dense"><a href="#dense" class="headerlink" title="dense"></a>dense</h4><p>dense，即全连接网络，layers 模块提供了一个 dense() 方法来实现此操作，定义在 tensorflow/python/layers/core.py 中，下面我们来说明一下它的用法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dense(</span><br><span class="line">    inputs,</span><br><span class="line">    units,</span><br><span class="line">    activation=None,</span><br><span class="line">    use_bias=True,</span><br><span class="line">    kernel_initializer=None,</span><br><span class="line">    bias_initializer=tf.zeros_initializer(),</span><br><span class="line">    kernel_regularizer=None,</span><br><span class="line">    bias_regularizer=None,</span><br><span class="line">    activity_regularizer=None,</span><br><span class="line">    kernel_constraint=None,</span><br><span class="line">    bias_constraint=None,</span><br><span class="line">    trainable=True,</span><br><span class="line">    name=None,</span><br><span class="line">    reuse=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>参数说明如下：<br> inputs：必需，即需要进行操作的输入数据。<br> units：必须，即神经元的数量。<br> activation：可选，默认为 None，如果为 None 则是线性激活。<br> use_bias：可选，默认为 True，是否使用偏置。<br> kernel_initializer：可选，默认为 None，即权重的初始化方法，如果为 None，则使用默认的 Xavier 初始化方法。<br> bias_initializer：可选，默认为零值初始化，即偏置的初始化方法。<br> kernel_regularizer：可选，默认为 None，施加在权重上的正则项。<br> bias_regularizer：可选，默认为 None，施加在偏置上的正则项。<br> activity_regularizer：可选，默认为 None，施加在输出上的正则项。<br> kernel_constraint，可选，默认为 None，施加在权重上的约束项。<br> bias_constraint，可选，默认为 None，施加在偏置上的约束项。<br> trainable：可选，默认为 True，布尔类型，如果为 True，则将变量添加到 GraphKeys.TRAINABLE_VARIABLES 中。<br> name：可选，默认为 None，卷积层的名称。<br> reuse：可选，默认为 None，布尔类型，如果为 True，那么如果 name 相同时，会重复利用。<br> 返回值： 全连接网络处理后的 Tensor。</p>
+<h4 id="reshape"><a href="#reshape" class="headerlink" title="reshape()"></a>reshape()</h4><p>tf.reshape(tensor, shape, name=None)<br>函数的作用是将tensor变换为参数shape的形式。 其中shape为一个列表形式，特殊的一点是列表中可以存在-1。</p>
+<p>转换为一般的shape（也就是不涉及-1的）我这里就不说了，主要说一下对-1的理解。<br>-1代表的含义是不用我们自己指定这一维的大小，函数会自动计算，但列表中只能存在一个-1。<br>（当然如果存在多个-1，就是一个存在多解的方程了）</p>
+<p>我理解的要点是：首先shape就是reshape变换后的矩阵大小，先不管-1的那一个维度，先看其它维度，然后用原矩阵的总元素个数除以确定的维度，就能得到-1维度的值。</p>
+<p>我们来看例子。</p>
+<p>M=np.array([[[[1,2,3]]],[[[4,5,6]]],[[[7,8,9]]]])   #M是[3,1,1,3]的四维矩阵</p>
+<p>我想把M重组成若干个3维的向量，那么直接tf.reshape(M,[-1,3])</p>
+<p>那么会得到几个3维向量呢？  M一共有9个元素，9/3=3，那么得到3个三维向量，那么结果就是[3,3]的矩阵。</p>
+<p><img src="/2021/10/05/tensorflow/image-20211006175936881.png" alt="image-20211006175936881"></p>
+<p>那么我想得到若干个[3,3]的矩阵，那么我们tf.reshape(M,[-1,3,3])</p>
+<p>那么结果就是[1,3,3]的矩阵</p>
+<p><img src="/2021/10/05/tensorflow/image-20211006175946915.png" alt="image-20211006175946915"></p>
+<h4 id="tf-reduce-mean"><a href="#tf-reduce-mean" class="headerlink" title="tf.reduce_mean"></a>tf.reduce_mean</h4><p>tf.reduce_mean 函数用于计算张量tensor沿着指定的数轴（tensor的某一维度）上的的平均值，主要用作降维或者计算tensor（图像）的平均值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reduce_mean(input_tensor,</span><br><span class="line">                axis=None,</span><br><span class="line">                keep_dims=False,</span><br><span class="line">                name=None,</span><br><span class="line">                reduction_indices=None)</span><br></pre></td></tr></table></figure>
+<p>第一个参数input_tensor： 输入的待降维的tensor;<br>第二个参数axis： 指定的轴，如果不指定，则计算所有元素的均值;<br>第三个参数keep_dims：是否降维度，设置为True，输出的结果保持输入tensor的形状，设置为False，输出结果会降低维度;<br>第四个参数name： 操作的名称;<br>第五个参数 reduction_indices：在以前版本中用来指定轴，已弃用;</p>
+<h4 id="tf-nn-sigmoid-cross-entropy-with-logits"><a href="#tf-nn-sigmoid-cross-entropy-with-logits" class="headerlink" title="tf.nn.sigmoid_cross_entropy_with_logits"></a>tf.nn.sigmoid_cross_entropy_with_logits</h4><p>tf.nn.sigmoid_cross_entropy_with_logits(_sentinel=None,,labels=None,logits=None,name=None)</p>
+<p>对于给定的logits计算sigmoid的交叉熵。</p>
+<h4 id="tf-trainable-variables"><a href="#tf-trainable-variables" class="headerlink" title="tf.trainable_variables()"></a>tf.trainable_variables()</h4><p>顾名思义，这个函数可以也仅可以查看可训练的变量，在我们生成变量时，无论是使用tf.Variable()还是tf.get_variable()生成变量，都会涉及一个参数trainable,其默认为True。以tf.Variable()为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">__init__(</span><br><span class="line">    initial_value=None,</span><br><span class="line">    trainable=True,</span><br><span class="line">    collections=None,</span><br><span class="line">    validate_shape=True,</span><br><span class="line">   ...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>对于一些我们不需要训练的变量，比较典型的例如学习率或者计步器这些变量，我们都需要将trainable设置为False，这时tf.trainable_variables() 就不会打印这些变量。</p>
+<h4 id="tf-train-GradientDescentOptimizer"><a href="#tf-train-GradientDescentOptimizer" class="headerlink" title="tf.train.GradientDescentOptimizer"></a>tf.train.GradientDescentOptimizer</h4><p>TensorFlow中损失优化方法</p>
+<ul>
+<li>tf.train.GradientDescentOptimizer(learningrate, uselocking, name)：原始梯度下降方法，唯一参数就是学习率。</li>
+</ul>
+<h4 id="tf-gradients"><a href="#tf-gradients" class="headerlink" title="tf.gradients()"></a>tf.gradients()</h4><p>参数如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tf.gradients(ys, xs, </span><br><span class="line">			 grad_ys=None, </span><br><span class="line">			 name=&#x27;gradients&#x27;,</span><br><span class="line">			 colocate_gradients_with_ops=False,</span><br><span class="line">			 gate_gradients=False,</span><br><span class="line">			 aggregation_method=None,</span><br><span class="line">			 stop_gradients=None)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>tf.gradients()</code>实现<code>ys</code>对<code>xs</code>求导，接受求导值<code>ys</code>和<code>xs</code>不仅可以是tensor，还可以是list</p>
+<h4 id="tf-clip-by-global-norm"><a href="#tf-clip-by-global-norm" class="headerlink" title="tf.clip_by_global_norm"></a>tf.clip_by_global_norm</h4><p>tf.clip_by_global_norm函数的作用就是通过权重梯度的总和的比率来截取多个张量的值。</p>
+<h4 id="tf-gather"><a href="#tf-gather" class="headerlink" title="tf.gather"></a>tf.gather</h4><p>tf.gather(params,indices,axis=0 )</p>
+<p>从params的axis维根据indices的参数值获取切片</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/01/NAS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/01/NAS/" class="post-title-link" itemprop="url">NAS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-01 09:19:15 / Modified: 16:26:25" itemprop="dateCreated datePublished" datetime="2021-10-01T09:19:15+08:00">2021-10-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="NAS"><a href="#NAS" class="headerlink" title="NAS"></a>NAS</h4><p>神经结构搜索（Neural Architecture Search，简称NAS）是一种自动设计神经网络的技术，可以通过算法根据样本集自动设计出高性能的网络结构，在某些任务上甚至可以媲美人类专家的水准，甚至发现某些人类之前未曾提出的网络结构，这可以有效的降低神经网络的使用和实现成本。</p>
+<p>NAS的原理是给定一个称为搜索空间的候选神经网络结构集合，用某种策略从中搜索出最优网络结构。神经网络结构的优劣即性能用某些指标如精度、速度来度量，称为性能评估。这一过程如下图所示。</p>
+<p><img src="/2021/10/01/NAS/image-20211001131823612.png" alt="image-20211001131823612"></p>
+<p>在搜索过程的每次迭代中，从搜索空间产生“样本”即得到一个神经网络结构，称为“子网络”。在训练样本集上训练子网络，然后在验证集上评估其性能。逐步优化网络结构，直至找到最优的子网络。</p>
+<p>搜索空间，搜索策略，性能评估策略是NAS算法的核心要素。搜索空间定义了可以搜索的神经网络结构的集合，即解的空间。搜索策略定义了如何在搜索空间中寻找最优网络结构。性能评估策略定义了如何评估搜索出的网络结构的性能。对这些要素的不同实现得到了各种不同的NAS算法，本节将选择有代表性的进行介绍。</p>
+<h4 id="基于梯度的神经架构优化算法"><a href="#基于梯度的神经架构优化算法" class="headerlink" title="基于梯度的神经架构优化算法"></a>基于梯度的神经架构优化算法</h4><p>前面介绍的NAS算法都存在计算量大的问题，虽然存在改进方案。强化学习、遗传算法等方案低效的一个原因是结构搜索被当作离散空间（网络结构的表示是离散的，如遗传算法中的二进制串编码）中的黑箱优化问题，无法利用梯度信息来求解。</p>
+<p>其中一种解决思路是将离散优化问题连续化。文献[6]提出了一种称为可微结构搜索（Differentiable Architecture Search，简称DARTS）的算法，将网络结构搜索转化为连续空间的优化问题，采用梯度下降法求解，可高效地搜索神经网络架构，同时得到网络的权重参数。</p>
+<p>DARTS将网络结构、网络单元表示成有向无环图，对结构搜索问题进行松弛，转化为连续变量优化问题。目标函数是可导的，能够用梯度下降法求解，同时得到网络结构和权重等参数。算法寻找计算单元，作为最终网络结构的基本构建块。这些单元可以堆积形成卷积神经网络，递归连接形成循环神经网络。</p>
+<h4 id="教师-学生网络"><a href="#教师-学生网络" class="headerlink" title="教师-学生网络"></a>教师-学生网络</h4><p>教师—学生网络的方法，属于迁移学习的一种。迁移学习也就是将一个模型的性能迁移到另一个模型上，而对于教师—学生网络，教师网络往往是一个更加复杂的网络，具有非常好的性能和泛化能力，可以用这个网络来作为一个soft target来指导另外一个更加简单的学生网络来学习，使得更加简单、参数运算量更少的学生模型也能够具有和教师网络相近的性能，也算是一种模型压缩的方式。</p>
+<p>较大、较复杂的网络虽然通常具有很好的性能，但是也存在很多的冗余信息，因此运算量以及资源的消耗都非常多。而所谓的Distilling就是将复杂网络中的有用信息提取出来迁移到一个更小的网络上，这样学习来的小网络可以具备和大的复杂网络想接近的性能效果，并且也大大的节省了计算资源。这个复杂的网络可以看成一个教师，而小的网络则可以看成是一个学生。</p>
+<h4 id="知识蒸馏"><a href="#知识蒸馏" class="headerlink" title="知识蒸馏"></a>知识蒸馏</h4><p>一般认为模型的参数保留了模型学到的知识，因此最常见的迁移学习的方式就是在一个大的数据集上先做预训练，然后使用预训练得到的参数在一个小的数据集上做微调（两个数据集往往领域不同或者任务不同）。例如先在Imagenet上做预训练，然后在COCO数据集上做检测。在这篇论文中，作者认为可以将模型看成是黑盒子，知识可以看成是输入到输出的映射关系。因此，我们可以先训练好一个teacher网络，然后将teacher的网络的输出结果 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 作为student网络的目标，训练student网络，使得student网络的结果 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 接近 <img src="https://www.zhihu.com/equation?tex=q" alt="[公式]"> ，因此，我们可以将损失函数写成 <img src="https://www.zhihu.com/equation?tex=L%3DCE%28y%2C+p%29%2B%5Calpha+CE%28q%2C+p%29" alt="[公式]"> 。这里CE是交叉熵（Cross Entropy），y是真实标签的onehot编码，q是teacher网络的输出结果，p是student网络的输出结果。</p>
+<p>但是，直接使用teacher网络的softmax的输出结果 <img src="https://www.zhihu.com/equation?tex=q" alt="[公式]"> ，可能不大合适。因此，一个网络训练好之后，对于正确的答案会有一个很高的置信度。例如，在MNIST数据中，对于某个2的输入，对于2的预测概率会很高，而对于2类似的数字，例如3和7的预测概率为 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 和 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 。这样的话，teacher网络学到数据的相似信息（例如数字2和3，7很类似）很难传达给student网络。由于它们的概率值接近0。因此，文章提出了softmax-T，公式如下所示：</p>
+<p><img src="/2021/10/01/NAS/equation" alt="[公式]"></p>
+<p>这里 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 是student网络学习的对象（soft targets），<img src="/2021/10/01/NAS/equation" alt="[公式]"> 是神经网络softmax前的输出logit。如果将T取1，这个公式就是softmax，根据logit输出各个类别的概率。如果T接近于0，则最大的值会越近1，其它值会接近0，近似于onehot编码。如果T越大，则输出的结果的分布越平缓，相当于平滑的一个作用，起到保留相似信息的作用。如果T等于无穷，就是一个均匀分布。</p>
+<p>知识蒸馏，可以将一个网络的知识转移到另一个网络，两个网络可以是同构或者异构。做法是先训练一个teacher网络，然后使用这个teacher网络的输出和数据的真实标签去训练student网络。知识蒸馏，可以用来将网络从大网络转化成一个小网络，并保留接近于大网络的性能；也可以将多个网络的学到的知识转移到一个网络中，使得单个网络的性能接近emsemble的结果。</p>
+<h4 id="EMD"><a href="#EMD" class="headerlink" title="EMD"></a>EMD</h4><p>对于离散的概率分布，Wasserstein距离也被描述为推土距离(EMD)。如果我们将分布想象为两个有一定存土量的土堆，那么EMD就是将一个土堆 转换 为另一个土堆所需的最小总工作量。工作量的定义是 单位泥土 的总量乘以它移动的距离。</p>
+<p>有很多种推土的方式，我们的目标是找到其中工作量最少的那一种，这是个优化问题。</p>
+<h4 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h4><p>BERT（Bidirectional Encoder Representation from Transformers)</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/27/CTR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/27/CTR/" class="post-title-link" itemprop="url">CTR</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-09-27 18:06:48" itemprop="dateCreated datePublished" datetime="2021-09-27T18:06:48+08:00">2021-09-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-26 15:17:05" itemprop="dateModified" datetime="2022-01-26T15:17:05+08:00">2022-01-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="MLPS"><a href="#MLPS" class="headerlink" title="MLPS"></a>MLPS</h4><p>MPLS（Multiprotocol Label Switch）是使用标签为了做出数据转发决策的数据包转发技术。利用 MPLS 技术，只需一次（当数据包进入 MPLS 域时）即可完成第 3 层报头分析。标签检查可推动后续的数据包转发。MPLS 可为以下应用带来益处：虚拟专用网络 (VPN)<br>流量工程 (TE)<br>服务质量 (QoS)<br>任何基于 MPLS 的传输 (AToM)<br>另外，它还可减少核心路由器上的转发开销。MPLS 技术适用于任何网络层协议。</p>
+<h4 id="embedding"><a href="#embedding" class="headerlink" title="embedding"></a>embedding</h4><p>​        简单来说，embedding就是用一个低维的向量表示一个物体，可以是一个词，或是一个商品，或是一个电影等等。这个embedding向量的性质是能使距离相近的向量对应的物体有相近的含义，比如 Embedding(复仇者联盟)和Embedding(钢铁侠)之间的距离就会很接近，但 Embedding(复仇者联盟)和Embedding(乱世佳人)的距离就会远一些。　　<br>　　除此之外Embedding甚至还具有数学运算的关系，比如Embedding（马德里）-Embedding（西班牙）+Embedding(法国)≈Embedding(巴黎)<br>　　从另外一个空间表达物体，甚至揭示了物体间的潜在关系，上次体会这样神奇的操作还是在学习傅里叶变换的时候，从某种意义上来说，Embedding方法甚至具备了一些本体论的哲学意义。<br>　　言归正传，Embedding能够用低维向量对物体进行编码还能保留其含义的特点非常适合深度学习。在传统机器学习模型构建过程中，我们经常使用one hot encoding对离散特征，特别是id类特征进行编码，但由于one hot encoding的维度等于物体的总数，比如阿里的商品one hot encoding的维度就至少是千万量级的。这样的编码方式对于商品来说是极端稀疏的，甚至用multi hot encoding对用户浏览历史的编码也会是一个非常稀疏的向量。而深度学习的特点以及工程方面的原因使其不利于稀疏特征向量的处理（这里希望大家讨论一下为什么?）。因此如果能把物体编码为一个低维稠密向量再喂给DNN，自然是一个高效的基本操作。</p>
+<h4 id="pooling"><a href="#pooling" class="headerlink" title="pooling"></a>pooling</h4><p>池化过程在一般卷积过程后。池化（pooling） 的本质，其实就是采样。Pooling 对于输入的 Feature Map，选择某种方式对其进行降维压缩，以加快运算速度。</p>
+<h4 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h4><p>激活函数是用来加入非线性因素的，提高神经网络对模型的表达能力，解决线性模型所不能解决的问题。</p>
+<h4 id="sigmoid和softmax"><a href="#sigmoid和softmax" class="headerlink" title="sigmoid和softmax"></a>sigmoid和softmax</h4><p>sigmoid：<img src="/2021/09/27/CTR/image-20210927183028016.png" alt="image-20210927183028016"></p>
+<p>softmax:<img src="/2021/09/27/CTR/image-20210927183115523.png" alt="image-20210927183115523"></p>
+<p>sigmoid将一个real value映射到（0,1）的区间（当然也可以是（-1,1）），这样可以用来做二分类。而softmax把一个k维的real value向量（a1,a2,a3,a4…）映射成一个（b1,b2,b3,b4…）其中bi是一个0-1的常数，然后可以根据bi的大小来进行多分类的任务，如取权重最大的一维。</p>
+<h4 id="神经网络的Attention机制"><a href="#神经网络的Attention机制" class="headerlink" title="神经网络的Attention机制"></a>神经网络的Attention机制</h4><p>注意力机制也称为：“神经网络的注意力”，或者更简单的：“注意力”。</p>
+<p>人脑在工作时，其实是由一定的注意力的，比如我们在浏览器上搜索时，大部分的注意力都集中在搜索结果的左上角，这说明大脑在处理信号的时候是有一定权重划分的，而注意力机制的提出正是模仿了大脑的这种特性。神经网络的注意力就是说，神经网络具有将注意力集中到一部分输入（或特征）的能力。</p>
+<p>（1）为什么引入注意力机制呢？</p>
+<p>计算能力的限制：目前计算能力依然是限制神经网络发展的瓶颈，当输入的信息过多时，模型也会变得更复杂，通过引入注意力，可以减少处理的信息量，从而减小需要的计算资源。<br>优化算法的限制：虽然局部连接、权重共享以及 pooling 等优化操作可以让神经网络变得简单一些，有效缓解模型复杂度和表达能力之间的矛盾；但是，如循环神经网络中的长序列输入，信息“记忆”能力并不高。<br>（2）注意力机制的分类</p>
+<p>注意力机制一般分为两种：</p>
+<p>聚焦式（Focus）注意力：是一种自上而下的有意识的注意力，“主动注意” 是指有预定目的、依赖任务的、主动有意识地聚焦于某一对象的注意力；<br>显著性（Saliency-Based）注意力：是一种自下而上的无意识的注意力，“被动注意” 是基于显著性的注意力，是由外界刺激驱动的注意，不需要主动干预，也和任务无关；池化（Max Pooling） 和 门控（Gating） 可以近似地看作是自下而上的基于显著性的注意力机制。</p>
+<p>在神经网络结构中加入注意力模型主要是基于三点考虑：首先是这些模型在众多的任务中取得了非常好的性能，比方说机器翻译、问答系统、情感分析、词性标注选民分析和问答系统。然后，在提升模型性能的同时，注意力机制增加了神经网络结构的可解释性。由于传统的神经网络是一个黑盒模型，因此提高其可解释性对机器学习模型的公平性、可靠性和透明性的提高至关重要。第三，其能够帮助缓解递归神经网络中的一些缺陷，比方说随着输入序列长度的增加导致的性能下降和对输入的顺序处理所导致的计算效率低下。</p>
+<h4 id="DIN模型"><a href="#DIN模型" class="headerlink" title="DIN模型"></a>DIN模型</h4><p>基准模型：基准模型就是比较常见的多层神经网络，即：（1）先对每个特征进行Embedding操作，得到一系列Embedding向量；（2）将不同Group的特征拼接组合起来之后得到一个固定长度的用户Embedding向量，和候选商品Embedding向量；（3）然后将（2）中的向量输入后续的全连接网络，最后输出pCTR值。具体网络结构见下图：</p>
+<p><img src="/2021/09/27/CTR/image-20210927194204860.png" alt="image-20210927194204860"></p>
+<p>base模型缺点：（1）用户的历史行为特征和当前的候选广告特征在全都拼起来给神经网络之前，是一点交互的过程都没有。</p>
+<p>（2）拼起来之后给神经网络，虽然有了交互，但也丢失了部分信息，并引入了噪声。</p>
+<p>DIN模型：DIN模型在基准模型的基础上，增加了注意力机制，就是模型在对候选商品预测的时候，对用户不同行为的注意力是不一样的。“相关”的行为历史看重一些，“不相关”的历史甚至可以忽略。下图展示了DIN模型的网络结构图。DIN的模型结构中增加了 Activation Unit模块，该模块主要提取当前候选商品与历史行为中的商品的权重值。<img src="/2021/09/27/CTR/image-20210927194403979.png" alt="image-20210927194403979"></p>
+<h4 id="单层注意力模型与多层注意力模型"><a href="#单层注意力模型与多层注意力模型" class="headerlink" title="单层注意力模型与多层注意力模型"></a>单层注意力模型与多层注意力模型</h4><p>在最一般的情形下，注意力权重是仅仅是由注意力模型的原始的输入序列算出来的，这一注意力模型可被称为<strong><em>单层注意力模型</em></strong>。另一方面，我们可对输入序列进行多次抽象，这样可以使得底层抽象的上下文向量成为下一次抽象的查询状态。这种对输入数据叠加若干层注意力模块实现对序列数据多层抽象的方法可被称为<strong>多层注意力模型</strong>。更具体地来说，多层注意力模型又可按照模型的权重是自顶向下学习还是自底向上学习的方式进行划分。</p>
+<p>多层注意力机制的一个典型应用是通过对文本进行两层抽象实现对文本的分类。这一模型称为“层次和注意力模型(Hierarchical Attention Model,HAM)”。文本是由不同的句子组合而成的，而每个句子又包含不同的单词，HAM能够对文章这种自然的层次化结构进行抽取。具体来说，其首先对每个句子建立一个注意力模型，该注意力模型的输入是每个句子中的基本单词，从而得到这个句子的特征表示；然后将句子的特征的表示输入到后续的注意力模型中来构建整段文本的特征表示。这一最后得到的整段文本的特征表示可以用于后面分类任务分类器的输入。</p>
+<h4 id="特征表示的数量"><a href="#特征表示的数量" class="headerlink" title="特征表示的数量"></a>特征表示的数量</h4><p>在大多数的应用场景下，我们只会对输入数据进行一种特征表示。然而在有些场景下，对输入数据进行单一的特征表示可能不能够为后续的过程提供足够的信息。在这种情形下，我们可以对同样的输入数据进行多种特征表示。利用注意力机制可以为这些不同的特征表示指定相关的权重，从而丢弃掉输入数据中的噪声信息和重复冗余信息。我们称这种模型为<strong><em>多表示注意力模型\</em></strong>。这种多表示注意力模型能够决定不同特征表示的权重从而有助于后面对这一表示的应用。最后得到的输入的特征表示是多个特征表示的加权组合，这一模型的一个优势在于针对不同的后处理任务能够决定哪些特征表示更适合当前的任务场景。</p>
+<p>基于类似的想法，还有一种称为<strong><em>多维度注意力模型\</em></strong>的方法。其核心观点是对特征表示向量的各个维度之间的依赖关系进行建模，这样我们便能够选择特征中更为有用的属性来帮助我们处理后续的任务。这一思想在自然语言处理领域至关重要因为相同的单词往往会出现多义性。</p>
+<h4 id="AUC"><a href="#AUC" class="headerlink" title="AUC"></a>AUC</h4><p>本质是一个概率值，简单来说就是随机抽出一对样本（一个正样本一个负样本），然后用训练得到的分类器对这两个样本进行预测，预测得到正样本的概率大于负样本的概率的概率。</p>
+<h4 id="GAUC"><a href="#GAUC" class="headerlink" title="GAUC"></a>GAUC</h4><p>优点：实现了用户级别的AUC计算</p>
+<p>缺点：用户行为没有那么多的时候，GAUC会抖动，所以大部分公司还是会采用AUC</p>
+<h4 id="multi-hot编码"><a href="#multi-hot编码" class="headerlink" title="multi-hot编码"></a><strong>multi-hot编码</strong></h4><p>在做用户画像或为用户做兴趣标签的时候，往往会遇到这样的问题，就是multi-hot特征的处理。 multi-hot编码之后每个id对应的是多个的1，而且不同样本中1的个数还不一样。 对multi-hot特征的处理无非也是一种稀疏矩阵的降维压缩，因此可以使用embedding的方法。对于某个属性对应的分类特征,可能该特征下有多个取值,比如一个特征表示对哪些物品感兴趣,那么这个特征不是单个值,而是有多个取值。 例如我们现在有3个样本： - 样本1 在该属性下取值有1,2两种特征 - 样本2 在该属性下有2一种特征 - 样本3 在该属性下有3,4 两种特征。我们以multi-hot编码的形式来定义特征应为 - 样本1 [1,1,0,0] - 样本2 [0,1,0,0] - 样本3 [0,0,1,1] 但是这种变量不能够直接用 embedding_lookup 去做, embedding_lookup 只接受只有一个1的onehot编码,那么为了完成这种情况的embedding需要两个步骤: </p>
+<ol>
+<li>将输入属性转化为类型one-hot编码的形式, 在tensorflow中这个过程是通过 tf.SparseTensor 来完成的,实际上就是构建了一个字典矩阵,key为坐标,value为1或者0表示是否有值,对于一个样本 如样本1来说就是构建了一个矩阵[[1,1,0,0]]表示有物品1和2,这个矩阵的规模为 [batch_size,num_items] ,这个过程即为 multi-hot 编码</li>
+<li>将构建好的类似于one-hot编码的矩阵与embedding矩阵相乘, embedding矩阵的规模为 [num_items, embedding_size] ,相乘之后得到的输出规模为 [batchi_size, embedding_size] , 即对多维多属性的特征构建了embedding vector</li>
+</ol>
+<h2 id="CTR模型整理"><a href="#CTR模型整理" class="headerlink" title="CTR模型整理"></a>CTR模型整理</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>参考部分所列出的为遵循原论文所整理，若原论文中有源码则均以附出，实现基本均为tf实现。</p>
+<p>pytorch统一接口部分所给出的链接，是一个pytorch实现的ctr库。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/shenweichen/DeepCTR</span><br><span class="line">https://github.com/DSXiangLi/CTR</span><br><span class="line">https://github.com/shenweichen/DeepCTR-Torch</span><br><span class="line">https://github.com/qiaoguan/deep-ctr-prediction</span><br></pre></td></tr></table></figure>
+<h3 id="Convolutional-Click-Prediction-Model-卷积点击预测模型CCPM"><a href="#Convolutional-Click-Prediction-Model-卷积点击预测模型CCPM" class="headerlink" title="Convolutional Click Prediction Model(卷积点击预测模型CCPM)"></a>Convolutional Click Prediction Model(卷积点击预测模型CCPM)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[CIKM 2015]A Convolutional Click Prediction Model</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://wnzhang.net/share/rtb-papers/cnn-ctr.pdf</span><br></pre></td></tr></table></figure>
+<h4 id="算法细节"><a href="#算法细节" class="headerlink" title="算法细节"></a>算法细节</h4><p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Avazu：包括数天的广告点击数据，按时间顺序排列。在每一份点击数据中，有17个数据字段</span><br><span class="line">如广告ID，网站ID，点击等。</span><br><span class="line">Yoochoose：包含了一个在线零售商的许多浏览和购买事件的会议。其中每个会话封装了单个用户的点击事件。</span><br></pre></td></tr></table></figure>
+<p>结果分析</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CCPM和其他竞争性方法在单一广告印象和连续广告印象上的点击预测性能相比较优。(FM,LR.RNN)</span><br></pre></td></tr></table></figure>
+<p>超参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">the parameter impacts of the filter width w and the number of feature map m in corresponding layer are studied</span><br><span class="line">filter width 与feature map</span><br><span class="line">具体在论文第四页有提及，没有说明修正位置、默认值以及可设置范围。</span><br></pre></td></tr></table></figure>
+<h3 id="Factorization-supported-Neural-Network-因子分解支持的神经网络FNN"><a href="#Factorization-supported-Neural-Network-因子分解支持的神经网络FNN" class="headerlink" title="Factorization-supported Neural Network(因子分解支持的神经网络FNN)"></a>Factorization-supported Neural Network(因子分解支持的神经网络FNN)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ECIR 2016]Deep Learning over Multi-field Categorical Data: A Case Study on User Response Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1601.02376.pdf</span><br></pre></td></tr></table></figure>
+<p>带有演示数据的源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/wnzhang/deep-ctr</span><br></pre></td></tr></table></figure>
+<h4 id="算法细节-1"><a href="#算法细节-1" class="headerlink" title="算法细节"></a>算法细节</h4><p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iPinYou：iPinYou数据集是一个公开的真实世界的显示广告数据集，其中有每个广告显示信息和相应的</span><br><span class="line">用户点击反馈。</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.使用随机梯度下降法来学习所有模型的大部分参数。</span><br><span class="line">2.学习率，从1、0.1、0.01、0.001到0.0001</span><br><span class="line">3.尝试了每个领域的负样本数m=1、2和4，并发现m=2在大多数情况下产生最好的结果。</span><br><span class="line">4.对于激活函数(如公式(3)和(2))，我们尝试了线性函数、sigmoid函数和tanh函数，并发现tanh函数的结果是最优的。</span><br><span class="line">5.通过固定3、4和5个隐藏层来研究架构，具有3个隐藏层（即总共5层）的架构在AUC性能方面是最好的。</span><br><span class="line">6.每个隐藏层的训练范围是隐含单元的范围从100到500，增量为100。</span><br></pre></td></tr></table></figure>
+<h3 id="Product-based-Neural-Network-PNN"><a href="#Product-based-Neural-Network-PNN" class="headerlink" title="Product-based Neural Network(PNN)"></a>Product-based Neural Network(PNN)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ICDM 2016]Product-based neural networks for user response prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1611.00144.pdf</span><br></pre></td></tr></table></figure>
+<p>可重复的实验代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/Atomu2014/product-nets </span><br><span class="line">tensorflow</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Criteo：一个著名的广告技术行业的基准数据集。</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.在这个数据集上应用了负向下采样。定义下采样率为w，预测的CTR为p，重新校准的CTR q</span><br><span class="line">2.在实验中比较了7个模型，它们是用TensorFlow4实现(LR,FM,FNN,CCPM,IPNN,OPNN,PNN),用随机梯度下降法（SGD）进行训练。采用了dropout作为正则化方法来防止训练神经网络时的过度拟合。</span><br><span class="line">3.we set dropout rate at 0.5 on networkhidden layers.将网络隐层的滤除率设置为0.5。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><p> Follow the instructions and update the soft link <code>data</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XXX/product-nets$ ln -sfn XXX/make-ipinyou-data/2997 data</span><br></pre></td></tr></table></figure>
+<p>run <code>main.py</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd python</span><br><span class="line">python main.py</span><br></pre></td></tr></table></figure>
+<h3 id="Wide-amp-Deep"><a href="#Wide-amp-Deep" class="headerlink" title="Wide &amp; Deep"></a>Wide &amp; Deep</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[DLRS 2016]Wide &amp; Deep Learning for Recommender Systems</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1606.07792.pdf</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.模型训练时为每个分类特征学习一个 32 维嵌入向量</span><br></pre></td></tr></table></figure>
+<h3 id="DeepFM"><a href="#DeepFM" class="headerlink" title="DeepFM"></a>DeepFM</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[IJCAI 2017]DeepFM: A Factorization-Machine based Neural Network for CTR Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.ijcai.org/proceedings/2017/0239.pdf</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Criteo：包括4500万用户的点击记录。</span><br><span class="line">Company</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.for FNN and PNN: (1)dropout: 0.5; (2) network structure: 400-400-400; (3) optimizer: Adam; (4) activation function: tanh for IPNN, relu forother deep models.</span><br><span class="line">2.研究了不同深度模型的不同超参数，对公司数据集的影响。顺序是：1）激活函数；2）辍学率；3）每层的神经元数量；4）隐藏层数量；5）网络形状。dropout设置为1.0、0.9、0.8、0.7。每层的神经元数量200，400，800。网络形状：constant, increasing,decreasing, and diamond. </span><br></pre></td></tr></table></figure>
+<p>注：这篇文章对于超参数进行了大量实验</p>
+<h3 id="Piece-wise-Linear-Model"><a href="#Piece-wise-Linear-Model" class="headerlink" title="Piece-wise Linear Model"></a>Piece-wise Linear Model</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[arxiv 2017]Learning Piece-wise Linear Models from Large Scale Data for Ad Click Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/abs/1704.05194</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.LS-PLM是一个分片线性模型，割数m控制模型的容量。尝试m=6、12、24、36。m=12的测试AUC明显好于m=6，而m=24，36的改善相对较小。</span><br><span class="line">温和。因此，在下面的所有实验中，LS-PLM模型的参数m被设定为12。</span><br></pre></td></tr></table></figure>
+<h3 id="Deep-amp-Cross-Network"><a href="#Deep-amp-Cross-Network" class="headerlink" title="Deep &amp; Cross Network"></a>Deep &amp; Cross Network</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ADKDD 2017]Deep &amp; Cross Network for Ad Click Predictions</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/abs/1708.05123</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Criteo Display Ads2</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.batch size is set at 512</span><br><span class="line">2.gradient clip norm was set at 100.</span><br><span class="line">3.隐层的数量从2到5不等。</span><br><span class="line">4.隐藏层大小从32到1024</span><br><span class="line">5.初始学习率从0.0001到0.001，增量为0.0001</span><br></pre></td></tr></table></figure>
+<p>最佳超参数选择</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The optimal hyperparameter seings were 2 deep layers of size 1024 and 6 cross layers for</span><br><span class="line">the DCN model, 5 deep layers of size 1024 for the DNN, 5 residual units with input dimension 424 and cross dimension 537 forthe DC, and 42 cross features for the LR model</span><br></pre></td></tr></table></figure>
+<p>注：本文对于超参数有详细的实验，具体请参考原文。所列不全。</p>
+<h3 id="Attentional-Factorization-Machine-AFM"><a href="#Attentional-Factorization-Machine-AFM" class="headerlink" title="Attentional Factorization Machine(AFM)"></a>Attentional Factorization Machine(AFM)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[IJCAI 2017]Attentional Factorization Machines: Learning the Weight of Feature Interactions via Attention Networks</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.ijcai.org/proceedings/2017/0435.pdf</span><br></pre></td></tr></table></figure>
+<p>一个对该论文的实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/hexiangnan/attentional_factorization_machine</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Frappe ：被用于情境感知推荐，它包含了96,203个不同情境下的用户应用日志。该数据集包含96,203个用户在不同情境下的使用日志。</span><br><span class="line">MovieLens：被用于个性化标签推荐</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.对于AFM，Frappe和MovieLens上的最佳滤波率是0.2和0.5</span><br></pre></td></tr></table></figure>
+<h4 id="to-use"><a href="#to-use" class="headerlink" title="to use"></a>to use</h4><p>代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AFM.py</span><br><span class="line">FM.py</span><br><span class="line">LoadData.py</span><br></pre></td></tr></table></figure>
+<p>数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ml-tag</span><br><span class="line">ml-tag.train.libfm</span><br><span class="line">ml-tag.validation.libfm</span><br><span class="line">ml-tag.test.libfm</span><br></pre></td></tr></table></figure>
+<p>训练</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># step into the code folder</span><br><span class="line">cd code</span><br><span class="line"># train FM model with optimal parameters</span><br><span class="line">python FM.py --dataset ml-tag --epoch 20 --pretrain -1 --batch_size 4096 --hidden_factor 16 --lr 0.01 --keep 0.7</span><br><span class="line"># train AFM model with optimal parameters</span><br><span class="line">python AFM.py --dataset ml-tag --epoch 20 --pretrain 1 --batch_size 4096 --hidden_factor [16,16] --keep [1.0,0.5] --lamda_attention 100.0 --lr 0.1</span><br></pre></td></tr></table></figure>
+<p>注：该复现非原作者</p>
+<p>参考文章</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://zhuanlan.zhihu.com/p/110375283</span><br></pre></td></tr></table></figure>
+<h3 id="Neural-Factorization-Machine"><a href="#Neural-Factorization-Machine" class="headerlink" title="Neural Factorization Machine"></a>Neural Factorization Machine</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[SIGIR 2017]Neural Factorization Machines for Sparse Predictive Analytics</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1708.05027.pdf</span><br></pre></td></tr></table></figure>
+<p>论文开源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/hexiangnan/neural_factorization_machine</span><br></pre></td></tr></table></figure>
+<p> 数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Frappe：包含96,203个应用程序在不同背景下的用户使用日志。</span><br><span class="line">MovieLens</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.学习率都在[0.005, 0.01, 0.02, 0.05]，在[0, 0.1, 0.2, ..., 0.9]的辍学率</span><br><span class="line">2.辍学率为NFM最重要的超参数，后设置为0.5</span><br><span class="line">3.ReLU作为激活函数</span><br></pre></td></tr></table></figure>
+<p>to use</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python NeuralFM.py --dataset frappe --hidden_factor 64 --layers [64] --keep_prob [0.8,0.5] --loss_type square_loss --activation relu --pretrain 0 --optimizer AdagradOptimizer --lr 0.05 --batch_norm 1 --verbose 1 --early_stop 1 --epoch 200</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">We use the same input format as the LibFM toolkit (http://www.libfm.org/).</span><br><span class="line"></span><br><span class="line">Split the data to train/test/validation files to run the codes directly (examples see data/frappe/).</span><br></pre></td></tr></table></figure>
+<h3 id="xDeepFM"><a href="#xDeepFM" class="headerlink" title="xDeepFM"></a>xDeepFM</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[KDD 2018]xDeepFM: Combining Explicit and Implicit Feature Interactions for Recommender Systems</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1803.05170.pdf</span><br></pre></td></tr></table></figure>
+<p>源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/Leavingseason/xDeepFM</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Criteo：一个著名的行业基准数据集用于开发预测广告点击率的模型，并且可以公开访问</span><br><span class="line">Dianping：中国最大的消费者评论网站。</span><br><span class="line">Bing News：微软的必应搜索引擎的一部分</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.学习率被设置为0.001</span><br><span class="line">2.每一层的神经元数量的默认设置是。(1) 400个用于DNN层；(2)Criteo数据集的CIN层为200，大众点评和必应的CIN层为100。</span><br><span class="line">3.对于超参数设置不同数据集有不同设置，详见论文第8页Q3</span><br></pre></td></tr></table></figure>
+<h3 id="Deep-Interest-Network"><a href="#Deep-Interest-Network" class="headerlink" title="Deep Interest Network"></a>Deep Interest Network</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[KDD 2018]Deep Interest Network for Click-Through Rate Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1706.06978.pdf</span><br></pre></td></tr></table></figure>
+<p>源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/zhougr1993/DeepInterestNetwork</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Amazon</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.学习率从1开始，衰减率设置为0.1。</span><br><span class="line">2.小批量学习率从0.001开始，衰减率设置为0.001。</span><br></pre></td></tr></table></figure>
+<p>注：DIN这篇论文中，代码质量较差，不建议使用该版本，在后期DIEN论文中会进行调整。</p>
+<h3 id="Deep-Interest-Evolution-Network"><a href="#Deep-Interest-Evolution-Network" class="headerlink" title="Deep Interest Evolution Network"></a>Deep Interest Evolution Network</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[AAAI 2019]Deep Interest Evolution Network for Click-Through Rate Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1809.03672.pdf</span><br></pre></td></tr></table></figure>
+<p>源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/mouna99/dien</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public and industrial datasets</span><br></pre></td></tr></table></figure>
+<h4 id="to-use-1"><a href="#to-use-1" class="headerlink" title="to use"></a>to use</h4><p>准备数据</p>
+<p>法一</p>
+<p>从亚马逊网站获取数据，并使用脚本进行处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh prepare_data.sh</span><br></pre></td></tr></table></figure>
+<p>法二，推荐</p>
+<p>解压后直接使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar -jxvf data.tar.gz</span><br><span class="line">mv data/* .</span><br><span class="line">tar -jxvf data1.tar.gz</span><br><span class="line">mv data1/* .</span><br><span class="line">tar -jxvf data2.tar.gz</span><br><span class="line">mv data2/* .</span><br></pre></td></tr></table></figure>
+<p>训练模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py train [model name] </span><br></pre></td></tr></table></figure>
+<h3 id="AutoInt"><a href="#AutoInt" class="headerlink" title="AutoInt"></a>AutoInt</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[CIKM 2019]AutoInt: Automatic Feature Interaction Learning via Self-Attentive Neural Networks</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/abs/1810.11921</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Criteo：一个CTR预测的基准数据集，它有4500万用户的点击广告的记录。</span><br><span class="line">Avazu：包含用户的移动行为，包括一个显示的移动广告是否被用户点击。</span><br><span class="line">KDD12</span><br><span class="line">MovieLens-1M</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.在&#123;0.1 - 0.9&#125;范围内为MovieLens-1M数据集选择辍学率</span><br><span class="line">2.文章分析了Influence of Residual Structure，nfluence of Network Depths.Influence of Different Dimensions.</span><br></pre></td></tr></table></figure>
+<h3 id="ONN"><a href="#ONN" class="headerlink" title="ONN"></a>ONN</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[arxiv 2019]Operation-aware Neural Networks for User Response Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1904.12579.pdf</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Criteo</span><br><span class="line">Tencent Ad</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.非线性隐藏层的数量对于Criteo数据集，隐藏的大小被设置为[400, 400, 400]，而非线性隐藏层的数量被设置为3。</span><br><span class="line">2.对于腾讯广告数据集，隐藏尺寸被设置为[200，200, 200]. </span><br><span class="line">3.Adam学习率是通过网格搜索从[0.0001,0.00025, 0.0005, 0.00075, 0.001]，</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="FiBiNET"><a href="#FiBiNET" class="headerlink" title="FiBiNET"></a>FiBiNET</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[RecSys 2019]FiBiNET: Combining Feature Importance and Bilinear feature Interaction for Click-Through Rate Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1905.09433.pdf</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Criteo</span><br><span class="line">Avazu：由数天的广告点击数据组成。</span><br></pre></td></tr></table></figure>
+<p>细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">对于嵌入层，Criteo数据集的嵌入层维度被设置为10，Avazu数据集的嵌入层维度被设置为50。</span><br><span class="line">Avazu数据集为50。对于优化方法，我们使用Adam。</span><br><span class="line">对于Criteo数据集和Avazu数据集，小型批次大小为1000，Avazu数据集为500。</span><br><span class="line">学习率被设置为0.0001。对于所有的深度模型，层的深度设置为3，所有的激活函数都是RELU，每层的神经元数量为400。</span><br><span class="line">每层的神经元数量在Criteo数据集为400个，在Avazu数据集为2000个。</span><br><span class="line">数据集的每层神经元数量为400个，Avazu数据集为2000个，辍学率设置为0.5。对于SENET部分，两个FC的激活函数为</span><br><span class="line">对于SENET部分，两个FC中的激活函数是RELU函数，还原率设置为3。 </span><br></pre></td></tr></table></figure>
+<h3 id="IFM"><a href="#IFM" class="headerlink" title="IFM"></a>IFM</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[IJCAI 2019]An Input-aware Factorization Machine for Sparse Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.ijcai.org/Proceedings/2019/0203.pdf</span><br></pre></td></tr></table></figure>
+<p>源代码链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/gulyfish/Input-aware-Factorization-Machine</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Frappe</span><br><span class="line">MovieLens</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.学习率：0.01</span><br><span class="line">2. the number of hidden layers，the dropout ratio， activation functions</span><br><span class="line">3.IFM的性能在开始时随着网络的增加而提高。然而，当网络的深度大于2(Frappe)或3(Movielens)时，模型的性能开始下降。</span><br><span class="line">4.Fraith的Frappe和MovieLens的最佳辍学率分别为0.3和0.4，</span><br><span class="line">5.ReLU更适合这两个数据集</span><br></pre></td></tr></table></figure>
+<p>注：本文进行了详细的超参数实验</p>
+<h3 id="DCN-V2"><a href="#DCN-V2" class="headerlink" title="DCN V2"></a>DCN V2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[arxiv 2020]DCN V2: Improved Deep &amp; Cross Network and Practical Lessons for Web-scale Learning to Rank Systems</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/abs/2008.13535</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Criteo</span><br><span class="line">MovieLen-1M</span><br><span class="line">Production</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. learning rate was tuned from 10−4 to 10−1 ，再到10-4到5×10-4</span><br><span class="line">2.隐蔽层的数量在&#123;1，2，3，4&#125;之间，大小为&#123;562, 768, 1024&#125;。</span><br><span class="line">3.正则化参数𝜆的范围为&#123;0, 3 × 10−5, 10−4&#125;</span><br><span class="line">4.研究的超参数：depth of cross layers，matrix rank of DCN-Mix，number of experts in DCN-Mix</span><br></pre></td></tr></table></figure>
+<h3 id="DIFM"><a href="#DIFM" class="headerlink" title="DIFM"></a>DIFM</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[IJCAI 2020]A Dual Input-aware Factorization Machine for CTR Prediction</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.ijcai.org/Proceedings/2020/0434.pdf</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Avazu</span><br><span class="line">Criteo</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.所有模型的学习都是通过使用Adam（学习率：0.001）</span><br><span class="line">2.Criteo和Avazu的嵌入大小分别被设定为20和40。</span><br><span class="line">3.批量大小对这两个数据集都设置为2000</span><br><span class="line">4.所研究的超参数：the number of attention heads n，the attention key size dk， activation functions (the vector-wise part)，the number of hidden layers in DNNs</span><br><span class="line">5.the number of attention heads n，进行了从1-16的实验，最后将数量固定在16</span><br><span class="line">6.the attention key size dk，在Avazu上将注意因子的大小从20增加到100时，Avazu数据集的模型性能稳步提高，而在Criteo数据集上，80是一个更合适的注意因子大小设置。为避免模型过于复杂，我们将Avazu的注意力系数固定为100，Criteo为80。</span><br><span class="line">7.Relu作为向量部分的神经元的激活函数</span><br><span class="line">8.对于Avazu最好的性能是我们只使用一个隐藏层，对于Criteo数据集采用两个</span><br></pre></td></tr></table></figure>
+<h3 id="AFN"><a href="#AFN" class="headerlink" title="AFN"></a>AFN</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[AAAI 2020]Adaptive Factorization Network: Learning Adaptive-Order Feature Interactions</span><br></pre></td></tr></table></figure>
+<p>论文链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://arxiv.org/pdf/1909.03276.pdf</span><br></pre></td></tr></table></figure>
+<p>源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/WeiyuCheng/AFN-AAAI-20</span><br></pre></td></tr></table></figure>
+<p>数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Criteo</span><br><span class="line">Avazu</span><br><span class="line">Movielens</span><br><span class="line">Frappe</span><br></pre></td></tr></table></figure>
+<p>各种细节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.超参数Number of logarithmic neurons，Depth of hidden layers，Number of neurons in hidden layers</span><br><span class="line">2.Number of neurons in hidden layers超过600性能开始下降touse</span><br></pre></td></tr></table></figure>
+<p>to use</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">数据集</span><br><span class="line">cd src</span><br><span class="line">python download_criteo_and_avazu.py</span><br><span class="line">代码</span><br><span class="line">cd src</span><br><span class="line">sh ./run_experiments.sh</span><br></pre></td></tr></table></figure>
+<h2 id="pytorch统一接口"><a href="#pytorch统一接口" class="headerlink" title="pytorch统一接口"></a>pytorch统一接口</h2><p>链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/shenweichen/DeepCTR-Torch</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/09/27/CTR/image-20220118172936135.png" alt="image-20220118172936135"></p>
+<h3 id="统一视角"><a href="#统一视角" class="headerlink" title="统一视角"></a>统一视角</h3><p>DeepCTR通过对现有的基于深度学习的点击率预测模型的结构进行抽象总结，在设计过程中采用模块化的思路，各个模块自身具有高复用性，各个模块之间互相独立。 基于深度学习的点击率预测模型按模型内部组件的功能可以划分成以下4个模块：输入模块，嵌入模块，特征提取模块，预测输出模块。</p>
+<p><img src="/2021/09/27/CTR/image-20220118173022237.png" alt="image-20220118173022237"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/25/%E7%88%AC%E8%99%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/25/%E7%88%AC%E8%99%AB/" class="post-title-link" itemprop="url">爬虫</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-09-25 19:49:32" itemprop="dateCreated datePublished" datetime="2021-09-25T19:49:32+08:00">2021-09-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/31/%E5%88%9D%E7%AD%89%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/31/%E5%88%9D%E7%AD%89%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">初等模型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-31 09:33:39 / Modified: 10:43:57" itemprop="dateCreated datePublished" datetime="2021-07-31T09:33:39+08:00">2021-07-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="初等模型"><a href="#初等模型" class="headerlink" title="初等模型"></a>初等模型</h1><h3 id="双层玻璃的功效"><a href="#双层玻璃的功效" class="headerlink" title="双层玻璃的功效"></a>双层玻璃的功效</h3><p>北方城镇的有些建筑物窗户是双层的，窗户上装两层玻璃且中间留有一定的空隙，两层厚度为d的玻璃夹着一层厚度为l的空气。我们要建立一个模型来描述热量通过窗户的传导过程，并将双层玻璃制成同样多材料的单层玻璃，进行，热量传导对比，对双层玻璃能够减少多少热量损失给出定量分析结果。</p>
+<h4 id="模型假设"><a href="#模型假设" class="headerlink" title="模型假设"></a>模型假设</h4><p>（1）热量的传播过程只有传导，没有对流。即假定窗户的密封性能很好，两层玻璃之间的空气是不流动的。</p>
+<p>（2）室内温度T1和室外温度T2保持不变，热传导过程已处于稳定状态，即沿热传导方向，单位时间内通过单位面积的热量是常数。</p>
+<p>（3）玻璃材料均匀，热传导系数是常数。</p>
+<h4 id="模型构成"><a href="#模型构成" class="headerlink" title="模型构成"></a>模型构成</h4><p>在上述假设下热传导过程遵从以下物理定律：</p>
+<p>厚度为d的均匀介质，两侧温度差为<img src="/2021/07/31/%E5%88%9D%E7%AD%89%E6%A8%A1%E5%9E%8B/wpsFA62.tmp.wmf" alt="img">，则单位时间内由温度高的一侧向温度低的一侧通过单位面积的热量Q与<img src="/2021/07/31/%E5%88%9D%E7%AD%89%E6%A8%A1%E5%9E%8B/wpsFA62.tmp-1627698544223.wmf" alt="img">成正比，与d成反比，即<img src="/2021/07/31/%E5%88%9D%E7%AD%89%E6%A8%A1%E5%9E%8B/wpsB5F9.tmp.wmf" alt="img"></p>
+<p>k为热传导系数。</p>
+<p>其余步骤省略。</p>
+<h4 id="模型应用"><a href="#模型应用" class="headerlink" title="模型应用"></a>模型应用</h4><p>这个模型具有一定应用价值。制作双层玻璃窗虽然工艺复杂会增加一些费用，但它减少的热量损失确实相当可观的。通常，建筑规范要求g=l/d≈4.按照这个模型，Q1/Q2≈3%，即双层窗比用同样多的玻璃材质制成的单层窗节约热量97%左右。不难发现，之所以有如此高的功效主要是由于层间空气的极低的热传导系数k2,而这要求空气是干燥，不流通的。作为模型假设这个条件在实际情况下当然不能完全满足，所以实际上双层窗户的功效会比上述结果差一些。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/29/Latex/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -298,1286 +1183,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/26/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/26/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" class="post-title-link" itemprop="url">数据可视化</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-26 15:08:11 / Modified: 15:10:26" itemprop="dateCreated datePublished" datetime="2021-07-26T15:08:11+08:00">2021-07-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/12/Python%E5%A4%87%E5%BF%98%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/12/Python%E5%A4%87%E5%BF%98%E5%BD%95/" class="post-title-link" itemprop="url">Python备忘录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-07-12 15:32:04" itemprop="dateCreated datePublished" datetime="2021-07-12T15:32:04+08:00">2021-07-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-19 16:43:19" itemprop="dateModified" datetime="2021-07-19T16:43:19+08:00">2021-07-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Python编程备忘录"><a href="#Python编程备忘录" class="headerlink" title="Python编程备忘录"></a>Python编程备忘录</h2><h3 id="变量和简单数据类型"><a href="#变量和简单数据类型" class="headerlink" title="变量和简单数据类型"></a>变量和简单数据类型</h3><h4 id="变量的命名和使用"><a href="#变量的命名和使用" class="headerlink" title="变量的命名和使用"></a>变量的命名和使用</h4><p>（1）变量名只能包含字母，数字和下划线。</p>
-<p>（2）变量名不能包含空格，但能使用下划线来分割其中字符。</p>
-<p>（3）关键字和函数名不能忘用作变量。</p>
-<p>（4）变量名应简单又具有描述性。</p>
-<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>python中单引号和双引号引起来的都是字符串。</p>
-<p>name.title()以首字母大写显示。</p>
-<p>name.upper()全部大写。</p>
-<p>name.lower()全部小写。</p>
-<p>用f(format)来合并字符串。name=f“{firstname} {lastname}”</p>
-<p>name.strip()来消除空白。该删除为暂时，要永久需关联到变量。</p>
-<p>name.rstrip()消除右边空白。</p>
-<p>name.lstrip()消除左边空白。</p>
-<p>name1=name.rstrip()。</p>
-<h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><p>用两个乘号表示乘方运算。3**2=9</p>
-<p>将任意两个数相除时，结果总是浮点数，即便这两个数都是整数且能整数。</p>
-<p>在其他任意运算中，只要有操作数是浮点数，默认得到的总是浮点数。</p>
-<p>给多个变量赋值：x,y,z=0,0,0</p>
-<p>用全大写将某个变量视为常量。</p>
-<h3 id="列表简介"><a href="#列表简介" class="headerlink" title="列表简介"></a>列表简介</h3><p>python中，用[]表示列表，用逗号分隔其中元素。</p>
-<p>在python中，索引为负数表示访问倒数第几个元素。</p>
-<p>name.append(‘xyz’)在列表末尾添加元素。</p>
-<p>name.insert(0,’xyz’)在索引0处插入元素。</p>
-<p>用del name[0]永久删除索引0处的元素。</p>
-<p>用pop暂时删除末尾元素，加入数字可删除任意位置。name.pop() name.pop(1)</p>
-<p>用remove永久删除特定元素。name.remove(‘xyz’)。但是remove只删除第一个指定的值，若多次出现需循环删除。</p>
-<h4 id="组织列表"><a href="#组织列表" class="headerlink" title="组织列表"></a>组织列表</h4><p>用cars.sort()对列表进行永久排序。</p>
-<p>若要按相反的顺序排序，则向方法传递参数reverse=True,cars.sort(reverse.True)</p>
-<p>用cars.sorted()对列表进行临时排序。</p>
-<p>用cars.reverse()倒着打印列表，且会永久性的修改列表的顺序。</p>
-<p>用len(cars)可确定列表的长度。</p>
-<h3 id="操作列表"><a href="#操作列表" class="headerlink" title="操作列表"></a>操作列表</h3><p>range（1,4）只会打印1 2 3</p>
-<p>若range只输入一个参数，则将从0开始。</p>
-<p>可给range指定第三个参数，设定为步长。</p>
-<h4 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h4><p>将for循环和创建新元素的代码合并成一行，并自动附加新元素。</p>
-<p>squares=[value**2 for value in range(1,11)]</p>
-<h4 id="使用列表的一部分"><a href="#使用列表的一部分" class="headerlink" title="使用列表的一部分"></a>使用列表的一部分</h4><h5 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h5><p>与range函数一样，指定索引，cars[0:3]，将返回索引0,1,2的元素</p>
-<p>若不指定，cars[:3]，将从头开始索引，而cars[3:]将从第四个元素索引到末尾</p>
-<p>若访问后三位元素，可cars[-3:]</p>
-<p>也可加入第三个值，告诉Python间隔多少提取一个元素</p>
-<h5 id="复制列表"><a href="#复制列表" class="headerlink" title="复制列表"></a>复制列表</h5><p>省略起始索引与终止索引，cars1=cars[:]</p>
-<p>若只是单纯赋值，cars1=cars，则将两个指向同一个列表</p>
-<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><p>python将不可变的列表称为元组</p>
-<p>元组使用圆括号而非中括号进行标识</p>
-<p>如果你要定义的元组只包含一个元素，必须加上逗号，my_t=(3,)</p>
-<p>虽然不能修改元组的元素，但可以给存储元组的变量赋值</p>
-<p>dimensions=(200,50)</p>
-<p>dimensions=(400,100)</p>
-<p>这是合法的，相当于将一个新元组关联到变量dimension</p>
-<h3 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h3><h4 id="条件测试"><a href="#条件测试" class="headerlink" title="条件测试"></a>条件测试</h4><p>python在检查是否相等时区分大小写</p>
-<p>检查多个条件用 and 和 or</p>
-<p>要判断特定值是否已包含在列表中，可使用关键字in</p>
-<p>检查不包含，可用 not in</p>
-<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>在python中，字典是一系列键值对。每个键都与一个值相关联，你可以使用键来访问相关联的值。</p>
-<p>字典用在花括号中的一系列键值对表示。</p>
-<p>键值对是两个相关联的值，指定键时，Python将返回与之相关联的值。键和值之间用冒号分割，而键值对之间用逗号分割。</p>
-<p>要获取与键相关联的值，可依次指定字典名和放在方括号内的值。</p>
-<p>对于字典中不需要的信息，可用del语句将相应的键值对彻底删除。使用del语句时，必须要指定字典名和要删除的键。</p>
-<p>可使用get来访问值，可避免指定键不存在的情况。</p>
-<p>eg:point_value -alien.get(‘points’,’sorry’)</p>
-<h5 id="遍历字典"><a href="#遍历字典" class="headerlink" title="遍历字典"></a>遍历字典</h5><p>for k,v in users.items()//遍历键值对</p>
-<p>for k in users.keys()//遍历键</p>
-<p>for v in users.values()//遍历值    </p>
-<h3 id="用户输入和while循环"><a href="#用户输入和while循环" class="headerlink" title="用户输入和while循环"></a>用户输入和while循环</h3><p>要返回循环开头，并根据条件测试结果决定是否继续执行循环，可使用continue。</p>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>使用def定义函数</p>
-<p>def user():</p>
-<h5 id="关键字实参"><a href="#关键字实参" class="headerlink" title="关键字实参"></a>关键字实参</h5><p>def pet(type,name)</p>
-<p>不使用pet(hamster,harry)</p>
-<p>使用关键字实参pet(type=’hamster’,name=’harry’)//无视顺序</p>
-<h5 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h5><p>编写函数时，可给每个形参指定默认值，在调用时，若未指定实参，则使用默认形参。</p>
-<p>def pet(type=’dog’,name)</p>
-<h5 id="传递任意数量的实参"><a href="#传递任意数量的实参" class="headerlink" title="传递任意数量的实参"></a>传递任意数量的实参</h5><p>def make(*pizza)://即可接受任意数量的实参</p>
-<h5 id="使用任意数量的关键字实参"><a href="#使用任意数量的关键字实参" class="headerlink" title="使用任意数量的关键字实参"></a>使用任意数量的关键字实参</h5><p>def make(**pizza)://接受任意数量键值对</p>
-<h4 id="将函数存储在模块中"><a href="#将函数存储在模块中" class="headerlink" title="将函数存储在模块中"></a>将函数存储在模块中</h4><p>导入整个模块 import pizza</p>
-<p>导入模块中特定函数 from pizza import makepizza1,makepizza2</p>
-<p>可使用as给模块或者函数指定别名</p>
-<p>from pizza import make as m</p>
-<p>使用<em>号可导入模块中所有函数 from pizza import </em></p>
-<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>类中的 __init()方法会自动运行，并且开头和结尾各有两个下划线。</p>
-<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>class elecar(car):</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/30/%E9%9B%86%E5%90%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/30/%E9%9B%86%E5%90%88/" class="post-title-link" itemprop="url">集合</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-30 10:18:34 / Modified: 13:41:05" itemprop="dateCreated datePublished" datetime="2021-06-30T10:18:34+08:00">2021-06-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="java集合框架"><a href="#java集合框架" class="headerlink" title="java集合框架"></a>java集合框架</h3><h4 id="集合接口与实现分离"><a href="#集合接口与实现分离" class="headerlink" title="集合接口与实现分离"></a>集合接口与实现分离</h4><p>与现代的数据结构类库的常见做法一样，java集合类库也将接口与实现分离。下面用我们熟悉的数据结构——队列来说明是如何分离的。</p>
-<p>队列接口指出可以在队列的尾部添加元素，在队列的头部删除元素，并且可以查找队列中元素的个数。当需要收集对象，并按照“先进先出”方式检索对象时就应该使用队列。</p>
-<p><img src="/2021/06/30/%E9%9B%86%E5%90%88/image-20210630104036075.png" alt="image-20210630104036075"></p>
-<p>队列接口的最简形式可能类似下面这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface Queue&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">    void add(E element);</span><br><span class="line">    E remove();</span><br><span class="line">    int size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个接口并没有说明队列是如何实现的。队列通常有两种实现方式：一种是使用循环数组；另一种是使用链表。</p>
-<p><img src="/2021/06/30/%E9%9B%86%E5%90%88/image-20210630104055147.png" alt="image-20210630104055147"></p>
-<p>每一个实现都可以用一个实现了Queue接口的类表示。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class CircularArrayQueue&lt;E&gt; implements Queue&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">   private int head;</span><br><span class="line">   private int tail;</span><br><span class="line">   CircularArrayQueue(int capacity)&#123;...&#125;</span><br><span class="line">   public void add(E element)&#123;...&#125;</span><br><span class="line">   public E remove()&#123;...&#125;</span><br><span class="line">   public int size()&#123;...&#125;</span><br><span class="line">   private E[] elements;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class LinkedListQueue&lt;E&gt; implements Queue&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">   private Link head;</span><br><span class="line">   private Link tail;</span><br><span class="line">   </span><br><span class="line">   LinkedListQueue()&#123;...&#125;</span><br><span class="line">   public void add(E element)&#123;...&#125;</span><br><span class="line">   public E remove()&#123;...&#125;</span><br><span class="line">   public int size()&#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当在程序中使用队列时，一旦已经构造了集合，就不需要知道究竟使用了哪种实现。因此，只有在构造集合对象时，才会使用具体的类。可以使用接口类型存放集合引用。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;Customer&gt; expresslane = new CircularArrayQueue&lt;&gt;(100);</span><br><span class="line">expressLane.add(new Customer(&quot;Harry&quot;));</span><br></pre></td></tr></table></figure>
-<p>利用这种方法，一旦改变了想法，就可以很轻松地使用另外一种不同的实现。只需要对程序的一个地方1做出修改，即调用构造器的地方。如果觉得LinkedListQueue是个更好的选择，就将代码修改为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Queue1&lt;Customer&gt; expressLane =new LinkedListQueue&lt;&gt;();</span><br><span class="line">expressLane.add(new Customer(&quot;Harry&quot;));</span><br></pre></td></tr></table></figure>
-<p>为什么选择这种实现，而不选择那种实现呢？接口本身并不能说明哪种实现的效率究竟如何。循环数组要比链表更高效，因此多数人优先选择循环数组。不过，通常来讲，这样做也需要付出一定代价。</p>
-<p>循环数组是一个有界集合，即容量有限。如果程序中要收集的对象数量没有上限，就最好使用链表来实现。</p>
-<h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>Iterator接口包含4个方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public interface Iterator&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">   E next();</span><br><span class="line">   boolean hasNext();</span><br><span class="line">   void remove();</span><br><span class="line">   default void forEachRemaining(Consumer&lt;?super E&gt; action);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过反复调用next方法，可以逐个访问集合中的每个元素。但是，如果到达了集合的末尾，next方法将抛出一个NoSuchElementException。因此，需要在调用next之前调用hasNext方法。如果迭代器对象还有多个可以访问的元素，这个方法就返回true。如果想要查看集合中的所有元素，就请求一个迭代器，党hasNext返回true时就反复地调用next方法。例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;String&gt; c=...;</span><br><span class="line">Iterator&lt;String&gt; iter=c.iterator();</span><br><span class="line">while(iter.hasNext())</span><br><span class="line">&#123;</span><br><span class="line">  String element-iter.next();</span><br><span class="line">  do something with element</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>用”for each”循坏可以更加简练地表示同样的循环操作：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(String element : c)</span><br><span class="line">&#123;</span><br><span class="line">   do something with element</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>编译器简单地将”for each”循环转换为带有迭代器的循坏。</p>
-<p>“for each”循环可以处理任何实现了Iterable接口的对象，这个接口只包含一个抽象方法:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Iterable&lt;E&gt;</span><br><span class="line">&#123;</span><br><span class="line">   Iterator&lt;E&gt; iterator();</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>访问元素的顺序取决于集合类型。如果迭代处理一个ArrayList，迭代器将从索引0开始，每迭代一次，索引值加1.不过，如果访问HashSet中的元素，会按照一种基本上随机的顺序获得元素。虽然可以确保在迭代过程中能够遍历到集合中的所有元素，但是无法预知访问各元素的顺序。这通常并不是什么问题，因为对于计算总和或统计匹配之类的计算，顺序并不重要。</p>
-<p>Java集合类库中的迭代器与其他类库中的迭代器在概念上有着重要的区别。在传统的集合类库中，例如，C++的标准模版库，迭代器是根据数组索引建模的。如果给定这样一个迭代器，就可以查看指定位置上的元素，就像知道数组索引i就可以查看数组元素a[i]一样。不需要查找元素，就可以将迭代器向前移动一个位置。这与不需要执行查找操作就可以通过i++将数组索引向前移动一样。但是，Java迭代器并不是这样操作的。查找操作与位置变更是紧密相连的。查找一个元素的唯一方法是调用next,而在执行查找操作的同时，迭代器的位置随之向前移动。<br>因此，应该将Java迭代器认为是位于两个元素之间。当调用next时，迭代器就越过下一个元素，并返回刚刚越过的那个元素的引用。</p>
-<p><img src="/2021/06/30/%E9%9B%86%E5%90%88/image-20210630113409750.png" alt="image-20210630113409750"></p>
-<p>Iterator接口的remove方法将会删除上次调用next方法时返回的元素。在大多数情况下，这是有道理的，在决定删除某个元素之前应该先看一下这个元素。不过，如果想要删除指定位置上的元素，仍然需要越过这个元素：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;String&gt; it =c.iterator();</span><br><span class="line">it.next;</span><br><span class="line">it.remove();</span><br></pre></td></tr></table></figure>
-<p>更重要的是，next方法和remove方法调用之间存在依赖性。如果调用remove之前没有调用next，将是不合法的。如果这样做，将会抛出一个IllegalStateException异常。</p>
-<p>如果想删掉两个相邻的元素，不能直接这样调用：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">it.remove();</span><br><span class="line">it.remove();</span><br></pre></td></tr></table></figure>
-<p>实际上，必须先调用next越过要删除的元素。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">it.remove();</span><br><span class="line">it.next();</span><br><span class="line">it.remove();</span><br></pre></td></tr></table></figure>
-<h3 id="具体集合"><a href="#具体集合" class="headerlink" title="具体集合"></a>具体集合</h3><h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>链表是一个有序集合。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListIterator&lt;E&gt; ListIterator()</span><br></pre></td></tr></table></figure>
-<p>返回一个列表迭代器，用来访问列表中的元素。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListIterator&lt;E&gt; listIterator(int index)</span><br></pre></td></tr></table></figure>
-<p>返回一个列表迭代器，用来访问列表中的元素，第一次调用这个迭代器的next会返回给定索引的元素。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void add(int i,E element)</span><br></pre></td></tr></table></figure>
-<p>在给定位置添加一个元素。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void addAll(int i,Collection&lt;?extends E&gt;elements)</span><br></pre></td></tr></table></figure>
-<p>将一个集合中的所有元素添加到给定位置。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E remove(int i)</span><br></pre></td></tr></table></figure>
-<p>删除给定位置的元素。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E get(int i)</span><br></pre></td></tr></table></figure>
-<p>获取给定位置的元素。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E set(int i,E element)</span><br></pre></td></tr></table></figure>
-<p>用一个新元素替换给定位置的元素，并返回原来那个元素。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int indexOf(Object element)</span><br></pre></td></tr></table></figure>
-<p>返回与指定元素相等的元素在列表中第一次出现的位置，如果没有这样的元素就返回-1.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int lastIndexOf(Object element)</span><br></pre></td></tr></table></figure>
-<p>返回与指定元素相等的元素在列表中最后一次出现的位置，如果没有这样的元素将返回-1.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void add(E newElement)</span><br></pre></td></tr></table></figure>
-<p>在当前位置添加一个元素。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void set(E newElement)</span><br></pre></td></tr></table></figure>
-<p>用新元素替换next或previous访问的上一个元素。如果在上一个next或previous调用之后列表结构被修改了，将抛出一个IllegalStateException异常。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boolean hasPrevious()</span><br></pre></td></tr></table></figure>
-<p>当反向迭代列表时，如果还有可以访问的元素，返回true。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E previous()</span><br></pre></td></tr></table></figure>
-<p>返回前一个对象。如果已经到达了列表的头部，就抛出一个NoSuchElementException异常。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int nextIndex()</span><br></pre></td></tr></table></figure>
-<p>返回下一次调用next方法时将返回的元素的索引。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int previousIndex()</span><br></pre></td></tr></table></figure>
-<p>返回下一次调用previous方法时将返回的元素的索引。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LinkedList()</span><br></pre></td></tr></table></figure>
-<p>构造一个空链表。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LinkedList(Collection&lt;?extends E&gt;elements)</span><br></pre></td></tr></table></figure>
-<p>构造一个链表，并将集合中所有的元素添加到这个链表中。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void addFirst(E element)</span><br><span class="line">void addLast(E element)</span><br></pre></td></tr></table></figure>
-<p>将某个元素添加到列表的头部或尾部。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E getFirst()</span><br><span class="line">E getLast()</span><br></pre></td></tr></table></figure>
-<p>返回列表头部或尾部的元素。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E removeFirst()</span><br><span class="line">E removeLast()</span><br></pre></td></tr></table></figure>
-<p>删除并返回列表头部或尾部的元素。</p>
-<h4 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashSet()</span><br></pre></td></tr></table></figure>
-<p>构造一个空散列集。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashSet(Collection&lt;?extends E&gt;elements)</span><br></pre></td></tr></table></figure>
-<p>构造一个散列集，并将集合中所有元素添加到这个散列集中。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashSet(int initialCapacity)</span><br></pre></td></tr></table></figure>
-<p>构造一个空的具有指定容量的散列集。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashSet(int initialCapacity,float loadFactor)</span><br></pre></td></tr></table></figure>
-<p>构造一个有指定容量和装填因子的空散列集。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int hashCode()</span><br></pre></td></tr></table></figure>
-<p>返回这个对象的散列码。</p>
-<h4 id="树集"><a href="#树集" class="headerlink" title="树集"></a>树集</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TreeSet()</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TreeSet(Comparator&lt;?super E&gt; compartor)</span><br></pre></td></tr></table></figure>
-<p>构造一个空数集。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TreeSet(Collection&lt;?extends E&gt;elements)</span><br><span class="line">TreeSet(SortedSet&lt;E&gt; s)</span><br></pre></td></tr></table></figure>
-<p>构造一个树集，并增加一个集合或有序集中的所有元素。</p>
-<h4 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V get(Object key)</span><br></pre></td></tr></table></figure>
-<p>获取与键关联的值；返回与键关联的对象，或者映射中如果没有这个对象，就返回NULL。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V put(K key,V value)</span><br></pre></td></tr></table></figure>
-<p>将关联的一对键和值放到映射中。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void putAll(Map&lt;?extends K,?extends V&gt;entries)</span><br></pre></td></tr></table></figure>
-<p>将给定映射中的所有映射条目添加到这个映射中。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boolean containsKey(Object key)</span><br></pre></td></tr></table></figure>
-<p>如果在映射中已经有这个键，返回true。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boolean containsValue(Object value)</span><br></pre></td></tr></table></figure>
-<p>如果映射中已经有这个值，返回true。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E6%B3%9B%E5%9E%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/%E6%B3%9B%E5%9E%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">泛型程序设计</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-29 21:03:24" itemprop="dateCreated datePublished" datetime="2021-06-29T21:03:24+08:00">2021-06-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-30 10:15:30" itemprop="dateModified" datetime="2021-06-30T10:15:30+08:00">2021-06-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="为什么要使用泛型程序设计"><a href="#为什么要使用泛型程序设计" class="headerlink" title="为什么要使用泛型程序设计"></a>为什么要使用泛型程序设计</h3><p><strong>泛型程序设计</strong>意味着编写的代码可以对多种不同类型的对象重用。</p>
-<h4 id="谁想成为泛型程序员"><a href="#谁想成为泛型程序员" class="headerlink" title="谁想成为泛型程序员"></a>谁想成为泛型程序员</h4><p>使用像 ArrayList的泛型类很容易。大多数Java程序员都使用 ArrayList<String>这样的类型，就好像它们已经构建在语言之中，像 String[]数组一样。(当然，数组列表比数组要好一些，因为它可以自动扩展。)<br>但是，实现一个泛型类并没有那么容易。对于类型参数，使用这段代码的程序员可能想要内置( plug in)所有的类。他们希望在没有过多的限制以及混乱的错误消息的状态下，做所有的事情。因此，一个泛型程序员的任务就是预测出所用类的未来可能有的所有用途。<br>这一任务难到什么程度呢?下面是标准类库的设计者们肯定产生争议的一个典型问题。 ArrayList类有一个方法addAll用来添加另一个集合的全部元素。程序员可能想要将 ArrayList<Manager>中的所有元素添加到 ArrayList&lt; Employee&gt;中去。然而，反过来就不行了。如果只能允许前一个调用，而不能允许后一个调用呢?Java语言的设计者发明了一个具有独创性的新概念，通配符类型( wildcard type),它解决了这个问题。通配符类型非常抽象，然而，它们能让库的构建者编写出尽可能灵活的方法。<br>泛型程序设计划分为3个能力级别。基本级别是，仅仅使用泛型类——典型的是像 ArrayList这样的集合——不必考虑它们的工作方式与原因。大多数应用程序员将会停留在这一级别上，直到出现了什么问题。当把不同的泛型类混合在一起时，或是在与对类型参数一无所知的遗留的代码进行衔接时，可能会看到含混不清的错误消息。如果这样的话，就需要学习Java泛型来系统地解决这些问题，而不要胡乱地猜测。当然，最终可能想要实现自己的泛型类与泛型方法。<br>应用程序员很可能不喜欢编写太多的泛型代码。JDK开发人员已经做出了很大的努力，为所有的集合类提供了类型参数。凭经验来说，那些原本涉及许多来自通用类型(如 Object或 Comparable接口)的强制类型转换的代码一定会因使用类型参数而受益。</Manager></String></p>
-<h3 id="定义简单泛型"><a href="#定义简单泛型" class="headerlink" title="定义简单泛型"></a>定义简单泛型</h3><p><strong>泛型类</strong>就是有一个或多个类型变量的类。</p>
-<p>注释：类型变量使用大写形式，且比较短，这是很常见的。在ava库中，使用变量E表示集合的元素类型，K和V分别表示表的关键字与值的类型。T(需要时还可以用临近的字母U和S)表示“任意类型”。</p>
-<h3 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h3><p>定义一个带有类型参数的简单方法。 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class ArrayAlg</span><br><span class="line">&#123;</span><br><span class="line"> public static &lt;T&gt; T getMiddle(T... a)</span><br><span class="line">&#123;</span><br><span class="line"> return a[a.length /2];</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>这个方法是在普通类中定义的，而不是在泛型类中定义的。然而，这是一个泛型方法，可以从尖括号和类型变量看出这一点。注意，类型变量放在修饰符(这里是 public static)的后面，返回类型的前面。<br>泛型方法可以定义在普通类中，也可以定义在泛型类中。<br>当调用一个泛型方法时，在方法名前的尖括号中放入具体的类型：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String middle ArrayAlg. &lt;String&gt; (&quot;John&quot;, &quot;Q&quot;, &quot;Public&quot;);</span><br></pre></td></tr></table></figure>
-<p>在这种情况(实际也是大多数情况)下，方法调用中可以省略<String>类型参数。编译器有足够的信息能够推断出所调用的方法。它用names的类型(即 String[])与泛型类型T[]进行匹配并推断出T一定 String是。也就是说，可以调用</String></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String middle ArrayAlg. getMiddle(&quot;John&quot;, &quot;Q.&quot;, &quot;Public&quot;);</span><br></pre></td></tr></table></figure>
-<p>几乎在大多数情况下，对于泛型方法的类型引用没有问题。偶尔，编译器也会提示错误，此时需要解译错误报告。看一看下面这个示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double middle= ArrayAlg.getMiddle(3.14,1729,0);</span><br></pre></td></tr></table></figure>
-<p>错误消息会以晦涩的方式指出(不同的编译器给出的错误消息可能有所不同):解释这句代码有两种方法，而且这两种方法都是合法的。简单地说，编译器将会自动打包参数为1个 Double和2个 Integer对象，而后寻找这些类的共同超类型。事实上；找到2个这样的超类型： Number和 Comparable接口，其本身也是一个泛型类型。在这种情况下，可以采取的补救措施是将所有的参数都写为double值。</p>
-<h3 id="类型限定的变量"><a href="#类型限定的变量" class="headerlink" title="类型限定的变量"></a>类型限定的变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">有时，类或方法需要对类型变量加以约束。下面是一个典型的例子。我们要计算数组中的最小元素：</span><br><span class="line"> class ArrayAlg</span><br><span class="line"> &#123;</span><br><span class="line">    public static &lt;T&gt; T min( a)//almost correct</span><br><span class="line">   &#123;</span><br><span class="line">        if (a = null ||a.length==0) return null;</span><br><span class="line">        T smallest a[0];</span><br><span class="line">        for (int 1; i a. length; i++)</span><br><span class="line">            if (smallest. compareTo(a[i])&gt; 0) smallest=a[i];</span><br><span class="line">        return smallest;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;  </span><br></pre></td></tr></table></figure>
-<p>但是，这里有一个问题。请看一下min方法的代码内部。变量 smallest类型为T,这意味着它可以是任何一个类的对象。怎么才能确信T所属的类有 compareTo方法呢?<br>解决这个问题的方案是将T限制为实现了 Comparable接口(只含一个方法compareTo的标准接口)的类。可以通过对类型变量T设置限定( bound)实现这一点：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&gt; T min(T[] a)...</span><br></pre></td></tr></table></figure>
-<p>实际上 Comparable接口本身就是一个泛型类型。目前，我们忽略其复杂性以及编译器产生的警告。<br>现在，泛型的min方法只能被实现了 Comparable接口的类(如String、 LocalDate等)的数组调用。由于 Rectangle类没有实现 Comparable接口，所以调用min将会产生一个编译错误。</p>
-<p>读者或许会感到奇怪——在此为什么使用关键字 extends而不是 implements?毕竞， Comparable是一个接口。下面的记法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;T extends Boundinglype&gt;</span><br></pre></td></tr></table></figure>
-<p>表示T应该是绑定类型的子类型(subtype)。T和绑定类型可以是类，也可以是接口。选择关键字 extends的原因是更接近子类的概念，并且Java的设计者也不打算在语言中再添加一个新的关键字(如sub)。<br>一个类型变量或通配符可以有多个限定，例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T extends Comparable &amp; Serializable</span><br></pre></td></tr></table></figure>
-<p>限定类型用“&amp;”分隔，而逗号用来分隔类型变量。<br>在java的继承中，可以根据需要拥有多个接口超类型，但限定中至多有一个类。如果用一个类作为限定，它必须是限定列表中的第一个。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/" class="post-title-link" itemprop="url">接口与内部类</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-29 19:47:49 / Modified: 21:00:45" itemprop="dateCreated datePublished" datetime="2021-06-29T19:47:49+08:00">2021-06-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><h4 id="接口的概念"><a href="#接口的概念" class="headerlink" title="接口的概念"></a>接口的概念</h4><p>接口中的所有方法都自动是public方法。因此，在接口中声明方法时，不必提供关键字public。</p>
-<h4 id="接口的属性"><a href="#接口的属性" class="headerlink" title="接口的属性"></a>接口的属性</h4><p>接口不是类。具体来说，不能用new运算符实例化一个接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x =new Comparable(...);/erron</span><br></pre></td></tr></table></figure>
-<p>不过，尽管不能构造接口的对象，却能声明接口的变量：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Comparable x;//ok</span><br></pre></td></tr></table></figure>
-<p>接下来，如同使用instanceof检查一个对象是否属于某个特定类一样，也可以使用instanceof检查一个对象是否实现了某个特定的接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(anObject instanceof Comparable)&#123;...&#125;</span><br></pre></td></tr></table></figure>
-<p>与建立类的继承层次一样，也可以扩展接口。。这里允许有多条接口链，从通用性较高的接口扩展到专用性较高的接口。例如，假设有一个名为Moveable的接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Moveable</span><br><span class="line">&#123;</span><br><span class="line">void move(double x,double y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后，可以假设一个名为Powered的接口扩展了以上接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Powered extends Moveable</span><br><span class="line">&#123;</span><br><span class="line">double milePerGallon();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>虽然在接口中不能包含实例字段，但是可以包含常量。</p>
-<h4 id="解决默认方法冲突"><a href="#解决默认方法冲突" class="headerlink" title="解决默认方法冲突"></a>解决默认方法冲突</h4><p>如果先在一个接口中将一个方法定义为默认方法，然后又在超类或另一个接口中定义同样的方法，会发生什么情况？java的规则如下：</p>
-<p>（1）超类优先。如果超类提供了一个具体方法，同名而且参数相同的默认方法会被忽略。</p>
-<p>（2）接口冲突。如果一个接口提供了一个默认方法，另一个接口1提供了一个同名而且参数类型（不论是否是默认参数）相同的方法，必须覆盖这个方法来解决冲突。</p>
-<h4 id="回调"><a href="#回调" class="headerlink" title="回调"></a>回调</h4><p><strong>回调</strong>是一种常见的程序设计模式。在这种模式中，可以指定某个特定事件发生时应该采取的动作。</p>
-<h3 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h3><p>内部类是定义在另一个类中的类。使用的原因主要有两点：</p>
-<p>（1）内部类可以对同一个包中的其他类隐藏。</p>
-<p>（2）内部类方法可以访问定义这个类的作用域中的数据，包括原本私有的数据。</p>
-<h3 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h3><p>利用代理可以在运行时创建实现了一组给定接口的新类。只有在编译时期无法确定需要实现哪个接口时才有必要使用代理。对于编写应用程序的程序员来说，这种情况很少见，所以如果对这种高级技术不感兴趣，可以跳过本节内容。不过，对于某些系统应用程序，代带来的灵活性可能十分重要。</p>
-<h4 id="何时使用代理"><a href="#何时使用代理" class="headerlink" title="何时使用代理"></a>何时使用代理</h4><p>假设你想构造一个类的对象，这个类实现了一个多个接口，但是在编译时你可能并不知道这些接口到底是什么。这个问题确实有些难度。要想构造一个具体的类，只需要使用 newInstance方法或者使用反射找出构造器。但是，不能实例化接口。需要在运行的程序中定义一个新类。<br>为了解决这个问题，有些程序会生成代码，将这些代码放在一个文件中，调用编译器， 然后再加载得到的类文件。很自然地，这样做速度会比较慢，并且需要将编译器连同程序 一起部署。而代理机制则是一种更好的解决方案。代理类可以在运行时创建全新的类。这样的代理类能够实现你指定的接口。具体地，代理类包含以下方法：</p>
-<p>●指定接口所需要的全部方法。<br>●object类中的全部方法，例如， toString、 equals等。</p>
-<p>不过，不能在运行时为这些方法定义新代码。实际上，必须提供一个调用处理器。调用处理器是实现了 InvocationHandler接口的类的对象。这个接口只有一个方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object invoke(Object proxy, Method method, Object[] args)</span><br></pre></td></tr></table></figure>
-<p>无论何时调用代理对象的方法，调用处器的 invoke方法都会被调用，并向其传递Method对象和原调用的参数。之后调用处理必须确定如何处理这个调用。</p>
-<h4 id="创建代理对象"><a href="#创建代理对象" class="headerlink" title="创建代理对象"></a>创建代理对象</h4><p>要想创建一个代理对象，需要使用 Proxy类 newProxyInstance方法。这个方法有三个参数：<br>●一个类加载器。作为java安全模型的一部分，可以对平台和应用类、 从因特网下载的类等使用不同的类加载器。<br>●一个 Class对象数组，每个元素对应需要实现的各个接口。<br>●一个调用处理器。<br>还有两个需要解决的问题。如何定义处理器?另外，对于得到的代理对象能够做些什么?当然，这两个问题的答案取决于我们想要用代理机制解决什么问题。使用代理可能出于很多目的，例如：</p>
-<p>●将方法调用路由到远程服务器。<br>●在运行的程序中将用户界面事件与动作关联起来。<br>●为了调试，跟踪方法调用。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E7%BB%A7%E6%89%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/%E7%BB%A7%E6%89%BF/" class="post-title-link" itemprop="url">继承</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-29 13:23:25 / Modified: 19:44:21" itemprop="dateCreated datePublished" datetime="2021-06-29T13:23:25+08:00">2021-06-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="定义子类"><a href="#定义子类" class="headerlink" title="定义子类"></a>定义子类</h4><p>关键词extends表明正在构造的新类派生于一个已存在的类。这个已存在的类1称为超类、基类或父类；新类称为子类、派生类或孩子类。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Manger extends Employee</span><br><span class="line">&#123;</span><br><span class="line">  addded methods and fields</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="覆盖方法"><a href="#覆盖方法" class="headerlink" title="覆盖方法"></a>覆盖方法</h4><p>超类中的有些方法对子类并不一定适用。为此，需要提供一个新的方法来覆盖超类中的这个方法。</p>
-<p>当我们希望调用超类中的方法，而不是当前类的这个方法，可以用特殊的关键词<strong>super</strong>来解决。</p>
-<p>继承绝对不会删除任何字段或方法。</p>
-<h4 id="子类构造器"><a href="#子类构造器" class="headerlink" title="子类构造器"></a>子类构造器</h4><p>当子类的构造器不能访问父类的私有字段时，则必须通过一个构造器来初始化这些私有字段。可以利用特殊的super语法调用这个构造器。使用super调用构造器的语句必须是子类构造器的第一条语句。</p>
-<p>如果子类构造器没有显示地调用超类的构造器，将自动调用超类的无参数构造器。如果超类没有无参数构造器，并且在子类的构造器中又没有显示地调用超类的其他构造器，java编译器就会报告一个错误。</p>
-<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><p>一个对象变量可以指示多种实际类型的现象被称为<strong>多态</strong>。</p>
-<p>在运行是能够自动地选择适当的方法，称为<strong>动态绑定</strong>。</p>
-<p><strong>替换原则</strong>：程序中出现超类对象的任何地方都可以使用子类对象替换。</p>
-<p>在java程序设计语言中，对象变量是多态的。</p>
-<h4 id="理解方法调用"><a href="#理解方法调用" class="headerlink" title="理解方法调用"></a>理解方法调用</h4><p>（1）编译器查看对象的声明类型和方法名。</p>
-<p>（2）接下来，编译器要确定方法调用中提供的参数类型。方法的名字和参数列表称为方法的<strong>签名</strong>。</p>
-<p>（3）如果是private方法，static方法，final方法或者构造器，那么编译器将可以准确地知道应该调用哪个方法，这称为<strong>静态绑定</strong>。</p>
-<p>（4）程序运行并且采用动态绑定调用方法时，虚拟机必须调用与x所引用对象的实际类型对应的那个方法。</p>
-<p><strong>警告</strong>：在覆盖一个方法时，子类方法不能低于超类方法的可见性。特别是，如果超类方法时public，子类方法必须也要声明为public。</p>
-<h4 id="阻止继承"><a href="#阻止继承" class="headerlink" title="阻止继承"></a>阻止继承</h4><p>有时候，我们可能希望阻止人们利用某个类定义子类。不允许扩展的类被称为final类。如果在定义类的时候使用了final修饰符就表示这个类是final类。</p>
-<p>类中的某个特定方法也可以被声明为final。如果这样做，子类就不能覆盖这个方法（final类中的所有方法自动地成为final方法）。</p>
-<p>如果一个方法没有被覆盖并且很短，编译器就能对它进行优化处理，这个过程称为<strong>内联</strong>。</p>
-<h4 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h4><p>只能在继承层次内进行强制类型转换。</p>
-<p>在将超类强制转换成子类之前，应该使用instanceof进行检查。</p>
-<h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><p>使用abstract关键字，则不需要实现该方法。</p>
-<p>为了提高程序的清晰度，包含一个或多个抽象方法的类本身必须被声明为抽象的。</p>
-<p>扩展抽象类可以有两种选择。一种是在子类中保留抽象类中的部分或所有抽象方法仍未定义，这样就必须将子类也标记为抽象类；另一种做法是定义全部方法，这样一来，子类就不是抽象的了。</p>
-<p>即使不含抽象方法，也可以将类声明为抽象类。</p>
-<p>抽象类不能实例化。</p>
-<h4 id="受保护访问"><a href="#受保护访问" class="headerlink" title="受保护访问"></a>受保护访问</h4><p>子类也无法访问父类的私有对象。</p>
-<p>当希望允许子类的访问父类的某个字段。为此，需要将这些类方法或字段声明为受保护。</p>
-<p>在java中保护字段只能由同一个包的类访问。</p>
-<h4 id="object类型变量"><a href="#object类型变量" class="headerlink" title="object类型变量"></a>object类型变量</h4><p>在java中，只有基本类型不是对象，例如，数值、字符和布尔类型的值都不是对象。</p>
-<h4 id="相等测试与继承"><a href="#相等测试与继承" class="headerlink" title="相等测试与继承"></a>相等测试与继承</h4><p>java语言规范要求equals方法具有以下特性：</p>
-<p>（1）自反性</p>
-<p>对于任何非空引用想，x.equals(x)应该返回true。</p>
-<p>（2）对称性</p>
-<p>对于任何引用x和y，当且仅当y.equals(x)返回true时，x.equals(y)返回true。</p>
-<p>（3）传递性</p>
-<p>对于任何引用x,y,z，如果x.equlas(y)返回true，y.equals(z)返回true，x.equals(z)也应该返回true。</p>
-<p>（4）一致性</p>
-<p>如果x和y引用的对象没有发生变化，反复调用x.equals(y)应该返回同样的结果。</p>
-<p>（5）对于任何非空引用x，x.equals（null）应该返回fasle</p>
-<h4 id="hasCode方法"><a href="#hasCode方法" class="headerlink" title="hasCode方法"></a>hasCode方法</h4><p>散列码是由对象导出的一个整型值。散列码是没有规律的。如果x和y是两个不同的对象，x.hasCode()与y.hasCode()基本上不会相同。</p>
-<p>如果重新定义了equals方法，就必须为用户可能插入散列表的对象重新定义hasCode方法。</p>
-<h4 id="泛型数组列表"><a href="#泛型数组列表" class="headerlink" title="泛型数组列表"></a>泛型数组列表</h4><p>一旦能够确认数组列表的大小将保持恒定，不再发生变化，就可以调用trimToSize方法。这个方法将存储块的大小调整为保存当前元素数量所需要的存储空间。垃圾回收器将回收多余的存储空间。</p>
-<p>一旦削减了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该在确认不会再向数组列表添加任何元素时再调用trimToSize。</p>
-<h4 id="参数数量可变的方法"><a href="#参数数量可变的方法" class="headerlink" title="参数数量可变的方法"></a>参数数量可变的方法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(&quot;%d&quot;,n)；</span><br><span class="line">System.out.printf(&quot;%d %s&quot;,n,&quot;widgets&quot;);</span><br></pre></td></tr></table></figure>
-<p>这两条语句都调用同一个方法，不过一个调用有两个参数，一个有三个。</p>
-<p>printf方法是这样定义的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class PrintStream</span><br><span class="line">&#123;</span><br><span class="line">public PrintStream printf(String fmt,Object...args)&#123;return format(fmt,args);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="继承的设计技巧"><a href="#继承的设计技巧" class="headerlink" title="继承的设计技巧"></a>继承的设计技巧</h4><p>（1）将公共操作和字段放在超类中。</p>
-<p>（2）不要使用受保护的字段。</p>
-<p>（3）使用继承实现“is-a”关系。</p>
-<p>（4）除非所有继承的方法都有意义，否则不要使用继承。</p>
-<p>（5）在覆盖方法时，不要改变预期的行为。</p>
-<p>（6）使用多态，而不要使用类型信息。</p>
-<p>（7）不要滥用反射。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/" class="post-title-link" itemprop="url">对象与类</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-29 09:44:10 / Modified: 12:11:38" itemprop="dateCreated datePublished" datetime="2021-06-29T09:44:10+08:00">2021-06-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><strong>类</strong>：构造对象的模板和蓝图。</p>
-<p><strong>封装</strong>：有时称为数据隐藏。是处理对象的一个重要概念。从形式上看，封装就是将数据和行为组合在一个包中，并对对象的使用者隐藏具体的实现方式。</p>
-<p><strong>实例字段</strong>：对象中的数据。</p>
-<p><strong>方法</strong>：操作数据的过程。</p>
-<p><strong>继承</strong>：通过扩展一个类来建立另外一个类的过程称为继承。</p>
-<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><h4 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h4><p>构造器与类同名。在构造类的对象时，构造器会运行，从而将实例字段初始化为所希望的初始状态。</p>
-<p>构造器与其他方法有一个重要不同。构造器总是结合new运算符来调用。不能对一个已经存在的对象调用构造器来达到重新设置实例字段的目的。</p>
-<p>每个类可以有一个以上的构造器。</p>
-<p>构造器可以有0个，1个或多个参数。</p>
-<p>构造器没有返回值。</p>
-<h4 id="使用NULL值引用"><a href="#使用NULL值引用" class="headerlink" title="使用NULL值引用"></a>使用NULL值引用</h4><p>一个对象变量包含一个对象的引用，或者包含一个特殊值null，后者表示没有引用任何对象。</p>
-<p>如果对null值应用一个方法，会产生一个NullPointerException异常。</p>
-<p>这是一个很严重的错误，类似于“索引越界”异常。如果你的程序没有“捕获”异常，程序就会终止。正常情况下，程序并不捕获这些异常，而是依赖于程序员从一开始就不要带来异常。</p>
-<h4 id="隐式参数与显示参数"><a href="#隐式参数与显示参数" class="headerlink" title="隐式参数与显示参数"></a>隐式参数与显示参数</h4><p>方法中的参数通常分为隐式参数与显示参数，隐式参数是出现在方法名前的类类型的对象。显示参数是位于方法名后面括号中的数值。</p>
-<p>可用关键词this指示隐式参数，可以将实例字段与局部变量明显地区分开。</p>
-<h4 id="final实例字段"><a href="#final实例字段" class="headerlink" title="final实例字段"></a>final实例字段</h4><p>可以将实例字段定义为final。这样的字段必须在构造对象时初始化。也就是说，必须确保在每一个构造器执行之后，这个字段的值已经设置，并且以后不能再修改这个字段。</p>
-<h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><p>静态方法是不在对象上执行的方法。可以认为静态方法是没有this参数的方法。</p>
-<p>以下两种方法可以使用静态方法：</p>
-<p>(1)方法不需要访问对象状态，因为它需要的所有参数都通过显示参数提供。</p>
-<p>(2)方法只需要访问类的静态字段。</p>
-<p>注：建议使用类名而不是对象来调用静态方法。</p>
-<h4 id="方法参数"><a href="#方法参数" class="headerlink" title="方法参数"></a>方法参数</h4><p><strong>按值调用</strong>：表示方法接受的是调用者提供的值。</p>
-<p><strong>按引用调用</strong>：表示方法接收的是调用者提供的变量地址。</p>
-<p>方法可以修改按引用传递的变量的值，而不能修改按值传递的变量的值。</p>
-<p>java程序设计语言总是采用按值调用。也就是说，方法得到的是所有参数值的一个副本。</p>
-<p>方法不能修改基本数据类型的参数。</p>
-<p>方法可以改变对象参数的状态。</p>
-<p>方法不能让一个对象参数引用一个新的对象。</p>
-<h4 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h4><p>如果多个方法有相同的名字，不同的参数，便出现了重载。编译器必须挑出具体调用哪个方法。它用各个方法首部中的参数类型与特定方法调用中所使用的值类型进行匹配，来选出正确的方法。查找匹配的过程被称为重载解析。</p>
-<h4 id="构造器的具体处理步骤"><a href="#构造器的具体处理步骤" class="headerlink" title="构造器的具体处理步骤"></a>构造器的具体处理步骤</h4><p>(1)如果构造器的第一行调用了另一个构造器，则基于所提供的参数执行第二个构造器。</p>
-<p>(2)否则，</p>
-<p>a）所有数据字段初始化为其默认值（0，false，null）</p>
-<p>b）按照在类声明中出现的顺序，执行所有字段初始化方法和初始化块。</p>
-<p>(3)执行构造器主体代码。</p>
-<h4 id="类设计技巧"><a href="#类设计技巧" class="headerlink" title="类设计技巧"></a>类设计技巧</h4><p>(1)一定要保证数据私有。</p>
-<p>这是最重要的；绝对不要破坏封装性。有时候，可能需要编写一个访问器方法或更改器方法，但是最好还是保持实例字段的私有性。很多惨痛的教训告诉我们，数据的表示形式很可能会改变，但它们的使用方式却不会经变化。当数据保持私有时，表示形式的变化不会对类的使用者产生影响，而且也更容易检测bug。</p>
-<p>(2)一定要对数据进行初始化。</p>
-<p>Java不会为你初始化局部变量，但是会对对象的实例字段进行初始化。最好不要依赖于系统的默认值，而是应该显式地初始化所有的数据，可以提供默认值，也可以在所有构造器中设置默认值。</p>
-<p>(3)不要再类中使用过多的基本类型。</p>
-<p>这个想法是要用其他的类替换使用多个相关的基本类型。</p>
-<p>(4)不是所有的字段都需要单独的字段访问器和字段更改器。</p>
-<p>(5)分解有过多职责的类。</p>
-<p>这样说似乎有点含糊，究竟多少算是“过多”?每个人的看法都不同。但是，如果明显地可以将一个复杂的类分解成两个更为简单的类，就应该将其分解。</p>
-<p>(6)类名和方法名要能够体现它们的职责。</p>
-<p>与变量应该有一个能够反映其含义的名字一样，类也应该如此。</p>
-<p>(7)优先使用不可变的类。</p>
-<p> LocalDate类以及java.time包中的其他类是不可变的——没有方法能修改对象的状态。类似 plusDays的方法并不是更改对象，而是返回状态已修改的新对象。<br>更改对象的问题在于，如果多个线程试图同时更新一个对象，就会发生并发更改。其结果是不可预料的。如果类是不可变的，就可以安全地在多个线程间共享其对象。<br>因此，要尽可能让类是不可变的，</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/" class="post-title-link" itemprop="url">ICS大作业</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-17 19:19:01 / Modified: 19:46:13" itemprop="dateCreated datePublished" datetime="2021-06-17T19:19:01+08:00">2021-06-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="计算机系统"><a href="#计算机系统" class="headerlink" title="计算机系统"></a>计算机系统</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>​        本文遍历了hello.c在Linux下的生命周期，利用了Linux下的开发工具，通过对其进行预处理，编译，汇编，链接等过程的分布解读，来进行对各个过程Linux下的学习与理解。通过对其中的进程运行，内存管理，I/O管理等过程来探索深层次的Linux相关内容。重点在于将课本知识与实例进行结合，同时帮助复习，来将计算机系统的知识所贯通。</p>
-<p><strong><em>\</em>关键词：*<em>**</em></strong>*计算机系统；预处理；编译；汇编；链接；内存管理；Linux*<em>*</em> </p>
-<p><strong><em>\</em>目  录**</strong></p>
-<p><a href="#_Toc532238396">第1章 概述    <strong><em>\</em>- 4 -**</strong></a></p>
-<p><a href="#_Toc532238397">1.1 Hello简介    - 4 -</a></p>
-<p><a href="#_Toc532238398">1.2 环境与工具    - 4 -</a></p>
-<p><a href="#_Toc532238399">1.3 中间结果    - 4 -</a></p>
-<p><a href="#_Toc532238400">1.4 本章小结    - 4 -</a></p>
-<p><a href="#_Toc532238401">第2章 预处理    <strong><em>\</em>- 5 -**</strong></a></p>
-<p><a href="#_Toc532238402">2.1 预处理的概念与作用    - 5 -</a></p>
-<p><a href="#_Toc532238403">2.2在Ubuntu下预处理的命令    - 5 -</a></p>
-<p><a href="#_Toc532238404">2.3 Hello的预处理结果解析    - 5 -</a></p>
-<p><a href="#_Toc532238405">2.4 本章小结    - 5 -</a></p>
-<p><a href="#_Toc532238406">第3章 编译    <strong><em>\</em>- 6 -**</strong></a></p>
-<p><a href="#_Toc532238407">3.1 编译的概念与作用    - 6 -</a></p>
-<p><a href="#_Toc532238408">3.2 在Ubuntu下编译的命令    - 6 -</a></p>
-<p><a href="#_Toc532238409">3.3 Hello的编译结果解析    - 6 -</a></p>
-<p><a href="#_Toc532238410">3.4 本章小结    - 6 -</a></p>
-<p><a href="#_Toc532238411">第4章 汇编    <strong><em>\</em>- 7 -**</strong></a></p>
-<p><a href="#_Toc532238412">4.1 汇编的概念与作用    - 7 -</a></p>
-<p><a href="#_Toc532238413">4.2 在Ubuntu下汇编的命令    - 7 -</a></p>
-<p><a href="#_Toc532238414">4.3 可重定位目标elf格式    - 7 -</a></p>
-<p><a href="#_Toc532238415">4.4 Hello.o的结果解析    - 7 -</a></p>
-<p><a href="#_Toc532238416">4.5 本章小结    - 7 -</a></p>
-<p><a href="#_Toc532238417">第5章 链接    <strong><em>\</em>- 8 -**</strong></a></p>
-<p><a href="#_Toc532238418">5.1 链接的概念与作用    - 8 -</a></p>
-<p><a href="#_Toc532238419">5.2 在Ubuntu下链接的命令    - 8 -</a></p>
-<p><a href="#_Toc532238420">5.3 可执行目标文件hello的格式    - 8 -</a></p>
-<p><a href="#_Toc532238421">5.4 hello的虚拟地址空间    - 8 -</a></p>
-<p><a href="#_Toc532238422">5.5 链接的重定位过程分析    - 8 -</a></p>
-<p><a href="#_Toc532238423">5.6 hello的执行流程    - 8 -</a></p>
-<p><a href="#_Toc532238424">5.7 Hello的动态链接分析    - 8 -</a></p>
-<p><a href="#_Toc532238425">5.8 本章小结    - 9 -</a></p>
-<p><a href="#_Toc532238426">第6章 hello进程管理    <strong><em>\</em>- 10 -**</strong></a></p>
-<p><a href="#_Toc532238427">6.1 进程的概念与作用    - 10 -</a></p>
-<p><a href="#_Toc532238428">6.2 简述壳Shell-bash的作用与处理流程    - 10 -</a></p>
-<p><a href="#_Toc532238429">6.3 Hello的fork进程创建过程    - 10 -</a></p>
-<p><a href="#_Toc532238430">6.4 Hello的execve过程    - 10 -</a></p>
-<p><a href="#_Toc532238431">6.5 Hello的进程执行    - 10 -</a></p>
-<p><a href="#_Toc532238432">6.6 hello的异常与信号处理    - 10 -</a></p>
-<p><a href="#_Toc532238433">6.7本章小结    - 10 -</a></p>
-<p><a href="#_Toc532238434">第7章 hello的存储管理    <strong><em>\</em>- 11 -**</strong></a></p>
-<p><a href="#_Toc532238435">7.1 hello的存储器地址空间    - 11 -</a></p>
-<p><a href="#_Toc532238436">7.2 Intel逻辑地址到线性地址的变换-段式管理    - 11 -</a></p>
-<p><a href="#_Toc532238437">7.3 Hello的线性地址到物理地址的变换-页式管理    - 11 -</a></p>
-<p><a href="#_Toc532238438">7.4 TLB与四级页表支持下的VA到PA的变换    - 11 -</a></p>
-<p><a href="#_Toc532238439">7.5 三级Cache支持下的物理内存访问    - 11 -</a></p>
-<p><a href="#_Toc532238440">7.6 hello进程fork时的内存映射    - 11 -</a></p>
-<p><a href="#_Toc532238441">7.7 hello进程execve时的内存映射    - 11 -</a></p>
-<p><a href="#_Toc532238442">7.8 缺页故障与缺页中断处理    - 11 -</a></p>
-<p><a href="#_Toc532238443">7.9动态存储分配管理    - 11 -</a></p>
-<p><a href="#_Toc532238444">7.10本章小结    - 12 -</a></p>
-<p><a href="#_Toc532238445">第8章 hello的IO管理    <strong><em>\</em>- 13 -**</strong></a></p>
-<p><a href="#_Toc532238446">8.1 Linux的IO设备管理方法    - 13 -</a></p>
-<p><a href="#_Toc532238447">8.2 简述Unix IO接口及其函数    - 13 -</a></p>
-<p><a href="#_Toc532238448">8.3 printf的实现分析    - 13 -</a></p>
-<p><a href="#_Toc532238449">8.4 getchar的实现分析    - 13 -</a></p>
-<p><a href="#_Toc532238450">8.5本章小结    - 13 -</a></p>
-<p><a href="#_Toc532238451">结论    <strong><em>\</em>- 14 -**</strong></a></p>
-<p><a href="#_Toc532238452">附件    <strong><em>\</em>- 15 -**</strong></a></p>
-<p><a href="#_Toc532238453">参考文献    <strong><em>\</em>- 16 -**</strong></a></p>
-<h2 id="第一章-概述"><a href="#第一章-概述" class="headerlink" title="第一章 概述"></a>第一章 概述</h2><h3 id="1-1-Hello简介"><a href="#1-1-Hello简介" class="headerlink" title="1.1 Hello简介"></a>1.1 Hello简介</h3><p>P2P：From Program to Process</p>
-<p>从源文件到目标文件的转换是由编译器驱动程序完成的。</p>
-<p>在这里，GCC编译器驱动程序读取源程序文件hello.c，并把它翻译成一个可执行的目标文件hello。这个编译可以分为四部分进行，执行这四个阶段的程序（预处理器，编译器，汇编器，链接器）一起构成了编译系统。</p>
-<p>Hello.c-&gt;(cpp)hello.i-&gt;(ccl)hello.s-&gt;(as)hello.o-&gt;(ld)hello</p>
-<p>预处理阶段：预处理器（cpp）根据以字符#开头的命令，修改原始的c程序。比如hello.c中第一行的#include<stdio.h>命令告诉预处理器读取系统头文件stdio.h的内容，并把它直接插入程序文本。结果就得到了另一个C程序，通常以.i作为文件扩展名。</stdio.h></p>
-<p>编译阶段：编译器（ccl）将文本文件hello.i翻译成文本文件hello.s。它包含一个汇编语言程序。</p>
-<p>汇编阶段：接下来，汇编器（as）将hello.s翻译成机器语言指令，把这些指令打包成一种叫做可重定位目标程序的格式，并将结果保存在目标文件hello.o中。hello.o是一个二进制文件，它包含的17个字节是函数main的指令编码。</p>
-<p>链接阶段：请注意，hello程序调用了printf函数，它是每个C编译器都提供的标准C库中的一个函数。printf函数存在于一个名为printf.o的单独的预编译好了的目标文件中，而这个文件必须以某种方式合并到我们的hello.o程序中。链接器（ld）就负责处理这种合并。</p>
-<p>O2O: From Zero-0 to Zero-0</p>
-<p>  shell通过execve在fork产生的子进程中加载hello，先删除当前虚拟地址的用户部分已存在的数据结构，为hello的代码段、数据、bss以及栈区域创建新的区域结构，然后映射虚拟内存，设置程序计数器，使之指向代码区域的入口点，进入程序入口后程序开始载入物理内存，而后进入main函数，CPU为hello分配时间片执行逻辑控制流。hello通过Unix I/O管理来控制输出。hello执行完成后shell父进程会回收hello进程，并且内核会从系统中删除hello所有痕迹，至此，hello完成O2O的过程。</p>
-<h3 id="1-2-环境与工具"><a href="#1-2-环境与工具" class="headerlink" title="1.2 环境与工具"></a>1.2 环境与工具</h3><h4 id="1-2-1-硬件环境"><a href="#1-2-1-硬件环境" class="headerlink" title="1.2.1 硬件环境"></a>1.2.1 硬件环境</h4><p>系统型号：81T0</p>
-<p>BIOS：BHCN26WW</p>
-<p>处理器：i5—9300H</p>
-<p>内存：8192MB RAM</p>
-<h4 id="1-2-2-软件环境"><a href="#1-2-2-软件环境" class="headerlink" title="1.2.2 软件环境"></a>1.2.2 软件环境</h4><p>操作系统：win10家庭中文版64位</p>
-<p>VMware Workstation Pro</p>
-<p>Ubuntu20.04</p>
-<h4 id="1-2-3-开发工具"><a href="#1-2-3-开发工具" class="headerlink" title="1.2.3 开发工具"></a>1.2.3 开发工具</h4><p>CodeBlocks</p>
-<p>gcc</p>
-<p>VsCode</p>
-<h3 id="1-3-中间结果"><a href="#1-3-中间结果" class="headerlink" title="1.3 中间结果"></a>1.3 中间结果</h3><p>hello.i预处理后的文件  gcc -E hello.c -o hello.i</p>
-<p>hello.s编译后的文件   gcc -S hello.i -o hello.s</p>
-<p>hello.o汇编后的可重定位目标程序  gcc -c hello.s -o hello.o</p>
-<p>hello链接后的可执行目标文件    gcc -o hello hello.o</p>
-<p>hello_objd.txt：链接后的hello可执行文件经过反汇编生成的代码</p>
-<p>objdump -d hello.o<br>ELFout.txt：链接后的hello可执行文件经过readelf读取的ELF信息</p>
-<p>readelf -a hello.o &gt;hello.elf</p>
-<h3 id="1-4-本章小结"><a href="#1-4-本章小结" class="headerlink" title="1.4 本章小结"></a>1.4 本章小结</h3><p>本章对hello做了一个总体的概述，了解了P2P与020，简述了硬件与软件环境，并了解了中间产物以及其作用。</p>
-<h2 id="第2章-预处理"><a href="#第2章-预处理" class="headerlink" title="\第2章** \预处理**"></a><strong><em>\</em>第2章**</strong> <strong><em>\</em>预处理**</strong></h2><h3 id="2-1-预处理的概念与作用"><a href="#2-1-预处理的概念与作用" class="headerlink" title="2.1 预处理的概念与作用"></a>2.1 预处理的概念与作用</h3><p>概念：预处理一般是指在程序源代码被翻译为目标代码的过程中，生成二进制代码之前的过程。预处理器（cpp）根据以字符#开头的命令，修改原始的C程序，读取头文件stdio.h的内容，并把它直接插入程序文本中。</p>
-<p>作用:</p>
-<p>(1)预处理器（cpp）根据以字符#开头的命令，修改原始的c程序。比如hello.c中第一行的#include<stdio.h>命令告诉预处理器读取系统头文件stdio.h的内容，并把它直接插入程序文本。结果就得到了另一个C程序，通常以.i作为文件扩展名。</stdio.h></p>
-<p>(2)用实际值替换用#define定义的字符串</p>
-<p>(3)根据#if后面的条件决定需要编译的代码</p>
-<h3 id="2-2在Ubuntu下预处理的命令"><a href="#2-2在Ubuntu下预处理的命令" class="headerlink" title="2.2在Ubuntu下预处理的命令"></a>2.2在Ubuntu下预处理的命令</h3><p>gcc -E hello.c -o hello.i</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsD253.tmp.jpg" alt="img"></p>
-<p> <img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsEC45.tmp.jpg" alt="img"></p>
-<h3 id="2-3-Hello的预处理结果解析"><a href="#2-3-Hello的预处理结果解析" class="headerlink" title="2.3 Hello的预处理结果解析"></a>2.3 Hello的预处理结果解析</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsA063.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsC62C.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsE629.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsFED2.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps148E.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps2D66.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps4043.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps53EB.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps690B.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps802D.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps9676.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsA655.tmp.jpg" alt="img"></p>
-<h3 id="2-4-本章小结"><a href="#2-4-本章小结" class="headerlink" title="2.4 本章小结"></a>2.4 本章小结</h3><p>​       本章了解了预处理的概念及作用，以及在linux系统下的指令，同时解析了预处理的文本内容，让我对预处理有了更一步的了解和较为深刻的认识，更好的理解了计算机系统。</p>
-<h2 id="第3章-编译"><a href="#第3章-编译" class="headerlink" title="\第3章** \编译**"></a><strong><em>\</em>第3章**</strong> <strong><em>\</em>编译**</strong></h2><h3 id="3-1-编译的概念与作用"><a href="#3-1-编译的概念与作用" class="headerlink" title="3.1 编译的概念与作用"></a>3.1 编译的概念与作用</h3><p>概念：编译过程是整个程序构建的核心部分，编译成功，会将源代码由文本形式转换成机器语言，编译过程就是把预处理完的文件进行一系列词法分析、语法分析、语义分析以及优化后生成相应的汇编代码文件。 </p>
-<p>作用：编译器（ccl）将文本文件hello.i翻译成文本文件hello.s，它包含一个汇编语言程序，该程序包含函数main的定义，其中每条语句都以一种文本格式描述了一条低级语言指令。编译主要作用除了是将文本文件hello.i翻译成文本文件hello.s之外，还在出现语法错误时给出提示信息。执行过程主要从其中几个阶段进行分析：</p>
-<p>(1)词法分析：词法分析是使用一种叫做lex的程序实现词法扫描，它会按照用户之前描述好的词法规则将输入的字符串分割成一个个记号。产生的记号一般分为：关键字、标识符、字面量（包含数字、字符串等）和特殊符号（运算符、等号等），然后他们放到对应的表中。</p>
-<p>(2)语法分析：语法分析器根据用户给定的语法规则，将词法分析产生的记号序列进行解析，然后将它们构成一棵语法树。对于不同的语言，只是其语法规则不一样。用于语法分析也有一个现成的工具，叫做：yacc。</p>
-<p>(3)语义分析：语法分析完成了对表达式语法层面的分析，但是它不了解这个语句是否真正有意义。有的语句在语法上是合法的，但是却是没有实际的意义，比如说两个指针的做乘法运算，这个时候就需要进行语义分析，但是编译器能分析的语义也只有静态语义。</p>
-<p>(4)中间代码生成：我们的代码是可以进行优化的，对于一些在编译期间就能确定的值，是会将它进行优化的，比如说上边例子中的 2+6，在编译期间就可以确定他的值为8了，但是直接在语法上进行优化的话比较困难，这时优化器会先将语法树转成中间代码。中间代码一般与目标机器和运行环境无关。（不包含数据的尺寸、变量地址和寄存器的名字等）。中间代码在不同的编译器中有着不同的形式，比较常见的有三地址码和P-代码。</p>
-<p>(5)目标代码生成与优化:代码生成器将中间代码转成机器代码，这个过程是依赖于目标机器的，因为不同的机器有着不同的字长、寄存器、数据类型等。最后目标代码优化器对目标代码进行优化，比如选择合适的寻址方式、使用唯一来代替乘除法、删除出多余的指令等。</p>
-<h3 id="3-2-在Ubuntu下编译的命令"><a href="#3-2-在Ubuntu下编译的命令" class="headerlink" title="3.2 在Ubuntu下编译的命令"></a>3.2 在Ubuntu下编译的命令</h3><p>gcc -S hello.i -o hello.s</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsA425.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsB1D2.tmp.jpg" alt="img"></p>
-<h3 id="3-3-Hello的编译结果解析"><a href="#3-3-Hello的编译结果解析" class="headerlink" title="3.3 Hello的编译结果解析"></a>3.3 Hello的编译结果解析</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps35E.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps18AC.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps2C83.tmp.jpg" alt="img"></p>
-<h4 id="3-3-1-数据"><a href="#3-3-1-数据" class="headerlink" title="\3.3.1 数据**"></a><strong><em>\</em>3.3.1 数据**</strong></h4><h5 id="1-全局变量"><a href="#1-全局变量" class="headerlink" title="(1)全局变量"></a>(1)全局变量</h5><p> int sleeptime=2;</p>
-<p>   全局变量sleeptime被设置为int，由于int与long大小相同，所以被转换为long，数值大小为2，被赋予4个字节内存，对齐方式设置为4，储存在.data中。</p>
-<h5 id="2-局部变量"><a href="#2-局部变量" class="headerlink" title="(2)局部变量"></a>(2)局部变量</h5><p> int i;</p>
-<p>通常储存在栈或者是寄存器中，在这个程序中，i被存放在栈中</p>
-<p>而argc作为传入main的参数同样储存在栈中</p>
-<h5 id="3-字符串"><a href="#3-字符串" class="headerlink" title="(3)字符串"></a>(3)字符串</h5><p> 代码中出现的字符串，存放在.roarta中</p>
-<h4 id="3-3-2-赋值"><a href="#3-3-2-赋值" class="headerlink" title="\3.3.2 赋值**"></a><strong><em>\</em>3.3.2 赋值**</strong></h4><p> 对全局变量的赋初值直接在汇编后代码。</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps1CFF.tmp.jpg" alt="img"></p>
-<p>对循环变量i的赋值，局部变量i保存在栈中，存放在-4(%rbp)中，对其赋初值为0。</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps57C7.tmp.jpg" alt="img"></p>
-<h4 id="3-3-3-类型转换"><a href="#3-3-3-类型转换" class="headerlink" title="\3.3.3 类型转换**"></a><strong><em>\</em>3.3.3 类型转换**</strong></h4><p>将全局变量的int转换为long类型。都占据4个字节。</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps856F.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8570.tmp.jpg" alt="img"> </p>
-<h4 id="3-3-4-算数操作"><a href="#3-3-4-算数操作" class="headerlink" title="\3.3.4 算数操作**"></a><strong><em>\</em>3.3.4 算数操作**</strong></h4><p>当i的值小于8时，将i的值每次循环+1。</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8571.tmp.jpg" alt="img"> </p>
-<h4 id="3-3-5-关系操作"><a href="#3-3-5-关系操作" class="headerlink" title="\3.3.5 关系操作**"></a><strong><em>\</em>3.3.5 关系操作**</strong></h4><p>判断argc是否等于3</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8572.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8573.tmp.jpg" alt="img"> </p>
-<p>通过cmpl来判断，argc存放在-20(%rbp)中</p>
-<p>通过je跳转</p>
-<p>判断循环变量i是否小于8</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8574.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8575.tmp.jpg" alt="img"> </p>
-<p>通过cmpl来判断，i存放在-4(%rbp)中</p>
-<p>通过jle跳转</p>
-<h4 id="3-3-6-数组-指针-结构操作"><a href="#3-3-6-数组-指针-结构操作" class="headerlink" title="\3.3.6 数组/指针/结构操作**"></a><strong><em>\</em>3.3.6 数组/指针/结构操作**</strong></h4><p>在代码中对数组的引用</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8576.tmp.jpg" alt="img"> </p>
-<p>分别存放argv[0]与argv[1]</p>
-<h4 id="3-3-7-控制转移"><a href="#3-3-7-控制转移" class="headerlink" title="\3.3.7 控制转移**"></a><strong><em>\</em>3.3.7 控制转移**</strong></h4><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8577.tmp.jpg" alt="img"> </p>
-<p>赋初值给i,开始进行循环</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8578.tmp.jpg" alt="img"> </p>
-<p>判断是否满足循环条件</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8579.tmp.jpg" alt="img"> </p>
-<p>判断argc是否等于3</p>
-<h4 id="3-3-8-函数操作"><a href="#3-3-8-函数操作" class="headerlink" title="\3.3.8 函数操作**"></a><strong><em>\</em>3.3.8 函数操作**</strong></h4><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps857A.tmp.jpg" alt="img"> </p>
-<p>调用printf与sleep</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps858B.tmp.jpg" alt="img"> </p>
-<p>主函数</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps858C.tmp.jpg" alt="img"> </p>
-<p>return</p>
-<h3 id="3-4-本章小结"><a href="#3-4-本章小结" class="headerlink" title="3.4 本章小结"></a>3.4 本章小结</h3><p>​        通过对文本文件hello.c的学习，再次强调了汇编语言的重要性。</p>
-<p>​        编译器将高级语言编译成汇编语言，在以上的分析过程中，详细的分析了编译器是怎么处理C语言的各个数据类型以及各类操作的，按照不同的数据类型和操作格式，解释了hello.c文件与hello.s文件间的映射关系。通过对汇编语言的分析，加深了对各种操作的掌握。</p>
-<h2 id="第4章-汇编"><a href="#第4章-汇编" class="headerlink" title="\第4章** \汇编**"></a><strong><em>\</em>第4章**</strong> <strong><em>\</em>汇编**</strong></h2><h3 id="4-1-汇编的概念与作用"><a href="#4-1-汇编的概念与作用" class="headerlink" title="4.1 汇编的概念与作用"></a>4.1 汇编的概念与作用</h3><p>概念与作用：汇编器（as）将hello.s翻译成机器语言指令，把这些指令打包成一种叫做可重定位目标程序的格式，并将结果保存在目标文件hello.o中。hello.o是一个二进制文件，它包含的17个字节是函数main的指令编码。</p>
-<h3 id="4-2-在Ubuntu下汇编的命令"><a href="#4-2-在Ubuntu下汇编的命令" class="headerlink" title="4.2 在Ubuntu下汇编的命令"></a>4.2 在Ubuntu下汇编的命令</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74B.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74C.tmp.jpg" alt="img"> </p>
-<h3 id="4-3-可重定位目标elf格式"><a href="#4-3-可重定位目标elf格式" class="headerlink" title="4.3 可重定位目标elf格式"></a>4.3 可重定位目标elf格式</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74D.tmp.jpg" alt="img"> </p>
-<p> <img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74E.tmp.jpg" alt="img"></p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74F.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps750.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps751.tmp.jpg" alt="img"> </p>
-<p>ELF头以一个十六字节的序列开始，这个序列描述了生成该文件的系统的字的大小和字节顺序。ELF头剩下的部分包含帮助链接器语法分析和解释目标文件的信息。其中包括ELF头的大小，目标文件的类型，机器类型，节头部标中条目的大小和数量。不同节的位置和大小是由节头部表描述的，其中目标文件中每一个节都有一个固定大小的条目。</p>
-<p>.text:已编译程序的机器代码</p>
-<p>.rodata:只读数据</p>
-<p>.data:已初始化的全局和静态C变量</p>
-<p>.bss:未初始化的全局和静态C变量，以及所有被初始化为0的全局或静态变量</p>
-<p>.symtab:一个符号表，它存放在程序中定义和引用的函数和全局变量的信息</p>
-<p>.rel.text:一个.text节中位置的列表</p>
-<p>.rel.data:被模块引用或定义的所有全局变量的重定位信息</p>
-<p>.debug:一个调试符号表</p>
-<p>.line:原始C源程序中的行号和.text节中机器指令之间的映射</p>
-<p>.strtab:一个字符串表</p>
-<h3 id="4-4-Hello-o的结果解析"><a href="#4-4-Hello-o的结果解析" class="headerlink" title="4.4 Hello.o的结果解析"></a>4.4 Hello.o的结果解析</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps752.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps753.tmp.jpg" alt="img"> </p>
-<p>机器语言的构成：<br>机器的指令指令是CPU能直接识别并执行的指令，它的表现形式是二进制编码。<br>通常由操作码和操作数两部分组成，操作码指出该指令所要完成的操作，即指令的功能，操作数指出参与运算的对象，以及运算结果所存放的位置等。</p>
-<p>汇编前后代码区别：</p>
-<p>经过汇编之后，hello.o文件得到了ELF格式信息，重定位信息，所以发生了以下变化：</p>
-<p>(1)所有机器数都由10进制变成了便于机器操作的16进制</p>
-<p>(2)在函数调用方面，之前是直接调用，在汇编之后，变成了通过程序计数器(PC)的变化来转移</p>
-<p>(3)跳转方面，也由直接跳转变成了通过程序计数器来转变</p>
-<p>(4)对于全局变量的引用，某些全局变量因为他们的地址需要在运行后才能确定，所以访问需要重定位；在汇编后的代码，所以在汇编后，这些操作数都被置于零，添加重定位条目</p>
-<h3 id="4-5-本章小结"><a href="#4-5-本章小结" class="headerlink" title="4.5 本章小结"></a>4.5 本章小结</h3><p>​       汇编阶段，通过汇编器(as)将hello.s翻译成机器语言指令，把这些指令打包成一种叫做可重定位目标程序的格式，并将结果保存在hello.o中。</p>
-<p>​       通过实验，了解了汇编前后代码的区别以及ELF表的相关内容，对汇编的掌握又提升了一部分。</p>
-<h2 id="第-5-章-链接"><a href="#第-5-章-链接" class="headerlink" title="\第****5****章* *链接**"></a><strong><em>\</em>第*<em>**</em></strong>*5*<strong>**</strong>*章*<strong><em> </em></strong>*链接*<em>*</em></h2><h3 id="5-1-链接的概念与作用"><a href="#5-1-链接的概念与作用" class="headerlink" title="5.1 链接的概念与作用"></a>5.1 链接的概念与作用</h3><p>链接是将各种代码和数据片段收集并组合成为一个单一文件的过程，这个文件可被加载(复制)到内存并执行。链接可以执行于编译时，也就是在源代码被翻译成机器代码时；也可以执行于加载时，也就是在程序被加载器加载到内存并执行时；甚至执行于运行时，也就是由应用程序来执行。</p>
-<h3 id="5-2-在Ubuntu下链接的命令"><a href="#5-2-在Ubuntu下链接的命令" class="headerlink" title="5.2 在Ubuntu下链接的命令"></a>5.2 在Ubuntu下链接的命令</h3><p>gcc -o hello hello.o</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF185.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF186.tmp.jpg" alt="img"> </p>
-<h3 id="5-3-可执行目标文件hello的格式"><a href="#5-3-可执行目标文件hello的格式" class="headerlink" title="5.3 可执行目标文件hello的格式"></a>5.3 可执行目标文件hello的格式</h3><p>  readelf -a hello &gt; hello_out.elf</p>
-<p>ELF头(ELF header)以一个16字节的序列开始，这个序列描述了生成该文件的系统的字的大小和字节顺序。</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF187.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF188.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF189.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF18A.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF18B.tmp.jpg" alt="img"> </p>
-<p>重定位节</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF18C.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF19C.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF19D.tmp.jpg" alt="img"> </p>
-<h3 id="5-4-hello的虚拟地址空间"><a href="#5-4-hello的虚拟地址空间" class="headerlink" title="5.4 hello的虚拟地址空间"></a>5.4 hello的虚拟地址空间</h3><p>使用edb加载hello，查看本进程的虚拟地址空间各段信息，并与5.3对照分析说明。  </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF19E.tmp.jpg" alt="img"> </p>
-<p>edb使用方法</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF19F.tmp.jpg" alt="img"> </p>
-<p>可以从Data Dump中查看虚拟空间的地址，程序的虚拟空间地址为</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A0.tmp.jpg" alt="img"> </p>
-<p>首先查看hello_out.elf中的程序头部分，如下图：</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A1.tmp.jpg" alt="img"> </p>
-<p>此处PHDR表示该段具有读/执行权限，表示自身所在的程序头部表在内存中的位置为内存起始位置0x400000偏移0x40字节处</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A2.tmp.jpg" alt="img"> </p>
-<p>此处INTERP位于偏移0x318处，该段具有读权限，记录了程序所用ELF解析器</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A3.tmp.jpg" alt="img"> </p>
-<p>LOAD段位于开始处，有读/执行访问权限，其中包括ELF头、程序头部表以及.init、.text、.rodata字节</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A4.tmp.jpg" alt="img"> </p>
-<p>DYNAMIC在偏移0x2da8处，则与之对应</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A5.tmp.jpg" alt="img"> </p>
-<p>NOTE在偏移0x338处，则与之对应</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A6.tmp.jpg" alt="img"> </p>
-<h3 id="5-5-链接的重定位过程分析"><a href="#5-5-链接的重定位过程分析" class="headerlink" title="5.5 链接的重定位过程分析"></a>5.5 链接的重定位过程分析</h3><p>1.对于包含的函数：在hello.o反汇编生成的代码中，只有main函数，而在链接后生成的反汇编代码中，出现了调用的其他函数，比如printf，puts，getchar，exit，sleep等</p>
-<p>2.对于函数调用和跳转：在hello.o反汇编生成的代码中，跳转都是一个偏移量，并在后面加上重定位条目，而在链接后生成的反汇编代码中，函数调用和跳转拥有了实际上的虚拟地址和函数，链接前的函数调用，调用地址为空，添加重定位条目，链接后的函数调用，拥有了实际的虚拟地址和函数名，不再需要重定位条目</p>
-<p>3.增加了节：在hello.o反汇编生成的代码中，只有.text一个节，而在链接后生成的反汇编代码中，又添加了.init节和.fini节</p>
-<p>4.地址引用和全局变量的引用：在hello.o反汇编生成的代码中，对全局变量的引用是通过重定位符号来描述的，而在链接后生成的反汇编代码中，随着链接的完成，有些需要在运行时确定的地址得到确定的变量被确定了虚拟内存地址</p>
-<h3 id="5-6-hello的执行流程"><a href="#5-6-hello的执行流程" class="headerlink" title="5.6 hello的执行流程"></a>5.6 hello的执行流程</h3><p>0000000000401000 <_init>:</_init></p>
-<p>0000000000401030 puts@plt:</p>
-<p>0000000000401040 printf@plt:</p>
-<p>0000000000401050 getchar@plt:</p>
-<p>0000000000401060 exit@plt:</p>
-<p>0000000000401070 sleep@plt:</p>
-<p>0000000000401080 :</p>
-<p>0000000000401110 <_start>:</_start></p>
-<p>0000000000401140 <_dl_relocate_static_pie>:</_dl_relocate_static_pie></p>
-<p>0000000000401150 <_libc_csu_init></_libc_csu_init></p>
-<p>00000000004011b0 <_libc_csu_fini></_libc_csu_fini></p>
-<p>00000000004011b4 <_fini>:</_fini></p>
-<h3 id="5-7-Hello的动态链接分析"><a href="#5-7-Hello的动态链接分析" class="headerlink" title="5.7 Hello的动态链接分析"></a>5.7 Hello的动态链接分析</h3><p>分析hello程序的动态链接项目，通过edb调试，分析在dl_init前后，这些项目的内容变化。要截图标识说明。</p>
-<p>根据hello  ELF可知，.got起始位置为0x3f98</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1B7.tmp.jpg" alt="img"> </p>
-<p>在调用dl_init之前其后16字节均为0</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1B8.tmp.jpg" alt="img"> </p>
-<p>调用_start之后发生改变，其后的两个8个字节分别改变，其中GOT[O]和GOT[1]包含动态链接器在解析函数地址时会使用的信息。GOT[2]是动态链接器在1d-linux.so模块中的入口点。其余的每个条目对应于一个被调用的函数，改变后的GOT表如下：</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1B9.tmp.jpg" alt="img"> </p>
-<p>可以看出其已经动态链接，GOT条目已经改变。</p>
-<h3 id="5-8-本章小结"><a href="#5-8-本章小结" class="headerlink" title="5.8 本章小结"></a>5.8 本章小结</h3><p>​          链接是将各种代码和数据片段收集并组合成为一个单一文件的过程，这个文件可被加载(复制)到内存并执行。链接可以执行于编译时，也就是在源代码被翻译成机器代码时；也可以执行于加载时，也就是在程序被加载器加载到内存并执行时；甚至执行于运行时，也就是由应用程序来执行。在进行本章操作后，对于链接过程及其中间变化有了新的了解，对于这部分知识也加深了掌握。</p>
-<h2 id="第-6-章-hello进程管理"><a href="#第-6-章-hello进程管理" class="headerlink" title="\第****6****章* *hello进程管理**"></a><strong><em>\</em>第*<em>**</em></strong>*6*<strong>**</strong>*章*<strong><em> </em></strong>*hello进程管理*<em>*</em></h2><h3 id="6-1-进程的概念与作用"><a href="#6-1-进程的概念与作用" class="headerlink" title="6.1 进程的概念与作用"></a>6.1 进程的概念与作用</h3><p>进程的经典定义是一个执行中程序的实例。系统中的每个程序都运行在某个进程上下文中。上下文是由程序正确运行所需的状态组成的。这个状态包括存放在内存中的程序的代码和数据，它的栈，通用目的寄存器的内容，程序计数器，环境变量以及打开文件描述符的集合。</p>
-<p>进程的作用是给在在运行一个程序时，得到一个假象，就好像我们的程序是系统中当前运行的唯一的程序一样。我们的程序好像是独占地使用处理器和内存。处理器就好像是无间断地一条接一条地执行我们程序中的指令。最后，我们程序中的代码和数据好像是系统内存中唯一的对象。这些假象都是通过进程的概念提供给我们的。</p>
-<h3 id="6-2-简述壳Shell-bash的作用与处理流程"><a href="#6-2-简述壳Shell-bash的作用与处理流程" class="headerlink" title="6.2 简述壳Shell-bash的作用与处理流程"></a>6.2 简述壳Shell-bash的作用与处理流程</h3><p>shell是一种命令解释器，指为操作系统的使用者提供操作界面，它接收用户命令，然后调用相应的应用程序，交互式解释和执行用户输入的命令或者自动地解释和执行预先设定好的一连串的命令。</p>
-<p>Shell-bash的处理流程</p>
-<p>(1)读取用户由键盘输入的命令行，对其进行语法检查，如果键入的命令不是一个内部命令并且在路径里没有找到这个可执行文件，将会显示一条错误信息</p>
-<p>(2)如果是内部命令直接执行</p>
-<p>(3)若不是内部命令，则是可执行程序，分析命令，以命令名作为文件名，并将其它参数改造为系统调用execve( )内部处理所要求的形式，传给Linux内核。</p>
-<p>(4)终端进程调用fork( )建立一个子进程。</p>
-<p>(5)终端进程本身调用wait4()来等待子进程完成（如果是后台命令，则不等待）。当子进程运行时调用execve()，子进程根据文件名到目录中查找有关文件，调入内存，执行这个程序。</p>
-<p>(6).如果命令末尾有&amp;,则终端进程不用执行系统调用wait4()，立即发提示符，让用户输入下一条命令；否则终端进程会一直等待，当子进程完成工作后，向父进程报告，此时中断进程醒来，作必要的判别工作后，终端发出命令提示符，重复上述处理过程。</p>
-<h3 id="6-3-Hello的fork进程创建过程"><a href="#6-3-Hello的fork进程创建过程" class="headerlink" title="6.3 Hello的fork进程创建过程"></a>6.3 Hello的fork进程创建过程</h3><p>当shell读取到执行hello程序时候，shell会分析命令，以命令名作为文件名，并将其它参数改造为系统调用execve( )内部处理所要求的形式，传给Linux内核。</p>
-<p>然后终端进程调用fork( )建立一个子进程，新创建的子进程几乎但不完全与父进程相同。子进程得到与父进程用户级虚拟地址空间相同的(但是独立的)一份副本，包括代码和数据段、堆、共享库以及用户栈。子进程还获得与父进程任何打开文件描述符相同的副本，这就意味着当父进程调用fork时，子进程可以读写父进程中打开的任何文件。父进程和新创建的子进程之间最大的区别在于它们有不同的PID。</p>
-<p>最后终端进程本身调用waitpid()来等待子进程完成（如果是后台命令，则不等待）。</p>
-<p>fork具有以下特性：</p>
-<p>(1)调用一次，返回两次。</p>
-<p>(2)并发执行。</p>
-<p>(3)相同但是独立的地址空间。</p>
-<p>(4)共享文件。</p>
-<h3 id="6-4-Hello的execve过程"><a href="#6-4-Hello的execve过程" class="headerlink" title="6.4 Hello的execve过程"></a>6.4 Hello的execve过程</h3><p>execve函数在当前进程的上下文中加载并运行一个新程序。</p>
-<p>execve函数加载并运行可执行目标文件hello，且带参数列表argv和环境变量列表envp。只有当出现错误时，例如找不到hello，execve 才会返回到调用程序。所以，与fork一次调用返回两次不同，execve调用一次并从不返回。</p>
-<p>在execve加载了hello之后，调用启动代码libc_start_main。启动代码设置栈，并将控制传递给新程序的主函数，该主函数具有如下形式的原型</p>
-<p>int main(int argc,char <strong>argv ,char </strong>envp)</p>
-<p>execve过程执行以下内容：</p>
-<p>1.删除已存在的用户区域。删除当前进程虚拟地址的用户部分中的已存在的区域结构。</p>
-<p>2.映射私有区域。为新程序的代码、数据、bss 和栈区域创建新的区域结构。所有这些</p>
-<p>3.新的区域都是私有的、写时复制的。代码和数据区域被映射为hello文件中的. text和.data区。bss 区域是请求二进制零的，映射到匿名文件，其大小包含在hello中。栈和堆区域也是请求二进制零的，初始长度为零。概括了私有区域的不同映射。</p>
-<p>4.映射共享区域。如果hello程序与共享对象(或目标)链接，比如标准C库libc.so，那么这些对象都是动态链接到这个程序的，然后再映射到用户虚拟地址空间中的共享区域内。</p>
-<p>5.设置程序计数器(PC)。execve做的最后一件事情就是设置当前进程上下文中的程序计数器，使之指向代码区域的入口点。</p>
-<h3 id="6-5-Hello的进程执行"><a href="#6-5-Hello的进程执行" class="headerlink" title="6.5 Hello的进程执行"></a>6.5 Hello的进程执行</h3><p>hello是一个进程，在执行的时得到一个抽象，就好像hello是系统中当前运行的唯一的程序一样。hello拥有一个独立的逻辑控制流，就像程序独占地使用处理器，同时hello拥有一个私有的地址空间，就像我们的程序独占地使用内存系统。</p>
-<p>逻辑控制流和时间片</p>
-<p>内核为每个进程（例如hello）维持一个上下文(context)。上下文就是内核重新启动一个被抢占的进程所需的状态。它由一些对象的值组成，这些对象包括通用目的寄存器、浮点寄存器、程序计数器、用户栈、状态寄存器、内核栈和各种内核数据结构，比如描述地址空间的页表、包含有关当前进程信息的进程表，以及包含进程已打开文件的信息的文件表。</p>
-<p>在进程执行的某些时刻，内核可以决定抢占当前进程，并重新开始一个先前被抢占了的进程。这种决策就叫做调度，是由内核中称为调度器的代码处理的。当内核选择一个新的进程运行时，我们说内核调度了这个进程。在内核调度了一个新的进程运行后，它就抢占当前进程，并使用一种称为上下文切换的机制来将控制转移到新的进程。</p>
-<p>上下文切换的过程</p>
-<p>(1)保存当前进程的上下文</p>
-<p>(2)恢复某个先前被抢占的进程被保存的上下文</p>
-<p>(3)将控制传递给这个新恢复的进程</p>
-<p>一个逻辑流的执行在时间上与另一个流重叠，称为并发流；这两个流被称为并发地运行。</p>
-<p>进程时间片</p>
-<p>多个流并发地执行的一般现象被称为并发。一个进程和其他进程轮流运行的概念称为多任务。一个进程执行它的控制流的一部分的每一时间段叫做时间片。因此，多任务也叫做时间分片。</p>
-<p>用户态与核心态转换</p>
-<p>当内核代表用户执行系统调用时，可能会发生上下文切换。如果系统调用因为等待某个事件发生而阻塞，那么内核可以让当前进程休眠，切换到另一个进程。比如，如果一个read系统调用需要访问磁盘，内核可以选择执行上下文切换，运行另外一个进程，而不是等待数据从磁盘到达。另一个示例是sleep系统调用，它显式地请求让调用进程休眠。般而言， 即使系统调用没有阻塞，内核也可以决定执行上下文切换，而不是将控制返回给调用进程。运行应用程序代码的进程初始时是在用户模式中的。进程从用户模式变为内核模式的唯一方法是通过诸如中断、故障或者陷人系统调用这样的异常。当异常发生时，控制传递到异常处理程序，处理器将模式从用户模式变为内核模式。处理程序运行在内核模式中，当它返回到应用程序代码时，处理器就把模式从内核模式改回到用户模式。</p>
-<h3 id="6-6-hello的异常与信号处理"><a href="#6-6-hello的异常与信号处理" class="headerlink" title="6.6 hello的异常与信号处理"></a>6.6 hello的异常与信号处理</h3><p> hello执行过程中会出现哪几类异常，会产生哪些信号，又怎么处理的。</p>
-<p> 程序运行过程中可以按键盘，如不停乱按，包括回车，Ctrl-Z，Ctrl-C等，Ctrl-z后可以运行ps  jobs  pstree  fg  kill 等命令，请分别给出各命令及运行结截屏，说明异常与信号的处理。</p>
-<p>异常</p>
-<p>1.中断：当输入Ctrl-Z，进程收到信号SIGSTP，为暂停运行，直到收到SIGCONT</p>
-<p>2.终止：当输如Ctrl-C，信号SIGINT，进程终止</p>
-<p>信号：</p>
-<p>信号SIGSTP：通过Ctrl-Z，为暂停运行直到收到下一个SIGCONT</p>
-<p>信号SIGINT：通过Ctrl-C，进程终止</p>
-<p>(1)直接运行，不再执行任何操作：</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63F7.tmp.jpg" alt="img"> </p>
-<p>程序会正常运行直到结束，程序结束后进程被回收</p>
-<p>(2) 运行后输入Ctrl-C</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63F8.tmp.jpg" alt="img"> </p>
-<p>shell收到来自键盘输入的终止信号，经过信号处理程序后终止hello进程，并回收进程空间</p>
-<p>(3)运行后输入Ctrl-Z</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63F9.tmp.jpg" alt="img"> </p>
-<p>shell收到来自键盘输入的SIGSTP，暂停hello进程运行直到收到下一个SIGCONT</p>
-<p>(4)进程暂停后输入jobs</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63FA.tmp.jpg" alt="img"> </p>
-<p>会打印当前shell执行的进程的pid，状态，和名称</p>
-<p>(5)进程暂停后输入ps</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63FB.tmp.jpg" alt="img"> </p>
-<p>ps命令会打印出当前系统的的进程的各种信息</p>
-<p>(6)进程暂停后输入pstree</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63FC.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63FD.tmp.jpg" alt="img"> </p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63FE.tmp.jpg" alt="img"> </p>
-<p>输入pstree指令后会查看进程树之间的关系,即哪个进程是父进程,哪个是子进程,可以清楚的看出来是谁创建了谁。</p>
-<p>(7)进程暂停后输入fg</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps640F.tmp.jpg" alt="img"> </p>
-<p>fg指令将本来在后台挂起的hello进程恢复执行</p>
-<p>(8)进程暂停后输入kill指令</p>
-<p>首先在进程暂停后利用ps获取hello的pid</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps6410.tmp.jpg" alt="img"> </p>
-<p>然后输入kill -9 -pid来发送信号给hello进程使其无条件终止</p>
-<p>(9)进程运行过程中不停乱按键盘</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps6411.tmp.jpg" alt="img"> </p>
-<p>在运行过程中输入乱码发现输入不会影响进程的运行，当按到回车键时，之前输入的字符会被读入缓冲区等待getchar处理，回车后再输入的字符会被当做是输入shell的命令。</p>
-<h3 id="6-7本章小结"><a href="#6-7本章小结" class="headerlink" title="6.7本章小结"></a>6.7本章小结</h3><p>​        本章介绍了hello程序在shell中运行形式，并通过此方式延申至对于进程以及unix环境下终端指令的实验，使得对进程工作原理更加熟悉了解。明白了有关进程创建，管理运行以及终止/上下文切换的各种知识。对于各种指令有了直观的体验，增加了对于fork与execve的理解。对于异常控制流与虚拟内存部分的内容有了更深的掌握。</p>
-<h2 id="第-7-章-hello的存储管理"><a href="#第-7-章-hello的存储管理" class="headerlink" title="\第****7****章* *hello的存储管理**"></a><strong><em>\</em>第*<em>**</em></strong>*7*<strong>**</strong>*章*<strong><em> </em></strong>*hello的存储管理*<em>*</em></h2><h3 id="7-1-hello的存储器地址空间"><a href="#7-1-hello的存储器地址空间" class="headerlink" title="7.1 hello的存储器地址空间"></a>7.1 hello的存储器地址空间</h3><p>逻辑地址：是指由程序产生的与段相关的偏移地址部分。用段基址(段地址)和段内偏移量(偏移地址)来表示,段基址确定它所在的段居于整个存储空间的位置,偏移量确定它在段内的位置。</p>
-<p>线性地址：如果地址空间中的整数是连续的，那么我们说它是一个线性地址空间，为了简化讨论，我们总是假设使用的是线性地址空间。在分段部件中逻辑地址是段中的偏移地址，然后加上基地址就是线性地址。</p>
-<p>虚拟地址：在一个带虚拟内存的系统.中，CPU从一个有N=2^n个地址的地址空间中生成虚拟地址，这个地址空间称为虚拟地址空间。</p>
-<p>物理地址：计算机系统的主存被组织成一个由M个连续的字节大小的单元组成的数组，每个字节都对应具体的物理地址。</p>
-<p>段式管理：逻辑地址—&gt;线性地址==虚拟地址</p>
-<p>页式管理：虚拟地址—&gt;物理地址。</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsAB28.tmp.jpg" alt="img"> </p>
-<p>在hello的反汇编文件中可以看到，很多都是用偏移地址表示的。</p>
-<h2 id><a href="#" class="headerlink" title=" "></a> </h2><h3 id="7-2-Intel逻辑地址到线性地址的变换-段式管理"><a href="#7-2-Intel逻辑地址到线性地址的变换-段式管理" class="headerlink" title="7.2 Intel逻辑地址到线性地址的变换-段式管理"></a>7.2 Intel逻辑地址到线性地址的变换-段式管理</h3><p>段式存储管理中，将程序的地址空间划分为若干个段(segment)，这样每个进程有一个二维的地址空间。在前面所介绍的动态分区分配方式中，系统为整个进程分配一个连续的内存空间。而在段式存储管理系统中，则为每个段分配一个连续的分区，而进程中的各个段可以不连续地存放在内存的不同分区中。程序加载时，操作系统为所有段分配其所需内存，这些段不必连续，物理内存的管理采用动态分区的管理方法。</p>
-<p>在为某个段分配物理内存时，可以采用首先适配法、下次适配法、最佳适配法等方法。</p>
-<p>在回收某个段所占用的空间时，要注意将收回的空间与其相邻的空间合并。</p>
-<p>段式存储管理也需要硬件支持，实现逻辑地址到物理地址的映射。</p>
-<p>程序通过分段划分为多个模块，如代码段、数据段、共享段：</p>
-<p>Linux x86-64内存映像：</p>
-<p>–可以分别编写和编译</p>
-<p>–可以针对不同类型的段采取不同的保护</p>
-<p>–可以按段为单位来进行共享，包括通过动态链接进行代码共享</p>
-<p>这样做的优点是：可以分别编写和编译源程序的一个文件，并且可以针对不同类型的段采取不同的保护，也可以按段为单位来进行共享。</p>
-<h3 id="7-3-Hello的线性地址到物理地址的变换-页式管理"><a href="#7-3-Hello的线性地址到物理地址的变换-页式管理" class="headerlink" title="7.3 Hello的线性地址到物理地址的变换-页式管理"></a>7.3 Hello的线性地址到物理地址的变换-页式管理</h3><p>虚拟内存被组织为一个由存放在磁盘上的N个连续的字节大小的单元组成的数组。每字节都有一个唯一的虚拟地址，作为到数组的索引。磁盘上数组的内容被缓存在主存中。</p>
-<p>在任意时刻，虚拟页面的集合都分为三个不相交的子集：</p>
-<p>(1)未分配的：VM系统还未分配的页。未分配的块没有任何数据和它们相关联，因此也就不占用任何磁盘空间。</p>
-<p>(2)缓存的：当前已缓存在物理内存中的已分配页。</p>
-<p>(3)未缓存的：未缓存在物理内存中的已分配页。</p>
-<p>形式上说，地址翻译是一个N元素的虚拟地址空间（VAS）中的元素和一个M元素的物理地址空间（PAS）中元素之间的映射。</p>
-<p>当页面命中时，CPU硬件执行的操作为：</p>
-<p>(1)处理器生成一个虚拟地址，并把它传送给MMU。</p>
-<p>(2)MMU生成PTE地址，并从高速缓存/主存请求得到它。</p>
-<p>(3)高速缓存/主存向MMU返回PTE。</p>
-<p>(4)MMU构造物理地址，并把它传送给高速缓存/主存。</p>
-<p>(5)高速缓存/主存返回所请求的数据字给处理器。</p>
-<p>处理缺页时要求硬件和操作系统内核协作完成：</p>
-<p>(1)一到三步同上。</p>
-<p>(4)PTE中的有效位是零，所以MMU触发了一次异常，传递CPU中的控制到操作系统内核中的缺页处理程序。</p>
-<p>(5)缺页处理程序确定出物理内存中的牺牲页，如果这个页面已经被修改了，则把它换出到磁盘。</p>
-<p>(6)缺页处理程序页面调入新的页面，并更新内存中的PTE。</p>
-<p>(7)缺页处理程序返回到原来的进程，再次执行导致缺页的指令。CPU将引起缺页的虚拟地址重新发送给MMU。</p>
-<h3 id="7-4-TLB与四级页表支持下的VA到PA的变换"><a href="#7-4-TLB与四级页表支持下的VA到PA的变换" class="headerlink" title="7.4 TLB与四级页表支持下的VA到PA的变换"></a>7.4 TLB与四级页表支持下的VA到PA的变换</h3><p>TLB是一个小的，虚拟寻址的缓存，其中每一行都保存着一个由单个PTE组成的块。TLB通常有高度的相联度。用于组选择和行匹配的索引和标记字段是从虚拟地址中的虚拟页号中提取出来的。如果TLB有T=2^t个组，那么TLB索引是由VPN的t个最低位组成的，而TLB标记是由VPN中剩余位组成的。</p>
-<p>(1)CPU产生一个虚拟地址。</p>
-<p>(2)MMU从TLB中取出相应的PTE</p>
-<p>(3)MMU将这个虚拟地址翻译成一个物理地址，并且将它发送到高速缓存/主存中。</p>
-<p>(4)高速缓存/主存将所请求的数据字返回给CPU。</p>
-<h3 id="7-5-三级Cache支持下的物理内存访问"><a href="#7-5-三级Cache支持下的物理内存访问" class="headerlink" title="7.5 三级Cache支持下的物理内存访问"></a>7.5 三级Cache支持下的物理内存访问</h3><p>一级页表中的每个PTE负责映射虚拟地址空间中一个4MB的片，这里每一片都是由1024个连续的页面组成的。</p>
-<p>如果片i中的每个页面都未被分配，那么一级PTEi就为空。然而，如果在片i中至少有一个页是分配了的，那么一级PTEi就指向一个二级页表的基址。</p>
-<p>这种方法从两个方面减少了内存要求。第一，如果一级页表中第一个PTE是空的，那么对应的二级页表根本不会存在。这代表着一种巨大的潜在节约，因为对于一个典型的程序，4GB的虚拟地址空间的大部分都会是未分配的。第二，只有一级页表才需要总是在主存中；虚拟内存系统可以在需要时创建，页面调入或调出二级页表，这就减少了主存的压力，只有最经常用的才会在主存中。</p>
-<h3 id="7-6-hello进程fork时的内存映射"><a href="#7-6-hello进程fork时的内存映射" class="headerlink" title="7.6 hello进程fork时的内存映射"></a>7.6 hello进程fork时的内存映射</h3><p>当fork函数被当前进程调用时，内核为新进程创建各种数据结构，并分配给它一个唯一的PID。为了给这个新进程创建虚拟内存，他创建了当前进程的mm_struct，区域结构和页表的原本副本。他将两个进程中的每个页面都标记为只读，并将两个进程中的每个区域结构都标记为私有的写时复制。</p>
-<p>当fork在新进程中返回时，新进程现在的虚拟内存刚好和调用fork时存在的虚拟内存相同。当这两个进程中的任一个后来进行写操作时，写时复制机制就会创建新页面，因此，也就为每个进程保持了私有地址空间的抽象概念。</p>
-<h3 id="7-7-hello进程execve时的内存映射"><a href="#7-7-hello进程execve时的内存映射" class="headerlink" title="7.7 hello进程execve时的内存映射"></a>7.7 hello进程execve时的内存映射</h3><p>(1)删除已存在的用户内容。删除当前进程虚拟地址的用户部分中的已存在的区域结构。</p>
-<p>(2)映射私有区域。为新程序的代码，数据，bss和栈区域创建新的区域结构。所有这些区域都是私有的，写时复制。</p>
-<p>(3)映射共享区域。如果hello.out程序与共享对象链接，那么这些对象都是动态连接到这个程序的，然后在映射到用户虚拟地址空间中的共享区域内。</p>
-<p>(4)设置程序计数器。execve做的最后一件事情就是设置当前进程上下文中的程序计数器，使之指向代码区域的入口点。</p>
-<h3 id="7-8-缺页故障与缺页中断处理"><a href="#7-8-缺页故障与缺页中断处理" class="headerlink" title="7.8 缺页故障与缺页中断处理"></a>7.8 缺页故障与缺页中断处理</h3><p>(1)处理器生成一个虚拟地址，并把它传送给MMU。</p>
-<p>(2)MMU生成PTE地址，并从高速缓存/主存请求得到它。</p>
-<p>(3)高速缓存/主存向MMU返回PTE。</p>
-<p>(4)PTE中的有效位是零，所以MMU触发了一次异常，传递CPU中的控制到操作系统内核中的缺页处理程序。</p>
-<p>(5)缺页处理程序确定出物理内存中的牺牲页，如果这个页面已经被修改了，则把它换出到磁盘。</p>
-<p>(6)缺页处理程序页面调入新的页面，并更新内存中的PTE。</p>
-<p>(7)缺页处理程序返回到原来的进程，再次执行导致缺页的指令。CPU将引起缺页的虚拟地址重新发送给MMU。</p>
-<p>缺页异常及其处理过程：如果DRAM缓存不命中称为缺页。当地址翻译硬件从内存中读对应PTE时有效位为0则表明该页未被缓存，触发缺页异常。缺页异常调用内核中的缺页异常处理程序。</p>
-<p>缺页处理程序搜索区域结构的链表，把A和每个区域结构中的vm_start和vm_end做比较，如果指令不合法，缺页处理程序就触发一个段错误、终止进程。</p>
-<p>缺页处理程序检查试图访问的内存是否合法，如果不合法则触发保护异常终止此进程。</p>
-<p>缺页处理程序确认引起异常的是合法的虚拟地址和操作，则选择一个牺牲页，如果牺牲页中内容被修改，内核会将其先复制回磁盘。无论是否被修改，牺牲页的页表条目均会被内核修改。接下来内核从磁盘复制需要的虚拟页到DRAM中，更新对应的页表条目，重新执行导致缺页的指令。</p>
-<h3 id="7-9动态存储分配管理"><a href="#7-9动态存储分配管理" class="headerlink" title="7.9动态存储分配管理"></a>7.9动态存储分配管理</h3><p>动态内存分配器维护着一个进程的虚拟内存区域，称为堆(heap)，假设堆是一个请求二进制零的区域，它紧接在未初始化的数据区域后开始，并向上生长(向更高的地址)。对于每个进程，内核维护着一个变量brk(读做“break”),它指向堆的顶部，分配器将堆视为–组不同大小的块(block)的集合来维护。每个块就是一一个连续的虚拟内存片(chunk),要么是已分配的，要么是空闲的。已分配的块显式地保留为供应用程序使用。空闲块可用来分配。空闲块保持空闲，直到它显式地被应用所分配。一个已分配的块保持已分配状态，直到它被释放，这种释放要么是应用程序显式执行的，要么是内存分配器自身隐式执行的。分配器有两种基本风格。两种风格都要求应用显式地分配块。它们的不同之处在于由哪个实体来负责释放已分配的块。</p>
-<p>1.显式分配器(explicit allocator)，要求应用显式地释放任何已分配的块。例如，C标准库提供一-种叫做malloc程序包的显式分配器。C程序通过调用malloc函数来分配一个块，并通过调用free函数来释放-一个块。C++中的new和delete操作符与C中的malloc和free相当。</p>
-<p>2.隐式分配器(implicitallocator)，另–方面，要求分配器检测-一个已分配块何时不再被程序所使用，那么就释放这个块。隐式分配器也叫做垃圾收集器(garbage collecor)而自动释放未使用的已分配的块的过程叫做垃圾收集( garbage collection)。</p>
-<p>例如，诸如Lisp、ML以及Java之类的高级语言就依赖垃圾收集来释放已分配的块。</p>
-<p>对于显式分配器必须在一些相当严格的约束条件下工作:</p>
-<p>1.处理任意请求序列。一个应用可以有任意的分配请求和释放请求序列，只要满足约束条件:每个释放请求必须对应于一个当前已分配块，这个块是由一个以前的分配请求获得的。因此，分配器不可以假设分配和释放请求的顺序。例如，分配器不能假设所有的分配请求都有相匹配的释放请求，或者有相匹配的分配和空闲请求是嵌套的。</p>
-<p>2.立即响应请求。分配器必须立即响应分配请求。因此，不允许分配器为了提高性能重新排列或者缓冲请求。</p>
-<p>3.只使用堆。为了使分配器是可扩展的，分配器使用的任何非标量数据结构都必须保存在堆里。</p>
-<p>4.对齐块(对齐要求)。分配器必须对齐块，使得它们可以保存任何类型的数据对象。</p>
-<p>5.不修改已分配的块。分配器只能操作或者改变空闲块。特别是，-旦块被分配了，就不允许修改或者移动它了。因此，诸如压缩已分配块这样的技术是不允许使用的。</p>
-<h3 id="7-10本章小结"><a href="#7-10本章小结" class="headerlink" title="7.10本章小结"></a>7.10本章小结</h3><p>本章从Linux存储器的地址空间起，阐述了Intel的段式管理和页式管理机制，以及TLB与多级页表支持下的VA到PA的转换，同时对cache支持下的物理内存访问做了说明。针对内存映射及管理，简述了hello的fork和execve内存映射，了解了缺页故障与缺页中断处理程序，对动态分配管理做了系统阐述。通过本章学习，对于虚拟内存部分的大部分内容，如虚拟地址，catch命中等进行了巩固，并加深了对其的了解。</p>
-<h2 id="第-8-章-hello的IO管理"><a href="#第-8-章-hello的IO管理" class="headerlink" title="\ ****第****8****章* *hello的IO管理**"></a><strong><em>\</em> *<em>**</em></strong>*第*<strong>**</strong>*8*<strong>**</strong>*章*<strong><em> </em></strong>*hello的IO管理*<em>*</em></h2><h3 id="8-1-Linux的IO设备管理方法"><a href="#8-1-Linux的IO设备管理方法" class="headerlink" title="8.1 Linux的IO设备管理方法"></a>8.1 Linux的IO设备管理方法</h3><p>一个Linux文件就是一个m个字节的序列：B0,B1,B2,……B(m-1)。所有的I/O设备都被模型化为文件，而所有的输入输出都被当作对相应文件的读和写来执行。这种将设备优雅地映射为文件的方式，允许Linux内核引出一个简单，低级的应用接口，称为UnixI/O，这使得所有的输入和输出都能以一种统一且一致的方式来执行。</p>
-<h3 id="8-2-简述Unix-IO接口及其函数"><a href="#8-2-简述Unix-IO接口及其函数" class="headerlink" title="8.2 简述Unix IO接口及其函数"></a>8.2 简述Unix IO接口及其函数</h3><p>打开文件。一个应用程序通过要求内核打开相应的文件，来宣告它想要访问一个I/O设备。内核返回一个小的非负整数，叫做描述符，它在后续对此文件的所有操作中标识这个文件。内核记录有关这个打开文件的所有信息。应用程序只需要记住这个描述符。</p>
-<p>Linux shell创建的每个进程开始时都有三个打开的文件：标准输入，标准输出和标准错误。</p>
-<p>改变当前的文件位置。对于每个打开的文件，内核保持着一个文件位置k,初始为0.这个文件位置是从文件开头起始的字节偏移量。应用程序能够通过执行seek操作，显示地设置文件的当前位置为k。</p>
-<p>读写文件。一个读操作就是从文件复制n&gt;0个字节到内存，从当前文件位置k开始，然后将k增加到k+n。给定一个大小为m字节的文件，当k≥m时执行读操作会触发一个称为end-of-file（EOF）的条件，应用程序能够检测到这个条件。</p>
-<p>关闭文件。当应用完成了对文件的访问之后，它就通知内核关闭这个文件。作为响应，内核释放文件打开时创建的数据结构，并将这个描述符恢复到可用的描述符池中。无论一个进程因为何种原因终止时，内核都会关闭所有打开的文件并释放它们的内存资源。</p>
-<p>open函数将filename转换为一个文件描述符，并且返回描述符数字。返回的描述符总是在进程中当前没有打开的最小描述符。</p>
-<p>O_RDONLY:只读。</p>
-<p>O_WRONLY:只写。</p>
-<p>O_RDWR:可读可写。</p>
-<p>read函数从描述符为fd的当前文件位置复制最多n个字节到内存位置buf。返回值-1表示一个错误，而返回值0表示EOF。否则，返回值表示的是实际传送的字节数量。</p>
-<p>write函数从内存位置buf复制至多n个字节到描述符fd的当前文件位置。</p>
-<p>通过调用lseek函数，应用程序能够显示地修改当前文件的位置。</p>
-<h3 id="8-3-printf的实现分析"><a href="#8-3-printf的实现分析" class="headerlink" title="8.3 printf的实现分析"></a>8.3 printf的实现分析</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pianist/p/3315801.html">https://www.cnblogs.com/pianist/p/3315801.html</a></p>
-<p>首先查看printf函数的函数体</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsAB39.tmp.jpg" alt="img"> </p>
-<p>va_list的定义是：typedef char * va_list，因此通过调用va_start函数，获得的arg为第一个参数的地址。</p>
-<p>vsprintf的作用是格式化。接受确定输出格式的格式字符串fmt。用格式字符串对个数变化的参数进行格式化，产生格式化输出，例如hello中：</p>
-<p>printf(“Hello %s %s\n”,argv[1],argv[2]);</p>
-<p>命令行参数为./hello 1173710217 hpy，则对应格式化后的字符串为：Hello 1173710217 hpy\n，并且i为返回的字符串长度</p>
-<p>接下来是write函数：</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsAB3A.tmp.jpg" alt="img"> </p>
-<p>根据代码可知内核向寄存器传递几个参数后，中断调用syscall函数。对应ebx打印输出的buf数组中第一个元素的地址，ecx是要打印输出的个数。查看syscall函数体：</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsAB3B.tmp.jpg" alt="img"> </p>
-<p>在syscall函数中字符显示驱动子程序：从ASCII到字模库到显示vram（存储每一个点的RGB颜色信息）。显示芯片按照刷新频率逐行读取vram，并通过信号线向液晶显示器传输每一个点（RGB分量），实现printf格式化输出。</p>
-<h3 id="8-4-getchar的实现分析"><a href="#8-4-getchar的实现分析" class="headerlink" title="8.4 getchar的实现分析"></a>8.4 getchar的实现分析</h3><p>getchar源代码为：</p>
-<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsAB3C.tmp.jpg" alt="img"> </p>
-<p>异步异常-键盘中断的处理：键盘中断处理是底层的硬件异常，当用户按下键盘时，内核会调用异常键盘中断处理子程序。接受按键扫描码转成ascii码，保存到系统的键盘缓冲区。</p>
-<p>getchar函数read系统函数，通过系统调用读取按键ascii码，直到接受到回车键才返回。实现读取一个字符的功能。</p>
-<h3 id="8-5本章小结"><a href="#8-5本章小结" class="headerlink" title="8.5本章小结"></a>8.5本章小结</h3><p>本章系统的了解了Unix I/O，通过LinuxI/O设备管理方法以及Unix I/O接口及函数了解系统级I/O的底层实现机制。通过对printf和getchar函数的底层解析加深对Unix I/O以及异常中断等的了解。通过本章的学习，对于程序间的交互和通信有了进一步的理解。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="\结论**"></a><strong><em>\</em>结论**</strong></h2><p>让我们来一起回顾一下hello的一生：</p>
-<p>(1)hello.c经过预处理器处理，变成了hello.i。</p>
-<p>(2)hello.i经过编译器，变成了hello.s。</p>
-<p>(3)hello.s经过汇编器，被翻译成了机器指令，打包为可重定位目标文件hello.o。</p>
-<p>(4)hello.o经过链接终于变成了可执行文件hello。</p>
-<p>(5)在Linux下键入./hello likaijie 1190201617运行hello，内核为hello fork出新进程，并在新进程中execve hello程序。</p>
-<p>(6)execve 通过加载器将hello中的代码和数据从磁盘复制到内存，为其创建虚拟内存映像，加载器在程序头部表的引导下将hello的片复制到代码段和数据段，执行_start函数。</p>
-<p>(7)MMU通过页表将虚拟地址映射到对应的物理地址完成访存。</p>
-<p>(8)内核通过GOT和PLT协同工作完成共享库函数的调用。</p>
-<p>(9)hello调用函数，内核通过动态内存分配器为其分配内存。</p>
-<p>(10)内核通过调度完成hello和其他所有进程的上下文切换，成功运行hello。</p>
-<p>(11)shell父进程回收hello，内核删除hello进程的所有痕迹。</p>
-<p>至此，hello走完了它的一生。</p>
-<p>回顾hello短暂的一生，却又并不短暂，每一步都是人类智慧的结晶，为了这短短的几步，人类走了许久，自1946年第一台电子计算机问世以来，就在不断探索，计算机技术在元件器件、硬件系统结构、软件系统、应用等方面，均有惊人进步。从两个足球场大的计算机到如今我们面前的小小的笔记本，令人叹服。</p>
-<p>回顾计算机系统漫游，学习了信息的表示和处理，程序的机器级表示，处理器体系结构，优化程序性能，存储器层次结构，了解了链接，异常控制流与虚拟内存，见识了程序间的交互和通信。都展现了计算机迷人的魅力。</p>
-<h2 id="附件"><a href="#附件" class="headerlink" title="\ ****附件**"></a><strong><em>\</em> *<em>**</em></strong>*附件*<em>*</em></h2><p>列出所有的中间产物的文件名，并予以说明起作用。</p>
-<p>(1)hello.c:源代码</p>
-<p>(2)hello.i：预处理生成的文本文件</p>
-<p>(3)hello.s:编译翻译成的文本文件</p>
-<p>(4)hello.o:汇编器翻译成的机器指令打包成的可重定位二进制文件</p>
-<p>(5)hello:链接后的可执行文件</p>
-<p>(6)hello.elf:hello.o的ELF格式</p>
-<p>(7)helloobj.txt：hello.o生成的反汇编文件</p>
-<p>(8)hello_out.elf:hello生成的ELF格式</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="\参考文献**"></a><strong><em>\</em>参考文献**</strong></h2><p><strong><em>\</em>为完成本次大作业你翻阅的书籍与网站等**</strong></p>
-<p>[1]  林来兴. 空间控制技术[M]. 北京：中国宇航出版社，1992：25-42.</p>
-<p>[2]  辛希孟. 信息技术与信息服务国际研讨会论文集：A集[C]. 北京：中国科学出版社，1999.</p>
-<p>[3]  赵耀东. 新时代的工业工程师[M/OL]. 台北：天下文化出版社，1998 [1998-09-26]. <a target="_blank" rel="noopener" href="http://www.ie.nthu.edu.tw/info/ie.newie.htm（Big5）">http://www.ie.nthu.edu.tw/info/ie.newie.htm（Big5）</a>.</p>
-<p>[4]  谌颖. 空间交会控制理论与方法研究[D]. 哈尔滨：哈尔滨工业大学，1992：8-13.</p>
-<p>[5] KANAMORI H. Shaking Without Quaking[J]. Science，1998，279（5359）：2063-2064.</p>
-<p>[6] CHRISTINE M. Plant Physiology: Plant Biology in the Genome Era[J/OL]. Science，1998，281：331-332[1998-09-23]. <a target="_blank" rel="noopener" href="http://www.sciencemag.org/cgi/">http://www.sciencemag.org/cgi/</a> collection/anatmorp.</p>
-<p>[7]Computer System A Programmer’s Perspective Third Edition,2015,Randal E. Bryant,</p>
-<p>David R.O’Hallaron</p>
-<p>[8]读计算机系统有感 2011.6.10 马旭东</p>
-<p>[9]深入计算机系统之道 2006.9.1 刘江</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1643,7 +1252,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1730,6 +1339,61 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
