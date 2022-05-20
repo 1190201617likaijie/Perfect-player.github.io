@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="DBMS考点对的要求再复习一次 域再看一下，函数依赖再看一下，关系模式分解 1-3部分：选择，填空，查询 30 4-6部分：选择，填空，证明，设计 35 7-12部分：选择，填空，算法，分析 35 考前看的    第一章数据库：有组织的、共享的、持久存储的数据集合。 数据库管理系统： 数据库用户： 数据库系统：由数据库、数据库管理系统、应用程序和数据库用户在一起构成的系统。 数据库语言：数据定义语">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DBMS考点">
+<meta property="og:url" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="DBMS考点对的要求再复习一次 域再看一下，函数依赖再看一下，关系模式分解 1-3部分：选择，填空，查询 30 4-6部分：选择，填空，证明，设计 35 7-12部分：选择，填空，算法，分析 35 考前看的    第一章数据库：有组织的、共享的、持久存储的数据集合。 数据库管理系统： 数据库用户： 数据库系统：由数据库、数据库管理系统、应用程序和数据库用户在一起构成的系统。 数据库语言：数据定义语">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520205944497.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520205958323.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520212508933.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520224447692.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520153555464.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520153623316.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520153847947.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520154032246.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520154059712.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520154405650.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155141463.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155612344.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155641699.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155743424.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155859015.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520160538221.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520160612769.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520160959188.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161142076.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161425477.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161503774.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161558258.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161649142.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161924541.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161945409.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162037491.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162335425.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162543845.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162635401.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162642179.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162649518.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162658892.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162844795.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162906353.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162914871.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162930131.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163234585.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163910020.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163916662.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163925574.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163949288.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164015974.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164105233.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164330211.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164401070.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164446039.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164516972.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164634209.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164726502.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164850113.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164953833.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165020624.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165056729.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165125143.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165211147.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165702247.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165402241.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165508652.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165515069.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165753008.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165821598.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165852993.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170550893.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170647628.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170717706.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170838645.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170855147.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520175937252.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520175956860.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180242647.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180448573.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180514823.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180528762.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180639352.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180900446.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180909316.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180936480.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180943648.png">
+<meta property="og:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520181353631.png">
+<meta property="article:published_time" content="2022-05-20T07:29:10.000Z">
+<meta property="article:modified_time" content="2022-05-20T14:52:18.299Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520205944497.png">
+
+<link rel="canonical" href="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>DBMS考点 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DBMS考点
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-20 15:29:10 / Modified: 22:52:18" itemprop="dateCreated datePublished" datetime="2022-05-20T15:29:10+08:00">2022-05-20</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="DBMS考点"><a href="#DBMS考点" class="headerlink" title="DBMS考点"></a>DBMS考点</h1><p>对的要求再复习一次</p>
+<p>域再看一下，函数依赖再看一下，关系模式分解</p>
+<p>1-3部分：选择，填空，查询 30</p>
+<p>4-6部分：选择，填空，证明，设计 35</p>
+<p>7-12部分：选择，填空，算法，分析 35</p>
+<h2 id="考前看的"><a href="#考前看的" class="headerlink" title="考前看的"></a>考前看的</h2><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520205944497.png" alt="image-20220520205944497" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520205958323.png" alt="image-20220520205958323" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520212508933.png" alt="image-20220520212508933" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520224447692.png" alt="image-20220520224447692" style="zoom:50%;"></p>
+<h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><p><strong>数据库</strong>：有组织的、共享的、持久存储的数据集合。</p>
+<p><strong>数据库管理系统</strong>：<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520153555464.png" alt="image-20220520153555464" style="zoom:50%;"></p>
+<p><strong>数据库用户</strong>：<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520153623316.png" alt="image-20220520153623316" style="zoom:50%;"></p>
+<p><strong>数据库系统</strong>：由数据库、数据库管理系统、应用程序和数据库用户在一起构成的系统。</p>
+<p><strong>数据库语言</strong>：数据定义语言；数据操作语言</p>
+<p><strong>数据模型</strong>：<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520153847947.png" alt="image-20220520153847947" style="zoom:50%;"></p>
+<p><strong>数据库模式</strong>：<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520154032246.png" alt="image-20220520154032246" style="zoom:50%;"></p>
+<p><strong>数据库实例</strong>：<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520154059712.png" alt="image-20220520154059712" style="zoom:50%;"></p>
+<p><strong>数据库三层模式结构</strong>：数据库模式通常分三个层次定义，从低到高分别是:内模式/存储模式；概念模式；外模式/视图</p>
+<p><strong>内模式/存储模式</strong>：描述数据库的物理存储结构和存取方式；数据库只有一个内模式；定义内模式时通常使用物理数据模型提供的概念</p>
+<p><strong>概念模式</strong>：为全体数据库用户描述整个数据库的结构和约束；数据库只有一个概念模式；定义概念模式时使用实现数据模型提供的概念</p>
+<p><strong>外模式/视图</strong>：从不同类别用户的视角描述数据库结构；可以有多个外模式；定义外模式时也可以使用实现数据模型提供的概念</p>
+<p><strong>数据独立性</strong>：逻辑数据独立性；物理数据独立性</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520154405650.png" alt="image-20220520154405650" style="zoom:50%;"></p>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><h3 id="关系模型"><a href="#关系模型" class="headerlink" title="关系模型"></a>关系模型</h3><p><strong>超键</strong>：可以唯一标识每个元组的属性。</p>
+<p><strong>候选键</strong>：任意真子集都不是超键的超键。即极小的超键。</p>
+<p><strong>域</strong>：<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155141463.png" alt="image-20220520155141463" style="zoom:50%;"></p>
+<p><strong>主属性</strong>：候选键中的属性。</p>
+<h3 id="关系完整性约束"><a href="#关系完整性约束" class="headerlink" title="关系完整性约束"></a>关系完整性约束</h3><p>完整性约束的类型：实体完整性、参照完整性、用户定义完整性。</p>
+<p>实体完整性约束规则</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">主键值唯一且非空。</span><br></pre></td></tr></table></figure>
+<p>参照完整性约束</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于外键的约束，外键值为空或不为空则必须在S存在。</span><br></pre></td></tr></table></figure>
+<p>用户定义完整性约束</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">根据需求定义。</span><br></pre></td></tr></table></figure>
+<h3 id="关系代数"><a href="#关系代数" class="headerlink" title="关系代数"></a>关系代数</h3><p>投影<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155612344.png" alt="image-20220520155612344" style="zoom:50%;"></p>
+<p>并、差、交<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155641699.png" alt="image-20220520155641699" style="zoom: 67%;"></p>
+<p>重命名<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155743424.png" alt="image-20220520155743424" style="zoom:50%;"></p>
+<p>$\theta$连接<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155859015.png" alt="image-20220520155859015" style="zoom:50%;"></p>
+<p>等值连接：连接条件仅涉及相等比较的连接称作等值连接。</p>
+<p>除<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520160538221.png" alt="image-20220520160538221" style="zoom:50%;"></p>
+<p>分组操作<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520160612769.png" alt="image-20220520160612769" style="zoom: 67%;"></p>
+<h3 id="关系演算"><a href="#关系演算" class="headerlink" title="关系演算"></a>关系演算</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520160959188.png" alt="image-20220520160959188"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161142076.png" alt="image-20220520161142076"></p>
+<h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><h3 id="非嵌套查询"><a href="#非嵌套查询" class="headerlink" title="非嵌套查询"></a>非嵌套查询</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161425477.png" alt="image-20220520161425477" style="zoom: 100%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161503774.png" alt="image-20220520161503774" style="zoom: 50%;"></p>
+<p><strong>注意</strong>：空值判断，应用 is null,不可以用 =或者！=</p>
+<p>查询结果排序<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161558258.png" alt="image-20220520161558258"></p>
+<p>聚集查询<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161649142.png" alt="image-20220520161649142" style="zoom:67%;"></p>
+<p><strong>注</strong>：聚集函数不能出现在where子句中</p>
+<p>分组查询<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161924541.png" alt="image-20220520161924541"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161945409.png" alt="image-20220520161945409"></p>
+<p>连接<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162037491.png" alt="image-20220520162037491"></p>
+<h3 id="嵌套查询"><a href="#嵌套查询" class="headerlink" title="嵌套查询"></a>嵌套查询</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162335425.png" alt="image-20220520162335425"></p>
+<p>使用exists关键字进行查询的时候，首先，我们先查询的不是子查询的内容，而是查我们的主查询的表，然后，根据表的每一条记录，依次去判断where后面的条件是否成立。</p>
+<p>in在查询的时候，首先查询子查询的表，然后将内表和外表做一个笛卡尔积，然后按照条件进行筛选。所以相对内表比较小的时候，in的速度较快。</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162543845.png" alt="image-20220520162543845" style="zoom:50%;"></p>
+<h3 id="更新数据库"><a href="#更新数据库" class="headerlink" title="更新数据库"></a>更新数据库</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162635401.png" alt="image-20220520162635401"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162642179.png" alt="image-20220520162642179"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162649518.png" alt="image-20220520162649518"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162658892.png" alt="image-20220520162658892"></p>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162844795.png" alt="image-20220520162844795"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162906353.png" alt="image-20220520162906353"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162914871.png" alt="image-20220520162914871"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162930131.png" alt="image-20220520162930131" style="zoom:50%;"></p>
+<h2 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h2><h3 id="数据库设计的基本过程"><a href="#数据库设计的基本过程" class="headerlink" title="数据库设计的基本过程"></a>数据库设计的基本过程</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163234585.png" alt="image-20220520163234585"></p>
+<h3 id="实体-联系模型"><a href="#实体-联系模型" class="headerlink" title="实体-联系模型"></a>实体-联系模型</h3><h4 id="与实体相关的概念"><a href="#与实体相关的概念" class="headerlink" title="与实体相关的概念"></a>与实体相关的概念</h4><p><strong>实体</strong>：数据库中表示的现实世界中的具体对象或事物。</p>
+<p><strong>属性</strong>：用于刻画实体的特性。</p>
+<p><strong>属性的类型</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">简单属性</span><br><span class="line">复合属性</span><br><span class="line">多值属性</span><br><span class="line">派生属性</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163910020.png" alt="image-20220520163910020"></p>
+<h5 id="实体型的ER图表示"><a href="#实体型的ER图表示" class="headerlink" title="实体型的ER图表示"></a>实体型的ER图表示</h5><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163916662.png" alt="image-20220520163916662" style="zoom:50%;"></p>
+<p><strong>弱实体型</strong>：没有键属性的实体型。</p>
+<p><strong>标识实体型、属主实体型</strong>：由于弱实体型没有键属性，需要依赖于其他实体型进行区分。</p>
+<p><strong>标识联系型</strong>：弱实体型与其标识实体型通过标识联系型关联。</p>
+<p><strong>部分键</strong>：用于区分和同一标识实体相关联的弱实体的属性集合。</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163925574.png" alt="image-20220520163925574" style="zoom:50%;"></p>
+<h4 id="与联系相关的概念"><a href="#与联系相关的概念" class="headerlink" title="与联系相关的概念"></a>与联系相关的概念</h4><p><strong>联系</strong>：一个联系表示多个实体之间有意义的关联关系。</p>
+<p><strong>联系型</strong>：同一类联系共同具有的类型。</p>
+<p><strong>联系型的度</strong>：参与到一个联系型中的实体型的个数。</p>
+<p><strong>联系集</strong>：数据库中当前存储的联系型的实例的集合。</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163949288.png" alt="image-20220520163949288" style="zoom:50%;"></p>
+<p><strong>基数比</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164015974.png" alt="image-20220520164015974" style="zoom:50%;"></p>
+<p><strong>参与度</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164105233.png" alt="image-20220520164105233" style="zoom:50%;"></p>
+<h2 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h2><h3 id="概念数据模型转换为关系数据库模型"><a href="#概念数据模型转换为关系数据库模型" class="headerlink" title="概念数据模型转换为关系数据库模型"></a>概念数据模型转换为关系数据库模型</h3><p><strong>实体型的转换</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164330211.png" alt="image-20220520164330211" style="zoom:50%;"></p>
+<p><strong>复合属性的转换</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164401070.png" alt="image-20220520164401070" style="zoom:50%;"></p>
+<p><strong>多值属性的转换</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164446039.png" alt="image-20220520164446039" style="zoom:50%;"></p>
+<p><strong>弱实体型转换</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164516972.png" alt="image-20220520164516972" style="zoom:50%;"></p>
+<p><strong>M:N二元联系型的转换</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164634209.png" alt="image-20220520164634209" style="zoom:50%;"></p>
+<p><strong>N:1二元联系型的转换</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164726502.png" alt="image-20220520164726502" style="zoom:50%;"></p>
+<p><strong>1:1二元联系型的转换</strong></p>
+<p>与N:1相同</p>
+<h3 id="函数依赖"><a href="#函数依赖" class="headerlink" title="函数依赖"></a>函数依赖</h3><p><strong>定义</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164850113.png" alt="image-20220520164850113" style="zoom:50%;"></p>
+<p><strong>平凡函数依赖</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164953833.png" alt="image-20220520164953833"></p>
+<p><strong>完全函数依赖</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165020624.png" alt="image-20220520165020624" style="zoom:50%;"></p>
+<p><strong>部分函数依赖</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165056729.png" alt="image-20220520165056729" style="zoom:50%;"></p>
+<p><strong>传递函数依赖</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165125143.png" alt="image-20220520165125143" style="zoom:50%;"></p>
+<p><strong>逻辑蕴含</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165211147.png" alt="image-20220520165211147" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165702247.png" alt="image-20220520165702247" style="zoom:50%;"></p>
+<p><strong>属性集闭包</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165402241.png" alt="image-20220520165402241" style="zoom:50%;"></p>
+<p><strong>等价函数依赖集</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165508652.png" alt="image-20220520165508652" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165515069.png" alt="image-20220520165515069" style="zoom:50%;"></p>
+<h3 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h3><h4 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h4><p>若关系模式R的每个属性都是不可分的，则称R为第一范式关系模式。</p>
+<p>问题原因：非主属性部分函数依赖于候选键</p>
+<p><strong>第二范式</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165753008.png" alt="image-20220520165753008"></p>
+<p>问题原因：非主属性传递函数依赖于候选键</p>
+<p><strong>第三范式</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165821598.png" alt="image-20220520165821598"></p>
+<p>问题原因：主属性部分依赖于候选键</p>
+<p><strong>BCNF</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165852993.png" alt="image-20220520165852993" style="zoom:50%;"></p>
+<p>消除主属性间的传递依赖。</p>
+<p>判断方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/weixin_43865875/article/details/115659734</span><br></pre></td></tr></table></figure>
+<h3 id="关系模式分解"><a href="#关系模式分解" class="headerlink" title="关系模式分解"></a>关系模式分解</h3><p>分解准则1：无损连接性</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170550893.png" alt="image-20220520170550893" style="zoom:50%;"></p>
+<p>分解准则2：函数依赖保持性</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170647628.png" alt="image-20220520170647628" style="zoom:50%;"></p>
+<p>无损连接性判定</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170717706.png" alt="image-20220520170717706" style="zoom:50%;"></p>
+<p>BCNF分解算法</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170838645.png" alt="image-20220520170838645" style="zoom:50%;"></p>
+<p>3NF分解算法</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170855147.png" alt="image-20220520170855147" style="zoom:50%;"></p>
+<h2 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h2><h3 id="索引设计"><a href="#索引设计" class="headerlink" title="索引设计"></a>索引设计</h3><p>根据数据文件中的元组是否按索引键值排序，分为聚簇索引与非聚簇索引。</p>
+<p><strong>聚簇索引</strong></p>
+<p>文件中的元组按索引键排序的，则索引为聚簇索引。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">聚簇索引的索引键通常为关系主键；</span><br><span class="line">一个关系通常只有一个聚簇索引</span><br></pre></td></tr></table></figure>
+<p><strong>非聚簇索引</strong></p>
+<p>文件中的元组不按索引键排序的，则索引为非聚簇索引。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个关系上可以有多个非聚簇索引</span><br></pre></td></tr></table></figure>
+<p>根据索引键是否为关系的主键，可将有序索引分为两类：主索引，二级索引</p>
+<p>主索引</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">索引键为主键；一个关系只有一个</span><br></pre></td></tr></table></figure>
+<p>二级索引</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">索引键不是主键：</span><br><span class="line">通常为非聚簇索引，一个关系可以有多个</span><br></pre></td></tr></table></figure>
+<p>根据关系中每个元组在索引中是否都有一个对应索引项，可将有序索引分为两类：稠密索引、稀疏索引</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520175937252.png" alt="image-20220520175937252" style="zoom: 67%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520175956860.png" alt="image-20220520175956860"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180242647.png" alt="image-20220520180242647" style="zoom:67%;"></p>
+<h3 id="关系模式的优化"><a href="#关系模式的优化" class="headerlink" title="关系模式的优化"></a>关系模式的优化</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180448573.png" alt="image-20220520180448573"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180514823.png" alt="image-20220520180514823" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180528762.png" alt="image-20220520180528762" style="zoom:50%;"></p>
+<h2 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h2><h3 id="存储介质"><a href="#存储介质" class="headerlink" title="存储介质"></a>存储介质</h3><p>按CPU访问存储介质的方式，可将存储器分为三类。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">主存储器</span><br><span class="line">二级存储器</span><br><span class="line">三级存储器</span><br></pre></td></tr></table></figure>
+<p>主存</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">包括：寄存器、高速缓存、内存</span><br><span class="line">主存特点：按字节寻址、可使用load/store指令直接访问</span><br></pre></td></tr></table></figure>
+<p>二级存储器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">包括：磁盘/机械硬盘、闪存/固态硬盘</span><br><span class="line">特点：按块寻址、联机使用 CPU无法直接访问，需用read、write将数据先复制到主存</span><br></pre></td></tr></table></figure>
+<p>三级存储器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">包括：磁带、光盘、网络存储</span><br><span class="line">脱机使用、按块存储、需先将数据复制到二级存储</span><br></pre></td></tr></table></figure>
+<p>按存储介质的易失性/持久性，可分为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">易失性存储器：计算机重启后，易失性存储器的数据会丢失</span><br><span class="line">菲易失性存储器</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180639352.png" alt="image-20220520180639352"></p>
+<h3 id="基于磁盘的数据库存储结构"><a href="#基于磁盘的数据库存储结构" class="headerlink" title="基于磁盘的数据库存储结构"></a>基于磁盘的数据库存储结构</h3><p>元组表示</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180900446.png" alt="image-20220520180900446" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180909316.png" alt="image-20220520180909316" style="zoom:50%;"></p>
+<p>页布局</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180936480.png" alt="image-20220520180936480" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180943648.png" alt="image-20220520180943648" style="zoom:50%;"></p>
+<p>其余和原本内容一致，查看DBMS的文档。</p>
+<h2 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h2><p>可扩展哈希表</p>
+<p>线性哈希表</p>
+<p>B+树</p>
+<h2 id="第九章"><a href="#第九章" class="headerlink" title="第九章"></a>第九章</h2><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520181353631.png" alt="image-20220520181353631"></p>
+<h2 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/" rel="prev" title="编译原理总结">
+      <i class="fa fa-chevron-left"></i> 编译原理总结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DBMS%E8%80%83%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">DBMS考点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%80%83%E5%89%8D%E7%9C%8B%E7%9A%84"><span class="nav-number">1.1.</span> <span class="nav-text">考前看的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="nav-number">1.2.</span> <span class="nav-text">第一章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0"><span class="nav-number">1.3.</span> <span class="nav-text">第二章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">关系模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.3.2.</span> <span class="nav-text">关系完整性约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0"><span class="nav-number">1.3.3.</span> <span class="nav-text">关系代数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E6%BC%94%E7%AE%97"><span class="nav-number">1.3.4.</span> <span class="nav-text">关系演算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0"><span class="nav-number">1.4.</span> <span class="nav-text">第三章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%B5%8C%E5%A5%97%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.1.</span> <span class="nav-text">非嵌套查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.2.</span> <span class="nav-text">嵌套查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.4.3.</span> <span class="nav-text">更新数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE"><span class="nav-number">1.4.4.</span> <span class="nav-text">视图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0"><span class="nav-number">1.5.</span> <span class="nav-text">第四章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B"><span class="nav-number">1.5.1.</span> <span class="nav-text">数据库设计的基本过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93-%E8%81%94%E7%B3%BB%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.5.2.</span> <span class="nav-text">实体-联系模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8E%E5%AE%9E%E4%BD%93%E7%9B%B8%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">与实体相关的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E5%9E%8B%E7%9A%84ER%E5%9B%BE%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.5.2.1.1.</span> <span class="nav-text">实体型的ER图表示</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8E%E8%81%94%E7%B3%BB%E7%9B%B8%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">与联系相关的概念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0"><span class="nav-number">1.6.</span> <span class="nav-text">第五章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.6.1.</span> <span class="nav-text">概念数据模型转换为关系数据库模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%BE%9D%E8%B5%96"><span class="nav-number">1.6.2.</span> <span class="nav-text">函数依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8C%83%E5%BC%8F"><span class="nav-number">1.6.3.</span> <span class="nav-text">范式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8C%83%E5%BC%8F"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">第一范式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%BC%8F%E5%88%86%E8%A7%A3"><span class="nav-number">1.6.4.</span> <span class="nav-text">关系模式分解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0"><span class="nav-number">1.7.</span> <span class="nav-text">第六章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.7.1.</span> <span class="nav-text">索引设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">1.7.2.</span> <span class="nav-text">关系模式的优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0"><span class="nav-number">1.8.</span> <span class="nav-text">第七章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E4%BB%8B%E8%B4%A8"><span class="nav-number">1.8.1.</span> <span class="nav-text">存储介质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%A3%81%E7%9B%98%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.8.2.</span> <span class="nav-text">基于磁盘的数据库存储结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0"><span class="nav-number">1.9.</span> <span class="nav-text">第八章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0"><span class="nav-number">1.10.</span> <span class="nav-text">第九章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E7%AB%A0"><span class="nav-number">1.11.</span> <span class="nav-text">第十章</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

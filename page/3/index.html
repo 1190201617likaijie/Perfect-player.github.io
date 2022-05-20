@@ -145,6 +145,728 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">编译原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-04 10:47:20" itemprop="dateCreated datePublished" datetime="2022-01-04T10:47:20+08:00">2022-01-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-19 10:03:47" itemprop="dateModified" datetime="2022-05-19T10:03:47+08:00">2022-05-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="存疑"><a href="#存疑" class="headerlink" title="存疑"></a>存疑</h2><p>z=x+1;的中间代码生成</p>
+<p>移植问题(已解决)</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419121711994.png" alt="image-20220419121711994"></p>
+<p>虚属性？</p>
+<p>中间代码生成，修改</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514151221654.png" alt="image-20220514151221654" style="zoom:25%;"></p>
+<p>习题8.4 是否存在和这些规则一致的求值过程</p>
+<p>9.1</p>
+<p>9 10</p>
+<p>12.2 </p>
+<p>13.3</p>
+<p>14.6</p>
+<p>15.4 15.5 </p>
+<h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><p>消除左递归</p>
+<p>递归下降语法分析器</p>
+<p>非递归下降语法分析器</p>
+<p>句柄</p>
+<p>判断是否为LL文法</p>
+<p>LR文法的四种判断</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">关系：LR(0)&lt;SLR(1)&lt;LALR(1)&lt;LR(1)</span><br></pre></td></tr></table></figure>
+<p>1.判断LR(0)文法：<br>看项目中是否有归约-归约和移进-归约冲突。<br>如果无冲突则是LR(0)文法（如果是LR(0)文法则四种都是）；如果有冲突则不是LR(0)文法。（就要向下判断）</p>
+<p>2.判断SLR(1)文法：<br>a:DFA中存在冲突项目（归约-归约，归约-移进）<br>b:{a1,a2,…,an},FOLLOW(B1),FOLLOW(B2)两两互不相交，（交集=空集）时是SLR(1)项目。<br>【也就是说，同时满足两个条件才是SLR（1）文法】</p>
+<p>若不是再向下判断。</p>
+<p>3.判断LR(1)文法：<br>构造带向前搜索符的DFA，无归约-归约冲突则是LR(1)文法。</p>
+<p>【此处意思是如果有向前搜索符还有冲突的话就不是LR（1）文法，就要再向下判断】</p>
+<p>4.判断LALR(1)文法：<br>合并同心集后无（归约-归约）冲突（在之前的基础上）<br>（核相同，向前搜索符不同）</p>
+<p>（B-&gt;a,a<br>B-&gt;a,a|b<br>同心集）<br><strong>LR(0)项目集规范族的构造和分析的构造</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/m0_37154839/article/details/80316089</span><br></pre></td></tr></table></figure>
+<p>设计SDD</p>
+<p>改写SDT</p>
+<p>四元式序列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/abc123lzf/article/details/103753507</span><br></pre></td></tr></table></figure>
+<p><strong>中间代码生成</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220518170348404.png" alt="image-20220518170348404" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220518170539086.png" alt="image-20220518170539086" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220518170614471.png" alt="image-20220518170614471" style="zoom:50%;"></p>
+<p>赋值语句的翻译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">newtemp( )：生成一个新的临时变量t，返回t的地址</span><br><span class="line">gen(code)：生成三地址指令code</span><br><span class="line">lookup(name)：查询符号表返回name 对应的记录</span><br></pre></td></tr></table></figure>
+<p>数组引用的翻译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L的综合属性</span><br><span class="line">L.type：L生成的数组元素的类型</span><br><span class="line">L.offset：指示一个临时变量，该临时变量用于累加公式中的ij × wj项，从而计算数组元素的偏移量</span><br><span class="line">L.array：数组名在符号表的入口地址</span><br></pre></td></tr></table></figure>
+<p>控制语句的翻译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">继承属性</span><br><span class="line">B.true：是一个地址，该地址用来存放当B为真时控制流转向的指令的标号</span><br><span class="line">B.false：是一个地址，该地址用来存放当B为假时控制流转向的指令的标号</span><br><span class="line">S.next：是一个地址，该地址用来存放紧跟在S代码之后执行的指令(S的后继指令)的标号</span><br></pre></td></tr></table></figure>
+<p><strong>回填</strong></p>
+<p>非终结符B的综合属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B.truelist：指向一个包含跳转指令的列表，这些指令最终获得的目标标号就是当B为真时控制流应该转向的指令的标号</span><br><span class="line">B.falselist：指向一个包含跳转指令的列表，这些指令最终获得的目标标号就是当B为假时控制流应该转向的指令的标号</span><br></pre></td></tr></table></figure>
+<p>函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">makelist( i )</span><br><span class="line">创建一个只包含i的列表，i是跳转指令的标号，函数返回指向新创建的列表的指针</span><br><span class="line">merge( p1, p2 )</span><br><span class="line">将 p1 和 p2 指向的列表进行合并，返回指向合并后的列表的指针</span><br><span class="line">backpatch( p, i )</span><br><span class="line">将 i 作为目标标号插入到 p所指列表中的各指令中</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nextquad：即将生成的下一条指令的标号</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220517011523873.png" alt="image-20220517011523873" style="zoom: 25%;"></p>
+<h2 id="什么是编译"><a href="#什么是编译" class="headerlink" title="什么是编译"></a>什么是编译</h2><p>编译：将<strong>高级语言</strong>翻译成<strong>汇编语言</strong>或<strong>机器语言</strong>的过程。</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104110715843.png" alt="image-20220104110715843" style="zoom:50%;"></p>
+<p>预处理器：把存储在不同文件中的源程序聚合在一起；把被称为宏的缩写语句转换为原始语句。</p>
+<p>可重定位：在内存中存放的起始位置L不是固定的</p>
+<p>加载器：修改可重定位地址；将修改后的指令和数据放到内存中适当的位置。</p>
+<p>链接器：将多个可重定位的机器代码文件连接到一起；解决外部内存地址问题</p>
+<h3 id="编译系统的结构"><a href="#编译系统的结构" class="headerlink" title="编译系统的结构"></a>编译系统的结构</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220104113047587.png" alt="image-20220104113047587" style="zoom:50%;"></p>
+<h3 id="词法分析概述"><a href="#词法分析概述" class="headerlink" title="词法分析概述"></a>词法分析概述</h3><p>词法分析的主要任务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">从左向右逐行扫描源程序的字符，识别出各个单词，确定单词的类型。将识别出的单词转换成统一的机内表示——词法单元(token)形式。</span><br><span class="line">token:&lt;种别码，属性值&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220105104115216.png" alt="image-20220105104115216" style="zoom:50%;"></p>
+<h3 id="语法分析概述"><a href="#语法分析概述" class="headerlink" title="语法分析概述"></a>语法分析概述</h3><p>语法分析器从词法分析器输出的token序列中识别出各类短语，并构造语法分析树。</p>
+<h3 id="语义分析概述"><a href="#语义分析概述" class="headerlink" title="语义分析概述"></a>语义分析概述</h3><p>主要任务：</p>
+<p>任务一：收集标识符的属性信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">：</span><br><span class="line">种属:简单变量、复合变量(数组，记录)、过程</span><br><span class="line">类型:整型、实型、字符型、布尔型、指针型</span><br><span class="line">存储类型，长度</span><br><span class="line">值</span><br><span class="line">作用域</span><br><span class="line">参数和返回值信息</span><br></pre></td></tr></table></figure>
+<p>符号表：用来存放标识符的属性信息的数据结构</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095418057.png" alt="image-20220106095418057" style="zoom:50%;"></p>
+<p>任务二：语义检查</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">变量或过程未经声明就使用；</span><br><span class="line">变量或过程名重复声明；</span><br><span class="line">运算分量类型不匹配；</span><br><span class="line">操作符与操作数之间的类型不匹配</span><br></pre></td></tr></table></figure>
+<h3 id="中间代码生成及编译器后端"><a href="#中间代码生成及编译器后端" class="headerlink" title="中间代码生成及编译器后端"></a>中间代码生成及编译器后端</h3><p>常用的中间表示形式：</p>
+<p>三地址码；语法结构树/语法树</p>
+<h4 id="三地址码"><a href="#三地址码" class="headerlink" title="三地址码"></a>三地址码</h4><p>三地址码由类似于汇编语言的指令序列组成，每个指令最多有三个操作数。</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220106095933969.png" alt="image-20220106095933969" style="zoom:50%;"></p>
+<p>三地址指令的表示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">四元式(op,arg1,arg2,result)</span><br><span class="line">三元式(op,arg1,arg2)</span><br><span class="line">间接三元式</span><br></pre></td></tr></table></figure>
+<p>目标代码生成以源程序的中间表示形式作为输入，并把它映射到目标语言；目标代码生成的一个重要任务是为程序中使用的变量合理分配寄存器。</p>
+<p>代码优化：为改进代码，所进行的等价程序变换，使其运行得更快一些，占用空间更小一些。</p>
+<h3 id="编译程序的生成"><a href="#编译程序的生成" class="headerlink" title="编译程序的生成"></a>编译程序的生成</h3><h4 id="编译器的T形图"><a href="#编译器的T形图" class="headerlink" title="编译器的T形图"></a>编译器的T形图</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419112048151.png" alt="image-20220419112048151" style="zoom:25%;"></p>
+<h4 id="自展"><a href="#自展" class="headerlink" title="自展"></a>自展</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419112803975.png" alt="image-20220419112803975" style="zoom:25%;"></p>
+<h4 id="移植"><a href="#移植" class="headerlink" title="移植"></a>移植</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220419112828085.png" alt="image-20220419112828085" style="zoom: 25%;"></p>
+<h2 id="语言及其文法"><a href="#语言及其文法" class="headerlink" title="语言及其文法"></a>语言及其文法</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>字母表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个有穷符号集合。</span><br></pre></td></tr></table></figure>
+<p>字母表运算</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">乘积</span><br><span class="line">n次幂</span><br><span class="line">正闭包（正数次幂的并集）</span><br><span class="line">克林闭包(正闭包的基础上加个空串)</span><br></pre></td></tr></table></figure>
+<p>串：字母表中符号的一个有穷序列</p>
+<p>串的运算</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">连接，空串是连接运算的单位元</span><br><span class="line">串的幂运算</span><br></pre></td></tr></table></figure>
+<h3 id="文法的定义"><a href="#文法的定义" class="headerlink" title="文法的定义"></a>文法的定义</h3><p>文法</p>
+<p>$G=(V_T,V_N,P,S)$</p>
+<p>$V_T$:终结符集合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">终结符是文法所定义的语言的基本符号，有事也称为token</span><br></pre></td></tr></table></figure>
+<p>$V_N$：非终结符集合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">非终结符是用来表示语法成分的符号，有时也称为&quot;语法变量&quot;</span><br></pre></td></tr></table></figure>
+<p>$V_T$与$V_N$不相交，二者相并统称为文法符号集。</p>
+<p>P：产生式集合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">描述了将终结符和非终结符组合成串的方法</span><br></pre></td></tr></table></figure>
+<p>S:开始符号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开始符号表示的是该文法中最大的语法成分</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107105320903.png" alt="image-20220107105320903" style="zoom: 25%;"></p>
+<p>符号约定</p>
+<p>终结符</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110153976.png" alt="image-20220107110153976" style="zoom: 25%;"></p>
+<p>非终结符</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110227112.png" alt="image-20220107110227112" style="zoom: 25%;"></p>
+<p>注</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220107110401057.png" alt="image-20220107110401057" style="zoom: 25%;"></p>
+<h3 id="语言的定义"><a href="#语言的定义" class="headerlink" title="语言的定义"></a>语言的定义</h3><p>符号串$a<em>0$经过n步推导出$a_n$,可简记为$a_0\Longrightarrow </em>{}^{n}a_n $</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220108100026833.png" alt="image-20220108100026833" style="zoom: 25%;"></p>
+<p>句子是不包含非终结符的句型。</p>
+<h3 id="文法的分类"><a href="#文法的分类" class="headerlink" title="文法的分类"></a>文法的分类</h3><p>Chomsky文法分类体系</p>
+<h4 id="0型文法"><a href="#0型文法" class="headerlink" title="0型文法"></a>0型文法</h4><p>$\alpha \longrightarrow \beta $</p>
+<p>无限制文法，其中$\alpha$中至少包含一个非终结符。</p>
+<p>由0型文法G生成的语言称为 <strong>0型语言</strong></p>
+<h4 id="1型文法"><a href="#1型文法" class="headerlink" title="1型文法"></a>1型文法</h4><p>$\alpha \longrightarrow \beta $</p>
+<p>上下文有关文法，CSG</p>
+<script type="math/tex; mode=display">
+|\alpha| < |\beta|</script><p>产生式的一般形式:</p>
+<script type="math/tex; mode=display">
+\alpha_1A\alpha_2\longrightarrow\alpha_1\beta\alpha_2(\beta\ne\varepsilon)</script><h4 id="2型文法"><a href="#2型文法" class="headerlink" title="2型文法"></a>2型文法</h4><p>$\alpha \longrightarrow \beta $</p>
+<p>上下文无关文法，CFG</p>
+<p>其中$\alpha\in V_N$</p>
+<p>产生式的一般形式：</p>
+<script type="math/tex; mode=display">
+A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="headerlink" title="3型文法"></a>3型文法</h4><p>$\alpha \longrightarrow \beta $</p>
+<p>正则文法，RG</p>
+<p>右线性文法：$A\longrightarrow wB或A\longrightarrow w$</p>
+<p>左线性文法：$A\longrightarrow Bw或A\longrightarrow w$</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220429171644864.png" alt="image-20220429171644864" style="zoom: 25%;"></p>
+<h3 id="CFG的分析树"><a href="#CFG的分析树" class="headerlink" title="CFG的分析树"></a>CFG的分析树</h3><p>给定一个句型，其分析树中的每一棵子树的边缘称为该句型的一个短语。</p>
+<p>直接短语：高度为2的子树的边缘。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">直接短语一定是某产生式的右部</span><br><span class="line">但产生式的右部不一定是给定句型的直接短语</span><br></pre></td></tr></table></figure>
+<p>二义性文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果一个文法可以为某个句子生成多颗分析树，则称这个文法是二义性的。</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105001704.png" alt="image-20220109105001704" style="zoom:50%;"></p>
+<h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220109105354813.png" alt="image-20220109105354813" style="zoom: 25%;"></p>
+<h3 id="正则定义"><a href="#正则定义" class="headerlink" title="正则定义"></a>正则定义</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111100400281.png" alt="image-20220111100400281" style="zoom: 25%;"></p>
+<h3 id="有穷自动机"><a href="#有穷自动机" class="headerlink" title="有穷自动机"></a>有穷自动机</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220111101353306.png" alt="image-20220111101353306" style="zoom: 25%;"></p>
+<p><strong>最长子串匹配原则</strong>：当输入串的多个前缀与一个或多个模式匹配时，总是选择最长的前缀进行匹配</p>
+<h3 id="有穷自动机的分类"><a href="#有穷自动机的分类" class="headerlink" title="有穷自动机的分类"></a>有穷自动机的分类</h3><p>DFA确定的有穷自动机</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104246612.png" alt="image-20220112104246612" style="zoom: 25%;"></p>
+<p>NFA非确定的有穷自动机</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104402251.png" alt="image-20220112104402251" style="zoom: 25%;"></p>
+<p>正则文法与正则表达式与有穷自动机等价</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220112104637911.png" alt="image-20220112104637911" style="zoom: 25%;"></p>
+<p>带有空边的NFA与不带空边的NFA有等价性</p>
+<h3 id="从正则表达式到有穷自动机"><a href="#从正则表达式到有穷自动机" class="headerlink" title="从正则表达式到有穷自动机"></a>从正则表达式到有穷自动机</h3><p>先构造NFA,再从NFA到DFA。</p>
+<p>根据RE构造NFA</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220501150009650.png" alt="image-20220501150009650" style="zoom:25%;"></p>
+<p>假设正则表达式r1和r2对应的NFA分别为N(r1)和N(r2)</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220501150031625.png" alt="image-20220501150031625" style="zoom:25%;"></p>
+<h3 id="从NFA到DFA的转换"><a href="#从NFA到DFA的转换" class="headerlink" title="从NFA到DFA的转换"></a>从NFA到DFA的转换</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100302890.png" alt="image-20220114100302890" style="zoom: 25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220114100719876.png" alt="image-20220114100719876" style="zoom: 25%;"></p>
+<h3 id="识别单词的DFA"><a href="#识别单词的DFA" class="headerlink" title="识别单词的DFA"></a>识别单词的DFA</h3><p> 词法分析阶段可检测错误的类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">单词拼写错误</span><br><span class="line">非法字符</span><br></pre></td></tr></table></figure>
+<p>错误恢复策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">最简单的错误恢复策略：恐慌模式</span><br><span class="line">从剩余的输入中不断删除字符，直到词法分析器能够在剩余的开头发现一个正确的字符为止。</span><br></pre></td></tr></table></figure>
+<h2 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h2><h3 id="自顶向下分析概述"><a href="#自顶向下分析概述" class="headerlink" title="自顶向下分析概述"></a>自顶向下分析概述</h3><p>从分析树的顶部向底部方向构造分析树。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最左推导：总是选择每个句型的最左非终结符进行替换。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最右推导：总是选择每个句型的最右非终结符进行替换。</span><br></pre></td></tr></table></figure>
+<p>在自底向上的分析中，总是采用最左规约的方式，因此把最左规约称为规范规约，而最右推导相应的称为规范推导。</p>
+<p>自顶向下选择最左推导。</p>
+<h4 id="自顶向下分析存在的问题"><a href="#自顶向下分析存在的问题" class="headerlink" title="自顶向下分析存在的问题"></a>自顶向下分析存在的问题</h4><p>同一非终结符的多个候选式存在共同前缀，将导致回溯现象</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192055179.png" alt="image-20220512192055179" style="zoom: 50%;"></p>
+<p>左递归文法会使递归下降分析器陷入无限循环</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192124252.png" alt="image-20220512192124252" style="zoom:50%;"></p>
+<h4 id="消除直接左递归"><a href="#消除直接左递归" class="headerlink" title="消除直接左递归"></a>消除直接左递归</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192544030.png" alt="image-20220512192544030" style="zoom: 50%;"></p>
+<p>消除直接左递归的一般形式</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192836269.png" alt="image-20220512192836269" style="zoom:50%;"></p>
+<h4 id="消除间接左递归"><a href="#消除间接左递归" class="headerlink" title="消除间接左递归"></a>消除间接左递归</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512192935922.png" alt="image-20220512192935922" style="zoom:50%;"></p>
+<h4 id="提取左公因子"><a href="#提取左公因子" class="headerlink" title="提取左公因子"></a>提取左公因子</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512193513607.png" alt="image-20220512193513607" style="zoom:50%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512193523610.png" alt="image-20220512193523610" style="zoom:50%;"></p>
+<h4 id="预测分析"><a href="#预测分析" class="headerlink" title="预测分析"></a>预测分析</h4><p>需要回溯的分析器叫不确定分析器。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">预测分析：递归下降分析技术的一个特例，通过在输入中向前看固定个数符号来选择正确的A-产生式。</span><br><span class="line">预测分析不需要回溯，是一种确定的自顶向下分析方法。</span><br></pre></td></tr></table></figure>
+<p>可以对某些文法构造出向前看k个输入符号的预测分析器，该类文法有时也称为LL(k) 文法类</p>
+<h3 id="预测分析法"><a href="#预测分析法" class="headerlink" title="预测分析法"></a>预测分析法</h3><h4 id="LL-1-文法"><a href="#LL-1-文法" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h4><p>S_文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">每个产生式的右部都以终结符开始</span><br><span class="line">同一非终结符的各个候选式的首终结符都不同</span><br><span class="line">S_文法不含ε产生式</span><br></pre></td></tr></table></figure>
+<p>什么时候使用ε产生式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果当前某非终结符A与当前输入符a不匹配时，若存在A→ε，可以通过检查a是否可以出现在 A的后面，来决定是否使用产生式 A→ε（若文法中无 A→ε ，则应报错）</span><br></pre></td></tr></table></figure>
+<p>后继符号集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">可能在某个句型中紧跟在A后边的终结符a的集合，记为FOLLOW(A)</span><br><span class="line">	FOLLOW(A)=&#123;a| S -&gt;* αAaβ, a∈VT，α,β∈(VT∪VN)*&#125;</span><br><span class="line">如果 A是某个句型的的最右符号，则将结束符“$”添加到FOLLOW(A)中</span><br></pre></td></tr></table></figure>
+<p>产生式的可选集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">产生式A→β的可选集是指可以选用该产生式进行推导时对应的输入符号的集合，记为SELECT( A→β )</span><br><span class="line">SELECT( A→aβ ) = &#123; a &#125;</span><br><span class="line">SELECT( A→ε )=FOLLOW( A )</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512212721662.png" alt="image-20220512212721662" style="zoom:50%;"></p>
+<p>q_文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">每个产生式的右部或为ε ，或以终结符开始</span><br><span class="line">具有相同左部的产生式有不相交的可选集</span><br><span class="line">q_文法不含右部以非终结符打头的产生式</span><br></pre></td></tr></table></figure>
+<p>串首终结符集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给定一个文法符号串α， α的串首终结符集FIRST(α)被定义为可以从α推导出的所有串首终结符构成的集合。如果α * ε，那么ε也在FIRST(α)中</span><br></pre></td></tr></table></figure>
+<p>LL(1)文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">当且仅当G的任意两个具有相同左部的产生式A → α | β 满足下面的条件：</span><br><span class="line">不存在终结符a使得α 和β都能够推导出以a开头的串</span><br><span class="line">α 和β至多有一个能推导出ε </span><br><span class="line">如果 β -&gt;* ε，则FIRST (α)∩FOLLOW(A) =Φ；</span><br><span class="line">如果 α -&gt;* ε，则FIRST (β)∩FOLLOW(A) =Φ；</span><br></pre></td></tr></table></figure>
+<p>即同一非终结符的各个产生式的可选集互不相交</p>
+<p>第一个L表示从左向右扫描输入，第二个L表示最左推导</p>
+<p>follow(A)计算方法</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512220412044.png" alt="image-20220512220412044" style="zoom:50%;"></p>
+<p>预测分析表</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512220850395.png" alt="image-20220512220850395" style="zoom:33%;"></p>
+<p>预测分析</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">递归的方式：基于预测分析表对递归下降分析法进行扩展</span><br><span class="line">非递归的方式：显式地维护一个栈结构来模拟最左推导过程</span><br></pre></td></tr></table></figure>
+<h4 id="递归的预测分析法"><a href="#递归的预测分析法" class="headerlink" title="递归的预测分析法"></a>递归的预测分析法</h4><h4 id="非递归的预测分析法"><a href="#非递归的预测分析法" class="headerlink" title="非递归的预测分析法"></a>非递归的预测分析法</h4><p>非递归的预测分析显式地维护一个栈结构，而不是通过递归调用的方式隐式地维护栈。这样的语法分析器可以模拟最左推导过程</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512221720701.png" alt="image-20220512221720701" style="zoom:33%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220512221741289.png" alt="image-20220512221741289" style="zoom:33%;"></p>
+<p>预测分析步骤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.构造文法</span><br><span class="line">2.改造文法：消除二义性、消除左递归、消除回溯</span><br><span class="line">3.求每个变量的FIRST集和FOLLOW集，从而求得每个候选式的SELECT集</span><br><span class="line">4.检查是不是 LL(1) 文法。若是，构造预测分析表</span><br><span class="line">5.对于递归的预测分析，根据预测分析表为每一个非终结符编写一个过程；对于非递归的预测分析，实现表驱动</span><br><span class="line">  的预测分析算法</span><br></pre></td></tr></table></figure>
+<p>二义性判定</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于任一个上下文无关文法，不存在一个算法判断其是否为二义性，但能给出一个充分条件，满足则无二义性，不满足也未必有二义性</span><br></pre></td></tr></table></figure>
+<h4 id="预测分析中的错误检测"><a href="#预测分析中的错误检测" class="headerlink" title="预测分析中的错误检测"></a>预测分析中的错误检测</h4><p>两种情况下可以检测到错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">栈顶的终结符和当前输入符号不匹配</span><br><span class="line">栈顶非终结符与当前输入符号在预测分析表对应项中的信息为空</span><br></pre></td></tr></table></figure>
+<p>错误恢复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">恐慌模式：忽略输入中的一些符号，直到输入中出现由设计者选定的同步词法单元(synchronizing token)集合中的某个词法单元；如果终结符在栈顶而不能匹配，一个简单的办法就是弹出此终结符</span><br></pre></td></tr></table></figure>
+<h3 id="自底向上的分析"><a href="#自底向上的分析" class="headerlink" title="自底向上的分析"></a>自底向上的分析</h3><p>自底向上的语法分析采用最左归约方式（反向构造句子的最右推导）</p>
+<h4 id="移入-归约分析"><a href="#移入-归约分析" class="headerlink" title="移入-归约分析"></a>移入-归约分析</h4><p>工作过程</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513095056700.png" alt="image-20220513095056700" style="zoom: 25%;"></p>
+<p>四种动作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">移入：将下一个输入符号移到栈的顶端</span><br><span class="line">归约：被归约的符号串的右端必然处于栈顶。语法分析器在栈中确定这个串的左端，并决定用哪个非终结符来替换这个串</span><br><span class="line">接收：宣布语法分析过程成功完成</span><br><span class="line">报错：发现一个语法错误，并调用错误恢复子例程</span><br></pre></td></tr></table></figure>
+<p>存在问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">归约-归约冲突</span><br><span class="line">移入-归约冲突</span><br></pre></td></tr></table></figure>
+<p><strong>归约-归约冲突</strong></p>
+<p>造成错误的原因：错误地识别了句柄</p>
+<p>句柄：句型的最左直接短语</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513100212940.png" alt="image-20220513100212940" style="zoom:25%;"></p>
+<p><strong>移入-归约冲突</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513100150507.png" alt="image-20220513100150507" style="zoom: 25%;"></p>
+<h3 id="LR分析法"><a href="#LR分析法" class="headerlink" title="LR分析法"></a>LR分析法</h3><p>是最大的、可以构造出相应移入-归约语法分析器的文法类<br>L: 对输入进行从左到右的扫描<br>R: 反向构造出一个最右推导序列</p>
+<p>LR(k)分析<br>需要向前查看k个输入符号的LR分析</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513102223085.png" alt="image-20220513102223085" style="zoom: 25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513102611274.png" alt="image-20220513102611274" style="zoom:25%;"></p>
+<p>看PPT例题分析</p>
+<h4 id="LR-0-分析"><a href="#LR-0-分析" class="headerlink" title="LR(0) 分析"></a>LR(0) 分析</h4><p>右部某位置标有圆点的产生式称为相应文法的一个LR(0)项目（简称为项目）</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513103304315.png" alt="image-20220513103304315" style="zoom:25%;"></p>
+<p>产生式A→ε 只生成一个项目A→ · </p>
+<p>增广文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果G 是一个以S为开始符号的文法，则G的增广文法 G&#x27; 就是在G中加上新开始符号S&#x27; 和产生式S&#x27; → S而得到的文法</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513103407672.png" alt="image-20220513103407672" style="zoom:25%;"></p>
+<p>引入这个新的开始产生式的目的是使得文法开始符号仅出现在一个产生式的左边，从而使得分析器只有一个接受状态</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513103852131.png" alt="image-20220513103852131" style="zoom: 25%;"></p>
+<p>初始项目：S’→·S</p>
+<p>接收项目：S’→S·</p>
+<p>归约项目：·在末尾的项目</p>
+<p>后继项目：同属于一个产生式的项目，但圆点的位置只相差一个符号，  则称后者是前者的后继项目</p>
+<p>A→α· Xβ的后继项目是A→αX·β</p>
+<p>可以把等价的项目组成一个项目集( I ) ，称为项目集闭包(Closure of Item Sets)，每个项目集闭包对应着自动机的一个状态</p>
+<p>eg：</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513104546195.png" alt="image-20220513104546195" style="zoom: 25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513104843423.png" alt="image-20220513104843423" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513104852180.png" alt="image-20220513104852180" style="zoom:25%;"></p>
+<p>LR(0)分析过程的冲突</p>
+<p>移进归约冲突</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513105245484.png" alt="image-20220513105245484" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513105343336.png" alt="image-20220513105343336" style="zoom:25%;"></p>
+<p>在状态2时，当遇到*号时，不清楚应该移入还是归约。</p>
+<p>归约归约冲突</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513105500066.png" alt="image-20220513105500066" style="zoom:25%;"></p>
+<p>状态二有两个归约和一个移入，移进/归约冲突和归约/归约冲突混合。</p>
+<p>如果LR(0)分析表中没有语法分析动作冲突，那么给定的文法就称为LR(0)文法</p>
+<p>不是所有CFG(上下文无关文法)都能用LR(0)方法进行分析，也就是说，CFG不总是LR(0)文法。</p>
+<h4 id="SLR-分析"><a href="#SLR-分析" class="headerlink" title="SLR 分析"></a>SLR 分析</h4><p>LR(0)解决不了冲突的原因</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">句柄都是相对一个句型而言的，因此应该将句柄的识别放在句型这样一个上下文环境中考虑</span><br><span class="line">LR(0)考虑了A的上文（规范句型的前缀），但未考虑A的下文，因此消解冲突能力有限</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513135613449.png" alt="image-20220513135613449" style="zoom:25%;"></p>
+<p>SLR冲突</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513135724655.png" alt="image-20220513135724655" style="zoom:25%;"></p>
+<p>当状态2遇到=时，会有移入归约冲突。</p>
+<p>存在问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SLR只是简单地考察下一个输入符号b是否属于与归约项目A→α相关联的FOLLOW(A)，但b∈FOLLOW(A)只是归约α的一个必要条件，而非充分条件</span><br></pre></td></tr></table></figure>
+<h4 id="LR-1-分析"><a href="#LR-1-分析" class="headerlink" title="LR(1)分析"></a>LR(1)分析</h4><p>在特定位置，A的后继符集合是FOLLOW(A)的子集，而SLR分析法则将其全部考虑了进去。</p>
+<p>将一般形式为 [A→α·β, a]的项称为 LR(1) 项，其中A→αβ 是一个产生式，a 是一个终结符(这里将$视为一个特殊的终结符)它表示在当前状态下，A后面必须紧跟的终结符，称为该项的展望符(lookahead)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LR(1) 中的1指的是项的第二个分量的长度</span><br><span class="line">在形如[A→α·β, a]且β ≠ ε的项中，展望符a没有任何作用</span><br><span class="line">但是一个形如[A→α·, a]的项在只有在下一个输入符号等于a时才可以按照A→α 进行归约</span><br><span class="line">这样的a的集合总是FOLLOW(A)的子集，而且它通常是一个真子集</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513143948062.png" alt="image-20220513143948062" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513144511943.png" alt="image-20220513144511943" style="zoom:25%;"></p>
+<p>如果除展望符外，两个LR(1)项目集是相同的，则称这两个LR(1)项目集是同心的</p>
+<p>LR(1)分析实际上是根据后继符集合的不同，将原始的LR(0)状态分裂成不同的LR(1)状态</p>
+<h4 id="LALR分析"><a href="#LALR分析" class="headerlink" title="LALR分析"></a>LALR分析</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">寻找具有相同核心的LR  (1) 项集，并将这些项集合并为一个项集。 所谓项集的核心就是其第一分量的集合</span><br><span class="line">然后根据合并后得到的项集族构造语法分析表</span><br><span class="line">如果分析表中没有语法分析动作冲突，给定的文法就称为LALR  (1) 文法，就可以根据该分析表进行语法分析</span><br></pre></td></tr></table></figure>
+<p>合并同心项集时产生归约-归约冲突的例子</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513145829960.png" alt="image-20220513145829960" style="zoom:25%;"></p>
+<p>合并同心项集不会产生移进-归约冲突</p>
+<p>合并同心项集后，虽然不产生冲突，但可能会推迟错误的发现</p>
+<p>LALR分析法可能会作多余的归约动作，但绝不会作错误的移进操作</p>
+<p>LALR(1)的特点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">形式上与LR(1)相同</span><br><span class="line">大小上与LR(0)/SLR相当</span><br><span class="line">分析能力介于SLR和LR(1)二者之间：LR(0)&lt; SLR&lt;LALR(1)&lt;LR(1)</span><br><span class="line">合并后的展望符集合仍为FOLLOW集的子集</span><br></pre></td></tr></table></figure>
+<h4 id="二义性文法的LR分析"><a href="#二义性文法的LR分析" class="headerlink" title="二义性文法的LR分析"></a>二义性文法的LR分析</h4><p>每个二义性文法都不是LR的<br>某些类型的二义性文法在语言的描述和实现中很有用</p>
+<p>用优先级和结合性解决冲突</p>
+<p>应该保守地使用二义性文法，并且必须在严格控制之下使用，因为稍有不慎就会导致语法分析器所识别的语言出现偏差</p>
+<h4 id="LR分析中的错误处理"><a href="#LR分析中的错误处理" class="headerlink" title="LR分析中的错误处理"></a>LR分析中的错误处理</h4><p>语法错误的检测</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当LR分析器在查询语法分析动作表并发现一个报错条目时，就检测到了一个语法错误</span><br></pre></td></tr></table></figure>
+<p>错误恢复策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">恐慌模式错误恢复</span><br><span class="line">短语层次错误恢复</span><br></pre></td></tr></table></figure>
+<p>恐慌错误恢复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">从栈顶向下扫描，直到发现某个状态si，它有一个对应于某个非终结符A的GOTO目标，可以认为从这个A推导出的串中包含错误</span><br><span class="line">然后丢弃0个或多个输入符号，直到发现一个可能合法地紧跟在A之后的符号a为止</span><br><span class="line">之后将si+1 = GOTO(si , A)压入栈中，继续进行正常的语法分析</span><br><span class="line">实践中可能会选择多个这样的非终结符A。通常这些非终结符代表了主要的程序段，比如表达式、语句或块</span><br></pre></td></tr></table></figure>
+<p>短语层次错误恢复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">检查LR分析表中的每一个报错条目，并根据语言的使用方法来决定程序员所犯的何种错误最有可能引起这个语法错误</span><br><span class="line">然后构造出适当的恢复过程</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513151319857.png" alt="image-20220513151319857" style="zoom:25%;"></p>
+<h2 id="语法制导翻译"><a href="#语法制导翻译" class="headerlink" title="语法制导翻译"></a>语法制导翻译</h2><p>语法制导翻译使用CFG来引导对语言的翻译，是一种面向文法的翻译技术</p>
+<p>基本思想</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如何表示语义信息：为CFG中的文法符号设置语义属性，用来表示语法成分对应的语义信息</span><br><span class="line">如何计算语义属性：文法符号的语义属性值是用与文法符号所在产生式（语法规则）相关联的语义规则来计算的</span><br><span class="line">对于给定的输入串x ，构建x的语法分析树，并利用与产生式（语法规则）相关联的语义规则来计算分析树中各结点对应的语义属性值</span><br></pre></td></tr></table></figure>
+<p>语法制导定义(Syntax-Directed Definitions, SDD)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SDD是对CFG的推广</span><br><span class="line">将每个文法符号和一个语义属性集合相关联</span><br><span class="line">将每个产生式和一组语义规则相关联，这些规则用于计算该产生式中各文法符号的属性值</span><br><span class="line">如果X是一个文法符号，a是X的一个属性，则用X.a表示属性a在某个标号为X的分析树结点上的值</span><br></pre></td></tr></table></figure>
+<p>语法制导翻译方案 (Syntax-Directed Translation Scheme , SDT )</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SDT是在产生式右部嵌入了程序片段的CFG，这些程序片段称为语义动作。一个语义动作在产生式中的位置决定了这个动作的执行时间</span><br></pre></td></tr></table></figure>
+<h3 id="语法制导定义SDD"><a href="#语法制导定义SDD" class="headerlink" title="语法制导定义SDD"></a>语法制导定义SDD</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>语法制导定义SDD是对CFG的推广</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将每个文法符号和一个语义属性集合相关联</span><br><span class="line">将每个产生式和一组语义规则相关联，用来计算该产生式中各文法符号的属性值</span><br></pre></td></tr></table></figure>
+<p>文法符号的属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">综合属性 (synthesized attribute)</span><br><span class="line">继承属性 (inherited attribute)</span><br></pre></td></tr></table></figure>
+<p>综合属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在分析树结点 N上的非终结符A的综合属性只能通过 N的子结点或 N本身的属性值来定义</span><br><span class="line">终结符可以具有综合属性。终结符的综合属性值是由词法分析器提供的词法值，因此在SDD中没有计算终结符属性值的语义规则</span><br></pre></td></tr></table></figure>
+<p>继承属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在分析树结点 N上的非终结符A的继承属性只能通过 N的父结点、N的兄弟结点或 N本身的属性值来定义</span><br><span class="line">终结符没有继承属性。终结符从词法分析器处获得的属性值被归为综合属性值</span><br></pre></td></tr></table></figure>
+<p>属性文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一个没有副作用的SDD有时也称为属性文法</span><br><span class="line">属性文法的规则仅仅通过其它属性值和常量来定义一个属性值</span><br></pre></td></tr></table></figure>
+<h4 id="SDD的求值顺序"><a href="#SDD的求值顺序" class="headerlink" title="SDD的求值顺序"></a>SDD的求值顺序</h4><p>语义规则建立了属性之间的依赖关系，在对语法分析树节点的一个属性求值之前，必须首先求出这个属性值所依赖的所有属性值</p>
+<p>依赖图</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">依赖图是一个描述了分析树中结点属性间依赖关系的有向图</span><br><span class="line">分析树中每个标号为X的结点的每个属性a都对应着依赖图中的一个结点</span><br><span class="line">如果属性X.a的值依赖于属性Y.b的值，则依赖图中有一条从Y.b的结点指向X.a的结点的有向边</span><br></pre></td></tr></table></figure>
+<p>eg：<img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513155754626.png" alt="image-20220513155754626" style="zoom:25%;"></p>
+<p>属性值计算顺序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这样的排序将一个有向图变成了一个线性排序，这个排序称为这个图的拓扑排序</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对于只具有综合属性的SDD ，可以按照任何自底向上的顺序计算它们的值</span><br><span class="line">对于同时具有继承属性和综合属性的SDD，不能保证存在一个顺序来对各个节点上的属性进行求值</span><br><span class="line">如果图中没有环，那么至少存在一个拓扑排序</span><br></pre></td></tr></table></figure>
+<h3 id="S-属性定义与L-属性定义"><a href="#S-属性定义与L-属性定义" class="headerlink" title="S-属性定义与L-属性定义"></a>S-属性定义与L-属性定义</h3><p>仅仅使用综合属性的SDD称为S属性的SDD，或S-属性定义、S-SDD</p>
+<p>如果一个SDD是S属性的，可以按照语法分析树节点的任何自底向上顺序来计算它的各个属性值</p>
+<p>L-属性定义(也称为L属性的SDD或L-SDD)的直观含义：在一个产生式所关联的各属性之间，依赖图的边可以从左到右，但不能从右到左</p>
+<p>正式定义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一个SDD是L-属性定义，当且仅当它的每个属性要么是一个综合属性，要么是满足如下条件的继承属性：假设存在一个产生式A→X1X2…Xn，其右部符号Xi (1&lt;= i &lt;= n)的继承属性仅依赖于下列属性：</span><br><span class="line">A的继承属性</span><br><span class="line">产生式中Xi左边的符号 X1, X2, … , Xi-1 的属性</span><br><span class="line">Xi本身的属性，但Xi 的全部属性不能在依赖图中形成环路</span><br></pre></td></tr></table></figure>
+<p>虚属性：就是一个动作，不干其他事情。</p>
+<h3 id="语法制导翻译方案SDT"><a href="#语法制导翻译方案SDT" class="headerlink" title="语法制导翻译方案SDT"></a>语法制导翻译方案SDT</h3><p>语法制导翻译方案(SDT )是在产生式右部中嵌入了程序片段(称为语义动作)的CFG</p>
+<p>SDD定义了各属性的计算方法（计算规则），SDT进一步明确了各属性的计算时机（计算顺序）</p>
+<p>这两种情况下，SDT可在语法分析过程中实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">基本文法可以使用LR分析技术，且SDD是S属性的</span><br><span class="line">基本文法可以使用LL分析技术，且SDD是L属性的</span><br></pre></td></tr></table></figure>
+<h4 id="S-SDD转换为SDT"><a href="#S-SDD转换为SDT" class="headerlink" title="S-SDD转换为SDT"></a>S-SDD转换为SDT</h4><p>将每个语义动作都放在产生式的最后</p>
+<p>S-属性定义的SDT 实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果一个S-SDD的基本文法可以使用LR分析技术，那么它的SDT可以在LR语法分析过程中实现</span><br><span class="line">当归约发生时执行相应的语义动作</span><br></pre></td></tr></table></figure>
+<p>语法分析器的扩展</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">为每个栈记录增加属性值字段，存放文法符号的综合属性值</span><br><span class="line">在每次归约时调用计算综合属性值的语义子程序</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513164603555.png" alt="image-20220513164603555" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513164616906.png" alt="image-20220513164616906" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513164754145.png" alt="image-20220513164754145" style="zoom:25%;"></p>
+<h4 id="将L-SDD转换为SDT"><a href="#将L-SDD转换为SDT" class="headerlink" title="将L-SDD转换为SDT"></a>将L-SDD转换为SDT</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将计算某个非终结符号A的继承属性的动作插入到产生式右部中紧靠在A的本次出现之前的位置上</span><br><span class="line">将计算一个产生式左部符号的综合属性的动作放置在这个产生式右部的最右端</span><br></pre></td></tr></table></figure>
+<p>如果一个L-SDD的基本文法可以使用LL分析技术，那么它的SDT可以在LL或LR语法分析过程中实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在非递归的预测分析过程中进行语义翻译</span><br><span class="line">在递归的预测分析过程中进行语义翻译</span><br><span class="line">在LR分析过程中进行语义翻译</span><br></pre></td></tr></table></figure>
+<h3 id="L-属性定义的自顶向下翻译"><a href="#L-属性定义的自顶向下翻译" class="headerlink" title="L-属性定义的自顶向下翻译"></a>L-属性定义的自顶向下翻译</h3><h4 id="在非递归的预测分析过程中进行翻译"><a href="#在非递归的预测分析过程中进行翻译" class="headerlink" title="在非递归的预测分析过程中进行翻译"></a>在非递归的预测分析过程中进行翻译</h4><p>扩展语法分析栈</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220513205659076.png" alt="image-20220513205659076" style="zoom: 50%;"></p>
+<p>看例题</p>
+<p>分析栈中的每一个记录都对应着一段执行代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">综合记录出栈时，要将综合属性值复制给后面特定的语义动作</span><br><span class="line">变量展开时（即变量本身的记录出栈时），如果其含有继承属性，则要将继承属性值复制给后面特定的语义动作</span><br></pre></td></tr></table></figure>
+<h4 id="在递归的预测分析过程中进行翻译"><a href="#在递归的预测分析过程中进行翻译" class="headerlink" title="在递归的预测分析过程中进行翻译"></a>在递归的预测分析过程中进行翻译</h4><p>为每个非终结符A构造一个函数，A的每个继承属性对应该函数的一个形参，函数的返回值是A的综合属性值</p>
+<p>对出现在A产生式右部中的每个文法符号的每个属性都设置一个局部变量</p>
+<p>例题</p>
+<p>算法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">为每个非终结符A构造一个函数，A的每个继承属性对应该函数的一个形参，函数的返回值是A的综合属性值。对出现在A产生式中的每个文法符号的每个属性都设置一个局部变量</span><br><span class="line">非终结符A的代码根据当前的输入决定使用哪个产生式</span><br></pre></td></tr></table></figure>
+<h3 id="L-属性定义的自底向上翻译"><a href="#L-属性定义的自底向上翻译" class="headerlink" title="L-属性定义的自底向上翻译"></a>L-属性定义的自底向上翻译</h3><p>给定一个以LL文法为基础的L-SDD，可以修改这个文法，并在LR语法分析过程中计算这个新文法之上的SDD</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">给定一个以LL文法为基础的L-属性定义，可以修改这个文法，并在LR语法分析过程中计算这个新文法之上的SDD</span><br><span class="line">首先构造SDT，在各个非终结符之前放置语义动作来计算它的继承属性， 并在产生式后端放置语义动作计算综合属性</span><br><span class="line">对每个内嵌的语义动作，向文法中引入一个标记非终结符来替换它。每个这样的位置都有一个不同的标记，并且对于任意一个标记M都有一个产生式M→ε</span><br><span class="line">如果标记非终结符M在某个产生式A→α&#123;a&#125;β中替换了语义动作a，对a进行修改得到a&#x27; ，并且将a&#x27;关联到M→ε 上。动作a&#x27;</span><br><span class="line">(a) 将动作a需要的A或α中符号的任何属性作为M的继承属性进行复制</span><br><span class="line">(b) 按照a中的方法计算各个属性，但是将计算得到的这些属性作为M的综合属性</span><br></pre></td></tr></table></figure>
+<h2 id="中间代码生成"><a href="#中间代码生成" class="headerlink" title="中间代码生成"></a>中间代码生成</h2><h3 id="声明语句的翻译"><a href="#声明语句的翻译" class="headerlink" title="声明语句的翻译"></a>声明语句的翻译</h3><p>主要任务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">收集标识符的类型等属性信息，并为每一个名字分配一个相对地址</span><br></pre></td></tr></table></figure>
+<p>名字的类型和相对地址信息保存在相应的符号表记录中</p>
+<h4 id="类型表达式"><a href="#类型表达式" class="headerlink" title="类型表达式"></a>类型表达式</h4><p>基本类型是类型表达式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">integer</span><br><span class="line">real</span><br><span class="line">char</span><br><span class="line">boolean</span><br><span class="line">type_error (出错类型)</span><br><span class="line">void (无类型)</span><br></pre></td></tr></table></figure>
+<p>可以为类型表达式命名，类型名也是类型表达式</p>
+<p>将类型构造符(type constructor)作用于类型表达式可以构成新的类型表达式</p>
+<p><strong>数组构造符array</strong></p>
+<p>若T是类型表达式，则array ( I, T )是类型表达式( I是一个整数)</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514094900862.png" alt="image-20220514094900862" style="zoom:25%;"></p>
+<p><strong>指针构造符pointer</strong></p>
+<p>若T 是类型表达式，则 pointer ( T ) 是类型表达式，它表示一个指针类型</p>
+<p><strong>笛卡尔乘积构造符X</strong></p>
+<p>若T1 和T2是类型表达式，则笛卡尔乘积T1 X T2 是类型表达式</p>
+<p><strong>函数构造符→</strong></p>
+<p>若T1、T2、…、Tn 和R是类型表达式，则T1T2 …Tn→ R是类型表达式</p>
+<p><strong>记录构造符record</strong></p>
+<p>若有标识符N1 、N2 、…、Nn 与类型表达式T1 、T2 、…、Tn ， 则    record ( ( N1  X T1 ) X ( N2 X T2 )X …X ( Nn X Tn )) 是一个类型表达式</p>
+<p>eg：<img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514095400390.png" alt="image-20220514095400390" style="zoom: 25%;"></p>
+<h4 id="局部变量的存储分配"><a href="#局部变量的存储分配" class="headerlink" title="局部变量的存储分配"></a>局部变量的存储分配</h4><p>对于声明语句，语义分析的主要任务就是收集标识符的类型等属性信息，并为每一个名字分配一个相对地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">从类型表达式可以知道该类型在运行时刻所需的存储单元数量称为类型的宽度(width)</span><br><span class="line">在编译时刻，可以使用类型的宽度为每一个名字分配一个相对地址</span><br></pre></td></tr></table></figure>
+<p>名字的类型和相对地址信息保存在相应的符号表记录中</p>
+<h3 id="赋值语句的翻译"><a href="#赋值语句的翻译" class="headerlink" title="赋值语句的翻译"></a>赋值语句的翻译</h3><h4 id="简单赋值语句的翻译"><a href="#简单赋值语句的翻译" class="headerlink" title="简单赋值语句的翻译"></a>简单赋值语句的翻译</h4><p>newtemp( )：生成一个新的临时变量t，返回t的地址</p>
+<p>gen(code)：生成三地址指令code</p>
+<p>lookup(name)：查询符号表返回name 对应的记录</p>
+<p>增量翻译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在增量方法中，gen( )不仅要构造出一个新的三地址指令，还要将它添加到至今为止已生成的指令序列之后</span><br></pre></td></tr></table></figure>
+<p>ppt例子</p>
+<h4 id="数组引用的翻译"><a href="#数组引用的翻译" class="headerlink" title="数组引用的翻译"></a>数组引用的翻译</h4><p>将数组引用翻译成三地址码时要解决的主要问题是确定数组元素的存放地址，也就是数组元素的寻址</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514114112824.png" alt="image-20220514114112824" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514142140992.png" alt="image-20220514142140992" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514142202241.png" alt="image-20220514142202241" style="zoom:25%;"></p>
+<p>符号表的组织——数组</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514142237490.png" alt="image-20220514142237490" style="zoom:25%;"></p>
+<h3 id="控制语句的翻译"><a href="#控制语句的翻译" class="headerlink" title="控制语句的翻译"></a>控制语句的翻译</h3><h4 id="控制流语句"><a href="#控制流语句" class="headerlink" title="控制流语句"></a>控制流语句</h4><p>继承属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B.true：是一个地址，该地址用来存放当B为真时控制流转向的指令的标号</span><br><span class="line">B.false：是一个地址，该地址用来存放当B为假时控制流转向的指令的标号</span><br><span class="line">S.next：是一个地址，该地址用来存放紧跟在S代码之后执行的指令(S的后继指令)的标号</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514143929654.png" alt="image-20220514143929654" style="zoom:25%;"></p>
+<p>if-then-else</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144057301.png" alt="image-20220514144057301" style="zoom:25%;"></p>
+<p>if-then</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144152954.png" alt="image-20220514144152954" style="zoom:25%;"></p>
+<p>while-do</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144250284.png" alt="image-20220514144250284" style="zoom:25%;"></p>
+<p>控制流语句SDT编写要点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">分析每一个非终结符之前</span><br><span class="line">先计算继承属性</span><br><span class="line">再观察代码结构图中该非终结符对应的方框顶部是否有导入箭头。如果有，调用label( )函数</span><br><span class="line">上一个代码框执行完不顺序执行下一个代码框时，生成一条显式跳转指令</span><br><span class="line">有自下而上的箭头时，设置begin属性。且定义后直接调用label( )函数绑定地址</span><br></pre></td></tr></table></figure>
+<h4 id="布尔表达式的翻译"><a href="#布尔表达式的翻译" class="headerlink" title="布尔表达式的翻译"></a>布尔表达式的翻译</h4><p>在跳转代码中，逻辑运算符&amp;&amp;、|| 和 ! 被翻译成跳转指令。运算符本身不出现在代码中，布尔表达式的值是通过代码序列中的位置来表示的</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144701666.png" alt="image-20220514144701666" style="zoom:25%;"></p>
+<p>布尔表达式的SDT</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514144801933.png" alt="image-20220514144801933" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514145311289.png" alt="image-20220514145311289" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514145338517.png" alt="image-20220514145338517" style="zoom:25%;"></p>
+<h4 id="SDT的通用实现方法"><a href="#SDT的通用实现方法" class="headerlink" title="SDT的通用实现方法"></a>SDT的通用实现方法</h4><p>任何SDT都可以通过下面的方法实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">首先建立一棵语法分析树</span><br><span class="line">然后按照从左到右的深度优先顺序来执行这些动作</span><br></pre></td></tr></table></figure>
+<p>例题</p>
+<p>存疑，修改</p>
+<h3 id="回填"><a href="#回填" class="headerlink" title="回填"></a>回填</h3><h4 id="布尔表达式回填"><a href="#布尔表达式回填" class="headerlink" title="布尔表达式回填"></a>布尔表达式回填</h4><p>基本思想</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">生成一个跳转指令时，暂时不指定该跳转指令的目标标号。这样的指令都被放入由跳转指令组成的列表中。同一个列表中的所有跳转指令具有相同的目标标号。等到 能够确定正确的目标标号时，才去填充这些指令的目标标号</span><br></pre></td></tr></table></figure>
+<p>非终结符B的综合属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B.truelist：指向一个包含跳转指令的列表，这些指令最终获得的目标标号就是当B为真时控制流应该转向的指令的标号</span><br><span class="line">B.falselist：指向一个包含跳转指令的列表，这些指令最终获得的目标标号就是当B为假时控制流应该转向的指令的标号</span><br></pre></td></tr></table></figure>
+<p>函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">makelist( i )</span><br><span class="line">创建一个只包含i的列表，i是跳转指令的标号，函数返回指向新创建的列表的指针</span><br><span class="line">merge( p1, p2 )</span><br><span class="line">将 p1 和 p2 指向的列表进行合并，返回指向合并后的列表的指针</span><br><span class="line">backpatch( p, i )</span><br><span class="line">将 i 作为目标标号插入到 p所指列表中的各指令中</span><br></pre></td></tr></table></figure>
+<p>例题</p>
+<h4 id="控制流语句回填"><a href="#控制流语句回填" class="headerlink" title="控制流语句回填"></a>控制流语句回填</h4><p>综合属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">S.next1ist：指向一个包含跳转指令的列表，这些指令最终获得的目标标号就是按照运行顺序紧跟在S代码之后的指令的标号</span><br></pre></td></tr></table></figure>
+<p>例题</p>
+<p>回填技术SDT编写要点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">文法改造</span><br><span class="line">在list箭头指向的位置设置标记非终结符M</span><br><span class="line">在产生式末尾的语义动作中</span><br><span class="line">计算综合属性</span><br><span class="line">调用backpatch ( )函数回填各个list</span><br></pre></td></tr></table></figure>
+<h3 id="switch语句的翻译"><a href="#switch语句的翻译" class="headerlink" title="switch语句的翻译"></a>switch语句的翻译</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514162527513.png" alt="image-20220514162527513" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514162534065.png" alt="image-20220514162534065" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514162733153.png" alt="image-20220514162733153" style="zoom:25%;"></p>
+<h3 id="过程调用语句的翻译"><a href="#过程调用语句的翻译" class="headerlink" title="过程调用语句的翻译"></a>过程调用语句的翻译</h3><p>需要一个队列q存放E1.addr 、E2.addr、…、 En.addr，以生成</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514163207424.png" alt="image-20220514163207424" style="zoom:25%;"></p>
+<p>例子</p>
+<h2 id="运行存储分配"><a href="#运行存储分配" class="headerlink" title="运行存储分配"></a>运行存储分配</h2><h3 id="存储组织"><a href="#存储组织" class="headerlink" title="存储组织"></a>存储组织</h3><p>一个目标程序运行所需的存储空间主要包括</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514163839643.png" alt="image-20220514163839643" style="zoom:25%;"></p>
+<p><strong>存储分配策略</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">对于那些在编译时刻就可以确定大小的数据对象，可以在编译时刻就为它们分配存储空间，这样的分配策略称为静态存储分配</span><br><span class="line">反之，如果不能在编译时完全确定数据对象的大小，就要采用动态存储分配的策略。即在编译时仅产生各种必要的信息，而在运行时刻，再动态地分配数据对象的存储空间</span><br><span class="line">栈式存储分配</span><br><span class="line">堆式存储分配</span><br><span class="line">静态和动态分别对应编译时刻和运行时刻</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514194257711.png" alt="image-20220514194257711" style="zoom:25%;"></p>
+<p><strong>活动记录</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">使用过程(或函数、方法)作为用户自定义动作的单元的语言，其编译器通常以过程为单位分配存储空间</span><br><span class="line">过程体的每次执行称为该过程的一个活动(activation)</span><br><span class="line">过程每执行一次，就为它分配一块连续存储区，用来管理过程一次执行所需的信息，这块连续存储区称为活动记录( activation record )</span><br></pre></td></tr></table></figure>
+<p><strong>活动记录的一般形式</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514194518053.png" alt="image-20220514194518053" style="zoom:25%;"></p>
+<h3 id="静态存储分配"><a href="#静态存储分配" class="headerlink" title="静态存储分配"></a>静态存储分配</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在静态存储分配中，编译器为每个过程确定其活动记录在目标程序中的位置</span><br><span class="line">这样，过程中每个名字的存储位置就确定了</span><br><span class="line">因此，这些名字的存储地址可以被编译到目标代码中</span><br><span class="line">过程每次执行时，它的名字都绑定到同样的存储单元</span><br></pre></td></tr></table></figure>
+<p>适合静态存储分配的语言必须满足以下条件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">数组上下界必须是常数</span><br><span class="line">不允许过程的递归调用</span><br><span class="line">不允许用户动态建立数据实体</span><br></pre></td></tr></table></figure>
+<p>满足这些条件的语言有BASIC和FORTRAN等</p>
+<p>常用的静态存储分配方法：顺序分配法、层次分配法</p>
+<p><strong>顺序分配法</strong></p>
+<p>按照过程出现的先后顺序逐段分配存储空间<br>各过程的活动记录占用互不相交的存储空间</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514195326335.png" alt="image-20220514195326335" style="zoom:25%;"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">优点：处理上简单</span><br><span class="line">缺点：对内存空间的使用不够经济合理</span><br></pre></td></tr></table></figure>
+<p><strong>层次分配法</strong></p>
+<p>通过对过程间的调用关系进行分析，凡属无相互调用关系的并列过程，尽量使其局部数据共享存储空间</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514195613542.png" alt="image-20220514195613542" style="zoom:25%;"></p>
+<p>层次分配算法</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514195658467.png" alt="image-20220514195658467" style="zoom:25%;"></p>
+<h3 id="栈式存储分配"><a href="#栈式存储分配" class="headerlink" title="栈式存储分配"></a>栈式存储分配</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">有些语言使用过程、函数或方法作为用户自定义动作的单元，几乎所有针对这些语言的编译器都把它们的(至少一部分的)运行时刻存储以栈的形式进行管理，称为栈式存储分配</span><br><span class="line">当一个过程被调用时，该过程的活动记录被压入栈；当过程结束时，该活动记录被弹出栈</span><br><span class="line">这种安排不仅允许活跃时段不交叠的多个过程调用之间共享空间，而且允许以如下方式为一个过程编译代码：它的非局部变量的相对地址总是固定的，和过程调用序列无关</span><br></pre></td></tr></table></figure>
+<p><strong>活动树</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用来描述程序运行期间控制进入和离开各个活动的情况的树称为活动树</span><br><span class="line">树中的每个结点对应于一个活动。根结点是启动程序执行的main过程的活动</span><br><span class="line">在表示过程p的某个活动的结点上，其子结点对应于被p的这次活动调用的各个过程的活动。按照这些活动被调用的顺序，自左向右地显示它们。一个子结点必须在其右兄弟结点的活动开始之前结束</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">每个活跃的活动都有一个位于控制栈中的活动记录</span><br><span class="line">活动树的根的活动记录位于栈底</span><br><span class="line">程序控制所在的活动的记录位于栈顶</span><br><span class="line">栈中全部活动记录的序列对应于在活动树中到达当前控制所在的活动结点的路径</span><br></pre></td></tr></table></figure>
+<p>设计活动记录的一些原则</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在调用者和被调用者之间传递的值一般被放在被调用者的活动记录的开始位置，这样它们可以尽可能地靠近调用者的活动记录</span><br><span class="line">固定长度的项被放置在中间位置:控制连、访问链、机器状态字</span><br><span class="line">在早期不知道大小的项被放置在活动记录的尾部</span><br><span class="line">栈顶指针寄存器top_sp指向活动记录中局部数据开始的位置，以该位置作为基地址</span><br></pre></td></tr></table></figure>
+<h4 id="调用序列和返回序列"><a href="#调用序列和返回序列" class="headerlink" title="调用序列和返回序列"></a>调用序列和返回序列</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">过程调用和过程返回都需要执行一些代码来管理活动记录栈，保存或恢复机器状态等</span><br><span class="line">调用序列</span><br><span class="line">实现过程调用的代码段。为一个活动记录在栈中分配空间，并在此记录的字段中填写信息</span><br><span class="line">返回序列</span><br><span class="line">恢复机器状态，使得调用过程能够在调用结束之后继续执行</span><br><span class="line">一个调用代码序列中的代码通常被分割到调用过程（调用者）和被调用过程（被调用者）中。返回序列也是如此</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514203627726.png" alt="image-20220514203627726" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514203641791.png" alt="image-20220514203641791" style="zoom:25%;"></p>
+<p><strong>调用者和被调用者之间的任务划分</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514203739336.png" alt="image-20220514203739336" style="zoom:25%;"></p>
+<p><strong>变长数据的存储分配</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在现代程序设计语言中，在编译时刻不能确定大小的对象将被分配在堆区。但是，如果它们是过程的局部对象，也可以将它们分配在运行时刻栈中。尽量将对象放置在栈区的原因：可以避免对它们的空间进行垃圾回收，也就减少了相应的开销</span><br><span class="line">只有一个数据对象局部于某个过程，且当此过程结束时它变得不可访问，才可以使用栈为这个对象分配空间</span><br></pre></td></tr></table></figure>
+<h3 id="非局部数据的访问"><a href="#非局部数据的访问" class="headerlink" title="非局部数据的访问"></a>非局部数据的访问</h3><p>一个过程除了可以使用过程自身声明的局部数据以外，还可以使用过程外声明的非局部数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">全局数据</span><br><span class="line">外围过程定义的数据</span><br></pre></td></tr></table></figure>
+<p>如何访问非局部数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">访问链（静态链）</span><br><span class="line">display表（嵌套层次显示表）</span><br></pre></td></tr></table></figure>
+<h4 id="访问链"><a href="#访问链" class="headerlink" title="访问链"></a>访问链</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">静态作用域规则：只要过程b的声明嵌套在过程a的声明中，过程b就可以访问过程a中声明的对象</span><br><span class="line">可以在相互嵌套的过程的活动记录之间建立一种称为访问链(Access link)的指针，使得内嵌的过程可以访问外层过程中声明的对象</span><br><span class="line">如果过程b在源代码中直接嵌套在过程a中(b的嵌套深度比a的嵌套深度多1)，那么b的任何活动中的访问链都指向最近的a的活动</span><br></pre></td></tr></table></figure>
+<p><strong>嵌套深度</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514205925465.png" alt="image-20220514205925465" style="zoom: 50%;"></p>
+<p>例子</p>
+<p><strong>访问链的建立</strong></p>
+<p>假设嵌套深度为nx的过程x调用嵌套深度为ny的过程y (x→y)</p>
+<p>nx &lt; ny的情况(外层调用内层)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y一定是直接在x中定义的 (例如：s→q,  q→p) ，因此，ny=nx +1</span><br><span class="line">在调用代码序列中增加一个步骤：在y的访问链中放置一个指向x的活动记录的指针</span><br></pre></td></tr></table></figure>
+<p>nx = ny的情况(本层调用本层 )</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">例如：递归调用 (q→q )</span><br><span class="line">被调用者的活动记录的访问链与调用者的活动记录的访问链是相同的，可以直接复制</span><br></pre></td></tr></table></figure>
+<p>nx &gt; ny的情况(内层调用外层，如： p→e )</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">调用者x必定嵌套在某个过程z中，而z中直接定义了被调用者y</span><br><span class="line">从x的活动记录开始，沿着访问链经过nx - ny + 1步就可以找到离栈顶最近的z的活动记录。 y的访问链必须指向z的这个活动记录</span><br></pre></td></tr></table></figure>
+<p>嵌套深度是在编译阶段通过静态分析就能确定的</p>
+<p><strong>display表</strong></p>
+<p>慕课没有</p>
+<p>看例题，注意嵌套深度与树无关，在编译阶段就决定。</p>
+<h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>形式参数（formal parameter）：在过程定义中使用的参数<br>实际参数（actual parameter）：在调用过程时使用的参数</p>
+<p>形参和实参相关联的几种方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">传值（Call- by-Value）</span><br><span class="line">传地址（Call- by-Reference）</span><br><span class="line">传值结果（Call- by-Value-Result）</span><br><span class="line">传名（Call- by-Name）</span><br></pre></td></tr></table></figure>
+<h4 id="传值"><a href="#传值" class="headerlink" title="传值"></a>传值</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">把实参的值传递给相应的形参</span><br><span class="line">实现方法</span><br><span class="line">调用过程把实参的值计算出来，并传递到被调用过程相应的形式单元中</span><br><span class="line">被调用过程中，像引用局部数据一样引用形式参数，直接访问对应的形式单元</span><br></pre></td></tr></table></figure>
+<h4 id="传地址"><a href="#传地址" class="headerlink" title="传地址"></a>传地址</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">把实参的地址传递给相应的形参</span><br><span class="line">实现方法</span><br><span class="line">调用过程把实参的地址传递到被调用过程相应的形式单元中</span><br><span class="line">被调用过程中，对形参的引用或赋值被处理成对形式单元的间接访问</span><br></pre></td></tr></table></figure>
+<h4 id="传值结果"><a href="#传值结果" class="headerlink" title="传值结果"></a>传值结果</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">传地址的一种变形</span><br><span class="line">实现方法</span><br><span class="line">每个形参对应两个形式单元。第一个形式单元存放实参的地址，第二个形式单元存放实参的值</span><br><span class="line">在过程体中，对形参的引用或赋值看作对它的第二个形式单元的直接访问</span><br><span class="line">过程完成返回前，把第二个单元的内容存放到第一个单元所指的实参单元中</span><br></pre></td></tr></table></figure>
+<h4 id="传名"><a href="#传名" class="headerlink" title="传名"></a>传名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">相当于把被调用过程的过程体抄到调用出现的地方，但把其中出现的形参都替换成相应的实参</span><br><span class="line">实现方法</span><br><span class="line">在进入被调用过程之前不对实参预先进行计值，而是让过程体中每当使用到相应的实参时才逐次对它实行计值（或计算地址）</span><br><span class="line">通常把实参处理成一个子程序（称为参数子程序），每当过程体中使用到相应的实参时就调用这个子程序</span><br></pre></td></tr></table></figure>
+<h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><p>符号表是用于存放标识符的属性信息的数据结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">种属 (Kind)</span><br><span class="line">类型 (Type)</span><br><span class="line">存储位置、长度</span><br><span class="line">作用域 </span><br><span class="line">参数和返回值信息</span><br></pre></td></tr></table></figure>
+<p>符号表的作用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">辅助代码生成</span><br><span class="line">一致性检查</span><br></pre></td></tr></table></figure>
+<p>例子</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220514213155111.png" alt="image-20220514213155111"></p>
+<p>标识符的基本处理方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">当在某一层的声明语句中识别出一个标识符(id的定义性出现)时，以此标识符查相应于本层的符号表</span><br><span class="line">如果查到，则报错并发出诊断信息“id重复声明”</span><br><span class="line">否则，在符号表中加入新登记项，将标识符及有关信息填入</span><br><span class="line">当在可执行语句部分扫视到标识符时( id的应用性出现)</span><br><span class="line">首先在该层符号表中查找该id，如果找不到，则到直接外层符号表中去查，如此等等，一旦找到，则在表中取出有关信息并作相应处理</span><br><span class="line">如果查遍所有外层符号表均未找到该id，则报错并发出诊断信息“id未声明”</span><br></pre></td></tr></table></figure>
+<p>符号表的建立？</p>
+<h2 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h2><h4 id="流图"><a href="#流图" class="headerlink" title="流图"></a>流图</h4><p>基本块(Basic Block)是满足下列条件的最大的连续三地址指令序列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">控制流只能从基本块的第一条指令进入该块。也就是说，没有跳转到基本块中间或末尾指令的转移指令</span><br><span class="line">除了基本块的最后一条指令，控制流在离开基本块之前不会跳转或者停机</span><br></pre></td></tr></table></figure>
+<p>每个基本块由一组总是一起执行的指令组成</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515003940960.png" alt="image-20220515003940960" style="zoom:25%;"></p>
+<p>流图的每个结点是一个基本块<br>从基本块B到基本块C之间有一条边当且仅当基本块C的第一条指令可能紧跟在B的最后一条指令之后执行，此时称B是C的前驱(predecessor) ，   C是B的后继(successor)</p>
+<h3 id="优化的分类"><a href="#优化的分类" class="headerlink" title="优化的分类"></a>优化的分类</h3><p>机器无关优化：针对中间代码<br>机器相关优化：针对目标代码<br>局部代码优化：单个基本块范围内的优化<br>全局代码优化：面向多个基本块的优化</p>
+<p>常用的优化方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">删除公共子表达式</span><br><span class="line">删除无用代码</span><br><span class="line">代码移动</span><br><span class="line">强度削弱</span><br><span class="line">删除归纳变量</span><br></pre></td></tr></table></figure>
+<h4 id="删除公共子表达式"><a href="#删除公共子表达式" class="headerlink" title="删除公共子表达式"></a>删除公共子表达式</h4><p>如果表达式x op y先前已被计算过，并且从先前的计算到现在，x op y中变量的值没有改变，那么x op y的这次出现就称为公共子表达式</p>
+<p>局部公共子表达式；全局公共子表达式</p>
+<p>例子</p>
+<h4 id="删除无用代码"><a href="#删除无用代码" class="headerlink" title="删除无用代码"></a>删除无用代码</h4><p>复制传播</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">常用的公共子表达式消除算法和其它一些优化算法会引入一些复制语句(形如x = y的赋值语句)</span><br><span class="line"> 复制传播：在复制语句x = y之后尽可能地用y代替x</span><br></pre></td></tr></table></figure>
+<p>复制传播给删除无用代码带来机会</p>
+<p>无用代码(死代码Dead-Code ) ：其计算结果永远不会被使用的语句</p>
+<p>例子</p>
+<p><strong>常量合并</strong></p>
+<p>如果在编译时刻推导出一个表达式的值是常量，就可以使用该常量来替代这个表达式。该技术被称为常量合并</p>
+<h4 id="代码移动"><a href="#代码移动" class="headerlink" title="代码移动"></a>代码移动</h4><p>这个转换处理的是那些不管循环执行多少次都得到相同结果的表达式(即循环不变计算，loop-invariant computation) ，在进入循环之前就对它们求值</p>
+<p>对于多重嵌套的循环，循环不变计算是相对于某个循环而言的。可能对于更加外层的循环，它就不是循环不变计算</p>
+<h4 id="强度削弱"><a href="#强度削弱" class="headerlink" title="强度削弱"></a>强度削弱</h4><p>用较快的操作代替较慢的操作，如用加代替乘</p>
+<p>归纳变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于一个变量x ，如果存在一个正的或负的常数c使得每次x被赋值时它的值总增加c ，那么x就称为归纳变量(Induction Variable)</span><br></pre></td></tr></table></figure>
+<h4 id="删除归纳变量"><a href="#删除归纳变量" class="headerlink" title="删除归纳变量"></a>删除归纳变量</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在沿着循环运行时，如果有一组归纳变量的值的变化保持步调一致，常常可以将这组变量删除为只剩一个</span><br></pre></td></tr></table></figure>
+<h3 id="基本块的优化"><a href="#基本块的优化" class="headerlink" title="基本块的优化"></a>基本块的优化</h3><p>很多重要的局部优化技术首先把一个基本块转换成为一个无环有向图</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144138737.png" alt="image-20220515144138737" style="zoom:25%;"></p>
+<p>基于基本块的 DAG 删除无用代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">从一个DAG上删除所有没有附加活跃变量（活跃变量是指其值可能会在以后被使用的变量）的根结点(即没有父结点的结点) 。重复应用这样的处理过程就可以从DAG中消除所有对应于无用代码的结点</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144511396.png" alt="image-20220515144511396" style="zoom:25%;"></p>
+<p>数组元素赋值指令的表示</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144602509.png" alt="image-20220515144602509" style="zoom:25%;"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在a[j]=y时，有可能改变a[i]的值</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144738742.png" alt="image-20220515144738742" style="zoom:25%;"></p>
+<p>根据基本块的DAG可以获得一些非常有用的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">确定哪些变量的值在该基本块中赋值前被引用过</span><br><span class="line">在DAG中创建了叶结点的那些变量</span><br><span class="line">确定哪些语句计算的值可以在基本块外被引用</span><br><span class="line">在DAG构造过程中为语句s（该语句为变量x定值）创建的节点N，在DAG构造结束时x仍然是N的定值变量</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515144412561.png" alt="image-20220515144412561" style="zoom:25%;"></p>
+<p>例子</p>
+<h3 id="数据流分析"><a href="#数据流分析" class="headerlink" title="数据流分析"></a>数据流分析</h3><p>一组用来获取有关数据如何沿着程序执行路径流动的相关信息的技术</p>
+<p>在每一种数据流分析应用中，都会把每个程序点和一个数据流值关联起来</p>
+<p>数据流分析的主要应用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">到达-定值分析 (Reaching-Definition Analysis)</span><br><span class="line">活跃变量分析 (Live-Variable Analysis)</span><br><span class="line">可用表达式分析 (Available-Expression Analysis)</span><br></pre></td></tr></table></figure>
+<p>数据流分析模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">语句的数据流模式</span><br><span class="line"> IN[s]:	语句s之前的数据流值</span><br><span class="line">	 OUT[s]:	语句s之后的数据流值</span><br><span class="line"> fs：语句s的传递函数(transfer function)</span><br><span class="line">     一个赋值语句s之前和之后的数据流值的关系</span><br><span class="line">     传递函数的两种风格</span><br><span class="line">        信息沿执行路径前向传播 (前向数据流问题)：OUT[s] = fs (IN[s])</span><br><span class="line">        信息沿执行路径逆向传播 (逆向数据流问题)：IN[s] = fs (OUT[s])</span><br></pre></td></tr></table></figure>
+<h4 id="到达定值分析"><a href="#到达定值分析" class="headerlink" title="到达定值分析"></a>到达定值分析</h4><p>定值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">变量x的定值是(可能)将一个值赋给x的语句</span><br></pre></td></tr></table></figure>
+<p>到达定值(Reaching Definition)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果存在一条从紧跟在x的定值d后面的点到达某一程序点p的路径，而且在此路径上d没有被“杀死” (如果在此路径上有对变量x的其它定值d′，则称定值d被定值d′“杀死”了) ，则称定值d到达程序点p</span><br><span class="line">直观地讲，如果某个变量x的一个定值d到达点p，在点p处使用的x的值可能就是由d最后赋予的</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155110137.png" alt="image-20220515155110137" style="zoom:25%;"></p>
+<p><strong>到达定值分析的主要用途</strong></p>
+<p>循环不变计算的检测</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果循环中含有赋值x=y+z ，而y和z所有可能的定值都在循环外面(包括y或z是常数的特殊情况) ，那么y+z就是循环不变计算</span><br></pre></td></tr></table></figure>
+<p>常量合并</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果对变量x的某次使用只有一个定值可以到达，并且该定值把一个常量赋给x ，那么可以简单地把x替换为该常量</span><br></pre></td></tr></table></figure>
+<p>判定变量x在p点上是否未经定值就被引用</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155325874.png" alt="image-20220515155325874" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155539821.png" alt="image-20220515155539821" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155645902.png" alt="image-20220515155645902" style="zoom:25%;"></p>
+<p>例子</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515155911362.png" alt="image-20220515155911362" style="zoom:25%;"></p>
+<p><strong>到达定值的计算</strong></p>
+<p>例题</p>
+<p>引用-定值链</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515160301603.png" alt="image-20220515160301603" style="zoom:25%;"></p>
+<h4 id="活跃变量分析"><a href="#活跃变量分析" class="headerlink" title="活跃变量分析"></a>活跃变量分析</h4><p>活跃变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于变量x和程序点p，如果在流图中沿着从p开始的某条路径会引用变量x在p点的值，则称变量x在点p是活跃(live)的，否则称变量x在点p不活跃(dead)</span><br></pre></td></tr></table></figure>
+<p>例子</p>
+<p><strong>活跃变量信息的主要用途</strong></p>
+<p>删除无用赋值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无用赋值：如果x在点p的定值在基本块内所有后继点都不被引用，且x在基本块出口之后又是不活跃的，那么x在点p的定值就是无用的</span><br></pre></td></tr></table></figure>
+<p>为基本块分配寄存器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果所有寄存器都被占用，并且还需要申请一个寄存器，则应该考虑使用已经存放了死亡值的寄存器，因为这个值不需要保存到内存</span><br><span class="line"> 如果一个值在基本块结尾处是死的就不必在结尾处保存这个值</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515165840678.png" alt="image-20220515165840678" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515170431350.png" alt="image-20220515170431350" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515170613886.png" alt="image-20220515170613886" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515172411560.png" alt="image-20220515172411560" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515173505087.png" alt="image-20220515173505087" style="zoom:25%;"></p>
+<h4 id="可用表达式分析"><a href="#可用表达式分析" class="headerlink" title="可用表达式分析"></a>可用表达式分析</h4><p>可用表达式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果从流图的首节点到达程序点 p的每条路径都对表达式x op y进行计算，并且从最后一个这样的计算到点p之间没有再次对x或y定值，那么表达式x op y在点 p是可用的(available)</span><br></pre></td></tr></table></figure>
+<p>表达式可用的直观意义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在点 p上，x op y已经在之前被计算过，不需要重新计算</span><br></pre></td></tr></table></figure>
+<p><strong>主要通途</strong></p>
+<p>消除全局公共子表达式</p>
+<p>进行复制传播</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515193957942.png" alt="image-20220515193957942" style="zoom:25%;"></p>
+<p><strong>可用表达式传递函数</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515194252677.png" alt="image-20220515194252677" style="zoom:25%;"></p>
+<p><strong>可用表达式的数据流方程</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515194545925.png" alt="image-20220515194545925" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515194801190.png" alt="image-20220515194801190" style="zoom:25%;"></p>
+<p>注意此处初始化</p>
+<h3 id="流图中的循环"><a href="#流图中的循环" class="headerlink" title="流图中的循环"></a>流图中的循环</h3><p>支配结点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果从流图的入口结点到结点n的每条路径都经过结点d，则称结点d支配(dominate)结点n，记为d dom n</span><br></pre></td></tr></table></figure>
+<p>寻找支配节点</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515195118328.png" alt="image-20220515195118328" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515195158344.png" alt="image-20220515195158344" style="zoom:25%;"></p>
+<p><strong>回边</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果存在从结点n到d的有向边n→d，且d dom n，那么这条边称为回边</span><br></pre></td></tr></table></figure>
+<p><strong>自然循环</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515195547361.png" alt="image-20220515195547361" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515195949826.png" alt="image-20220515195949826" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200001241.png" alt="image-20220515200001241" style="zoom:25%;"></p>
+<p>自然循环的一个重要性质</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果两个自然循环的首结点不相同，则这两个循环要么互不相交，要么一个完全包含(嵌入)在另外一个里面</span><br></pre></td></tr></table></figure>
+<p>最内循环 (Innermost Loops): 不包含其它循环的循环</p>
+<p>如果两个循环具有相同的首结点，那么很难说哪个是最内循环。此时把两个循环合并</p>
+<h3 id="全局优化"><a href="#全局优化" class="headerlink" title="全局优化"></a>全局优化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">删除全局公共子表达式</span><br><span class="line">删除复制语句</span><br><span class="line">代码移动</span><br><span class="line">作用于递归变量的强度削弱</span><br><span class="line">删除递归变量</span><br></pre></td></tr></table></figure>
+<h4 id="删除全局公共子表达式"><a href="#删除全局公共子表达式" class="headerlink" title="删除全局公共子表达式"></a>删除全局公共子表达式</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200350777.png" alt="image-20220515200350777" style="zoom:25%;"></p>
+<h4 id="删除复制语句"><a href="#删除复制语句" class="headerlink" title="删除复制语句"></a><strong>删除复制语句</strong></h4><p>对于复制语句s: x=y，如果在x的所有引用点都可以用对y的引用代替对x的引用(复制传播)，那么可以删除复制语句 x=y</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200456345.png" alt="image-20220515200456345" style="zoom:25%;"></p>
+<h4 id="代码移动-1"><a href="#代码移动-1" class="headerlink" title="代码移动"></a>代码移动</h4><p><strong>循环不变计算检测算法</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200548207.png" alt="image-20220515200548207" style="zoom:25%;"></p>
+<p><strong>代码外提</strong></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515200759125.png" alt="image-20220515200759125" style="zoom:25%;"></p>
+<p><strong>循环不变计算语句 s : x = y + z 移动的条件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(1) s所在的基本块是循环所有出口结点(有后继结点在循环外的结点)的支配结点</span><br><span class="line">(2) 循环中没有其它语句对x赋值</span><br><span class="line">(3) 循环中对x的引用仅由s到达</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515201036529.png" alt="image-20220515201036529" style="zoom:25%;"></p>
+<p>例子</p>
+<h4 id="作用于归纳变量的强度削弱"><a href="#作用于归纳变量的强度削弱" class="headerlink" title="作用于归纳变量的强度削弱"></a>作用于归纳变量的强度削弱</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">对于一个变量x ，如果存在一个正的或负的常量c ，使得每次x被赋值时，它的值总是增加c ，则称x为归纳变量</span><br><span class="line">如果循环L中的变量i 只有形如i =i+c的定值(c是常量)，则称i为循环L的基本归纳变量</span><br><span class="line">如果j = c×i+d，其中i是基本归纳变量，c和d是常量，则j也是一个归纳变量，称j属于i族</span><br><span class="line">每个归纳变量都关联一个三元组。如果j = c×i+d，其中i是基本归纳变量，c和d是常量，则与j相关联的三元组是( i, c, d )</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515201237286.png" alt="image-20220515201237286" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515201248830.png" alt="image-20220515201248830" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515201356302.png" alt="image-20220515201356302" style="zoom:25%;"></p>
+<h4 id="归纳变量的删除"><a href="#归纳变量的删除" class="headerlink" title="归纳变量的删除"></a>归纳变量的删除</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对于在强度削弱算法中引入的复制语句j=t，如果在归纳变量j的所有引用点都可以用对t的引用代替对j的引用，并且j在循环的出口处不活跃，则可以删除复制语句j=t</span><br><span class="line"></span><br><span class="line">强度削弱后，有些归纳变量的作用只是用于测试。如果可以用对其它归纳变量的测试代替对这种归纳变量的测试，那么可以删除这种归纳变量</span><br></pre></td></tr></table></figure>
+<p>删除仅用于测试的归纳变量</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515211020194.png" alt="image-20220515211020194" style="zoom:25%;"></p>
+<h2 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h2><h3 id="代码生成器的主要任务"><a href="#代码生成器的主要任务" class="headerlink" title="代码生成器的主要任务"></a>代码生成器的主要任务</h3><p>指令选择</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">选择适当的目标机指令来实现中间表示(IR)语句</span><br></pre></td></tr></table></figure>
+<p>寄存器分配（allocation）和指派（assignment）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把哪个值放在哪个寄存器中</span><br></pre></td></tr></table></figure>
+<p>指令排序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">按照什么顺序来安排指令的执行</span><br></pre></td></tr></table></figure>
+<h3 id="一个简单的目标机模型"><a href="#一个简单的目标机模型" class="headerlink" title="一个简单的目标机模型"></a>一个简单的目标机模型</h3><p>三地址机器模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">加载、保存、运算、跳转等操作</span><br><span class="line">内存按字节寻址</span><br><span class="line">n个通用寄存器R0, R1, …, Rn-1</span><br><span class="line">假设所有的运算分量都是整数</span><br><span class="line">指令之间可能有一个标号</span><br></pre></td></tr></table></figure>
+<h3 id="指令选择"><a href="#指令选择" class="headerlink" title="指令选择"></a>指令选择</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515215146285.png" alt="image-20220515215146285" style="zoom:25%;"></p>
+<p><strong>过程调用和返回的目标代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用静态内存分配的方式</span><br><span class="line">使用栈式内存分配的方式</span><br></pre></td></tr></table></figure>
+<p>callee的活动记录在静态区中的起始位置</p>
+<p>callee的目标代码在代码区中的起始位置</p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515215844342.png" alt="image-20220515215844342" style="zoom:25%;"></p>
+<h3 id="寄存器的选择"><a href="#寄存器的选择" class="headerlink" title="寄存器的选择"></a>寄存器的选择</h3><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220019625.png" alt="image-20220515220019625" style="zoom:25%;"></p>
+<p><strong>寄存器描述符和地址描述符</strong></p>
+<p>寄存器描述符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">记录每个寄存器当前存放的是哪些变量的值</span><br></pre></td></tr></table></figure>
+<p>地址描述符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">记录运行时每个名字的当前值存放在哪个或哪些位置</span><br><span class="line">该位置可能是寄存器、栈单元、内存地址或者是它们的某个集合</span><br><span class="line">这些信息可以存放在该变量名对应的符号表条目中</span><br></pre></td></tr></table></figure>
+<p><strong>基本块的收尾处理</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在基本块结束之前，基本块中使用的变量可能仅存放在某个寄存器中</span><br><span class="line">如果这个变量是一个只在基本块内部使用的临时变量，当基本块结束时，可以忘记这些临时变量的值并假设这些寄存器是空的</span><br><span class="line">对于一个在基本块的出口处可能活跃的变量x ,  如果它的地址描述符表明它的值没有存放在x的内存位置上,  则生成指令“ST x, R” ( R是在基本块结尾处存放 x值的寄存器 )</span><br></pre></td></tr></table></figure>
+<p><strong>管理寄存器和地址描述符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当代码生成算法生成加载、保存和其他指令时，它必须同时更新寄存器和地址描述符</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220152288.png" alt="image-20220515220152288" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220242413.png" alt="image-20220515220242413" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220310043.png" alt="image-20220515220310043" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515220624081.png" alt="image-20220515220624081" style="zoom:25%;"></p>
+<h4 id="寄存器选择函getReg"><a href="#寄存器选择函getReg" class="headerlink" title="寄存器选择函getReg"></a>寄存器选择函getReg</h4><p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515221133482.png" alt="image-20220515221133482" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515221317333.png" alt="image-20220515221317333" style="zoom:25%;"></p>
+<p><img src="/2022/01/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/image-20220515221332913.png" alt="image-20220515221332913" style="zoom:25%;"></p>
+<h3 id="窥孔优化"><a href="#窥孔优化" class="headerlink" title="窥孔优化"></a>窥孔优化</h3><p><strong>窥孔</strong>(peephole)是程序上的一个小的滑动窗口</p>
+<p><strong>窥孔优化</strong>是指在优化的时候，检查目标指令的一个滑动窗口(即窥孔) ，并且只要有可能就在窥孔内用更快或更短的指令来替换窗口中的指令序列</p>
+<p>也可以在中间代码生成之后直接应用窥孔优化来提高中间表示形式的质量</p>
+<p><strong>具有窥孔优化特点的程序变换的例子</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">冗余指令删除</span><br><span class="line">控制流优化</span><br><span class="line">代数优化</span><br><span class="line">机器特有指令的使用</span><br></pre></td></tr></table></figure>
+<h2 id="习题总结"><a href="#习题总结" class="headerlink" title="习题总结"></a>习题总结</h2><h3 id="重点-1"><a href="#重点-1" class="headerlink" title="重点"></a>重点</h3><p>已掌握</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3.1 4.1 4.2  5.1(5.1.2重点) 6.1 6.2 7.1 7.2 7.3 7.4 7.5 (规范LR项集族) 7.6 7.7 7.8  7.9</span><br><span class="line">8.1 8.3 9.2(设计SDD) 9.3(设计SDD) 9.4(改写SDT) 12.2(四元式) 12.3(翻译赋值语句) 13.1(控制流处理方案) 13.2 13.3(控制流四元式) 14.1(求truelist) 14.2 14.3 14.4(构造SDT) 14.6(设计sdt) 15.1 15.2(快排) 15.3(Fibonacci) 15.4(栈问题，考前再看一下) 15.5 15.6(符号表) 16.3 16.4(DAG) 16.5 16.6(带跳转和[]=的DAG) 16.7 16.8(基本块) </span><br><span class="line">17.1(到达定值分析) 18.1(可用表达式分析) 18.2(活跃变量分析,逆分析) 18.3(到达定值分析应用) 19.1(重点，各种值的找取)</span><br><span class="line">19.2(重点，代码优化) 19.6</span><br></pre></td></tr></table></figure>
+<p>未掌握</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">4.1.3的消除左递归方法 </span><br><span class="line">9.1 扩展SDD</span><br><span class="line">10.1(构造递归下降SDD)</span><br><span class="line">13.4 13.5 *13.6(翻译方案) </span><br><span class="line">14.5(超级复杂的SDT构造)</span><br><span class="line">19.5</span><br></pre></td></tr></table></figure>
+<h3 id="非重点"><a href="#非重点" class="headerlink" title="非重点"></a>非重点</h3><p>已掌握</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.2 2.1 8.2 8.4(是否存在一致的求值过程)</span><br></pre></td></tr></table></figure>
+<p>未掌握</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.1 6.3 18.4 18.5</span><br></pre></td></tr></table></figure>
+<p>各种链</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/24/NLP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2094,398 +2816,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/10/machine-learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/10/machine-learning/" class="post-title-link" itemprop="url">machine learning</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-10 21:03:53" itemprop="dateCreated datePublished" datetime="2021-11-10T21:03:53+08:00">2021-11-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-20 12:10:39" itemprop="dateModified" datetime="2021-11-20T12:10:39+08:00">2021-11-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>奥卡姆剃刀：若有多个假设与观察一致，则选择最简单的那个。</p>
-<p>NFL定理（No Free Lunch Theorem）：所有学习算法期望性能相同。</p>
-<p> Independent and identically distributed，独立同分布，IID</p>
-<h2 id="模型评估与选择"><a href="#模型评估与选择" class="headerlink" title="模型评估与选择"></a>模型评估与选择</h2><h3 id="经验误差与过拟合"><a href="#经验误差与过拟合" class="headerlink" title="经验误差与过拟合"></a>经验误差与过拟合</h3><p>若在m个样本中有a个样本分类错误，则称错误率为E=a/m;</p>
-<p>精度=1-错误率；</p>
-<p>学习器在训练集上的误差称为训练误差或经验误差，在新样本的误差称为泛化误差。</p>
-<p>过拟合：把训练样本自身的一些特点当成了所有潜在样本都会具有的一般性质，这样就会导致泛化性能下降。</p>
-<p>欠拟合：训练样本的一般性质尚未学好。</p>
-<h3 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h3><h4 id="留出法"><a href="#留出法" class="headerlink" title="留出法"></a>留出法</h4><p>直接将数据集划分为两个互斥的集合，其中一个集合作为训练集，另一个作为测试集。</p>
-<p>分层采样：保留类别比例的采样方式。</p>
-<h4 id="交叉验证法"><a href="#交叉验证法" class="headerlink" title="交叉验证法"></a>交叉验证法</h4><p>先将数据集D划分为k个大小相似的互斥子集，每次用k-1个子集的并集作为训练集，余下的那个子集作为测试集，从而进行k次训练和测试，最终返回k个测试的均值。通常把交叉验证法称为k折交叉验证法。</p>
-<p>当k=m时，得到交叉验证法的特例：留一法(Leave-One-Out,简称LOC)。留一法评估结果往往比较准确，但计算开销较大。</p>
-<h4 id="自助法"><a href="#自助法" class="headerlink" title="自助法"></a>自助法</h4><p>以自主采样为基础，给定包含m个样本的数据集，每次随机从中挑选一个并放回，重复执行m次，则得到一个包含m个样本的数据集$D’$，样本在m次采样中始终不被取得的概率取极限为0.368.这样的测试结果，也称为包外估计。</p>
-<p>自助法在数据集较小，难以有效划分训练/测试集时很有用。但是自助法产生的数据集会改变初始数据集分布，这会引入估计偏差，因此，在数据量足够时，留出法和交叉验证法更加常用。</p>
-<h3 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h3><p>在预测任务中，给定样例集$D={(x_1,y_1),(x_2,y_2),…,(x_m,y_m)}$,其中$y_i$是示例$x_i$的真实标记。</p>
-<p>回归任务最常用的性能度量是均方误差。</p>
-<script type="math/tex; mode=display">E(f;D)=\frac{1}{m}\sum_{i=1}^{m}(f(x_i)-y_i)^2</script><p>下面是一些常用的性能度量。</p>
-<h4 id="错误率与精度"><a href="#错误率与精度" class="headerlink" title="错误率与精度"></a>错误率与精度</h4><p>对样本集D，分类错误率定义为</p>
-<script type="math/tex; mode=display">E(f;D)=\frac{1}{m}\sum_{i=1}^{m}\Pi(f(x_i)\ne y_i)</script><p>精度定义为</p>
-<script type="math/tex; mode=display">acc(f;D)=1-E(f;D)</script><h4 id="查准率、查全率与F1"><a href="#查准率、查全率与F1" class="headerlink" title="查准率、查全率与F1"></a>查准率、查全率与F1</h4><p><img src="/2021/11/10/machine-learning/31EA8B0CF299E7E13C8472E403A80D1B.jpg" alt="img" style="zoom:50%;"></p>
-<p>查准率P：$P=\frac{TP}{TP+FP}$</p>
-<p>查全率R:$R=\frac{TP}{TP+FN}$</p>
-<p>查准率与查全率为一对矛盾的度量。通常只有在一些简单任务中，才可能使查准率与查全率都很高。</p>
-<p><img src="/2021/11/10/machine-learning/A90737E4B9198F7B34D54BE9AB6D1E74.jpg" alt="img" style="zoom:50%;"></p>
-<p>若一个学习器的PR曲线完全被另一个学习器的曲线包住，则可断言，后者的性能优于前者。</p>
-<p>平衡点(Break-Even Point,简称BEP)为查准率与查全率相等时的取值。</p>
-<p>但BEP度量还是简单一点，更为常用的是F1度量：</p>
-<script type="math/tex; mode=display">F1=\frac{2*P*R}{P+R}=\frac{2*TP}{样例总数+TP-TN}</script><p>F1度量的一般形式-$F_\beta$</p>
-<script type="math/tex; mode=display">F_\beta=\frac{(1+\beta^2)*P*R}{\beta^2*P+R}</script><p>$\beta$&gt;1查全率有更大影响。</p>
-<p><img src="/2021/11/10/machine-learning/E572FFA93ACC986F8A70D8FFF6DB9AAE.jpg" alt="img" style="zoom:50%;"></p>
-<h4 id="ROC与AOC"><a href="#ROC与AOC" class="headerlink" title="ROC与AOC"></a>ROC与AOC</h4><p>ROC曲线的纵轴是真正例率(True Positive Rate,TPR)，横轴是假正例率(False Positive Rate,FPR)</p>
-<script type="math/tex; mode=display">TPR=\frac{TP}{TP+FN}</script><script type="math/tex; mode=display">FPR=\frac{FP}{TN+FP}</script><p><img src="/2021/11/10/machine-learning/96C927242A7BA45CCE302EDEADE623B2.jpg" alt="img" style="zoom:50%;"></p>
-<p>若一个学习器的ROC曲线被另一个学习器的曲线完全“包住”，则可断言后者性能优于前者。但是当有交叉时，一般难以判断，此时较为合理的依据是比较ROC曲线下的面积，即AUC.(Area Under ROC Curve)</p>
-<p>$l_{rank}$定义为</p>
-<p><img src="/2021/11/10/machine-learning/C80967EA3A665CF6EB8EB5DE6DFA7996.jpg" alt="img"></p>
-<p>AUC=1-$l_{rank}$</p>
-<p>以下为对$l_{rank}$的通俗解释：</p>
-<p>假设我们在做一个手写数字识别，识别样本数字是否为5，输入12个数字，经过算法得出每个数字的打分从小到大如下(分越高表示算法认为这个数字越接近5，用A表示正例，B表示反例)：B1,B2,B3,B4,A1,B5,A2,A3,B6,A4,A5,A6</p>
-<p>对于第一个正例A1，有两个反例比他大，则为2，对于第二三个正例，有一个，其余没有，则分子为2+1+1+0+0+0=4，分母为正例数，反例数=6*6=36，则此时$l_{rank}$为4/36=1/9</p>
-<h4 id="代价敏感错误率与代价曲线"><a href="#代价敏感错误率与代价曲线" class="headerlink" title="代价敏感错误率与代价曲线"></a>代价敏感错误率与代价曲线</h4><p><img src="/2021/11/10/machine-learning/B71F120E1D85FE164FAEFD745AD1E202.jpg" alt="img" style="zoom:50%;"></p>
-<p>代价敏感错误率为</p>
-<script type="math/tex; mode=display">E(f;D;cost)=\frac1m(\sum_{x_i\in D^+}^{}\Pi (f(x_i)\ne y_i )*cost_{01}+\sum_{x_i\in D^-}^{}\Pi (f(x_i)\ne y_i )*cost_{10})</script><p>在非均等代价下，ROC曲线不能直接反映出学习器的期望总体代价，而代价曲线则可达到该目的。</p>
-<p>代价曲线图的横轴是取值为[0,1]的正概率代价</p>
-<script type="math/tex; mode=display">P(+)cost=\frac{p*cost_{01}}{p*cost_{01}+(1-p)*cost_{10}}</script><p>代价曲线图的横轴是取值为[0,1]的正例概率代价</p>
-<script type="math/tex; mode=display">P(+)cost=\frac{p*cost_{01}}{p*cost_{01}+(1-p)*cost_{10}}</script><p>其中p是样例为正例的概率；纵轴是取值为[0,1]的归一化代价</p>
-<script type="math/tex; mode=display">cost_{norm}=\frac{FNR*p*cost{01}+FPR*(1-p)*cost_{10}}{p*cost_{01}+(1-p)*cost_{10}}</script><p>代价曲线绘制很简单：ROC曲线上每一点对应了代价平面上的一条线段，设ROC曲线上点的坐标为(FPR,TPR),则可计算出FNR，然后在代价平面上绘制一条从(0,FPR)到(1,FNR)的线段，线段下的面积表示了该条件下的期望总体代价。</p>
-<p><img src="/2021/11/10/machine-learning/5F373773E2879FE3B9027F166C1263DC.jpg" alt="img" style="zoom:50%;"></p>
-<h3 id="比较检验"><a href="#比较检验" class="headerlink" title="比较检验"></a>比较检验</h3><p>本节默认以错误率为性能度量，用$\epsilon$表示</p>
-<h4 id="假设检验"><a href="#假设检验" class="headerlink" title="假设检验"></a>假设检验</h4><p>泛化错误率为$\epsilon$的学习器在一个样本上犯错的概率是$\epsilon$;测试错误率$\hat{\epsilon } $意味着在m个测试样本中恰好有$\hat{\epsilon } $*m个被误分类。</p>
-<p>我们可使用“二项检验”来对“$\epsilon$&lt;=$\hat{\epsilon}_0$”这样的假设进行检验。</p>
-<p>在很多时候我们并不是做一次留出法估计，而是通过多次重复留出法或是交叉验证法等进行多次训练和测试，这样会得到多个测试错误率，此时可用”t-检验”。平均测试错误率$\mu$和方差$\sigma^2$为</p>
-<script type="math/tex; mode=display">\mu=\frac{1}{k}\sum_{i=1}^{k}\hat{\epsilon_i}</script><script type="math/tex; mode=display">\sigma^2=\frac{1}{k-1}\sum_{i=1}^{k}(\hat{\epsilon_i}a-\mu)^2</script><p>考虑到k个测试错误率可看作泛化错误率$\epsilon_0$的独立采样，则变量</p>
-<script type="math/tex; mode=display">\tau_t=\frac{\sqrt{k}(\mu-\epsilon_0)}{\sigma}</script><p>服从自由度为k-1的t分布。</p>
-<p><img src="/2021/11/10/machine-learning/6CCFB550F4DE45AAE64650B826C88341.jpg" alt="img" style="zoom:33%;"></p>
-<h4 id="交叉验证t检验"><a href="#交叉验证t检验" class="headerlink" title="交叉验证t检验"></a>交叉验证t检验</h4><p>对于两个学习器A和B，若我们使用k折交叉验证法得到的错误测试率分别为$\epsilon^A_1$…和$\epsilon_1^B$…，则可使用k折交叉验证”成对t检验”来进行比较检验。可根据差值来对学习器A与B性能相同这个假设做t检验，计算出插值的均值$\mu$和方差$\sigma^2$，在显著度$\alpha$下，若变量</p>
-<script type="math/tex; mode=display">\tau_t=|\frac{\sqrt{k}\mu}{\sigma}|</script><p>小于临界值，则假设不能被拒绝。</p>
-<h4 id="McNemar检验"><a href="#McNemar检验" class="headerlink" title="McNemar检验"></a>McNemar检验</h4><p><img src="/2021/11/10/machine-learning/A988E7FEA95CDC7D31315BF9096EBD7A.jpg" alt="img" style="zoom:33%;"></p>
-<p>若我们做的假设是两学习器性能相同，则应有$e<em>{01}=e</em>{10}$，那么变量$|e<em>{01}-e</em>{10}|$应当服从正态分布。McNemar检验考虑变量</p>
-<script type="math/tex; mode=display">\tau_{\chi^2}=\frac{(|e_{01}-e_{10}|-1)^2}{e_{01}+e_{10}}</script><p>服从自由度为1的$\chi^2$分布</p>
-<h4 id="Friedman检验与Nemenyi后续检验"><a href="#Friedman检验与Nemenyi后续检验" class="headerlink" title="Friedman检验与Nemenyi后续检验"></a>Friedman检验与Nemenyi后续检验</h4><p>之前介绍的都是在一个数据集上比较两个算法的性能，而在很多时候，我们会在一组数据集上比较多个算法。此时可以使用基于算法排序的Friedman检验。</p>
-<p>当所有算法性能相同这个假设被拒绝，则说明算法的性能显著不同，这时需要后续检验来区分，常用的有Nemenyi后续检验。</p>
-<h3 id="偏差与方差"><a href="#偏差与方差" class="headerlink" title="偏差与方差"></a>偏差与方差</h3><p>偏差度量了学习算法的期望预测与真实结果的偏离程度，即刻画了学习算法本身的拟合能力。</p>
-<p>方差度量了同样大小的训练集的变动所导致的学习性能的变化，即刻画了数据扰动所造成的影响。</p>
-<p>噪声则表达在当前任务上任何学习算法所能达到的期望泛化误差的下界，即刻画了学习问题本身的难度，</p>
-<p>泛化误差可分解为偏差、方差与噪声之和。</p>
-<h2 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h2><h3 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h3><p>f(x)=w1x1+w2x2+…+wdxd+b</p>
-<p>一般用向量形式写成</p>
-<script type="math/tex; mode=display">
-f(x)=\omega^Tx+b</script><h3 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h3><p> 线性回归试图学得</p>
-<script type="math/tex; mode=display">
-f(x_i)=wx_i+b,st :f(x_i)\approx y_i</script><p>多元线性回归</p>
-<script type="math/tex; mode=display">
-   f(x_i)=\omega^T x_i+b,st :f(x_i)\approx y_i</script><p>对数线性回归</p>
-<script type="math/tex; mode=display">
-lny=\omega^T x+b</script><p>广义线性模型</p>
-<script type="math/tex; mode=display">
-y=g^-1(\omega^T x+b)</script><h3 id="对数几率回归"><a href="#对数几率回归" class="headerlink" title="对数几率回归"></a>对数几率回归</h3><p>对数几率函数，“Sigmod函数”，将Z值转换为1个接近0或1的y值，并且其输出在z=0附近变化很陡。</p>
-<script type="math/tex; mode=display">
-y=\frac{1}{1+e^{-z}}</script><p>带入得</p>
-<script type="math/tex; mode=display">
-y=\frac{1}{1+e^{-(w^Tx+b)}}</script><p>将上述式子变换得</p>
-<script type="math/tex; mode=display">
-ln\frac{y}{1-y}=w^Tx+b</script><p>注：极大似然估计，梯度下降法，牛顿法，请参考实验。</p>
-<h3 id="线性判别分析"><a href="#线性判别分析" class="headerlink" title="线性判别分析"></a>线性判别分析</h3><p>线性判别分析(Linear Discriminant Analysis,简称LDA)是一种经典的线性学习方法。</p>
-<p>LDA的思想非常朴素：给定训练样例集，设法将样例投影到一条直线上，使得同类样例的投影点尽可能接近、异类样例的投影点尽可能远离；在对新样本进行分类时，将其投影到同样的这条直线上，再根据投影点的位置来确定新样本的类别。</p>
-<p><img src="/2021/11/10/machine-learning/F4BAAC59D4585EE05971A98DC99EA6C4.jpg" alt="img" style="zoom:33%;">           </p>
-<p><img src="/2021/11/10/machine-learning/97DB1639B86ED8B3021436B71378A6FE.jpg" alt="img" style="zoom: 33%;"></p>
-<p><img src="/2021/11/10/machine-learning/2D144DC0F1851483569B8FCFBC4AA36D.jpg" alt="img" style="zoom:50%;"></p>
-<p>定义类内散度矩阵</p>
-<script type="math/tex; mode=display">
-$S_w=\sum_0+\sum_1=\sum_{x\in X_0}^{}(x-\mu_0)(x-\mu_0)^T+\sum_{x\in X_1}^{}(x-\mu_1)(x-\mu_1)^T</script><p>类间散度矩阵$S_b=(\mu_0-\mu_1)(\mu_0-\mu_1)^T$                        </p>
-<p>则有最大化目标</p>
-<script type="math/tex; mode=display">
-J=\frac{w^TS_bw}{w^TS_ww}</script><p>这就是LDA想要最大化的目标，即$S_b与S_w$的“广义瑞利商”。   </p>
-<p>上述式子只与$w$的方向有关，与长度无关，故不是一般性，令$w^TS_ww=1$,根据拉格朗日乘子法，等价于</p>
-<script type="math/tex; mode=display">
-S_bw=\lambda S_ww</script><p>注意到$S_bw$的方向恒为$\mu_0-\mu_1$          </p>
-<p>则令$S_bw=\lambda(\mu_0-\mu_1)$     </p>
-<p>代入得$w=S^{-1}_w(\mu_0-\mu_1)$  </p>
-<p>考虑到数值解的稳定性，在实践中通常是对$S_w$进行奇异值分解，即$S_w=U\Sigma V^T$</p>
-<p>值得一提的是,LDA可从贝叶斯决策理论的角度来阐述，并可以证明，当两类数据同先验、满足高斯分布且协方差相等时，LDA可达到最优分类。</p>
-<p>可将LDA推广到多分类任务。</p>
-<h3 id="多分类学习"><a href="#多分类学习" class="headerlink" title="多分类学习"></a>多分类学习</h3><p>多分类学习的基本思路是拆解法，即将多分类任务拆为若干个二分类任务求解 。最经典的拆分策略有三种，一对一(one vs one,OvO)，一对其余(one vs rest,OvR)，多对多(manay vs many,MvM)。</p>
-<p>OvO将这N个类别两两配对，从而产生N(N-1)/2个二分类任务。</p>
-<p>OvR则是每次将一个类的样例作为正例，所有其他类的样例作为反例来训练N个分类器。在测试时若仅有一个分类器预测为正类，则对应的类别标记作为最终分类结果。若有多个分类器预测为正类，则通常考虑各分类器的预测置信度，选择置信度最大的类别标记作为分类结果。</p>
-<p><img src="/2021/11/10/machine-learning/04D2A99C0BCF59320FCA0EC8557E268E.jpg" alt="img" style="zoom:33%;">                                         </p>
-<p>可以看出，OvR只需要训练N个分类器，而OvO需训练N(N-1)/2个分类器，因此，OvO的存储开销和测试时间开销通常比OvR大。但在训练时，OvR的每个分类器均使用全部训练样例，而OvO的每个分类器仅用到两个类的样例，因此，在类别很多时，OvO的训练时间开销通常比OvR更小。至于预测性能，多数情况下二者差不多。</p>
-<p>介绍一种MvM最常用的技术，纠错输出码(Erroe Correcting Output Codes,ECOC)，它是将编码的思想引入类别拆分，并尽可能在解码过程中具有容错性。EOOC工作过程主要分为两步：</p>
-<p>编码：对N个类别做M次划分，每次划分将一部分划分为正类，一部分划分为反类，从而形成一个二分类训练器；这样一共产生M个训练集，可训练出M个分类器。</p>
-<p>解码：M个分类器对测试样本进行预测，这些预测标记组成一个编码。将这个预测编码与每个类别各自的编码进行比较，返回其中距离最小的类别作为最终预测结果。</p>
-<p>对于同一个学习任务，EOOC编码越长，纠错能力越强。</p>
-<h3 id="类别不平衡问题"><a href="#类别不平衡问题" class="headerlink" title="类别不平衡问题"></a>类别不平衡问题</h3><p>一个基本策略是再缩放。</p>
-<p>大体有三种做法：</p>
-<p>欠采样:去除一些样例使得正反例数目接近</p>
-<p>过采样：增加一些样例使得正反例数目接近</p>
-<p>第三类是基于原始数据训练，，再进行阈值转移。</p>
-<p>欠采样法的时间开销通常远小于过采样。过采样法不能简单对初始样本进行重复采样，否则会过拟合。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </p>
-<h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><p>决策树学习基本算法</p>
-<p><img src="/2021/11/10/machine-learning/E898624B5F73D1A43DCABE5689B64E31.jpg" alt="img" style="zoom: 25%;"></p>
-<h3 id="划分选择"><a href="#划分选择" class="headerlink" title="划分选择"></a>划分选择</h3><h4 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h4><p>信息熵为度量样本集合纯度最常用的一种指标。假定样本集合D中第k类样本所占的比例为$p_k$,则D的信息熵定义为</p>
-<script type="math/tex; mode=display">
-Ent(D)=-\sum_{k=1}^{|y|} p_klog_2p_k</script><p>Ent(D)的值越小，则D的纯度越高。</p>
-<p>假定离散属性有v个可能的取值，若使用a来对样本集D进行划分，则会产生V个分支结点，其中第v个分支结点包括了D中所有在属性a上取值为$a^v$的样本，记为$D^v$。则可又获得信息增益：</p>
-<script type="math/tex; mode=display">
-Gain(D,a)=Ent(D)-\sum_{v=1}^{V}\frac{|D^v|}{|D|}Ent(D^v)</script><p>著名的ID3决策树学习算法就是以信息增益为准则来选择划分属性的。</p>
-<p>X和Y的交互信息</p>
-<script type="math/tex; mode=display">
-I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)=H(X)+H(Y)-H(X,Y)</script><p>样本熵：各类样本熵之和</p>
-<h4 id="增益率"><a href="#增益率" class="headerlink" title="增益率"></a>增益率</h4><p>但是，显而易见，信息增益准则对于可取数目较多的属性有所偏好，所以我们引入增益率。著名的C4.5决策树算法便是使用增益率来哈分最优划分属性的。增益率定义为</p>
-<script type="math/tex; mode=display">
-Gain\_ratio(D,a)=\frac{Gain(D,a)}{IV(a)} 
-其中
-IV(a)=-\sum_{v=1}^{V}\frac{|D^v|}{|D|} log_2\frac{|D^v|}{|D|}</script><p>需要注意，增益率准则对于可取纸2数目较少的属性有所偏好，因此C4.5并不是直接使用增益率准则来进行划分的，而是采用了一个启发式算法，先从候选划分属性中zhaochu1信息增益高于平均水平的属性，再从中选择增益率最高的。</p>
-<h4 id="基尼系数"><a href="#基尼系数" class="headerlink" title="基尼系数"></a>基尼系数</h4><p>CART决策树采用基尼指数来选择划分属性。数据集D的纯度可用基尼系数来度量：</p>
-<script type="math/tex; mode=display">
-Gini(D)=\sum_{k=1}^{|y|}\sum_{k'\ne k }^{} p_k p_{k'}
-       =1-\sum_{k=1}^{|y|}p_k^2</script><p>直观理解的话，基尼系数反应了从数据集D中随机抽取两个样本，其分类不一致的概率。</p>
-<p>属性a的基尼系数定义为</p>
-<script type="math/tex; mode=display">
-Gini\_index(D,a)=\sum_{v=1}^{V}\frac{|D^v|}{|D|}Gini(D^v)</script><h3 id="剪枝处理"><a href="#剪枝处理" class="headerlink" title="剪枝处理"></a>剪枝处理</h3><p>剪枝(pruning)是决策树学习算法对应过拟合的主要手段。决策树基本策略有预剪枝(prepruning)和后剪枝(postpruning)。</p>
-<p>预剪枝是在决策树生成过程中，对每个结点在划分前进行估计，若当前结点的划分不能带来决策树泛化性能提升，则停止划分并将当前结点标记为叶结点；后剪枝则是先从训练集生成一颗完整的决策树，然后自底向上地对非叶结点进行考察，若将该节点对应的子树替换为叶结点能带来决策树泛化性能提升，则将该子树替换为叶结点。</p>
-<p>预剪枝使决策树很多分支都没有展开，降低了过拟合风险，减少了决策树训练时间开销和测试时间开销，但会带来欠拟合的风险。</p>
-<p>后剪枝决策树的欠拟合风险很小，泛化性能往往优于预剪枝决策树。</p>
-<h3 id="连续与缺失值"><a href="#连续与缺失值" class="headerlink" title="连续与缺失值"></a>连续与缺失值</h3><h4 id="连续值处理"><a href="#连续值处理" class="headerlink" title="连续值处理"></a>连续值处理</h4><p>由于连续属性的可取数目不再有限，因此不能直接根据连续属性的可取值来对结点进行划分。此时，连续属性离散化技术派上用处。最简单策略就是采用二分法，正是C4.5决策树算法采用的机制。</p>
-<h4 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h4><h5 id="在以下三方面影响到决策树构建"><a href="#在以下三方面影响到决策树构建" class="headerlink" title="在以下三方面影响到决策树构建"></a>在以下三方面影响到决策树构建</h5><p>影响杂质测量计算方式；影响如何将缺失值的实例分配到子节点；影响具有缺失值的测试实例如何被分配</p>
-<p>原信息增益=去除缺失值信息增益*（去除后的样本数/总样本数）</p>
-<h3 id="多变量决策树"><a href="#多变量决策树" class="headerlink" title="多变量决策树"></a>多变量决策树</h3><p>每个节点划分为线性分类器。对属性的线性组合进行测试。</p>
-<h3 id="考点"><a href="#考点" class="headerlink" title="考点"></a>考点</h3><h4 id="基于决策树分类的优点"><a href="#基于决策树分类的优点" class="headerlink" title="基于决策树分类的优点"></a>基于决策树分类的优点</h4><p>构建过程计算资源开销小；</p>
-<p>分类未知样本速度极快；</p>
-<p>对于小规模的树比较容易解释；</p>
-<p>在许多小的简单数据集合性能与其他方法相近。</p>
-<h4 id="TOP-DOWN决策树"><a href="#TOP-DOWN决策树" class="headerlink" title="TOP-DOWN决策树"></a>TOP-DOWN决策树</h4><p><img src="/2021/11/10/machine-learning/image-20211117162908027.png" alt="image-20211117162908027" style="zoom:50%;"></p>
-<h4 id="过拟合"><a href="#过拟合" class="headerlink" title="过拟合"></a>过拟合</h4><h5 id="pre-pruning"><a href="#pre-pruning" class="headerlink" title="pre-pruning"></a>pre-pruning</h5><p>如果所有的实例都属于同一类别就停止；如果所有的属性值都一样就停止。</p>
-<p>更加具有限制性的，如果实例的数量少于用户指定的阈值；如果实例的类别分布与可用的特征无关；如果扩展当前节点不能改善纯度。（基尼系数或信息增益）</p>
-<h5 id="post-pruning"><a href="#post-pruning" class="headerlink" title="post-pruning"></a>post-pruning</h5><p>将决策树增长到其全部内容，以自下而上的方式修剪。若修剪后泛化错误得到改善，则将子树替换为叶子。可使用MDL修剪。</p>
-<h4 id="MDL"><a href="#MDL" class="headerlink" title="MDL"></a>MDL</h4><p>最小描述长度准则—Minimum Description Length</p>
-<p><img src="/2021/11/10/machine-learning/image-20211117203144245.png" alt="image-20211117203144245" style="zoom:50%;"></p>
-<p>分发实例的过程，将缺失值按照权重分别分发给不同的分支。如下图：</p>
-<p><img src="/2021/11/10/machine-learning/image-20211117203735045.png" alt="image-20211117203735045" style="zoom:50%;"></p>
-<p>对于新实例有缺失值的情况下如何分类，也要利用概率来看。</p>
-<h4 id="惩罚项"><a href="#惩罚项" class="headerlink" title="惩罚项"></a>惩罚项</h4><p>惩罚项比重影响 ：比重大时降低模型复杂度 ；比重适当时模型复杂度与问题匹配 ；比重小时、退化成原模型</p>
-<h2 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h2><p>support vector machine,SVM</p>
-<h3 id="间隔与支持向量"><a href="#间隔与支持向量" class="headerlink" title="间隔与支持向量"></a>间隔与支持向量</h3><p>给定训练集样本D，分类学习最基本的想法就是基于训练集D在样本空间中找到一个划分超平面。</p>
-<p>在样本空间中，划分超平面可通过如下线性方程来描述：$w^T x+b$</p>
-<p>其中$w$为法向量，决定了超平面的方向，b为位移量。我们将该平面记做(w,b)</p>
-<p>样本空间中任一点x到该超平面的距离可写为</p>
-<script type="math/tex; mode=display">
-r=\frac{|w^T x+b|}{||w||}</script><p>假设超平面可将训练样本正确分类，对于$(x_i,y_i)$,若$y_i=1$,则有$w^T x+b&gt;$0,若为-1则&lt;0</p>
-<p>令</p>
-<script type="math/tex; mode=display">
-w^T x+b\ge+1,y_i=+1</script><script type="math/tex; mode=display">
-w^T x+b\le-1,y_i=-1</script><p>如图所示，距离超平面最近的这几个训练样本使上述等号成立，他们被称为支持向量，两个异类支持向量，两个异类支持向量到超平面的距离之和为$\gamma=\frac{2}{||w||}$,它被称为间隔。</p>
-<p><img src="/2021/11/10/machine-learning/36EFD86F17078452CE4BAFE7406E7716.jpg" alt="img" style="zoom:33%;"></p>
-<p>想要找到最大间隔，即找到最大$w与b$，使得$\lambda$最大。</p>
-<p>显然，为了最大化间隔，仅需要最大化$||w||^{-1}$，这等价于最小化$||w||^2$，于是便有</p>
-<script type="math/tex; mode=display">
-min\frac12 ||w||^2</script><script type="math/tex; mode=display">
-st\  y_i(w^Tx_i+b)\ge1，i=1,2,...,m</script><p>这就是SVM的基本型。</p>
-<h3 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h3><p>对于SVM的基本型，添加拉格朗日乘子$\alpha\ge0$，则该问题拉格朗日函数可以写为</p>
-<script type="math/tex; mode=display">
-L(w,b,\alpha)=\frac12 ||w||^2+\sum_{i=1}^{m}\alpha_i(1-y_i(w^Tx_i+b))</script><p>其中$\alpha_i=(\alpha_1,\alpha_2,…,\alpha_m)$</p>
-<p>分别求偏导，$w=\sum<em>{i=1}^{m}\alpha_i y_i x_i，0=\sum</em>{i=1}^{m}\alpha_i y_i$</p>
-<p>代入，可得对偶问题如下</p>
-<script type="math/tex; mode=display">
-max:\sum_{i=1}^{m}\alpha_i-\frac12 \sum_{i=1}^{m}\sum_{j=1}^m \alpha_i \alpha_j y_i y_j x_i^T x_j（11）
-\\
-st\sum_{i=1}^m\alpha_i y_i=0,\alpha_i\ge0</script><p>解出$\alpha$后，求出w与b即可得到模型</p>
-<script type="math/tex; mode=display">
-f(x)=\sum_{i=1}^m \alpha_i y_i x_i^Tx+b(12)</script><p>因为上述过程需要满足KK条件，即要求</p>
-<p>$\alpha_i\ge0$</p>
-<p>$y_if(x_i)-1\ge0$</p>
-<p>$\alpha_i(y_if(x_i)-1)=0$（13）    </p>
-<p>若$\alpha_i$=0，则该样本不会在12的求和中出现，也就不会对f(x)有影响‘</p>
-<p>若后面等于0，则所对应的样本点位于最大间隔边界上，是一个支持向量。</p>
-<p>如何求解11呢？我们介绍一种高效的SMO算法。</p>
-<p>暂且跳过这部分。</p>
-<h3 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h3><p>若在原始样本空间内不存在一个能正确划分两类样本的超平面，面对这类问题，我们可将样本从原始空间映射到一个高维的特征空间，使得样本在这个高维空间内线性可分。并且若原始空间有限，则一定存在一个高维特征空间使样本可分。</p>
-<p>令$\phi(x)$表示将x映射后的特征向量，于是，在特征空间中划分超平面所对应的模型可以表示为</p>
-<p>$f(x)=w^T\phi(x)+b$</p>
-<p>同上，其对偶问题是</p>
-<script type="math/tex; mode=display">
-max:\sum_{i=1}^{m}\alpha_i-\frac12 \sum_{i=1}^{m}\sum_{j=1}^m \alpha_i \alpha_j y_i y_j \phi(x_i)^T \phi(x_j)
-$$（21）
-
-$st\sum_{i=1}^m\alpha_i y_i=0,\alpha_i\ge0$</script><p>求解21会涉及到计算$\phi(x_i)^T\phi(x_i)$，这是样本$x_i与x_j$映射到特征空间后的内积，计算困难，为了避开这个障碍，可以设想一个这样的函数</p>
-<script type="math/tex; mode=display">
-\kappa(x_i,x_j)=<\phi(x_i),\phi(x_j)> =\phi(x_i)^T\phi(x_i)(22)</script><p>即$x_i与x_j$在特征空间的内积等于他们在原始样本空间中通过函数$\kappa$计算的结果。</p>
-<p>则可进行求解，求解得</p>
-<script type="math/tex; mode=display">
-f(x)=w^T\phi(x_i)+b=\sum_{i=1}^{m}\alpha_i y_i \phi(x_i)^T \phi(x) +b=\sum_{i=1}^{m}\alpha_i y_i \kappa(x,x_i)+b$$（24）</script><p>这里的$\kappa(,)$就是核函数，24显示出模型最优解可通过训练样本的核函数展开，这一展开式也称为“支持向量展式”。</p>
-<p>关于核函数，我们有以下定理：</p>
-<p>暂且略过</p>
-<h3 id="软间隔与正则化"><a href="#软间隔与正则化" class="headerlink" title="软间隔与正则化"></a>软间隔与正则化</h3><p>大多数时候我们很难找到合适的核函数，所以为了缓解这一问题，我们会允许支持向量机在一些样本上出错。为此要引入软间隔的概念。</p>
-<p> <img src="/2021/11/10/machine-learning/4A16DFA62BFB67D6662A8F6552B5C427.jpg" alt="img" style="zoom:33%;"></p>
-<p>软间隔则是允许某些样本不满足约束</p>
-<p>$y_i(w^Tx_i+b)\ge1$(28)</p>
-<p>当然，在最大化间隔的同时，不满足约束的样本应尽可能少。于是，优化目标可以写为</p>
-<script type="math/tex; mode=display">
-\hat{P}(c)=\frac{|D_c|+1}{|D|+N}</script><h2 id="贝叶斯分类器"><a href="#贝叶斯分类器" class="headerlink" title="贝叶斯分类器"></a>贝叶斯分类器</h2><h3 id="贝叶斯决策论"><a href="#贝叶斯决策论" class="headerlink" title="贝叶斯决策论"></a>贝叶斯决策论</h3><p>[最大后验估计(Maximum-a-Posteriori (MAP) Estimation) ]</p>
-<p>最大似然估计（MLE）选择值 使观察到的数据的概率最大化<br>最大后验估计（MAP） 选择在观察到的数据和先验条件下最有可能的值 </p>
-<p>缺点<br>MLE: 如果数据集太小，就会过度拟合<br>MAP: 两个有不同预设的人最终会导致不同的估计值</p>
-<p><img src="/2021/11/10/machine-learning/image-20211117223857004.png" alt="image-20211117223857004" style="zoom:50%;"></p>
-<p><img src="/2021/11/10/machine-learning/A6BDD93CCCCCC047DE2609620E7D78C3.jpg" alt="img" style="zoom:50%;"></p>
-<p><img src="/2021/11/10/machine-learning/A044609FAA1AD73C2A0217EC28158122.jpg" alt="img" style="zoom:50%;"></p>
-<h3 id="极大似然估计"><a href="#极大似然估计" class="headerlink" title="极大似然估计"></a>极大似然估计</h3><p><img src="/2021/11/10/machine-learning/9A0C04058645739BD9C5D62DD3AB2700.jpg" alt="img" style="zoom: 33%;"></p>
-<p><img src="/2021/11/10/machine-learning/B45A21D4483D97DDD0C96A6805892B6C.jpg" alt="img" style="zoom:33%;"></p>
-<h3 id="朴素贝叶斯分类器"><a href="#朴素贝叶斯分类器" class="headerlink" title="朴素贝叶斯分类器"></a>朴素贝叶斯分类器</h3><p><img src="/2021/11/10/machine-learning/1E8135079EBCC4628459CF2B8B7EE87A.jpg" alt="img" style="zoom:33%;"></p>
-<h3 id="半朴素贝叶斯分类器"><a href="#半朴素贝叶斯分类器" class="headerlink" title="半朴素贝叶斯分类器"></a>半朴素贝叶斯分类器</h3><p><img src="/2021/11/10/machine-learning/1E8135079EBCC4628459CF2B8B7EE87A-16371597889032.jpg" alt="img" style="zoom:33%;"></p>
-<script type="math/tex; mode=display">
-P(c|x)\propto\ P(c)\prod{i=1}^{d}P(x_i|c,pa_i)$$（21）</script><p>其中$pa_i$为属性$x_i$所依赖的属性，称为$x_i$的父属性。问题的关键转换为如何确定每个属性的父属性，不同的做法产生不同的独依赖分类器。</p>
-<p>最直接的做法是假设所有属性都依赖于同一个属性，称为“超父”，然后通过交叉验证等模型选择方法来确定超父属性，由此形成了SPODE(Super-Parent ODE)方法，例如(b)中，$x_1$是超父属性。</p>
-<p><img src="/2021/11/10/machine-learning/55A690BDCFCF2088CC674065B8172013.jpg" alt="img" style="zoom: 50%;"></p>
-<p>TAN则是在最大带权生成树算法的基础上，通过以下步骤化简为(c)的树形结构。</p>
-<p><img src="/2021/11/10/machine-learning/38DEA55FFF99EC16FC86A14D9523652D.jpg" alt="img" style="zoom:50%;"></p>
-<h3 id="贝叶斯网"><a href="#贝叶斯网" class="headerlink" title="贝叶斯网"></a>贝叶斯网</h3><p>Directed Acyclic Graph(DAG)：有向无环图</p>
-<p>Conditional Probability Table(CPT)：条件概率表</p>
-<p>具体来说，一个贝叶斯网B由结构G和参数$\theta$两部分构成，即$B=<G,\theta>$。</G,\theta></p>
-<p>网络结构G为DAG，其每个结点对应于一个属性，若两个属性有直接依赖关系，则他们由一条边连接起来；参数$\theta$定量描述这种依赖关系，假设属性$x<em>i$在G中的父节点为$\pi_i$,则$\theta$包含了每个属性的条件概率表$\theta</em>{x_i|\pi_i}=P_B(x_i|\pi_i)$</p>
-<h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><p>给定父节点集，贝叶斯网假设每个属性与它的非后裔属性独立。</p>
-<p><img src="/2021/11/10/machine-learning/79D783BCFC662B14C00191FCE9BFE39E.jpg" alt="img" style="zoom:50%;"></p>
-<p>为了分析有向图中变量间的条件独立性，可使用有向分离。我们先把有向图转变成为一个无向图：</p>
-<p>*找出有向图中的所有V型结构，在V型结构的两个父节点之间加上一条无向边；</p>
-<p>*将所有有向边改为无向边</p>
-<p>由此产生的无向图称为道德图，令父节点相连的过程称为道德化。</p>
-<p>若变量x和y能在图上z分开，即从道德图中将变量集合z去除后，x和y分属两个连通分支，则称x和y被z有向分离，$x\perp y|z$成立。</p>
-<h4 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h4><p>贝叶斯网学习的首要任务就是根据训练数据集来找出结构最恰当的贝叶斯网。评分搜索是求解这一问题的常用办法。具体来说，我们先定义一个评分函数，以此来评估贝叶斯网与训练数据的契合程度，然后基于这个评分函数来寻找结构最优的贝叶斯网。</p>
-<p>常用评分函数通常基于信息论准则，此类准则将学习问题看作一个数据压缩任务，学习的目标是找到一个能以最短编码长度描述训练数据的模型，此时编码的长度包括了描述模型自身所需的编码位数和使用该模型描述数据所需的编码位数。对于贝叶斯网学习而言，模型就是一个贝叶斯网，同时，每个贝叶斯网描述了一个在训练数据上的概率分布，我们应选择那个综合编码长度最短的贝叶斯网，这就是最小描述长度准则。(Minimal Description Length,MDL)</p>
-<p>给定训练集D，贝叶斯网$B=<G,\theta>$在D上的评分函数可写为</G,\theta></p>
-<script type="math/tex; mode=display">
-s(B|D)=f(\theta)|B|-LL(B|D)(28)</script><p>其中，|B|是贝叶斯网的参数个数；$f(\theta)$表示描述每个参数$\theta$所需的编码位数。而</p>
-<script type="math/tex; mode=display">
-LL(B|D)=\sum_{i=1}^{m}logP_B(x_i)(29)</script><p>是贝叶斯网B的对数似然。显然，28的第一项是计算编码贝叶斯网B所需的编码位数，第二项是表述B所对应的概率分布$P_B$对D的描述有多好。此时，学习任务转换为优化任务，寻找一个贝叶斯网B使得评分函数最小。</p>
-<p>若$f(\theta)=1$，则得到AIC评分函数。</p>
-<p>若$f(\theta) =\frac12log\ m$，则得到BIC评分函数。</p>
-<p>当=0时，评分函数退化为负对数似然函数，学习任务退化为极大似然估计。</p>
-<p>为最小化评分函数，只需要对网络结构进行搜索，而候选结构的最优参数可直接在训练集计算得到。</p>
-<p>但是，在所有可能的网络空间搜索最优贝叶斯网络是一个NP问题。一般有两种策略在有限时间内求得近似解，第一种为贪心法，第二种是通过给网络结构施加约束来削减搜索空间。</p>
-<h4 id="推断"><a href="#推断" class="headerlink" title="推断"></a>推断</h4><p>贝叶斯网络的近似推断常使用吉布斯采样来完成，这是一种随机采样方法。</p>
-<p><img src="/2021/11/10/machine-learning/E2B301816200CD704A7D700DBB22FC31.jpg" alt="img" style="zoom:50%;"></p>
-<p><img src="/2021/11/10/machine-learning/78E3A5A0E31E197592EDE4D8AF528331.jpg" alt="img" style="zoom:50%;"></p>
-<h4 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h4><p>在现实中，会存在许多未观测变量。未观测变量的学名是隐变量，令X表示已观测变量集，Z表示隐变量集，$\theta$表示模型参数，若想要对$\theta$做极大似然估计，则应最大化对数似然</p>
-<p>$LL(\theta|X,Z)ln\ P(X,Z|\theta)$</p>
-<p>由于Z是隐变量，我们可通过对Z计算期望，来最大化已观测数据的对数“边际似然”</p>
-<p>$LL(\theta|X)=ln\ P(X|\theta)=ln\sum_{Z}P(X,Z|\theta)$（35）</p>
-<p><img src="/2021/11/10/machine-learning/A675D81C9F372B741728116344652037.jpg" alt="img" style="zoom:50%;"></p>
-<h2 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h2><h3 id="聚类任务"><a href="#聚类任务" class="headerlink" title="聚类任务"></a>聚类任务</h3><p>在无监督学习中，训练样本的标记信息是未知的，目标是通过对无标记训练样本的学习来揭示数据的内在性质及规律，为进一步的数据分析提供基础，此类学习任务应用最广的是聚类。</p>
-<p>聚类试图将数据集中的样本划分为若干个通常是不相交的子集，每个子集称为一个簇。</p>
-<p><img src="/2021/11/10/machine-learning/4C60C854BC237111701519B848988BBC.jpg" alt="img"></p>
-<h3 id="性能度量-1"><a href="#性能度量-1" class="headerlink" title="性能度量"></a>性能度量</h3><p>聚类性能度量也称为聚类“有效性指标”。</p>
-<p>聚类性能度量大致有两类，一类是将聚类结果与某个“参考模型”进行比较，称为“外部指标”；另一类是直接考察聚类结果而不利用任何参考模型，称为“内部指标”。</p>
-<p><img src="/2021/11/10/machine-learning/75BD1DD109F66E6E202DCF1D6A7E5356.jpg" alt="img" style="zoom:50%;"></p>
-<p><img src="/2021/11/10/machine-learning/02B3276E333E4A1D2CB5F7C7BA8C5CCA.jpg" alt="img" style="zoom:50%;"></p>
-<h3 id="距离计算"><a href="#距离计算" class="headerlink" title="距离计算"></a>距离计算</h3><p>对函数$dist$，若他是一个距离度量，则需要满足一些基本性质</p>
-<p>非负性：$dist(x_i,x_j)\ge0$</p>
-<p>同一性：$dist(x_i,x_j)=0当且仅当x_i=x_j$</p>
-<p>对称性</p>
-<p>直递性</p>
-<p>对于给定样本</p>
-<script type="math/tex; mode=display">
-x_i=(x_{i1};x_{i2};...;x_{in})与x_j</script><p>最常用的闵可夫斯基距离</p>
-<script type="math/tex; mode=display">
-dist_{mk}(x_i,x_j)=(\sum_{u=1}^n |x_{iu}-x_{ju}|^p)^{\frac1p}（18）</script><p>当p=2时，闵可夫斯基距离即为欧氏距离</p>
-<script type="math/tex; mode=display">
-dist_{ed}(x_i,x_j)=||x_i-x_j||_2=\sqrt{\sum_{u=1}^n |x_{iu}-x_{ju}|^2}（19）</script><p>当p=1时，闵可夫斯基距离即为曼哈顿距离</p>
-<script type="math/tex; mode=display">
-dist_{man}(x_i,x_j)=||x_i-x_j||_1=\sum_{u=1}^n |x_{iu}-x_{ju}|（20）</script><p>定义域为{1,2,3}这样的属性为有序属性，而定义域为{飞机，轮船，火车}则为无序属性，闵可夫斯基距离用于有序属性。</p>
-<p>对无序属性可采用VDM(Value Difference Metric)。令$m<em>{u,a}$表示属性u上取值为a的样本数，$m</em>{u,a,i}$表示在第i个样本簇中在属性u上取值为a的样本数，k为样本簇数，则属性u上两个离散值a与b之间的VDM距离为</p>
-<script type="math/tex; mode=display">
-VDM_p(a,b)=\sum_{i=1}^k | \frac{m_{u,a,i}}{m_{u,a}}-\frac{m_{u,b,i}}{m_{u,b}} |^p（21）</script><p>于是，将闵可夫斯基距离和VDM结合即可处理混合属性。假定有$n_c$个有序属性、$n-n_c$个无序属性，不失一般性，令有序属性排列在无序属性之前，</p>
-<script type="math/tex; mode=display">
-MinkovDM_p(x_i,x_j)=(\sum_{u=1}^{n_c}|x_{iu}-x_{ju}|^p+\sum_{u=n_c+1}^{n}VDM_p(x_{iu},x_{ju}))^{\frac12}（22）</script><p>当空间中不同属性的重要性不同时，可使用加权距离。</p>
-<p>需要注意的是，通常我们是基于某种形式的距离来定义“相似度度量”，距离越大，相似度越小，然而用于相似度度量的距离未必一定要满足距离度量的所有基本性质。不满足直递性的距离称为非度量距离。</p>
-<h3 id="原型聚类"><a href="#原型聚类" class="headerlink" title="原型聚类"></a>原型聚类</h3><p>也称为基于原型的聚类，此类算法假设聚类结构能通过一组原型刻画。通常对原型进行初始化，然后对原型进行迭代更新求解。</p>
-<h4 id="k均值算法"><a href="#k均值算法" class="headerlink" title="k均值算法"></a>k均值算法</h4><p>给定样本集$D={x_1,x_2,..,x_m}$，“k均值”算法针对聚类所得簇划分$C={C_1,C_2,…,C_k}$最小化平方误差</p>
-<script type="math/tex; mode=display">
-E=\sum_{i=1}^{k}\sum_{x\in C_i} ||x-\mu_i||_2^2（24）</script><p>k均值算法采用了贪心策略，通过迭代优化来近似求解式。</p>
-<h4 id="学习向量量化"><a href="#学习向量量化" class="headerlink" title="学习向量量化"></a>学习向量量化</h4><p>Learning Vector Quantization（LVQ)与一般的聚类算法不同，LVQ假设数据样本带有标记类别，学习过程利用样本的这些监督信息来辅助聚类。</p>
-<p>给定样本集</p>
-<script type="math/tex; mode=display">
-D={(x_1,y_1),(x_2,y_2),...,(x_m,y_m)}</script><p>每个样本$x<em>j$是由n个属性描述的特征向量$(x</em>{j1};x<em>{j2};…;x</em>{jn})$,$y_i\in \gamma$是样本$x_j$的类别标记。LVQ的目标是学得一组n维向量${p_1,p_2,…,p_n}$,每个原型向量代表一个聚类簇，簇标记$t_i \in \gamma$。</p>
-<p><img src="/2021/11/10/machine-learning/6B4E7175C6A70D74E89E1D5803B11140.jpg" alt="img" style="zoom:50%;"></p>
-<h4 id="高斯混合模型"><a href="#高斯混合模型" class="headerlink" title="高斯混合模型"></a>高斯混合模型</h4><p>参考下面这篇文章</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30483076">https://zhuanlan.zhihu.com/p/30483076</a></p>
-<h3 id="密度聚类"><a href="#密度聚类" class="headerlink" title="密度聚类"></a>密度聚类</h3><p>此类算法假设聚类结构能通过样本分布的紧密程度确定。</p>
-<p>DBSCAN是一种著名的密度聚类算法，它基于一组“邻域”参数$(\varepsilon,MinPts)$来刻画样本分布的紧密程度。给定数据集$D={x_1,x_2,…,x_m}$,定义以下概念</p>
-<p>$\varepsilon-$邻域：对于x，其$\varepsilon$邻域包含样本集D中与$x_j$的距离不大于$\varepsilon$的样本</p>
-<p>核心对象：若x的$\varepsilon$邻域至少包含MinPts个样本，则为一个核心对象</p>
-<p>密度直达：若$x_j$位于$x_i$的$\varepsilon$邻域中，且$x_i$是核心对象，则称$x_j$由$x_i$密度直达</p>
-<p>密度可达：对$x_i$与$x_j$，若存在样本序列</p>
-<script type="math/tex; mode=display">
-$p_1,p_2,...,p_n</script><p>其中$p<em>1=x_i,p_n=x_j$且$p</em>{i+1}$由$p_i$密度直达，则称$x_j$由$x_i$密度可达</p>
-<p>密度相连：对$x_i$与$x_j$，若存在$x_k$使得$x_k$使得二者均由$x_k$密度可达，则称二者密度相连。</p>
-<p>DBSCAN将簇定义为：由密度可达关系导出的最大的密度相连样本集合。</p>
-<p><img src="/2021/11/10/machine-learning/EDC190CDAD019755FE8DB3451CDB741C.jpg" alt="img" style="zoom:50%;"></p>
-<h3 id="层次聚类"><a href="#层次聚类" class="headerlink" title="层次聚类"></a>层次聚类</h3><p>层次聚类试图在不同层次上对数据集进行划分，从而形成树形的聚类结构。数据集的划分可采用“自顶向上”的聚合策略，也可采用“自顶向下”的分拆策略。</p>
-<p>AGNES是一种采用自底向上聚合策略的层次聚类算法。它先将数据集中的每个样本看作一个初始聚类簇，然后在算法运行的每一步中找出距离最近的两个聚类簇进行合并。</p>
-<p>当聚类簇距离由</p>
-<script type="math/tex; mode=display">
-d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单链接，全链接和均链接算法。</p>
-<p><img src="/2021/11/10/machine-learning/38F2CE5A44DBE19A0FC3066D27AB8B2A.jpg" alt="img" style="zoom:50%;"></p>
-<h2 id="降维与度量学习"><a href="#降维与度量学习" class="headerlink" title="降维与度量学习"></a>降维与度量学习</h2><h3 id="k近邻学习"><a href="#k近邻学习" class="headerlink" title="k近邻学习"></a>k近邻学习</h3><p>k-Nearest Neighbor，简称kNN学习是一种常用的监督学习方法。</p>
-<p>其工作机制是：给定测试样本，基于某种距离度量找出训练集中与其最靠近的k个训练样本，然后基于这k个邻居的信息来进行预测。</p>
-<p>k近邻学习没有显示的训练过程，是“懒惰学习”的主要代表，此类学习技术在训练阶段仅仅是把样本保存起来，训练时间开销为0，待收到测试样本后再进行处理；相应的，那些在训练阶段就对样本进行学习处理的方法称为急切学习。</p>
-<p>k近邻的错误率小于贝叶斯的两倍。    </p>
-<h3 id="低维嵌入"><a href="#低维嵌入" class="headerlink" title="低维嵌入"></a>低维嵌入</h3><p>通过某种数学变换将原始高维属性空间转变为一个低维子空间。</p>
-<p>若要求原始空间中样本之间的距离在低维空间中得以保持，即得到多维缩放(Multiple Dimensional Scaling,MDS)这样一种经典的降维方法。</p>
-<h3 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h3><p>Principal Component Analysis,PCA</p>
-<p>​    </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2555,7 +2885,7 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
