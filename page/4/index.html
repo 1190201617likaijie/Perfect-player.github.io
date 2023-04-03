@@ -145,6 +145,641 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/24/NLP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/24/NLP/" class="post-title-link" itemprop="url">NLP</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-24 17:08:09" itemprop="dateCreated datePublished" datetime="2021-12-24T17:08:09+08:00">2021-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-29 00:31:44" itemprop="dateModified" datetime="2021-12-29T00:31:44+08:00">2021-12-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>NLP任务：分词、词性标注、未登录词识别</p>
+<p>语言的性质：共时性；历时性</p>
+<p>语法单位</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">句子是语言中最大的语法单位</span><br><span class="line">词组是词的组合，它是句子里面作用相当于词而本身又是由词组成的大于词的单位。</span><br><span class="line">词是最重要的一级语法单位，它是造句的时候能够独立运用的最小单位。</span><br><span class="line">语素是语言中音义结合的最小单位。就汉语来说，大抵一个汉字就是一个语素，但是也有两个字表示一个语素的，如：“咖啡”</span><br></pre></td></tr></table></figure>
+<h2 id="语料库"><a href="#语料库" class="headerlink" title="语料库"></a>语料库</h2><p>• 语料库（corpus）一词在语言学上意指大量的文本，通常经过整理， 具有既定格式与标记</p>
+<p>语料库的种类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">共时语料库与历时语料库</span><br><span class="line">通用语料库与专用语料库</span><br></pre></td></tr></table></figure>
+<h3 id="语料加工"><a href="#语料加工" class="headerlink" title="语料加工"></a>语料加工</h3><p>文本处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">垃圾格式问题</span><br><span class="line">大小写</span><br><span class="line">标记化</span><br><span class="line">空格</span><br><span class="line">连字符</span><br><span class="line">词法</span><br><span class="line">句子定义—启发式算法</span><br><span class="line">句子边界的研究</span><br></pre></td></tr></table></figure>
+<p>格式标注</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">通用标记语言SGML</span><br><span class="line">SGML是超文本格式的最高层次标准，是可以定义标记语言的元语言</span><br><span class="line">语法标注</span><br></pre></td></tr></table></figure>
+<p>Zipf法则 • 一个词地频率f和它的词频排序位置r： f*r=k (k为常数)</p>
+<p><img src="/2021/12/24/NLP/image-20211227150000774.png" alt="image-20211227150000774"></p>
+<p>如果设置参数B=1, ρ=0，Mandelbrot公式就简化为Zipf法则</p>
+<p>搭配抽取</p>
+<p><img src="/2021/12/24/NLP/image-20211227150045052.png" alt="image-20211227150045052" style="zoom:50%;"></p>
+<h2 id="语料库加工-双语句子自动对齐-amp-双语词典获取"><a href="#语料库加工-双语句子自动对齐-amp-双语词典获取" class="headerlink" title="语料库加工_双语句子自动对齐&amp; 双语词典获取"></a>语料库加工_双语句子自动对齐&amp; 双语词典获取</h2><h3 id="句子对齐问题描述"><a href="#句子对齐问题描述" class="headerlink" title="句子对齐问题描述"></a>句子对齐问题描述</h3><p>基于长度的句子对齐  基本思想：源语言和目标语言的句子长度存在一定 的比例关系</p>
+<p>要求：最小（句珠内无句珠）； 唯一（一个句子仅属于一个句珠）； 无交叉（后句对齐一定在前句对齐位置之后）</p>
+<h3 id="基于共现的双语词典的获取"><a href="#基于共现的双语词典的获取" class="headerlink" title="基于共现的双语词典的获取"></a>基于共现的双语词典的获取</h3><p>基本思想：如果汉语词出现在某个双语句对 中，其译文也必定在这个句对中。</p>
+<p>汉英词典的迭代获取策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">迭代策略</span><br><span class="line">1) 初始化；</span><br><span class="line">2) 使用对数相似性模型计算汉英翻译词对候选；</span><br><span class="line">3) 选取前n个汉英对译词对；</span><br><span class="line">4) 双语句对中剔除选定的翻译词对；</span><br><span class="line">5) 若不满足终止条件，重复步骤2；</span><br><span class="line"> 几点说明：复合词暂未考虑；可加入交互方式;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>基于共现的词汇对译模型</p>
+<p>评价方式：专家独立于上下文进行判别</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">评价1：每5000个翻译词对候选中正确的译文数</span><br><span class="line">评价2：综合考虑翻译词典的性能</span><br></pre></td></tr></table></figure>
+<h2 id="汉语自动分词"><a href="#汉语自动分词" class="headerlink" title="汉语自动分词"></a>汉语自动分词</h2><h3 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h3><p>词干提取vs词形还原：分别用于IR 和 NLP</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">词干提取（stemming）是抽取词的词干或词根形式（不一定能够表达完整语义</span><br><span class="line">词形还原（lemmatization），是把一个任何形式的语言词汇还原为一般形式（能表达完整语义）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">词干提取主要是采用“缩减”的方法</span><br><span class="line">词形还原主要采用“转变”的方法</span><br><span class="line">在复杂性上：词干提取方法相对简单，词形还原更复杂</span><br><span class="line">在实现方法上：主流方法类似，但具体实现上各有侧重</span><br></pre></td></tr></table></figure>
+<p>词性标注</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">词性标注（part-of-speech tagging）,又称为词类标注或者简称</span><br><span class="line">标注，是指为分词结果中的每个单词标注一个正确的词性的程序，</span><br><span class="line">也即确定每个词是名词、动词、形容词或者其他词性的过程</span><br><span class="line">• 词性标注是很多NLP任务的预处理步骤，如句法分析，经过词性</span><br><span class="line">标注后的文本会带来很大的便利性，但也不是不可或缺的步骤</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="分词算法"><a href="#分词算法" class="headerlink" title="分词算法"></a>分词算法</h3><p>正向最大匹配分词(Forward Maximum  Matching method, FMM)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">基本思想：将当前能够匹配的最长词输出</span><br><span class="line">• 1. 设自动分词词典中最长词条所含汉字个数为I</span><br><span class="line">• 2. 取被处理材料当前字符串序数中的I个字作为匹配字段，查找分词词典。</span><br><span class="line">若词典中有这样的一个I字词，则匹配成功，匹配字段作为一个词被切分出</span><br><span class="line">来，转6</span><br><span class="line">• 3. 如果词典中找不到这样的一个I字词，则匹配失败</span><br><span class="line">• 4. 匹配字段去掉最后一个汉字，I--</span><br><span class="line">• 5. 重复2-4，直至切分成功为止</span><br><span class="line">• 6. I重新赋初值，转2，直到切分出所有词为止</span><br></pre></td></tr></table></figure>
+<p>逆向最大匹配分词(Backward  Maximum Matching method, BMM法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">分词过程与FMM方法相同，不过是从句子(或文</span><br><span class="line">章)末尾开始处理，每次匹配不成功时去掉的是</span><br><span class="line">最前面的一个汉字</span><br></pre></td></tr></table></figure>
+<p>实验表明：逆向最大匹配法比最大匹配法更有效</p>
+<p>最大匹配法的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">• 存在分词错误：增加知识、局部修改</span><br><span class="line">• 局部修改：增加歧义词表，排歧规则</span><br><span class="line">无法发现分词歧义-&gt;从单向匹配改为双向最大匹配</span><br></pre></td></tr></table></figure>
+<p>双向匹配法（Bi-direction Matching  method, BM法）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">双向最大匹配法是将正向最大匹配法（FMM）得到的分词</span><br><span class="line">结果和逆向最大匹配法（BMM）得到的结果进行比较，从</span><br><span class="line">而决定正确的分词方法</span><br></pre></td></tr></table></figure>
+<p>最少分词法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">• 分词结果中含词数最少</span><br><span class="line">• 优化代替了贪心</span><br><span class="line">• 等价于最短路径</span><br><span class="line">•算法：</span><br><span class="line">• 动态规划算法</span><br><span class="line">• 优点：好于单向的最大匹配方法</span><br><span class="line">• 最大匹配：独立自主/和平/等/互利/的/原则</span><br><span class="line">• 最短路径：独立自主/和/平等互利/的/原则</span><br><span class="line">• 缺点：忽略了所有覆盖歧义，也无法解决大部分交叉歧义</span><br><span class="line">• 结合成分子时</span><br><span class="line">• 结合|成分|子 &#123;&#125; 结|合成|分子 &#123;&#125; 结合|成|分</span><br></pre></td></tr></table></figure>
+<h3 id="分词问题：歧义"><a href="#分词问题：歧义" class="headerlink" title="分词问题：歧义"></a>分词问题：歧义</h3><p>交集型切分歧义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">汉字串AJB被称作交集型切分歧义，如果满足AJ、JB同时</span><br><span class="line">为词(A、J、B分别为汉字串)。此时汉字串J被称作交集串。</span><br></pre></td></tr></table></figure>
+<p>组合型切分歧义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">• 汉字串AB被称作组合型切分歧义，如果满足条件：A、</span><br><span class="line">B、AB同时为词</span><br></pre></td></tr></table></figure>
+<p>交集型歧义字段中含有交集字段的个数，称为链长</p>
+<p>“真歧义”和“伪歧义”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">• 真歧义指存在两种或两种以上的可实现的切分形式</span><br><span class="line">• 伪歧义一般只有一种正确的切分形式</span><br></pre></td></tr></table></figure>
+<p>分词问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">歧义</span><br><span class="line">未登录词</span><br><span class="line">新词</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>分词质量评价</p>
+<p><img src="/2021/12/24/NLP/image-20211227193857156.png" alt="image-20211227193857156" style="zoom:50%;"></p>
+<h2 id="中文分词-统计建模"><a href="#中文分词-统计建模" class="headerlink" title="中文分词_统计建模"></a>中文分词_统计建模</h2><h3 id="基于N元文法的分词（MM）"><a href="#基于N元文法的分词（MM）" class="headerlink" title="基于N元文法的分词（MM）"></a>基于N元文法的分词（MM）</h3><p>MM(马尔可夫模型/过程) ：有限历史假设，仅依 赖前n-1个词</p>
+<p>一种最简化的情况：一元文法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">P（S）=p(w1) ·p(w2) ·p(w3)….p(wn)</span><br><span class="line"> 等价于最大频率分词</span><br><span class="line"> 即把切分路径上每一个词的概率相乘得到该切</span><br><span class="line">分路径的概率</span><br><span class="line"> 把词概率的负对数理解成路径“代价”，输出</span><br><span class="line">结果就是整体代价最“小”分词序列</span><br></pre></td></tr></table></figure>
+<p>采用二元语法(bi-gram)：性能进一步提高</p>
+<p><img src="/2021/12/24/NLP/image-20211227195204331.png" alt="image-20211227195204331" style="zoom:50%;"></p>
+<p> 更大的n：对下一个词出现的约束性信息更多，更大的辨别力。  更小的n：出现的次数更多，更可靠的统计结果，更高的可靠性。</p>
+<p>等价类映射：降低语言模型参数空间</p>
+<p>数据平滑（smoothing）：保持模型的辨别能力</p>
+<h3 id="基于HMM的分词-词性标注一体化"><a href="#基于HMM的分词-词性标注一体化" class="headerlink" title="基于HMM的分词/词性标注一体化"></a>基于HMM的分词/词性标注一体化</h3><p>输入：待处理句子S </p>
+<p> 输出：S的 词序列 W = w1 ,w2…wn </p>
+<p>词性序列 T = t1 ,t2…tn </p>
+<p> 提示  W可以代表S  分词结果即观测序列  词性序列是状态序列</p>
+<p>公式推导</p>
+<p><img src="/2021/12/24/NLP/image-20211227200001707.png" alt="image-20211227200001707" style="zoom:50%;"></p>
+<p><img src="/2021/12/24/NLP/image-20211227200011651.png" alt="image-20211227200011651" style="zoom:50%;"></p>
+<p><img src="/2021/12/24/NLP/image-20211227200200077.png" alt="image-20211227200200077"></p>
+<h3 id="由字构词的汉语分词方法"><a href="#由字构词的汉语分词方法" class="headerlink" title="由字构词的汉语分词方法"></a>由字构词的汉语分词方法</h3><p>基本思路  分词过程：一个字的分类问题；  每个字在词语中属于一个确定位置</p>
+<p>字的的标注过程中，对所有的字根据预定义的特 征进行词位特征学习，获得一个概率模型</p>
+<p>由字构词的分词技术的优势</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> 简化了分词系统的设计  文本中的词表词和未登录词都是用统一的字 标注过程来实现的，分词过程成为字重组的 简单过程。  既可以不必专门强调词表词信息，也不用专 门设计特定的未登录词识别模块</span><br></pre></td></tr></table></figure>
+<h3 id="汉语分词方法的后处理方法"><a href="#汉语分词方法的后处理方法" class="headerlink" title="汉语分词方法的后处理方法"></a>汉语分词方法的后处理方法</h3><p>为什么不采用更精巧的模型？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">四元或更高阶...  不可行，需要大量的参数  不得不做一些平滑或差值  难度随模型复杂度而加剧</span><br></pre></td></tr></table></figure>
+<p>两个重要组成部分：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 允许的错误校正转换的详细说明</span><br><span class="line"> 学习算法</span><br></pre></td></tr></table></figure>
+<p>输入数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一个已经标注好的语料库，</span><br><span class="line">*一个词典</span><br></pre></td></tr></table></figure>
+<p>基于转换错误驱动的规则方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> 学习和标注在该方法种都是简单和直观的</span><br><span class="line"> 成功用于词性标注、句法分析、介词附着以及</span><br><span class="line">语义消歧</span><br><span class="line"> 经验上，没有出现过拟合现象</span><br><span class="line"> 可以被用来解决大部分后处理问题</span><br><span class="line"> 效率的提升优化，考验工程能力</span><br></pre></td></tr></table></figure>
+<p>标注可以采用 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> 隐马尔科夫模型（HMM）  最大熵（ME）  最大熵马尔科夫模型（MEMM）  条件随机场（CRF）等</span><br></pre></td></tr></table></figure>
+<h2 id="隐马尔科夫模型"><a href="#隐马尔科夫模型" class="headerlink" title="隐马尔科夫模型"></a>隐马尔科夫模型</h2><h3 id="马尔科夫-Markov-模型"><a href="#马尔科夫-Markov-模型" class="headerlink" title="马尔科夫(Markov)模型"></a>马尔科夫(Markov)模型</h3><p>马尔科夫模型是一种统计模型，广泛的应用在语音识别， 词性自动标注，音字转换，概率文法等各个自然语言处理 的应用领域。</p>
+<p>随机过程又称为随机函数，是随时间随机变化的过程。马 尔科夫模型描述了一类重要随机过程。</p>
+<p>系统在时间t处于状态𝑠𝑗的概率取决于其在时间1,2,…t-1的 状态，该概率为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">𝑃(𝑞𝑡 = 𝑠𝑗|𝑞𝑡−1 = 𝑠𝑖, 𝑞𝑡−2 = 𝑠𝑘, … )</span><br></pre></td></tr></table></figure>
+<p>离散的一阶马尔科夫链：系统在时间t的状态只与时间t-1 的状态有关。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">𝑃(𝑞𝑡 = 𝑠𝑗|𝑞𝑡−1 = 𝑠𝑖, 𝑞𝑡−2 = 𝑠𝑘, … ) = 𝑃(𝑞𝑡 = 𝑠𝑗|𝑞𝑡−1 = 𝑠𝑖)</span><br></pre></td></tr></table></figure>
+<p>状态转移概率𝑎𝑖𝑗必须满足以下条件：</p>
+<p><img src="/2021/12/24/NLP/image-20211227203707059.png" alt="image-20211227203707059" style="zoom:50%;"></p>
+<p>N个状态的一阶马尔科夫过程有𝑁2，可以表示成为一个状 态转移矩阵</p>
+<p>eg:状态𝑠1：名词 状态𝑠2：动词 状态𝑠3：形容词</p>
+<p>如果在该文字中某句子的第一个词为名词，那么该句子 中三类词出现顺序为O=“名动形名”的概率。</p>
+<p><img src="/2021/12/24/NLP/image-20211227203903492.png" alt="image-20211227203903492" style="zoom:50%;"></p>
+<p>马尔科夫(Markov)模型：有限状态机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">马尔科夫模型可视为随机的有限状态机。</span><br><span class="line">圆圈表示状态，状态之间的转移用带箭头的弧表示，弧上</span><br><span class="line">的数字为状态转移的概率。</span><br><span class="line">初始状态用标记为start的输入箭头表示。</span><br><span class="line">假设任何状态都可作为终止状态。</span><br><span class="line">对每个状态来说，发出弧上的概率和为1。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>eg:</p>
+<p><img src="/2021/12/24/NLP/image-20211227204121800.png" alt="image-20211227204121800" style="zoom:50%;"></p>
+<p>一般地，一个HMM记为一个五元组μ＝（S，K， A，B，π），其中，S为状态的集合，K为输出符 号的集合，π，A和B分别是初始状态的概率分布、 状态转移概率和符号发射概率。为了简单，有时也将其记为三元组μ＝（A，B，π）</p>
+<p>隐马尔可夫模型：三个基本问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.估值问题：给定一个观察序列 O = 𝑂1𝑂2 … 𝑂𝑇 和模型μ＝(A，</span><br><span class="line">B，π)，如何快速地计算出给定模型μ情况下，观察序列O的</span><br><span class="line">概率，即𝑃 𝑂 𝜇 ?</span><br><span class="line">2.序列问题：给定一个观察序列 O = 𝑂1𝑂2 … 𝑂𝑇 和模型μ＝(A，</span><br><span class="line">B，π),如何快速有效的选择在一定意义下“最优”的状态序</span><br><span class="line">列 𝑄 = 𝑞1𝑞2 … 𝑞𝑇 ，使得该状态序列“最好的解释”观察序列？</span><br><span class="line">3.参数估计问题：给定一个观察序列O = 𝑂1𝑂2 … 𝑂𝑇，如何根</span><br><span class="line">据最大似然估计来求模型的参数值？即如何调节模型μ＝(A，</span><br><span class="line">B，π)的参数，使得𝑃 𝑂 𝜇 最大？</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="隐马尔可夫模型：求解观察序列的概率"><a href="#隐马尔可夫模型：求解观察序列的概率" class="headerlink" title="隐马尔可夫模型：求解观察序列的概率"></a>隐马尔可夫模型：求解观察序列的概率</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给定观察序列O = 𝑂1𝑂2 … 𝑂𝑇和模型𝜇 =(𝐴, 𝐵, π)，快速的计算出给定模型𝜇情况下观察序列O的概率，即𝑃 （𝑂|𝜇） 。</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/12/24/NLP/image-20211227210645264.png" alt="image-20211227210645264" style="zoom:50%;"></p>
+<p>隐马尔可夫模型：前向算法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基本思想：定义前向变量𝛼𝑡(𝑖)，前向变量𝛼𝑡(𝑖)是在时间t，HMM输出了序列𝑂1𝑂2 … 𝑂𝑡 ，并且位于状态𝑠𝑖的概率。</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/12/24/NLP/image-20211227211103464.png" alt="image-20211227211103464" style="zoom:50%;"></p>
+<p>前向算法总的复杂度为O(𝑁2𝑇)</p>
+<p>隐马尔可夫模型：后向算法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">后向变量𝛽𝑡(𝑖)是在给定模型𝜇 = (𝐴, 𝐵, π)，并且在时间t状态为𝑠𝑖的条件下，HMM输出观察序列𝑂𝑡+1 … 𝑂𝑇的概率。</span><br></pre></td></tr></table></figure>
+<p>与计算前向变量一样，可以用动态规划的算法计算后向变量。</p>
+<p><img src="/2021/12/24/NLP/image-20211227211441031.png" alt="image-20211227211441031" style="zoom:50%;"></p>
+<p>时间复杂度：O(𝑁2𝑇)</p>
+<h4 id="序列问题"><a href="#序列问题" class="headerlink" title="序列问题"></a>序列问题</h4><p>隐马尔可夫模型：维特比算法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">维特比算法用于求解HMM中的第二个问题，给定一个观</span><br><span class="line">察序列O = 𝑂1𝑂2 … 𝑂𝑇和模型𝜇 = (𝐴, 𝐵, π)，如何快速有效</span><br><span class="line">的选择在一定意义下最优的状态序列𝑄 = 𝑞1𝑞2 … 𝑞𝑇，使得</span><br><span class="line">该状态序列“最好的解释”观察序列。</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/12/24/NLP/image-20211227211917788.png" alt="image-20211227211917788" style="zoom:50%;"></p>
+<p><img src="/2021/12/24/NLP/image-20211227211938609.png" alt="image-20211227211938609" style="zoom:50%;"></p>
+<p>存在问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">单独最优不一定整体最优</span><br></pre></td></tr></table></figure>
+<h4 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h4><p>最 大似然估计</p>
+<p>EM</p>
+<h2 id="句法分析"><a href="#句法分析" class="headerlink" title="句法分析"></a>句法分析</h2><h3 id="句法分析概述"><a href="#句法分析概述" class="headerlink" title="句法分析概述"></a>句法分析概述</h3><p>基本任务：确定句子的句法结构或句子中词汇之间的依存关系。</p>
+<p>定义：判断单词序列（一般为句子）判读其构成是否合乎 给定的语法(recognition)，如果是，则给出其（树）结构 (parsing)</p>
+<p>描述一种语言可以有三种途径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">穷举法：把语言中的所有句子都枚举出来。显然，这种方法只适合句子数目有限的语</span><br><span class="line">语法/文法描述：语言中的每个句子用严格定义的规则来构造，利用规则生成语言中合法的句子</span><br><span class="line">自动机法：通过对输入句子进行合法性检验，区别哪些是语言中的句子，哪些不是语言中的句子</span><br></pre></td></tr></table></figure>
+<p>形式语法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">四元组 𝐺 = &#123;𝑁, Σ, 𝑃, 𝑆&#125;</span><br><span class="line">𝑁是非终结符(non-terminal symbol)的有限集合(有时也称变量集或句法种类集)</span><br><span class="line">Σ是终结符号(terminal symbol)的有限集合，𝑁 ∩ Σ = ∅</span><br><span class="line">𝑃是一组重写规则的有限集合：𝑃 = 𝛼 → 𝛽 ，其中𝛼, 𝛽是由V中元素构成的串，但是𝛼中至少应含一个非终结符</span><br><span class="line">𝑆 ∈ 𝑁称为句子符或初始符</span><br></pre></td></tr></table></figure>
+<p>形式语法种类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">正则文法</span><br><span class="line">上下文无关文法</span><br><span class="line">上下文相关文法</span><br><span class="line">无约束文法</span><br></pre></td></tr></table></figure>
+<p>控制策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">自顶向下、自底向上</span><br><span class="line">移进-归约是自底向上语法分析的一种形式</span><br><span class="line"> 使用一个栈来保存文法符号，并用一个输入缓冲区来存放将要进行语</span><br><span class="line">法分析的其余符号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>搜索策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深搜广搜</span><br></pre></td></tr></table></figure>
+<p>扫描策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">自左至右，自右至左</span><br></pre></td></tr></table></figure>
+<p>移进-归约是自底向上语法分析的一种形式</p>
+<p>CFG缺陷</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> 对于一个中等长度的输入句子来说，要利用大覆盖度的语法规</span><br><span class="line">则分析出所有可能的句子结构是非常困难的，分析过程的复杂</span><br><span class="line">度往往使程序无法实现</span><br><span class="line"> 即使能分析出句子所有可能的结构，也难以在巨大的句法分析</span><br><span class="line">结果集中实现有效的消歧，并选择出最有可能的分析结果</span><br><span class="line"> 手工编写的规则一般带有一定的主观性，对于实际应用系统来</span><br><span class="line">说，往往难以覆盖大领域的所有复杂语言</span><br><span class="line"> 写规则本身是一件大工作量的复杂劳动，而且编写的规则对特</span><br><span class="line">定的领域有密切的相关性，不利于句法分析系统向其他领域移</span><br><span class="line">植</span><br></pre></td></tr></table></figure>
+<h3 id="概率上下文无关文法-PCFG"><a href="#概率上下文无关文法-PCFG" class="headerlink" title="概率上下文无关文法(PCFG)"></a>概率上下文无关文法(PCFG)</h3><p>概率上下文无关文法就是一个为规则增添了概率的简单CFG， 指明了不同重写规则的可能性大小</p>
+<p>在基于PCFG的句法分析模型中，假设满足以下三个条件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">上下文无关性</span><br><span class="line">祖先无关性</span><br><span class="line">位置不变性</span><br></pre></td></tr></table></figure>
+<p>剪枝策略：Beam search（集束搜索）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一种启发式图搜索算法，为了减少搜索占用的时间和空间，在每一步深度扩展的时候，</span><br><span class="line">减掉一些质量比较差的节点，保留质量较高的一些节点</span><br><span class="line">优点是减少空间消耗，提高时间效率</span><br><span class="line">缺点是有可能存在潜在的最佳方案被丢弃，beam search算法是不完全的</span><br></pre></td></tr></table></figure>
+<p>PCFG的优点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">可利用概率减少分析过程的搜索空间</span><br><span class="line">可以利用概率对概率较小的子树剪枝，加快分析效</span><br><span class="line">率</span><br><span class="line">可以定量地比较两个语法的性能</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>PCFG的缺陷</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">结构相关性</span><br><span class="line">词汇相关性</span><br></pre></td></tr></table></figure>
+<h2 id="词义消歧"><a href="#词义消歧" class="headerlink" title="词义消歧"></a>词义消歧</h2><p>word sense disambiguation     WSD</p>
+<p>义位：语义系统中能独立存在的基本语义单位</p>
+<p>WSD需要解决三个问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(1)如何判断一个词是不是多义词？ 如何表示一个多义词的不同意思？</span><br><span class="line">(2)对每个多义词，预先要有关于它的 各个不同义项的清晰的区分标准</span><br><span class="line">(3)对出现在具体语境中的每个多义词，为它确定一个合适的义项</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">基于机器词典的WSD</span><br><span class="line">基于义类词典的WSD</span><br><span class="line">基于语料库的WSD</span><br><span class="line">基于统计方法的WSD</span><br><span class="line">基于规则的WSD</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">总结：</span><br><span class="line">用词典资源进行词义排歧，是利用词典中对多义</span><br><span class="line">词的各个义项的描写，求多义词的释义跟其上下</span><br><span class="line">文环境词的释义之间的交集，判断词义的亲和程</span><br><span class="line">度，来确定词义；</span><br><span class="line">由于词典释义的概括性，这种方法应用于实际语</span><br><span class="line">料中多义词的排歧，效果不一定理想</span><br></pre></td></tr></table></figure>
+<p>基于义类词典的WSD方法</p>
+<p><img src="/2021/12/24/NLP/image-20211227233833336.png" alt="image-20211227233833336" style="zoom:50%;"></p>
+<p>互信息：I（X；Y）反映的是在知道了Y的值 以后X的不确定性的减少量。</p>
+<p>基于Bayes判别的WSD方法</p>
+<p><img src="/2021/12/24/NLP/image-20211227235729108.png" alt="image-20211227235729108" style="zoom:50%;"></p>
+<p>词义消歧——基于多分类器集成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">总结</span><br><span class="line">还有很多问题需要探讨</span><br><span class="line">❖如何选用更有效的分类器</span><br><span class="line">❖单分类器的结果怎样更高效地集成</span><br><span class="line">❖如何在单分类器中选取更有效的特征</span><br><span class="line"> 集成学习的研究对自然语言处理中的其他任务</span><br></pre></td></tr></table></figure>
+<h2 id="篇章"><a href="#篇章" class="headerlink" title="篇章"></a>篇章</h2><p>概念</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Anaphor:指代语</span><br><span class="line">Entity(referent):实体（指称对象）</span><br><span class="line">Reference:指称。用于指称实体的语言表示</span><br><span class="line">Antecedent:先行语。语篇中引入的一个相对明确的指称意义表述（如张三）；</span><br><span class="line">Coreference:共指（同指）。当两种表述均指称相同对象（实体）时，这两种表述具有共指关系</span><br></pre></td></tr></table></figure>
+<p>六类指称表示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> Indefinite NPs（不定名词）: 一辆汽车</span><br><span class="line"> Definite NPs （有定名词）: 那个人</span><br><span class="line"> Pronouns （人称代词）: 它，他</span><br><span class="line"> Demonstratives （指示代词）: 这，那</span><br><span class="line"> One-anaphora （one指代）: one (in English)</span><br><span class="line"> Zero anaphora （0型指代）: 省略</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>指代一般包括两种情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">– 回指(Anaphora)：强调指代语与另一个表述之间的关</span><br><span class="line">系。指代语的指称对象通常不明确，需要确定其与先行</span><br><span class="line">语之间的关系来解释指代语的语义</span><br><span class="line">• 张先生走过来，给大家看他的新作品</span><br><span class="line">– 共指(coreference)：强调一个表述与另一个表述是否</span><br><span class="line">指向相同的实体，可以独立于上下文存在</span><br><span class="line">• 第44任美国总统 与奥巴马</span><br></pre></td></tr></table></figure>
+<h3 id="衔接和连贯"><a href="#衔接和连贯" class="headerlink" title="衔接和连贯"></a>衔接和连贯</h3><p>以词汇表示的关联，通常称为“衔接(cohesion)，强调其构成成分</p>
+<p>通过句子意义表示的关联称为连贯Coherence，强调整体上表达某种意义</p>
+<h3 id="篇章表示和相似度计算"><a href="#篇章表示和相似度计算" class="headerlink" title="篇章表示和相似度计算"></a>篇章表示和相似度计算</h3><p>将文档表示为如下所示的向量： 𝑑𝑗 = (𝑤1,𝑗 , 𝑤2,𝑗 , 𝑤3,𝑗 , … , 𝑤𝑡,𝑗)  向量的每一维都对应于词表中的一个词。  如果某个词出现在了文档中，那它在向量中的值就非 零。  这个值有很多计算方法，我们使用词语在文档中出现 的次数表示。</p>
+<h2 id="机器翻译"><a href="#机器翻译" class="headerlink" title="机器翻译"></a>机器翻译</h2><h3 id="传统机器翻译方法"><a href="#传统机器翻译方法" class="headerlink" title="传统机器翻译方法"></a>传统机器翻译方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">直接翻译法</span><br></pre></td></tr></table></figure>
+<p>基于规则的翻译方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对源语言和目标语言均进行适当描述</span><br><span class="line">吧翻译机制与语法分开</span><br><span class="line">用规则描述语法的翻译方式</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">▪优点：</span><br><span class="line">▪ 可以较好地保持原文的结构，产生的译文结构与源文的结构关系密切</span><br><span class="line">▪ 尤其对于语言现象的或句法结构的明确的源语言语句具有较强的处理能力</span><br><span class="line">▪弱点：</span><br><span class="line">▪ 规则一般由人工编写，工作量大，主观性强，一致性难以保障</span><br><span class="line">▪ 不利于系统扩充，对非规范语言现 象缺乏相应的处理能力</span><br></pre></td></tr></table></figure>
+<p>基于实例的翻译方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">方法：输入语句-&gt;与事例相似度比较-&gt;翻译结果</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">▪ 方法优点</span><br><span class="line">▪ 不要求源语言句子必须符合语法规定;</span><br><span class="line">▪ 翻译机制一般不需要对源语言句子做深入分析;</span><br><span class="line">▪ 方法弱点</span><br><span class="line">▪ 两个不同的句子之间的相似性(包括结构相似性和语义相似性)往往难以把握</span><br><span class="line">▪ 在口语中，句子结构一般比较松散，成分冗余和成分省略都较严重;</span><br><span class="line">▪ 系统往往难以处理事例库中没有记录的陌生的语言现象；</span><br><span class="line">▪ 当事例库达到一定规模时，其事例检索的效率较低;</span><br></pre></td></tr></table></figure>
+<h3 id="基于统计的机器翻译模型"><a href="#基于统计的机器翻译模型" class="headerlink" title="基于统计的机器翻译模型"></a>基于统计的机器翻译模型</h3><p>噪声信道模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一种语言T 由于经过一个噪声信道而发生变形从而在信道的另一端呈现为另一种语言 S</span><br></pre></td></tr></table></figure>
+<p>翻译问题可定义为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">▪ 如何根据观察到的 S，恢复最为可能的T 问题。</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/12/24/NLP/image-20211228101907190.png" alt="image-20211228101907190" style="zoom:50%;"></p>
+<p>▪三个关键问题 ▪ (1)估计语言模型概率 p(T)； ▪ (2)估计翻译概率 p(S|T)； ▪ (3)快速有效地搜索T 使得 p(T)×p(S | T) 最大</p>
+<h4 id="基于词的统计机器翻译模型"><a href="#基于词的统计机器翻译模型" class="headerlink" title="基于词的统计机器翻译模型"></a>基于词的统计机器翻译模型</h4><p>IBM模型1：词汇翻译（词对齐）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">▪ 基于词的统计翻译模型</span><br><span class="line">▪ 引入了词对齐的问题</span><br><span class="line">▪ 通过EM算法学习词对齐</span><br><span class="line">▪ 缺陷</span><br><span class="line">▪ 无法刻画翻译过程中重排序、添词、舍词等情况；</span><br><span class="line">▪ 例如：</span><br><span class="line">▪ Seldom do I go to work by bus.</span><br><span class="line">▪ 我很少乘公共汽车上班</span><br></pre></td></tr></table></figure>
+<p>IBM模型2：增加绝对对齐模型</p>
+<p>IBM模型3：引入繁衍率模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">前述模型存在的问题</span><br><span class="line">▪ 在随机选择对位关系的情况下，与目标语言句子中的单词t对应的源语言句子中的单</span><br><span class="line">词数目是一个随机变量；</span><br></pre></td></tr></table></figure>
+<p>繁衍率</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">定义：与目标语言句子中的单词t对应的源语言句子中的单词数目的变量</span><br><span class="line">▪ 记做Фt，称该变量为单词t的繁衍能力或产出率(fertility)。一个具体的取值记做：Фt</span><br><span class="line">▪ 繁衍率刻画的是目标语言单词与源语言单词之间一对多的关系</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="基于短语的统计机器翻译模型"><a href="#基于短语的统计机器翻译模型" class="headerlink" title="基于短语的统计机器翻译模型"></a>基于短语的统计机器翻译模型</h4><p>基本思想</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">▪ 把训练语料库中所有对齐的短语及其翻译概率存储起来，作为一部带</span><br><span class="line">概率的短语词典</span><br><span class="line">▪ 这里所说的短语是任意连续的词串，不一定是一个独立的语言单位</span><br><span class="line">▪ 翻译的时候将输入的句子与短语词典进行匹配，选择最好的短语划分，</span><br><span class="line">将得到的短语译文重新排序，得到最优的译文.</span><br></pre></td></tr></table></figure>
+<h3 id="系统融合"><a href="#系统融合" class="headerlink" title="系统融合"></a>系统融合</h3><p>几个相似的系统执行同一个任务时，可能有多个输出结果，系统融合将这些结果进行融 合，抽取其有用信息，归纳得到任务的最终输出结果。</p>
+<p>目标：最终的输出比之前的输入结果都要好</p>
+<p>句子级系统融合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">两种技术</span><br><span class="line">最小贝叶斯风险解码；通用线性模型</span><br></pre></td></tr></table></figure>
+<p>句子级系统融合方法不会产生新的翻译句子，而是在已有的翻 译句子中挑选出最好的一个</p>
+<p>短语级系统融合 ▪ 利用多个翻译系统的输出结果，重新抽取短语翻译规则集合，并利用 新的短语翻译规则进行重新解码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">基本思想：首先合并参与融合的所有系统的短语表，从中抽取</span><br><span class="line">一个新的源语言到目标语言的短语表，然后使用新的短语表和</span><br><span class="line">语言模型去重新解码源语言句子。</span><br></pre></td></tr></table></figure>
+<p>词语级系统融合 ▪ 首先将多个翻译系统的译文输出进行词语对齐，构建一个混淆网络， 对混淆网络中的每个位置的候选词进行置信度估计， 最后进行混淆网 络解码</p>
+<p>小结</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">句子级系统融合</span><br><span class="line">▪ 未生成新的翻译假设，有效的保护原来翻译假设中短语的连续性和句子词序，但</span><br><span class="line">是也没有吸收借鉴其他翻译假设中词或者短语层次的知识。</span><br><span class="line">▪ 短语级系统融合</span><br><span class="line">▪ 借鉴其他翻译系统的短语表知识，利用传统的基于短语的翻译引擎来重新解码源</span><br><span class="line">语言的句子。有效的保持短语的连续性和译文的局部词序。但是不能很好的利用</span><br><span class="line">非连续短语和句法知识来克服译文的远距离调序问题</span><br><span class="line">▪ 词语级系统融合</span><br><span class="line">▪ 从词的粒度重组了输出译文，充分利用了各个翻译假设的词汇级别的知识，取长</span><br><span class="line">补短。但是在混淆网络解码时，并不能保证新生成的翻译句子的词序一致性和短</span><br><span class="line">语连续性</span><br></pre></td></tr></table></figure>
+<h2 id="应用：语言自动生成"><a href="#应用：语言自动生成" class="headerlink" title="应用：语言自动生成"></a>应用：语言自动生成</h2><h3 id="自然语言生成概述"><a href="#自然语言生成概述" class="headerlink" title="自然语言生成概述"></a>自然语言生成概述</h3><p>NLG生成模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1. 马尔可夫链：通过当前单词可以预测句子中的下一个单</span><br><span class="line">词。</span><br><span class="line">缺点：无法探测当前单词与句子中其他单词的关系以及句</span><br><span class="line">子的结构，使得预测结果不够准确。</span><br><span class="line">2. 循环神经网络(RNN)：通过前馈网络传递序列的每个项目</span><br><span class="line">信息，并将模型的输出作为序列中下一项的输入，每个项</span><br><span class="line">目存储前面步骤中的信息。</span><br><span class="line">优点：能够捕捉输入数据的序列特征</span><br><span class="line">缺点：第一，RNN短期记忆无法生成连贯的长句子；第二，</span><br><span class="line">因为 RNN 不能并行计算，无法适应主流趋势。</span><br><span class="line">3. 长短期记忆网络(LSTM)，解决梯度消失问题，但难以并行化</span><br><span class="line">4. Seq2Seq，能够解决大部分序列不等长的问题</span><br><span class="line">5. Attention模型</span><br><span class="line">6. Transformer模型，能够在不考虑单词位置的情况</span><br><span class="line">下，直接捕捉句子中所有单词之间的关系</span><br><span class="line">7. ELMO模型</span><br><span class="line">8. BERT模型</span><br></pre></td></tr></table></figure>
+<h3 id="数据到文本的生成"><a href="#数据到文本的生成" class="headerlink" title="数据到文本的生成"></a>数据到文本的生成</h3><p>以包含键值对的数据作为输入，旨在 自动生成流畅的、贴近事实的文本以描 述输入数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 信号分析模块(Siganl Analysis)</span><br><span class="line"> 数据阐释模块(Data Interpretation)</span><br><span class="line"> 文档规划模块(Document Planning)</span><br><span class="line"> 微规划与实现模块(Microplanning and Realisation)</span><br></pre></td></tr></table></figure>
+<p>应用领域：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> 天气预报领域的文本生成系统</span><br><span class="line"> 针对空气质量的文本生成系统</span><br><span class="line"> 针对财经数据的文本生成系统</span><br><span class="line"> 面向医疗诊断数据的文本生成系统</span><br><span class="line"> 基于体育数据生成文本摘要</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="文本到文本的生成"><a href="#文本到文本的生成" class="headerlink" title="文本到文本的生成"></a>文本到文本的生成</h3><p>对给定文本进行变换和处理从而获得新文本的技术</p>
+<p>应用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> 对联自动生成</span><br><span class="line"> 诗歌自动生成</span><br><span class="line"> 作文自动生成</span><br><span class="line"> 对话生成*---这个任务现阶段一般不作为NLG的研究分支来探讨</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="词和文档表示与相似度计算"><a href="#词和文档表示与相似度计算" class="headerlink" title="词和文档表示与相似度计算"></a>词和文档表示与相似度计算</h2><h3 id="词的表示"><a href="#词的表示" class="headerlink" title="词的表示"></a>词的表示</h3><p>独热表示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">每个词对应一个向量，向量的维度等于词典的大小，向量中只有一个元素值为1，其余的元素均为0 ，值为1的元素对应的下标为该词在词典中的位置</span><br></pre></td></tr></table></figure>
+<p>词频 -逆文档频率(TF -IDF)</p>
+<p>词嵌入方法的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">静态词向量</span><br><span class="line">词向量无法随语境变化</span><br><span class="line">不能处理一词多义</span><br><span class="line">多义词无法区分多个含义</span><br><span class="line">不能有效区分反义词</span><br><span class="line">反义词的上下文很相似</span><br></pre></td></tr></table></figure>
+<p>词向量</p>
+<p>skip-gram</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 将目标词和邻近的 </span><br><span class="line">语境词作为正面例子。</span><br><span class="line">2.随机抽取词库中的其他词 </span><br><span class="line">词库中的其他词，以获得负面样本。</span><br><span class="line">3. 使用逻辑回归来训练一个分类器，以区分这两种情况。</span><br><span class="line">区分这两种情况。</span><br><span class="line">4. 使用权重作为嵌入。</span><br></pre></td></tr></table></figure>
+<h3 id="文档表示"><a href="#文档表示" class="headerlink" title="文档表示"></a>文档表示</h3><p><img src="/2021/12/24/NLP/image-20211228162546651.png" alt="image-20211228162546651" style="zoom:50%;"></p>
+<h3 id="文本相似度计算"><a href="#文本相似度计算" class="headerlink" title="文本相似度计算"></a>文本相似度计算</h3><p>编辑距离，动态规划</p>
+<h2 id="信息抽取"><a href="#信息抽取" class="headerlink" title="信息抽取"></a>信息抽取</h2><h3 id="信息抽取的定义、任务及发展"><a href="#信息抽取的定义、任务及发展" class="headerlink" title="信息抽取的定义、任务及发展"></a>信息抽取的定义、任务及发展</h3><p>信息抽取中的主要任务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">命名实体识别：</span><br><span class="line">识别和分类文本中出现的“实体提及”</span><br><span class="line">实体链接：</span><br><span class="line">将“实体提及”链接到知识库中对应的实体</span><br><span class="line">关系抽取：</span><br><span class="line">找到句子中有关系的两个实体，并识别出他们之间的关系类型</span><br><span class="line">事件抽取：</span><br><span class="line">事件抽取就要是找到一个事件对应的元素。</span><br></pre></td></tr></table></figure>
+<h3 id="命名实体识别"><a href="#命名实体识别" class="headerlink" title="命名实体识别"></a>命名实体识别</h3><p>挑战</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">种类繁多，命名方式灵活多样</span><br><span class="line">同一实体对应很多变体</span><br><span class="line">相同的词或者短语可以表示不同类别的实</span><br><span class="line">体</span><br><span class="line">存在嵌套</span><br><span class="line">细粒度</span><br><span class="line">语言不断进化，新的挑战不断出现</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>主要方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基于规则的方法 基于词典的方法 机器学习方法 ◼最大熵 ◼条件随机场 ◼深度学</span><br></pre></td></tr></table></figure>
+<p>命名实体识别的评价</p>
+<p><img src="/2021/12/24/NLP/image-20211228163639194.png" alt="image-20211228163639194" style="zoom:50%;"></p>
+<p><img src="/2021/12/24/NLP/image-20211228163649954.png" alt="image-20211228163649954" style="zoom:50%;"></p>
+<h3 id="实体链接"><a href="#实体链接" class="headerlink" title="实体链接"></a>实体链接</h3><p>将“实体提及”链接到知识库中对应的实体</p>
+<h3 id="关系抽取"><a href="#关系抽取" class="headerlink" title="关系抽取"></a>关系抽取</h3><p>自动识别由一对实体和联系这对实体的关系构成的 相关三元组</p>
+<p>预定义关系抽取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">任务</span><br><span class="line">给定实体关系类别，给定语料，抽取目标关系对</span><br><span class="line">评测语料（MUC, ACE, KBP, SemEval）</span><br><span class="line">专家标注语料，语料质量高</span><br><span class="line">抽取的目标类别已经定义好</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>基于神经网络的关系抽取方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主要问题：如何设计合理的网络结构，从而捕捉更多的信息，进而更准确的完成关系的抽取</span><br><span class="line">网络结构：不同的网络结构捕捉文本中不同的信息</span><br></pre></td></tr></table></figure>
+<p>开放域关系抽取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">实体类别和关系类别不固定、数量大</span><br><span class="line">难点问题</span><br><span class="line"> 如何获取训练语料</span><br><span class="line"> 如何获取实体关系类别</span><br><span class="line"> 如何针对不同类型目标文本抽取关系</span><br><span class="line">需要研究新的抽取方法</span><br><span class="line"> 基于句法的方法</span><br><span class="line"> 基于知识监督的方法</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="深度学习简介"><a href="#深度学习简介" class="headerlink" title="深度学习简介"></a>深度学习简介</h2><p>常用的深度学习模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">激活函数</span><br><span class="line">深度神经网络（Deep Neural Network, DNN）</span><br><span class="line">卷积神经网络（Convolutional Neural Network,CNN)</span><br><span class="line">循环神经网络 (Recurrent Neural Network, RNN) </span><br><span class="line">注意力机制（Attention Mechanisms）</span><br></pre></td></tr></table></figure>
+<p>pooling</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">目的：</span><br><span class="line">扩大视野：就如同先从近处看一张图片，然后离远一些再看同一张图片，有些细节就会被忽略。</span><br><span class="line">降维：在保留图片局部特征的前提下，使得图片更小，更易于计算。</span><br><span class="line">平移不变性，轻微扰动不会影响输出。</span><br><span class="line">维持同尺寸，便于后端处理。</span><br></pre></td></tr></table></figure>
+<p>深度学习模型的应用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DBN的应用</span><br><span class="line">基于DBN的问答对挖掘</span><br><span class="line">CNN的应用</span><br><span class="line">关系分类</span><br><span class="line">句子分类</span><br><span class="line">LSTM-RNN的应用</span><br><span class="line">命名实体识别</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">深度学习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-24 17:07:48" itemprop="dateCreated datePublished" datetime="2021-12-24T17:07:48+08:00">2021-12-24</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">计算机组织原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-13 16:49:24" itemprop="dateCreated datePublished" datetime="2021-12-13T16:49:24+08:00">2021-12-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/09/ASP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/09/ASP/" class="post-title-link" itemprop="url">ASP</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-09 21:45:59" itemprop="dateCreated datePublished" datetime="2021-12-09T21:45:59+08:00">2021-12-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-11 22:43:48" itemprop="dateModified" datetime="2021-12-11T22:43:48+08:00">2021-12-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="简单登录程序"><a href="#简单登录程序" class="headerlink" title="简单登录程序"></a>简单登录程序</h3><p>跳转：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Response.Redirect(&quot;URL&quot;)</span><br></pre></td></tr></table></figure>
+<p>返回弹窗</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Response.Write(&quot;&lt;script&gt;alter(&#x27;用户名或密码错误&#x27;);&lt;/script&gt;&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="文本框的使用"><a href="#文本框的使用" class="headerlink" title="文本框的使用"></a>文本框的使用</h3><p>text默认为单行模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;单行模式&lt;/p&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">        &lt;asp:TextBox ID=&quot;TextBox1&quot; runat=&quot;server&quot;&gt;&lt;/asp:TextBox&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">    &lt;p&gt;密码模式&lt;/p&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">        &lt;asp:TextBox ID=&quot;TextBox2&quot; runat=&quot;server&quot; TextMode=&quot;Password&quot;&gt;&lt;/asp:TextBox&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">    &lt;p&gt;多行模式&lt;/p&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">        &lt;asp:TextBox ID=&quot;TextBox3&quot; runat=&quot;server&quot; TextMode=&quot;MultiLine&quot;&gt;&lt;/asp:TextBox&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/12/09/ASP/image-20211209221532497.png" alt="image-20211209221532497" style="zoom:50%;"></p>
+<p>属性栏修改。</p>
+<h3 id="判断单选框"><a href="#判断单选框" class="headerlink" title="判断单选框"></a>判断单选框</h3><p>单选框将GroupName设置为一样即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;label&gt;性别&lt;/label&gt;</span><br><span class="line">        &lt;asp:RadioButton ID=&quot;RadioButton1&quot; runat=&quot;server&quot; Text=&quot;男&quot; GroupName=&quot;sex&quot;/&gt;</span><br><span class="line">        &amp;nbsp;&amp;nbsp</span><br><span class="line">        &lt;asp:RadioButton ID=&quot;RadioButton2&quot; runat=&quot;server&quot; Text=&quot;女&quot; GroupName=&quot;sex&quot;/&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">        &lt;asp:Button ID=&quot;Button1&quot; runat=&quot;server&quot; Text=&quot;提交&quot; OnClick=&quot;Button1_Click2&quot;  /&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">protected void Button1_Click2(object sender, EventArgs e)</span><br><span class="line">   &#123;</span><br><span class="line">       if (RadioButton1.Checked == true)</span><br><span class="line">       &#123;</span><br><span class="line">           Response.Write(&quot;&lt;script&gt;alert(&#x27;性别为男&#x27;);&lt;/script&gt;&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">       if (RadioButton2.Checked == true)</span><br><span class="line">       &#123;</span><br><span class="line">           Response.Write(&quot;&lt;script&gt;alert(&#x27;性别为女&#x27;);&lt;/script&gt;&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="判断多选框"><a href="#判断多选框" class="headerlink" title="判断多选框"></a>判断多选框</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“+string+”</span><br></pre></td></tr></table></figure>
+<h3 id="下拉框"><a href="#下拉框" class="headerlink" title="下拉框"></a>下拉框</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;asp:DropDownList ID=&quot;DropDownList1&quot; runat=&quot;server&quot;&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;原平&lt;/asp:ListItem&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;忻州&lt;/asp:ListItem&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;五台&lt;/asp:ListItem&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;定襄&lt;/asp:ListItem&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;五寨&lt;/asp:ListItem&gt;</span><br><span class="line">       &lt;/asp:DropDownList&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DropDownList1.SelectedItem.Value</span><br><span class="line">DropDownList1.SelectedValue</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="呈现信息"><a href="#呈现信息" class="headerlink" title="呈现信息"></a>呈现信息</h3><p>构造一个用于盛放HTML代码的变量，用Response.Write(HTML),可先用Response.Clear()清理当前页面</p>
+<h3 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h3><p>Convert.ToDouble()</p>
+<h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">catch(Exception es)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="显示数据"><a href="#显示数据" class="headerlink" title="显示数据"></a>显示数据</h3><p><img src="/2021/12/09/ASP/image-20211210120304445.png" alt="image-20211210120304445"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inf.InnerHtml=HTML;</span><br></pre></td></tr></table></figure>
+<h3 id="读取全部数据"><a href="#读取全部数据" class="headerlink" title="读取全部数据"></a>读取全部数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foreach</span><br></pre></td></tr></table></figure>
+<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><p><img src="/2021/12/09/ASP/image-20211210135917242.png" alt="image-20211210135917242" style="zoom:50%;"></p>
+<p><img src="/2021/12/09/ASP/image-20211210135930367.png" alt="image-20211210135930367" style="zoom:50%;"></p>
+<h3 id="初始"><a href="#初始" class="headerlink" title="初始"></a>初始</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;/system.web&gt;</span><br><span class="line">	&lt;system.webServer&gt;</span><br><span class="line">		&lt;defaultDocument&gt;</span><br><span class="line">			&lt;files&gt;</span><br><span class="line">				&lt;clear/&gt;</span><br><span class="line">				&lt;add value=&quot;index.aspk&quot;/&gt;</span><br><span class="line">			&lt;/files&gt;</span><br><span class="line">		&lt;/defaultDocument&gt;</span><br><span class="line">	&lt;/system.webServer&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="显示表"><a href="#显示表" class="headerlink" title="显示表"></a>显示表</h3><p><img src="/2021/12/09/ASP/image-20211210175458347.png" alt="image-20211210175458347"></p>
+<h3 id="拆包"><a href="#拆包" class="headerlink" title="拆包"></a>拆包</h3><p><img src="/2021/12/09/ASP/image-20211210184423626.png" alt="image-20211210184423626"></p>
+<p><img src="/2021/12/09/ASP/image-20211210184758134.png" alt="image-20211210184758134"></p>
+<p><img src="/2021/12/09/ASP/image-20211210185030345.png" alt="image-20211210185030345"></p>
+<p><img src="/2021/12/09/ASP/image-20211210185043844.png" alt="image-20211210185043844"></p>
+<p><img src="/2021/12/09/ASP/image-20211210190952668.png" alt="image-20211210190952668"></p>
+<p><img src="/2021/12/09/ASP/image-20211210191832719.png" alt="image-20211210191832719"></p>
+<p><img src="/2021/12/09/ASP/image-20211210191935390.png" alt="image-20211210191935390"></p>
+<p><img src="/2021/12/09/ASP/image-20211211204121826.png" alt="image-20211211204121826"></p>
+<p><img src="/2021/12/09/ASP/image-20211211204221557.png" alt="image-20211211204221557"></p>
+<p><img src="/2021/12/09/ASP/image-20211211204301439.png" alt="image-20211211204301439"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/07/%E5%AD%A6%E6%A0%A1%E6%95%99%E5%AE%A4%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/07/%E5%AD%A6%E6%A0%A1%E6%95%99%E5%AE%A4%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">学校教室管理信息系统</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-07 15:23:19" itemprop="dateCreated datePublished" datetime="2021-12-07T15:23:19+08:00">2021-12-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-24 20:48:41" itemprop="dateModified" datetime="2022-04-24T20:48:41+08:00">2022-04-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="数据库部分"><a href="#数据库部分" class="headerlink" title="数据库部分"></a>数据库部分</h2><h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--创建数据库School Classroom Management Information System-SCMIS</span></span><br><span class="line"><span class="keyword">create</span> database SCMIS</span><br><span class="line"><span class="keyword">on</span> <span class="keyword">primary</span></span><br><span class="line">(</span><br><span class="line">name<span class="operator">=</span><span class="string">&#x27;f1&#x27;</span>,</span><br><span class="line">filename<span class="operator">=</span><span class="string">&#x27;F:\sqlserver\sqlwj\scmis\f1.mdf&#x27;</span>,</span><br><span class="line">size<span class="operator">=</span><span class="number">3</span>mb,</span><br><span class="line">maxsize<span class="operator">=</span>unlimited,</span><br><span class="line">filegrowth<span class="operator">=</span><span class="number">3</span><span class="operator">%</span></span><br><span class="line">),</span><br><span class="line">(</span><br><span class="line">name<span class="operator">=</span><span class="string">&#x27;f2&#x27;</span>,</span><br><span class="line">filename<span class="operator">=</span><span class="string">&#x27;F:\sqlserver\sqlwj\scmis\f2.ndf&#x27;</span>,</span><br><span class="line">size<span class="operator">=</span><span class="number">10</span>mb,</span><br><span class="line">maxsize<span class="operator">=</span><span class="number">500</span>mb,</span><br><span class="line">filegrowth<span class="operator">=</span><span class="number">6</span>mb</span><br><span class="line">)</span><br><span class="line">log <span class="keyword">on</span></span><br><span class="line">(</span><br><span class="line">name<span class="operator">=</span><span class="string">&#x27;f3&#x27;</span>,</span><br><span class="line">filename<span class="operator">=</span><span class="string">&#x27;F:\sqlserver\sqlwj\scmis\f3.ldf&#x27;</span>,</span><br><span class="line">size<span class="operator">=</span><span class="number">1</span>mb,</span><br><span class="line">maxsize<span class="operator">=</span>unlimited,</span><br><span class="line">filegrowth<span class="operator">=</span><span class="number">2</span><span class="operator">%</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>创建教师信息表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--创建教师信息表</span><br><span class="line">create table 教师信息</span><br><span class="line">(</span><br><span class="line">教师编号 varchar(15) not null,</span><br><span class="line">教师姓名 varchar(15) not null,</span><br><span class="line">性别 varchar(5) not null,</span><br><span class="line">所属院系 varchar(10) not null,</span><br><span class="line">职称 varchar(15) not null,</span><br><span class="line">身份证号 varchar(18) not null</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>创建学生信息表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">--创建学生信息表</span><br><span class="line">create table 学生信息</span><br><span class="line">(</span><br><span class="line">学号 varchar(9) not null,</span><br><span class="line">院系号 varchar(5) not null,</span><br><span class="line">身份证号 varchar(18) not null</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>创建教室信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">--创建教室信息表</span><br><span class="line">create table 教室信息</span><br><span class="line">(</span><br><span class="line">教室编号 varchar(5) not null,</span><br><span class="line">教学楼编号 varchar(2) not null,</span><br><span class="line">楼层号 varchar(2)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>创建教学楼信息表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">--创建教学楼信息表</span><br><span class="line">create table 教学楼信息</span><br><span class="line">(</span><br><span class="line">教学楼名称 varchar(10) not null,</span><br><span class="line">教学楼编号 varchar(5) not null</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>有个信息不匹配，进行修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table 教室信息</span><br><span class="line">alter column 教学楼编号 varchar(5) not null</span><br></pre></td></tr></table></figure>
+<p>创建教室使用信息表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--创建教室使用信息表</span><br><span class="line">create table 教室使用信息</span><br><span class="line">(</span><br><span class="line">教学楼编号 varchar(5) not null,</span><br><span class="line">教室编号 varchar(5) not null,</span><br><span class="line">时间 varchar(10) not null,</span><br><span class="line">状态 varchar(10) not null</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>创建课程信息表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">--创建课程信息表</span><br><span class="line">create table 课程信息</span><br><span class="line">(</span><br><span class="line">课程名称 varchar(15) not null,</span><br><span class="line">课程编号 varchar(10) not null,</span><br><span class="line">教师编号 varchar(15) not null,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>创建课程时间表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--创建课程时间表</span><br><span class="line">create table 课程时间</span><br><span class="line">(</span><br><span class="line">课程编号 varchar(10) not null,</span><br><span class="line">教师编号 varchar(15) not null,</span><br><span class="line">教师名称 varchar(10) not null,</span><br><span class="line">上课时间 varchar(10) not null</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">alter table 学生信息 add 密码 varchar(15)</span><br><span class="line"></span><br><span class="line">alter table 课程时间 add 上课教室 varchar(5)</span><br><span class="line"></span><br><span class="line">alter table 教室使用信息 add 开设课程 varchar(15) default &#x27;无&#x27;</span><br><span class="line"></span><br><span class="line">alter table 学生信息 add 姓名 varchar(15)</span><br><span class="line"></span><br><span class="line">alter table 教师信息</span><br><span class="line">alter column 所属院系 varchar(15) </span><br><span class="line"></span><br><span class="line">alter table 学生信息</span><br><span class="line">alter column 院系号 varchar(15) </span><br><span class="line"></span><br><span class="line">alter table 教室使用信息 add 课程编号 varchar(10) </span><br></pre></td></tr></table></figure>
+<h3 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--将教师信息表中教师编号设置为主键约束，身份证号设为唯一约束</span><br><span class="line">alter table 教师信息 </span><br><span class="line">add constraint PK_教师编号 primary key (教师编号)</span><br><span class="line">alter table 教师信息</span><br><span class="line">add constraint UQ_身份证号 unique(身份证号)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--将学生信息表中学号设置为主键约束，身份证号设为唯一约束</span><br><span class="line">alter table 学生信息 </span><br><span class="line">add constraint PK_学号 primary key (学号)</span><br><span class="line">alter table 学生信息</span><br><span class="line">add constraint UQ_身份证号学生 unique(身份证号)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--将教室信息中教室编号设置为主键</span><br><span class="line">alter table 教室信息</span><br><span class="line">add constraint PK_教室编号 primary key(教室编号)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--将教学楼信息中教学楼编号设置为主键</span><br><span class="line">alter table 教学楼信息</span><br><span class="line">add constraint PK_教学楼编号 primary key(教学楼编号)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--将教学楼信息中的教学楼编号与教室信息中的教学楼编号添加外键</span><br><span class="line">alter table 教室信息</span><br><span class="line">add constraint FK_教学楼编号 foreign key(教学楼编号)references 教学楼信息(教学楼编号)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">--将教室使用信息表中教学楼编号与教学楼信息表中的教学楼编号添加外键</span><br><span class="line">alter table 教室使用信息</span><br><span class="line">add constraint FK_教学楼编号教室使用信息 foreign key (教学楼编号)references 教学楼信息(教学楼编号)</span><br><span class="line"></span><br><span class="line">--将教室使用信息表中教室编号与教室信息表中的教室编号添加外键</span><br><span class="line">alter table 教室使用信息</span><br><span class="line">add constraint FK_教室编号教室使用信息 foreign key (教室编号)references 教室信息(教室编号)</span><br><span class="line"></span><br><span class="line">--将教室使用信息表中教师状态做约束</span><br><span class="line">alter table 教室使用信息</span><br><span class="line">add constraint CK_状态 check(状态=&#x27;有课&#x27; or 状态=&#x27;讲座&#x27; or 状态=&#x27;活动&#x27; or 状态=&#x27;空闲&#x27; or 状态=&#x27;其他&#x27;)//删除掉该约束</span><br><span class="line"></span><br><span class="line">--将教室使用信息表中教室状态添加默认约束空闲</span><br><span class="line">alter table 教室使用信息</span><br><span class="line">add constraint DF_状态 default &#x27;空闲&#x27; for 状态</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">--对课程信息表中课程编号添加主键约束</span><br><span class="line">alter table 课程信息</span><br><span class="line">　add constraint PK_课程编号 primary key (课程编号)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--对课程信息表中教师编号添加外键约束</span><br><span class="line">alter table 课程信息</span><br><span class="line">add constraint FK_教师编号课程信息 foreign key(教师编号)references 教师信息(教师编号)</span><br><span class="line"></span><br><span class="line">--对课程时间表中教师编号添加外键约束</span><br><span class="line">alter table 课程时间</span><br><span class="line">add constraint FK_教师编号课程时间 foreign key(教师编号)references 教师信息(教师编号)</span><br><span class="line"></span><br><span class="line">--对课程时间表中课程编号添加外键约束</span><br><span class="line">alter table 课程时间</span><br><span class="line">add constraint FK_课程编号课程时间 foreign key(课程编号)references 课程信息(课程编号)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">--对教师信息中的性别添加约束</span><br><span class="line">　　alter table 教师信息</span><br><span class="line">　　add constraint CK_性别教师 check (性别=&#x27;男&#x27; or 性别=&#x27;女&#x27;)</span><br><span class="line"></span><br><span class="line">--对教室使用信息的时间进行约束</span><br><span class="line">  alter table 教室使用信息</span><br><span class="line">  add constraint CK_时间 check (时间=&#x27;周一一二&#x27; or 时间=&#x27;周一三四&#x27; or 时间=&#x27;周一五六&#x27; or 时间=&#x27;周一七八&#x27; or </span><br><span class="line">  时间=&#x27;周二一二&#x27; or 时间=&#x27;周二三四&#x27; or 时间=&#x27;周二五六&#x27; or 时间=&#x27;周二七八&#x27; or </span><br><span class="line">  时间=&#x27;周三一二&#x27; or 时间=&#x27;周三三四&#x27; or 时间=&#x27;周三五六&#x27; or 时间=&#x27;周三七八&#x27; or </span><br><span class="line">  时间=&#x27;周四一二&#x27; or 时间=&#x27;周四三四&#x27; or 时间=&#x27;周四五六&#x27; or 时间=&#x27;周四七八&#x27; or </span><br><span class="line">  时间=&#x27;周五一二&#x27; or 时间=&#x27;周五三四&#x27; or 时间=&#x27;周五五六&#x27; or 时间=&#x27;周五七八&#x27; or </span><br><span class="line">  时间=&#x27;周六一二&#x27; or 时间=&#x27;周六三四&#x27; or 时间=&#x27;周六五六&#x27; or 时间=&#x27;周六七八&#x27; or </span><br><span class="line">  时间=&#x27;周日一二&#x27; or 时间=&#x27;周日三四&#x27; or 时间=&#x27;周日五六&#x27; or 时间=&#x27;周日七八&#x27; </span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<p>修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">alter table 课程时间</span><br><span class="line">add constraint FK_教室 foreign key(上课教室) references 教室信息(教室编号)</span><br><span class="line"></span><br><span class="line">alter table 教室使用信息</span><br><span class="line">alter column 状态 varchar(15) not null</span><br><span class="line"></span><br><span class="line">alter table 学生信息</span><br><span class="line">add constraint UQ_ID unique (身份证号)</span><br></pre></td></tr></table></figure>
+<h3 id="插入的信息"><a href="#插入的信息" class="headerlink" title="插入的信息"></a>插入的信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">insert into 教师信息</span><br><span class="line"> values(&#x27;001&#x27;,&#x27;张三&#x27;,&#x27;男&#x27;,&#x27;计算机&#x27;,&#x27;教授&#x27;,&#x27;123456789&#x27;)</span><br><span class="line"> insert into 教师信息</span><br><span class="line"> values(&#x27;002&#x27;,&#x27;李四&#x27;,&#x27;女&#x27;,&#x27;地理与海洋&#x27;,&#x27;教授&#x27;,&#x27;123123123&#x27;)</span><br><span class="line"> insert into 教师信息</span><br><span class="line">values(&#x27;003&#x27;,&#x27;王五&#x27;,&#x27;男&#x27;,&#x27;计算机&#x27;,&#x27;教授&#x27;,&#x27;456456456&#x27;)</span><br><span class="line"></span><br><span class="line"> select * from 教师信息</span><br><span class="line"></span><br><span class="line">insert into 教学楼信息</span><br><span class="line">values(&#x27;仙一&#x27;,&#x27;001&#x27;)</span><br><span class="line"></span><br><span class="line">insert into 教学楼信息</span><br><span class="line">values(&#x27;仙二&#x27;,&#x27;002&#x27;)</span><br><span class="line">select * from 教学楼信息</span><br><span class="line"></span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1101&#x27;,&#x27;001&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1102&#x27;,&#x27;001&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1103&#x27;,&#x27;001&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1104&#x27;,&#x27;001&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1201&#x27;,&#x27;001&#x27;,&#x27;2&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1202&#x27;,&#x27;001&#x27;,&#x27;2&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1203&#x27;,&#x27;001&#x27;,&#x27;2&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;1204&#x27;,&#x27;001&#x27;,&#x27;2&#x27;)</span><br><span class="line"></span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2101&#x27;,&#x27;002&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2102&#x27;,&#x27;002&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2103&#x27;,&#x27;002&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2104&#x27;,&#x27;002&#x27;,&#x27;1&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2201&#x27;,&#x27;002&#x27;,&#x27;2&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2202&#x27;,&#x27;002&#x27;,&#x27;2&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2203&#x27;,&#x27;002&#x27;,&#x27;2&#x27;)</span><br><span class="line">insert into 教室信息</span><br><span class="line">values(&#x27;2204&#x27;,&#x27;002&#x27;,&#x27;2&#x27;)</span><br><span class="line">select * from 教室信息</span><br></pre></td></tr></table></figure>
+<p>插入课程信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">exec information_entry &#x27;数据库&#x27;,&#x27;001&#x27;,&#x27;周一三四&#x27;,&#x27;张三&#x27;,&#x27;001&#x27;,&#x27;001&#x27;,&#x27;1102&#x27;</span><br><span class="line">exec information_entry &#x27;数据库&#x27;,&#x27;001&#x27;,&#x27;周二三四&#x27;,&#x27;张三&#x27;,&#x27;001&#x27;,&#x27;001&#x27;,&#x27;1102&#x27;</span><br><span class="line">exec information_entry &#x27;地理综合认知&#x27;,&#x27;002&#x27;,&#x27;周三三四&#x27;,&#x27;李四&#x27;,&#x27;002&#x27;,&#x27;001&#x27;,&#x27;1202&#x27;</span><br><span class="line">exec information_entry &#x27;地理综合认知&#x27;,&#x27;002&#x27;,&#x27;周四三四&#x27;,&#x27;李四&#x27;,&#x27;002&#x27;,&#x27;001&#x27;,&#x27;1202&#x27;</span><br><span class="line">exec information_entry &#x27;机器学习&#x27;,&#x27;003&#x27;,&#x27;周一五六&#x27;,&#x27;张三&#x27;,&#x27;001&#x27;,&#x27;002&#x27;,&#x27;2102&#x27;</span><br><span class="line">exec information_entry &#x27;机器学习&#x27;,&#x27;003&#x27;,&#x27;周二五六&#x27;,&#x27;张三&#x27;,&#x27;001&#x27;,&#x27;002&#x27;,&#x27;2102&#x27;</span><br><span class="line">exec information_entry &#x27;机器学习&#x27;,&#x27;004&#x27;,&#x27;周四七八&#x27;,&#x27;王五&#x27;,&#x27;003&#x27;,&#x27;002&#x27;,&#x27;2202&#x27;</span><br><span class="line">exec information_entry &#x27;机器学习&#x27;,&#x27;004&#x27;,&#x27;周五七八&#x27;,&#x27;王五&#x27;,&#x27;003&#x27;,&#x27;002&#x27;,&#x27;2202&#x27;</span><br></pre></td></tr></table></figure>
+<h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h3><p>插入课程信息存储</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">--插入课程信息</span><br><span class="line"></span><br><span class="line">go</span><br><span class="line">create procedure information_entry</span><br><span class="line"> @coursename varchar(15),--输入参数，课程名称</span><br><span class="line"> @coursenumber varchar(10),--输入参数，课程编号</span><br><span class="line"> @coursetime varchar(10),--输入参数，课程时间</span><br><span class="line"> @teachername varchar(10),--输入参数，教师名称</span><br><span class="line"> @teachernumber varchar(15),--输入参数，教师编号</span><br><span class="line"> @buildingnumber varchar(5),--输入参数，教学楼编号</span><br><span class="line"> @roomnumber varchar(5)--输入参数教室编号</span><br><span class="line">AS</span><br><span class="line"> insert into 课程信息</span><br><span class="line"> values(@coursename,@coursenumber,@teachernumber)</span><br><span class="line"> insert into 课程时间</span><br><span class="line"> values(@coursenumber,@teachernumber,@teachername,@coursetime)</span><br><span class="line"> insert into 教室使用信息</span><br><span class="line"> values(@buildingnumber,@roomnumber,@coursetime,&#x27;有课&#x27;)</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+<p>修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">create procedure information_entry</span><br><span class="line"> @coursename varchar(15),--输入参数，课程名称</span><br><span class="line"> @coursenumber varchar(10),--输入参数，课程编号</span><br><span class="line"> @coursetime varchar(10),--输入参数，课程时间</span><br><span class="line"> @teachername varchar(10),--输入参数，教师名称</span><br><span class="line"> @teachernumber varchar(15),--输入参数，教师编号</span><br><span class="line"> @buildingnumber varchar(5),--输入参数，教学楼编号</span><br><span class="line"> @roomnumber varchar(5)--输入参数教室编号</span><br><span class="line">AS</span><br><span class="line"> insert into 课程信息</span><br><span class="line"> values(@coursename,@coursenumber,@teachernumber)</span><br><span class="line"> insert into 课程时间</span><br><span class="line"> values(@coursenumber,@teachernumber,@teachername,@coursetime,@roomnumber)</span><br><span class="line"> insert into 教室使用信息</span><br><span class="line"> values(@buildingnumber,@roomnumber,@coursetime,&#x27;有课&#x27;,@coursename,@coursenumber)</span><br><span class="line">go</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>查询指定教室使用情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">--查询指定教室使用情况</span><br><span class="line">create procedure classroom_query</span><br><span class="line"> @room varchar(5),</span><br><span class="line"> @time varchar(10),</span><br><span class="line"> @state varchar(10)=&#x27;空闲&#x27; output</span><br><span class="line"> AS</span><br><span class="line"> declare @state1 varchar(10)</span><br><span class="line"> select @state=状态</span><br><span class="line"> from 教室使用信息</span><br><span class="line"> where 教室编号=@room and 时间=@time</span><br><span class="line"> if @state IS NULL</span><br><span class="line">   set  @state=&#x27;空闲&#x27;</span><br><span class="line"> go</span><br><span class="line"></span><br><span class="line">修改</span><br><span class="line">create procedure classroom_query</span><br><span class="line"> @room varchar(5),</span><br><span class="line"> @time varchar(10),</span><br><span class="line"> @state varchar(10)=&#x27;空闲&#x27; output</span><br><span class="line"> AS</span><br><span class="line"></span><br><span class="line"> select @state=状态</span><br><span class="line"> from 教室使用信息</span><br><span class="line"> where 教室编号=@room and 时间=@time</span><br><span class="line"> if @state IS NULL</span><br><span class="line">   set  @state=&#x27;空闲&#x27;</span><br><span class="line">   else if @state=&#x27;有课&#x27;</span><br><span class="line">   begin</span><br><span class="line">    select @state=开设课程</span><br><span class="line"> from 教室使用信息</span><br><span class="line"> where 教室编号=@room and 时间=@time</span><br><span class="line"></span><br><span class="line">   end</span><br><span class="line"> go</span><br></pre></td></tr></table></figure>
+<p>查询指定课程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">create procedure course_query</span><br><span class="line"> @name varchar(10),</span><br><span class="line"> @state varchar(10) output</span><br><span class="line"> AS</span><br><span class="line"></span><br><span class="line"> select 课程信息.课程名称,课程信息.课程编号,课程时间.教师名称,课程时间.上课时间</span><br><span class="line"> from 课程时间 inner join 课程信息 on 课程信息.课程编号=课程时间.课程编号</span><br><span class="line"> where 课程信息.课程名称=@name</span><br><span class="line"> go</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>租借教室</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">go</span><br><span class="line"> create procedure borrow</span><br><span class="line"> @building varchar(5),</span><br><span class="line"> @room varchar(5),</span><br><span class="line"> @time varchar(10),</span><br><span class="line"> @reason varchar(10)</span><br><span class="line">AS</span><br><span class="line">declare @state varchar(10)</span><br><span class="line"> select @state=状态</span><br><span class="line"> from 教室使用信息</span><br><span class="line"> where 教室编号=@room and 时间=@time</span><br><span class="line"> if @state IS NULL</span><br><span class="line"> begin</span><br><span class="line">   set  @state=&#x27;空闲&#x27;</span><br><span class="line">   print &#x27;此时教室空闲，可以借用&#x27;</span><br><span class="line">   insert into 教室使用信息</span><br><span class="line">   values(@building,@room,@time,@reason)</span><br><span class="line">  end</span><br><span class="line">else</span><br><span class="line">  print &#x27;此教室被占用，正在&#x27;+@state</span><br><span class="line">  go</span><br></pre></td></tr></table></figure>
+<p>修改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">declare @state varchar(10)</span><br><span class="line">go</span><br><span class="line">create procedure borrow</span><br><span class="line"> @building varchar(5),</span><br><span class="line"> @room varchar(5),</span><br><span class="line"> @time varchar(10),</span><br><span class="line"> @reason varchar(10),</span><br><span class="line"> @state varchar(10) output</span><br><span class="line">AS</span><br><span class="line">declare @state1 varchar(10)</span><br><span class="line"> select @state1=状态</span><br><span class="line"> from 教室使用信息</span><br><span class="line"> where 教室编号=@room and 时间=@time</span><br><span class="line"> if @state1 IS NULL</span><br><span class="line"> begin</span><br><span class="line">   set  @state1=&#x27;空闲&#x27;</span><br><span class="line">   </span><br><span class="line">   print &#x27;此时教室空闲，可以借用&#x27;</span><br><span class="line">   insert into 教室使用信息</span><br><span class="line">   values(@building,@room,@time,@reason,&#x27;其他&#x27;,&#x27;其他&#x27;)</span><br><span class="line">  end</span><br><span class="line">else</span><br><span class="line">  print &#x27;此教室被占用，正在&#x27;+@state1</span><br><span class="line">  set @state=@state1</span><br><span class="line">  print @state</span><br><span class="line">  go</span><br><span class="line"></span><br><span class="line">  select *from 教室使用信息</span><br><span class="line">  declare @state varchar(10)</span><br><span class="line">  exec borrow &#x27;001&#x27;,&#x27;1102&#x27;,&#x27;周一三四&#x27;,&#x27;其他&#x27;,@state output</span><br><span class="line">  print @state</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>判断密码是否正确</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">create procedure password_query</span><br><span class="line"> @user varchar(9),</span><br><span class="line"> @password varchar(15),</span><br><span class="line"> @state varchar(10)=&#x27;false&#x27; output</span><br><span class="line">AS</span><br><span class="line">declare @password1 varchar(15)</span><br><span class="line"> select @password1=密码  from 学生信息</span><br><span class="line"> where 学号=@user</span><br><span class="line"> if @password1 IS NOT NULL and @password1=@password</span><br><span class="line"> set @state=&#x27;true&#x27;</span><br><span class="line"> else</span><br><span class="line"> set @state=&#x27;false&#x27;</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+<p>删除</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create procedure delete_course</span><br><span class="line"> @number varchar(10)</span><br><span class="line"> AS</span><br><span class="line">delete from 课程信息 where 课程编号=@number</span><br><span class="line">delete from 教室使用信息 where 课程编号=@number</span><br><span class="line">delete from 课程时间 where 课程编号=@number</span><br></pre></td></tr></table></figure>
+<p>编写存储插入大量数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">--创建循环插入1000条记录的存储过程</span><br><span class="line">CREATE  PROCEDURE SP_CREATE_DATA1 </span><br><span class="line">AS</span><br><span class="line">declare @cnt INT=0;</span><br><span class="line">while @cnt&lt;100</span><br><span class="line">begin</span><br><span class="line">declare @a varchar(8)</span><br><span class="line">set @a=(SELECT   LEFT(LOWER(NEWID()),8))</span><br><span class="line">declare @b varchar(8)</span><br><span class="line">set @b=(SELECT   LEFT(LOWER(NEWID()),9))</span><br><span class="line">declare @c INT</span><br><span class="line">set @c=(SELECT 1 + RAND() * 2)</span><br><span class="line">    INSERT INTO 学生信息</span><br><span class="line">    VALUES</span><br><span class="line">    (</span><br><span class="line">     @a</span><br><span class="line">    </span><br><span class="line">    ,CASE @c  --随机选取3个枚举值</span><br><span class="line">          when 1 then &#x27;001&#x27;</span><br><span class="line">          when 2 then &#x27;002&#x27;</span><br><span class="line">          when 3 then &#x27;003&#x27;         </span><br><span class="line">     END</span><br><span class="line">	 ,@b</span><br><span class="line">	  ,@a</span><br><span class="line">	   ,@b</span><br><span class="line">   </span><br><span class="line">    );</span><br><span class="line">	set @cnt=@cnt+1;</span><br><span class="line">end;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">GO</span><br><span class="line">exec SP_CREATE_DATA1 </span><br><span class="line"></span><br><span class="line">CREATE  PROCEDURE SP_CREATE_DATA3 </span><br><span class="line">AS</span><br><span class="line">declare @cnt INT=0;</span><br><span class="line">while @cnt&lt;100</span><br><span class="line">begin</span><br><span class="line">declare @a varchar(8)</span><br><span class="line">set @a=(SELECT   LEFT(LOWER(NEWID()),8))</span><br><span class="line">declare @b varchar(8)</span><br><span class="line">set @b=(SELECT   LEFT(LOWER(NEWID()),9))</span><br><span class="line">declare @c INT</span><br><span class="line">set @c=(SELECT 1 + RAND() * 2)</span><br><span class="line">declare @d varchar(8)</span><br><span class="line">set @d=replace(str(@cnt,8),&#x27; &#x27;,&#x27;0&#x27;)</span><br><span class="line">    INSERT INTO 学生信息</span><br><span class="line">    VALUES</span><br><span class="line">    (</span><br><span class="line">     @d</span><br><span class="line">    </span><br><span class="line">    ,CASE @c  --随机选取3个枚举值</span><br><span class="line">          when 1 then &#x27;001&#x27;</span><br><span class="line">          when 2 then &#x27;002&#x27;</span><br><span class="line">          when 3 then &#x27;003&#x27;         </span><br><span class="line">     END</span><br><span class="line">	 ,@b</span><br><span class="line">	  ,@a</span><br><span class="line">	   ,@b</span><br><span class="line">   </span><br><span class="line">    );</span><br><span class="line">	set @cnt=@cnt+1;</span><br><span class="line">end;</span><br><span class="line">exec SP_CREATE_DATA3 </span><br><span class="line"></span><br><span class="line">declare @cnt INT=1</span><br><span class="line">declare @d varchar(8)</span><br><span class="line">set @d=replace(str(@cnt,8),&#x27; &#x27;,&#x27;0&#x27;)</span><br><span class="line">print @d</span><br><span class="line">select * from 学生信息</span><br></pre></td></tr></table></figure>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>创建视图，查询张三老师课程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--创建视图，查询计算机学院张三老师所有课程名称</span><br><span class="line">go</span><br><span class="line">create VIEW view_张三</span><br><span class="line">as </span><br><span class="line">select 课程名称 </span><br><span class="line">from 课程信息</span><br><span class="line">where 教师编号=&#x27;001&#x27;</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">exec information_entry &#x27;机器学习&#x27;,&#x27;004&#x27;,&#x27;周六七八&#x27;,&#x27;王五&#x27;,&#x27;003&#x27;,&#x27;002&#x27;,&#x27;2202&#x27;</span><br><span class="line">select *from 教室使用信息</span><br><span class="line">declare @state varchar(15)</span><br><span class="line">exec classroom_query &#x27;2202&#x27;,&#x27;周六七八&#x27;,@state output</span><br><span class="line">print @state</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">declare @state varchar(10)</span><br><span class="line">exec password_query &#x27;191830076&#x27;,&#x27;0323&#x27;,@state output</span><br><span class="line">print @state</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1851,487 +2486,10 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/13/Verilog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/13/Verilog/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-10-13 21:49:51" itemprop="dateCreated datePublished" datetime="2021-10-13T21:49:51+08:00">2021-10-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Verilog"><a href="#Verilog" class="headerlink" title="Verilog"></a>Verilog</h2><h4 id="数字表示"><a href="#数字表示" class="headerlink" title="数字表示"></a>数字表示</h4><p>基本格式：&lt; 位宽 &gt;’&lt; 数制的符号 &gt;&lt; 数值 &gt;</p>
-<p>h十六进制</p>
-<p>d十进制</p>
-<p>o八进制</p>
-<p>b二进制</p>
-<h4 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h4><p>可直接进行加减等运算，方括号位于向量名前方。eg: reg [7:0] data</p>
-<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>方括号位于数组名的后面。括号内的第一个数字为第一个元素的序号，第二 个数字为最后一个元素的序号，中间用冒号隔开。</p>
-<p>eg: wire array [15:0];</p>
-<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>可以通过 parameter 关键字声明参数以增强模块可拓展性和可读性。</p>
-<p>在模块实例化时，可以使用 #() 将所需的实例参数覆盖模块的默认参数。</p>
-<p>局部参数可以用 localparam 关键字声明，它不能够进行参数重载。</p>
-<p>eg:</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder #(</span><br><span class="line"><span class="keyword">parameter</span> WIDTH = <span class="number">4</span> <span class="comment">// 默认宽度为 4</span></span><br><span class="line">) (</span><br><span class="line"><span class="keyword">input</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] a,</span><br><span class="line"><span class="keyword">input</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] b,</span><br><span class="line"><span class="keyword">output</span> [WIDTH - <span class="number">1</span> : <span class="number">0</span>] c</span><br><span class="line">);</span><br><span class="line"><span class="keyword">assign</span> c = a + b;</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>在我们例化这个模块时，可以进行如下操作：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 覆盖宽度，修改为 6</span></span><br><span class="line">adder <span class="variable">#( .WIDTH (6) )</span> U_adder_0(</span><br><span class="line"><span class="variable">.a</span> (a ),</span><br><span class="line"><span class="variable">.b</span> (b ),</span><br><span class="line"><span class="variable">.c</span> (c )</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 使用默认的宽度 4</span></span><br><span class="line">adder U_adder_1(</span><br><span class="line"><span class="variable">.a</span> (a ),</span><br><span class="line"><span class="variable">.b</span> (b ),</span><br><span class="line"><span class="variable">.c</span> (c )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>局部参数 localparam 和参数类似，但是不能在例化时被覆盖。</p>
-<h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><h6 id="按位运算"><a href="#按位运算" class="headerlink" title="按位运算"></a>按位运算</h6><p>按位取反 ~</p>
-<p>按位与 &amp;</p>
-<p>按位或 |</p>
-<p>按位异或 ^</p>
-<h6 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h6><p>• 逻辑取反!</p>
-<p>• 逻辑与 &amp;&amp;</p>
-<p>• 逻辑或 ||</p>
-<h6 id="缩减运算"><a href="#缩减运算" class="headerlink" title="缩减运算"></a>缩减运算</h6><p>• 缩减与 &amp;：对一个多位操作数进行缩减与操作，计算所有位之间的与操作结果，例如：&amp;(4’b1011) 的结果为 0</p>
-<p> • 缩减或 |：对一个多位操作数进行缩减或操作，计算所有位之间的或操作结果。例如：|(4’b1011) 的结果为 1</p>
-<p> • 缩减异或 ^：对一个多位操作数进行缩减异或操作，计算所有位之间的异或操作结果。例如： ^(4’b1011) 的结果为 1 </p>
-<p>缩减或非、缩减异或、缩减同或是类似的。</p>
-<h6 id="移位运算"><a href="#移位运算" class="headerlink" title="移位运算"></a>移位运算</h6><p>• 逻辑右移&gt;&gt;：1 个操作数向右移位，产生的空位用 0 填充 </p>
-<p>• 逻辑左移&lt;&lt;：1 个操作数向左移位，产生的空位用 0 填充</p>
-<p> • 算术右移&gt;&gt;&gt;：1 个操作数向右移位。如果是无符号数，则产生的空位用 0 填充；有符号数则用其符号 位填充</p>
-<p> • 算术左移&lt;&lt;&lt;：1 个操作数向左移位，产生的空位用 0 填充</p>
-<h6 id="其他运算"><a href="#其他运算" class="headerlink" title="其他运算"></a>其他运算</h6><p>• 拼接 {,}：2 个操作数分别作为高低位进行拼接，例如：{2’b10,2’b11} 的结果是 4’b1011 </p>
-<p>• 重复 {n{m}}：将操作数 m 重复 n 次，拼接成一个多位的数。例如：a=2’b01，则 {2{a}} 的结果 是 4’b0101 </p>
-<p>• 条件? :：根据? 前的表达式是否为真，选择执行后面位于: 左右两个语句。例如：assign c = (a &gt; b) ? a : b，如果 a 大于 b，则将 a 的值赋给 c，否则将 b 的值赋给 c</p>
-<h4 id="组合逻辑"><a href="#组合逻辑" class="headerlink" title="组合逻辑"></a>组合逻辑</h4><h6 id="always"><a href="#always" class="headerlink" title="always"></a>always</h6><p>不推荐使用 always 块来表示组合逻辑。不正确的使用会生成大量锁存器。 </p>
-<p>下面的例子是一个 32-5 优先编码器，如果 tlb_hit_array 全为 0，那么 tlb_hit_index 也为 0。 always 块中被赋值的变量只能是 reg 类型，但是该编码器并不会综合出寄存器或者锁存器，这是因为 Verilog 中的寄存器 (reg) 和硬件上的寄存器不能完全等价。 如果去掉 tlb_hit_index = 5’d0; 一句，则会综合出锁存器。</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">4</span> :<span class="number">0</span>] tlb_hit_index;</span><br><span class="line"><span class="keyword">wire</span> [<span class="number">31</span>:<span class="number">0</span>] tlb_hit_array;</span><br><span class="line"><span class="keyword">integer</span> i;</span><br><span class="line"><span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">tlb_hit_index = <span class="number">5&#x27;d0</span>;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i = i + <span class="number">1</span>) <span class="keyword">begin</span></span><br><span class="line"><span class="keyword">if</span> (tlb_hit_array[i]) <span class="keyword">begin</span></span><br><span class="line">tlb_hit_index = i;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h4 id="模块声明和例化"><a href="#模块声明和例化" class="headerlink" title="模块声明和例化"></a>模块声明和例化</h4><p>模块被包含在关键字 module、endmodule 之内。</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder ( <span class="comment">// 模块名称声明</span></span><br><span class="line"><span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] a, <span class="comment">// 输入输出声明</span></span><br><span class="line"><span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] b,</span><br><span class="line"><span class="keyword">output</span> [<span class="number">31</span>:<span class="number">0</span>] c</span><br><span class="line">);</span><br><span class="line"><span class="keyword">assign</span> c = a + b; <span class="comment">// 变量声明、always 语句、assign 语句等</span></span><br><span class="line"><span class="keyword">endmodule</span> <span class="comment">// 模块结束</span></span><br></pre></td></tr></table></figure>
-<h4 id="Generate-块"><a href="#Generate-块" class="headerlink" title="Generate 块"></a>Generate 块</h4><p>这里只介绍 generate for 块。 </p>
-<p>generate for 的主要功能就是对模块或组件以及 always 块、assign 语句进行复制。 使用 generate for 的时候, 必须要注意以下几点要求 </p>
-<p>• 在使用 generate for 的时候必须先声明一个 genvar 变量，用作 for 的循环变量。genvar 是 generate 语句中的一种变量类型，用于在 generate for 语句中声明一个正整数的索引变量。</p>
-<p> • for 里面的内嵌语句, 必须写在 begin-end 里 </p>
-<p>• 尽量对 begin-end 顺序块进行命名</p>
-<p> generate for 的语法示例如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">genvar</span> i;</span><br><span class="line"><span class="keyword">generate</span> <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i = i + <span class="number">1</span>) <span class="keyword">begin</span>: gen_assign_temp</span><br><span class="line"><span class="keyword">assign</span> temp[i] = indata[<span class="number">2</span> * i + <span class="number">1</span> : <span class="number">2</span> * i];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">endgenerat</span><br></pre></td></tr></table></figure>
-<h4 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h4><h6 id="时延语句"><a href="#时延语句" class="headerlink" title="时延语句"></a>时延语句</h6><p>仿真中还经常使用时延来构造合适的仿真激励。它是不可综合的，仅能够在仿真中使用。时延分两类，一是 语句内部时延，二是语句间时延，其示例如下所示：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 语句内部时延</span></span><br><span class="line">A = #<span class="number">5</span> <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="comment">// 语句间时延</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">Temp = <span class="number">1&#x27;b1</span>;</span><br><span class="line">#<span class="number">5</span> A = Temp;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>两种方式都表达在五个时间单位后，将 A 的值赋为 1。</p>
-<h6 id="initial-语句"><a href="#initial-语句" class="headerlink" title="initial 语句"></a>initial 语句</h6><p>一般用来生成复位信号和激励。只在仿真开始时执行一次。</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试代码中</span></span><br><span class="line"><span class="comment">// 假设`timescale 1ns / 1ps</span></span><br><span class="line"><span class="keyword">reg</span> rst_n, clk;</span><br><span class="line"><span class="keyword">always</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">rst_n = <span class="number">1&#x27;b0</span>;</span><br><span class="line">clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">#<span class="number">50</span> rst_n = <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>会生成一个 100MHz 的时钟，一个 50ns 有效的复位信号。</p>
-<h6 id="系统任务"><a href="#系统任务" class="headerlink" title="系统任务"></a>系统任务</h6><p>系统任务可以被用来执行一些系统设计所需的输入、输出、时序检查、仿真控制操作。所有的系统任务名称 前都带有符号 $ 使之与用户定义的任务和函数相区分。</p>
-<p>常见的系统任务：</p>
-<p> • $display：用于显示指定的字符串，然后自动换行（用法类似 C 语言中的 printf 函数）</p>
-<p> • $time：可以提取当前的仿真时间</p>
-<p> • $stop：暂停仿真</p>
-<p> • $finish：终止仿真</p>
-<p> • $random：生成随机数 </p>
-<p>• $readmemh：读入一个 16 进制数的文件以初始化 reg</p>
-<h6 id="测试设计"><a href="#测试设计" class="headerlink" title="测试设计"></a>测试设计</h6><p>测试最基本的结构包括信号声明、激励和模块例化。 测试模块声明时，一般不需要声明端口。因为激励信号一般都在测试模块内部，没有外部信号。 声明的变量应该能全部对应被测试模块的端口。当然，变量不一定要与被测试模块端口名字一样。但是被测试模块输入端对应的变量应该声明为 reg 型，输出端对应的变量应该声明为 wire 型。 仿真过程中可以使用 $display 显示当前仿真进度或者测试结果。 在测试完成或者发现错误时可以使用 $finish; 或者 $stop; 来停止仿真。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/11/R12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/11/R12/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-10-11 19:11:24" itemprop="dateCreated datePublished" datetime="2021-10-11T19:11:24+08:00">2021-10-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-14 19:59:35" itemprop="dateModified" datetime="2021-10-14T19:59:35+08:00">2021-10-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="session"><a href="#session" class="headerlink" title="session"></a>session</h4><p>Session：在计算机中，尤其是在网络应用中，称为“会话控制”。Session对象存储特定用户会话所需的属性及配置信息。这样，当用户在应用程序的Web页之间跳转时，存储在Session对象中的变量将不会丢失，而是在整个用户会话中一直存在下去。当用户请求来自应用程序的 Web页时，如果该用户还没有会话，则Web服务器将自动创建一个 Session对象。当会话过期或被放弃后，服务器将终止该会话。Session 对象最常见的一个用法就是存储用户的首选项。例如，如果用户指明不喜欢查看图形，就可以将该信息存储在Session对象中。有关使用Session 对象的详细信息，请参阅“ASP应用程序”部分的“管理会话”。注意会话状态仅在支持cookie的浏览器中保留。</p>
-<h4 id="多头注意力机制"><a href="#多头注意力机制" class="headerlink" title="多头注意力机制"></a>多头注意力机制</h4><p>从第二张图中可以多头函数看出：attention函数输入为由原来的Q，K，V变成了QW（上标为Q，下标为i），KW（上标为K，下标为i），VW（上标为V，下标为i）；即3个W都不相同；将Q，K，V由原来的512维度变成了64维度（因为采取了8个多头）；然后再拼接在一起变成512维，通过W(上标为O)进行线性转换；得到最终的多头注意力值；</p>
-<p>个人最终认为：多头的本质是多个独立的attention计算，作为一个集成的作用，防止过拟合；从attention is all your need论文中输入序列是完全一样的；相同的Q,K,V，通过线性转换，每个注意力机制函数只负责最终输出序列中一个子空间，即1/8，而且互相独立；</p>
-<h4 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h4><p>长短期记忆（Long short-term memory, LSTM）是一种特殊的RNN，主要是为了解决长序列训练过程中的梯度消失和梯度爆炸问题。简单来说，就是相比普通的RNN，LSTM能够在更长的序列中有更好的表现。</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32085405">人人都能看懂的LSTM - 知乎 (zhihu.com)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/07/DIN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/07/DIN/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-10-07 20:54:24" itemprop="dateCreated datePublished" datetime="2021-10-07T20:54:24+08:00">2021-10-07</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>利用真实的下一个行为作为正样本；</li>
-<li>负例的选择或是从用户未交互过的商品中随机抽取，或是从已展示给用户但用户没有点击的商品中随机抽取；</li>
-</ul>
-<p>具体来讲，就是利用 t 时刻的行为 b(t+1) 作为监督去学习隐含层向量 ht。正负样本分别代表了用户 点击/未点击 的第 t 个物品embedding向量。</p>
-<p>关于mask的作用，这里结合 Transformer 再说一下：</p>
-<p>mask 表示掩码，它对某些值进行掩盖，使其在参数更新时不产生效果。Transformer 模型里面涉及两种 mask，分别是 padding mask 和 sequence mask。其中，padding mask 在所有的 scaled dot-product attention 里面都需要用到，而 sequence mask 只有在 decoder 的 self-attention 里面用到。</p>
-<h5 id="Padding-Mask"><a href="#Padding-Mask" class="headerlink" title="Padding Mask"></a>Padding Mask</h5><p>什么是 padding mask 呢？因为每个批次输入序列长度是不一样的也就是说，我们要对输入序列进行对齐。具体来说，就是给在较短的序列后面填充 0。但是如果输入的序列太长，则是截取左边的内容，把多余的直接舍弃。因为这些填充的位置，其实是没什么意义的，所以attention机制不应该把注意力放在这些位置上，需要进行一些处理。</p>
-<p>具体的做法是，把这些位置的值加上一个非常大的负数(负无穷)，这样的话，经过 softmax，这些位置的概率就会接近0！而我们的 padding mask 实际上是一个张量，每个值都是一个Boolean，值为 false 的地方就是我们要进行处理的地方。</p>
-<h5 id="Sequence-mask"><a href="#Sequence-mask" class="headerlink" title="Sequence mask"></a>Sequence mask</h5><p>sequence mask 是为了使得 decoder 不能看见未来的信息。也就是对于一个序列，在 time_step 为 t 的时刻，我们的解码输出应该只能依赖于 t 时刻之前的输出，而不能依赖 t 之后的输出。因此我们需要想一个办法，把 t 之后的信息给隐藏起来。</p>
-<p>那么具体怎么做呢？也很简单：产生一个上三角矩阵，上三角的值全为0。把这个矩阵作用在每一个序列上，就可以达到我们的目的。</p>
-<p>对于 decoder 的 self-attention，里面使用到的 scaled dot-product attention，同时需要padding mask 和 sequence mask 作为 attn_mask，具体实现就是两个mask相加作为attn_mask。</p>
-<p>其他情况，attn_mask 一律等于 padding mask。</p>
-<p><strong>DIN这里使用的是padding mask。</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/05/tensorflow/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/05/tensorflow/" class="post-title-link" itemprop="url">tensorflow</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-10-05 21:08:48" itemprop="dateCreated datePublished" datetime="2021-10-05T21:08:48+08:00">2021-10-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-07 20:54:27" itemprop="dateModified" datetime="2021-10-07T20:54:27+08:00">2021-10-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="placeholder"><a href="#placeholder" class="headerlink" title="placeholder"></a>placeholder</h4><p>函数形式：<img src="/2021/10/05/tensorflow/image-20211005211038432.png" alt="image-20211005211038432"></p>
-<p>参数：</p>
-<p>dtype：数据类型。常用的是tf.float32,tf.float64等数值类型</p>
-<p>shape：数据形状。默认是None，就是一维值，也可以是多维（比如[2,3], [None, 3]表示列是3，行不定）</p>
-<p>name：名称</p>
-<p>使用原因： Tensorflow的设计理念称之为计算流图，在编写程序时，首先构筑整个系统的graph，代码并不会直接生效，这一点和python的其他数值计算库（如Numpy等）不同，graph为静态的，类似于docker中的镜像。然后，在实际的运行时，启动一个session，程序才会真正的运行。这样做的好处就是：避免反复地切换底层程序实际运行的上下文，tensorflow帮你优化整个系统的代码。我们知道，很多python程序的底层为C语言或者其他语言，执行一行脚本，就要切换一次，是有成本的，tensorflow通过计算流图的方式，帮你优化整个session需要执行的代码，还是很有优势的。</p>
-<p>​        所以placeholder()函数是在神经网络构建graph的时候在模型中的占位，此时并没有把要输入的数据传入模型，它只会分配必要的内存。等建立session，在会话中，运行模型的时候通过feed_dict()函数向占位符喂入数据。</p>
-<h4 id="get-variable"><a href="#get-variable" class="headerlink" title="get_variable"></a>get_variable</h4><p>该函数共有十一个参数，常用的有：名称name、变量规格shape、变量类型dtype、变量初始化方式initializer、所属于的集合collections。</p>
-<p>该函数的作用是创建新的tensorflow变量，常见的initializer有：常量初始化器tf.constant_initializer、正太分布初始化器tf.random_normal_initializer、截断正态分布初始化器tf.truncated_normal_initializer、均匀分布初始化器tf.random_uniform_initializer。</p>
-<h4 id="张量"><a href="#张量" class="headerlink" title="张量"></a>张量</h4><p>关于张量的学习，可参考：</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/140260245">什么是张量？ - 知乎 (zhihu.com)</a></p>
-<h4 id="convert-to-tensor"><a href="#convert-to-tensor" class="headerlink" title="convert_to_tensor"></a>convert_to_tensor</h4><p>将给定值转换为张量。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.convert_to_tensor(</span><br><span class="line">    value,</span><br><span class="line">    dtype=<span class="literal">None</span>,</span><br><span class="line">    dtype_hint=<span class="literal">None</span>,</span><br><span class="line">    name=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>该函数将各种类型的Python对象转换为张量对象。它接受张量对象、数字数组、Python列表和Python标量。</p>
-<h5 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h5><p>value:类型具有注册张量转换函数的对象。<br>dtype:返回张量的可选元素类型。如果缺少，则从值的类型推断类型。<br>dtype_hint:返回张量的可选元素类型，当dtype为None时使用。在某些情况下，调用者在转换为张量时可能没有考虑到dtype，因此dtype_hint可以用作软首选项。如果不能转换为dtype_hint，则此参数没有效果。<br>name:创建新张量时使用的可选名称。</p>
-<h5 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h5><p>一个基于值的张量。</p>
-<h4 id="embedding-lookup"><a href="#embedding-lookup" class="headerlink" title="embedding_lookup()"></a>embedding_lookup()</h4><p>用途主要是选取一个张量里面索引对应的元素。</p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6e61528acad9">tf.nn.embedding_lookup() 详解 - 简书 (jianshu.com)</a></p>
-<h4 id="expand-dims"><a href="#expand-dims" class="headerlink" title="expand_dims()"></a>expand_dims()</h4><p>tf.expand_dims()函数用于给函数增加维度。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.expand_dims(</span><br><span class="line">    input,</span><br><span class="line">    axis=None,</span><br><span class="line">    name=None,</span><br><span class="line">    dim=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h5 id="参数：-1"><a href="#参数：-1" class="headerlink" title="参数："></a>参数：</h5><ul>
-<li>input是输入张量。</li>
-<li>axis是指定扩大输入张量形状的维度索引值。</li>
-<li>dim等同于轴，一般不推荐使用。</li>
-</ul>
-<p>函数的功能是在给定一个input时，在axis轴处给input增加一个维度。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/TeFuirnever/article/details/88797810">(5条消息) tf.expand<em>dims()函数解析（最清晰的解释）</em>种树最好的时间是10年前，其次是现在！！！-CSDN博客_tf.expand_dim</a></p>
-<h4 id="tf-tile"><a href="#tf-tile" class="headerlink" title="tf.tile()"></a>tf.tile()</h4><p>tensorflow中的tile()函数是用来对张量(Tensor)进行扩展的，其特点是对当前张量内的数据进行一定规则的复制。最终的输出张量维度不变。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tf.tile(</span><br><span class="line">    input,</span><br><span class="line">    multiples,</span><br><span class="line">    name=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>input是待扩展的张量，multiples是扩展方法。<br>假如input是一个3维的张量。那么mutiples就必须是一个1x3的1维张量。这个张量的三个值依次表示input的第1，第2，第3维数据扩展几倍。 </p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chamie/p/11124314.html">tf.tile()函数理解 - chamie - 博客园 (cnblogs.com)</a></p>
-<h4 id="concact"><a href="#concact" class="headerlink" title="concact"></a>concact</h4><p>tensorflow中用来拼接张量的函数tf.concat()，用法:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.concat([tensor1, tensor2, tensor3,...], axis)</span><br></pre></td></tr></table></figure>
-<p>axis=0   代表在第0个维度拼接</p>
-<p>axis=1   代表在第1个维度拼接 </p>
-<p>对于一个二维矩阵，第0个维度代表最外层方括号所框下的子集，第1个维度代表内部方括号所框下的子集。维度越高，括号越小。</p>
-<h4 id="tf-layers-batch-normalization"><a href="#tf-layers-batch-normalization" class="headerlink" title="tf.layers.batch_normalization"></a>tf.layers.batch_normalization</h4><p>用来构建待训练的神经网络模型,方法接口如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">tf.layers.batch_normalization(</span><br><span class="line">    inputs,</span><br><span class="line">    axis=-1,</span><br><span class="line">    momentum=0.99,</span><br><span class="line">    epsilon=0.001,</span><br><span class="line">    center=True,</span><br><span class="line">    scale=True,</span><br><span class="line">    beta_initializer=tf.zeros_initializer(),</span><br><span class="line">    gamma_initializer=tf.ones_initializer(),</span><br><span class="line">    moving_mean_initializer=tf.zeros_initializer(),</span><br><span class="line">    moving_variance_initializer=tf.ones_initializer(),</span><br><span class="line">    beta_regularizer=None,</span><br><span class="line">    gamma_regularizer=None,</span><br><span class="line">    beta_constraint=None,</span><br><span class="line">    gamma_constraint=None,</span><br><span class="line">    training=False,</span><br><span class="line">    trainable=True,</span><br><span class="line">    name=None,</span><br><span class="line">    reuse=None,</span><br><span class="line">    renorm=False,</span><br><span class="line">    renorm_clipping=None,</span><br><span class="line">    renorm_momentum=0.99,</span><br><span class="line">    fused=None,</span><br><span class="line">    virtual_batch_size=None,</span><br><span class="line">    adjustment=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>这里有几个重要参数需要注意：</p>
-<ul>
-<li><code>axis</code>的值取决于按照<code>input</code>的哪一个维度进行BN，例如输入为<code>channel_last</code> format，即<code>[batch_size, height, width, channel]</code>，则<code>axis</code>应该设定为4，如果为<code>channel_first</code> format，则<code>axis</code>应该设定为1.</li>
-<li><code>momentum</code>的值用在训练时，滑动平均的方式计算滑动平均值<code>moving_mean</code>和滑动方差<code>moving_variance</code>。</li>
-<li><code>center</code>为<code>True</code>时，添加位移因子<code>beta</code>到该BN层，否则不添加。添加<code>beta</code>是对BN层的变换加入位移操作。注意，<code>beta</code>一般设定为可训练参数，即<code>trainable=True</code>。</li>
-<li><code>scale</code>为<code>True</code>是，添加缩放因子<code>gamma</code>到该BN层，否则不添加。添加<code>gamma</code>是对BN层的变化加入缩放操作。注意，<code>gamma</code>一般设定为可训练参数，即<code>trainable=True</code>。</li>
-<li><code>training</code>表示模型当前的模式，如果为<code>True</code>，则模型在训练模式，否则为推理模式。要非常注意这个模式的设定，这个参数默认值为<code>False</code>。如果在训练时采用了默认值<code>False</code>，则滑动均值<code>moving_mean</code>和滑动方差<code>moving_variance</code>都不会根据当前batch的数据更新，这就意味着在推理模式下，均值和方差都是其初始值，因为这两个值并没有在训练迭代过程中滑动更新。</li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fclbky/p/12636842.html">tf.layers.batch_normalization 介绍 - 大雄fcl - 博客园 (cnblogs.com)</a></li>
-</ul>
-<h4 id="dense"><a href="#dense" class="headerlink" title="dense"></a>dense</h4><p>dense，即全连接网络，layers 模块提供了一个 dense() 方法来实现此操作，定义在 tensorflow/python/layers/core.py 中，下面我们来说明一下它的用法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dense(</span><br><span class="line">    inputs,</span><br><span class="line">    units,</span><br><span class="line">    activation=None,</span><br><span class="line">    use_bias=True,</span><br><span class="line">    kernel_initializer=None,</span><br><span class="line">    bias_initializer=tf.zeros_initializer(),</span><br><span class="line">    kernel_regularizer=None,</span><br><span class="line">    bias_regularizer=None,</span><br><span class="line">    activity_regularizer=None,</span><br><span class="line">    kernel_constraint=None,</span><br><span class="line">    bias_constraint=None,</span><br><span class="line">    trainable=True,</span><br><span class="line">    name=None,</span><br><span class="line">    reuse=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>参数说明如下：<br> inputs：必需，即需要进行操作的输入数据。<br> units：必须，即神经元的数量。<br> activation：可选，默认为 None，如果为 None 则是线性激活。<br> use_bias：可选，默认为 True，是否使用偏置。<br> kernel_initializer：可选，默认为 None，即权重的初始化方法，如果为 None，则使用默认的 Xavier 初始化方法。<br> bias_initializer：可选，默认为零值初始化，即偏置的初始化方法。<br> kernel_regularizer：可选，默认为 None，施加在权重上的正则项。<br> bias_regularizer：可选，默认为 None，施加在偏置上的正则项。<br> activity_regularizer：可选，默认为 None，施加在输出上的正则项。<br> kernel_constraint，可选，默认为 None，施加在权重上的约束项。<br> bias_constraint，可选，默认为 None，施加在偏置上的约束项。<br> trainable：可选，默认为 True，布尔类型，如果为 True，则将变量添加到 GraphKeys.TRAINABLE_VARIABLES 中。<br> name：可选，默认为 None，卷积层的名称。<br> reuse：可选，默认为 None，布尔类型，如果为 True，那么如果 name 相同时，会重复利用。<br> 返回值： 全连接网络处理后的 Tensor。</p>
-<h4 id="reshape"><a href="#reshape" class="headerlink" title="reshape()"></a>reshape()</h4><p>tf.reshape(tensor, shape, name=None)<br>函数的作用是将tensor变换为参数shape的形式。 其中shape为一个列表形式，特殊的一点是列表中可以存在-1。</p>
-<p>转换为一般的shape（也就是不涉及-1的）我这里就不说了，主要说一下对-1的理解。<br>-1代表的含义是不用我们自己指定这一维的大小，函数会自动计算，但列表中只能存在一个-1。<br>（当然如果存在多个-1，就是一个存在多解的方程了）</p>
-<p>我理解的要点是：首先shape就是reshape变换后的矩阵大小，先不管-1的那一个维度，先看其它维度，然后用原矩阵的总元素个数除以确定的维度，就能得到-1维度的值。</p>
-<p>我们来看例子。</p>
-<p>M=np.array([[[[1,2,3]]],[[[4,5,6]]],[[[7,8,9]]]])   #M是[3,1,1,3]的四维矩阵</p>
-<p>我想把M重组成若干个3维的向量，那么直接tf.reshape(M,[-1,3])</p>
-<p>那么会得到几个3维向量呢？  M一共有9个元素，9/3=3，那么得到3个三维向量，那么结果就是[3,3]的矩阵。</p>
-<p><img src="/2021/10/05/tensorflow/image-20211006175936881.png" alt="image-20211006175936881"></p>
-<p>那么我想得到若干个[3,3]的矩阵，那么我们tf.reshape(M,[-1,3,3])</p>
-<p>那么结果就是[1,3,3]的矩阵</p>
-<p><img src="/2021/10/05/tensorflow/image-20211006175946915.png" alt="image-20211006175946915"></p>
-<h4 id="tf-reduce-mean"><a href="#tf-reduce-mean" class="headerlink" title="tf.reduce_mean"></a>tf.reduce_mean</h4><p>tf.reduce_mean 函数用于计算张量tensor沿着指定的数轴（tensor的某一维度）上的的平均值，主要用作降维或者计算tensor（图像）的平均值。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reduce_mean(input_tensor,</span><br><span class="line">                axis=None,</span><br><span class="line">                keep_dims=False,</span><br><span class="line">                name=None,</span><br><span class="line">                reduction_indices=None)</span><br></pre></td></tr></table></figure>
-<p>第一个参数input_tensor： 输入的待降维的tensor;<br>第二个参数axis： 指定的轴，如果不指定，则计算所有元素的均值;<br>第三个参数keep_dims：是否降维度，设置为True，输出的结果保持输入tensor的形状，设置为False，输出结果会降低维度;<br>第四个参数name： 操作的名称;<br>第五个参数 reduction_indices：在以前版本中用来指定轴，已弃用;</p>
-<h4 id="tf-nn-sigmoid-cross-entropy-with-logits"><a href="#tf-nn-sigmoid-cross-entropy-with-logits" class="headerlink" title="tf.nn.sigmoid_cross_entropy_with_logits"></a>tf.nn.sigmoid_cross_entropy_with_logits</h4><p>tf.nn.sigmoid_cross_entropy_with_logits(_sentinel=None,,labels=None,logits=None,name=None)</p>
-<p>对于给定的logits计算sigmoid的交叉熵。</p>
-<h4 id="tf-trainable-variables"><a href="#tf-trainable-variables" class="headerlink" title="tf.trainable_variables()"></a>tf.trainable_variables()</h4><p>顾名思义，这个函数可以也仅可以查看可训练的变量，在我们生成变量时，无论是使用tf.Variable()还是tf.get_variable()生成变量，都会涉及一个参数trainable,其默认为True。以tf.Variable()为例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">__init__(</span><br><span class="line">    initial_value=None,</span><br><span class="line">    trainable=True,</span><br><span class="line">    collections=None,</span><br><span class="line">    validate_shape=True,</span><br><span class="line">   ...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>对于一些我们不需要训练的变量，比较典型的例如学习率或者计步器这些变量，我们都需要将trainable设置为False，这时tf.trainable_variables() 就不会打印这些变量。</p>
-<h4 id="tf-train-GradientDescentOptimizer"><a href="#tf-train-GradientDescentOptimizer" class="headerlink" title="tf.train.GradientDescentOptimizer"></a>tf.train.GradientDescentOptimizer</h4><p>TensorFlow中损失优化方法</p>
-<ul>
-<li>tf.train.GradientDescentOptimizer(learningrate, uselocking, name)：原始梯度下降方法，唯一参数就是学习率。</li>
-</ul>
-<h4 id="tf-gradients"><a href="#tf-gradients" class="headerlink" title="tf.gradients()"></a>tf.gradients()</h4><p>参数如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tf.gradients(ys, xs, </span><br><span class="line">			 grad_ys=None, </span><br><span class="line">			 name=&#x27;gradients&#x27;,</span><br><span class="line">			 colocate_gradients_with_ops=False,</span><br><span class="line">			 gate_gradients=False,</span><br><span class="line">			 aggregation_method=None,</span><br><span class="line">			 stop_gradients=None)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>tf.gradients()</code>实现<code>ys</code>对<code>xs</code>求导，接受求导值<code>ys</code>和<code>xs</code>不仅可以是tensor，还可以是list</p>
-<h4 id="tf-clip-by-global-norm"><a href="#tf-clip-by-global-norm" class="headerlink" title="tf.clip_by_global_norm"></a>tf.clip_by_global_norm</h4><p>tf.clip_by_global_norm函数的作用就是通过权重梯度的总和的比率来截取多个张量的值。</p>
-<h4 id="tf-gather"><a href="#tf-gather" class="headerlink" title="tf.gather"></a>tf.gather</h4><p>tf.gather(params,indices,axis=0 )</p>
-<p>从params的axis维根据indices的参数值获取切片</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/01/NAS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/01/NAS/" class="post-title-link" itemprop="url">NAS</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-10-01 09:19:15 / Modified: 16:26:25" itemprop="dateCreated datePublished" datetime="2021-10-01T09:19:15+08:00">2021-10-01</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="NAS"><a href="#NAS" class="headerlink" title="NAS"></a>NAS</h4><p>神经结构搜索（Neural Architecture Search，简称NAS）是一种自动设计神经网络的技术，可以通过算法根据样本集自动设计出高性能的网络结构，在某些任务上甚至可以媲美人类专家的水准，甚至发现某些人类之前未曾提出的网络结构，这可以有效的降低神经网络的使用和实现成本。</p>
-<p>NAS的原理是给定一个称为搜索空间的候选神经网络结构集合，用某种策略从中搜索出最优网络结构。神经网络结构的优劣即性能用某些指标如精度、速度来度量，称为性能评估。这一过程如下图所示。</p>
-<p><img src="/2021/10/01/NAS/image-20211001131823612.png" alt="image-20211001131823612"></p>
-<p>在搜索过程的每次迭代中，从搜索空间产生“样本”即得到一个神经网络结构，称为“子网络”。在训练样本集上训练子网络，然后在验证集上评估其性能。逐步优化网络结构，直至找到最优的子网络。</p>
-<p>搜索空间，搜索策略，性能评估策略是NAS算法的核心要素。搜索空间定义了可以搜索的神经网络结构的集合，即解的空间。搜索策略定义了如何在搜索空间中寻找最优网络结构。性能评估策略定义了如何评估搜索出的网络结构的性能。对这些要素的不同实现得到了各种不同的NAS算法，本节将选择有代表性的进行介绍。</p>
-<h4 id="基于梯度的神经架构优化算法"><a href="#基于梯度的神经架构优化算法" class="headerlink" title="基于梯度的神经架构优化算法"></a>基于梯度的神经架构优化算法</h4><p>前面介绍的NAS算法都存在计算量大的问题，虽然存在改进方案。强化学习、遗传算法等方案低效的一个原因是结构搜索被当作离散空间（网络结构的表示是离散的，如遗传算法中的二进制串编码）中的黑箱优化问题，无法利用梯度信息来求解。</p>
-<p>其中一种解决思路是将离散优化问题连续化。文献[6]提出了一种称为可微结构搜索（Differentiable Architecture Search，简称DARTS）的算法，将网络结构搜索转化为连续空间的优化问题，采用梯度下降法求解，可高效地搜索神经网络架构，同时得到网络的权重参数。</p>
-<p>DARTS将网络结构、网络单元表示成有向无环图，对结构搜索问题进行松弛，转化为连续变量优化问题。目标函数是可导的，能够用梯度下降法求解，同时得到网络结构和权重等参数。算法寻找计算单元，作为最终网络结构的基本构建块。这些单元可以堆积形成卷积神经网络，递归连接形成循环神经网络。</p>
-<h4 id="教师-学生网络"><a href="#教师-学生网络" class="headerlink" title="教师-学生网络"></a>教师-学生网络</h4><p>教师—学生网络的方法，属于迁移学习的一种。迁移学习也就是将一个模型的性能迁移到另一个模型上，而对于教师—学生网络，教师网络往往是一个更加复杂的网络，具有非常好的性能和泛化能力，可以用这个网络来作为一个soft target来指导另外一个更加简单的学生网络来学习，使得更加简单、参数运算量更少的学生模型也能够具有和教师网络相近的性能，也算是一种模型压缩的方式。</p>
-<p>较大、较复杂的网络虽然通常具有很好的性能，但是也存在很多的冗余信息，因此运算量以及资源的消耗都非常多。而所谓的Distilling就是将复杂网络中的有用信息提取出来迁移到一个更小的网络上，这样学习来的小网络可以具备和大的复杂网络想接近的性能效果，并且也大大的节省了计算资源。这个复杂的网络可以看成一个教师，而小的网络则可以看成是一个学生。</p>
-<h4 id="知识蒸馏"><a href="#知识蒸馏" class="headerlink" title="知识蒸馏"></a>知识蒸馏</h4><p>一般认为模型的参数保留了模型学到的知识，因此最常见的迁移学习的方式就是在一个大的数据集上先做预训练，然后使用预训练得到的参数在一个小的数据集上做微调（两个数据集往往领域不同或者任务不同）。例如先在Imagenet上做预训练，然后在COCO数据集上做检测。在这篇论文中，作者认为可以将模型看成是黑盒子，知识可以看成是输入到输出的映射关系。因此，我们可以先训练好一个teacher网络，然后将teacher的网络的输出结果 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 作为student网络的目标，训练student网络，使得student网络的结果 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 接近 <img src="https://www.zhihu.com/equation?tex=q" alt="[公式]"> ，因此，我们可以将损失函数写成 <img src="https://www.zhihu.com/equation?tex=L%3DCE%28y%2C+p%29%2B%5Calpha+CE%28q%2C+p%29" alt="[公式]"> 。这里CE是交叉熵（Cross Entropy），y是真实标签的onehot编码，q是teacher网络的输出结果，p是student网络的输出结果。</p>
-<p>但是，直接使用teacher网络的softmax的输出结果 <img src="https://www.zhihu.com/equation?tex=q" alt="[公式]"> ，可能不大合适。因此，一个网络训练好之后，对于正确的答案会有一个很高的置信度。例如，在MNIST数据中，对于某个2的输入，对于2的预测概率会很高，而对于2类似的数字，例如3和7的预测概率为 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 和 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 。这样的话，teacher网络学到数据的相似信息（例如数字2和3，7很类似）很难传达给student网络。由于它们的概率值接近0。因此，文章提出了softmax-T，公式如下所示：</p>
-<p><img src="/2021/10/01/NAS/equation" alt="[公式]"></p>
-<p>这里 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 是student网络学习的对象（soft targets），<img src="/2021/10/01/NAS/equation" alt="[公式]"> 是神经网络softmax前的输出logit。如果将T取1，这个公式就是softmax，根据logit输出各个类别的概率。如果T接近于0，则最大的值会越近1，其它值会接近0，近似于onehot编码。如果T越大，则输出的结果的分布越平缓，相当于平滑的一个作用，起到保留相似信息的作用。如果T等于无穷，就是一个均匀分布。</p>
-<p>知识蒸馏，可以将一个网络的知识转移到另一个网络，两个网络可以是同构或者异构。做法是先训练一个teacher网络，然后使用这个teacher网络的输出和数据的真实标签去训练student网络。知识蒸馏，可以用来将网络从大网络转化成一个小网络，并保留接近于大网络的性能；也可以将多个网络的学到的知识转移到一个网络中，使得单个网络的性能接近emsemble的结果。</p>
-<h4 id="EMD"><a href="#EMD" class="headerlink" title="EMD"></a>EMD</h4><p>对于离散的概率分布，Wasserstein距离也被描述为推土距离(EMD)。如果我们将分布想象为两个有一定存土量的土堆，那么EMD就是将一个土堆 转换 为另一个土堆所需的最小总工作量。工作量的定义是 单位泥土 的总量乘以它移动的距离。</p>
-<p>有很多种推土的方式，我们的目标是找到其中工作量最少的那一种，这是个优化问题。</p>
-<h4 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h4><p>BERT（Bidirectional Encoder Representation from Transformers)</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2397,7 +2555,7 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -2425,7 +2583,7 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

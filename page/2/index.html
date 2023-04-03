@@ -145,6 +145,693 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">编译原理总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-18 23:36:48" itemprop="dateCreated datePublished" datetime="2022-05-18T23:36:48+08:00">2022-05-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-19 11:21:13" itemprop="dateModified" datetime="2022-05-19T11:21:13+08:00">2022-05-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h2><h3 id="杂乱"><a href="#杂乱" class="headerlink" title="杂乱"></a>杂乱</h3><h4 id="消除左递归的方法"><a href="#消除左递归的方法" class="headerlink" title="消除左递归的方法"></a>消除左递归的方法</h4><p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220512192836269.png" alt="image-20220512192836269" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220512192935922.png" alt="image-20220512192935922" style="zoom:50%;"></p>
+<h4 id="句柄"><a href="#句柄" class="headerlink" title="句柄"></a>句柄</h4><p><strong>句柄</strong>：句型的最左直接短语</p>
+<h4 id="LL文法判断"><a href="#LL文法判断" class="headerlink" title="LL文法判断"></a>LL文法判断</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">当且仅当G的任意两个具有相同左部的产生式A → α | β 满足下面的条件：</span><br><span class="line">不存在终结符a使得α 和β都能够推导出以a开头的串</span><br><span class="line">α 和β至多有一个能推导出ε </span><br><span class="line">如果 β -&gt;* ε，则FIRST (α)∩FOLLOW(A) =Φ；</span><br><span class="line">如果 α -&gt;* ε，则FIRST (β)∩FOLLOW(A) =Φ；</span><br></pre></td></tr></table></figure>
+<h4 id="LR四种文法的判断"><a href="#LR四种文法的判断" class="headerlink" title="LR四种文法的判断"></a>LR四种文法的判断</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">关系：LR(0)&lt;SLR(1)&lt;LALR(1)&lt;LR(1)</span><br></pre></td></tr></table></figure>
+<p>1.判断LR(0)文法：<br>看项目中是否有归约-归约和移进-归约冲突。<br>如果无冲突则是LR(0)文法（如果是LR(0)文法则四种都是）；如果有冲突则不是LR(0)文法。（就要向下判断）</p>
+<p>2.判断SLR(1)文法：<br>a:DFA中存在冲突项目（归约-归约，归约-移进）<br>b:{a1,a2,…,an},FOLLOW(B1),FOLLOW(B2)两两互不相交，（交集=空集）时是SLR(1)项目。<br>【也就是说，同时满足两个条件才是SLR（1）文法】</p>
+<p>若不是再向下判断。</p>
+<p>3.判断LR(1)文法：<br>构造带向前搜索符的DFA，无归约-归约冲突则是LR(1)文法。</p>
+<p>【此处意思是如果有向前搜索符还有冲突的话就不是LR（1）文法，就要再向下判断】</p>
+<p>4.判断LALR(1)文法：<br>合并同心集后无（归约-归约）冲突（在之前的基础上）<br>（核相同，向前搜索符不同）</p>
+<p>（B-&gt;a,a<br>B-&gt;a,a|b<br>同心集）</p>
+<p><strong>LR即指LR(1)</strong></p>
+<h4 id="四元式知识点"><a href="#四元式知识点" class="headerlink" title="四元式知识点"></a>四元式知识点</h4><p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220518170348404.png" alt="image-20220518170348404" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220518170539086.png" alt="image-20220518170539086" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220518170614471.png" alt="image-20220518170614471" style="zoom:50%;"></p>
+<h4 id="一些函数"><a href="#一些函数" class="headerlink" title="一些函数"></a>一些函数</h4><p>赋值语句的翻译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">newtemp( )：生成一个新的临时变量t，返回t的地址</span><br><span class="line">gen(code)：生成三地址指令code</span><br><span class="line">lookup(name)：查询符号表返回name 对应的记录</span><br></pre></td></tr></table></figure>
+<p>数组引用的翻译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L的综合属性</span><br><span class="line">L.type：L生成的数组元素的类型</span><br><span class="line">L.offset：指示一个临时变量，该临时变量用于累加公式中的ij × wj项，从而计算数组元素的偏移量</span><br><span class="line">L.array：数组名在符号表的入口地址</span><br></pre></td></tr></table></figure>
+<p>控制语句的翻译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">继承属性</span><br><span class="line">B.true：是一个地址，该地址用来存放当B为真时控制流转向的指令的标号</span><br><span class="line">B.false：是一个地址，该地址用来存放当B为假时控制流转向的指令的标号</span><br><span class="line">S.next：是一个地址，该地址用来存放紧跟在S代码之后执行的指令(S的后继指令)的标号</span><br></pre></td></tr></table></figure>
+<p><strong>回填</strong></p>
+<p>非终结符B的综合属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B.truelist：指向一个包含跳转指令的列表，这些指令最终获得的目标标号就是当B为真时控制流应该转向的指令的标号</span><br><span class="line">B.falselist：指向一个包含跳转指令的列表，这些指令最终获得的目标标号就是当B为假时控制流应该转向的指令的标号</span><br></pre></td></tr></table></figure>
+<p>函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">makelist( i )</span><br><span class="line">创建一个只包含i的列表，i是跳转指令的标号，函数返回指向新创建的列表的指针</span><br><span class="line">merge( p1, p2 )</span><br><span class="line">将 p1 和 p2 指向的列表进行合并，返回指向合并后的列表的指针</span><br><span class="line">backpatch( p, i )</span><br><span class="line">将 i 作为目标标号插入到 p所指列表中的各指令中</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nextquad：即将生成的下一条指令的标号</span><br></pre></td></tr></table></figure>
+<h4 id="优化方法"><a href="#优化方法" class="headerlink" title="优化方法"></a>优化方法</h4><p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220517011523873.png" alt="image-20220517011523873" style="zoom: 25%;"></p>
+<h4 id="NFA到DFA的转换"><a href="#NFA到DFA的转换" class="headerlink" title="NFA到DFA的转换"></a>NFA到DFA的转换</h4><p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220114100302890.png" alt="image-20220114100302890" style="zoom: 25%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220114100719876.png" alt="image-20220114100719876" style="zoom: 25%;"></p>
+<h4 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h4><p>词法分析阶段可检测错误的类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">单词拼写错误</span><br><span class="line">非法字符</span><br></pre></td></tr></table></figure>
+<h4 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h4><p>最左规约称为规范规约，而最右推导相应的称为规范推导。</p>
+<p>LL错误恢复：恐慌模式</p>
+<p>LR错误恢复：恐慌模式错误恢复；短语层次错误恢复</p>
+<h4 id="语法制导翻译"><a href="#语法制导翻译" class="headerlink" title="语法制导翻译"></a>语法制导翻译</h4><p>这两种情况下，SDT可在语法分析过程中实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">基本文法可以使用LR分析技术，且SDD是S属性的</span><br><span class="line">基本文法可以使用LL分析技术，且SDD是L属性的</span><br></pre></td></tr></table></figure>
+<p>给定一个以LL文法为基础的L-SDD，可以修改这个文法，并在LR语法分析过程中计算这个新文法之上的SDD</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">给定一个以LL文法为基础的L-属性定义，可以修改这个文法，并在LR语法分析过程中计算这个新文法之上的SDD</span><br><span class="line">首先构造SDT，在各个非终结符之前放置语义动作来计算它的继承属性， 并在产生式后端放置语义动作计算综合属性</span><br><span class="line">对每个内嵌的语义动作，向文法中引入一个标记非终结符来替换它。每个这样的位置都有一个不同的标记，并且对于任意一个标记M都有一个产生式M→ε</span><br><span class="line">如果标记非终结符M在某个产生式A→α&#123;a&#125;β中替换了语义动作a，对a进行修改得到a&#x27; ，并且将a&#x27;关联到M→ε 上。动作a&#x27;</span><br><span class="line">(a) 将动作a需要的A或α中符号的任何属性作为M的继承属性进行复制</span><br><span class="line">(b) 按照a中的方法计算各个属性，但是将计算得到的这些属性作为M的综合属性</span><br></pre></td></tr></table></figure>
+<h3 id="中间代码生成"><a href="#中间代码生成" class="headerlink" title="中间代码生成"></a>中间代码生成</h3><h4 id="类型表达式"><a href="#类型表达式" class="headerlink" title="类型表达式"></a>类型表达式</h4><p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220514095400390.png" alt="image-20220514095400390" style="zoom: 25%;"></p>
+<h4 id="控制流语句SDT编写要点"><a href="#控制流语句SDT编写要点" class="headerlink" title="控制流语句SDT编写要点"></a>控制流语句SDT编写要点</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">分析每一个非终结符之前</span><br><span class="line">先计算继承属性</span><br><span class="line">再观察代码结构图中该非终结符对应的方框顶部是否有导入箭头。如果有，调用label( )函数</span><br><span class="line">上一个代码框执行完不顺序执行下一个代码框时，生成一条显式跳转指令</span><br><span class="line">有自下而上的箭头时，设置begin属性。且定义后直接调用label( )函数绑定地址</span><br></pre></td></tr></table></figure>
+<h3 id="运行存储分配"><a href="#运行存储分配" class="headerlink" title="运行存储分配"></a>运行存储分配</h3><h4 id="活动记录的一般形式"><a href="#活动记录的一般形式" class="headerlink" title="活动记录的一般形式"></a>活动记录的一般形式</h4><p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220514194518053.png" alt="image-20220514194518053" style="zoom:25%;"></p>
+<h4 id="静态存储分配"><a href="#静态存储分配" class="headerlink" title="静态存储分配"></a>静态存储分配</h4><p>顺序分配法<img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220514195326335.png" alt="image-20220514195326335" style="zoom:25%;"></p>
+<p>层次分配法<img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220514195613542.png" alt="image-20220514195613542" style="zoom:25%;"></p>
+<h4 id="栈式存储分配"><a href="#栈式存储分配" class="headerlink" title="栈式存储分配"></a>栈式存储分配</h4><p>活动树</p>
+<p>调用序列与返回序列</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220514203627726.png" alt="image-20220514203627726" style="zoom:25%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220514203641791.png" alt="image-20220514203641791" style="zoom:25%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220514203739336.png" alt="image-20220514203739336" style="zoom:25%;"></p>
+<h3 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h3><p>如果表达式x op y先前已被计算过，并且从先前的计算到现在，x op y中变量的值没有改变，那么x op y的这次出现就称为<strong>公共子表达式</strong></p>
+<p> <strong>复制传播</strong>：在复制语句x = y之后尽可能地用y代替x</p>
+<p>对于一个变量x ，如果存在一个正的或负的常数c使得每次x被赋值时它的值总增加c ，那么x就称为<strong>归纳变量</strong></p>
+<h4 id="DAG"><a href="#DAG" class="headerlink" title="DAG"></a>DAG</h4><p>数组元素赋值<img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220515144738742.png" alt="image-20220515144738742" style="zoom:25%;"></p>
+<h4 id="数据流分析"><a href="#数据流分析" class="headerlink" title="数据流分析"></a>数据流分析</h4><p><strong>到达定值分析</strong></p>
+<p>正常</p>
+<p>作用：</p>
+<p>循环不变计算的检测</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果循环中含有赋值x=y+z ，而y和z所有可能的定值都在循环外面(包括y或z是常数的特殊情况) ，那么y+z就是循环不变计算</span><br></pre></td></tr></table></figure>
+<p>常量合并</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果对变量x的某次使用只有一个定值可以到达，并且该定值把一个常量赋给x ，那么可以简单地把x替换为该常量</span><br></pre></td></tr></table></figure>
+<p>ud链<img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220515160301603.png" alt="image-20220515160301603" style="zoom:25%;"></p>
+<p><strong>活跃变量分析</strong></p>
+<p><strong>活跃变量</strong>：对于变量x和程序点p，如果在流图中沿着从p开始的某条路径会引用变量x在p点的值，则称变量x在点p是活跃(live)的，否则称变量x在点p不活跃(dead)</p>
+<p>逆向分析</p>
+<p>用途：</p>
+<p>删除无用赋值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无用赋值：如果x在点p的定值在基本块内所有后继点都不被引用，且x在基本块出口之后又是不活跃的，那么x在点p的定值就是无用的</span><br></pre></td></tr></table></figure>
+<p>为基本块分配寄存器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果所有寄存器都被占用，并且还需要申请一个寄存器，则应该考虑使用已经存放了死亡值的寄存器，因为这个值不需要保存到内存</span><br><span class="line"> 如果一个值在基本块结尾处是死的就不必在结尾处保存这个值</span><br></pre></td></tr></table></figure>
+<p>du链<img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220515173505087.png" alt="image-20220515173505087" style="zoom:25%;"></p>
+<p><strong>可用表达式分析</strong></p>
+<p>概念：如果从流图的首节点到达程序点 p的每条路径都对表达式x op y进行计算，并且从最后一个这样的计算到点p之间没有再次对x或y定值，那么表达式x op y在点 p是可用的</p>
+<p>初始化时出enter外每个out都是全集</p>
+<p>用途：</p>
+<p>消除全局公共子表达式</p>
+<p>进行复制传播</p>
+<h3 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h3><p>主要任务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">指令选择</span><br><span class="line">寄存器分配（allocation）和指派（assignment）</span><br><span class="line">指令排序</span><br></pre></td></tr></table></figure>
+<h2 id="题目总结"><a href="#题目总结" class="headerlink" title="题目总结"></a>题目总结</h2><p>词素分析</p>
+<p>符号表</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519095250393.png" alt="image-20220519095250393" style="zoom:50%;"></p>
+<p>递归的预测分析</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519090315865.png" alt="image-20220519090315865" style="zoom:50%;"></p>
+<p>非递归的预测分析</p>
+<p>设计SDD</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519090831495.png" alt="image-20220519090831495" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519090857805.png" alt="image-20220519090857805" style="zoom: 50%;"></p>
+<p>改写SDT</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519091009554.png" alt="image-20220519091009554" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519091020128.png" alt="image-20220519091020128" style="zoom:50%;"></p>
+<p>递归的翻译</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519091117371.png" alt="image-20220519091117371" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519091125843.png" alt="image-20220519091125843" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519091136618.png" alt="image-20220519091136618" style="zoom: 50%;"></p>
+<p>非递归的翻译</p>
+<p>活动记录</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519095215951.png" alt="image-20220519095215951" style="zoom:50%;"></p>
+<p>嵌套深度</p>
+<p>找自然循坏</p>
+<p>全局优化</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519112045378.png" alt="image-20220519112045378" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519112057244.png" alt="image-20220519112057244" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519112108281.png" alt="image-20220519112108281" style="zoom:50%;"></p>
+<p>句柄</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519090345663.png" alt="image-20220519090345663" style="zoom:50%;"></p>
+<p>注释语法分析树</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519090524677.png" alt="image-20220519090524677" style="zoom:50%;"></p>
+<p>翻译赋值语句</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519091438811.png" alt="image-20220519091438811" style="zoom:50%;"></p>
+<p>控制流翻译</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519091926010.png" alt="image-20220519091926010" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519091945017.png" alt="image-20220519091945017" style="zoom:50%;"></p>
+<p>四元式序列</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519091908986.png" alt="image-20220519091908986" style="zoom:50%;"></p>
+<p>翻译方案</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519093013272.png" alt="image-20220519093013272" style="zoom:50%;"></p>
+<p>13.5 难</p>
+<p>13.6</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519093318108.png" alt="image-20220519093318108" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519093414326.png" alt="image-20220519093414326" style="zoom:50%;"></p>
+<p>14.4</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519094046078.png" alt="image-20220519094046078" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519094815904.png" alt="image-20220519094815904" style="zoom:50%;"></p>
+<p>求trulist</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519093827461.png" alt="image-20220519093827461" style="zoom:50%;"></p>
+<p>活动树</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519095147977.png" alt="image-20220519095147977" style="zoom:50%;"></p>
+<p>DAG</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519095524644.png" alt="image-20220519095524644" style="zoom:50%;"></p>
+<p>数值分析</p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519095710086.png" alt="image-20220519095710086" style="zoom:50%;"></p>
+<p><img src="/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/image-20220519095720862.png" alt="image-20220519095720862" style="zoom:50%;"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/12/test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/12/test/" class="post-title-link" itemprop="url">test</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-12 19:59:27 / Modified: 20:33:35" itemprop="dateCreated datePublished" datetime="2022-05-12T19:59:27+08:00">2022-05-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p><img src="/2022/05/12/test/QQ图片20220512202816.png" alt="QQ图片20220512202816"></p>
+<p>现象如图所示，会一直打印A。</p>
+<p>在执行时，追踪IDT表，发现表中每一项第四位的值发生了变化。</p>
+<p><img src="/2022/05/12/test/QQ图片20220512203227.png" alt="QQ图片20220512203227"></p>
+<p>在IDT表初始化后，其所有描述表的第四位的值均为ignore_int首第四位值，即0x114。</p>
+<p>在修改的程序后，每次eax都会多执行一条+2的指令。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-08 19:58:05" itemprop="dateCreated datePublished" datetime="2022-05-08T19:58:05+08:00">2022-05-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-09 01:48:08" itemprop="dateModified" datetime="2023-03-09T01:48:08+08:00">2023-03-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="操作系统的引导"><a href="#操作系统的引导" class="headerlink" title="操作系统的引导"></a>操作系统的引导</h1><h2 id="完成-bootsect-s-的屏幕输出功能"><a href="#完成-bootsect-s-的屏幕输出功能" class="headerlink" title="完成 bootsect.s 的屏幕输出功能"></a>完成 bootsect.s 的屏幕输出功能</h2><p>关键代码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">! 文件：bootsect.s</span><br><span class="line">entry _start</span><br><span class="line">_start:</span><br><span class="line">    mov ah,#0x03</span><br><span class="line">    xor bh,bh</span><br><span class="line">    int 0x10</span><br><span class="line">    mov cx,#25</span><br><span class="line">    mov bx,#0x0007</span><br><span class="line">    mov bp,#msg1</span><br><span class="line">    mov ax,#0x07c0</span><br><span class="line">    mov es,ax</span><br><span class="line">    mov ax,#0x1301</span><br><span class="line">    int 0x10</span><br><span class="line">inf_loop:</span><br><span class="line">    jmp inf_loop</span><br><span class="line">msg1:</span><br><span class="line">    .byte   13,10</span><br><span class="line">    .ascii &quot;LKJos is running...&quot;</span><br><span class="line">    .byte   13,10,13,10</span><br><span class="line">.org 510</span><br><span class="line">boot_flag:</span><br><span class="line">    .word   0xAA55</span><br></pre></td></tr></table></figure>
+<p>我们修改的字符为19个，再加上前后一共3个回车加换行，所以总共25个字符。</p>
+<p>将 .org 508 修改为 .org 510，是因为这里不需要 root_dev: .word ROOT_DEV，为了保证 boot_flag 一定在最后两个字节，所以要修改 .org。</p>
+<p>执行下面两个命令编译和链接 bootsect.s</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ as86 -0 -a -o bootsect.o bootsect.s</span><br><span class="line">$ ld86 -0 -s -o bootsect bootsect.o</span><br></pre></td></tr></table></figure>
+<p>需要留意的文件是 <code>bootsect</code> 的文件大小是 <code>544</code> 字节，而引导程序必须要正好占用一个磁盘扇区，即 <code>512</code> 个字节。 造成多了 <code>32</code> 个字节的原因是 <code>ld86</code> 产生的是 <code>Minix</code> 可执行文件格式， 这样的可执行文件处理文本段、数据段等部分以外，还包括一个 <code>Minix</code> 可执行文件头部。</p>
+<p>去掉32字节的头部文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd bs=1 if=bootsect of=Image skip=32</span><br></pre></td></tr></table></figure>
+<p>接下来进行拷贝，并且run</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 当前的工作路径为 /common/linux-0.11/boot/</span><br><span class="line"># 将刚刚生成的 Image 复制到 linux-0.11 目录下</span><br><span class="line">$ cp ./Image ../Image</span><br><span class="line"># 执行run 脚本</span><br><span class="line">$ ../../run</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>注：由于我执行run的时候有些许问题，所以我对于目录结构进行了修改。</p>
+<p>效果如下图</p>
+<p><img src="/2022/05/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC/image-20220508200758526.png" alt="image-20220508200758526"></p>
+<h2 id="bootsect-s-读入-setup-s"><a href="#bootsect-s-读入-setup-s" class="headerlink" title="bootsect.s 读入 setup.s"></a>bootsect.s 读入 setup.s</h2><p>首先编写一个 setup.s，该 setup.s 可以就直接拷贝前面的 bootsect.s，然后将其中的显示的信息改为：“Now we are in SETUP”。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">entry _start</span><br><span class="line">_start:</span><br><span class="line">	mov ah,#0x03</span><br><span class="line">	xor bh,bh</span><br><span class="line">	int 0x10</span><br><span class="line">	mov cx,#25</span><br><span class="line">	mov bx,#0x0007</span><br><span class="line">	mov bp,#msg2</span><br><span class="line">	mov ax,cs				! 这里的cs其实就是这段代码的段地址</span><br><span class="line">	mov es,ax</span><br><span class="line">	mov ax,#0x1301</span><br><span class="line">	int 0x10</span><br><span class="line">inf_loop:</span><br><span class="line">	jmp inf_loop</span><br><span class="line">msg2:</span><br><span class="line">	.byte	13,10</span><br><span class="line">	.ascii	&quot;Now we are in SETUP&quot;</span><br><span class="line">	.byte	13,10,13,10</span><br><span class="line">.org 510</span><br><span class="line">boot_flag:</span><br><span class="line">	.word	0xAA55</span><br></pre></td></tr></table></figure>
+<p>接下来需要编写 <code>bootsect.s</code> 中载入 <code>setup.s</code> 的关键代码,注意去掉无限循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">SETUPLEN=2              ! 读入的扇区数</span><br><span class="line">SETUPSEG=0x07e0         ! setup代码的段地址</span><br><span class="line">entry _start</span><br><span class="line">_start:</span><br><span class="line">    mov ah,#0x03        ! 设置功能号</span><br><span class="line">    xor bh,bh           ! 将bh置0</span><br><span class="line">    int 0x10            ! 返回行号和列号，供显示串用</span><br><span class="line">    mov cx,#25          ！要显示的字符串长度</span><br><span class="line">    mov bx,#0x0007      ! bh=0,bl=07(正常的黑底白字)</span><br><span class="line">    mov bp,#msg1        ! es:bp 要显示的字符串物理地址</span><br><span class="line">    mov ax,#0x07c0      ! 将es段寄存器置为#0x07c0</span><br><span class="line">    mov es,ax           </span><br><span class="line">    mov ax,#0x1301      ! ah=13(设置功能号),al=01(目标字符串仅仅包含字符，属性在BL中包含，光标停在字符串结尾处)</span><br><span class="line">    int 0x10            ! 显示字符串</span><br><span class="line"></span><br><span class="line">! 将setup模块从磁盘的第二个扇区开始读到0x7e00</span><br><span class="line">load_setup:</span><br><span class="line">    mov dx,#0x0000                  ! 磁头=0；驱动器号=0</span><br><span class="line">    mov cx,#0x0002                  ! 磁道=0；扇区=2</span><br><span class="line">    mov bx,#0x0200                  ! 偏移地址</span><br><span class="line">    mov ax,#0x0200+SETUPLEN         ! 设置功能号；需要读出的扇区数量</span><br><span class="line">    int 0x13                        ! 读磁盘扇区到内存</span><br><span class="line">    jnc ok_load_setup               ! CF=0(读入成功)跳转到ok_load_setup  </span><br><span class="line">    mov dx,#0x0000                  ! 如果读入失败，使用功能号ah=0x00————磁盘系统复位</span><br><span class="line">    mov ax,#0x0000</span><br><span class="line">    int 0x13</span><br><span class="line">    jmp load_setup                  ! 尝试重新读入</span><br><span class="line"></span><br><span class="line">ok_load_setup:</span><br><span class="line">    jmpi    0,SETUPSEG              ! 段间跳转指令，跳转到setup模块处(0x07e0:0000)</span><br><span class="line"></span><br><span class="line">! 字符串信息</span><br><span class="line">msg1:</span><br><span class="line">    .byte   13,10           ! 换行+回车</span><br><span class="line">    .ascii  &quot;LKJos is running...&quot;</span><br><span class="line">    .byte   13,10,13,10     ! 换行+回车</span><br><span class="line"></span><br><span class="line">! 将</span><br><span class="line">.org 510</span><br><span class="line"></span><br><span class="line">! 启动盘具有有效引导扇区的标志。仅供BIOS中的程序加载引导扇区时识别使用。它必须位于引导扇区的最后两个字节中</span><br><span class="line">boot_flag:</span><br><span class="line">    .word   0xAA55</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>效果如下图</p>
+<p><img src="/2022/05/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC/image-20220508210219587.png" alt="image-20220508210219587"></p>
+<p>需要修改build.c，并且删除同目录下的 <code>hdc-0.11.img.lock</code> 即可。</p>
+<h2 id="setup-s-获取基本硬件参数"><a href="#setup-s-获取基本硬件参数" class="headerlink" title="setup.s 获取基本硬件参数"></a>setup.s 获取基本硬件参数</h2><p><code>setup.s</code> 将获得硬件参数放在内存的 <code>0x90000</code> 处。原版 <code>setup.s</code> 中已经完成了光标位置、内存大小、显存大小、显卡参数、第一和第二硬盘参数的保存。</p>
+<p>用 <code>ah=#0x03</code> 调用 <code>0x10</code> 中断可以读出光标的位置，用 <code>ah=#0x88</code> 调用 <code>0x15</code> 中断可以读出内存的大小。 有些硬件参数的获取要稍微复杂一些，如磁盘参数表。在 <code>PC</code> 机中 <code>BIOS</code> 设定的中断向量表中 <code>int 0x41</code> 的中断向量位置( <code>4*0x41 = 0x0000:0x0104</code> )存放的并不是中断程序的地址，而是第一个硬盘的基本参数表。 第二个硬盘的基本参数表入口地址存于 <code>int 0x46</code> 中断向量位置处。每个硬盘参数表有 <code>16</code> 个字节大小。</p>
+<p>在PC机中BIOS设定的中断向量表中int 0x41的中断向量位置存放的并不是中断程序的地址,而是第一个硬盘的基本参数表。对于100%兼容的BIOS来说,这里存放着硬盘参数表阵列的首地址0xF000:0E401，第二个硬盘的基本参数表入口地址存于int 0x46中断向量位置处.每个硬盘参数表有16个字节大小.</p>
+<p>这段话是重点，磁盘参数就存放在以0x0000:0x0104为首地址的单元中只存了4个字节，里面存放的是磁盘参数表的偏移地址和段地址，也就是上文所说这里存放着硬盘参数表阵列的首地址0xF000:0E401。</p>
+<p>以十六进制方式显示比较简单。这是因为十六进制与二进制有很好的对应关系（每 4 位二进制数和 1 位十六进制数存在一一对应关系），显示时只需将原二进制数每 4 位划成一组，按组求对应的 ASCII 码送显示器即可。ASCII 码与十六进制数字的对应关系为：0x30 ～ 0x39 对应数字 0 ～ 9，0x41 ～ 0x46 对应数字 a ～ f。从数字 9 到 a，其 ASCII 码间隔了 7h，这一点在转换时要特别注意。为使一个十六进制数能按高位到低位依次显示，实际编程中，需对 bx 中的数每次循环左移一组（4 位二进制），然后屏蔽掉当前高 12 位，对当前余下的 4 位（即 1 位十六进制数）求其 ASCII 码，要判断它是 0 ～ 9 还是 a ～ f，是前者则加 0x30 得对应的 ASCII 码，后者则要加 0x37 才行，最后送显示器输出。以上步骤重复 4 次，就可以完成 bx 中数以 4 位十六进制的形式显示出来。</p>
+<p>如下图：</p>
+<p><img src="/2022/05/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC/image-20220508215057266.png" alt="image-20220508215057266"></p>
+<p>代码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br></pre></td><td class="code"><pre><span class="line">! 文件setup.s</span><br><span class="line">INITSEG = 0x9000</span><br><span class="line"></span><br><span class="line">entry _start</span><br><span class="line">_start:</span><br><span class="line">! 在显示字符串之前必须先获取当前光标的位置，这样就可以把字符串显示到当前光标处了</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10</span><br><span class="line">    </span><br><span class="line">! 利用10号中断的13号功能打印字符串&quot;Now we are in SETUP.&quot;</span><br><span class="line">    mov    cx,#26</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    bp,#msg1</span><br><span class="line">    mov     ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10</span><br><span class="line"></span><br><span class="line">! 下面开始读取一些硬件参数</span><br><span class="line"></span><br><span class="line">    ! 读入光标位置信息，保存到0x90000处</span><br><span class="line">    mov    ax,#INITSEG</span><br><span class="line">    mov    ds,ax</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10</span><br><span class="line">    mov    [0],ds</span><br><span class="line"></span><br><span class="line">    ! 读入内存大小位置信息，保存到0x90002处</span><br><span class="line">    mov    ah,#0x88</span><br><span class="line">    int    0x15</span><br><span class="line">    mov    [2],ax</span><br><span class="line"></span><br><span class="line">    ! 从0x41处拷贝16个字节（磁盘参数表）到0x90004处</span><br><span class="line">    mov    ax,#0x0000</span><br><span class="line">    mov    ds,ax</span><br><span class="line">    lds    si,[4*0x41]</span><br><span class="line">    mov    ax,#INITSEG</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    di,#0x0004</span><br><span class="line">    mov    cx,#0x10</span><br><span class="line">    rep       ! 重复16次</span><br><span class="line">    movsb</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">! 先打印光标位置</span><br><span class="line">    ! 打印字符串之前要先读取光标位置，将字符串打印到当前光标处</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10</span><br><span class="line"></span><br><span class="line">    ! 打印字符串 &quot;Cursor POS:&quot;</span><br><span class="line">    mov    cx,#11</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    bp,#msg2</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10    </span><br><span class="line">    </span><br><span class="line">    ! 调用打印函数，打印光标位置</span><br><span class="line">    mov    ax,#0x9000</span><br><span class="line">    mov    ds,ax</span><br><span class="line">    mov    dx,0x0</span><br><span class="line">    call    print_hex</span><br><span class="line">    call    print_nl</span><br><span class="line"></span><br><span class="line">! 打印内存大小</span><br><span class="line">    ! 打印字符串&quot;Memory SIZE:&quot;</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10    ! 读取光标位置</span><br><span class="line"></span><br><span class="line">    mov    cx,#12</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    bp,#msg3</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ! 调用打印函数，打印内存大小信息</span><br><span class="line">    mov    ax,#0x9000    </span><br><span class="line">    mov    ds,ax</span><br><span class="line">    mov    dx,0x2</span><br><span class="line">    call     print_hex</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ! 打印字符串&quot;KB&quot;</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10    ! 读取光标位置    </span><br><span class="line">    </span><br><span class="line">    mov    cx,#2</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    bp,#msg4</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10    </span><br><span class="line">    call    print_nl    </span><br><span class="line"></span><br><span class="line">!打印柱面数</span><br><span class="line">    ! 打印字符串&quot;Cyls&quot;</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10    ! 读取光标位置</span><br><span class="line"></span><br><span class="line">    mov    cx,#5</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    bp,#msg5</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10    </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    ! 调用打印函数打印磁盘柱面数</span><br><span class="line">    mov    ax,#0x9000    </span><br><span class="line">    mov    ds,ax</span><br><span class="line">    mov    dx,0x4</span><br><span class="line">    call    print_hex</span><br><span class="line">    call    print_nl</span><br><span class="line"></span><br><span class="line">! 打印磁头数</span><br><span class="line">    ! 打印字符串&quot;Heads:&quot;</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10    ! 读取光标位置</span><br><span class="line"></span><br><span class="line">    mov    cx,#6</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    bp,#msg6</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10    </span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    ! 调用打印函数打印磁盘磁头数</span><br><span class="line">    mov    ax,#0x9000    </span><br><span class="line">    mov    ds,ax</span><br><span class="line">    mov    dx,0x6</span><br><span class="line">    call    print_hex</span><br><span class="line">    call    print_nl</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">! 打印每磁道扇区数</span><br><span class="line">    ! 打印字符串&quot;sectors&quot;</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10    ! 读取光标位置</span><br><span class="line"></span><br><span class="line">    mov    cx,#8</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    bp,#msg7</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10    </span><br><span class="line"></span><br><span class="line">    ! 调用打印函数打印扇区数</span><br><span class="line">    mov    ax,#0x9000    </span><br><span class="line">    mov    ds,ax</span><br><span class="line">    mov    dx,0x12</span><br><span class="line">    call    print_hex</span><br><span class="line">    call    print_nl</span><br><span class="line"></span><br><span class="line">Inf_loop:</span><br><span class="line">    jmp Inf_loop    ! 无限循环</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">! print_hex函数：将一个数字转换为ascii码字符，并打印到屏幕上</span><br><span class="line">! 参数值：dx</span><br><span class="line">! 返回值：无</span><br><span class="line">print_hex:</span><br><span class="line">    mov    cx,#4            ! 要打印4个十六进制数字,故循环4次</span><br><span class="line">print_digit:</span><br><span class="line">    rol    dx,#4            ! 循环以使低4比特用上 !! 取dx的高4比特移到低4比特处</span><br><span class="line">    mov    ax,#0xe0f        ! ah = 请求的功能值，al = 半字节(4个比特)掩码</span><br><span class="line">    and    al,dl            ! 取dl的低4比特值</span><br><span class="line">    add    al,#0x30        ! 给al数字加上十六进制0x30</span><br><span class="line">    cmp    al,#0x3a    </span><br><span class="line">    jl    outp            ! 如果是一个不大于十的数字</span><br><span class="line">    add    al,#0x07    ! 如果是a～f，要多加7</span><br><span class="line">outp:</span><br><span class="line">    int    0x10</span><br><span class="line">    loop    print_digit    ! 用loop重复4次</span><br><span class="line">    ret</span><br><span class="line"></span><br><span class="line">! 打印回车换行</span><br><span class="line">print_nl:</span><br><span class="line">    mov    ax,#0xe0d</span><br><span class="line">    int    0x10</span><br><span class="line">    mov    al,#0xa</span><br><span class="line">    int    0x10</span><br><span class="line">    ret</span><br><span class="line"></span><br><span class="line">msg1:</span><br><span class="line">    .byte 13,10</span><br><span class="line">    .ascii &quot;Now we are in SETUP.&quot;</span><br><span class="line">    .byte 13,10,13,10</span><br><span class="line"></span><br><span class="line">msg2:</span><br><span class="line">    .ascii &quot;Cursor POS:&quot;</span><br><span class="line"></span><br><span class="line">msg3:    </span><br><span class="line">    .ascii &quot;Memory SIZE:&quot;</span><br><span class="line"></span><br><span class="line">msg4:</span><br><span class="line">    .ascii &quot;KB&quot;</span><br><span class="line"></span><br><span class="line">msg5:    </span><br><span class="line">    .ascii &quot;Cyls:&quot;</span><br><span class="line"></span><br><span class="line">msg6:</span><br><span class="line">    .ascii &quot;Heads:&quot;</span><br><span class="line"></span><br><span class="line">msg7:</span><br><span class="line">    .ascii &quot;Sectors:&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.org 510</span><br><span class="line">boot_flag:</span><br><span class="line">    .word 0xAA55</span><br></pre></td></tr></table></figure>
+<h2 id="问题解答"><a href="#问题解答" class="headerlink" title="问题解答"></a>问题解答</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当PC的电源打开后，80x86结构的CPU将自动进入实模式，并从地址0xFFFF0开始自动执行程序代码，这个地址通常是ROM—BIOS中的地址。PC机的BIOS将执行某些系统的检测，并在物理地址0处开始初始化中断向量。此后将启动设备的第一个扇区512字节读入内存绝对地址0x7C00处。因为当时system模块的长度不会超过0x80000字节大小512KB，所以bootsect程序把system模块读入物理地址0x10000开始位置处时并不会覆盖在0x90000处开始的bootsect和setup模块，多此一举的是system模块移到内存中相对靠后的位置，以便加载系统主模块。解决方案是在保证操作系统启动引导成功的前提下尽量扩大ROM—BIOS的内存寻址范围。</span><br></pre></td></tr></table></figure>
+<h2 id="知识点记录"><a href="#知识点记录" class="headerlink" title="知识点记录"></a>知识点记录</h2><h3 id="数据寄存器"><a href="#数据寄存器" class="headerlink" title="数据寄存器"></a>数据寄存器</h3><p><strong>AH&amp;AL=AX(accumulator)：</strong>累加寄存器，常用于运算;在乘除等指令中指定用来存放操作数，另外,所有的I/O指令都使用这一寄存器与外界设备传送数据。</p>
+<p><strong>BH&amp;BL=BX(base)：</strong>基址寄存器，常用于地址索引</p>
+<p><strong>CH&amp;CL=CX(count)：</strong>计数寄存器，常用于计数；常用于保存计算值，如在移位指令,循环(loop)和串处理指令中用作隐含的计数器.</p>
+<p><strong>DH&amp;DL=DX(data)：</strong>数据寄存器，常用于数据传递。</p>
+<p>他们的特点是，这4个16位的寄存器可以分为高8位: AH, BH, CH, DH.以及低八位：AL,BL,CL,DL。这2组8位寄存器可以分别寻址，并单独使用。</p>
+<h3 id="中断知识"><a href="#中断知识" class="headerlink" title="中断知识"></a>中断知识</h3><h4 id="int-0x10"><a href="#int-0x10" class="headerlink" title="int 0x10"></a>int 0x10</h4><p><img src="/2022/05/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC/image-20220509162715086.png" alt="image-20220509162715086"></p>
+<p>注意，这里ah要先有值，代表内部子程序的编号</p>
+<p>功能号ah=0x03，作用是读取光标的位置</p>
+<p>输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bh = 页号</span><br></pre></td></tr></table></figure>
+<p>返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ch = 扫描开始线；cl = 扫描结束线；dh = 行号；dl = 列号</span><br></pre></td></tr></table></figure>
+<p>功能号ah=0x13，作用是显示字符串</p>
+<p>输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">al = 放置光标的方式及规定属性，下文 al＝1，表示目标字符串仅仅包含字符，属性在BL中包含，光标停在字符串结尾处；es:bp = 字符串起始位置；cx = 显示的字符串字符数；bh = 页号；bl = 字符属性，下文 bl = 07H，表示正常的黑底白字；dh = 行号；dl = 列号</span><br></pre></td></tr></table></figure>
+<p>功能号ah=0x0e，作用是显示字符</p>
+<p>输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">al = 字符</span><br></pre></td></tr></table></figure>
+<h4 id="int-0x13"><a href="#int-0x13" class="headerlink" title="int 0x13"></a>int 0x13</h4><p>在DOS等实模式操作系统下，调用INT 13h会跳转到计算机的ROM-BIOS代码中进行低级磁盘服务，对程序进行基于物理扇区的磁盘读写操作。</p>
+<p>功能号ah=0x02，作用是读磁盘扇区到内存<br>输入：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>寄存器</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ah</td>
+<td>读磁盘扇区到内存</td>
+</tr>
+<tr>
+<td>al</td>
+<td>需要读出的扇区数量</td>
+</tr>
+<tr>
+<td>ch</td>
+<td>磁道</td>
+</tr>
+<tr>
+<td>cl</td>
+<td>扇区</td>
+</tr>
+<tr>
+<td>dh</td>
+<td>磁头</td>
+</tr>
+<tr>
+<td>dl</td>
+<td>驱动器</td>
+</tr>
+<tr>
+<td>es:bx</td>
+<td>数据缓冲区的地址</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>返回</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ah = 出错码（00H表示无错，01H表示非法命令，02H表示地址目标未发现…）；CF为进位标志位，如果没有出错CF=0</span><br></pre></td></tr></table></figure>
+<p>功能号ah=0x00，作用是磁盘系统复位</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：dl = 驱动器</span><br><span class="line">返回：如果操作成功———— C F = 0 CF=0CF=0，a h = 00 H ah=00Hah=00H</span><br></pre></td></tr></table></figure>
+<h4 id="int-0x15"><a href="#int-0x15" class="headerlink" title="int 0x15"></a>int 0x15</h4><p>功能号ah=0x88，作用是获取系统所含扩展内存大小</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：ah = 0x88</span><br><span class="line">返回：ax = 从0x100000(1M)处开始的拓展内存大小(KB)。若出错则CF置位，ax = 出错码。</span><br></pre></td></tr></table></figure>
+<h4 id="int-0x41"><a href="#int-0x41" class="headerlink" title="int 0x41"></a>int 0x41</h4><p>在PC机中BIOS设定的中断向量表中int 0x41的中断向量位置 (4 ∗ 0 x 41 = 0 x 0000 : 0 x 0104 4*0x41 = 0x0000:0x01044∗0x41=0x0000:0x0104)存放的并不是中断程序的地址,而是第一个硬盘的基本参数表。对于100%兼容的BIOS来说,这里存放着硬盘参数表阵列的首地址0xF000:0E401，第二个硬盘的基本参数表入口地址存于int 0x46中断向量位置处.每个硬盘参数表有16个字节大小.</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="lds"><a href="#lds" class="headerlink" title="lds"></a>lds</h4><p>格式： LDS reg16，mem32</p>
+<p>其意义是同时给一个段寄存器和一个16位通用寄存器同时赋值</p>
+<p>举例：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>地址</th>
+<th>100H</th>
+<th>101H</th>
+<th>102H</th>
+<th>103H</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内容</td>
+<td>00H</td>
+<td>41H</td>
+<td>02H</td>
+<td>03H</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LDS AX,[100H]</span><br><span class="line">! 结果：AX=4100H  DS=0302H</span><br><span class="line">可以理解为</span><br><span class="line">mov AX,[100H]</span><br><span class="line">mov DS,[100H+2]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/" class="post-title-link" itemprop="url">调试分析 Linux 0.00 多任务切换</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-04 15:17:11 / Modified: 21:51:59" itemprop="dateCreated datePublished" datetime="2022-05-04T15:17:11+08:00">2022-05-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="调试分析-Linux-0-00-多任务切换"><a href="#调试分析-Linux-0-00-多任务切换" class="headerlink" title="调试分析 Linux 0.00 多任务切换"></a>调试分析 Linux 0.00 多任务切换</h1><h2 id="执行-153-行-iret-时栈的变化"><a href="#执行-153-行-iret-时栈的变化" class="headerlink" title="执行 153 行 iret 时栈的变化"></a>执行 153 行 iret 时栈的变化</h2><p>执行前栈的内容</p>
+<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504154137710.png" alt="image-20220504154137710" style="zoom:50%;"></p>
+<p>执行后栈的内容</p>
+<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504154156025.png" alt="image-20220504154156025" style="zoom:50%;"></p>
+<p>在执行前后进行了栈的切换，从任务0的内核栈切换到了任务的用户栈。</p>
+<h2 id="模式切换"><a href="#模式切换" class="headerlink" title="模式切换"></a>模式切换</h2><p>当进入和退出 <code>system_interrupt</code> 时，都发生了模式切换，请总结模式切换时，特权级是如何改变的？栈切换吗？如何进行切换的？</p>
+<p>在进入中断时，通过查询IDT表，获得索引，之后进行特权级检查，要求CPL&lt;=调用门DPL；RPL&lt;=调用门DPL。DPL&lt;=CPL。特权级检查通过，则特权级改变。栈也进行切换。处理器从当前任务的TSS段获得该中断使用的堆栈的段选择符与栈指针，然后把被中断的栈选择符与栈指针压入新栈。EFLAGES、CS、EIP的值也被压栈。</p>
+<p>当退出时，使用iret指令。把保存的寄存器内容恢复到EFLAGES中，完成特权级复原，即切换为3。同时栈也切换回原来的栈。</p>
+<h2 id="任务切换过程"><a href="#任务切换过程" class="headerlink" title="任务切换过程"></a>任务切换过程</h2><p>当时钟中断发生，进入到 <code>timer_interrupt</code> 程序，请详细记录从任务 <code>0</code> 切换到任务 <code>1</code> 的过程。</p>
+<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504170543986.png" alt="image-20220504170543986" style="zoom: 33%;"></p>
+<p>以本图为例分析。说明第一次切换时的状况，第一次切换，即时钟中断发生时，大概率会在227行，此时任务号为0，当跳入时钟中断后，从125行开始进行转换，首先将1写入寄存器eax，然后判断，因为此时任务号为0，所以不执行127行，执行128行，则将任务号改为1，然后在129行跳转到任务1的代码段。</p>
+<p>任务0时的寄存器如下：</p>
+<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/W30F_428FK4HUQ8]K0{NQS.jpg" alt="img" style="zoom:50%;"></p>
+<p>任务1时的寄存器如下：</p>
+<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504205616009.png" alt="image-20220504205616009" style="zoom:50%;"></p>
+<h2 id="任务切回过程"><a href="#任务切回过程" class="headerlink" title="任务切回过程"></a>任务切回过程</h2><p>又过了 <code>10ms</code> ，从任务1切换回到任务 <code>0</code> ，整个流程是怎样的？ <code>TSS</code> 是如何变化的？各个寄存器的值是如何变化的？</p>
+<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504170543986.png" alt="image-20220504170543986" style="zoom:33%;"></p>
+<p>如图，承接上题叙述，从代码段228执行，在232循环，大概率在循环时进行时间中断发生，在126行比较时，由于此时任务号为1，所以跳转到131行，将任务号设为0，在132行处，跳转到任务0，由于任务0执行到129行，所以从130执行，再跳转到133行，弹栈后通过iret返回，由于上次为在226行触发中断，所以回到226行。</p>
+<p>寄存器变化如下：</p>
+<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/QQ图片20220504212642.png" alt="QQ图片20220504212642" style="zoom: 33%;"></p>
+<p>变至</p>
+<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/(PWOBGOQ)2`%MSLMDHDOG4X.png" alt="img" style="zoom:33%;"></p>
+<p>下图为任务0的TSS</p>
+<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504214234727.png" alt="image-20220504214234727" style="zoom:33%;"></p>
+<p>下图为任务1的TSS</p>
+<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504214319515.png" alt="image-20220504214319515" style="zoom: 33%;"></p>
+<h2 id="详细总结任务切换的过程"><a href="#详细总结任务切换的过程" class="headerlink" title="详细总结任务切换的过程"></a>详细总结任务切换的过程</h2><p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504170543986.png" alt="image-20220504170543986" style="zoom:33%;"></p>
+<p>还是对照这张图片，从头来讲。</p>
+<p>第一次切换，即时钟中断发生时，大概率会在227行，此时任务号为0，当跳入时钟中断后，从125行开始进行转换，首先将1写入寄存器eax，然后判断，因为此时任务号为0，所以不执行127行，执行128行，则将任务号改为1，然后在129行跳转到任务1的代码段。</p>
+<p>从代码段228执行，在232循环，大概率在循环时进行时间中断发生，在126行比较时，由于此时任务号为1，所以跳转到131行，将任务号设为0，在132行处，跳转到任务0，由于任务0执行到129行，所以从130执行，再跳转到133行，弹栈后通过iret返回，由于上次为在226行触发中断，所以回到226行。</p>
+<p>然后大概率在此行，再次遇到时间中断，从125行开始进行转换，首先将1写入寄存器eax，然后判断，因为此时任务号为0，所以不执行127行，执行128行，则将任务号改为1，然后在129行跳转到任务1。由于任务1上次执行至</p>
+<p>132行，所以从133行开始，到iret返回至232行。</p>
+<p>又大概率在232行遇到时钟中断，执行到126行比较后跳转到131行，将任务号变为0，回到任务0的代码段。</p>
+<p>至此为一个流程。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/26/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90Linux0-00%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/26/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90Linux0-00%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/" class="post-title-link" itemprop="url">调试分析Linux0.00引导程序</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-04-26 15:34:03" itemprop="dateCreated datePublished" datetime="2022-04-26T15:34:03+08:00">2022-04-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-27 23:47:22" itemprop="dateModified" datetime="2022-04-27T23:47:22+08:00">2022-04-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="调试分析Linux0-00引导程序"><a href="#调试分析Linux0-00引导程序" class="headerlink" title="调试分析Linux0.00引导程序"></a>调试分析Linux0.00引导程序</h1><h2 id="简述head-s的工作原理"><a href="#简述head-s的工作原理" class="headerlink" title="简述head.s的工作原理"></a>简述head.s的工作原理</h2><p>​        主要包括初始设置与任务执行切换。</p>
+<p>​        初始设置包括：</p>
+<p>1.设置GDT表。</p>
+<p>2.设置系统定时芯片。</p>
+<p>3.设置IDT表。</p>
+<p>4.切换到任务0。</p>
+<p>任务执行切换则为：</p>
+<p>​        head.s程序中把定时器芯片8253的通道0设置成每经过10ms就向中断控制芯片8259A发送一个时钟中断请求信号。PC机的ROM BIOS开机时已经在8259A把时钟中断请求信号设置成中断向量8，在中断8的处理过程中执行任务切换操作。任务切换的实现方法是查看current变量中当前运行任务号，若当前为0，就利用任务1的TSS选择符作为操作数执行远跳转指令，从而切换到任务1中执行，否则反之。</p>
+<p>​        每个任务在执行时，会先把一个字符的ASCLL码放入寄存器AL中，然后调用系统中断调用int 0x80，而该系统调用处理过程则会调用一个简单的字符写屏子程序，把寄存器AL中的字符显示在屏幕上，同时把字符显示的屏幕下一个位置记录下来，作为下一次显示字符的屏幕位置。在显示过一个字符后，任务代码会使用循环语句延迟一段时间，然后跳转到任务代码开始出继续循环执行，从而不断显示。</p>
+<h2 id="记录head-s的内存分布情况"><a href="#记录head-s的内存分布情况" class="headerlink" title="记录head.s的内存分布情况"></a>记录head.s的内存分布情况</h2><p>首先从GDT表看起，GDTR为0x998(3f)，则跳转到0x998去。寄存器SS的内容为0010。</p>
+<p>由于第一项为空，则从第二项看，第二项为FF 07 00 00 00 9A C0 00。将其填写到段描述中，发现其S为1，TYPE为A，为代码段，G为1，段限长为0 07 FF ，基地址为0。则实际段长度为8MB。</p>
+<p>第三项为FF 07 00 00 00 93 C0 00。将其填写到段描述中，发现其S为1，TYPE为3，为栈段，G为1，段限长为0 07 FF ，基地址为0，B/D为1。</p>
+<p>第四项为02 00 00 80 0B 92 C0 00，将其填写到段描述符中，发现其S为1，TYPE为2，为数据段，G为1，段限长为0 00 02，基地址为0XB8000。则实际段长度为8KB。</p>
+<p>第五、第六、七项S为0。</p>
+<p>再查询任务0 LDT表</p>
+<p>同理分析，则代码段与数据段基地址均为0，段限长为0x03ff，实际长度为4MB。</p>
+<p>再查询任务1 LDT表</p>
+<p>同理分析，则代码段与数据段基地址均为0，段限长为0x03ff，实际长度为4MB。</p>
+<p>再运行到任务0处，此时SS寄存器为0x17，栈段基地址为0，段限长为0x03ff。</p>
+<p>运行到任务1同理，此时SS寄存器为0x17，栈段基地址为0，段限长为0x03ff。</p>
+<p>初始化的代码段起始地址为0，段长为8MB，则终止地址为0X800000。数据段起始地址为0XB8000，段长为8kb，终止地址为0XBA000。</p>
+<p>任务0的代码段起始地址为0，段长为4MB，则终止地址为0X400000。数据段起始地址为0，段长为4MB，则终止地址为0X400000。</p>
+<p>任务1的代码段起始地址为0，段长为4MB，则终止地址为0X400000。数据段起始地址为0，段长为4MB，则终止地址为0X400000。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>栈段编号</th>
+<th>名称</th>
+<th>起始地址</th>
+<th>终止地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>init_stack</td>
+<td>0x9d8</td>
+<td>0xbd8</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Km_stk0</td>
+<td>0xc60</td>
+<td>0xe60</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Km_stk1</td>
+<td>0xe00</td>
+<td>0x10e0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>User _stk1</td>
+<td>0x1108</td>
+<td>0x1308</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="简述head-s-57-62行"><a href="#简述head-s-57-62行" class="headerlink" title="简述head.s 57-62行"></a>简述head.s 57-62行</h2><p>将新调度任务（任务0）的上下文，加载进处理器中，并将从加载的EIP指向的指令出开始执行。具体操作为</p>
+<p>57：将任务0当前局部空间数据段选择符入栈，</p>
+<p>58：将堆栈指针入栈，</p>
+<p>59：将标志寄存器值入栈，</p>
+<p>60：将当前局部空间代码段选择符入栈，</p>
+<p>61：将代码指针入栈，</p>
+<p>62：通过执行中断返回指令，切换到特权级3的任务0执行。·    </p>
+<h2 id="简述iret执行后，PC如何找到下一条指令。"><a href="#简述iret执行后，PC如何找到下一条指令。" class="headerlink" title="简述iret执行后，PC如何找到下一条指令。"></a>简述iret执行后，PC如何找到下一条指令。</h2><p><img src="/2022/04/26/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90Linux0-00%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/image-20220427150129063.png" alt="image-20220427150129063"></p>
+<p>在iret执行前，eip的值为000000ac,esp为00000bc4，cs的值为0008，栈顶的值为000010e0，然后执行iret。</p>
+<p><img src="/2022/04/26/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90Linux0-00%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/image-20220427150336651.png" alt="image-20220427150336651"></p>
+<p>栈内五条内容均被弹出，其中000010e0被写入eip，同时0000000f被写入cs，则获得了下一条指令的地址。</p>
+<h2 id="记录iret执行前后，栈的变化"><a href="#记录iret执行前后，栈的变化" class="headerlink" title="记录iret执行前后，栈的变化"></a>记录iret执行前后，栈的变化</h2><p>执行前</p>
+<p><img src="/2022/04/26/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90Linux0-00%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/image-20220427151617085.png" alt="image-20220427151617085"></p>
+<p>执行后</p>
+<p><img src="/2022/04/26/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90Linux0-00%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/image-20220427151627637.png" alt="image-20220427151627637"></p>
+<p>看上述两张图，图一为执行时，ss为0010，esp为00000bc4，当iret执行后，会弹出五条内容。分别为之前保存的寄存器eip的值，寄存器cs的值，标志寄存器eflags的值，寄存器esp的值，寄存器ss的值。</p>
+<h2 id="系统调用int-0x80时，栈的变化情况"><a href="#系统调用int-0x80时，栈的变化情况" class="headerlink" title="系统调用int 0x80时，栈的变化情况"></a>系统调用int 0x80时，栈的变化情况</h2><p>调用int 0x80前，栈为task0或task1的用户栈</p>
+<p><img src="/2022/04/26/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90Linux0-00%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/image-20220427151837544.png" alt="image-20220427151837544"></p>
+<p>调用int 0x80后，为此任务的系统栈。</p>
+<p><img src="/2022/04/26/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90Linux0-00%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/image-20220427152127334.png" alt="image-20220427152127334"></p>
+<p>由于执行前任务特权级为3，而执行后任务特权级为0，所以进行了栈切换。压入了中断前的ss、栈指针、标志寄存器、cs和下一条指令的eip。ss寄存器的值也发生了相应变化。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/23/%E7%A2%B3%E6%8E%92%E6%94%BE%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1530,757 +2217,10 @@ T(R\chi S)=T(R)T(S)</script><p>投影操作数的基数估计</p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/12/%E6%97%B6%E9%97%B4%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/12/%E6%97%B6%E9%97%B4%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">时间记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-04-12 09:33:47" itemprop="dateCreated datePublished" datetime="2022-04-12T09:33:47+08:00">2022-04-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-05 23:03:31" itemprop="dateModified" datetime="2022-05-05T23:03:31+08:00">2022-05-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="4-12"><a href="#4-12" class="headerlink" title="4.12"></a>4.12</h2><p>9.30-9.39 背单词</p>
-<p>9.39-9.54 看编译原理慕课</p>
-<p>10.02-11.07 线代第一讲</p>
-<p>11.30-11.45 线代第一讲</p>
-<p>13.26-14.56 午觉 </p>
-<p>15.00-15.28  15.38- 16.06 线代第一讲完成</p>
-<p>16.22-17.00 背单词</p>
-<p>17.16-17.35 看《Linux内核完全剖析》</p>
-<p>17.45-20.00 健身</p>
-<p>20.09-20.44背单词</p>
-<p>21.20-21.51 看《Linux内核完全剖析》</p>
-<p>21.56-22.08 看实验</p>
-<p>22.11-22.20 线代第二章</p>
-<h2 id="4-13"><a href="#4-13" class="headerlink" title="4.13"></a>4.13</h2><p>8.49-8.56 英语单词</p>
-<p>9.05-9.45 线代第二章</p>
-<p>10.-11.45上课</p>
-<p>12.39 吃完饭</p>
-<p>12.40-14.26 睡午觉</p>
-<p>14.31 -14.53 15.00-16.58 17.10-17.17线代第二章</p>
-<p>17.18-17.33 英语单词</p>
-<p>17.45-20.08 锻炼</p>
-<p>20.20-22.00 讨论</p>
-<p>22.10-22.36 英语单词</p>
-<h2 id="4-14"><a href="#4-14" class="headerlink" title="4.14"></a>4.14</h2><p>10.00-11.47 健身</p>
-<p>12.40-12.54 线代第二章</p>
-<p>12.55-13.45午觉</p>
-<p>13.45-15.30 上课，顺便完成线代第二章</p>
-<p>15.30-16.40 打电话与学长</p>
-<p>16.40-17.45 看实验</p>
-<p>18.30-21.00实验课</p>
-<p>21.00-21.52 读书笔记四</p>
-<p>22.00-22.30 背单词</p>
-<h2 id="4-15"><a href="#4-15" class="headerlink" title="4.15"></a>4.15</h2><p>9.00-10.00 考试</p>
-<p>10.02-10.10 单词</p>
-<p>10.40-11.00英语听力</p>
-<p>12.20-13.48 睡午觉</p>
-<p>13.59-14.43 做核酸</p>
-<p>14.43-16.05 线代第三章</p>
-<p>16.15-16.53 完成读书笔记四</p>
-<p>17.45-19.41 健身</p>
-<p>19.50-20.26 背单词</p>
-<p>20.26-20.56 打电话</p>
-<p>21.00-21.16 交报告</p>
-<p>21.50-22.30 听力</p>
-<h2 id="4-16"><a href="#4-16" class="headerlink" title="4.16"></a>4.16</h2><p>9.10-9.20 单词</p>
-<p>9.37-10.37 口语训练配音</p>
-<p>10.40-11.46 线代第三章</p>
-<p>12.26-13.45午觉</p>
-<p>13.45-14.20核酸</p>
-<p>14.20-15.26 完成线代第三章</p>
-<p>15.30-17.00 看《Linux内核完全剖析》</p>
-<p>17.00-17.30 单词</p>
-<p>17.45-19.45 健身</p>
-<h2 id="4-17"><a href="#4-17" class="headerlink" title="4.17"></a>4.17</h2><p>9.00-10.40 开会</p>
-<p>10.45-11.00背单词</p>
-<p>15.00-16.45 线代第四章</p>
-<h2 id="4-18"><a href="#4-18" class="headerlink" title="4.18"></a>4.18</h2><p>15.45-17.19 完成线代第四章</p>
-<p>17.19-17.46 单词</p>
-<p>19.15-21.15 数据整理</p>
-<h2 id="4-19"><a href="#4-19" class="headerlink" title="4.19"></a>4.19</h2><p>9.09-9.26 背单词</p>
-<p>9.27-9.54 线代第五讲，注：需要重新看视频</p>
-<p>10.00-12.17 复习完编译原理第一章</p>
-<p>14.00-15.10 开会</p>
-<p>15.15-16.24 复习数据库ch0</p>
-<p>16.45-16.49 17.00-17.36 翻译英语Text5</p>
-<p>17.45-19.30 健身</p>
-<p>19.30-22.07 开会</p>
-<p>22.07-22.23 单词</p>
-<h2 id="4-20"><a href="#4-20" class="headerlink" title="4.20"></a>4.20</h2><p>8.50-9.00 背单词</p>
-<p>9.08-10.00 数据库报告</p>
-<p>10.00-11.45 上课</p>
-<p>14.57-15.07 查询资料</p>
-<p>15.07-17.30 编译原理实验</p>
-<p>17.45-19.30 健身</p>
-<p>20.00-21.00 开会</p>
-<p>21.30-22.32 单词</p>
-<h2 id="4-21"><a href="#4-21" class="headerlink" title="4.21"></a>4.21</h2><p>13.45-16.30 编译原理实验</p>
-<p>16.41-17.20 单词</p>
-<p>18.36-19.00 20.31-21.30 背单词</p>
-<p>21.31-22.30 翻译</p>
-<h2 id="4-22"><a href="#4-22" class="headerlink" title="4.22"></a>4.22</h2><p>9.00-11.00 14.30-17.45 数据库实验</p>
-<p>19.50-21.00 单词</p>
-<p>21.20-23.43 实验</p>
-<h2 id="4-23"><a href="#4-23" class="headerlink" title="4.23"></a>4.23</h2><p>11.00过来做比赛</p>
-<p>17.45-19.30健身</p>
-<p>20.00-22.00 单词</p>
-<h2 id="4-24"><a href="#4-24" class="headerlink" title="4.24"></a>4.24</h2><p>15.00-17.00 数据库</p>
-<p>20.47-21.31单词</p>
-<h2 id="4-25"><a href="#4-25" class="headerlink" title="4.25"></a>4.25</h2><p>8.56-9.45 看《Linux内核完全剖析》</p>
-<p>12.56-14.35 睡觉</p>
-<p>14.36-15.40 18.20-21.11 完成数据库实验</p>
-<p>21.20-22.24 写论文</p>
-<h2 id="4-26"><a href="#4-26" class="headerlink" title="4.26"></a>4.26</h2><p>9.20-11.45  看《Linux内核完全剖析》</p>
-<p>14.20-15.35 写论文</p>
-<p>15.35-17.40 看《Linux内核完全剖析》</p>
-<p>20.25-22.44 操作系统实验一</p>
-<h2 id="4-27"><a href="#4-27" class="headerlink" title="4.27"></a>4.27</h2><p>8.10-8.20 单词</p>
-<p>8.50-10.00 看《Linux内核完全剖析》</p>
-<p>12.10-12.20 操作系统实验一</p>
-<p>14.30-15.38 完成操作系统实验一</p>
-<p>15.53-17.00 数据库实验四</p>
-<p>20.05-23.47 实验</p>
-<h2 id="4-28"><a href="#4-28" class="headerlink" title="4.28"></a>4.28</h2><p>白天看实验，看了一天</p>
-<p>20.30-23.59 写比赛论文</p>
-<h2 id="4-29"><a href="#4-29" class="headerlink" title="4.29"></a>4.29</h2><p>9.00-9.05 单词</p>
-<p>9.05-9.50 写实验报告</p>
-<p>9.51-11.00 实验</p>
-<p>14.30-16.39 完成报告与数据库第二章复习</p>
-<p>16.40-17.20 编译原理第二讲</p>
-<p>20.00-20.56写论文</p>
-<ol>
-<li>57-21.30 看《Linux内核完全剖析》</li>
-<li>35-22.40 单词</li>
-</ol>
-<h2 id="4-30"><a href="#4-30" class="headerlink" title="4.30"></a>4.30</h2><p>13.00-13.30 单词</p>
-<p>13.30-13.38 14.24-16.36 数据库第三章</p>
-<p>20.30-21.52 写论文</p>
-<h2 id="5-1"><a href="#5-1" class="headerlink" title="5.1"></a>5.1</h2><p>14.46-15.03 复习编译原理第三章</p>
-<p>15.03-15.48 改论文</p>
-<h2 id="5-2"><a href="#5-2" class="headerlink" title="5.2"></a>5.2</h2><p>9.00-9.45 单词</p>
-<p>9..45-9.55 改论文</p>
-<p>14.30-16.30 18.30-22.20 线代第五章完成</p>
-<h2 id="5-3"><a href="#5-3" class="headerlink" title="5.3"></a>5.3</h2><p>9.00-9.19 背单词</p>
-<p>9.21-11.20 14.56—16.40 线代第六章</p>
-<p>16.58-17.20数据库复习第四章</p>
-<p>19.44-21.39 完成数据库第四章与部分第五章</p>
-<p>22.10-22.40 英语听力</p>
-<h2 id="5-4"><a href="#5-4" class="headerlink" title="5.4"></a>5.4</h2><p>9.25-9.55 单词</p>
-<p>15.10-17.16 做操作系统实验二</p>
-<p>20.00-21.58 完成操作系统实验二</p>
-<p>22.00-23.00 复习国际结算</p>
-<h2 id="5-5"><a href="#5-5" class="headerlink" title="5.5"></a>5.5</h2><p>8.53-9.10 单词</p>
-<p>9.14-11.00 完成国际结算</p>
-<p>14.47-17.20 数据库第五章</p>
-<p>21.00-23.00 数据库第五章完成</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/10/%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/10/%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">中断和异常处理-读书笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-04-10 19:10:10" itemprop="dateCreated datePublished" datetime="2022-04-10T19:10:10+08:00">2022-04-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-11 09:20:50" itemprop="dateModified" datetime="2022-04-11T09:20:50+08:00">2022-04-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="中断和异常处理"><a href="#中断和异常处理" class="headerlink" title="中断和异常处理"></a>中断和异常处理</h1><h2 id="中断和异常处理概述"><a href="#中断和异常处理概述" class="headerlink" title="中断和异常处理概述"></a>中断和异常处理概述</h2><p>中断和异常是表明在系统、处理器的某个地方存在一个条件的事件，或当前执行的程序或任务中存在需要处理器注意的情况。它们通常会强制将进程从当前运行的程序或任务转移到一个特殊的软件程序或任务上，称为中断处理程序或异常处理程序。处理器为响应中断或异常而采取的行动被称为中断或异常处理。<br>中断在程序执行过程中随机发生，以响应来自硬件的信号。系统硬件使用中断来处理处理器外部的事件，如服务外围设备的请求。软件也可以通过执行INT n指令来产生中断。当处理器在执行指令时检测到一个错误条件，如除以0，就会发生异常。处理器检测各种错误条件，包括违反保护规定、页面故障和内部机器故障。<br>奔腾4、英特尔至强、P6系列和奔腾处理器的机器，当检测到内部硬件错误和总线错误时，也允许产生一个机器检查异常。<br>当处理器执行一个中断或异常处理程序时，当前运行的程序或任务被暂停。当处理程序的执行完成后，处理器恢复被中断的程序或任务的执行。除非无法从异常中恢复，或者中断导致当前运行的程序被终止，否则被中断的程序或任务的恢复不会失去程序的连续性。<br> 在实模式下，中断向量表占据内存最低的1KB，共256个表项。每个表项4子节，包含一个2子节的段地址和2子节的偏移，即中断处理程序的入口地址。但是在保护模式下，中断向量表可以在内存中自由浮动。就像GDT被GDTR指向一样，中断向量表被IDTR(Interrupt Descriptor Table Register，中断描述符表寄存器)指向。该表和GDT非常类似。首先，GDTR和IDTR在格式上完全相同，均包含一个32bit的基地址和16bit的界限。相比之下，CPU中的另外两个关键寄存器LDTR和TR则表现出了相似性，都是16bit大小，分别包含指向LDT和TSS的选择子。从表项上来看，除了指出中断处理程序的目标地址(16bit选择子和32bit偏移)外，IDT表项还为了进行特权级检测而加入的DPL域。此外，IDT表项还包含一个P比特。</p>
-<h2 id="有关中断和异常了解性的内容"><a href="#有关中断和异常了解性的内容" class="headerlink" title="有关中断和异常了解性的内容"></a>有关中断和异常了解性的内容</h2><h3 id="中断和异常向量"><a href="#中断和异常向量" class="headerlink" title="中断和异常向量"></a>中断和异常向量</h3><p>为了帮助处理异常和中断，每个架构上定义的异常和每个中断条件都被分配了一个唯一的识别号，称为向量号。处理器使用分配给一个异常或中断的向量号作为中断描述符表（IDT）的索引。该表提供了一个异常或中断处理程序的入口点。矢量号的允许范围是0到255。在0到31的范围内的向量号是由英特尔64和IA-32架构为架构定义的异常和中断保留了向量号。并非所有的向量号在这个范围内，并不是所有的向量号都有一个当前定义的功能。<br>在32到255范围内的向量号被指定为用户定义的中断，不被Intel64和IA-32架构保留。这些中断通常被分配给外部I/O设备，使这些设备能够向处理器发送中断。</p>
-<h3 id="中断源和异常源"><a href="#中断源和异常源" class="headerlink" title="中断源和异常源"></a>中断源和异常源</h3><h4 id="中断来源"><a href="#中断来源" class="headerlink" title="中断来源"></a>中断来源</h4><p>处理器接收来自两个来源的中断。</p>
-<ul>
-<li>外部（硬件产生的）中断。</li>
-<li>软件产生的中断</li>
-</ul>
-<h5 id="外部中断"><a href="#外部中断" class="headerlink" title="外部中断"></a>外部中断</h5><p>外部中断是通过处理器上的引脚或通过本地APIC接收的。Pentium 4、Intel Xeon、P6系列和Pentium处理器的主要中断引脚是LINT[1:0]引脚，它与本地APIC相连。启用时，LINT[1:0]引脚可以通过APIC的本地向量表(LVT)进行编程，以便与处理器的任何异常或故障相关联。</p>
-<p><img src="/2022/04/10/%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220410193839865.png" alt="image-20220410193839865"></p>
-<p><img src="/2022/04/10/%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220410193850982.png" alt="image-20220410193850982"></p>
-<h5 id="可屏蔽的硬件中断"><a href="#可屏蔽的硬件中断" class="headerlink" title="可屏蔽的硬件中断"></a>可屏蔽的硬件中断</h5><p>任何通过INTR引脚或通过本地APIC传递给处理器的外部中断被称为可屏蔽硬件中断。可以通过INTR引脚传送的可屏蔽硬件中断包括所有IA-32体系结构定义的从0到255的中断向量；那些可通过本地APIC传送的中断包括中断向量16到255。</p>
-<h5 id="软件产生的中断"><a href="#软件产生的中断" class="headerlink" title="软件产生的中断"></a>软件产生的中断</h5><p>INT n指令允许通过提供一个中断向量作为操作数，从软件内部产生中断。例如，INT 35指令强制调用35号中断的中断处理程序。任何从0到255的中断向量都可以作为该指令的参数。如果使用了处理器预定义的NMI向量，那么处理器的反应将与正常产生的的NMI中断产生的反应不一样。如果在这条指令中使用了2号向量（NMI向量），就会调用NMI中断处理程序，但处理器的NMI处理硬件没有被激活。用INT n指令在软件中产生的中断不能被EFLAGS寄存器中的IF标志所屏蔽。</p>
-<h4 id="异常来源"><a href="#异常来源" class="headerlink" title="异常来源"></a>异常来源</h4><p>处理器接收来自三个来源的异常。</p>
-<ul>
-<li>处理器检测到的程序错误异常。</li>
-<li>软件产生的异常。</li>
-<li>机器检查的异常。</li>
-</ul>
-<h5 id="程序错误异常"><a href="#程序错误异常" class="headerlink" title="程序错误异常"></a>程序错误异常</h5><p>当处理器在应用程序或操作系统或执行程序的执行过程中检测到程序错误时，会产生一个或多个异常。英特尔64和IA-32架构为每个处理器检测到的异常定义了一个向量号。</p>
-<h5 id="软件产生的异常"><a href="#软件产生的异常" class="headerlink" title="软件产生的异常"></a>软件产生的异常</h5><p>INTO, INT 3, 和 BOUND 指令允许在软件中产生异常。这些指令允许异常条件的检查在指令流中执行。例如，INT 3产生一个断点异常。INT n指令可以用来模拟软件中的异常；但是有一个限制。如果INT n提供了一个架构定义的异常的向量，处理器会产生一个中断到正确的向量(来访问异常处理程序），但不会在堆栈上推送错误代码。</p>
-<h5 id="机器检查异常"><a href="#机器检查异常" class="headerlink" title="机器检查异常"></a>机器检查异常</h5><p>P6系列和奔腾处理器提供内部和外部机器检查机制，用于检查内部芯片硬件和总线交易的操作。这些机制取决于执行情况。当检测到机器检查错误时，处理器发出机器检查异常信号（向量18）并返回一个错误代码。</p>
-<h3 id="异常的分类：故障、陷阱和中止"><a href="#异常的分类：故障、陷阱和中止" class="headerlink" title="异常的分类：故障、陷阱和中止"></a>异常的分类：故障、陷阱和中止</h3><p>异常被归类为故障、陷阱或中止，这取决于它们的报告方式以及引起异常的指令是否能在不损失程序或任务连续性的情况下重新启动。</p>
-<ul>
-<li><strong>故障</strong></li>
-</ul>
-<p>故障是一种通常可以被纠正的异常，一旦被纠正，就可以在不损失程序或任务连续性的情况下重新启动程序。<br>当一个故障被报告时，处理器将机器状态恢复到在开始执行故障指令之前的状态。故障处理程序的返回地址（保存在CS和EIP寄存器的保存内容）指向故障指令，而不是指向故障指令之后的指令。</p>
-<ul>
-<li><p><strong>陷阱</strong> </p>
-<p>陷阱是在执行陷阱指令后立即报告的异常。陷阱允许程序或任务的执行继续进行而不损失程序的连续性。陷阱处理程序的返回地址指向陷阱指令后要执行的指令。</p>
-</li>
-<li><p><strong>终止</strong> </p>
-<p>终止是一种异常，它并不总是报告引起异常的指令的精确位置，并且不允许重新启动引起异常的程序或任务。中止是用来报告严重的错误，例如硬件错误和系统表中不一致的或非法的值。</p>
-</li>
-</ul>
-<p><strong>注意</strong></p>
-<p>一个通常被报告为故障的异常子集是不能重新启动的。这种异常会导致损失一些处理器的状态。例如，在执行POPAD指令时，堆栈框架执行POPAD指令时，堆栈框架越过了堆栈段的末端，导致报告了一个故障。在这种情况下，异常处理程序看到指令指针(CS:EIP)已经被恢复，就像POPAD 指令没有被执行。然而，内部处理器状态（通用寄存器）将被修改。这种情况被认为是编程错误</p>
-<h3 id="程序或任务的重新执行"><a href="#程序或任务的重新执行" class="headerlink" title="程序或任务的重新执行"></a>程序或任务的重新执行</h3><p>为了允许在处理异常或中断后重新启动程序或任务，所有的异常(除了中止)都保证在指令边界上报告异常。所有的中断都被保证为在一个指令边界上进行。<br>对于故障类异常，返回指令指针（在处理器产生异常时保存）指向发生故障的指令。因此，当一个程序或任务在处理完故障后被重新启动时，发生故障的指令被重新启动（重新执行）。重启出错指令通常用于处理当对操作数的访问被阻止时产生的异常。这种类型的故障最常见的例子是页面故障异常（#PF），它发生在程序或任务引用位于不在内存中的页面上的操作数时。<br>当页面故障异常发生时，异常处理程序可以将该页面加载到内存中，并通过重启来恢复程序或任务的执行。为了确保重启对当前执行的程序或任务来说是透明的，处理器保存了必要的寄存器和堆栈指针 ，以允许重新启动到执行故障指令之前的状态。<br>对于陷阱类异常，返回指令的指针指向陷阱指令之后的指令。如果在转移执行的指令中检测到一个陷阱，返回指令指针反映了转移。例如，如果在执行JMP指令时检测到一个陷阱，返回指令的指针指向JMP指令的目的地，而不是JMP指令之后的下一个地址。所有的陷阱异常都允许程序或任务的重新启动而不会失去连续性。例如，溢出异常就是一个陷阱异常。在这里，返回指令的指针指向INTO指令之后的指令，该指令测试了EFLAGS.OF（溢出）标志。这个异常的陷阱处理程序解决了溢出的问题。从陷阱处理程序返回后，程序或任务在INTO指令之后的指令继续执行。<br>终止类异常不支持程序或任务的可靠重启。终止处理程序被设计为收集关于终止异常发生时处理器状态的诊断信息，然后尽可能优雅地关闭应用程序和系统。<br>中断程序严格地支持重新启动被中断的程序和任务而不损失连续性。返回为中断保存的返回指令指针指向要在指令边界执行的下一条指令 。如果刚刚执行的指令有一个重复的前缀，那么中断就会在当前迭代结束时进行，寄存器被设置为执行下一个迭代。</p>
-<h3 id="开启和禁止中断"><a href="#开启和禁止中断" class="headerlink" title="开启和禁止中断"></a>开启和禁止中断</h3><p>处理器会抑制一些中断的产生，这取决于处理器的状态和EFLAGS寄存器中的IF和RF标志的状态。</p>
-<h4 id="屏蔽可屏蔽硬件中断"><a href="#屏蔽可屏蔽硬件中断" class="headerlink" title="屏蔽可屏蔽硬件中断"></a>屏蔽可屏蔽硬件中断</h4><p>IF标志可以禁止对处理器INTR引脚上或通过本地APIC接收的可屏蔽硬件中断进行服务。当IF标志清除时，处理器会抑制传递到INTR引脚或通过本地APIC的中断产生内部中断请求；当IF标志被设置时，传递到INTR或通过本地APIC引脚的中断被作为正常的外部中断处理。<br>IF标志不影响传递到NMI引脚的非屏蔽中断（NMI）或通过本地APIC传递的交付模式NMI消息，也不影响处理器产生的异常。与EFLAGS寄存器中的其他标志一样，处理器在响应硬件复位时清除IF标志。<br>事实上，可屏蔽的硬件中断组包括保留的中断和异常向量0到32可能会引起混淆。从结构上看，当IF标志被设置时，矢量0到32的中断可以通过INTR引脚传递给处理器，而矢量16到32的中断则可以通过本地接口传递。然后，处理器将产生一个中断并调用中断或异常处理程序，该处理程序由矢量编号指向。<br>IF标志可以通过STI（设置中断使能标志）和CLI（清除中断使能标志）指令来设置或清除。这些指令只有在CPL等于或小于IOPL的情况下才能执行。如果在CPL大于IOPL的情况下执行这些指令，会产生一般保护异常（#GP）。<br>IF标志也受到以下操作的影响。</p>
-<ul>
-<li>PUSHF指令将所有的标志存储在堆栈上，在那里可以检查和修改它们。POPF指令可以用来将修改后的标志加载到EFLAGS寄存器中。</li>
-<li>任务开关、POPF和IRET指令加载EFLAGS寄存器；因此，它们可以用来修改IF标志的设置。</li>
-<li>当一个中断通过中断门处理时，IF标志会被自动清除，这就禁止了可屏蔽的硬件中断。</li>
-</ul>
-<h4 id="屏蔽指令断点"><a href="#屏蔽指令断点" class="headerlink" title="屏蔽指令断点"></a>屏蔽指令断点</h4><p>EFLAGS寄存器中的RF（恢复）标志控制处理器对指令断点条件的响应。当设置时，它阻止指令断点产生调试异常（#DB）；当清除时，指令断点将产生调试异常。RF标志的主要功能是防止处理器在以下情况下进入调试异常循环 。</p>
-<h4 id="切换堆栈时屏蔽异常和中断"><a href="#切换堆栈时屏蔽异常和中断" class="headerlink" title="切换堆栈时屏蔽异常和中断"></a>切换堆栈时屏蔽异常和中断</h4><p>为了切换到一个不同的堆栈段，软件经常使用一对指令，例如：<br>MOV SS, AX<br>MOV ESP, StackTop<br>如果在段选择器被加载到SS寄存器之后，但在ESP寄存器被加载之前，发生了中断或异常。ESP寄存器中，这两部分进入堆栈空间的逻辑地址在中断或异常处理过程中是不一致的。为了防止这种情况的发生，处理器在MOV到SS指令或POP到SS指令之后，处理器抑制中断、调试异常和单步陷阱异常，直到到达下一条指令后的指令边界。所有其他的故障仍然可以被产生。如果LSS指令被用来修改SS寄存器的内容（推荐的方法），这个问题就不会发生。</p>
-<h3 id="异常和中断的优先级"><a href="#异常和中断的优先级" class="headerlink" title="异常和中断的优先级"></a>异常和中断的优先级</h3><p>如果在一个指令边界有一个以上的异常或中断等待处理，处理器会以可预测的顺序处理它们。下表显示了异常和中断源类别之间的优先级。</p>
-<p><img src="/2022/04/10/%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220410202420157.png" alt="image-20220410202420157"></p>
-<p><strong>注意</strong>：虽然在表中列出的这些类别的优先级在整个架构中是一致的，但是每个类别中的例外情况是与实现有关的，可能因处理器不同而不同。处理器首先处理来自具有最高优先级的类的未决异常或中断，将执行转移到处理程序的第一条 指令。较低优先级的异常被丢弃；较低优先级的中断被搁置。当中断处理程序将执行返回到程序或任务中出现异常和/或中断的位置时，被丢弃的异常会重新产生。</p>
-<h2 id="中断描述符表"><a href="#中断描述符表" class="headerlink" title="中断描述符表"></a>中断描述符表</h2><p>中断描述符表（IDT）将每个异常或中断向量与用于服务相关异常或中断的门描述符联系起来。与GDT和LDT一样，IDT是一个由8字节描述符组成的数组。。与GDT不同，IDT的第一个条目可以包含一个描述符。为了<br>为了形成对IDT的索引，处理器将异常或中断向量按8（门描述符的字节数）的比例进行调整。因为只有256个中断或异常向量，IDT不需要包含多于256个描述符。它可以包含少于256个描述符，因为描述符只需要用于可能发生的中断和可能出现的异常向量需要描述符。IDT中所有空的描述符槽都应该将描述符的当前标志设置为0。<br>IDT的基地址应该在8字节的边界上对齐，以最大限度地提高缓存行的性能 。极限值以字节为单位，并与基地址相加，得到最后一个有效字节的地址。极限值为0时，正好是一个有效的字节。因为IDT条目总是8个字节长，所以极限值应该是始终是8的整数倍（即8N-1）。<br>IDT可以驻留在线性地址空间的任何地方。如图6-1所示，处理器使用IDTR寄存器来定位IDT 。这个寄存器持有32位的基地址和16位的IDT限制。<br>LIDT（加载IDT寄存器）和SIDT（存储IDT寄存器）指令分别加载和存储IDTR的内容。LIDT指令将IDTR寄存器中的基地址和限值加载到一个内存操作数中。这条指令只有在CPL为0时才能被执行。它通常由操作系统的初始化代码在创建IDT时使用。操作系统也可以用它来改变一个IDT到另一个IDT。<br>SIDT指令将IDTR中存储的基数和极限值复制到内存中。这条指令可以在任何权限级别下执行。如果一个向量引用的描述符超过了IDT的限制，就会产生一个一般保护异常（#GP）。<br><strong>注意</strong><br>由于中断只传递给处理器内核一次，一个不正确配置的IDT可能导致不完整的中断处理和/或中断传递的阻塞。在设置IDTR基础/限制/访问字段和门描述符中的每个字段时，需要遵循IA-32架构的规则。</p>
-<p><img src="/2022/04/10/%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220410202728708.png" alt="image-20220410202728708"></p>
-<h2 id="IDT-描述符"><a href="#IDT-描述符" class="headerlink" title="IDT 描述符"></a>IDT 描述符</h2><p>IDT可能包含三种门描述符中的任何一种。</p>
-<ul>
-<li>任务门描述符</li>
-<li>中断门描述符</li>
-</ul>
-<p>陷阱门描述符<br>图6-2显示了任务门、中断门和陷阱门描述符的格式。任务门的格式在IDT中使用的任务门的格式与在GDT或LDT中使用的任务门的格式相同。任务门包含一个异常和/或中断处理任务的TSS的段选择器。<br>中断和陷阱门与调用门非常相似。它们包含一个远指针(段选择器和偏移量)，处理器用它来把程序的执行转移到异常或中断处理程序代码中的一个处理程序。<br>这些门的不同之处在于处理器处理EFLAGS寄存器中的IF标志的方式。</p>
-<p><img src="/2022/04/10/%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220410205107225.png" alt="image-20220410205107225"></p>
-<h2 id="中断与异常处理"><a href="#中断与异常处理" class="headerlink" title="中断与异常处理"></a>中断与异常处理</h2><p>处理器处理对异常处理程序和中断处理程序的调用的方式类似于处理对过程或任务的CALL指令来处理对过程或任务的调用。当响应一个异常或中断时，处理器使用异常或中断向量作为IDT中描述符的索引。如果该索引指向一个中断门或陷阱门，处理器调用异常或中断处理程序，其方式类似于调用门的CALL。如果 index 指向一个任务<br>门，处理器将执行一个任务切换到异常或中断处理任务，其方式类似于 CALL到一个任务门</p>
-<h3 id="异常或中断处理程序"><a href="#异常或中断处理程序" class="headerlink" title="异常或中断处理程序"></a>异常或中断处理程序</h3><p>中断门或陷阱门引用了一个异常或中断处理程序，该程序在当前执行的任务的上下文中运行（见图6-3）。该门的段选择器指向一个段描述符，该段描述符位于GDT或当前LDT中的一个可执行代码段。门描述符的偏移字段指的是<br>异常或中断处理程序的开头。</p>
-<p><img src="/2022/04/10/%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220410205743923.png" alt="image-20220410205743923"></p>
-<p>当处理器执行一个对异常或中断处理程序的调用时。</p>
-<ul>
-<li>如果处理程序要在一个较低的权限级别上执行，就会发生堆栈切换。<br>当堆栈切换发生时 :<br>a. 处理程序使用的堆栈的段选择器和堆栈指针是从当前执行任务的TSS中获得的。在这个新的堆栈中，处理程序推送了被中断的堆栈段选择器和堆栈指针。<br>b. 然后，处理器将EFLAGS、CS和EIP寄存器的当前状态保存在新的堆栈中（见图6-4）。<br>c. 如果一个异常导致错误代码被保存，它将被推到EIP值之后的新栈上。</li>
-<li>如果处理程序要在与被中断程序相同的权限级别下执行。<br>a. 处理器将EFLAGS、CS和EIP寄存器的当前状态保存在当前堆栈中（见图6-4）。<br>b. 如果一个异常导致错误代码被保存，那么它将在EIP值之后被推到当前堆栈中。</li>
-</ul>
-<p><img src="/2022/04/10/%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220410210127965.png" alt="image-20220410210127965"></p>
-<p>要从一个异常或中断处理程序中返回，处理程序必须使用IRET（或IRETD）指令。IRET指令与RET指令类似，只是它将保存的标志恢复到EFLAGS寄存器中。只有当CPL为0时，EFLAGS寄存器的IOPL字段才被恢复。</p>
-<h4 id="异常和中断处理程序的保护"><a href="#异常和中断处理程序的保护" class="headerlink" title="异常和中断处理程序的保护"></a>异常和中断处理程序的保护</h4><p>异常和中断处理程序的特权级别保护与通过调用门调用普通程序的保护相似。处理器不允许将执行转移到一个异常或中断处理程序中。试图违反这一规则会导致一般保护异常（#GP）。异常处理程序和中断处理程序的保护机制在以下方面有所不同：</p>
-<ul>
-<li>因为中断和异常向量没有RPL，RPL在隐式调用异常和中断处理程序的隐式调用不检查RPL。</li>
-<li>只有在异常或中断产生的时候，处理器才会检查中断或陷阱门的DPL，如果有一个INT n, INT 3, 或 INTO 指令产生的异常或中断，处理器才会检查中断或陷阱门的 DPL。这里，CPL必须小于或等于门的DPL。这一限制防止了运行在权限级别3的应用程序或程序使用软件中断来访问关键的异常处理程序。中断来访问关键的异常处理程序，例如页面故障处理程序，条件是这些处理程序被放在更有权限的代码段中。对于硬件产生的中断和处理器检测到的异常，处理器忽略了中断和陷阱门的DPL。</li>
-</ul>
-<p>由于异常和中断通常不会在可预测的时间发生，这些特权规则有效地对异常和中断处理程序可以运行的权限级别进行了限制。以下两种技术都可以用来避免违反权限级别：</p>
-<ul>
-<li>异常或中断处理程序可以放在一个符合要求的代码段中。这种技术可以用于处理程序，这些处理程序只需要访问堆栈上的数据（例如，划分错误异常）。如果处理程序需要来自数据段的数据，数据段需要从权限级别3访问，这将使其不受保护。</li>
-<li>处理程序可以被放置在一个特权级别为0的不符合要求的代码段中。这个处理程序将始终运行，不管被中断的程序或任务是在哪个CPL下运行。</li>
-</ul>
-<h4 id="异常或中断处理程序的标志用法"><a href="#异常或中断处理程序的标志用法" class="headerlink" title="异常或中断处理程序的标志用法"></a>异常或中断处理程序的标志用法</h4><p>当通过中断门或陷阱门访问异常或中断处理程序时，处理器在将EFLAGS寄存器的内容保存在堆栈中后，清除EFLAGS寄存器中的TF标志。(在调用异常和中断处理程序时，处理器也会清除EFLAGS寄存器中的VM、RF和NT标志，然后将它们保存在堆栈中。）清除TF标志可以防止指令跟踪影响中断响应。A 后续的IRET指令将TF（以及VM、RF和NT）标志恢复到堆栈中EFLAGS寄存器的保存内容中的值。<br>中断门和陷阱门的唯一区别是处理器处理IF标志的方式。当通过中断门访问一个异常或中断处理程序时，处理器会清除IF标志以防止 其他中断干扰当前的中断处理程序。随后的IRET指令将IF标志恢复到堆栈上EFLAGS寄存器的保存内容中的值。通过陷阱门访问处理程序并不影响IF标志。</p>
-<h3 id="中断任务"><a href="#中断任务" class="headerlink" title="中断任务"></a>中断任务</h3><p>当异常或中断处理程序通过IDT中的任务门被访问时，会产生一个任务切换。处理异常或中断的单独任务有几个优点。</p>
-<ul>
-<li>被中断的程序或任务的整个上下文被自动保存。</li>
-<li>一个新的TSS允许处理程序在处理异常或中断时使用一个新的权限级别0的堆栈。如果异常或中断发生时，当前权限级别0的堆栈被破坏，通过任务门访问处理程序可以通过为处理程序提供一个新的权限级别0的堆栈来防止系统崩溃。</li>
-<li>处理程序可以通过给它一个单独的地址空间来进一步与其他任务隔离。这可以通过以下方式实现给它一个单独的LDT。</li>
-</ul>
-<p>用一个单独的任务来处理中断的缺点是，在任务切换时必须保存大量的机器状态，使得它比使用中断门要慢，从而导致中断延迟的增加。<br>IDT中的任务门引用GDT中的TSS描述符（见图6-5）。切换到处理程序任务的方式与普通任务切换相同。返回到被中断的任务的链接 被存储在处理程序任务的TSS的前一个任务链接域中。如果一个异常导致一个错误代码，这个错误代码被复制到新任务的堆栈中。<br>在操作系统中使用异常或中断处理任务时，实际上有两种机制可以用来调度任务：软件调度器（操作系统的一部分）和硬件调度器（处理器的中断机制的一部分）。软件调度器需要容纳中断任务当中断被激活时，可能会被调度。<br><strong>注意</strong><br>由于IA-32体系结构的任务不是可重入的，一个中断处理程序任务在它完成处理中断和执行IRET指令时，必须禁用中断。这个动作可以防止在中断任务的TSS仍被标记为忙时发生另一个中断，这将导致一般保护（#GP）异常。</p>
-<p><img src="/2022/04/10/%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220411091420768.png" alt="image-20220411091420768"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">保护模式内存管理-读书笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-04-03 10:09:18" itemprop="dateCreated datePublished" datetime="2022-04-03T10:09:18+08:00">2022-04-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-04 20:56:32" itemprop="dateModified" datetime="2022-04-04T20:56:32+08:00">2022-04-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="保护模式内存管理"><a href="#保护模式内存管理" class="headerlink" title="保护模式内存管理"></a>保护模式内存管理</h1><h2 id="内存管理概览"><a href="#内存管理概览" class="headerlink" title="内存管理概览"></a>内存管理概览</h2><p>IA-32架构的内存管理设施分为两部分：分段和分页。<br>分段提供了一种隔离单个代码、数据和堆栈模块的机制，以便多个程序（或任务）可以在同一个处理器上运行而不互相干扰。分页提供了一种机制来实现传统的需求分页、虚拟内存系统，其中程序执行环境的部分被映射到物理内存中。分页也可以用来提供多个任务之间的隔离。<br>在保护模式下操作时，必须使用某种形式的分段。没有模式位可以禁用分段。然而，分页的使用是可选的。这两种机制（分段和分页）可以被配置为支持简单的单程序（或单任务）系统，或使用共享内存的多处理器系统。</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403145257014.png" alt="image-20220403145257014"></p>
-<p>如图所示，分段提供了一种机制来划分处理器的可寻址内存空间（称为线性地址空间），分成更小的受保护的地址空间，称为段。分段可以可以用来保存程序的代码、数据和堆栈，或者保存系统数据结构（如TSS或LDT）。<br>如果一个处理器上有多个程序（或任务）在运行，每个程序可以被分配到它自己的段组。然后，处理器强制执行这些段之间的界限，并确保一个程序不会因为写进另一个程序的段而干扰程序的执行。分段机制还允许对段进行打字。</p>
-<p>段落机制也允许段的类型化，这样可以限制对特定类型的段进行的操作。一个系统中的所有段都包含在处理器的线性地址空间中。要在一个特定的段中找到一个字节必须提供一个逻辑地址（也称为远指针）。</p>
-<p>一个<strong>逻辑地址</strong>包括一个段选择器和一个偏移量。段选择器是一个段的唯一标识符。在其他方面，它提供了一个<br>在描述符表（如全局描述符表，GDT）中的偏移量，该数据结构称为段描述符。每个网段都有一个网段描述符，它指定了网段的大小，网段的访问权限和段的大小，段的访问权限和特权级别，段的类型，以及段的第一个字节在线性地址空间中的位置（称为段的基址）。逻辑地址的偏移部分被添加到段的基地址中，以定位段的第一个字节。<br>基准地址加上偏移量就形成了处理器线性地址中的一个<strong>线性地址</strong>。<br>如果不使用分页，处理器的线性地址空间将直接被映射到处理器的物理地址空间。<strong>物理地址空间</strong>被定义为处理器可以在其地址总线上产生的地址范围。由于多任务计算系统通常定义的线性地址空间远远大于在物理内存中一次性包含的经济可行性，因此需要一些 “虚拟化 “线性地址空间的方法。这种线性地址空间的虚拟化是通过处理器的分页机制处理的。<br>分页支持 “虚拟内存 “环境，用少量的物理内存（RAM和ROM）和一些磁盘存储来模拟大的线性地址空间。当使用分页时，每个段被划分为若干页（通常每页大小为4KB），这些页存储在物理内存或磁盘上。操作系统或执行器维护一个页面目录和一组页面表，以跟踪这些页面。<em>当一个程序（或任务）试图访问线性地址空间中的一个地址位置时，处理器会使用页目录和页表来将线性地址转换为物理地址</em>，然后执行所要求的操作（读或写）在内存位置上。<br>如果被访问的页面当前不在物理内存中，处理器会中断程序的执行。(通过产生一个页面故障异常)。然后，操作系统或执行程序将该页从磁盘读入物理内存，并继续执行程序。<br>当分页在操作系统或执行系统中被正确实现时，物理内存和磁盘之间的换页对于程序的正确执行是透明的。即使是为16位IA32处理器编写的程序，在虚拟8086模式下运行时也可以进行分页（透明）。</p>
-<h3 id="linux下的内存管理"><a href="#linux下的内存管理" class="headerlink" title="linux下的内存管理"></a>linux下的内存管理</h3><p>Linux系统中的物理存储空间和虚拟存储空间的地址范围分别都是从0x00000000到0xFFFFFFFF，共4GB，但物理存储空间与虚拟存储空间布局完全不同。Linux运行在虚拟存储空间，并负责把系统中实际存在的远小于4GB的物理内存根据不同需求映射到整个4GB的虚拟存储空间中。Linux主要工作在保护模式下。80X86从逻辑地址到物理地址变换中经过了两个阶段。第一阶段使用分段机制把程序的逻辑地址变换成处理器可寻址内存空间（称为线性地址空间）中的地址。第二阶段的分页机制把线性地址转换成物理地址。第一阶段的分段变换机制是必须使用的，但是第二阶段的分页机制是可选择的。如果没有开启分页机制，那么分段机制产生的线性地址空间就直接映射到处理器的物理地址空间上。</p>
-<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p><strong>物理地址</strong>： 放在寻址总线上的地址，用于内存芯片级内存单元寻址。放在寻址总线上，如果是读，电路根据这个地址每位的值就将相应地址的物理内存中的数据放到数据总线中传输。如果是写，电路根据这个地址每位的值就将相应地址的物理内存中放入数据总线上的内容。物理内存是以字节(8位)为单位编址的，是地址变换的最终结果地址，物理地址由32位或36位无符号整数表示。</p>
-<p><strong>逻辑地址</strong>：是指由程序产生的与段相关的偏移地址部分，每一个逻辑地址都由一个段和偏移量组成。在进行C语言指针编程中，可以读取指针变量本身值(&amp;操作)，实际上这个值就是逻辑地址，它是相对于你当前进程数据段的地址，不和绝对物理地址相干。只有在Intel实模式下，逻辑地址才和物理地址相等（因为实模式没有分段或分页机制,Cpu不进行自动地址转换）；逻辑也就是在Intel 保护模式下程序执行代码段限长内的偏移地址（假定代码段、数据段如果完全一样）。</p>
-<p><strong>线性地址：</strong>是逻辑地址到物理地址变换之间的中间层。程序代码会产生逻辑地址，或者说是段中的偏移地址，加上相应段的基地址就生成了一个线性地址，是一个32位无符号整数，可以用来表示高达4GB的地址，也就是说，高达4294967296个内存单元，以十六进制表示，0x00000000到oxffffffff。如果启用了分页机制，那么线性地址可以再经变换以产生一个物理地址。若没有启用分页机制，那么线性地址直接就是物理地址。Intel 80386的线性地址空间容量为4G（2的32次方即32根地址总线寻址）。</p>
-<p><strong>虚拟内存</strong>：是指计算机呈现出要比实际拥有的内存大得多的内存量。因此它允许程序员编制并运行比实际系统拥有的内存大得多的程序。这使得许多大型项目也能够在具有有限内存资源的系统上实现。一个很恰当的比喻是：你不需要很长的轨道就可以让一列火车从上海开到北京。你只需要足够长的铁轨（比如说3公里）就可以完成这个任务。采取的方法是把后面的铁轨立刻铺到火车的前面，只要你的操作足够快并能满足要求，列车就能象在一条完整的轨道上运行。这也就是虚拟内存管理需要完成的任务。在现在操作系统中，都使用了MMU的存储管理技术，而MMU管理的地址是虚拟地址，虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。与没有使用虚拟内存技术的系统相比，使用这种技术的系统使得大型程序的编写变得更容易，对真正的物理内存（例如RAM）的使用也更有效率。有时我们也把逻辑地址称为虚拟地址。因为和虚拟内存空间的概念类似，逻辑地址也是和实际物理内存容量无关的。</p>
-<h4 id="逻辑地址如何转换为线性地址"><a href="#逻辑地址如何转换为线性地址" class="headerlink" title="逻辑地址如何转换为线性地址"></a>逻辑地址如何转换为线性地址</h4><p> 完整的内存管理，包含保护和地址变换两个关键部分。80386的工作模式包括实地址模式和虚地址模式（保护模式）。Linux主要工作在保护模式下。80X86从逻辑地址到物理地址变换中经过了两个阶段。第一阶段使用分段机制把程序的逻辑地址变换成处理器可寻址内存空间（称为线性地址空间）中的地址。第二阶段的分页机制把线性地址转换成物理地址。第一阶段的分段变换机制是必须使用的，但是第二阶段的分页机制是可选择的。如果没有开启分页机制，那么分段机制产生的线性地址空间就直接映射到处理器的物理地址空间上。</p>
-<p>  一个逻辑地址由两部份组成，<strong>段标识符: 段内偏移量</strong>。段标识符是由一个16位长的字段组成，称为段选择符。其中前13位是一个索引号。后面3位包含一些硬件细节，表示具体的是代码段寄存器还是栈段寄存器抑或是数据段寄存器，如图1所示。索引号就是“段描述符(segment descriptor)”的索引，段描述符具体地址描述了一个段。很多个段描述符，就组了一个数组，叫“段描述符表”，这样，<strong>可以通过段标识符的前13位，直接在段描述符表中找到一个具体的段描述符</strong>，这句话很关键，说明段标识符的具体作用，每一个段描述符由8个字节组成，如图2所示，与主题最密切的就是Base字段，她表示的是包含段的首字节的线性地址，也就是一个段的开始位置的线性地址。完全引用书中的一句话，一些全局的段描述符，就放在“全局段描述符表(GDT)”中，一些局部的，例如每个进程自己的，就放在所谓的“局部段描述符表(LDT)”中。那究竟什么时候该用GDT，什么时候该用LDT呢？这是由段选择符中的T1字段表示的，=0，表示用GDT，=1表示用LDT，GDT在内存中的地址和大小存放在CPU的GDTR控制寄存器中，而LDT则在IDTR寄存器中。这个过程中有几个基本的概念，一定要理清楚，如段选择符、段描述符、局部段描述符表、全局段描述符表。</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403152513453.png" alt="image-20220403152513453"></p>
-<p>上图显示了一个逻辑地址是怎样转换成相应线性地址的，给定一个完整的逻辑地址[段选择符：段内偏移地址]</p>
-<p> 1、看段选择符的T1=0还是1，即<strong>先检查段选择符中的TI字段，以决定段描述符保存在哪一个描述符表中</strong>，知道当前要转换是GDT中的段（在这种情况下，分段单元从GDTR寄存器中得到GDT的线性基地址），还是LDT中的段（在这种情况下，分段单元从LDTR寄存器中得到GDT的线性基地址），再根据相应寄存器，得到其地址和大小。<br>2、<strong>由于一个段描述符是8字节长，因此她在GDT或LDT内的相对地址是由段选择符的最高13位的值乘以8得到</strong>，拿出段选择符中前13位，可以在这个数组中，查找到对应的段描述符，这样，它的Offset，即偏移地址就知道了。<br>3、把Base + offset，就是要转换的线性地址了。<br>    对于软件来讲，原则上就需要把硬件转换所需的信息准备好，就可以让硬件来完成这个转换了。下图逻辑地址转换为线性地址实例，段选择符为0x7B，指向用户数据段，段起始地址为0x00000000，逻辑偏移地址为0x80495B0，最终的线性地址为Base + offset=0x80495B0。</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403153532441.png" alt="image-20220403153532441"></p>
-<h4 id="线性地址转物理地址"><a href="#线性地址转物理地址" class="headerlink" title="线性地址转物理地址"></a>线性地址转物理地址</h4><p>CPU通过地址来访问内存中的单元，地址有虚拟地址和物理地址之分，如果CPU没有MMU（Memory  Management Unit，内存管理单元），或者有MMU但没有启用，CPU核在取指令或访问内存时发出的地址将直接传到CPU芯片的外部地址引脚上，直接被内存芯片（以下称为物理内存，以便与虚拟内存区分）接收，这称为物理地址（Physical Address，以下简称PA），如下图所示。</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403155046532.png" alt="image-20220403155046532"></p>
-<p>如果CPU启用了MMU，CPU核发出的地址将被MMU截获，从CPU到MMU的地址称为虚拟地址（Virtual Address，以下简称VA），而MMU将这个地址翻译成另一个地址发到CPU芯片的外部地址引脚上，也就是将虚拟地址映射成物理地址，如下图所示</p>
-<p> <img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403155108029.png" alt="image-20220403155108029"></p>
-<p>虚拟内存地址和物理内存地址的分离，给进程带来便利性和安全性。虚拟地址必须和物理地址建立一一对应的关系，才可以正确的进行地址转换。</p>
-<p>记录对应关系最简单的办法，就是把对应关系记录在一张表中。为了让翻译速度足够地快，这个表必须加载在内存中。不过，这种记录方式惊人地浪费。</p>
-<p>因此，Linux采用了分页（paging）的方式来记录对应关系。所谓的分页，就是以更大尺寸的单位页（page）来管理内存。在Linux中，通常每页大小为4KB。</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403155154004.png" alt="image-20220403155154004"></p>
-<p>依据以下步骤进行转换：</p>
-<ol>
-<li>从cr3中取出进程的页目录地址（操作系统负责在调度进程的时候，把这个地址装入对应寄存器）；</li>
-<li>根据线性地址前十位，在数组中，找到对应的索引项，因为引入了二级管理模式，页目录中的项，不再是页的地址，而是一个页表的地址。（又引入了一个数组），页的地址被放到页表中去了。</li>
-<li>根据线性地址的中间十位，在页表（也是数组）中找到页的起始地址；</li>
-<li>将页的起始地址与线性地址中最后12位相加，得到最终我们想要的；</li>
-</ol>
-<h2 id="分段机制"><a href="#分段机制" class="headerlink" title="分段机制"></a>分段机制</h2><p>由IA-32体系结构支持的分段机制可以用来实现各种各样的系统设计。这些设计的范围很广，从只极少使用分段的平面模型到保护。这些设计从扁平模型到多分段模型，这些模型采用分段来创建一个强大的操作环境，在其中多个程序和任务可以可靠地执行。</p>
-<h3 id="Basic-Flat-Model-基本平坦模型"><a href="#Basic-Flat-Model-基本平坦模型" class="headerlink" title="Basic Flat Model(基本平坦模型)"></a>Basic Flat Model(基本平坦模型)</h3><p>一个系统最简单的内存模型是基本的 “平坦模型”，在这个模型中，操作系统和应用程序可以访问一个连续的、没有分割的地址空间。在最大程度上，这种基本的平坦模型对系统设计者和应用程序都隐藏了架构的分割机制。<br>程序员为了实现IA-32体系结构的基本平坦内存模型，至少要创建两个段描述符，一个用于引用代码段，一个用于引用数据段。这两个段都被映射到整个线性地址空间：也就是说，两个段描述符都有同样的基址值为0，同样的段限制为4GBytes。通过设置段限制为4GBytes，分段机制就不会因为超出限制的内存引用而产生异常，即使在一个特定的地址上没有物理内存存在。ROM（EPROM）通常位于物理地址空间的顶部。因为处理器在FFF_FFF0H开始执行。RAM（DRAM）被放在物理地址空间的底部，因为复位初始化后DS数据段的初始基址是0。</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403161325418.png" alt="image-20220403161325418"></p>
-<p>​                                                                        flat model</p>
-<h3 id="Protected-Flat-Model-受保护的平坦模型"><a href="#Protected-Flat-Model-受保护的平坦模型" class="headerlink" title="Protected Flat Model(受保护的平坦模型)"></a>Protected Flat Model(受保护的平坦模型)</h3><p>受保护的平坦模型与基本平坦模型类似，只是段的限制被设置为只包括物理内存实际存在的的地址范围（见下图）。一个一般保护的异常(#GP)会在任何访问不存在的内存的尝试中产生。这个模型提供了一个最低水平的<br>这种模式提供了最低水平的硬件保护，以防止某些类型的程序错误。</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403161745702.png" alt="image-20220403161745702"></p>
-<p>​                                                                  Protected Flat Model</p>
-<p>更多的复杂性可以被添加到这个受保护的平坦模型中，以提供更多的保护。例如，对于分页机制要在用户和主管的代码和数据之间提供隔离，需要定义四个段。用户的代码和数据段的权限级别为3，而主管的代码和数据段的权限级别为0。通常，这些段都是相互重叠的，并从线性地址空间的地址0开始。这种平坦的分段模型和一个简单的分页结构可以保护操作系统不受应用程序的影响。通过为每个任务或进程增加一个单独的分页结构，它还可以保护应用程序之间的相互影响。类似的设计被几个流行的多任务操作系统所采用。</p>
-<h3 id="Multi-Segment-Model-多段模型"><a href="#Multi-Segment-Model-多段模型" class="headerlink" title="Multi-Segment Model(多段模型)"></a>Multi-Segment Model(多段模型)</h3><p>多段模型（如下图）使用分段机制的全部功能，对代码、数据结构、程序和任务提供硬件强制保护。在这里，每个<br>程序（或任务）都有自己的段描述符表和自己的段。这些段可以是对其分配的程序来说是完全私有的，或者在程序之间共享。对所有程序段的访问以及对运行在各个程序上的执行环境都由硬件控制。<br>访问检查不仅可以用来防止引用一个段限制之外的地址，还可以防止在段内进行不允许的操作。例如，由于代码段被指定为只读段，所以可以用硬件来防止向代码段写东西。为段创建的访问权限信息也可以用来设置保护环或保护级别。保护级别可以用来保护操作系统程序免受应用程序的未经授权的访问。</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403163121670.png" alt="image-20220403163121670"></p>
-<p>​                                                            Multi-Segment Model</p>
-<h3 id="Segmentation-in-IA-32e-Mode"><a href="#Segmentation-in-IA-32e-Mode" class="headerlink" title="Segmentation in IA-32e Mode"></a>Segmentation in IA-32e Mode</h3><p>在英特尔64架构的IA-32e模式下，分段的效果取决于处理器是在兼容模式还是64位模式下运行。在兼容模式下，分段的功能就像使用传统的16位或32位保护模式的语义。在64位模式下，分段功能通常被禁用（但不是完全禁用），创建一个平坦的64位线性地址空间。处理器将CS、DS、ES、SS的段基处理为零，创建一个线性地址，等于<br>有效地址。FS和GS段是个例外。这些段寄存器（存放段基）可以作为线性地址计算中的一个额外的基础寄存器。它们有助于寻址本地数据和某些操作系统的数据结构。注意，在64位模式下，处理器在运行时不执行段限制检查。</p>
-<h3 id="Paging-and-Segmentation-分页和分段"><a href="#Paging-and-Segmentation-分页和分段" class="headerlink" title="Paging and Segmentation(分页和分段)"></a>Paging and Segmentation(分页和分段)</h3><p>分页可以与上图中描述的任何一种分段模式一起使用。处理器的分页机制将线性地址空间（段被映射到其中）分为若干页。然后这些线性地址空间的页被映射到物理地址空间的页中。分页机制提供了几个页级的保护设施，可以和段保护设施一起使用，也可以代替段保护设施。例如，它允许在逐页的基础上强制执行读写保护。分页 机制还提供了两级用户-监督者保护，也可以在每页的基础上指定。</p>
-<h2 id="逻辑地址和线性地址的转换"><a href="#逻辑地址和线性地址的转换" class="headerlink" title="逻辑地址和线性地址的转换"></a>逻辑地址和线性地址的转换</h2><p>注:之前的内容为自己整理，以下为参考指导书翻译</p>
-<p>在保护模式下的系统架构层面，处理器使用两个阶段的地址转换来获得物理地址：逻辑地址转换和线性地址空间分页。<br>物理地址：逻辑地址转换和线性地址空间分页。即使对段的使用降到最低，处理器地址空间中的每一个字节都可以用一个逻辑地址来访问。一个逻辑地址包括一个16位的段选择器和一个32位的偏移量。段选择器确定了字节所处的段，偏移量指定了字节在段中相对于该段的基址的位置。处理器将每个逻辑地址转化为一个线性地址。线性地址是处理器线性地址空间中的一个32位地址。像物理地址空间一样，线性地址空间是一个平面的（未分割的）。232字节的地址空间，地址范围从0到FFFFFFFH。线性地址空间包含所有段和为系统定义的系统表。为了将逻辑地址转换为线性地址，处理器做了以下工作：</p>
-<ol>
-<li>使用段选择器中的偏移量来定位GDT或LDT中段的段描述符，并将其读入处理器。(只有当一个新的段选择器被加载到段寄存器中时才需要这个步骤。）</li>
-<li>检查段描述符，以检查段的访问权限和范围，以确保段是可访问的，并且偏移量在段的限制范围内。</li>
-<li>将段描述符中的段基地址加到偏移量上，形成一个线性地址。</li>
-</ol>
-<p>如果不使用分页，处理器将线性地址直接映射到物理地址上。如果线性地址空间被分页，第二层的地址转换被用来将线性地址转换为物理地址。<br><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404154555152.png" alt="image-20220404154555152"></p>
-<h3 id="Logical-Address-Translation-in-IA-32e-Mode-IA-32e-模式下的逻辑地址转换"><a href="#Logical-Address-Translation-in-IA-32e-Mode-IA-32e-模式下的逻辑地址转换" class="headerlink" title="Logical Address Translation in IA-32e Mode(IA-32e 模式下的逻辑地址转换)"></a>Logical Address Translation in IA-32e Mode(IA-32e 模式下的逻辑地址转换)</h3><p>在 IA-32e 模式下，Intel 64 处理器使用上述步骤将逻辑地址转换为线性地址。在64位模式下，段的偏移量和基地址是64位而不是32位。线性地址地址格式也是64位宽，并受制于典型形式的要求。每个代码段描述符都提供一个L位。这个位允许一个代码段执行64位代码或传统的32位代码的代码段。</p>
-<h3 id="Segment-Selectors-段选择子"><a href="#Segment-Selectors-段选择子" class="headerlink" title="Segment Selectors(段选择子)"></a>Segment Selectors(段选择子)</h3><p>段选择器是一个段的16位标识符（见下图）。它并不直接指向段，而是指向定义该段的段描述符。一个段选择器包含以下内容 ：</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404154957115.png" alt="image-20220404154957115"></p>
-<p>​                                                         Segment Selector</p>
-<p><strong>索引</strong>（第3至15位）- 在GDT或LDT中选择8192个描述符之一。处理器将索引值乘以8（段描述符中的字节数），并将结果加到GDT或LDT的基址上（分别来自GDTR或LDTR寄存器）。<br><strong>TI（表指示器）标志</strong><br>(Bit 2) - 指定要使用的描述符表：清除该标志选择GDT；设置该标志选择当前的LDT。</p>
-<p><strong>要求的权限级别(RPL)</strong><br>(位0和1) - 指定选择器的权限级别。特权级别范围从0到3，其中0为最高权限级别。</p>
-<p>GDT的第一个条目不被处理器使用。指向GDT这个条目的段选择器（即索引为0且TI标志设置为0的段选择器）被用作 “空段选择器”。就是说，一个索引为0且TI标志设置为0的段选择器被用作 “空段选择器”。当一个段寄存器（除了CS或SS寄存器）被载入空段选择器时，处理器不会产生一个异常。然而，当一个持有空段选择器的段寄存器被用来访问内存时，它会产生一个异常。空选择器可以用来初始化未使用的段寄存器。用一个空的段选择器加载CS或SS寄存器会导致一个通用的保护机制。段选择器加载CS或SS寄存器会产生一个通用保护异常（#GP）。段落选择器作为指针变量的一部分对应用程序是可见的，但是选择器的值通常是由链接编辑器分配或修改的，而不是应用程序。</p>
-<h3 id="Segment-Registers-段寄存器"><a href="#Segment-Registers-段寄存器" class="headerlink" title="Segment Registers(段寄存器)"></a>Segment Registers(段寄存器)</h3><p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404160315942.png" alt="image-20220404160315942"></p>
-<p>为了减少地址转换的时间和编码的复杂性，处理器提供了最多容纳6个段选择器的寄存器。这些段寄存器中的每一个都支持一种特定的内存引用(代码、堆栈或数据)。对于几乎任何一种程序的执行，至少要有代码段（CS），数据段（DS）和堆栈段（SS）寄存器且必须被加载有效的段选择器。处理器还提供了三个额外的数据段寄存器（ES、FS和GS），这些寄存器可以用来为当前执行的程序（或任务）提供额外的数据段。</p>
-<p>一个程序要访问一个段，该段的段选择器必须被加载到其中一个段寄存器中。因此，尽管一个系统可以定义数以千计的段，但只有6个可以立即使用。其他的段可以通过在程序执行期间将它们的段选择器加载到这些寄存器中来实现。</p>
-<p>每个段寄存器都有一个 “可见 “部分和一个 “隐藏 “部分。(隐藏部分有时被称为”描述符缓存 “或 “阴影寄存器”）。当段选择器被加载到段寄存器的可见部分时，处理器也会在段寄存器的隐藏部分加载基础地址、段限制和段描述符的访问控制信息。这些信息来自段选择器所指向的段描述符。缓存在段寄存器中的信息（可见的和隐藏的）允许处理器翻译地址，而不需要花费额外的总线周期来读取基址和限制。<br>系统中，多个处理器可以访问相同的描述符表，当描述符表被修改时，软件有责任重新加载段寄存器。如果不这样做，缓存在段寄存器中的旧的段描述符就可能在其内存驻留版本被修改后被使用。<br>为加载段寄存器提供了两种类型的加载指令:</p>
-<ol>
-<li><p>直接加载指令，如MOV, POP, LDS, LES, LSS, LGS和LFS指令。这些指令明确地引用段寄存器。</p>
-</li>
-<li><p>隐含的加载指令，如CALL、JMP和RET指令的远端指针版本，SYSENTER和SYSEXIT指令，以及IRET、INTn、INTO和INT3指令。<br>这些指令改变了CS寄存器的内容（有时也会改变其他段寄存器的内容），这是其操作的附带部分。MOV指令也可以用来将段寄存器的可见部分存储在通用寄存器中。</p>
-</li>
-</ol>
-<h3 id="Segment-Loading-Instructions-in-IA-32e-Mode-IA-32e模式下的段加载指令"><a href="#Segment-Loading-Instructions-in-IA-32e-Mode-IA-32e模式下的段加载指令" class="headerlink" title="Segment Loading Instructions in IA-32e Mode(IA-32e模式下的段加载指令)"></a>Segment Loading Instructions in IA-32e Mode(IA-32e模式下的段加载指令)</h3><p>由于ES、DS和SS段寄存器在64位模式下不被使用，它们在段描述符寄存器中的字段（base, limit, and attribute）被忽略了。某些形式的段装载指令也是无效的（例如LDS, POP ES）。引用ES、DS或SS段的地址计算被视为段基<br>为零。<br>处理器检查所有线性地址引用都是典型的形式，而不是执行极限检查。模式切换并不改变段寄存器或相关描述符寄存器的内容。在64位模式执行过程中，这些寄存器也不会改变，除非执行显式段加载。<br>为了给应用程序设置兼容模式，段加载指令（MOV to Sreg, POP Sreg）在64位模式下正常工作。从系统描述符表（GDT或LDT）中读取一个条目，并加载到段描述符的隐藏部分。描述符寄存器的基数、极限和属性字段都被加载。然而，数据和堆栈段选择器以及描述符寄存器的内容被忽略。<br>当FS和GS段重写在64位模式下使用时，它们各自的基础地址被用于线性地址计算中使用。(FS或GS).base + index + displacement。然后，FS.base和GS.base会被扩展到整个实现所支持的线性地址大小。由此产生的有效地址计算可以跨越正负地址；产生的线性地址必须是规范的。<br>在64位模式下，使用FS段和GS段覆盖的内存访问不会被检查是否有运行时限制也不受属性检查的影响。正常的段加载（MOV to Sreg和POP Sreg）到FS和GS中加载一个在段描述符寄存器的隐藏部分加载一个标准的32位基础值。标准32位以上的基址位以上的基址位被清除为0，以保证使用少于64位的实现方式的一致性。<br>FS.base和GS.base的隐藏描述符寄存器字段被物理映射到MSR，以便加载64位实现支持的所有地址位。64位实现所支持的所有地址位。CPL=0的软件（特权软件）可以使用WRMSR将所有支持的线性地址位加载到FS.base或GS.base。写入64位FS.base和GS.base寄存器中的地址必须是典型的形式。如果WRMSR指令试图向这些寄存器写入非经典地址的WRMSR指令会导致#GP故障。<br>当处于兼容模式时，FS和GS的重写操作与32位模式行为的定义无关。值加载到隐藏描述符寄存器基字段的前32位线性地址位。兼容性模式在计算有效地址时忽略上面的32位。<br>一个新的64位模式指令，SWAPGS，可以用来加载GS base。SWAPGS将IA32_KernelGSbase MSR中的内核数据结构指针与GS base寄存器交换。然后，内核可以使用GS前缀对正常的内存引用来访问内核的数据结构。试图向IA32_KernelGSbase MSR写一个非正则的值（使用WRMSR）会导致一个#GP故障。</p>
-<h3 id="Segment-Descriptors-段描述子"><a href="#Segment-Descriptors-段描述子" class="headerlink" title="Segment Descriptors(段描述子)"></a>Segment Descriptors(段描述子)</h3><p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404161935629.png" alt="image-20220404161935629"></p>
-<p>段描述符是GDT或LDT中的一个数据结构，为处理器提供段的大小和位置以及访问控制和状态信息。段落描述符通常是由编译器、链接器、加载器、操作系统或执行器，但不是应用程序创建的。</p>
-<p>段落描述符中的标志和字段如下:</p>
-<p><strong>分段限制字段</strong><br>指定段的大小。处理器把两个段限制字段放在一起，形成一个 一个20位的值。处理器以两种方式之一解释段限制，这取决于G（粒度）标志的设置：</p>
-<ul>
-<li>如果粒度标志是清除的，段的大小可以从1字节到1MByte，以字节为单位递增。</li>
-<li>如果颗粒度标志被设置，段的大小可以从4KB字节到4GB字节，以4KB字节为增量。</li>
-</ul>
-<p>处理器以两种不同的方式使用段的限制，取决于段是一个向上扩展的段或一个向下扩展的段。对于扩大的段，<br>在逻辑地址中的偏移量可以从0到段的极限范围。大于段限制的偏移量产生一般保护异常（#GP，用于SS以外的所有段）或堆栈故障异常（#SS用于SS段）。对于向下扩展的段，段限具有相反的功能。<br>偏移量可以从段限加1到FFFFFFFH或FFFFFFH，取决于B标志的设置。小于或等于段限制的偏移量产生一般保护异常或堆栈故障异常。减少一个扩展段的段限值字段的值，在段的地址空间的底部分配新的内存，而不是在顶部。<br>IA-32架构的堆栈总是向下增长，使得这种机制对于可扩展堆栈。</p>
-<p><strong>基准地址字段</strong><br>定义段的第0字节在4-GByte线性地址空间中的位置。处理器将三个基础地址字段放在一起，形成一个32位的数值。段的基址应与16字节的边界对齐，尽管16字节对齐不是必须的。这种对齐方式允许程序通过在16字节边界上对齐代码和数据来最大限度地提高性能。</p>
-<p><strong>类型字段</strong></p>
-<p>表示段或门的类型，并指定可以对该段进行的访问类型和增长方向。这个字段的解释取决于描述符类型标志指定的是应用（代码或数据）描述符还是系统描述符。类型字段的类型字段的编码对代码、数据和系统描述符是不同的。</p>
-<p><strong>S（描述符类型）标志</strong><br>指定段描述符是用于系统段（S标志为清除）还是用于代码或数据段（S标志为设置）。<br><strong>DPL（描述符权限级别）字段</strong><br>指定段的权限级别。特权级别的范围是0到3，其中0是最高的级别。<br><strong>P（段存在）标志</strong><br>指示段是否存在于内存中（设置）或不存在（清除）。如果这个标志是清除的，当指向段描述符的段选择器出现时，处理器会产生一个段不存在的异常（#NP）。内存管理软件可以使用这个标志来控制哪些段在给定的时间内被实际加载到物理内存中。它为管理虚拟内存提供了一个除分页之外的控制。当该标志被清除时，操作系统或执行程序可以自由地使用标记为 “可用 “的位置来存储自己的数据，例如关于丢失的段的位置的信息。<br><strong>D/B（默认操作大小/默认堆栈指针大小和/或上界）标志</strong><br>执行不同的功能，取决于段描述符是否是可执行的代码段、扩展的数据段、或者是其他的段，一个扩展的数据段，或者一个堆栈段。(对于32位的代码和数据段，这个标志应该总是设置为1，对于16位的代码和数据段，这个标志应该设置为0）。</p>
-<ul>
-<li>可执行代码段。该标志被称为D标志，它指示了有效地址和操作数的默认长度。如果该标志被设置，32位的地址和32位或8位的操作数；如果它被清除，16位的地址和16位或8位操作数。指令前缀66H可以用来选择默认以外的操作数，而指令前缀67H可以用来选择一个非默认的地址大小。</li>
-<li>堆栈段（由SS寄存器指向的数据段）。该标志被称为B（大）标志。它指定了用于隐式堆栈操作的堆栈指针的大小（如push, pops, and calls）。如果该标志被设置，则使用一个32位的堆栈指针，该指针被存储在32位的ESP寄存器中；如果该标志被清除，则使用16位的堆栈指针，该指针被存储在16位的SP寄存器中。如果堆栈段被设置为一个向下扩展的数据段（在下一段中描述下一段描述），B标志也指定了堆栈段的上界。</li>
-<li>扩大-缩小数据段。该标志被称为B标志，它指定了段的上限。如果该标志被设置，上界是FFFFFFFH（4GB字节）；如果该标志被清除，上限是FFFFFFFF（64KB）。</li>
-</ul>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404164628034.png" alt="image-20220404164628034"></p>
-<h2 id="描述符的分类"><a href="#描述符的分类" class="headerlink" title="描述符的分类"></a>描述符的分类</h2><p>段描述符分类</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404171152577.png" alt="image-20220404171152577"></p>
-<p>段描述符是GDT和LDT中的一个数据结构项，用于向处理器提供有关一个段的位置、大小以及访问控制的状态信息。每个段描述符的长度是8个字节，含有3个主要字段：</p>
-<ul>
-<li>段基地址</li>
-<li>段限长</li>
-<li>段属性</li>
-</ul>
-<p>段描述符通常由编译器，链接器，加载器或者操作系统来创建，但绝不是应用程序。</p>
-<p>段描述符通用格式如下所示</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404170746133.png" alt="image-20220404170746133"></p>
-<p>系统段描述符中各个位的含义如下所示</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404170802198.png" alt="image-20220404170802198"></p>
-<h3 id="存储段描述符"><a href="#存储段描述符" class="headerlink" title="存储段描述符"></a>存储段描述符</h3><h4 id="数据段描述符"><a href="#数据段描述符" class="headerlink" title="数据段描述符"></a>数据段描述符</h4><p>当S=1且TYPE字段的最高位（第2个双字的位11）为0时，表明是一个数据段描述符。</p>
-<p>下图是数据段描述符的格式。</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404171430725.png" alt="image-20220404171430725"></p>
-<h4 id="代码段描述符"><a href="#代码段描述符" class="headerlink" title="代码段描述符"></a>代码段描述符</h4><p>当S=1且TYPE字段的最高位（第2个双字的位11）为1时，表明是一个代码段描述符。</p>
-<p>下图是代码段描述符的格式。</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404171452192.png" alt="image-20220404171452192"></p>
-<h3 id="系统描述符类型"><a href="#系统描述符类型" class="headerlink" title="系统描述符类型"></a>系统描述符类型</h3><p>当段描述符中S标志位(描述符类型)是复位状态(0)的话，那么该描述符是一个系统描述符。处理器能够识别以下一些类型的系统段描述符:</p>
-<ul>
-<li>局部描述符表(LDT)的段描述符</li>
-<li>任务状态段（TSS）描述符</li>
-<li>调用门描述符</li>
-<li>中断门描述符</li>
-<li>陷阱门描述符</li>
-<li>任务门描述符</li>
-</ul>
-<p>这些描述符类型可分为两大类: 系统段描述符和门描述符。系统段描述符指向系统段(如LDT或TSS段)，门描述符也就是一个”门”,对应调用、中断或陷阱门，其中含有代码段的选择符和段中程序入口点的指针；对于任务门，其中含有TSS的段选择符。</p>
-<p>系统段描述符和门描述符类型字段的编码如下所示:</p>
-<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404170843601.png" alt="image-20220404170843601"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">x86系统架构预览-读书笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-03-28 15:44:58 / Modified: 20:05:31" itemprop="dateCreated datePublished" datetime="2022-03-28T15:44:58+08:00">2022-03-28</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="x86系统架构概述"><a href="#x86系统架构概述" class="headerlink" title="x86系统架构概述"></a>x86系统架构概述</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>[TOC]</p>
-<h2 id="系统级体系架构概述"><a href="#系统级体系架构概述" class="headerlink" title="系统级体系架构概述"></a>系统级体系架构概述</h2><p><img src="/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220328160624845.png" alt="image-20220328160624845"></p>
-<h3 id="Global-and-Local-Descriptor-Tables-全局和局部描述符表"><a href="#Global-and-Local-Descriptor-Tables-全局和局部描述符表" class="headerlink" title="Global and Local Descriptor Tables(全局和局部描述符表)"></a>Global and Local Descriptor Tables(全局和局部描述符表)</h3><p>​         当在保护模式下操作时，所有的内存访问都要经过<strong>全局描述符表（GDT）</strong>或可选的<strong>本地描述符表（LDT）</strong>，如图2-1所示。这些表包含的条目描述符称为段 。段描述符提供了段的基本地址以及访问权限、类型和使用信息。<br>​        每个段描述符都有一个相关的段选择器。一个段选择器为使用它的软件提供了 一个GDT或LDT的索引（其相关段描述符的偏移量），一个全局/本地标志（决定选择器是否指向GDT或LDT），以及访问权限信息。<br>​       要访问段中的一个字节，必须提供一个段选择器和一个偏移量。段选择器提供访问该段的段描述符（在GDT或LDT中）。从段描述符中，处理器获得该段在线性地址空间中的基本地址。然后，偏移量提供了字节相对于基址的位置。这种机制可以用来访问任何有效的代码、数据或堆栈段。只要该段可以从处理器所处的当前权限级别（CPL）访问。CPL被定义为当前执行的代码段的保护级别。<br>​       见图2-1。图中的实心箭头表示一个线性地址，虚线表示一个段选择器。而点状箭头表示物理地址。为了简单起见，许多段选择器被显示为 直接指向一个段。然而，从段选择器到其相关段的实际路径总是通过GDT或LDT。GDT的基址的线性地址包含在GDT寄存器（GDTR）中；LDT的线性地址包含在LDT寄存器（LDTR）中。</p>
-<h4 id="Global-and-Local-Descriptor-Tables-in-IA-32e-Mode"><a href="#Global-and-Local-Descriptor-Tables-in-IA-32e-Mode" class="headerlink" title="Global and Local Descriptor Tables in IA-32e Mode"></a>Global and Local Descriptor Tables in IA-32e Mode</h4><p>​        GDTR 和 LDTR 寄存器在 IA-32e 子模式（64 位模式和兼容模式）中都被扩展到 64 位宽。全局和局部描述符表在64位模式下被扩展以支持64位基地址，（16字节的LDT 描述符持有一个64位的基本地址和各种属性）。在兼容模式下，描述符不被扩展 。</p>
-<h3 id="System-Segments-Segment-Descriptors-and-Gates-系统段，段描述符和门"><a href="#System-Segments-Segment-Descriptors-and-Gates-系统段，段描述符和门" class="headerlink" title="System Segments, Segment Descriptors, and Gates(系统段，段描述符和门)"></a>System Segments, Segment Descriptors, and Gates(系统段，段描述符和门)</h3><p>​       除了构成程序或过程执行环境的代码、数据和堆栈段之外，架构还定义了两个系统段：<strong>任务状态段（TSS）</strong>和<strong>LDT</strong>。GDT不被视为。<br>因为它不是通过段选择器和段描述符访问的。TSSs和LDTs有为它们定义了段描述符。该体系结构还定义了一组特殊的描述符，称为门[调用门（call gates），中断门（interrupt gates），陷阱门（trap gates），和 任务门（task gates）]。这些描述符为系统程序和处理程序提供了受保护的通道，这些程序和处理程序可能在与应用程序不同的权限级别上运行。例如，一个调用门的CALL可以提供访问一个代码段中的程序，该代码段与当前代码段处于相同或更低的权限级别（更多权限）。<br>​        为了通过调用门访问一个过程，调用过程提供了调用门的选择器。然后，处理器对调用门进行访问权限检查，将CPL与调用门和调用门所指向的目标代码段的权限级别进行比较。如果对目标代码段的访问是允许的，处理器就会得到目标代码段的段选择器和该代码段的偏移。如果调用需要改变权限级别，处理器也会切换到目标权限级别的堆栈。新堆栈的段选择器是从当前运行任务的TSS中获得的。门也促进了16位和32位代码段之间的转换，反之亦然。</p>
-<h4 id="Gates-in-IA-32e-Mode"><a href="#Gates-in-IA-32e-Mode" class="headerlink" title="Gates in IA-32e Mode"></a>Gates in IA-32e Mode</h4><p>在IA-32e模式下，以下描述符是16字节的描述符（扩大到允许64位基数）。LDT描述符、64位TSS、调用门、中断门和陷阱门。调用门促进了64位模式和兼容模式之间的转换。在IA32e模式下不支持任务门。在权限级别改变时，堆栈段选择器不从TSS中读取。相反，它们被设置为NULL。</p>
-<h3 id="Task-State-Segments-and-Task-Gates-任务状态段任务门"><a href="#Task-State-Segments-and-Task-Gates-任务状态段任务门" class="headerlink" title="Task-State Segments and Task Gates(任务状态段任务门)"></a>Task-State Segments and Task Gates(任务状态段任务门)</h3><p>​       TSS（见图2-1）定义了一个任务的执行环境的状态。它包括通用寄存器、段寄存器、EFLAGS寄存器、EIP寄存器和段选择器的状态-指向三个堆栈段（每个权限级别有一个堆栈）。TSS还包括段选择器 ，用于与任务相关的LDT和分页结构层次的基址。<br>​       所有受保护模式下的程序执行都发生在一个任务（称为当前任务）的上下文中。<br>​      当前任务的TSS的段选择器被存储在任务寄存器中。最简单的切换方法是调用或跳转到一个新的任务。这里，新任务的TSS的段选择器是在CALL或JMP指令中给出的。在切换任务时，处理器会执行以下动作：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 将当前任务的状态存储在当前TSS中。</span><br><span class="line">2. 用新任务的段选择器加载任务寄存器。</span><br><span class="line">3. 通过GDT中的段描述符访问新的TSS。</span><br><span class="line">4. 将新任务的状态从新的TSS加载到通用寄存器、段寄存器中、LDTR，控制寄存器CR3（分页结构层次的基址），EFLAGS寄存器，以及EIP寄存器。</span><br><span class="line">5. 开始执行新的任务。一个任务也可以通过一个任务门来访问。任务门类似于调用门，只是它提供了访问 (通过段选择器)访问一个TSS而不是一个代码段。</span><br></pre></td></tr></table></figure>
-<h4 id="Task-State-Segments-in-IA-32e-Mode"><a href="#Task-State-Segments-in-IA-32e-Mode" class="headerlink" title="Task-State Segments in IA-32e Mode"></a>Task-State Segments in IA-32e Mode</h4><p>在IA-32e模式下不支持硬件任务开关。然而，TSSs继续存在。TSS的基本地址由其描述符指定。一个64位的TSS持有以下对64位操作很重要的信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 每个特权级别的堆栈指针地址</span><br><span class="line">- 中断堆栈表的指针地址</span><br><span class="line">- IO-permission位图的偏移地址（从TSS基数开始）。</span><br><span class="line">  在IA-32e模式下，任务寄存器被扩展为容纳64位基址。</span><br></pre></td></tr></table></figure>
-<h3 id="Interrupt-and-Exception-Handling-中断和异常处理"><a href="#Interrupt-and-Exception-Handling-中断和异常处理" class="headerlink" title="Interrupt and Exception Handling(中断和异常处理)"></a>Interrupt and Exception Handling(中断和异常处理)</h3><p>​          外部中断、软件中断和异常是通过中断描述符表（IDT）处理的。IDT存储了一个门描述符的集合，提供对中断和异常处理程序的访问。与 GDT一样，IDT不是一个段。IDT基础的线性地址包含在IDT寄存器（IDTR）中。IDT中的门描述符可以是中断、陷阱、或任务门描述符。要访问一个中断或异常处理程序 ，处理器首先从内部硬件、外部中断控制器或软件中接收一个中断向量（中断号）。中断控制器，或通过INT、INTO、INT 3或BOUND指令从软件接收一个中断向量（中断号）。中断向量 提供了一个进入IDT的索引。如果选择的门描述符是一个中断门或陷阱门，相关的处理程序就会被访问。处理程序的访问方式与通过调用门调用程序的方式类似。如果描述符是一个<br>任务门，处理程序将通过一个任务开关被访问。</p>
-<h4 id="Interrupt-and-Exception-Handling-IA-32e-Mode"><a href="#Interrupt-and-Exception-Handling-IA-32e-Mode" class="headerlink" title="Interrupt and Exception Handling IA-32e Mode"></a>Interrupt and Exception Handling IA-32e Mode</h4><p>在IA-32e模式下，中断描述符被扩展到16个字节，以支持64位基本地址。IDTR寄存器被扩展为容纳64位基地址。不支持任务门。</p>
-<h3 id="Memory-Management-内存管理"><a href="#Memory-Management-内存管理" class="headerlink" title="Memory Management(内存管理)"></a>Memory Management(内存管理)</h3><p>​        系统架构支持内存的直接物理寻址或虚拟内存（通过分页）。<br>​        当使用物理寻址时，线性地址被当作物理地址处理。当使用分页时：所有的代码、数据、堆栈和系统段（包括GDT和IDT）可以被分页，只有最近访问的 页被保存在物理内存中。物理内存中的页面（有时称为页框）的位置包含在分页结构中。这些结构位于物理内存中。<br>​        分页结构层次结构的基本物理地址包含在控制寄存器CR3中。分页结构中的条目决定了 一个分页框的物理地址、访问权限和内存管理信息。为了使用这种分页机制，一个线性地址被分解成几个部分。这些部分提供了进入分页结构和页框的单独偏移。一个系统可以有一个单一的分页结构层次，也可以有几个。例如 ，每个任务可以有自己的层次结构。</p>
-<h4 id="Memory-Management-in-IA-32e-Mode"><a href="#Memory-Management-in-IA-32e-Mode" class="headerlink" title="Memory Management in IA-32e Mode"></a>Memory Management in IA-32e Mode</h4><p>在IA-32e模式下，物理内存页由一组系统数据结构管理。在兼容模式 和64位模式下，使用四级系统数据结构。这些结构包括 ：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 第4级页面映射（PML4）--PML4表中的一个条目包含了一个页面的基点的物理地址目录指针表、访问权限和内存管理信息。PML4的基本物理地址被存储在CR3中。</span><br><span class="line">- 一组页目录指针表 - 页目录指针表中的一个条目包含了页目录指针表基的物理地址。</span><br><span class="line">- 一组页目录 - 页目录表中的一个条目包含了一个页目录表基的物理地址、访问权限和内存管理信息。</span><br><span class="line">- 成套的页表 - 一个页表中的条目包含了一个页框的物理地址，访问权限和内存管理信息。</span><br></pre></td></tr></table></figure>
-<h3 id="System-Registers-系统寄存器"><a href="#System-Registers-系统寄存器" class="headerlink" title="System Registers(系统寄存器)"></a>System Registers(系统寄存器)</h3><p>为了帮助初始化处理器和控制系统操作，系统结构在EFLAGS寄存器中提供了系统标志和几个系统寄存器：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- EFLAGS寄存器中的系统标志和IOPL字段控制任务和模式的切换，中断处理，指令跟踪和访问权限。</span><br><span class="line">- 控制寄存器（CR0、CR2、CR3和CR4）包含各种控制系统级操作的标志和数据域。这些寄存器中的其他标志被用来表示对操作系统或执行器中特定处理器能力的支持。</span><br><span class="line">- 调试寄存器允许设置断点以用于调试程序和系统软件。</span><br><span class="line">- GDTR、LDTR和IDTR寄存器包含了它们各自表的线性地址和大小（限制）。</span><br><span class="line">- 任务寄存器包含了当前任务的线性地址和TSS的大小。</span><br><span class="line">- 特定型号的寄存器。这些寄存器控制一些项目，如调试扩展。</span><br><span class="line">  这些寄存器的数量和功能在英特尔64和IA-32处理器系列的不同成员中是不同的。</span><br></pre></td></tr></table></figure>
-<h4 id="System-Registers-in-IA-32e-Mode"><a href="#System-Registers-in-IA-32e-Mode" class="headerlink" title="System Registers in IA-32e Mode"></a>System Registers in IA-32e Mode</h4><p>​        在IA-32e模式下，四个系统描述符表寄存器（GDTR、IDTR、LDTR和TR）在硬件上被扩展为<br>以容纳64位的基本地址。EFLAGS成为64位的RFLAGS寄存器。CR0-CR4被扩展到64位。CR8变得可用。CR8提供了对任务优先级寄存器（TPR）的读写访问，这样操作系统就可以控制外部设备的优先级。在64位模式下，调试寄存器DR0-DR7为64位。在兼容模式下，DR0-DR3的地址匹配也是以64位粒度进行的。在支持IA-32e模式的系统上，扩展功能启用寄存器（IA32_EFER）是可用的。这个特定型号的寄存器控制IA-32e模式的激活和其他IA-32e模式的操作。此外，还有几个特定型号的寄存器管理 IA-32e 模式指令。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- IA32_KernelGSbase - 由 SWAPGS 指令使用。</span><br><span class="line">- IA32_LSTAR - 由 SYSCALL 指令使用。</span><br><span class="line">- IA32_SYSCALL_FLAG_MASK - 由SYSCALL指令使用。</span><br><span class="line">- IA32_STAR_CS - 由SYSCALL和SYSRET指令使用。</span><br></pre></td></tr></table></figure>
-<h3 id="Other-System-Resources"><a href="#Other-System-Resources" class="headerlink" title="Other System Resources"></a>Other System Resources</h3><p>除了前几节描述的系统寄存器和数据结构，系统结构还提供了以下的额外资源。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 操作系统指令</span><br><span class="line">- 性能监测计数器</span><br><span class="line">- 内部缓存和缓冲区</span><br><span class="line">  等</span><br></pre></td></tr></table></figure>
-<h2 id="实模式和保护模式转换"><a href="#实模式和保护模式转换" class="headerlink" title="实模式和保护模式转换"></a>实模式和保护模式转换</h2><p>二者根本区别为：进程内存受保护与否</p>
-<p> 保护模式 - 这是处理器的原生操作模式。它提供了一套丰富的结构特性、灵活性、高性能和对现有软件基础的向后兼容性。</p>
-<p>真实地址模式 - 这种操作模式提供了英特尔8086处理器的编程环境，并有一些扩展（如切换到受保护或系统管理模式的能力）。</p>
-<h3 id="实模式工作原理"><a href="#实模式工作原理" class="headerlink" title="实模式工作原理"></a>实模式工作原理</h3><p>实模式出现于早期8088CPU时期。当时由于CPU的性能有限，一共只有20位地址线（所以地址空间只有1MB），以及8个16位的通用寄存器，以及4个16位的段寄存器。所以为了能够通过这些16位的寄存器去构成20位的主存地址，必须采取一种特殊的方式。当某个指令想要访问某个内存地址时，它通常需要用下面的这种格式来表示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(段基址：段偏移量)</span><br></pre></td></tr></table></figure>
-<p>其中第一个字段是段基址，它的值是由段寄存器提供的。</p>
-<p>第二字段是段内偏移量，代表你要访问的这个内存地址距离这个段基址的偏移。它的值就是由通用寄存器来提供的，所以也是16位。</p>
-<p>CPU采用把段寄存器所提供的段基址先向左移4位。这样就变成了一个20位的值，然后再与段偏移量相加，即可组合成一个二十位的地址。即：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">物理地址 = 段基址&lt;&lt;4 + 段内偏移</span><br></pre></td></tr></table></figure>
-<h3 id="保护模式工作原理"><a href="#保护模式工作原理" class="headerlink" title="保护模式工作原理"></a>保护模式工作原理</h3><p>随着CPU的发展，CPU的地址线的个数也从原来的20根变为现在的32根，所以可以访问的内存空间也从1MB变为现在4GB，寄存器的位数也变为32位。所以实模式下的内存地址计算方式就已经不再适合了。所以就引入了现在的保护模式，实现更大空间的，更灵活也更安全的内存访问。</p>
-<p>在保护模式下，CPU的32条地址线全部有效，可寻址高达4G字节的物理地址空间; 但是我们的内存寻址方式还是得兼容老办法，即(段基址：段偏移量)的表示方式。当然此时CPU中的通用寄存器都要换成32位寄存器(除了段寄存器)来保证寄存器能访问所有的4GB空间。</p>
-<p>我们的偏移值和实模式下是一样的，就是变成了32位而已，而段值仍旧是存放在原来16位的段寄存器中，但是这些段寄存器存放的却不再是段基址了，毕竟之前说过实模式下寻址方式不安全，我们在保护模式下需要加一些限制，而这些限制可不是一个寄存器能够容纳的，于是我们把这些关于内存段的限制信息放在一个叫做<strong>全局描述符表(GDT)</strong>的结构里。全局描述符表中含有一个个表项，每一个表项称为<strong>段描述符。</strong>而段寄存器在保护模式下存放的便是相当于一个数组索引的东西，通过这个索引，可以找到对应的表项。段描述符存放了段基址、段界限、内存段类型属性(比如是数据段还是代码段,注意<strong>一个段描述符只能用来定义一个内存段</strong>)等许多属性,具体信息见下图：</p>
-<p><img src="/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220328193206147.png" alt="image-20220328193206147"></p>
-<p>其中，段界限表示段边界的扩张最值，即最大扩展多少或最小扩展多少，用20位来表示，它的单位可以是字节，也可以是4KB，这是由G位决定的(G为1时表示单位为4KB)。</p>
-<p>实际段界限边界值=(描述符中的段界限+1)*（段界限的单位大小(即字节或4KB))-1，如果偏移地址超过了段界限，CPU会抛出异常。</p>
-<p>全局描述符表位于内存中，需要用专门的寄存器指向它后， CPU 才知道它在哪里。这个专门的寄存器便是<strong>GDTR</strong>(一个48位的寄存器),专门用来存储 GDT 的内存地址及大小。</p>
-<p>还需要介绍一个新的概念：段的选择子。段寄存器 CS、 DS、 ES、 FS、 GS、 SS，在实模式下时，段中存储的是段基地址，即内存段的起始地址。 而在保护模式下时，由于段基址已经存入了段描述符中，所以段寄存器中再存放段基址是没有意义的，在段寄存器中存入的是一个叫作选择子的东西。选择子“基本上”是个索引值。由于段寄存器是 16 位，所以选择子也是 16 位，在其低 2 位即第 0～1 位， 用来存储 RPL，即请求特权级，可以表示 0、 1、 2、 3 四种特权级。在选择子的第 2 位是 TI 位，即 Table Indicator，用来指示选择子是在 GDT 中，还是 LDT 中索引描述符。 TI 为 0 表示在 GDT 中索引描述符， TI 为 1 表示在 LDT 中索引描述符。选择子的高 13 位，即第 3～15 位是 描述符的索引值，用此值在 GDT 中索引描述符。前面说过 GDT 相当于一个描述符数组，所以此选择子中的索引值就是 GDT 中的下标。选择子结构如下：</p>
-<p><img src="/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220328193601767.png" alt="image-20220328193601767"></p>
-<p>此外， 扩充的存储器分段管理机制和可选的存储器分页管理机制，不仅为存储器共享和保护提供了硬件支持，而且为实现虚拟存储器提供了硬件支持; 支持多任务，能够快速地进行任务切换(switch)和保护任务环境(context); 4个特权级和完善的特权检查机制，既能实现资源共享又能保证代码和数据的安全和保密及任务的隔离; 支持虚拟8086方式，便于执行8086程序。</p>
-<h3 id="实模式到保护模式的切换"><a href="#实模式到保护模式的切换" class="headerlink" title="实模式到保护模式的切换"></a>实模式到保护模式的切换</h3><p>从实模式切换到保护模式大致可以分为以下几个步骤：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1、屏蔽中断</span><br><span class="line"></span><br><span class="line">2、初始化全局描述符表（GDT）</span><br><span class="line"></span><br><span class="line">3、将CR0寄存器最低位置1</span><br><span class="line"></span><br><span class="line">4、执行远跳转</span><br><span class="line"></span><br><span class="line">5、初始化段寄存器和栈指针</span><br></pre></td></tr></table></figure>
-<h4 id="屏蔽中断"><a href="#屏蔽中断" class="headerlink" title="屏蔽中断"></a>屏蔽中断</h4><p>在16位实模式下的中断由BIOS处理，进入保护模式后，中断将交给中断描述符表IDT里规定的函数处理，在刚进入保护模式时IDTR寄存器的初始值为0，一旦发生中断（例如BIOS的时钟中断）就将导致CPU发生异常，所以需要首先屏蔽中断。屏蔽中断可以使用cli指令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cli</span><br></pre></td></tr></table></figure>
-<h4 id="初始化GDT"><a href="#初始化GDT" class="headerlink" title="初始化GDT"></a>初始化GDT</h4><p>在32位保护模式中，段与段之间是互相隔离的，当访问的地址超出段的界限时处理器就会阻止这种访问，因此每个段都需要有起始地址、范围、访问权限以及其他属性四个部分，这四个部分合在一起叫做段描述符（Segment Descriptor），总共需要8个字节来描述。但Intel为了保持向后兼容，将段寄存器仍然规定为16-bit，显然我们无法用16-bit的段寄存器来直接存储64-bit的段描述符。 </p>
-<p>解决的办法是将所有64-bit的段描述符放到一个数组中，将16-bit段寄存器的值作为下标来访问这个数组（以字节为单位），获取64-bit的段描述符，这个数组就叫是全局描述符表</p>
-<h4 id="将CR0最低位置1"><a href="#将CR0最低位置1" class="headerlink" title="将CR0最低位置1"></a>将CR0最低位置1</h4><p>CR0是系统内的32位控制寄存器之一，可以控制CPU的一些重要特性。其中最低位是保护允许位（Protected Mode Enable, PE），PE位置1后CPU进入保护模式（注意此时还是16位保护模式，不是32位保护模式），置0时则为实模式。现在我们要进入保护模式，即将CR0的最低位置1，汇编代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-把 cr0 的最低位置为 1，开启保护模式</span><br><span class="line">mov eax, cr0</span><br><span class="line">or eax, 0x1</span><br><span class="line">mov cr0, eax</span><br></pre></td></tr></table></figure>
-<h4 id="执行远跳转"><a href="#执行远跳转" class="headerlink" title="执行远跳转"></a>执行远跳转</h4><p>将cr0最低位置1后，CPU就进入了保护模式，此时需要马上执行一条远跳转指令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmp 08h:PModeMain</span><br></pre></td></tr></table></figure>
-<p>这条指令有两个作用，第一个作用是将cs段寄存器的值修改为08h，切换到保护模式后，CPU寻址的方式就从实模式中的段地址 * 16 + 偏移地址改为了通过gdt寻址，所以这里的08h是段选择子而不是段地址，并且远跳转指令会自动将cs的值修改为对应的段选择子，这里是08h。</p>
-<p>远跳转的另一个作用是清空CPU的流水线，流水线的作用在计组中有提到过，为了加速指令的执行，CPU在执行当前指令时会同时加载并解析接下来的一些指令，在进入保护模式之前，已经有许多指令进入了流水线，这些指令都是按16位模式处理的，而进入保护模式后的指令都是32位，所以这里通过一个远跳转来让CPU清空流水线。</p>
-<p>切换到32位模式后，就应该执行32位的指令了，所以从PModeMain开始的指令都采用32位模式编译，通过[bits 32]这个标记实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[bits 32]</span><br><span class="line">PModeMain:</span><br></pre></td></tr></table></figure>
-<h4 id="初始化段寄存器和栈指针"><a href="#初始化段寄存器和栈指针" class="headerlink" title="初始化段寄存器和栈指针"></a>初始化段寄存器和栈指针</h4><p>上一步中我们将代码段寄存器cs初始化成了0x08，现在我们还需要初始化其他的段寄存器如数据段寄存器ds，拓展段寄存器es，栈段ss以及fs，gs两个由操作系统使用的段。 </p>
-<p>另外我们还需要初始化栈指针ebp和esp，代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[bits 32]</span><br><span class="line">PModeMain:</span><br><span class="line">    mov ax, 0x10        ; 将数据段寄存器ds和附加段寄存器es置为0x10</span><br><span class="line">    mov ds, ax         </span><br><span class="line">    mov es, ax</span><br><span class="line">    mov fs, ax          ; fs和gs寄存器由操作系统使用，这里统一设成0x10</span><br><span class="line">    mov gs, ax</span><br><span class="line">    mov ax, 0x18        ; 将栈段寄存器ss置为0x18</span><br><span class="line">    mov ss, ax</span><br><span class="line">    mov ebp, 0x7c00     ; 现在栈顶指向 0x7c00</span><br><span class="line">    mov esp, ebp</span><br></pre></td></tr></table></figure>
-<h3 id="需要修改的内容"><a href="#需要修改的内容" class="headerlink" title="需要修改的内容"></a>需要修改的内容</h3><ul>
-<li><p>GDT初始化：定义段描述符、定义GDTR的数据结构、定义GDT选择子</p>
-</li>
-<li><p>数据段+堆栈段</p>
-</li>
-<li><p>16位代码段（实模式下）的定义</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.设置代码运行环境，即给相关寄存器赋值；</span><br><span class="line">2.初始化16位代码段描述符 + 32位代码段描述符 + 堆栈段描述符 +数据段描述符；</span><br><span class="line">3.初始化全局描述符表寄存器GDTR的内容，因为其基地址还没有初始化， 然后通过lgdt [GdtPtr]，将内存中GDTR的内容加载到GDTR中，重点在于保存 GDT的基地址；</span><br><span class="line">4.关中断， 即设置CPU不响应任何其他的外部中断，因为CPU现在的时间片只属于当前加载的程序；</span><br><span class="line">5.打开地址线A20；</span><br><span class="line">6将CR0的 PE 位置1；PE位==1，表明CPU运行在保护模式下；</span><br><span class="line">7.跳转到保护模式： jmp dword SelectorCode32:0 ，这里的代码指提供了选择子，（2.3）末部分，已经说明了为什么通过选择子就可以索引到 32位代码段 LABEL_SEG_CODE32；（这就是从实模式跳入保护模式）</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>32位代码段（由实模式跳入，即保护模式）的定义</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.将对应选择子赋值到 对应寄存器， 即设置任务代码的运行环境，不得不提的是本段代码还改变了ss和esp，则在32位代码段中所有的堆栈操作将会在新增的堆栈段中进行；</span><br><span class="line">2.做任务；</span><br><span class="line">3.任务做完后，跳转到16位代码段，因为从保护模式跳回实模式，只能从16位代码段中跳回；</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="80x86系统指令寄存器"><a href="#80x86系统指令寄存器" class="headerlink" title="80x86系统指令寄存器"></a>80x86系统指令寄存器</h2><h3 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h3><p><img src="/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220328194436597.png" alt="image-20220328194436597"></p>
-<p>  EFLAGS系统标志和IOPL字段控制I/O，可屏蔽的硬件中断、调试、任务切换和虚拟8086模式。仅允许特权代码（通常为操作系统过执行代码）修改这些位。</p>
-<p>​       在64位模式下，RFLAGS寄存器扩展为64位，保留高32位。PFLAGS中系统标志（64位模式）或EFLAGS（兼容模式）。在IA-32e模式下，处理器不允许设置VM位，因为不支持virtual-8086模式（尝试设置该位将被忽略）。同样，处理器将不会设置NT位。但是处理器确实允许软件将NT位置1（请注意，如果将NT位置1，则IRET会在IA-32e模式下引起一般性保护故障）。在IA-32e模式下，YSCALL/SYSRET指令具有一种可编程的方法来指定哪些位是已RFLAGS/EFLAGS中清除。这些说明保存/恢复EFLAGS/RFLAGS。</p>
-<h3 id="内存管理寄存器"><a href="#内存管理寄存器" class="headerlink" title="内存管理寄存器"></a>内存管理寄存器</h3><p><img src="/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220328194633100.png" alt="image-20220328194633100"></p>
-<h4 id="GDTR"><a href="#GDTR" class="headerlink" title="GDTR"></a>GDTR</h4><p>保存基地址（在保护模式下为32位，在IA-32e模式下为64位）和16位表GDT的限制。基地址指定GDT字节0的线性地址；表格限制指定了表中的字节数。LGDT和SGDT指令分别加载和存储GDTR寄存器。开机或重置在处理器中，基地址设置为默认值0，限制设置为0FFFFH。必须有新的基本地址将其作为保护模式操作的处理器初始化过程的一部分加载的GDTR。</p>
-<h4 id="LDTR"><a href="#LDTR" class="headerlink" title="LDTR"></a>LDTR</h4><p>​       保留16位段选择器的结伴地址（在保护模式下为32位，在IA-32e模式下为64位）段限制和LDT的描述符属性。基地址指定字节的线性地址LDT段的0，段限制指定段中的字节数。LLDT和SLDT指令分别加载和存储LDTR寄存器的段选择器部分的包含LDT的段必须在GDT中具有段描述符。当LLDT指令加载一个LDTR中的段选择器：LDT描述符中的基地址、限制和描述符属性会自动加载到LDTR中。<br>​       发生任务切换时，LDTR会自动加载LDT的段选择器和描述符为新任务。在写入新的LDT信息之前，不会自动保存LDTR的内容进入寄存器。在处理器加电或重置时，段选择器和基地址被设置为默认值0和限制设置为0FFFFH。</p>
-<h4 id="IDTR"><a href="#IDTR" class="headerlink" title="IDTR"></a>IDTR</h4><p>​        寄存器保存基地址（保护模式下为32位，IA-32e模式下为64位）和16位表限制IDT。基地址指定IDT字节0的线性地址，表限制指定数量表中的字节数。LIDT和SIDT指令分别加载和存储IDTR寄存器。开机或重置处理器后，基地址设置为默认值0，限制设置为0FFFFH。然后可以在处理器初始化过程中更改寄存器中的地址和限制。</p>
-<h4 id="TR"><a href="#TR" class="headerlink" title="TR"></a>TR</h4><p>​        任务寄存器包含16位段选择器，基地址（在保护模式下为32位，在IA-32e中为64位），段限制和当前任务的TSS的描述符属性。选择器引用TSS、GDT的描述符。基地址指定TSS字节0的线性地址；段限制指定TSS中的字节数。LTR和STR指令分别加载和存储任务寄存器的段选择器部分。当LTR指令将段选择器加载到任务寄存器中时，基址、限制和描述符属性从TSS描述符将自动加载到任务寄存器中。处理器加电或重置时，基地址设置为默认值0，限制设置为0FFFFH。发生任务切换时，任务寄存器会自动加载段选择器和描述符新任务的TSS。在写入的新的TSS之前，不会自动保存任务寄存器的内容信息进去寄存器。</p>
-<h3 id="控制寄存器"><a href="#控制寄存器" class="headerlink" title="控制寄存器"></a>控制寄存器</h3><h4 id="CR0"><a href="#CR0" class="headerlink" title="CR0"></a>CR0</h4><p>包含控制处理器的操作模式和状态的系统控制标志。</p>
-<h4 id="CR3"><a href="#CR3" class="headerlink" title="CR3"></a>CR3</h4><p>包含分页结构层次结构基础的物理地址和两个标志（PCD和PWT）。仅指定基址的最高有效位（减去低12位）；低12位地址“0”假定为0.因此，第一个分页结构必须与页面（4KB）对齐边界。PCT和PWT标志控制处理器内部数据中该分页结构的缓存（它们不控制页面目录信息的TLB缓存）。使用物理地址扩展中，CR3寄存器包含页面目录指针表的基地址。在IA-32e模式下，CR3寄存器包含PML4表的基地址。</p>
-<h2 id="系统指令"><a href="#系统指令" class="headerlink" title="系统指令"></a>系统指令</h2><p>LGDT加载GDTR寄存器——将GDT基址和限制从内存加载到GDTR寄存器。<br>SGDT存储GDTR寄存器——将GDT基址和GDTR寄存器中的限制存储到内存。<br>LIDT加载IDTR寄存器——将IDT基址和限制从存储器加载到IDTR寄存器中。<br>SIDT加载IDTR寄存器——将IDT寄存器的IDT基址和限制存储到内存中。<br>LLDT加载LDT寄存器——将LDT段选择器和段描述符从内存加载到LDTR，段选择器操作数也可以位于通用寄存器中。<br>SLDT存储LDT寄存器——将LDTR寄存器中的LDT段选择器存储到存储器或存储器中。<br>LTR记载任务寄存器——将TSS的段选择器和段描述符从内存加载到任务寄存器，段选择器操作数也可以位于通用寄存器中。<br>STR存储任务寄存器——将当前任务TSS的段选择器从任务存储器存储到存储器或通用寄存器。</p>
-<h2 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://zhuanlan.zhihu.com/p/42309472</span><br><span class="line">https://mp.weixin.qq.com/s/VGhpbZaeyVwq3Ghs2E6eEw</span><br><span class="line">https://zhuanlan.zhihu.com/p/412845339</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/12/%E8%A7%A3%E5%86%B3%E5%B9%BF%E5%91%8A%E5%BC%B9%E7%AA%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/12/%E8%A7%A3%E5%86%B3%E5%B9%BF%E5%91%8A%E5%BC%B9%E7%AA%97/" class="post-title-link" itemprop="url">解决广告弹窗</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-03-12 20:00:20 / Modified: 20:25:48" itemprop="dateCreated datePublished" datetime="2022-03-12T20:00:20+08:00">2022-03-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="解决广告弹窗"><a href="#解决广告弹窗" class="headerlink" title="解决广告弹窗"></a>解决广告弹窗</h1><p>对于广告弹窗，我们采取安装火绒安全软件的方式来解决。具体流程如下</p>
-<p>打开网站</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.huorong.cn/</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/03/12/%E8%A7%A3%E5%86%B3%E5%B9%BF%E5%91%8A%E5%BC%B9%E7%AA%97/image-20220312201421955.png" alt="image-20220312201421955"></p>
-<p>点击上方一栏的个人产品</p>
-<p><img src="/2022/03/12/%E8%A7%A3%E5%86%B3%E5%B9%BF%E5%91%8A%E5%BC%B9%E7%AA%97/image-20220312201439903.png" alt="image-20220312201439903"></p>
-<p>点击免费下载</p>
-<p>下载安装等步骤正常进行。</p>
-<p>安装好之后如下</p>
-<p><img src="/2022/03/12/%E8%A7%A3%E5%86%B3%E5%B9%BF%E5%91%8A%E5%BC%B9%E7%AA%97/image-20220312201528490.png" alt="image-20220312201528490"></p>
-<p>点击安全工具</p>
-<p>点击右上方的弹窗拦截</p>
-<p><img src="/2022/03/12/%E8%A7%A3%E5%86%B3%E5%B9%BF%E5%91%8A%E5%BC%B9%E7%AA%97/image-20220312201548894.png" alt="image-20220312201548894"></p>
-<p>注：首次点击需要应该需要下载，为正常现象。</p>
-<p>到此工作完成。</p>
-<p>注：完成之后建议把其他杀毒软件全部卸载。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2346,7 +2286,7 @@ T(R\chi S)=T(R)T(S)</script><p>投影操作数的基数估计</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -2374,7 +2314,7 @@ T(R\chi S)=T(R)T(S)</script><p>投影操作数的基数估计</p>
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
