@@ -145,6 +145,243 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/20/DBMS%E8%80%83%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/20/DBMS%E8%80%83%E7%82%B9/" class="post-title-link" itemprop="url">DBMS考点</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-20 15:29:10" itemprop="dateCreated datePublished" datetime="2022-05-20T15:29:10+08:00">2022-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 09:32:31" itemprop="dateModified" datetime="2022-05-21T09:32:31+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="DBMS考点"><a href="#DBMS考点" class="headerlink" title="DBMS考点"></a>DBMS考点</h1><p>对的要求再复习一次</p>
+<p>域再看一下，函数依赖再看一下，关系模式分解</p>
+<p>1-3部分：选择，填空，查询 30</p>
+<p>4-6部分：选择，填空，证明，设计 35</p>
+<p>7-12部分：选择，填空，算法，分析 35</p>
+<h2 id="考前看的"><a href="#考前看的" class="headerlink" title="考前看的"></a>考前看的</h2><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520205944497.png" alt="image-20220520205944497" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520205958323.png" alt="image-20220520205958323" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520212508933.png" alt="image-20220520212508933" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520224447692.png" alt="image-20220520224447692" style="zoom:50%;"></p>
+<h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><p><strong>数据库</strong>：有组织的、共享的、持久存储的数据集合。</p>
+<p><strong>数据库管理系统</strong>：<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520153555464.png" alt="image-20220520153555464" style="zoom:50%;"></p>
+<p><strong>数据库用户</strong>：<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520153623316.png" alt="image-20220520153623316" style="zoom:50%;"></p>
+<p><strong>数据库系统</strong>：由数据库、数据库管理系统、应用程序和数据库用户在一起构成的系统。</p>
+<p><strong>数据库语言</strong>：数据定义语言；数据操作语言</p>
+<p><strong>数据模型</strong>：<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520153847947.png" alt="image-20220520153847947" style="zoom:50%;"></p>
+<p><strong>数据库模式</strong>：<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520154032246.png" alt="image-20220520154032246" style="zoom:50%;"></p>
+<p><strong>数据库实例</strong>：<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520154059712.png" alt="image-20220520154059712" style="zoom:50%;"></p>
+<p><strong>数据库三层模式结构</strong>：数据库模式通常分三个层次定义，从低到高分别是:内模式/存储模式；概念模式；外模式/视图</p>
+<p><strong>内模式/存储模式</strong>：描述数据库的物理存储结构和存取方式；数据库只有一个内模式；定义内模式时通常使用物理数据模型提供的概念</p>
+<p><strong>概念模式</strong>：为全体数据库用户描述整个数据库的结构和约束；数据库只有一个概念模式；定义概念模式时使用实现数据模型提供的概念</p>
+<p><strong>外模式/视图</strong>：从不同类别用户的视角描述数据库结构；可以有多个外模式；定义外模式时也可以使用实现数据模型提供的概念</p>
+<p><strong>数据独立性</strong>：逻辑数据独立性；物理数据独立性</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520154405650.png" alt="image-20220520154405650" style="zoom:50%;"></p>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><h3 id="关系模型"><a href="#关系模型" class="headerlink" title="关系模型"></a>关系模型</h3><p><strong>超键</strong>：可以唯一标识每个元组的属性。</p>
+<p><strong>候选键</strong>：任意真子集都不是超键的超键。即极小的超键。</p>
+<p><strong>域</strong>：<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155141463.png" alt="image-20220520155141463" style="zoom:50%;"></p>
+<p><strong>主属性</strong>：候选键中的属性。</p>
+<h3 id="关系完整性约束"><a href="#关系完整性约束" class="headerlink" title="关系完整性约束"></a>关系完整性约束</h3><p>完整性约束的类型：实体完整性、参照完整性、用户定义完整性。</p>
+<p>实体完整性约束规则</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">主键值唯一且非空。</span><br></pre></td></tr></table></figure>
+<p>参照完整性约束</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于外键的约束，外键值为空或不为空则必须在S存在。</span><br></pre></td></tr></table></figure>
+<p>用户定义完整性约束</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">根据需求定义。</span><br></pre></td></tr></table></figure>
+<h3 id="关系代数"><a href="#关系代数" class="headerlink" title="关系代数"></a>关系代数</h3><p>投影<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155612344.png" alt="image-20220520155612344" style="zoom:50%;"></p>
+<p>并、差、交<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155641699.png" alt="image-20220520155641699" style="zoom: 67%;"></p>
+<p>重命名<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155743424.png" alt="image-20220520155743424" style="zoom:50%;"></p>
+<p>$\theta$连接<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520155859015.png" alt="image-20220520155859015" style="zoom:50%;"></p>
+<p>等值连接：连接条件仅涉及相等比较的连接称作等值连接。</p>
+<p>除<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520160538221.png" alt="image-20220520160538221" style="zoom:50%;"></p>
+<p>分组操作<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520160612769.png" alt="image-20220520160612769" style="zoom: 67%;"></p>
+<h3 id="关系演算"><a href="#关系演算" class="headerlink" title="关系演算"></a>关系演算</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520160959188.png" alt="image-20220520160959188"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161142076.png" alt="image-20220520161142076"></p>
+<h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><h3 id="非嵌套查询"><a href="#非嵌套查询" class="headerlink" title="非嵌套查询"></a>非嵌套查询</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161425477.png" alt="image-20220520161425477" style="zoom: 100%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161503774.png" alt="image-20220520161503774" style="zoom: 50%;"></p>
+<p><strong>注意</strong>：空值判断，应用 is null,不可以用 =或者！=</p>
+<p>查询结果排序<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161558258.png" alt="image-20220520161558258"></p>
+<p>聚集查询<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161649142.png" alt="image-20220520161649142" style="zoom:67%;"></p>
+<p><strong>注</strong>：聚集函数不能出现在where子句中</p>
+<p>分组查询<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161924541.png" alt="image-20220520161924541"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520161945409.png" alt="image-20220520161945409"></p>
+<p>连接<img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162037491.png" alt="image-20220520162037491"></p>
+<h3 id="嵌套查询"><a href="#嵌套查询" class="headerlink" title="嵌套查询"></a>嵌套查询</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162335425.png" alt="image-20220520162335425"></p>
+<p>使用exists关键字进行查询的时候，首先，我们先查询的不是子查询的内容，而是查我们的主查询的表，然后，根据表的每一条记录，依次去判断where后面的条件是否成立。</p>
+<p>in在查询的时候，首先查询子查询的表，然后将内表和外表做一个笛卡尔积，然后按照条件进行筛选。所以相对内表比较小的时候，in的速度较快。</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162543845.png" alt="image-20220520162543845" style="zoom:50%;"></p>
+<h3 id="更新数据库"><a href="#更新数据库" class="headerlink" title="更新数据库"></a>更新数据库</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162635401.png" alt="image-20220520162635401"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162642179.png" alt="image-20220520162642179"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162649518.png" alt="image-20220520162649518"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162658892.png" alt="image-20220520162658892"></p>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162844795.png" alt="image-20220520162844795"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162906353.png" alt="image-20220520162906353"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162914871.png" alt="image-20220520162914871"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520162930131.png" alt="image-20220520162930131" style="zoom:50%;"></p>
+<h2 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h2><h3 id="数据库设计的基本过程"><a href="#数据库设计的基本过程" class="headerlink" title="数据库设计的基本过程"></a>数据库设计的基本过程</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163234585.png" alt="image-20220520163234585"></p>
+<h3 id="实体-联系模型"><a href="#实体-联系模型" class="headerlink" title="实体-联系模型"></a>实体-联系模型</h3><h4 id="与实体相关的概念"><a href="#与实体相关的概念" class="headerlink" title="与实体相关的概念"></a>与实体相关的概念</h4><p><strong>实体</strong>：数据库中表示的现实世界中的具体对象或事物。</p>
+<p><strong>属性</strong>：用于刻画实体的特性。</p>
+<p><strong>属性的类型</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">简单属性</span><br><span class="line">复合属性</span><br><span class="line">多值属性</span><br><span class="line">派生属性</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163910020.png" alt="image-20220520163910020"></p>
+<h5 id="实体型的ER图表示"><a href="#实体型的ER图表示" class="headerlink" title="实体型的ER图表示"></a>实体型的ER图表示</h5><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163916662.png" alt="image-20220520163916662" style="zoom:50%;"></p>
+<p><strong>弱实体型</strong>：没有键属性的实体型。</p>
+<p><strong>标识实体型、属主实体型</strong>：由于弱实体型没有键属性，需要依赖于其他实体型进行区分。</p>
+<p><strong>标识联系型</strong>：弱实体型与其标识实体型通过标识联系型关联。</p>
+<p><strong>部分键</strong>：用于区分和同一标识实体相关联的弱实体的属性集合。</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163925574.png" alt="image-20220520163925574" style="zoom:50%;"></p>
+<h4 id="与联系相关的概念"><a href="#与联系相关的概念" class="headerlink" title="与联系相关的概念"></a>与联系相关的概念</h4><p><strong>联系</strong>：一个联系表示多个实体之间有意义的关联关系。</p>
+<p><strong>联系型</strong>：同一类联系共同具有的类型。</p>
+<p><strong>联系型的度</strong>：参与到一个联系型中的实体型的个数。</p>
+<p><strong>联系集</strong>：数据库中当前存储的联系型的实例的集合。</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520163949288.png" alt="image-20220520163949288" style="zoom:50%;"></p>
+<p><strong>基数比</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164015974.png" alt="image-20220520164015974" style="zoom:50%;"></p>
+<p><strong>参与度</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164105233.png" alt="image-20220520164105233" style="zoom:50%;"></p>
+<h2 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h2><h3 id="概念数据模型转换为关系数据库模型"><a href="#概念数据模型转换为关系数据库模型" class="headerlink" title="概念数据模型转换为关系数据库模型"></a>概念数据模型转换为关系数据库模型</h3><p><strong>实体型的转换</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164330211.png" alt="image-20220520164330211" style="zoom:50%;"></p>
+<p><strong>复合属性的转换</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164401070.png" alt="image-20220520164401070" style="zoom:50%;"></p>
+<p><strong>多值属性的转换</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164446039.png" alt="image-20220520164446039" style="zoom:50%;"></p>
+<p><strong>弱实体型转换</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164516972.png" alt="image-20220520164516972" style="zoom:50%;"></p>
+<p><strong>M:N二元联系型的转换</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164634209.png" alt="image-20220520164634209" style="zoom:50%;"></p>
+<p><strong>N:1二元联系型的转换</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164726502.png" alt="image-20220520164726502" style="zoom:50%;"></p>
+<p><strong>1:1二元联系型的转换</strong></p>
+<p>与N:1相同</p>
+<h3 id="函数依赖"><a href="#函数依赖" class="headerlink" title="函数依赖"></a>函数依赖</h3><p><strong>定义</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164850113.png" alt="image-20220520164850113" style="zoom:50%;"></p>
+<p><strong>平凡函数依赖</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520164953833.png" alt="image-20220520164953833"></p>
+<p><strong>完全函数依赖</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165020624.png" alt="image-20220520165020624" style="zoom:50%;"></p>
+<p><strong>部分函数依赖</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165056729.png" alt="image-20220520165056729" style="zoom:50%;"></p>
+<p><strong>传递函数依赖</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165125143.png" alt="image-20220520165125143" style="zoom:50%;"></p>
+<p><strong>逻辑蕴含</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165211147.png" alt="image-20220520165211147" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165702247.png" alt="image-20220520165702247" style="zoom:50%;"></p>
+<p><strong>属性集闭包</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165402241.png" alt="image-20220520165402241" style="zoom:50%;"></p>
+<p><strong>等价函数依赖集</strong><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165508652.png" alt="image-20220520165508652" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165515069.png" alt="image-20220520165515069" style="zoom:50%;"></p>
+<h3 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h3><h4 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h4><p>若关系模式R的每个属性都是不可分的，则称R为第一范式关系模式。</p>
+<p>问题原因：非主属性部分函数依赖于候选键</p>
+<p><strong>第二范式</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165753008.png" alt="image-20220520165753008"></p>
+<p>问题原因：非主属性传递函数依赖于候选键</p>
+<p><strong>第三范式</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165821598.png" alt="image-20220520165821598"></p>
+<p>问题原因：主属性部分依赖于候选键</p>
+<p><strong>BCNF</strong></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520165852993.png" alt="image-20220520165852993" style="zoom:50%;"></p>
+<p>消除主属性间的传递依赖。</p>
+<p>判断方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/weixin_43865875/article/details/115659734</span><br></pre></td></tr></table></figure>
+<h3 id="关系模式分解"><a href="#关系模式分解" class="headerlink" title="关系模式分解"></a>关系模式分解</h3><p>分解准则1：无损连接性</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170550893.png" alt="image-20220520170550893" style="zoom:50%;"></p>
+<p>分解准则2：函数依赖保持性</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170647628.png" alt="image-20220520170647628" style="zoom:50%;"></p>
+<p>无损连接性判定</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170717706.png" alt="image-20220520170717706" style="zoom:50%;"></p>
+<p>BCNF分解算法</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170838645.png" alt="image-20220520170838645" style="zoom:50%;"></p>
+<p>3NF分解算法</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520170855147.png" alt="image-20220520170855147" style="zoom:50%;"></p>
+<h2 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h2><h3 id="索引设计"><a href="#索引设计" class="headerlink" title="索引设计"></a>索引设计</h3><p>根据数据文件中的元组是否按索引键值排序，分为聚簇索引与非聚簇索引。</p>
+<p><strong>聚簇索引</strong></p>
+<p>文件中的元组按索引键排序的，则索引为聚簇索引。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">聚簇索引的索引键通常为关系主键；</span><br><span class="line">一个关系通常只有一个聚簇索引</span><br></pre></td></tr></table></figure>
+<p><strong>非聚簇索引</strong></p>
+<p>文件中的元组不按索引键排序的，则索引为非聚簇索引。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个关系上可以有多个非聚簇索引</span><br></pre></td></tr></table></figure>
+<p>根据索引键是否为关系的主键，可将有序索引分为两类：主索引，二级索引</p>
+<p>主索引</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">索引键为主键；一个关系只有一个</span><br></pre></td></tr></table></figure>
+<p>二级索引</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">索引键不是主键：</span><br><span class="line">通常为非聚簇索引，一个关系可以有多个</span><br></pre></td></tr></table></figure>
+<p>根据关系中每个元组在索引中是否都有一个对应索引项，可将有序索引分为两类：稠密索引、稀疏索引</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520175937252.png" alt="image-20220520175937252" style="zoom: 67%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520175956860.png" alt="image-20220520175956860"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180242647.png" alt="image-20220520180242647" style="zoom:67%;"></p>
+<h3 id="关系模式的优化"><a href="#关系模式的优化" class="headerlink" title="关系模式的优化"></a>关系模式的优化</h3><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180448573.png" alt="image-20220520180448573"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180514823.png" alt="image-20220520180514823" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180528762.png" alt="image-20220520180528762" style="zoom:50%;"></p>
+<h2 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h2><h3 id="存储介质"><a href="#存储介质" class="headerlink" title="存储介质"></a>存储介质</h3><p>按CPU访问存储介质的方式，可将存储器分为三类。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">主存储器</span><br><span class="line">二级存储器</span><br><span class="line">三级存储器</span><br></pre></td></tr></table></figure>
+<p>主存</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">包括：寄存器、高速缓存、内存</span><br><span class="line">主存特点：按字节寻址、可使用load/store指令直接访问</span><br></pre></td></tr></table></figure>
+<p>二级存储器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">包括：磁盘/机械硬盘、闪存/固态硬盘</span><br><span class="line">特点：按块寻址、联机使用 CPU无法直接访问，需用read、write将数据先复制到主存</span><br></pre></td></tr></table></figure>
+<p>三级存储器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">包括：磁带、光盘、网络存储</span><br><span class="line">脱机使用、按块存储、需先将数据复制到二级存储</span><br></pre></td></tr></table></figure>
+<p>按存储介质的易失性/持久性，可分为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">易失性存储器：计算机重启后，易失性存储器的数据会丢失</span><br><span class="line">菲易失性存储器</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180639352.png" alt="image-20220520180639352"></p>
+<h3 id="基于磁盘的数据库存储结构"><a href="#基于磁盘的数据库存储结构" class="headerlink" title="基于磁盘的数据库存储结构"></a>基于磁盘的数据库存储结构</h3><p>元组表示</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180900446.png" alt="image-20220520180900446" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180909316.png" alt="image-20220520180909316" style="zoom:50%;"></p>
+<p>页布局</p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180936480.png" alt="image-20220520180936480" style="zoom:50%;"></p>
+<p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520180943648.png" alt="image-20220520180943648" style="zoom:50%;"></p>
+<p>其余和原本内容一致，查看DBMS的文档。</p>
+<h2 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h2><p>可扩展哈希表</p>
+<p>线性哈希表</p>
+<p>B+树</p>
+<h2 id="第九章"><a href="#第九章" class="headerlink" title="第九章"></a>第九章</h2><p><img src="/2022/05/20/DBMS%E8%80%83%E7%82%B9/image-20220520181353631.png" alt="image-20220520181353631"></p>
+<h2 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/18/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2015,208 +2252,6 @@ T(R\chi S)=T(R)T(S)</script><p>投影操作数的基数估计</p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">任务管理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-04-14 18:39:21" itemprop="dateCreated datePublished" datetime="2022-04-14T18:39:21+08:00">2022-04-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-15 16:46:32" itemprop="dateModified" datetime="2022-04-15T16:46:32+08:00">2022-04-15</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="任务管理"><a href="#任务管理" class="headerlink" title="任务管理"></a>任务管理</h1><h2 id="任务管理概述"><a href="#任务管理概述" class="headerlink" title="任务管理概述"></a>任务管理概述</h2><p>一个任务是一个处理器可以调度、执行和暂停的工作单位。它可以用来执行一个程序，一个任务或进程，一个操作系统服务工具，一个中断或异常处理程序，或一个内核或执行实用程序。</p>
-<p>IA-32结构提供了一种机制，用于保存任务的状态，调度任务的执行，以及从一个任务切换到另一个任务。当在保护模式下运行时，所有的处理器执行都是在任务内进行的，即使是简单的系统也必须至少定义一个任务。更复杂的系统可以使用处理器的任务管理设施来支持多任务的应用。</p>
-<p>一个过程调用包括将数据（以<strong>参数</strong>和<strong>返回值</strong>的形式）与控制从代码的一部分传递到另一部分。除此之外，在进入时为过程的局部变量分配空间，在退出的时候释放这些空间。数据传递、局部变量的分配和释放通过操纵程序栈来实现。</p>
-<p>操作系统实现宏观上并行任务的效果，其本质是微观上在多个任务之间切换。因此，当操作系统由任务A切换到任务B时，需要暂停任务A的执行，并将处理器执行任务A时各个寄存器的值保存到内存的某个位置上，这个过程叫做保存现场；之后将处理器上一次执行任务B时各个寄存器的值由内存中的某个位置回复到处理的寄存器当中，这个过程叫做恢复现场。当操作系统在调度时由任务A切换到任务B时，对任务A保存现场，对任务B恢复现场，这个整体的过程称之为：上下文切换。</p>
-<p>在每一个任务在执行之前，操作系统都需要为其分配一个专属的内存区域供其使用，这个内存区域通常被称为此任务的栈（stack）。Cortex-M有两个堆栈寄存器，主栈指针（MSP）与进程栈指针（PSP）。主程序操作系统和各个中断函数使用的是MSP指针，而各个被调度的任务（进程）使用的是PSP指针。本质上它是处理器的一个寄存器，PSP寄存器的值就是内存中任务的栈地址。</p>
-<h3 id="任务的结构"><a href="#任务的结构" class="headerlink" title="任务的结构"></a>任务的结构</h3><p>一个任务由两部分组成：一个任务执行空间和一个任务状态段（TSS）。任务执行空间由一个代码段、一个堆栈段和一个或多个数据段组成（见图7-1）。如果操作系统或执行程序使用处理器的特权级别保护机制，任务执行空间也会为每个特权提供一个单独的堆栈。<br>TSS指定了组成任务执行空间的段，并为任务状态信息提供了一个存储位置信息。在多任务系统中，TSS还提供了一种连接任务的机制。<br>一个任务由其TSS的段选择器来识别。当一个任务被加载到处理器中执行时，它的段选择器、基地址、限制和段描述符属性被加载到任务的寄存器。如果任务实现了分页，任务所使用的页面目录的基地址被加载到控制寄存器CR3。</p>
-<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414193049801.png" alt="image-20220414193049801"></p>
-<h3 id="任务状态"><a href="#任务状态" class="headerlink" title="任务状态"></a>任务状态</h3><p>以下项目定义了当前执行的任务的状态：</p>
-<ul>
-<li>任务的当前执行空间，由段寄存器（CS、DS、SS、ES、GS、FS和GS）中的段选择器定义。</li>
-<li>通用寄存器的状态。</li>
-<li>EFLAGS寄存器的状态。</li>
-<li>EIP寄存器的状态。</li>
-<li>控制寄存器CR3的状态。</li>
-<li>任务寄存器的状态。</li>
-<li>LDTR寄存器的状态。</li>
-<li>I/O地图的基址和I/O地图（包含在TSS中）。</li>
-<li>特权0、1和2堆栈的堆栈指针（包含在TSS中）。</li>
-<li>与先前执行的任务的链接（包含在TSS中）。<br>在调度任务之前，所有这些项目都包含在任务的TSS中，除了任务寄存器的状态。另外，LDTR寄存器的全部内容不包含在TSS中，只有LDT的段选择器。</li>
-</ul>
-<h3 id="任务的执行"><a href="#任务的执行" class="headerlink" title="任务的执行"></a>任务的执行</h3><p>软件或处理器可以通过以下方式之一调度一个任务的执行。</p>
-<ul>
-<li>用CALL指令明确调用一个任务。</li>
-<li>用JMP指令显式跳转到一个任务。</li>
-<li>隐式调用（由处理器）到一个中断处理任务。</li>
-<li>对一个异常处理任务的隐式调用。</li>
-<li>当EFLAGS寄存器中的NT标志被设置时，返回（用IRET指令启动）。</li>
-</ul>
-<p>所有这些调度任务的方法都是用一个段选择器来识别要调度的任务，这个段选择器指向任务门或任务的TSS。当用CALL或JMP指令调度任务时，指令中的选择器可以直接选择TSS或持有TSS的选择器的任务门。当调度一个任务来处理一个中断或异常时，中断或异常的IDT条目必须包含一个任务门，它持有中断或异常处理程序TSS的选择器。<br>当一个任务被调度执行时，在当前运行的任务和被调度的任务之间会发生一个任务切换。在任务切换期间，当前执行的任务的执行环境（称为任务的状态或上下文）被保存在其TSS中，任务的执行被暂停。被派遣任务的上下文被加载到处理器中，该任务的执行从新加载的EIP寄存器所指向的指令开始。如果任务在系统上次初始化后没有运行过，EIP将指向任务代码的第一条指令；否则，它将指向任务最后执行的指令之后的下一条指令。<br>如果当前执行的任务（调用任务）调用了被派发的任务（被调用任务），则段选择器被存储在被调用任务的TSS中，以提供与调用任务的链接。<br>对于所有IA-32处理器，任务不是递归的。一个任务不能调用或跳转到自身。中断和异常可以通过任务切换到一个处理任务来处理。在这里，处理器执行一个任务来处理中断或异常，从中断处理任务或异常处理任务返回后，自动切换回被中断的任务。这种机制也可以处理在中断任务中发生的中断。<br>作为任务切换的一部分，处理器也可以切换到另一个LDT，允许每个任务对基于LDT的段有不同的逻辑到物理地址的映射。在任务切换时，页面目录基础寄存器（CR3）也被重新加载，允许每个任务有它自己的一套页表。这些保护设施有助于隔离任务并防止它们相互干扰。<br>如果不使用保护机制，处理器不提供任务之间的保护。这一点即使在操作系统也是如此，该系统使用多个特权级别进行保护。一个运行在特权级别3的任务，使用与其他任务相同的LDT和页表。</p>
-<h2 id="任务的数据结构"><a href="#任务的数据结构" class="headerlink" title="任务的数据结构"></a>任务的数据结构</h2><p>处理器定义了五个数据结构来处理与任务有关的活动。</p>
-<ul>
-<li>任务状态段（TSS）。</li>
-<li>任务门描述符。</li>
-<li>TSS描述符。</li>
-<li>任务寄存器。</li>
-<li>EFLAGS寄存器中的NT标志。</li>
-</ul>
-<p>当在保护模式下运行时，必须为至少一个任务创建一个TSS和TSS描述符，并且TSS的段选择器必须被加载到任务寄存器中（使用LTR指令）。</p>
-<h3 id="任务状态段-Task-State-Segment-TSS"><a href="#任务状态段-Task-State-Segment-TSS" class="headerlink" title="任务状态段 Task-State Segment (TSS)"></a>任务状态段 Task-State Segment (TSS)</h3><p>恢复一个任务所需的处理器状态信息被保存在一个叫做任务状态段（TSS）的系统段中。图7-2显示了为32位CPU设计的任务的TSS的格式。TSS的字段被分为两个主要类别：动态字段和静态字段。<br><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414195850785.png" alt="image-20220414195850785"></p>
-<p>在任务切换期间，当一个任务被暂停时，处理器会更新动态字段。以下是动态字段。</p>
-<ul>
-<li>通用寄存器字段 - EAX, ECX, EDX, EBX, ESP, EBP, ESI, 和 EDI 寄存器在任务切换前的状态。</li>
-<li>分段选择器字段—在任务切换前存储在ES、CS、SS、DS、FS和GS寄存器中的分段选择器。</li>
-<li>EFLAGS寄存器字段 - 任务切换前EFAGS寄存器的状态。</li>
-<li>EIP（指令指针）字段 - 任务切换前EIP寄存器的状态。</li>
-<li>前一个任务链接字段—包含前一个任务的TSS的段选择器（在由调用、中断或异常启动的任务切换中更新）。这个字段（有时被称为后端链接字段）允许通过使用IRET指令将任务切换到前一个任务。处理器读取静态字段，但通常不改变它们。这些字段是在一个任务被创建时设置的。<br>以下是静态字段。</li>
-<li>LDT段选择器字段 - 包含任务的LDT的段选择器。</li>
-<li>CR3控制寄存器字段 - 包含任务要使用的页面目录的基本物理地址。控制寄存器CR3也被称为页面目录基础寄存器（PDBR）。</li>
-<li>权限级别-0、-1和-2的堆栈指针字段—这些堆栈指针包括一个逻辑地址，由堆栈段的段选择器（SS0、SS1和SS2）和堆栈的偏移量（ESP0, ESP1和ESP2）组成。注意，这些字段的值对于一个特定的任务来说是静态的；而SS和ESP的值会在任务中发生堆栈切换时改变。</li>
-<li>T（调试陷阱）标志（字节100，位0）—当设置时，T标志会使处理器在任务切换到这个任务时引发一个调试异常。</li>
-<li>I/O地图基址字段 - 包含从TSS的基点到I/O权限位的图和中断重定向位图的16位偏移。当存在时，这些地图以更高的地址存储在TSS中。</li>
-<li>避免在处理器在任务切换时读取的TSS部分（前104字节）放置页面边界。如果边界出现在这个区域，处理器可能无法正确执行地址转换。在任务切换过程中，处理器在每个TSS的前104个字节中进行读写（使用连续的物理地址，从任务的物理地址开始）。所以，在TSS访问开始后，如果104字节中的一部分 不是物理上连续的，处理器将访问不正确的信息，而不会产生页面错误异常。</li>
-<li>与前一个任务的TSS、当前任务的TSS相对应的页面，以及每个任务的描述符表项都应该被标记为读/写。</li>
-</ul>
-<p>如果包含这些结构的页面在任务切换开始前就已经存在于内存中，那么任务切换的速度会更快。</p>
-<h3 id="TSS-描述符"><a href="#TSS-描述符" class="headerlink" title="TSS 描述符"></a>TSS 描述符</h3><p>TSS，像所有其他段一样，是由段描述符定义的。图7-3显示了TSS的格式 。TSS描述符只能放在GDT中，它们不能放在LDT或IDT中。<br>试图使用设置了TI标志（表示当前的LDT）的段选择器访问一个TSS，会导致在CALLs和JMPs期间会产生一个一般保护异常（#GP）；在IRETs期间会产生一个无效的TSS异常（#TS）。如果试图将一个TSS的段选择器加载到一个段寄存器中，也会产生一般保护异常。<br>类型字段中的繁忙标志（B）表示任务是否繁忙。一个繁忙的任务目前正在运行或暂停。类型字段的值为1001B表示一个不活动的任务；值为1011B表示一个繁忙的任务。<br>处理器使用繁忙标志来检测调用一个执行被中断的任务的尝试。为了确保只有一个繁忙标志与一个任务相关联，每个TSS应该只有一个TSS描述符指向它。</p>
-<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414201925534.png" alt="image-20220414201925534"></p>
-<p>基数、极限和DPL字段以及粒度和当前标志的功能与它们在数据段描述符中的使用类似。当32位TSS描述符中的G标志为0时，极限字段必须是32位TSS描述符中的极限。TSS描述符中G标志为0时，极限字段的值必须等于或大于67H，比TSS的最小尺寸少一个字节。<br>试图切换到一个TSS描述符的极限值小于67H的任务，会产生一个无效的TSS异常（#TS）。如果包括一个I/O权限位图或操作系统存储了额外的数据，则需要一个更大的限制。处理器不检查任务开关上是否有大于67H的限制；但是，当访问I/O权限位图或中断重定向位图时，它将进行检查。<br>任何可以访问TSS描述符的程序或过程（即其CPL在数字上等于或小于的DPL）可以通过调用或跳转来调度任务。<br>在大多数系统中，TSS描述符的DPL被设置为小于3的值，因此只有特权软件才能进行任务切换。然而，在多任务应用程序中，一些TSS描述符的DPLs可能被设置为3，以便允许在应用程序（或用户）权限级别进行任务切换。</p>
-<h3 id="任务寄存器"><a href="#任务寄存器" class="headerlink" title="任务寄存器"></a>任务寄存器</h3><p>任务寄存器持有16位段选择器和整个段描述符（32位基本地址（在IA-32e模式下为64位 ），16位段限制和描述符属性），用于当前任务的TSS。<br>这个信息是从当前任务的GDT中的TSS描述符中复制过来的。图7-5显示了处理器访问TSS的路径 （使用任务寄存器中的信息）。任务寄存器有一个可见的部分（可以被软件读取和改变）和一个不可见的部分（由处理器维护，不能访问）。可见部分的段选择器指向GDT中的一个TSS描述符。处理器使用任务寄存器的不可见部分来缓存段描述符 。在寄存器中缓存这些值使得任务的执行更加有效。LTR（加载任务<br>寄存器）和STR（存储任务寄存器）指令加载和读取任务寄存器的可见部分。<br>LTR指令将段选择器（源操作数）加载到任务寄存器中，指向GDT中的TSS描述符。然后它用TSS描述符的信息加载任务寄存器的不可见部分。LTR是一个 特权指令，只有当CPL为0时才能执行。之后，当任务切换发生时，任务寄存器的内容会被隐含地改变。<br>STR(存储任务寄存器)指令将任务寄存器的可见部分存储在一个通用寄存器或内存中。这条指令可以被运行在任何权限级别的代码执行，以识别当前的运行的任务。然而，它通常只被操作系统软件使用。在处理器上电或复位时，段选择器和基地址被设置为默认值0；极限值<br>被设置为FFFH。</p>
-<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414203302131.png" alt="image-20220414203302131"></p>
-<h3 id="任务门描述符"><a href="#任务门描述符" class="headerlink" title="任务门描述符"></a>任务门描述符</h3><p>任务门描述符提供了对一个任务的间接的、受保护的引用（见图7-6）。它可以被放置在GDT、LDT或IDT中。任务门描述符中的TSS段选择器字段指向GDT中的一个TSS描述符。该段选择器中的RPL不被使用。任务门描述符的DPL在任务切换期间控制对TSS描述符的访问。当一个程序或过程通过任务门调用或跳转到一个任务时，指向任务门的门选择器的CPL和RPL域必须小于或等于任务门描述符的DPL。请注意，当任务门被使用时 ，目标TSS描述符的DPL不被使用。</p>
-<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414204423254.png" alt="image-20220414204423254"></p>
-<p>一个任务可以通过一个任务门描述符或一个TSS描述符来访问。这两种结构都满足以下需求。</p>
-<ul>
-<li>一个任务只需要一个繁忙标志 - 因为一个任务的繁忙标志是存储在TSS描述符中，每个任务应该只有一个TSS描述符。然而，可能有几个任务门会引用同一个TSS描述符。</li>
-<li>需要提供对任务的选择性访问—任务门满足这一需求，因为它们可以驻留在一个LDT中，并且可以有一个与TSS描述符的DPL不同的DPL。一个程序或过程如果没有足够的权限访问GDT中任务的TSS描述符（通常DPL为0）的程序或过程可以通过一个具有更高DPL的任务门来访问该任务。任务门给了操作系统更大的限制对特定任务的访问的自由度。</li>
-<li>需要一个独立的任务来处理中断或异常 - 任务门也可以驻留在IDT中。在IDT中，它允许中断和异常由处理任务来处理。当一个中断或异常向量指向一个任务门时，处理器会切换到指定的任务。图7-7说明了LDT中的任务门、GDT中的任务门和IDT中的任务门如何都能指向同一个任务。</li>
-</ul>
-<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414210542784.png" alt="image-20220414210542784"></p>
-<h2 id="任务切换"><a href="#任务切换" class="headerlink" title="任务切换"></a>任务切换</h2><p>处理器在四种情况中的一种将执行转移到另一个任务。</p>
-<ul>
-<li>当前程序、任务或过程执行JMP或CALL指令到GDT中的TSS描述符。</li>
-<li>当前程序、任务或过程执行JMP或CALL指令到GDT或当前LDT中的任务门描述符。</li>
-<li>中断或异常向量指向IDT中的一个任务门描述符。</li>
-<li>当EFLAGS寄存器中的NT标志被设置时，当前任务执行一个IRET。JMP、CALL和IRET指令，以及中断和异常，都是重定向程序的机制。对TSS描述符或任务门的引用（当调用或跳转到一个任务时）或NT标志的状态（当执行IRET时）都是重定向的机制。NT标志的状态（执行IRET指令时）决定是否发生任务切换。当切换到一个新的任务时，处理器会执行以下操作：</li>
-</ul>
-<ol>
-<li>获得新任务的TSS段选择器，作为JMP或CALL指令的操作数，从任务门或前一个任务链接字段（对于用IRET指令启动的任务切换）获得新任务的TSS段选择器。</li>
-<li>检查当前（旧）任务是否被允许切换到新任务。数据访问权限规则适用于JMP和CALL指令。当前（旧）任务的CPL和新任务的段选择器的RPL必须小于或等于被引用的TSS描述符或任务门的DPL。例外的情况，中断（由INT n指令产生的中断除外）和IRET指令被允许切换任务，而不考虑TSS描述符的DPL。对于INT n指令产生的中断，要检查DPL。</li>
-<li>检查新任务的TSS描述符是否被标记为存在，并且有一个有效的限制（大于或等于67H）。</li>
-<li>检查新任务是否可用（调用、跳转、异常或中断）或繁忙（IRET返回）。</li>
-<li>检查当前（旧）TSS、新TSS和任务切换中使用的所有段描述符是否被分页到系统内存中。</li>
-<li>如果任务切换是由JMP或IRET指令启动的，处理器将清除当前（旧）任务的TSS中的忙（B）标志；如果用CALL指令、异常或中断启动：忙（B）标志保持不变。</li>
-<li>如果任务切换是由IRET指令启动的，处理器将清除EFLAGS寄存器中临时保存的NT标志；如果是由CALL或JMP指令、异常或中断启动的，则NT标志在EFLAGS寄存器中保持不变。</li>
-<li>在当前任务的TSS中保存当前（旧）任务的状态。处理器在任务寄存器中找到当前TSS的基地址 ，然后将下列寄存器的状态复制到当前的TSS中：所有的通用寄存器，段寄存器中的段选择器，临时保存的EFLAGS寄存器的映像，以及指令指针寄存器（EIP）。</li>
-<li>如果任务切换是由CALL指令、异常或中断启动的，处理器将设置EFLAGS寄存器中的NT标志。如果是用IRET指令或JMP指令启动的，NT标志将反映新任务中加载的EFLAGS的NT状态（见表7-2）。</li>
-<li>如果任务切换是由CALL指令、JMP指令、异常或中断启动的，处理器就会在新任务的TSS描述符中设置繁忙(B)标志；如果是由IRET指令启动的，繁忙(B)标志就保持不变。</li>
-<li>用段选择器和新任务的TSS的描述符加载任务寄存器。</li>
-<li>TSS状态被加载到处理器中。这包括LDTR寄存器，PDBR(控制寄存器CR3)，EFLAGS寄存器，EFLAGS寄存器，<br>EIP寄存器，通用寄存器，以及段选择器。在这个状态的加载过程中出现的故障可能会破坏架构状态。(如果没有启用分页，PDBR值会从新任务的TSS中读出，但它不会被加载到CR3中）。</li>
-<li>与段选择器相关的描述符被加载和限定。与此相关的任何错误都发生在新任务的上下文中，并可能破坏架构状态。</li>
-</ol>
-<p><strong>注意事项</strong><br>如果所有的检查和保存都成功进行了，处理器就会提交给任务开关。如果在步骤1到11中发生了不可恢复的错误，处理器不会完成任务切换，并确保处理器返回到执行启动任务切换的指令之前的状态。<br>如果一个不可恢复的错误发生在步骤12，架构状态可能会被破坏，但会试图将在先前的执行环境中处理该错误。如果一个不可恢复的错误发生在提交点之后（在步骤13），处理器完成了任务切换（不执行额外的访问和段可用性检查），并在开始执行新的任务之前产生适当的异常。<br>如果异常发生在提交点之后，异常处理程序必须完成任务切换本身然后才允许处理器开始执行新的任务。</p>
-<ol>
-<li>开始执行新任务。(对于异常处理程序来说，新任务的第一条指令似乎没有被执行）。</li>
-</ol>
-<p>当一个成功的任务切换发生时，当前执行的任务的状态总是被保存。如果该任务被恢复 ，执行将从保存的EIP值所指向的指令开始，并且寄存器被恢复到 任务暂停时的值。<br>当切换任务时，新任务的权限级别不会继承被暂停的任务的权限级别。新的任务以CS寄存器的CPL字段中指定的权限级别开始执行，CS寄存器是由TSS加载的。因为任务被它们独立的地址空间和TSS所隔离，并且因为特权规则控制对TSS的访问，所以任务在执行时，需要有足够的权限。<br>表7-1显示了处理器在切换任务时检查的异常条件。它还显示了如果检测到错误，每个检查都会产生异常，以及错误代码所引用的段。<br><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414215039998.png" alt="image-20220414215039998"></p>
-<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220414215048323.png" alt="image-20220414215048323"></p>
-<p><strong>注意</strong></p>
-<ol>
-<li><h1 id="NP是段不存在异常，-GP是一般保护异常，-TS是无效TSS异常，-SS是堆栈故障异常。"><a href="#NP是段不存在异常，-GP是一般保护异常，-TS是无效TSS异常，-SS是堆栈故障异常。" class="headerlink" title="NP是段不存在异常，#GP是一般保护异常，#TS是无效TSS异常，#SS是堆栈故障异常。"></a>NP是段不存在异常，#GP是一般保护异常，#TS是无效TSS异常，#SS是堆栈故障异常。</h1></li>
-<li>错误代码包含了这一列中引用的段描述符的索引。</li>
-<li>如果一个段选择器在一个兼容类型的表中（GDT或LDT），在表的段限制内占据一个地址，那么它是有效的。<br>并且指向兼容的描述符类型（例如，CS寄存器中的段选择器只有当它指向代码段描述符时才有效）。</li>
-</ol>
-<p>每次发生任务切换时，控制寄存器CR0中的TS（任务切换）标志被设置。在产生浮点异常时，系统软件使用TS标志来协调浮点单元与处理器其他部分的行动。</p>
-<h2 id="任务链"><a href="#任务链" class="headerlink" title="任务链"></a>任务链</h2><p>TSS的前一个任务链接字段（有时称为 “反向链接”）和EFLAGS寄存器中的NT标志被用来返回到前一个任务的执行。EFLAGS.NT=1表示当前执行的任务被嵌套在另一个任务的执行中。<br>当CALL指令、中断或异常导致任务切换时：处理器将当前TSS的选择器复制到新任务的TSS的前一个任务链接字段；然后设置EFLAGS.NT=1。如果软件使用IRET指令来暂停新任务，处理器检查EFLAGS.NT=1；然后使用<br>它使用前一个任务链接字段中的值来返回到前一个任务。见图7-8。<br>当JMP指令引起任务切换时，新任务不被嵌套。前一个任务链接字段不被使用，并且EFLAGS.NT=0。当不需要嵌套时，使用JMP指令来调度一个新任务。</p>
-<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220415161736123.png" alt="image-20220415161736123"></p>
-<p>表7-2显示了任务切换过程中的繁忙标志（在TSS段描述符中）、NT标志、前一个任务链接字段和TS标志(在控制寄存器CR0中)在任务切换期间。<br>NT标志可以被任何权限级别的软件所修改。一个程序有可能在设置NT标志的同时执行IRET指令。这可能会随机地调用当前任务的TSS的前一个链接字段中指定的任务。为了防止这种虚假的任务切换成功，操作系统应该把它所创建的每个TSS中的前一个任务链接字段初始化为0。</p>
-<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220415162023949.png" alt="image-20220415162023949"></p>
-<h3 id="使用繁忙标志来防止递归任务的切换"><a href="#使用繁忙标志来防止递归任务的切换" class="headerlink" title="使用繁忙标志来防止递归任务的切换"></a>使用繁忙标志来防止递归任务的切换</h3><p>一个TSS只允许为一个任务保存一个上下文；因此，一旦一个任务被调用（派发），对任务的递归（或重入）调用该任务将导致该任务的当前状态丢失。TSS段中的繁忙标志 是为了防止重入式任务切换和随后的任务状态信息的丢失。处理器对繁忙标志的管理如下 ：</p>
-<ol>
-<li>当调度一个任务时，处理器设置新任务的繁忙标志。</li>
-<li>如果在任务切换过程中，当前任务被放置在一个嵌套链中（任务切换是由一个CALL指令、一个中断或异常产生的），那么新任务的繁忙标志将被设置。</li>
-<li>当切换到新的任务时（由CALL指令、中断或异常启动），处理器产生一个一般保护异常。如果新任务的繁忙标志已经被设置，处理器会产生一个一般保护的异常（#GP）。如果任务切换是由IRET指令发起的，那么异常就不会产生，因为处理器希望繁忙标志被设置。</li>
-<li>当一个任务被跳转到一个新的任务（由任务代码中的JMP指令发起）或由任务代码中的IRET指令终止时，将产生一个异常。任务代码中的IRET指令终止时，处理器会清除繁忙标志，使任务回到 “不忙 “状态。</li>
-</ol>
-<p>处理器通过防止一个任务切换到它自己或一个嵌套的任务链中的任何任务来防止递归任务切换。由于多个调用、中断或异常，嵌套的暂停任务链可能增长到任何长度。如果一个任务在这个链中，忙碌标志会阻止它被调用。繁忙标志可以在多处理器配置中使用，因为处理器遵循一个LOCK协议（在总线上或缓存中），当它设置或清除繁忙标志时。这个锁使两个处理器不会同时调用同一个任务。</p>
-<h3 id="修改任务链"><a href="#修改任务链" class="headerlink" title="修改任务链"></a>修改任务链</h3><p>在单处理器系统中，如果有必要从链接的任务链中删除一个任务，请使用以下程序来删除<br>使用以下程序来删除任务。</p>
-<ol>
-<li>禁用中断。</li>
-<li>改变抢占式任务（暂停要删除的任务的任务）的TSS中的前一个任务链接字段。假设抢占式任务是要删除的任务链中的下一个任务（较新的任务）。改变前一个任务的链接字段，使其指向链中下一个最老的任务的TSS，或者指向链中更老的任务。</li>
-<li>清除被删除的任务的TSS段描述符中的繁忙（B）标志。如果有一个以上的任务被从链上删除，必须清除每个被删除的任务的繁忙标志。</li>
-<li>启用中断。</li>
-</ol>
-<p>在多进程系统中，必须在此过程中增加同步和序列化操作，以确保在改变前一个任务链接字段时，TSS和它的段描述符都被锁定并且繁忙标志被清除。</p>
-<h2 id="任务地址空间"><a href="#任务地址空间" class="headerlink" title="任务地址空间"></a>任务地址空间</h2><p>一个任务的地址空间由该任务可以访问的段组成。这些段包括代码、数据、堆栈和在TSS中引用的系统段以及任务代码所访问的任何其他段。这些段被映射到处理器的线性地址空间，而线性地址空间又被映射到处理器的物理地址空间（直接或通过分页）。<br>TSS中的LDT段字段可以用来给每个任务提供它自己的LDT。给予一个任务它自己的LDT允许任务地址空间与其他任务隔离，将与该任务相关的所有段描述符放在该任务的LDT中。也可以让几个任务使用同一个LDT。这是一种节省内存的方式，允许特定的任务互相通信或控制，而不丢掉整个系统的保护屏障。因为所有的任务都可以访问GDT，所以也有可能创建共享段，通过该表的段描述符来访问。<br>如果分页功能被启用，TSS中的CR3寄存器（PDBR）字段允许每个任务有自己的一套页表，用于将线性地址映射到物理地址。或者，几个任务可以共享同一组页表。</p>
-<h3 id="将任务映射到线性和物理地址空间"><a href="#将任务映射到线性和物理地址空间" class="headerlink" title="将任务映射到线性和物理地址空间"></a>将任务映射到线性和物理地址空间</h3><p>任务可以通过两种方式之一被映射到线性地址空间和物理地址空间。</p>
-<ul>
-<li>一个线性到物理地址空间的映射在所有任务之间共享。- 当分页未被启用时，这是唯一的选择。没有分页，所有线性地址都映射到相同的物理地址。当启用时，这种形式的线性到物理地址空间映射是通过为所有任务使用一个页目录来获得。如果支持需求分页，线性地址空间可能超过可用的物理空间。</li>
-<li>每个任务都有自己的线性地址空间，被映射到物理地址空间。- 这种形式的映射是通过为每个任务使用不同的页面目录来完成的。因为PDBR（控制寄存器CR3）被加载到任务开关上，每个任务可能有一个不同的页面目录。</li>
-</ul>
-<p>不同任务的线性地址空间可能映射到完全不同的物理地址。如果不同页面目录的条目 指向不同的页表，而页表指向内存的不同页面，那么这些任务就不会共享物理地址。<br>无论采用哪种方法来映射任务的线性地址空间，所有任务的TSS必须位于物理空间的一个共享区域，这个区域是所有任务都可以访问的。这种映射是必需的，当处理器在任务切换过程中读取和更新TSSs时不会改变。线性地址空间也应该被映射到物理空间的一个共享区域；否则，GDT的目的就会落空。<br>图7-9显示了两个任务的线性地址空间是如何通过共享页表可在物理空间中重叠通过共享页表。</p>
-<p><img src="/2022/04/14/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/image-20220415163751118.png" alt="image-20220415163751118"></p>
-<h3 id="任务逻辑地址空间"><a href="#任务逻辑地址空间" class="headerlink" title="任务逻辑地址空间"></a>任务逻辑地址空间</h3><p>为了允许任务之间共享数据，使用以下技术为数据段创建共享的逻辑-物理地址空间映射。</p>
-<ul>
-<li><strong>通过GDT中的段描述符</strong> - 所有任务必须能够访问GDT中的段描述符。如果GDT中的一些段描述符指向线性地址空间中的段，这些段被映射到所有任务共有的物理地址空间的一个区域，那么所有任务都可以共享这些段的数据和代码。</li>
-<li><strong>通过一个共享的LDT</strong> - 如果两个或更多的任务的TSSs中的LDT字段指向同一个LDT，那么它们可以使用同一个LDT。如果共享LDT中的一些段描述符指向被映射到物理地址空间的一个共同区域的段 ，这些段的数据和代码可以在共享LDT的任务之间共享。这种共享方法比通过GDT共享更具选择性，因为共享可以被限制在特定的任务中。系统中的其他任务可能有不同的LDT，不允许他们访问共享段。</li>
-<li><strong>通过不同的LDT中的段描述符，这些描述符被映射到线性空间的公共地址上</strong> -如果这个线性地址空间的公共区域被映射到每个任务的物理地址空间的相同区域，这些段描述符允许任务共享段。这种段描述符 通常被称为别名。这种共享方法比上面列出的方法更具有选择性。因为，LDT中的其他段描述符可能指向独立的线性地址，而这些段描述符并没有被共享。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2286,7 +2321,7 @@ T(R\chi S)=T(R)T(S)</script><p>投影操作数的基数估计</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -2314,7 +2349,7 @@ T(R\chi S)=T(R)T(S)</script><p>投影操作数的基数估计</p>
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
