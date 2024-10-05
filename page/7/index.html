@@ -145,6 +145,752 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E7%BB%A7%E6%89%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/29/%E7%BB%A7%E6%89%BF/" class="post-title-link" itemprop="url">继承</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-29 13:23:25 / Modified: 19:44:21" itemprop="dateCreated datePublished" datetime="2021-06-29T13:23:25+08:00">2021-06-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="定义子类"><a href="#定义子类" class="headerlink" title="定义子类"></a>定义子类</h4><p>关键词extends表明正在构造的新类派生于一个已存在的类。这个已存在的类1称为超类、基类或父类；新类称为子类、派生类或孩子类。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Manger extends Employee</span><br><span class="line">&#123;</span><br><span class="line">  addded methods and fields</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="覆盖方法"><a href="#覆盖方法" class="headerlink" title="覆盖方法"></a>覆盖方法</h4><p>超类中的有些方法对子类并不一定适用。为此，需要提供一个新的方法来覆盖超类中的这个方法。</p>
+<p>当我们希望调用超类中的方法，而不是当前类的这个方法，可以用特殊的关键词<strong>super</strong>来解决。</p>
+<p>继承绝对不会删除任何字段或方法。</p>
+<h4 id="子类构造器"><a href="#子类构造器" class="headerlink" title="子类构造器"></a>子类构造器</h4><p>当子类的构造器不能访问父类的私有字段时，则必须通过一个构造器来初始化这些私有字段。可以利用特殊的super语法调用这个构造器。使用super调用构造器的语句必须是子类构造器的第一条语句。</p>
+<p>如果子类构造器没有显示地调用超类的构造器，将自动调用超类的无参数构造器。如果超类没有无参数构造器，并且在子类的构造器中又没有显示地调用超类的其他构造器，java编译器就会报告一个错误。</p>
+<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><p>一个对象变量可以指示多种实际类型的现象被称为<strong>多态</strong>。</p>
+<p>在运行是能够自动地选择适当的方法，称为<strong>动态绑定</strong>。</p>
+<p><strong>替换原则</strong>：程序中出现超类对象的任何地方都可以使用子类对象替换。</p>
+<p>在java程序设计语言中，对象变量是多态的。</p>
+<h4 id="理解方法调用"><a href="#理解方法调用" class="headerlink" title="理解方法调用"></a>理解方法调用</h4><p>（1）编译器查看对象的声明类型和方法名。</p>
+<p>（2）接下来，编译器要确定方法调用中提供的参数类型。方法的名字和参数列表称为方法的<strong>签名</strong>。</p>
+<p>（3）如果是private方法，static方法，final方法或者构造器，那么编译器将可以准确地知道应该调用哪个方法，这称为<strong>静态绑定</strong>。</p>
+<p>（4）程序运行并且采用动态绑定调用方法时，虚拟机必须调用与x所引用对象的实际类型对应的那个方法。</p>
+<p><strong>警告</strong>：在覆盖一个方法时，子类方法不能低于超类方法的可见性。特别是，如果超类方法时public，子类方法必须也要声明为public。</p>
+<h4 id="阻止继承"><a href="#阻止继承" class="headerlink" title="阻止继承"></a>阻止继承</h4><p>有时候，我们可能希望阻止人们利用某个类定义子类。不允许扩展的类被称为final类。如果在定义类的时候使用了final修饰符就表示这个类是final类。</p>
+<p>类中的某个特定方法也可以被声明为final。如果这样做，子类就不能覆盖这个方法（final类中的所有方法自动地成为final方法）。</p>
+<p>如果一个方法没有被覆盖并且很短，编译器就能对它进行优化处理，这个过程称为<strong>内联</strong>。</p>
+<h4 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h4><p>只能在继承层次内进行强制类型转换。</p>
+<p>在将超类强制转换成子类之前，应该使用instanceof进行检查。</p>
+<h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><p>使用abstract关键字，则不需要实现该方法。</p>
+<p>为了提高程序的清晰度，包含一个或多个抽象方法的类本身必须被声明为抽象的。</p>
+<p>扩展抽象类可以有两种选择。一种是在子类中保留抽象类中的部分或所有抽象方法仍未定义，这样就必须将子类也标记为抽象类；另一种做法是定义全部方法，这样一来，子类就不是抽象的了。</p>
+<p>即使不含抽象方法，也可以将类声明为抽象类。</p>
+<p>抽象类不能实例化。</p>
+<h4 id="受保护访问"><a href="#受保护访问" class="headerlink" title="受保护访问"></a>受保护访问</h4><p>子类也无法访问父类的私有对象。</p>
+<p>当希望允许子类的访问父类的某个字段。为此，需要将这些类方法或字段声明为受保护。</p>
+<p>在java中保护字段只能由同一个包的类访问。</p>
+<h4 id="object类型变量"><a href="#object类型变量" class="headerlink" title="object类型变量"></a>object类型变量</h4><p>在java中，只有基本类型不是对象，例如，数值、字符和布尔类型的值都不是对象。</p>
+<h4 id="相等测试与继承"><a href="#相等测试与继承" class="headerlink" title="相等测试与继承"></a>相等测试与继承</h4><p>java语言规范要求equals方法具有以下特性：</p>
+<p>（1）自反性</p>
+<p>对于任何非空引用想，x.equals(x)应该返回true。</p>
+<p>（2）对称性</p>
+<p>对于任何引用x和y，当且仅当y.equals(x)返回true时，x.equals(y)返回true。</p>
+<p>（3）传递性</p>
+<p>对于任何引用x,y,z，如果x.equlas(y)返回true，y.equals(z)返回true，x.equals(z)也应该返回true。</p>
+<p>（4）一致性</p>
+<p>如果x和y引用的对象没有发生变化，反复调用x.equals(y)应该返回同样的结果。</p>
+<p>（5）对于任何非空引用x，x.equals（null）应该返回fasle</p>
+<h4 id="hasCode方法"><a href="#hasCode方法" class="headerlink" title="hasCode方法"></a>hasCode方法</h4><p>散列码是由对象导出的一个整型值。散列码是没有规律的。如果x和y是两个不同的对象，x.hasCode()与y.hasCode()基本上不会相同。</p>
+<p>如果重新定义了equals方法，就必须为用户可能插入散列表的对象重新定义hasCode方法。</p>
+<h4 id="泛型数组列表"><a href="#泛型数组列表" class="headerlink" title="泛型数组列表"></a>泛型数组列表</h4><p>一旦能够确认数组列表的大小将保持恒定，不再发生变化，就可以调用trimToSize方法。这个方法将存储块的大小调整为保存当前元素数量所需要的存储空间。垃圾回收器将回收多余的存储空间。</p>
+<p>一旦削减了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该在确认不会再向数组列表添加任何元素时再调用trimToSize。</p>
+<h4 id="参数数量可变的方法"><a href="#参数数量可变的方法" class="headerlink" title="参数数量可变的方法"></a>参数数量可变的方法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(&quot;%d&quot;,n)；</span><br><span class="line">System.out.printf(&quot;%d %s&quot;,n,&quot;widgets&quot;);</span><br></pre></td></tr></table></figure>
+<p>这两条语句都调用同一个方法，不过一个调用有两个参数，一个有三个。</p>
+<p>printf方法是这样定义的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class PrintStream</span><br><span class="line">&#123;</span><br><span class="line">public PrintStream printf(String fmt,Object...args)&#123;return format(fmt,args);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="继承的设计技巧"><a href="#继承的设计技巧" class="headerlink" title="继承的设计技巧"></a>继承的设计技巧</h4><p>（1）将公共操作和字段放在超类中。</p>
+<p>（2）不要使用受保护的字段。</p>
+<p>（3）使用继承实现“is-a”关系。</p>
+<p>（4）除非所有继承的方法都有意义，否则不要使用继承。</p>
+<p>（5）在覆盖方法时，不要改变预期的行为。</p>
+<p>（6）使用多态，而不要使用类型信息。</p>
+<p>（7）不要滥用反射。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/29/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/" class="post-title-link" itemprop="url">对象与类</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-29 09:44:10 / Modified: 12:11:38" itemprop="dateCreated datePublished" datetime="2021-06-29T09:44:10+08:00">2021-06-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><strong>类</strong>：构造对象的模板和蓝图。</p>
+<p><strong>封装</strong>：有时称为数据隐藏。是处理对象的一个重要概念。从形式上看，封装就是将数据和行为组合在一个包中，并对对象的使用者隐藏具体的实现方式。</p>
+<p><strong>实例字段</strong>：对象中的数据。</p>
+<p><strong>方法</strong>：操作数据的过程。</p>
+<p><strong>继承</strong>：通过扩展一个类来建立另外一个类的过程称为继承。</p>
+<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><h4 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h4><p>构造器与类同名。在构造类的对象时，构造器会运行，从而将实例字段初始化为所希望的初始状态。</p>
+<p>构造器与其他方法有一个重要不同。构造器总是结合new运算符来调用。不能对一个已经存在的对象调用构造器来达到重新设置实例字段的目的。</p>
+<p>每个类可以有一个以上的构造器。</p>
+<p>构造器可以有0个，1个或多个参数。</p>
+<p>构造器没有返回值。</p>
+<h4 id="使用NULL值引用"><a href="#使用NULL值引用" class="headerlink" title="使用NULL值引用"></a>使用NULL值引用</h4><p>一个对象变量包含一个对象的引用，或者包含一个特殊值null，后者表示没有引用任何对象。</p>
+<p>如果对null值应用一个方法，会产生一个NullPointerException异常。</p>
+<p>这是一个很严重的错误，类似于“索引越界”异常。如果你的程序没有“捕获”异常，程序就会终止。正常情况下，程序并不捕获这些异常，而是依赖于程序员从一开始就不要带来异常。</p>
+<h4 id="隐式参数与显示参数"><a href="#隐式参数与显示参数" class="headerlink" title="隐式参数与显示参数"></a>隐式参数与显示参数</h4><p>方法中的参数通常分为隐式参数与显示参数，隐式参数是出现在方法名前的类类型的对象。显示参数是位于方法名后面括号中的数值。</p>
+<p>可用关键词this指示隐式参数，可以将实例字段与局部变量明显地区分开。</p>
+<h4 id="final实例字段"><a href="#final实例字段" class="headerlink" title="final实例字段"></a>final实例字段</h4><p>可以将实例字段定义为final。这样的字段必须在构造对象时初始化。也就是说，必须确保在每一个构造器执行之后，这个字段的值已经设置，并且以后不能再修改这个字段。</p>
+<h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><p>静态方法是不在对象上执行的方法。可以认为静态方法是没有this参数的方法。</p>
+<p>以下两种方法可以使用静态方法：</p>
+<p>(1)方法不需要访问对象状态，因为它需要的所有参数都通过显示参数提供。</p>
+<p>(2)方法只需要访问类的静态字段。</p>
+<p>注：建议使用类名而不是对象来调用静态方法。</p>
+<h4 id="方法参数"><a href="#方法参数" class="headerlink" title="方法参数"></a>方法参数</h4><p><strong>按值调用</strong>：表示方法接受的是调用者提供的值。</p>
+<p><strong>按引用调用</strong>：表示方法接收的是调用者提供的变量地址。</p>
+<p>方法可以修改按引用传递的变量的值，而不能修改按值传递的变量的值。</p>
+<p>java程序设计语言总是采用按值调用。也就是说，方法得到的是所有参数值的一个副本。</p>
+<p>方法不能修改基本数据类型的参数。</p>
+<p>方法可以改变对象参数的状态。</p>
+<p>方法不能让一个对象参数引用一个新的对象。</p>
+<h4 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h4><p>如果多个方法有相同的名字，不同的参数，便出现了重载。编译器必须挑出具体调用哪个方法。它用各个方法首部中的参数类型与特定方法调用中所使用的值类型进行匹配，来选出正确的方法。查找匹配的过程被称为重载解析。</p>
+<h4 id="构造器的具体处理步骤"><a href="#构造器的具体处理步骤" class="headerlink" title="构造器的具体处理步骤"></a>构造器的具体处理步骤</h4><p>(1)如果构造器的第一行调用了另一个构造器，则基于所提供的参数执行第二个构造器。</p>
+<p>(2)否则，</p>
+<p>a）所有数据字段初始化为其默认值（0，false，null）</p>
+<p>b）按照在类声明中出现的顺序，执行所有字段初始化方法和初始化块。</p>
+<p>(3)执行构造器主体代码。</p>
+<h4 id="类设计技巧"><a href="#类设计技巧" class="headerlink" title="类设计技巧"></a>类设计技巧</h4><p>(1)一定要保证数据私有。</p>
+<p>这是最重要的；绝对不要破坏封装性。有时候，可能需要编写一个访问器方法或更改器方法，但是最好还是保持实例字段的私有性。很多惨痛的教训告诉我们，数据的表示形式很可能会改变，但它们的使用方式却不会经变化。当数据保持私有时，表示形式的变化不会对类的使用者产生影响，而且也更容易检测bug。</p>
+<p>(2)一定要对数据进行初始化。</p>
+<p>Java不会为你初始化局部变量，但是会对对象的实例字段进行初始化。最好不要依赖于系统的默认值，而是应该显式地初始化所有的数据，可以提供默认值，也可以在所有构造器中设置默认值。</p>
+<p>(3)不要再类中使用过多的基本类型。</p>
+<p>这个想法是要用其他的类替换使用多个相关的基本类型。</p>
+<p>(4)不是所有的字段都需要单独的字段访问器和字段更改器。</p>
+<p>(5)分解有过多职责的类。</p>
+<p>这样说似乎有点含糊，究竟多少算是“过多”?每个人的看法都不同。但是，如果明显地可以将一个复杂的类分解成两个更为简单的类，就应该将其分解。</p>
+<p>(6)类名和方法名要能够体现它们的职责。</p>
+<p>与变量应该有一个能够反映其含义的名字一样，类也应该如此。</p>
+<p>(7)优先使用不可变的类。</p>
+<p> LocalDate类以及java.time包中的其他类是不可变的——没有方法能修改对象的状态。类似 plusDays的方法并不是更改对象，而是返回状态已修改的新对象。<br>更改对象的问题在于，如果多个线程试图同时更新一个对象，就会发生并发更改。其结果是不可预料的。如果类是不可变的，就可以安全地在多个线程间共享其对象。<br>因此，要尽可能让类是不可变的，</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/" class="post-title-link" itemprop="url">ICS大作业</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-17 19:19:01 / Modified: 19:46:13" itemprop="dateCreated datePublished" datetime="2021-06-17T19:19:01+08:00">2021-06-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="计算机系统"><a href="#计算机系统" class="headerlink" title="计算机系统"></a>计算机系统</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>​        本文遍历了hello.c在Linux下的生命周期，利用了Linux下的开发工具，通过对其进行预处理，编译，汇编，链接等过程的分布解读，来进行对各个过程Linux下的学习与理解。通过对其中的进程运行，内存管理，I/O管理等过程来探索深层次的Linux相关内容。重点在于将课本知识与实例进行结合，同时帮助复习，来将计算机系统的知识所贯通。</p>
+<p><strong><em>\</em>关键词：*<em>**</em></strong>*计算机系统；预处理；编译；汇编；链接；内存管理；Linux*<em>*</em> </p>
+<p><strong><em>\</em>目  录**</strong></p>
+<p><a href="#_Toc532238396">第1章 概述    <strong><em>\</em>- 4 -**</strong></a></p>
+<p><a href="#_Toc532238397">1.1 Hello简介    - 4 -</a></p>
+<p><a href="#_Toc532238398">1.2 环境与工具    - 4 -</a></p>
+<p><a href="#_Toc532238399">1.3 中间结果    - 4 -</a></p>
+<p><a href="#_Toc532238400">1.4 本章小结    - 4 -</a></p>
+<p><a href="#_Toc532238401">第2章 预处理    <strong><em>\</em>- 5 -**</strong></a></p>
+<p><a href="#_Toc532238402">2.1 预处理的概念与作用    - 5 -</a></p>
+<p><a href="#_Toc532238403">2.2在Ubuntu下预处理的命令    - 5 -</a></p>
+<p><a href="#_Toc532238404">2.3 Hello的预处理结果解析    - 5 -</a></p>
+<p><a href="#_Toc532238405">2.4 本章小结    - 5 -</a></p>
+<p><a href="#_Toc532238406">第3章 编译    <strong><em>\</em>- 6 -**</strong></a></p>
+<p><a href="#_Toc532238407">3.1 编译的概念与作用    - 6 -</a></p>
+<p><a href="#_Toc532238408">3.2 在Ubuntu下编译的命令    - 6 -</a></p>
+<p><a href="#_Toc532238409">3.3 Hello的编译结果解析    - 6 -</a></p>
+<p><a href="#_Toc532238410">3.4 本章小结    - 6 -</a></p>
+<p><a href="#_Toc532238411">第4章 汇编    <strong><em>\</em>- 7 -**</strong></a></p>
+<p><a href="#_Toc532238412">4.1 汇编的概念与作用    - 7 -</a></p>
+<p><a href="#_Toc532238413">4.2 在Ubuntu下汇编的命令    - 7 -</a></p>
+<p><a href="#_Toc532238414">4.3 可重定位目标elf格式    - 7 -</a></p>
+<p><a href="#_Toc532238415">4.4 Hello.o的结果解析    - 7 -</a></p>
+<p><a href="#_Toc532238416">4.5 本章小结    - 7 -</a></p>
+<p><a href="#_Toc532238417">第5章 链接    <strong><em>\</em>- 8 -**</strong></a></p>
+<p><a href="#_Toc532238418">5.1 链接的概念与作用    - 8 -</a></p>
+<p><a href="#_Toc532238419">5.2 在Ubuntu下链接的命令    - 8 -</a></p>
+<p><a href="#_Toc532238420">5.3 可执行目标文件hello的格式    - 8 -</a></p>
+<p><a href="#_Toc532238421">5.4 hello的虚拟地址空间    - 8 -</a></p>
+<p><a href="#_Toc532238422">5.5 链接的重定位过程分析    - 8 -</a></p>
+<p><a href="#_Toc532238423">5.6 hello的执行流程    - 8 -</a></p>
+<p><a href="#_Toc532238424">5.7 Hello的动态链接分析    - 8 -</a></p>
+<p><a href="#_Toc532238425">5.8 本章小结    - 9 -</a></p>
+<p><a href="#_Toc532238426">第6章 hello进程管理    <strong><em>\</em>- 10 -**</strong></a></p>
+<p><a href="#_Toc532238427">6.1 进程的概念与作用    - 10 -</a></p>
+<p><a href="#_Toc532238428">6.2 简述壳Shell-bash的作用与处理流程    - 10 -</a></p>
+<p><a href="#_Toc532238429">6.3 Hello的fork进程创建过程    - 10 -</a></p>
+<p><a href="#_Toc532238430">6.4 Hello的execve过程    - 10 -</a></p>
+<p><a href="#_Toc532238431">6.5 Hello的进程执行    - 10 -</a></p>
+<p><a href="#_Toc532238432">6.6 hello的异常与信号处理    - 10 -</a></p>
+<p><a href="#_Toc532238433">6.7本章小结    - 10 -</a></p>
+<p><a href="#_Toc532238434">第7章 hello的存储管理    <strong><em>\</em>- 11 -**</strong></a></p>
+<p><a href="#_Toc532238435">7.1 hello的存储器地址空间    - 11 -</a></p>
+<p><a href="#_Toc532238436">7.2 Intel逻辑地址到线性地址的变换-段式管理    - 11 -</a></p>
+<p><a href="#_Toc532238437">7.3 Hello的线性地址到物理地址的变换-页式管理    - 11 -</a></p>
+<p><a href="#_Toc532238438">7.4 TLB与四级页表支持下的VA到PA的变换    - 11 -</a></p>
+<p><a href="#_Toc532238439">7.5 三级Cache支持下的物理内存访问    - 11 -</a></p>
+<p><a href="#_Toc532238440">7.6 hello进程fork时的内存映射    - 11 -</a></p>
+<p><a href="#_Toc532238441">7.7 hello进程execve时的内存映射    - 11 -</a></p>
+<p><a href="#_Toc532238442">7.8 缺页故障与缺页中断处理    - 11 -</a></p>
+<p><a href="#_Toc532238443">7.9动态存储分配管理    - 11 -</a></p>
+<p><a href="#_Toc532238444">7.10本章小结    - 12 -</a></p>
+<p><a href="#_Toc532238445">第8章 hello的IO管理    <strong><em>\</em>- 13 -**</strong></a></p>
+<p><a href="#_Toc532238446">8.1 Linux的IO设备管理方法    - 13 -</a></p>
+<p><a href="#_Toc532238447">8.2 简述Unix IO接口及其函数    - 13 -</a></p>
+<p><a href="#_Toc532238448">8.3 printf的实现分析    - 13 -</a></p>
+<p><a href="#_Toc532238449">8.4 getchar的实现分析    - 13 -</a></p>
+<p><a href="#_Toc532238450">8.5本章小结    - 13 -</a></p>
+<p><a href="#_Toc532238451">结论    <strong><em>\</em>- 14 -**</strong></a></p>
+<p><a href="#_Toc532238452">附件    <strong><em>\</em>- 15 -**</strong></a></p>
+<p><a href="#_Toc532238453">参考文献    <strong><em>\</em>- 16 -**</strong></a></p>
+<h2 id="第一章-概述"><a href="#第一章-概述" class="headerlink" title="第一章 概述"></a>第一章 概述</h2><h3 id="1-1-Hello简介"><a href="#1-1-Hello简介" class="headerlink" title="1.1 Hello简介"></a>1.1 Hello简介</h3><p>P2P：From Program to Process</p>
+<p>从源文件到目标文件的转换是由编译器驱动程序完成的。</p>
+<p>在这里，GCC编译器驱动程序读取源程序文件hello.c，并把它翻译成一个可执行的目标文件hello。这个编译可以分为四部分进行，执行这四个阶段的程序（预处理器，编译器，汇编器，链接器）一起构成了编译系统。</p>
+<p>Hello.c-&gt;(cpp)hello.i-&gt;(ccl)hello.s-&gt;(as)hello.o-&gt;(ld)hello</p>
+<p>预处理阶段：预处理器（cpp）根据以字符#开头的命令，修改原始的c程序。比如hello.c中第一行的#include<stdio.h>命令告诉预处理器读取系统头文件stdio.h的内容，并把它直接插入程序文本。结果就得到了另一个C程序，通常以.i作为文件扩展名。</stdio.h></p>
+<p>编译阶段：编译器（ccl）将文本文件hello.i翻译成文本文件hello.s。它包含一个汇编语言程序。</p>
+<p>汇编阶段：接下来，汇编器（as）将hello.s翻译成机器语言指令，把这些指令打包成一种叫做可重定位目标程序的格式，并将结果保存在目标文件hello.o中。hello.o是一个二进制文件，它包含的17个字节是函数main的指令编码。</p>
+<p>链接阶段：请注意，hello程序调用了printf函数，它是每个C编译器都提供的标准C库中的一个函数。printf函数存在于一个名为printf.o的单独的预编译好了的目标文件中，而这个文件必须以某种方式合并到我们的hello.o程序中。链接器（ld）就负责处理这种合并。</p>
+<p>O2O: From Zero-0 to Zero-0</p>
+<p>  shell通过execve在fork产生的子进程中加载hello，先删除当前虚拟地址的用户部分已存在的数据结构，为hello的代码段、数据、bss以及栈区域创建新的区域结构，然后映射虚拟内存，设置程序计数器，使之指向代码区域的入口点，进入程序入口后程序开始载入物理内存，而后进入main函数，CPU为hello分配时间片执行逻辑控制流。hello通过Unix I/O管理来控制输出。hello执行完成后shell父进程会回收hello进程，并且内核会从系统中删除hello所有痕迹，至此，hello完成O2O的过程。</p>
+<h3 id="1-2-环境与工具"><a href="#1-2-环境与工具" class="headerlink" title="1.2 环境与工具"></a>1.2 环境与工具</h3><h4 id="1-2-1-硬件环境"><a href="#1-2-1-硬件环境" class="headerlink" title="1.2.1 硬件环境"></a>1.2.1 硬件环境</h4><p>系统型号：81T0</p>
+<p>BIOS：BHCN26WW</p>
+<p>处理器：i5—9300H</p>
+<p>内存：8192MB RAM</p>
+<h4 id="1-2-2-软件环境"><a href="#1-2-2-软件环境" class="headerlink" title="1.2.2 软件环境"></a>1.2.2 软件环境</h4><p>操作系统：win10家庭中文版64位</p>
+<p>VMware Workstation Pro</p>
+<p>Ubuntu20.04</p>
+<h4 id="1-2-3-开发工具"><a href="#1-2-3-开发工具" class="headerlink" title="1.2.3 开发工具"></a>1.2.3 开发工具</h4><p>CodeBlocks</p>
+<p>gcc</p>
+<p>VsCode</p>
+<h3 id="1-3-中间结果"><a href="#1-3-中间结果" class="headerlink" title="1.3 中间结果"></a>1.3 中间结果</h3><p>hello.i预处理后的文件  gcc -E hello.c -o hello.i</p>
+<p>hello.s编译后的文件   gcc -S hello.i -o hello.s</p>
+<p>hello.o汇编后的可重定位目标程序  gcc -c hello.s -o hello.o</p>
+<p>hello链接后的可执行目标文件    gcc -o hello hello.o</p>
+<p>hello_objd.txt：链接后的hello可执行文件经过反汇编生成的代码</p>
+<p>objdump -d hello.o<br>ELFout.txt：链接后的hello可执行文件经过readelf读取的ELF信息</p>
+<p>readelf -a hello.o &gt;hello.elf</p>
+<h3 id="1-4-本章小结"><a href="#1-4-本章小结" class="headerlink" title="1.4 本章小结"></a>1.4 本章小结</h3><p>本章对hello做了一个总体的概述，了解了P2P与020，简述了硬件与软件环境，并了解了中间产物以及其作用。</p>
+<h2 id="第2章-预处理"><a href="#第2章-预处理" class="headerlink" title="\第2章** \预处理**"></a><strong><em>\</em>第2章**</strong> <strong><em>\</em>预处理**</strong></h2><h3 id="2-1-预处理的概念与作用"><a href="#2-1-预处理的概念与作用" class="headerlink" title="2.1 预处理的概念与作用"></a>2.1 预处理的概念与作用</h3><p>概念：预处理一般是指在程序源代码被翻译为目标代码的过程中，生成二进制代码之前的过程。预处理器（cpp）根据以字符#开头的命令，修改原始的C程序，读取头文件stdio.h的内容，并把它直接插入程序文本中。</p>
+<p>作用:</p>
+<p>(1)预处理器（cpp）根据以字符#开头的命令，修改原始的c程序。比如hello.c中第一行的#include<stdio.h>命令告诉预处理器读取系统头文件stdio.h的内容，并把它直接插入程序文本。结果就得到了另一个C程序，通常以.i作为文件扩展名。</stdio.h></p>
+<p>(2)用实际值替换用#define定义的字符串</p>
+<p>(3)根据#if后面的条件决定需要编译的代码</p>
+<h3 id="2-2在Ubuntu下预处理的命令"><a href="#2-2在Ubuntu下预处理的命令" class="headerlink" title="2.2在Ubuntu下预处理的命令"></a>2.2在Ubuntu下预处理的命令</h3><p>gcc -E hello.c -o hello.i</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsD253.tmp.jpg" alt="img"></p>
+<p> <img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsEC45.tmp.jpg" alt="img"></p>
+<h3 id="2-3-Hello的预处理结果解析"><a href="#2-3-Hello的预处理结果解析" class="headerlink" title="2.3 Hello的预处理结果解析"></a>2.3 Hello的预处理结果解析</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsA063.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsC62C.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsE629.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsFED2.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps148E.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps2D66.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps4043.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps53EB.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps690B.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps802D.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps9676.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsA655.tmp.jpg" alt="img"></p>
+<h3 id="2-4-本章小结"><a href="#2-4-本章小结" class="headerlink" title="2.4 本章小结"></a>2.4 本章小结</h3><p>​       本章了解了预处理的概念及作用，以及在linux系统下的指令，同时解析了预处理的文本内容，让我对预处理有了更一步的了解和较为深刻的认识，更好的理解了计算机系统。</p>
+<h2 id="第3章-编译"><a href="#第3章-编译" class="headerlink" title="\第3章** \编译**"></a><strong><em>\</em>第3章**</strong> <strong><em>\</em>编译**</strong></h2><h3 id="3-1-编译的概念与作用"><a href="#3-1-编译的概念与作用" class="headerlink" title="3.1 编译的概念与作用"></a>3.1 编译的概念与作用</h3><p>概念：编译过程是整个程序构建的核心部分，编译成功，会将源代码由文本形式转换成机器语言，编译过程就是把预处理完的文件进行一系列词法分析、语法分析、语义分析以及优化后生成相应的汇编代码文件。 </p>
+<p>作用：编译器（ccl）将文本文件hello.i翻译成文本文件hello.s，它包含一个汇编语言程序，该程序包含函数main的定义，其中每条语句都以一种文本格式描述了一条低级语言指令。编译主要作用除了是将文本文件hello.i翻译成文本文件hello.s之外，还在出现语法错误时给出提示信息。执行过程主要从其中几个阶段进行分析：</p>
+<p>(1)词法分析：词法分析是使用一种叫做lex的程序实现词法扫描，它会按照用户之前描述好的词法规则将输入的字符串分割成一个个记号。产生的记号一般分为：关键字、标识符、字面量（包含数字、字符串等）和特殊符号（运算符、等号等），然后他们放到对应的表中。</p>
+<p>(2)语法分析：语法分析器根据用户给定的语法规则，将词法分析产生的记号序列进行解析，然后将它们构成一棵语法树。对于不同的语言，只是其语法规则不一样。用于语法分析也有一个现成的工具，叫做：yacc。</p>
+<p>(3)语义分析：语法分析完成了对表达式语法层面的分析，但是它不了解这个语句是否真正有意义。有的语句在语法上是合法的，但是却是没有实际的意义，比如说两个指针的做乘法运算，这个时候就需要进行语义分析，但是编译器能分析的语义也只有静态语义。</p>
+<p>(4)中间代码生成：我们的代码是可以进行优化的，对于一些在编译期间就能确定的值，是会将它进行优化的，比如说上边例子中的 2+6，在编译期间就可以确定他的值为8了，但是直接在语法上进行优化的话比较困难，这时优化器会先将语法树转成中间代码。中间代码一般与目标机器和运行环境无关。（不包含数据的尺寸、变量地址和寄存器的名字等）。中间代码在不同的编译器中有着不同的形式，比较常见的有三地址码和P-代码。</p>
+<p>(5)目标代码生成与优化:代码生成器将中间代码转成机器代码，这个过程是依赖于目标机器的，因为不同的机器有着不同的字长、寄存器、数据类型等。最后目标代码优化器对目标代码进行优化，比如选择合适的寻址方式、使用唯一来代替乘除法、删除出多余的指令等。</p>
+<h3 id="3-2-在Ubuntu下编译的命令"><a href="#3-2-在Ubuntu下编译的命令" class="headerlink" title="3.2 在Ubuntu下编译的命令"></a>3.2 在Ubuntu下编译的命令</h3><p>gcc -S hello.i -o hello.s</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsA425.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsB1D2.tmp.jpg" alt="img"></p>
+<h3 id="3-3-Hello的编译结果解析"><a href="#3-3-Hello的编译结果解析" class="headerlink" title="3.3 Hello的编译结果解析"></a>3.3 Hello的编译结果解析</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps35E.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps18AC.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps2C83.tmp.jpg" alt="img"></p>
+<h4 id="3-3-1-数据"><a href="#3-3-1-数据" class="headerlink" title="\3.3.1 数据**"></a><strong><em>\</em>3.3.1 数据**</strong></h4><h5 id="1-全局变量"><a href="#1-全局变量" class="headerlink" title="(1)全局变量"></a>(1)全局变量</h5><p> int sleeptime=2;</p>
+<p>   全局变量sleeptime被设置为int，由于int与long大小相同，所以被转换为long，数值大小为2，被赋予4个字节内存，对齐方式设置为4，储存在.data中。</p>
+<h5 id="2-局部变量"><a href="#2-局部变量" class="headerlink" title="(2)局部变量"></a>(2)局部变量</h5><p> int i;</p>
+<p>通常储存在栈或者是寄存器中，在这个程序中，i被存放在栈中</p>
+<p>而argc作为传入main的参数同样储存在栈中</p>
+<h5 id="3-字符串"><a href="#3-字符串" class="headerlink" title="(3)字符串"></a>(3)字符串</h5><p> 代码中出现的字符串，存放在.roarta中</p>
+<h4 id="3-3-2-赋值"><a href="#3-3-2-赋值" class="headerlink" title="\3.3.2 赋值**"></a><strong><em>\</em>3.3.2 赋值**</strong></h4><p> 对全局变量的赋初值直接在汇编后代码。</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps1CFF.tmp.jpg" alt="img"></p>
+<p>对循环变量i的赋值，局部变量i保存在栈中，存放在-4(%rbp)中，对其赋初值为0。</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps57C7.tmp.jpg" alt="img"></p>
+<h4 id="3-3-3-类型转换"><a href="#3-3-3-类型转换" class="headerlink" title="\3.3.3 类型转换**"></a><strong><em>\</em>3.3.3 类型转换**</strong></h4><p>将全局变量的int转换为long类型。都占据4个字节。</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps856F.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8570.tmp.jpg" alt="img"> </p>
+<h4 id="3-3-4-算数操作"><a href="#3-3-4-算数操作" class="headerlink" title="\3.3.4 算数操作**"></a><strong><em>\</em>3.3.4 算数操作**</strong></h4><p>当i的值小于8时，将i的值每次循环+1。</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8571.tmp.jpg" alt="img"> </p>
+<h4 id="3-3-5-关系操作"><a href="#3-3-5-关系操作" class="headerlink" title="\3.3.5 关系操作**"></a><strong><em>\</em>3.3.5 关系操作**</strong></h4><p>判断argc是否等于3</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8572.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8573.tmp.jpg" alt="img"> </p>
+<p>通过cmpl来判断，argc存放在-20(%rbp)中</p>
+<p>通过je跳转</p>
+<p>判断循环变量i是否小于8</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8574.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8575.tmp.jpg" alt="img"> </p>
+<p>通过cmpl来判断，i存放在-4(%rbp)中</p>
+<p>通过jle跳转</p>
+<h4 id="3-3-6-数组-指针-结构操作"><a href="#3-3-6-数组-指针-结构操作" class="headerlink" title="\3.3.6 数组/指针/结构操作**"></a><strong><em>\</em>3.3.6 数组/指针/结构操作**</strong></h4><p>在代码中对数组的引用</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8576.tmp.jpg" alt="img"> </p>
+<p>分别存放argv[0]与argv[1]</p>
+<h4 id="3-3-7-控制转移"><a href="#3-3-7-控制转移" class="headerlink" title="\3.3.7 控制转移**"></a><strong><em>\</em>3.3.7 控制转移**</strong></h4><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8577.tmp.jpg" alt="img"> </p>
+<p>赋初值给i,开始进行循环</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8578.tmp.jpg" alt="img"> </p>
+<p>判断是否满足循环条件</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps8579.tmp.jpg" alt="img"> </p>
+<p>判断argc是否等于3</p>
+<h4 id="3-3-8-函数操作"><a href="#3-3-8-函数操作" class="headerlink" title="\3.3.8 函数操作**"></a><strong><em>\</em>3.3.8 函数操作**</strong></h4><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps857A.tmp.jpg" alt="img"> </p>
+<p>调用printf与sleep</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps858B.tmp.jpg" alt="img"> </p>
+<p>主函数</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps858C.tmp.jpg" alt="img"> </p>
+<p>return</p>
+<h3 id="3-4-本章小结"><a href="#3-4-本章小结" class="headerlink" title="3.4 本章小结"></a>3.4 本章小结</h3><p>​        通过对文本文件hello.c的学习，再次强调了汇编语言的重要性。</p>
+<p>​        编译器将高级语言编译成汇编语言，在以上的分析过程中，详细的分析了编译器是怎么处理C语言的各个数据类型以及各类操作的，按照不同的数据类型和操作格式，解释了hello.c文件与hello.s文件间的映射关系。通过对汇编语言的分析，加深了对各种操作的掌握。</p>
+<h2 id="第4章-汇编"><a href="#第4章-汇编" class="headerlink" title="\第4章** \汇编**"></a><strong><em>\</em>第4章**</strong> <strong><em>\</em>汇编**</strong></h2><h3 id="4-1-汇编的概念与作用"><a href="#4-1-汇编的概念与作用" class="headerlink" title="4.1 汇编的概念与作用"></a>4.1 汇编的概念与作用</h3><p>概念与作用：汇编器（as）将hello.s翻译成机器语言指令，把这些指令打包成一种叫做可重定位目标程序的格式，并将结果保存在目标文件hello.o中。hello.o是一个二进制文件，它包含的17个字节是函数main的指令编码。</p>
+<h3 id="4-2-在Ubuntu下汇编的命令"><a href="#4-2-在Ubuntu下汇编的命令" class="headerlink" title="4.2 在Ubuntu下汇编的命令"></a>4.2 在Ubuntu下汇编的命令</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74B.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74C.tmp.jpg" alt="img"> </p>
+<h3 id="4-3-可重定位目标elf格式"><a href="#4-3-可重定位目标elf格式" class="headerlink" title="4.3 可重定位目标elf格式"></a>4.3 可重定位目标elf格式</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74D.tmp.jpg" alt="img"> </p>
+<p> <img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74E.tmp.jpg" alt="img"></p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps74F.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps750.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps751.tmp.jpg" alt="img"> </p>
+<p>ELF头以一个十六字节的序列开始，这个序列描述了生成该文件的系统的字的大小和字节顺序。ELF头剩下的部分包含帮助链接器语法分析和解释目标文件的信息。其中包括ELF头的大小，目标文件的类型，机器类型，节头部标中条目的大小和数量。不同节的位置和大小是由节头部表描述的，其中目标文件中每一个节都有一个固定大小的条目。</p>
+<p>.text:已编译程序的机器代码</p>
+<p>.rodata:只读数据</p>
+<p>.data:已初始化的全局和静态C变量</p>
+<p>.bss:未初始化的全局和静态C变量，以及所有被初始化为0的全局或静态变量</p>
+<p>.symtab:一个符号表，它存放在程序中定义和引用的函数和全局变量的信息</p>
+<p>.rel.text:一个.text节中位置的列表</p>
+<p>.rel.data:被模块引用或定义的所有全局变量的重定位信息</p>
+<p>.debug:一个调试符号表</p>
+<p>.line:原始C源程序中的行号和.text节中机器指令之间的映射</p>
+<p>.strtab:一个字符串表</p>
+<h3 id="4-4-Hello-o的结果解析"><a href="#4-4-Hello-o的结果解析" class="headerlink" title="4.4 Hello.o的结果解析"></a>4.4 Hello.o的结果解析</h3><p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps752.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps753.tmp.jpg" alt="img"> </p>
+<p>机器语言的构成：<br>机器的指令指令是CPU能直接识别并执行的指令，它的表现形式是二进制编码。<br>通常由操作码和操作数两部分组成，操作码指出该指令所要完成的操作，即指令的功能，操作数指出参与运算的对象，以及运算结果所存放的位置等。</p>
+<p>汇编前后代码区别：</p>
+<p>经过汇编之后，hello.o文件得到了ELF格式信息，重定位信息，所以发生了以下变化：</p>
+<p>(1)所有机器数都由10进制变成了便于机器操作的16进制</p>
+<p>(2)在函数调用方面，之前是直接调用，在汇编之后，变成了通过程序计数器(PC)的变化来转移</p>
+<p>(3)跳转方面，也由直接跳转变成了通过程序计数器来转变</p>
+<p>(4)对于全局变量的引用，某些全局变量因为他们的地址需要在运行后才能确定，所以访问需要重定位；在汇编后的代码，所以在汇编后，这些操作数都被置于零，添加重定位条目</p>
+<h3 id="4-5-本章小结"><a href="#4-5-本章小结" class="headerlink" title="4.5 本章小结"></a>4.5 本章小结</h3><p>​       汇编阶段，通过汇编器(as)将hello.s翻译成机器语言指令，把这些指令打包成一种叫做可重定位目标程序的格式，并将结果保存在hello.o中。</p>
+<p>​       通过实验，了解了汇编前后代码的区别以及ELF表的相关内容，对汇编的掌握又提升了一部分。</p>
+<h2 id="第-5-章-链接"><a href="#第-5-章-链接" class="headerlink" title="\第****5****章* *链接**"></a><strong><em>\</em>第*<em>**</em></strong>*5*<strong>**</strong>*章*<strong><em> </em></strong>*链接*<em>*</em></h2><h3 id="5-1-链接的概念与作用"><a href="#5-1-链接的概念与作用" class="headerlink" title="5.1 链接的概念与作用"></a>5.1 链接的概念与作用</h3><p>链接是将各种代码和数据片段收集并组合成为一个单一文件的过程，这个文件可被加载(复制)到内存并执行。链接可以执行于编译时，也就是在源代码被翻译成机器代码时；也可以执行于加载时，也就是在程序被加载器加载到内存并执行时；甚至执行于运行时，也就是由应用程序来执行。</p>
+<h3 id="5-2-在Ubuntu下链接的命令"><a href="#5-2-在Ubuntu下链接的命令" class="headerlink" title="5.2 在Ubuntu下链接的命令"></a>5.2 在Ubuntu下链接的命令</h3><p>gcc -o hello hello.o</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF185.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF186.tmp.jpg" alt="img"> </p>
+<h3 id="5-3-可执行目标文件hello的格式"><a href="#5-3-可执行目标文件hello的格式" class="headerlink" title="5.3 可执行目标文件hello的格式"></a>5.3 可执行目标文件hello的格式</h3><p>  readelf -a hello &gt; hello_out.elf</p>
+<p>ELF头(ELF header)以一个16字节的序列开始，这个序列描述了生成该文件的系统的字的大小和字节顺序。</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF187.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF188.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF189.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF18A.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF18B.tmp.jpg" alt="img"> </p>
+<p>重定位节</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF18C.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF19C.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF19D.tmp.jpg" alt="img"> </p>
+<h3 id="5-4-hello的虚拟地址空间"><a href="#5-4-hello的虚拟地址空间" class="headerlink" title="5.4 hello的虚拟地址空间"></a>5.4 hello的虚拟地址空间</h3><p>使用edb加载hello，查看本进程的虚拟地址空间各段信息，并与5.3对照分析说明。  </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF19E.tmp.jpg" alt="img"> </p>
+<p>edb使用方法</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF19F.tmp.jpg" alt="img"> </p>
+<p>可以从Data Dump中查看虚拟空间的地址，程序的虚拟空间地址为</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A0.tmp.jpg" alt="img"> </p>
+<p>首先查看hello_out.elf中的程序头部分，如下图：</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A1.tmp.jpg" alt="img"> </p>
+<p>此处PHDR表示该段具有读/执行权限，表示自身所在的程序头部表在内存中的位置为内存起始位置0x400000偏移0x40字节处</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A2.tmp.jpg" alt="img"> </p>
+<p>此处INTERP位于偏移0x318处，该段具有读权限，记录了程序所用ELF解析器</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A3.tmp.jpg" alt="img"> </p>
+<p>LOAD段位于开始处，有读/执行访问权限，其中包括ELF头、程序头部表以及.init、.text、.rodata字节</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A4.tmp.jpg" alt="img"> </p>
+<p>DYNAMIC在偏移0x2da8处，则与之对应</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A5.tmp.jpg" alt="img"> </p>
+<p>NOTE在偏移0x338处，则与之对应</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1A6.tmp.jpg" alt="img"> </p>
+<h3 id="5-5-链接的重定位过程分析"><a href="#5-5-链接的重定位过程分析" class="headerlink" title="5.5 链接的重定位过程分析"></a>5.5 链接的重定位过程分析</h3><p>1.对于包含的函数：在hello.o反汇编生成的代码中，只有main函数，而在链接后生成的反汇编代码中，出现了调用的其他函数，比如printf，puts，getchar，exit，sleep等</p>
+<p>2.对于函数调用和跳转：在hello.o反汇编生成的代码中，跳转都是一个偏移量，并在后面加上重定位条目，而在链接后生成的反汇编代码中，函数调用和跳转拥有了实际上的虚拟地址和函数，链接前的函数调用，调用地址为空，添加重定位条目，链接后的函数调用，拥有了实际的虚拟地址和函数名，不再需要重定位条目</p>
+<p>3.增加了节：在hello.o反汇编生成的代码中，只有.text一个节，而在链接后生成的反汇编代码中，又添加了.init节和.fini节</p>
+<p>4.地址引用和全局变量的引用：在hello.o反汇编生成的代码中，对全局变量的引用是通过重定位符号来描述的，而在链接后生成的反汇编代码中，随着链接的完成，有些需要在运行时确定的地址得到确定的变量被确定了虚拟内存地址</p>
+<h3 id="5-6-hello的执行流程"><a href="#5-6-hello的执行流程" class="headerlink" title="5.6 hello的执行流程"></a>5.6 hello的执行流程</h3><p>0000000000401000 <_init>:</_init></p>
+<p>0000000000401030 puts@plt:</p>
+<p>0000000000401040 printf@plt:</p>
+<p>0000000000401050 getchar@plt:</p>
+<p>0000000000401060 exit@plt:</p>
+<p>0000000000401070 sleep@plt:</p>
+<p>0000000000401080 :</p>
+<p>0000000000401110 <_start>:</_start></p>
+<p>0000000000401140 <_dl_relocate_static_pie>:</_dl_relocate_static_pie></p>
+<p>0000000000401150 <_libc_csu_init></_libc_csu_init></p>
+<p>00000000004011b0 <_libc_csu_fini></_libc_csu_fini></p>
+<p>00000000004011b4 <_fini>:</_fini></p>
+<h3 id="5-7-Hello的动态链接分析"><a href="#5-7-Hello的动态链接分析" class="headerlink" title="5.7 Hello的动态链接分析"></a>5.7 Hello的动态链接分析</h3><p>分析hello程序的动态链接项目，通过edb调试，分析在dl_init前后，这些项目的内容变化。要截图标识说明。</p>
+<p>根据hello  ELF可知，.got起始位置为0x3f98</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1B7.tmp.jpg" alt="img"> </p>
+<p>在调用dl_init之前其后16字节均为0</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1B8.tmp.jpg" alt="img"> </p>
+<p>调用_start之后发生改变，其后的两个8个字节分别改变，其中GOT[O]和GOT[1]包含动态链接器在解析函数地址时会使用的信息。GOT[2]是动态链接器在1d-linux.so模块中的入口点。其余的每个条目对应于一个被调用的函数，改变后的GOT表如下：</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsF1B9.tmp.jpg" alt="img"> </p>
+<p>可以看出其已经动态链接，GOT条目已经改变。</p>
+<h3 id="5-8-本章小结"><a href="#5-8-本章小结" class="headerlink" title="5.8 本章小结"></a>5.8 本章小结</h3><p>​          链接是将各种代码和数据片段收集并组合成为一个单一文件的过程，这个文件可被加载(复制)到内存并执行。链接可以执行于编译时，也就是在源代码被翻译成机器代码时；也可以执行于加载时，也就是在程序被加载器加载到内存并执行时；甚至执行于运行时，也就是由应用程序来执行。在进行本章操作后，对于链接过程及其中间变化有了新的了解，对于这部分知识也加深了掌握。</p>
+<h2 id="第-6-章-hello进程管理"><a href="#第-6-章-hello进程管理" class="headerlink" title="\第****6****章* *hello进程管理**"></a><strong><em>\</em>第*<em>**</em></strong>*6*<strong>**</strong>*章*<strong><em> </em></strong>*hello进程管理*<em>*</em></h2><h3 id="6-1-进程的概念与作用"><a href="#6-1-进程的概念与作用" class="headerlink" title="6.1 进程的概念与作用"></a>6.1 进程的概念与作用</h3><p>进程的经典定义是一个执行中程序的实例。系统中的每个程序都运行在某个进程上下文中。上下文是由程序正确运行所需的状态组成的。这个状态包括存放在内存中的程序的代码和数据，它的栈，通用目的寄存器的内容，程序计数器，环境变量以及打开文件描述符的集合。</p>
+<p>进程的作用是给在在运行一个程序时，得到一个假象，就好像我们的程序是系统中当前运行的唯一的程序一样。我们的程序好像是独占地使用处理器和内存。处理器就好像是无间断地一条接一条地执行我们程序中的指令。最后，我们程序中的代码和数据好像是系统内存中唯一的对象。这些假象都是通过进程的概念提供给我们的。</p>
+<h3 id="6-2-简述壳Shell-bash的作用与处理流程"><a href="#6-2-简述壳Shell-bash的作用与处理流程" class="headerlink" title="6.2 简述壳Shell-bash的作用与处理流程"></a>6.2 简述壳Shell-bash的作用与处理流程</h3><p>shell是一种命令解释器，指为操作系统的使用者提供操作界面，它接收用户命令，然后调用相应的应用程序，交互式解释和执行用户输入的命令或者自动地解释和执行预先设定好的一连串的命令。</p>
+<p>Shell-bash的处理流程</p>
+<p>(1)读取用户由键盘输入的命令行，对其进行语法检查，如果键入的命令不是一个内部命令并且在路径里没有找到这个可执行文件，将会显示一条错误信息</p>
+<p>(2)如果是内部命令直接执行</p>
+<p>(3)若不是内部命令，则是可执行程序，分析命令，以命令名作为文件名，并将其它参数改造为系统调用execve( )内部处理所要求的形式，传给Linux内核。</p>
+<p>(4)终端进程调用fork( )建立一个子进程。</p>
+<p>(5)终端进程本身调用wait4()来等待子进程完成（如果是后台命令，则不等待）。当子进程运行时调用execve()，子进程根据文件名到目录中查找有关文件，调入内存，执行这个程序。</p>
+<p>(6).如果命令末尾有&amp;,则终端进程不用执行系统调用wait4()，立即发提示符，让用户输入下一条命令；否则终端进程会一直等待，当子进程完成工作后，向父进程报告，此时中断进程醒来，作必要的判别工作后，终端发出命令提示符，重复上述处理过程。</p>
+<h3 id="6-3-Hello的fork进程创建过程"><a href="#6-3-Hello的fork进程创建过程" class="headerlink" title="6.3 Hello的fork进程创建过程"></a>6.3 Hello的fork进程创建过程</h3><p>当shell读取到执行hello程序时候，shell会分析命令，以命令名作为文件名，并将其它参数改造为系统调用execve( )内部处理所要求的形式，传给Linux内核。</p>
+<p>然后终端进程调用fork( )建立一个子进程，新创建的子进程几乎但不完全与父进程相同。子进程得到与父进程用户级虚拟地址空间相同的(但是独立的)一份副本，包括代码和数据段、堆、共享库以及用户栈。子进程还获得与父进程任何打开文件描述符相同的副本，这就意味着当父进程调用fork时，子进程可以读写父进程中打开的任何文件。父进程和新创建的子进程之间最大的区别在于它们有不同的PID。</p>
+<p>最后终端进程本身调用waitpid()来等待子进程完成（如果是后台命令，则不等待）。</p>
+<p>fork具有以下特性：</p>
+<p>(1)调用一次，返回两次。</p>
+<p>(2)并发执行。</p>
+<p>(3)相同但是独立的地址空间。</p>
+<p>(4)共享文件。</p>
+<h3 id="6-4-Hello的execve过程"><a href="#6-4-Hello的execve过程" class="headerlink" title="6.4 Hello的execve过程"></a>6.4 Hello的execve过程</h3><p>execve函数在当前进程的上下文中加载并运行一个新程序。</p>
+<p>execve函数加载并运行可执行目标文件hello，且带参数列表argv和环境变量列表envp。只有当出现错误时，例如找不到hello，execve 才会返回到调用程序。所以，与fork一次调用返回两次不同，execve调用一次并从不返回。</p>
+<p>在execve加载了hello之后，调用启动代码libc_start_main。启动代码设置栈，并将控制传递给新程序的主函数，该主函数具有如下形式的原型</p>
+<p>int main(int argc,char <strong>argv ,char </strong>envp)</p>
+<p>execve过程执行以下内容：</p>
+<p>1.删除已存在的用户区域。删除当前进程虚拟地址的用户部分中的已存在的区域结构。</p>
+<p>2.映射私有区域。为新程序的代码、数据、bss 和栈区域创建新的区域结构。所有这些</p>
+<p>3.新的区域都是私有的、写时复制的。代码和数据区域被映射为hello文件中的. text和.data区。bss 区域是请求二进制零的，映射到匿名文件，其大小包含在hello中。栈和堆区域也是请求二进制零的，初始长度为零。概括了私有区域的不同映射。</p>
+<p>4.映射共享区域。如果hello程序与共享对象(或目标)链接，比如标准C库libc.so，那么这些对象都是动态链接到这个程序的，然后再映射到用户虚拟地址空间中的共享区域内。</p>
+<p>5.设置程序计数器(PC)。execve做的最后一件事情就是设置当前进程上下文中的程序计数器，使之指向代码区域的入口点。</p>
+<h3 id="6-5-Hello的进程执行"><a href="#6-5-Hello的进程执行" class="headerlink" title="6.5 Hello的进程执行"></a>6.5 Hello的进程执行</h3><p>hello是一个进程，在执行的时得到一个抽象，就好像hello是系统中当前运行的唯一的程序一样。hello拥有一个独立的逻辑控制流，就像程序独占地使用处理器，同时hello拥有一个私有的地址空间，就像我们的程序独占地使用内存系统。</p>
+<p>逻辑控制流和时间片</p>
+<p>内核为每个进程（例如hello）维持一个上下文(context)。上下文就是内核重新启动一个被抢占的进程所需的状态。它由一些对象的值组成，这些对象包括通用目的寄存器、浮点寄存器、程序计数器、用户栈、状态寄存器、内核栈和各种内核数据结构，比如描述地址空间的页表、包含有关当前进程信息的进程表，以及包含进程已打开文件的信息的文件表。</p>
+<p>在进程执行的某些时刻，内核可以决定抢占当前进程，并重新开始一个先前被抢占了的进程。这种决策就叫做调度，是由内核中称为调度器的代码处理的。当内核选择一个新的进程运行时，我们说内核调度了这个进程。在内核调度了一个新的进程运行后，它就抢占当前进程，并使用一种称为上下文切换的机制来将控制转移到新的进程。</p>
+<p>上下文切换的过程</p>
+<p>(1)保存当前进程的上下文</p>
+<p>(2)恢复某个先前被抢占的进程被保存的上下文</p>
+<p>(3)将控制传递给这个新恢复的进程</p>
+<p>一个逻辑流的执行在时间上与另一个流重叠，称为并发流；这两个流被称为并发地运行。</p>
+<p>进程时间片</p>
+<p>多个流并发地执行的一般现象被称为并发。一个进程和其他进程轮流运行的概念称为多任务。一个进程执行它的控制流的一部分的每一时间段叫做时间片。因此，多任务也叫做时间分片。</p>
+<p>用户态与核心态转换</p>
+<p>当内核代表用户执行系统调用时，可能会发生上下文切换。如果系统调用因为等待某个事件发生而阻塞，那么内核可以让当前进程休眠，切换到另一个进程。比如，如果一个read系统调用需要访问磁盘，内核可以选择执行上下文切换，运行另外一个进程，而不是等待数据从磁盘到达。另一个示例是sleep系统调用，它显式地请求让调用进程休眠。般而言， 即使系统调用没有阻塞，内核也可以决定执行上下文切换，而不是将控制返回给调用进程。运行应用程序代码的进程初始时是在用户模式中的。进程从用户模式变为内核模式的唯一方法是通过诸如中断、故障或者陷人系统调用这样的异常。当异常发生时，控制传递到异常处理程序，处理器将模式从用户模式变为内核模式。处理程序运行在内核模式中，当它返回到应用程序代码时，处理器就把模式从内核模式改回到用户模式。</p>
+<h3 id="6-6-hello的异常与信号处理"><a href="#6-6-hello的异常与信号处理" class="headerlink" title="6.6 hello的异常与信号处理"></a>6.6 hello的异常与信号处理</h3><p> hello执行过程中会出现哪几类异常，会产生哪些信号，又怎么处理的。</p>
+<p> 程序运行过程中可以按键盘，如不停乱按，包括回车，Ctrl-Z，Ctrl-C等，Ctrl-z后可以运行ps  jobs  pstree  fg  kill 等命令，请分别给出各命令及运行结截屏，说明异常与信号的处理。</p>
+<p>异常</p>
+<p>1.中断：当输入Ctrl-Z，进程收到信号SIGSTP，为暂停运行，直到收到SIGCONT</p>
+<p>2.终止：当输如Ctrl-C，信号SIGINT，进程终止</p>
+<p>信号：</p>
+<p>信号SIGSTP：通过Ctrl-Z，为暂停运行直到收到下一个SIGCONT</p>
+<p>信号SIGINT：通过Ctrl-C，进程终止</p>
+<p>(1)直接运行，不再执行任何操作：</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63F7.tmp.jpg" alt="img"> </p>
+<p>程序会正常运行直到结束，程序结束后进程被回收</p>
+<p>(2) 运行后输入Ctrl-C</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63F8.tmp.jpg" alt="img"> </p>
+<p>shell收到来自键盘输入的终止信号，经过信号处理程序后终止hello进程，并回收进程空间</p>
+<p>(3)运行后输入Ctrl-Z</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63F9.tmp.jpg" alt="img"> </p>
+<p>shell收到来自键盘输入的SIGSTP，暂停hello进程运行直到收到下一个SIGCONT</p>
+<p>(4)进程暂停后输入jobs</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63FA.tmp.jpg" alt="img"> </p>
+<p>会打印当前shell执行的进程的pid，状态，和名称</p>
+<p>(5)进程暂停后输入ps</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63FB.tmp.jpg" alt="img"> </p>
+<p>ps命令会打印出当前系统的的进程的各种信息</p>
+<p>(6)进程暂停后输入pstree</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63FC.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63FD.tmp.jpg" alt="img"> </p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps63FE.tmp.jpg" alt="img"> </p>
+<p>输入pstree指令后会查看进程树之间的关系,即哪个进程是父进程,哪个是子进程,可以清楚的看出来是谁创建了谁。</p>
+<p>(7)进程暂停后输入fg</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps640F.tmp.jpg" alt="img"> </p>
+<p>fg指令将本来在后台挂起的hello进程恢复执行</p>
+<p>(8)进程暂停后输入kill指令</p>
+<p>首先在进程暂停后利用ps获取hello的pid</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps6410.tmp.jpg" alt="img"> </p>
+<p>然后输入kill -9 -pid来发送信号给hello进程使其无条件终止</p>
+<p>(9)进程运行过程中不停乱按键盘</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wps6411.tmp.jpg" alt="img"> </p>
+<p>在运行过程中输入乱码发现输入不会影响进程的运行，当按到回车键时，之前输入的字符会被读入缓冲区等待getchar处理，回车后再输入的字符会被当做是输入shell的命令。</p>
+<h3 id="6-7本章小结"><a href="#6-7本章小结" class="headerlink" title="6.7本章小结"></a>6.7本章小结</h3><p>​        本章介绍了hello程序在shell中运行形式，并通过此方式延申至对于进程以及unix环境下终端指令的实验，使得对进程工作原理更加熟悉了解。明白了有关进程创建，管理运行以及终止/上下文切换的各种知识。对于各种指令有了直观的体验，增加了对于fork与execve的理解。对于异常控制流与虚拟内存部分的内容有了更深的掌握。</p>
+<h2 id="第-7-章-hello的存储管理"><a href="#第-7-章-hello的存储管理" class="headerlink" title="\第****7****章* *hello的存储管理**"></a><strong><em>\</em>第*<em>**</em></strong>*7*<strong>**</strong>*章*<strong><em> </em></strong>*hello的存储管理*<em>*</em></h2><h3 id="7-1-hello的存储器地址空间"><a href="#7-1-hello的存储器地址空间" class="headerlink" title="7.1 hello的存储器地址空间"></a>7.1 hello的存储器地址空间</h3><p>逻辑地址：是指由程序产生的与段相关的偏移地址部分。用段基址(段地址)和段内偏移量(偏移地址)来表示,段基址确定它所在的段居于整个存储空间的位置,偏移量确定它在段内的位置。</p>
+<p>线性地址：如果地址空间中的整数是连续的，那么我们说它是一个线性地址空间，为了简化讨论，我们总是假设使用的是线性地址空间。在分段部件中逻辑地址是段中的偏移地址，然后加上基地址就是线性地址。</p>
+<p>虚拟地址：在一个带虚拟内存的系统.中，CPU从一个有N=2^n个地址的地址空间中生成虚拟地址，这个地址空间称为虚拟地址空间。</p>
+<p>物理地址：计算机系统的主存被组织成一个由M个连续的字节大小的单元组成的数组，每个字节都对应具体的物理地址。</p>
+<p>段式管理：逻辑地址—&gt;线性地址==虚拟地址</p>
+<p>页式管理：虚拟地址—&gt;物理地址。</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsAB28.tmp.jpg" alt="img"> </p>
+<p>在hello的反汇编文件中可以看到，很多都是用偏移地址表示的。</p>
+<h2 id><a href="#" class="headerlink" title=" "></a> </h2><h3 id="7-2-Intel逻辑地址到线性地址的变换-段式管理"><a href="#7-2-Intel逻辑地址到线性地址的变换-段式管理" class="headerlink" title="7.2 Intel逻辑地址到线性地址的变换-段式管理"></a>7.2 Intel逻辑地址到线性地址的变换-段式管理</h3><p>段式存储管理中，将程序的地址空间划分为若干个段(segment)，这样每个进程有一个二维的地址空间。在前面所介绍的动态分区分配方式中，系统为整个进程分配一个连续的内存空间。而在段式存储管理系统中，则为每个段分配一个连续的分区，而进程中的各个段可以不连续地存放在内存的不同分区中。程序加载时，操作系统为所有段分配其所需内存，这些段不必连续，物理内存的管理采用动态分区的管理方法。</p>
+<p>在为某个段分配物理内存时，可以采用首先适配法、下次适配法、最佳适配法等方法。</p>
+<p>在回收某个段所占用的空间时，要注意将收回的空间与其相邻的空间合并。</p>
+<p>段式存储管理也需要硬件支持，实现逻辑地址到物理地址的映射。</p>
+<p>程序通过分段划分为多个模块，如代码段、数据段、共享段：</p>
+<p>Linux x86-64内存映像：</p>
+<p>–可以分别编写和编译</p>
+<p>–可以针对不同类型的段采取不同的保护</p>
+<p>–可以按段为单位来进行共享，包括通过动态链接进行代码共享</p>
+<p>这样做的优点是：可以分别编写和编译源程序的一个文件，并且可以针对不同类型的段采取不同的保护，也可以按段为单位来进行共享。</p>
+<h3 id="7-3-Hello的线性地址到物理地址的变换-页式管理"><a href="#7-3-Hello的线性地址到物理地址的变换-页式管理" class="headerlink" title="7.3 Hello的线性地址到物理地址的变换-页式管理"></a>7.3 Hello的线性地址到物理地址的变换-页式管理</h3><p>虚拟内存被组织为一个由存放在磁盘上的N个连续的字节大小的单元组成的数组。每字节都有一个唯一的虚拟地址，作为到数组的索引。磁盘上数组的内容被缓存在主存中。</p>
+<p>在任意时刻，虚拟页面的集合都分为三个不相交的子集：</p>
+<p>(1)未分配的：VM系统还未分配的页。未分配的块没有任何数据和它们相关联，因此也就不占用任何磁盘空间。</p>
+<p>(2)缓存的：当前已缓存在物理内存中的已分配页。</p>
+<p>(3)未缓存的：未缓存在物理内存中的已分配页。</p>
+<p>形式上说，地址翻译是一个N元素的虚拟地址空间（VAS）中的元素和一个M元素的物理地址空间（PAS）中元素之间的映射。</p>
+<p>当页面命中时，CPU硬件执行的操作为：</p>
+<p>(1)处理器生成一个虚拟地址，并把它传送给MMU。</p>
+<p>(2)MMU生成PTE地址，并从高速缓存/主存请求得到它。</p>
+<p>(3)高速缓存/主存向MMU返回PTE。</p>
+<p>(4)MMU构造物理地址，并把它传送给高速缓存/主存。</p>
+<p>(5)高速缓存/主存返回所请求的数据字给处理器。</p>
+<p>处理缺页时要求硬件和操作系统内核协作完成：</p>
+<p>(1)一到三步同上。</p>
+<p>(4)PTE中的有效位是零，所以MMU触发了一次异常，传递CPU中的控制到操作系统内核中的缺页处理程序。</p>
+<p>(5)缺页处理程序确定出物理内存中的牺牲页，如果这个页面已经被修改了，则把它换出到磁盘。</p>
+<p>(6)缺页处理程序页面调入新的页面，并更新内存中的PTE。</p>
+<p>(7)缺页处理程序返回到原来的进程，再次执行导致缺页的指令。CPU将引起缺页的虚拟地址重新发送给MMU。</p>
+<h3 id="7-4-TLB与四级页表支持下的VA到PA的变换"><a href="#7-4-TLB与四级页表支持下的VA到PA的变换" class="headerlink" title="7.4 TLB与四级页表支持下的VA到PA的变换"></a>7.4 TLB与四级页表支持下的VA到PA的变换</h3><p>TLB是一个小的，虚拟寻址的缓存，其中每一行都保存着一个由单个PTE组成的块。TLB通常有高度的相联度。用于组选择和行匹配的索引和标记字段是从虚拟地址中的虚拟页号中提取出来的。如果TLB有T=2^t个组，那么TLB索引是由VPN的t个最低位组成的，而TLB标记是由VPN中剩余位组成的。</p>
+<p>(1)CPU产生一个虚拟地址。</p>
+<p>(2)MMU从TLB中取出相应的PTE</p>
+<p>(3)MMU将这个虚拟地址翻译成一个物理地址，并且将它发送到高速缓存/主存中。</p>
+<p>(4)高速缓存/主存将所请求的数据字返回给CPU。</p>
+<h3 id="7-5-三级Cache支持下的物理内存访问"><a href="#7-5-三级Cache支持下的物理内存访问" class="headerlink" title="7.5 三级Cache支持下的物理内存访问"></a>7.5 三级Cache支持下的物理内存访问</h3><p>一级页表中的每个PTE负责映射虚拟地址空间中一个4MB的片，这里每一片都是由1024个连续的页面组成的。</p>
+<p>如果片i中的每个页面都未被分配，那么一级PTEi就为空。然而，如果在片i中至少有一个页是分配了的，那么一级PTEi就指向一个二级页表的基址。</p>
+<p>这种方法从两个方面减少了内存要求。第一，如果一级页表中第一个PTE是空的，那么对应的二级页表根本不会存在。这代表着一种巨大的潜在节约，因为对于一个典型的程序，4GB的虚拟地址空间的大部分都会是未分配的。第二，只有一级页表才需要总是在主存中；虚拟内存系统可以在需要时创建，页面调入或调出二级页表，这就减少了主存的压力，只有最经常用的才会在主存中。</p>
+<h3 id="7-6-hello进程fork时的内存映射"><a href="#7-6-hello进程fork时的内存映射" class="headerlink" title="7.6 hello进程fork时的内存映射"></a>7.6 hello进程fork时的内存映射</h3><p>当fork函数被当前进程调用时，内核为新进程创建各种数据结构，并分配给它一个唯一的PID。为了给这个新进程创建虚拟内存，他创建了当前进程的mm_struct，区域结构和页表的原本副本。他将两个进程中的每个页面都标记为只读，并将两个进程中的每个区域结构都标记为私有的写时复制。</p>
+<p>当fork在新进程中返回时，新进程现在的虚拟内存刚好和调用fork时存在的虚拟内存相同。当这两个进程中的任一个后来进行写操作时，写时复制机制就会创建新页面，因此，也就为每个进程保持了私有地址空间的抽象概念。</p>
+<h3 id="7-7-hello进程execve时的内存映射"><a href="#7-7-hello进程execve时的内存映射" class="headerlink" title="7.7 hello进程execve时的内存映射"></a>7.7 hello进程execve时的内存映射</h3><p>(1)删除已存在的用户内容。删除当前进程虚拟地址的用户部分中的已存在的区域结构。</p>
+<p>(2)映射私有区域。为新程序的代码，数据，bss和栈区域创建新的区域结构。所有这些区域都是私有的，写时复制。</p>
+<p>(3)映射共享区域。如果hello.out程序与共享对象链接，那么这些对象都是动态连接到这个程序的，然后在映射到用户虚拟地址空间中的共享区域内。</p>
+<p>(4)设置程序计数器。execve做的最后一件事情就是设置当前进程上下文中的程序计数器，使之指向代码区域的入口点。</p>
+<h3 id="7-8-缺页故障与缺页中断处理"><a href="#7-8-缺页故障与缺页中断处理" class="headerlink" title="7.8 缺页故障与缺页中断处理"></a>7.8 缺页故障与缺页中断处理</h3><p>(1)处理器生成一个虚拟地址，并把它传送给MMU。</p>
+<p>(2)MMU生成PTE地址，并从高速缓存/主存请求得到它。</p>
+<p>(3)高速缓存/主存向MMU返回PTE。</p>
+<p>(4)PTE中的有效位是零，所以MMU触发了一次异常，传递CPU中的控制到操作系统内核中的缺页处理程序。</p>
+<p>(5)缺页处理程序确定出物理内存中的牺牲页，如果这个页面已经被修改了，则把它换出到磁盘。</p>
+<p>(6)缺页处理程序页面调入新的页面，并更新内存中的PTE。</p>
+<p>(7)缺页处理程序返回到原来的进程，再次执行导致缺页的指令。CPU将引起缺页的虚拟地址重新发送给MMU。</p>
+<p>缺页异常及其处理过程：如果DRAM缓存不命中称为缺页。当地址翻译硬件从内存中读对应PTE时有效位为0则表明该页未被缓存，触发缺页异常。缺页异常调用内核中的缺页异常处理程序。</p>
+<p>缺页处理程序搜索区域结构的链表，把A和每个区域结构中的vm_start和vm_end做比较，如果指令不合法，缺页处理程序就触发一个段错误、终止进程。</p>
+<p>缺页处理程序检查试图访问的内存是否合法，如果不合法则触发保护异常终止此进程。</p>
+<p>缺页处理程序确认引起异常的是合法的虚拟地址和操作，则选择一个牺牲页，如果牺牲页中内容被修改，内核会将其先复制回磁盘。无论是否被修改，牺牲页的页表条目均会被内核修改。接下来内核从磁盘复制需要的虚拟页到DRAM中，更新对应的页表条目，重新执行导致缺页的指令。</p>
+<h3 id="7-9动态存储分配管理"><a href="#7-9动态存储分配管理" class="headerlink" title="7.9动态存储分配管理"></a>7.9动态存储分配管理</h3><p>动态内存分配器维护着一个进程的虚拟内存区域，称为堆(heap)，假设堆是一个请求二进制零的区域，它紧接在未初始化的数据区域后开始，并向上生长(向更高的地址)。对于每个进程，内核维护着一个变量brk(读做“break”),它指向堆的顶部，分配器将堆视为–组不同大小的块(block)的集合来维护。每个块就是一一个连续的虚拟内存片(chunk),要么是已分配的，要么是空闲的。已分配的块显式地保留为供应用程序使用。空闲块可用来分配。空闲块保持空闲，直到它显式地被应用所分配。一个已分配的块保持已分配状态，直到它被释放，这种释放要么是应用程序显式执行的，要么是内存分配器自身隐式执行的。分配器有两种基本风格。两种风格都要求应用显式地分配块。它们的不同之处在于由哪个实体来负责释放已分配的块。</p>
+<p>1.显式分配器(explicit allocator)，要求应用显式地释放任何已分配的块。例如，C标准库提供一-种叫做malloc程序包的显式分配器。C程序通过调用malloc函数来分配一个块，并通过调用free函数来释放-一个块。C++中的new和delete操作符与C中的malloc和free相当。</p>
+<p>2.隐式分配器(implicitallocator)，另–方面，要求分配器检测-一个已分配块何时不再被程序所使用，那么就释放这个块。隐式分配器也叫做垃圾收集器(garbage collecor)而自动释放未使用的已分配的块的过程叫做垃圾收集( garbage collection)。</p>
+<p>例如，诸如Lisp、ML以及Java之类的高级语言就依赖垃圾收集来释放已分配的块。</p>
+<p>对于显式分配器必须在一些相当严格的约束条件下工作:</p>
+<p>1.处理任意请求序列。一个应用可以有任意的分配请求和释放请求序列，只要满足约束条件:每个释放请求必须对应于一个当前已分配块，这个块是由一个以前的分配请求获得的。因此，分配器不可以假设分配和释放请求的顺序。例如，分配器不能假设所有的分配请求都有相匹配的释放请求，或者有相匹配的分配和空闲请求是嵌套的。</p>
+<p>2.立即响应请求。分配器必须立即响应分配请求。因此，不允许分配器为了提高性能重新排列或者缓冲请求。</p>
+<p>3.只使用堆。为了使分配器是可扩展的，分配器使用的任何非标量数据结构都必须保存在堆里。</p>
+<p>4.对齐块(对齐要求)。分配器必须对齐块，使得它们可以保存任何类型的数据对象。</p>
+<p>5.不修改已分配的块。分配器只能操作或者改变空闲块。特别是，-旦块被分配了，就不允许修改或者移动它了。因此，诸如压缩已分配块这样的技术是不允许使用的。</p>
+<h3 id="7-10本章小结"><a href="#7-10本章小结" class="headerlink" title="7.10本章小结"></a>7.10本章小结</h3><p>本章从Linux存储器的地址空间起，阐述了Intel的段式管理和页式管理机制，以及TLB与多级页表支持下的VA到PA的转换，同时对cache支持下的物理内存访问做了说明。针对内存映射及管理，简述了hello的fork和execve内存映射，了解了缺页故障与缺页中断处理程序，对动态分配管理做了系统阐述。通过本章学习，对于虚拟内存部分的大部分内容，如虚拟地址，catch命中等进行了巩固，并加深了对其的了解。</p>
+<h2 id="第-8-章-hello的IO管理"><a href="#第-8-章-hello的IO管理" class="headerlink" title="\ ****第****8****章* *hello的IO管理**"></a><strong><em>\</em> *<em>**</em></strong>*第*<strong>**</strong>*8*<strong>**</strong>*章*<strong><em> </em></strong>*hello的IO管理*<em>*</em></h2><h3 id="8-1-Linux的IO设备管理方法"><a href="#8-1-Linux的IO设备管理方法" class="headerlink" title="8.1 Linux的IO设备管理方法"></a>8.1 Linux的IO设备管理方法</h3><p>一个Linux文件就是一个m个字节的序列：B0,B1,B2,……B(m-1)。所有的I/O设备都被模型化为文件，而所有的输入输出都被当作对相应文件的读和写来执行。这种将设备优雅地映射为文件的方式，允许Linux内核引出一个简单，低级的应用接口，称为UnixI/O，这使得所有的输入和输出都能以一种统一且一致的方式来执行。</p>
+<h3 id="8-2-简述Unix-IO接口及其函数"><a href="#8-2-简述Unix-IO接口及其函数" class="headerlink" title="8.2 简述Unix IO接口及其函数"></a>8.2 简述Unix IO接口及其函数</h3><p>打开文件。一个应用程序通过要求内核打开相应的文件，来宣告它想要访问一个I/O设备。内核返回一个小的非负整数，叫做描述符，它在后续对此文件的所有操作中标识这个文件。内核记录有关这个打开文件的所有信息。应用程序只需要记住这个描述符。</p>
+<p>Linux shell创建的每个进程开始时都有三个打开的文件：标准输入，标准输出和标准错误。</p>
+<p>改变当前的文件位置。对于每个打开的文件，内核保持着一个文件位置k,初始为0.这个文件位置是从文件开头起始的字节偏移量。应用程序能够通过执行seek操作，显示地设置文件的当前位置为k。</p>
+<p>读写文件。一个读操作就是从文件复制n&gt;0个字节到内存，从当前文件位置k开始，然后将k增加到k+n。给定一个大小为m字节的文件，当k≥m时执行读操作会触发一个称为end-of-file（EOF）的条件，应用程序能够检测到这个条件。</p>
+<p>关闭文件。当应用完成了对文件的访问之后，它就通知内核关闭这个文件。作为响应，内核释放文件打开时创建的数据结构，并将这个描述符恢复到可用的描述符池中。无论一个进程因为何种原因终止时，内核都会关闭所有打开的文件并释放它们的内存资源。</p>
+<p>open函数将filename转换为一个文件描述符，并且返回描述符数字。返回的描述符总是在进程中当前没有打开的最小描述符。</p>
+<p>O_RDONLY:只读。</p>
+<p>O_WRONLY:只写。</p>
+<p>O_RDWR:可读可写。</p>
+<p>read函数从描述符为fd的当前文件位置复制最多n个字节到内存位置buf。返回值-1表示一个错误，而返回值0表示EOF。否则，返回值表示的是实际传送的字节数量。</p>
+<p>write函数从内存位置buf复制至多n个字节到描述符fd的当前文件位置。</p>
+<p>通过调用lseek函数，应用程序能够显示地修改当前文件的位置。</p>
+<h3 id="8-3-printf的实现分析"><a href="#8-3-printf的实现分析" class="headerlink" title="8.3 printf的实现分析"></a>8.3 printf的实现分析</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pianist/p/3315801.html">https://www.cnblogs.com/pianist/p/3315801.html</a></p>
+<p>首先查看printf函数的函数体</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsAB39.tmp.jpg" alt="img"> </p>
+<p>va_list的定义是：typedef char * va_list，因此通过调用va_start函数，获得的arg为第一个参数的地址。</p>
+<p>vsprintf的作用是格式化。接受确定输出格式的格式字符串fmt。用格式字符串对个数变化的参数进行格式化，产生格式化输出，例如hello中：</p>
+<p>printf(“Hello %s %s\n”,argv[1],argv[2]);</p>
+<p>命令行参数为./hello 1173710217 hpy，则对应格式化后的字符串为：Hello 1173710217 hpy\n，并且i为返回的字符串长度</p>
+<p>接下来是write函数：</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsAB3A.tmp.jpg" alt="img"> </p>
+<p>根据代码可知内核向寄存器传递几个参数后，中断调用syscall函数。对应ebx打印输出的buf数组中第一个元素的地址，ecx是要打印输出的个数。查看syscall函数体：</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsAB3B.tmp.jpg" alt="img"> </p>
+<p>在syscall函数中字符显示驱动子程序：从ASCII到字模库到显示vram（存储每一个点的RGB颜色信息）。显示芯片按照刷新频率逐行读取vram，并通过信号线向液晶显示器传输每一个点（RGB分量），实现printf格式化输出。</p>
+<h3 id="8-4-getchar的实现分析"><a href="#8-4-getchar的实现分析" class="headerlink" title="8.4 getchar的实现分析"></a>8.4 getchar的实现分析</h3><p>getchar源代码为：</p>
+<p><img src="/2021/06/17/ICS%E5%A4%A7%E4%BD%9C%E4%B8%9A/wpsAB3C.tmp.jpg" alt="img"> </p>
+<p>异步异常-键盘中断的处理：键盘中断处理是底层的硬件异常，当用户按下键盘时，内核会调用异常键盘中断处理子程序。接受按键扫描码转成ascii码，保存到系统的键盘缓冲区。</p>
+<p>getchar函数read系统函数，通过系统调用读取按键ascii码，直到接受到回车键才返回。实现读取一个字符的功能。</p>
+<h3 id="8-5本章小结"><a href="#8-5本章小结" class="headerlink" title="8.5本章小结"></a>8.5本章小结</h3><p>本章系统的了解了Unix I/O，通过LinuxI/O设备管理方法以及Unix I/O接口及函数了解系统级I/O的底层实现机制。通过对printf和getchar函数的底层解析加深对Unix I/O以及异常中断等的了解。通过本章的学习，对于程序间的交互和通信有了进一步的理解。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="\结论**"></a><strong><em>\</em>结论**</strong></h2><p>让我们来一起回顾一下hello的一生：</p>
+<p>(1)hello.c经过预处理器处理，变成了hello.i。</p>
+<p>(2)hello.i经过编译器，变成了hello.s。</p>
+<p>(3)hello.s经过汇编器，被翻译成了机器指令，打包为可重定位目标文件hello.o。</p>
+<p>(4)hello.o经过链接终于变成了可执行文件hello。</p>
+<p>(5)在Linux下键入./hello likaijie 1190201617运行hello，内核为hello fork出新进程，并在新进程中execve hello程序。</p>
+<p>(6)execve 通过加载器将hello中的代码和数据从磁盘复制到内存，为其创建虚拟内存映像，加载器在程序头部表的引导下将hello的片复制到代码段和数据段，执行_start函数。</p>
+<p>(7)MMU通过页表将虚拟地址映射到对应的物理地址完成访存。</p>
+<p>(8)内核通过GOT和PLT协同工作完成共享库函数的调用。</p>
+<p>(9)hello调用函数，内核通过动态内存分配器为其分配内存。</p>
+<p>(10)内核通过调度完成hello和其他所有进程的上下文切换，成功运行hello。</p>
+<p>(11)shell父进程回收hello，内核删除hello进程的所有痕迹。</p>
+<p>至此，hello走完了它的一生。</p>
+<p>回顾hello短暂的一生，却又并不短暂，每一步都是人类智慧的结晶，为了这短短的几步，人类走了许久，自1946年第一台电子计算机问世以来，就在不断探索，计算机技术在元件器件、硬件系统结构、软件系统、应用等方面，均有惊人进步。从两个足球场大的计算机到如今我们面前的小小的笔记本，令人叹服。</p>
+<p>回顾计算机系统漫游，学习了信息的表示和处理，程序的机器级表示，处理器体系结构，优化程序性能，存储器层次结构，了解了链接，异常控制流与虚拟内存，见识了程序间的交互和通信。都展现了计算机迷人的魅力。</p>
+<h2 id="附件"><a href="#附件" class="headerlink" title="\ ****附件**"></a><strong><em>\</em> *<em>**</em></strong>*附件*<em>*</em></h2><p>列出所有的中间产物的文件名，并予以说明起作用。</p>
+<p>(1)hello.c:源代码</p>
+<p>(2)hello.i：预处理生成的文本文件</p>
+<p>(3)hello.s:编译翻译成的文本文件</p>
+<p>(4)hello.o:汇编器翻译成的机器指令打包成的可重定位二进制文件</p>
+<p>(5)hello:链接后的可执行文件</p>
+<p>(6)hello.elf:hello.o的ELF格式</p>
+<p>(7)helloobj.txt：hello.o生成的反汇编文件</p>
+<p>(8)hello_out.elf:hello生成的ELF格式</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="\参考文献**"></a><strong><em>\</em>参考文献**</strong></h2><p><strong><em>\</em>为完成本次大作业你翻阅的书籍与网站等**</strong></p>
+<p>[1]  林来兴. 空间控制技术[M]. 北京：中国宇航出版社，1992：25-42.</p>
+<p>[2]  辛希孟. 信息技术与信息服务国际研讨会论文集：A集[C]. 北京：中国科学出版社，1999.</p>
+<p>[3]  赵耀东. 新时代的工业工程师[M/OL]. 台北：天下文化出版社，1998 [1998-09-26]. <a target="_blank" rel="noopener" href="http://www.ie.nthu.edu.tw/info/ie.newie.htm（Big5）">http://www.ie.nthu.edu.tw/info/ie.newie.htm（Big5）</a>.</p>
+<p>[4]  谌颖. 空间交会控制理论与方法研究[D]. 哈尔滨：哈尔滨工业大学，1992：8-13.</p>
+<p>[5] KANAMORI H. Shaking Without Quaking[J]. Science，1998，279（5359）：2063-2064.</p>
+<p>[6] CHRISTINE M. Plant Physiology: Plant Biology in the Genome Era[J/OL]. Science，1998，281：331-332[1998-09-23]. <a target="_blank" rel="noopener" href="http://www.sciencemag.org/cgi/">http://www.sciencemag.org/cgi/</a> collection/anatmorp.</p>
+<p>[7]Computer System A Programmer’s Perspective Third Edition,2015,Randal E. Bryant,</p>
+<p>David R.O’Hallaron</p>
+<p>[8]读计算机系统有感 2011.6.10 马旭东</p>
+<p>[9]深入计算机系统之道 2006.9.1 刘江</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/30/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -459,7 +1205,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
