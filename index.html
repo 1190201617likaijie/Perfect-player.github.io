@@ -145,6 +145,184 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">手写RPC框架</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-10-11 09:27:52" itemprop="dateCreated datePublished" datetime="2024-10-11T09:27:52+08:00">2024-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-10-15 23:44:25" itemprop="dateModified" datetime="2024-10-15T23:44:25+08:00">2024-10-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="手写RPC框架"><a href="#手写RPC框架" class="headerlink" title="手写RPC框架"></a>手写RPC框架</h1><h2 id="简易版本RPC开发"><a href="#简易版本RPC开发" class="headerlink" title="简易版本RPC开发"></a>简易版本RPC开发</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><strong>什么是RPC</strong></p>
+<p>RPC:Remote Procedure Call即远程过程调用，是一种计算机通信协议，允许程序在不同计算机之间进行通信和交互，就像本地调用一样。</p>
+<p><strong>为什么需要RPC</strong>    </p>
+<ul>
+<li><strong>透明性</strong>：RPC 提供了一种机制，使得远程服务调用看起来就像本地方法调用一样。开发者不需要关心底层的网络通信细节，可以专注于业务逻辑。</li>
+<li><strong>封装性</strong>：RPC 框架通常会处理序列化、反序列化、网络传输等复杂操作，将这些细节从应用程序中抽象出来。</li>
+<li><strong>模块化</strong>：通过将服务拆分为多个独立的服务，并使用 RPC 进行通信，可以实现更好的模块化。每个服务都可以独立开发、部署和扩展。</li>
+<li><strong>解耦合</strong>：服务之间的依赖关系可以通过接口定义来管理，而不是直接的代码依赖。这使得系统的各个部分更加松散耦合，更容易进行修改和升级。</li>
+</ul>
+<h3 id="RPC框架实现思路"><a href="#RPC框架实现思路" class="headerlink" title="RPC框架实现思路"></a>RPC框架实现思路</h3><p><strong>基本设计</strong></p>
+<p>假设有消费者和服务提供者两个角色</p>
+<p><img src="/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/image-20241015192036350.png" alt="image-20241015192036350"></p>
+<p>消费者想要调用提供者，就需要提供者启动一个web服务，然后通过请求客户端发送HTTP请求或者其他协议来调用。</p>
+<p>若有多个服务和方法，每个接口都要单独写一个接口，则较为麻烦。</p>
+<p>则提供一个统一的服务调用接口，通过请求处理器根据客户端的请求参数来进行不同的处理、调用不同的服务和方法。</p>
+<p>可以在服务提供者维护一个本地服务注册器，记录服务和对应实现类的映射。</p>
+<p><img src="/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/image-20241015194556974.png" alt="image-20241015194556974"></p>
+<p>另外，需要注意的是，java对象在网络中无法直接传输，所以需要对传输的参数进行序列化和反序列化。</p>
+<p>所以，一个简易的RPC框架就此诞生。</p>
+<p><img src="/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/image-20241015194719132.png" alt="image-20241015194719132"></p>
+<h3 id="开发简易版RPC框架"><a href="#开发简易版RPC框架" class="headerlink" title="开发简易版RPC框架"></a>开发简易版RPC框架</h3><p>简易版实现几个模块：</p>
+<ul>
+<li>example-common:示例代码的公共依赖，包括接口、model等</li>
+<li>example-consumer:示例服务消费者代码</li>
+<li>example-provide:示例服务t提供者代码</li>
+<li>lkj-rpc-easy:简易版rpc框架</li>
+</ul>
+<p><strong>公共模块</strong></p>
+<ul>
+<li>编写实体类User</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.example.common.model;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line"></span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>对象需要实习序列化接口，为后续网络传输序列化提供支持</p>
+<ul>
+<li>编写用户服务接口UserService，提供一个获取用户的方法</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.example.common.service;</span><br><span class="line"></span><br><span class="line">import com.lkj.example.common.model.User;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public interface UserService &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取用户</span><br><span class="line">     *</span><br><span class="line">     * @param user</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    User getUser(User user);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>服务提供者</strong></p>
+<ul>
+<li>编写服务实现类，实现公共模块中定义的用户服务接口</li>
+</ul>
+<p>功能是打印用户的名称，并且返回参数中的用户对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.example.provider;</span><br><span class="line"></span><br><span class="line">import com.lkj.example.common.model.User;</span><br><span class="line">import com.lkj.example.common.service.UserService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class UserServiceImpl implements UserService &#123;</span><br><span class="line"></span><br><span class="line">    public User getUser(User user) &#123;</span><br><span class="line">        System.out.println(&quot;用户名：&quot; + user.getName());</span><br><span class="line">        return user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>编写服务提供者启动类</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.example.provider;</span><br><span class="line"></span><br><span class="line">import com.lkj.example.common.service.UserService;</span><br><span class="line">import com.lkj.yurpc.registry.LocalRegistry;</span><br><span class="line">import com.lkj.yurpc.server.HttpServer;</span><br><span class="line">import com.lkj.yurpc.server.VertxHttpServer;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class EasyProviderExample &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 注册服务</span><br><span class="line">        LocalRegistry.register(UserService.class.getName(), UserServiceImpl.class);</span><br><span class="line"></span><br><span class="line">        // 启动 web 服务</span><br><span class="line">        HttpServer httpServer = new VertxHttpServer();</span><br><span class="line">        httpServer.doStart(8080);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>服务消费者</strong></p>
+<ul>
+<li>创建服务消费者启动类，编写调用接口的代码</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> package com.lkj.example.consumer;</span><br><span class="line"></span><br><span class="line">import com.lkj.example.common.model.User;</span><br><span class="line">import com.lkj.example.common.service.UserService;</span><br><span class="line">import com.lkj.yurpc.proxy.ServiceProxyFactory;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class EasyConsumerExample &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">       </span><br><span class="line">      UserService userService = null;</span><br><span class="line">        User user = new User();</span><br><span class="line">        user.setName(&quot;lkj&quot;);</span><br><span class="line">        // 调用</span><br><span class="line">        User newUser = userService.getUser(user);</span><br><span class="line">        if (newUser != null) &#123;</span><br><span class="line">            System.out.println(newUser.getName());</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            System.out.println(&quot;user == null&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这里我们还没有获取userService实例，所以定义为null</p>
+<p><strong>web服务器</strong></p>
+<p>要让服务提供者提供可远程访问的服务，那么就需要一个web服务器，接受处理并返回请求。</p>
+<p>此处使用高性能的NIO框架Vert.x作为RPC框架的web服务器。</p>
+<ul>
+<li>编写一个web服务器的接口HttpServer，定义统一的启动服务器方法</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.server;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public interface HttpServer &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 启动服务器</span><br><span class="line">     *</span><br><span class="line">     * @param port</span><br><span class="line">     */</span><br><span class="line">    void doStart(int port);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>编写基于Vert.x的web服务器VertxHttpServer，能够箭筒指定端口并处理请求</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.server;</span><br><span class="line"></span><br><span class="line">import io.vertx.core.Vertx;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class VertxHttpServer implements HttpServer &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 启动服务器</span><br><span class="line">     *</span><br><span class="line">     * @param port</span><br><span class="line">     */</span><br><span class="line">    public void doStart(int port) &#123;</span><br><span class="line">        // 创建 Vert.x 实例</span><br><span class="line">        Vertx vertx = Vertx.vertx();</span><br><span class="line"></span><br><span class="line">        // 创建 HTTP 服务器</span><br><span class="line">        io.vertx.core.http.HttpServer server = vertx.createHttpServer();</span><br><span class="line"></span><br><span class="line">        // 监听端口并处理请求</span><br><span class="line">        server.requestHandler(new HttpServerHandler());</span><br><span class="line"></span><br><span class="line">        // 启动 HTTP 服务器并监听指定端口</span><br><span class="line">        server.listen(port, result -&gt; &#123;</span><br><span class="line">            if (result.succeeded()) &#123;</span><br><span class="line">                System.out.println(&quot;Server is now listening on port &quot; + port);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                System.err.println(&quot;Failed to start server: &quot; + result.cause());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>本地服务注册器</strong></p>
+<p>在简易版本中，暂时不用第三方注册中心，直接把服务注册到服务提供者本地。</p>
+<ul>
+<li>使用线程安全的ConcurrentHashMap存储服务注册信息，key为服务名称，value为服务的实现类</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.registry;</span><br><span class="line"></span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.concurrent.ConcurrentHashMap;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class LocalRegistry &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 注册信息存储</span><br><span class="line">     */</span><br><span class="line">    private static final Map&lt;String, Class&lt;?&gt;&gt; map = new ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 注册服务</span><br><span class="line">     *</span><br><span class="line">     * @param serviceName</span><br><span class="line">     * @param implClass</span><br><span class="line">     */</span><br><span class="line">    public static void register(String serviceName, Class&lt;?&gt; implClass) &#123;</span><br><span class="line">        map.put(serviceName, implClass);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取服务</span><br><span class="line">     *</span><br><span class="line">     * @param serviceName</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static Class&lt;?&gt; get(String serviceName) &#123;</span><br><span class="line">        return map.get(serviceName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 删除服务</span><br><span class="line">     *</span><br><span class="line">     * @param serviceName</span><br><span class="line">     */</span><br><span class="line">    public static void remove(String serviceName) &#123;</span><br><span class="line">        map.remove(serviceName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>序列化器</strong></p>
+<ul>
+<li>序列化：将java对象转为可传输的字节数组</li>
+<li>反序列化：将字节数组转换为可传输的java对象</li>
+</ul>
+<p>为了方便此处选择java原生的序列化器。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.serializer;</span><br><span class="line"></span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class JdkSerializer implements Serializer &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 序列化</span><br><span class="line">     *</span><br><span class="line">     * @param object</span><br><span class="line">     * @param &lt;T&gt;</span><br><span class="line">     * @return</span><br><span class="line">     * @throws IOException</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public &lt;T&gt; byte[] serialize(T object) throws IOException &#123;</span><br><span class="line">        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();</span><br><span class="line">        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);</span><br><span class="line">        objectOutputStream.writeObject(object);</span><br><span class="line">        objectOutputStream.close();</span><br><span class="line">        return outputStream.toByteArray();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 反序列化</span><br><span class="line">     *</span><br><span class="line">     * @param bytes</span><br><span class="line">     * @param type</span><br><span class="line">     * @param &lt;T&gt;</span><br><span class="line">     * @return</span><br><span class="line">     * @throws IOException</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public &lt;T&gt; T deserialize(byte[] bytes, Class&lt;T&gt; type) throws IOException &#123;</span><br><span class="line">        ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);</span><br><span class="line">        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);</span><br><span class="line">        try &#123;</span><br><span class="line">            return (T) objectInputStream.readObject();</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            objectInputStream.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>提供者调用-请求处理器</strong></p>
+<ul>
+<li>RpcRequest的作用是封装调用所需的信息，比如服务名称，方法名称，调用参数的类型列表，参数列表。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.model;</span><br><span class="line"></span><br><span class="line">import lombok.AllArgsConstructor;</span><br><span class="line">import lombok.Builder;</span><br><span class="line">import lombok.Data;</span><br><span class="line">import lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Data</span><br><span class="line">@Builder</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">public class RpcRequest implements Serializable &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 服务名称</span><br><span class="line">     */</span><br><span class="line">    private String serviceName;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 方法名称</span><br><span class="line">     */</span><br><span class="line">    private String methodName;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 参数类型列表</span><br><span class="line">     */</span><br><span class="line">    private Class&lt;?&gt;[] parameterTypes;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 参数列表</span><br><span class="line">     */</span><br><span class="line">    private Object[] args;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>响应类RpcResponse的作用是封装调用方法得到的返回值、以及调用的信息等。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.model;</span><br><span class="line"></span><br><span class="line">import lombok.AllArgsConstructor;</span><br><span class="line">import lombok.Builder;</span><br><span class="line">import lombok.Data;</span><br><span class="line">import lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Data</span><br><span class="line">@Builder</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">public class RpcResponse implements Serializable &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 响应数据</span><br><span class="line">     */</span><br><span class="line">    private Object data;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 响应数据类型（预留）</span><br><span class="line">     */</span><br><span class="line">    private Class&lt;?&gt; dataType;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 响应信息</span><br><span class="line">     */</span><br><span class="line">    private String message;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 异常信息</span><br><span class="line">     */</span><br><span class="line">    private Exception exception;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>编写请求处理器 HttpServerHandler</li>
+</ul>
+<p>业务流程如下：</p>
+<p>1.反序列化请求为对象，并从请求对象中获取参数</p>
+<p>2.根据服务名称从本地注册器中获取到对应的服务实现类</p>
+<p>3.通过反射机制调用方法，得到返回结果</p>
+<p>4.对返回结果进行封装和序列化，并写入响应</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.server;</span><br><span class="line"></span><br><span class="line">import com.lkj.yurpc.model.RpcRequest;</span><br><span class="line">import com.lkj.yurpc.model.RpcResponse;</span><br><span class="line">import com.lkj.yurpc.registry.LocalRegistry;</span><br><span class="line">import com.lkj.yurpc.serializer.JdkSerializer;</span><br><span class="line">import com.lkj.yurpc.serializer.Serializer;</span><br><span class="line">import io.vertx.core.Handler;</span><br><span class="line">import io.vertx.core.buffer.Buffer;</span><br><span class="line">import io.vertx.core.http.HttpServerRequest;</span><br><span class="line">import io.vertx.core.http.HttpServerResponse;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class HttpServerHandler implements Handler&lt;HttpServerRequest&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void handle(HttpServerRequest request) &#123;</span><br><span class="line">        // 指定序列化器</span><br><span class="line">        final Serializer serializer = new JdkSerializer();</span><br><span class="line"></span><br><span class="line">        // 记录日志</span><br><span class="line">        System.out.println(&quot;Received request: &quot; + request.method() + &quot; &quot; + request.uri());</span><br><span class="line"></span><br><span class="line">        // 异步处理 HTTP 请求</span><br><span class="line">        request.bodyHandler(body -&gt; &#123;</span><br><span class="line">            byte[] bytes = body.getBytes();</span><br><span class="line">            RpcRequest rpcRequest = null;</span><br><span class="line">            try &#123;</span><br><span class="line">                rpcRequest = serializer.deserialize(bytes, RpcRequest.class);</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // 构造响应结果对象</span><br><span class="line">            RpcResponse rpcResponse = new RpcResponse();</span><br><span class="line">            // 如果请求为 null，直接返回</span><br><span class="line">            if (rpcRequest == null) &#123;</span><br><span class="line">                rpcResponse.setMessage(&quot;rpcRequest is null&quot;);</span><br><span class="line">                doResponse(request, rpcResponse, serializer);</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            try &#123;</span><br><span class="line">                // 获取要调用的服务实现类，通过反射调用</span><br><span class="line">                Class&lt;?&gt; implClass = LocalRegistry.get(rpcRequest.getServiceName());</span><br><span class="line">                Method method = implClass.getMethod(rpcRequest.getMethodName(), rpcRequest.getParameterTypes());</span><br><span class="line">                Object result = method.invoke(implClass.newInstance(), rpcRequest.getArgs());</span><br><span class="line">                // 封装返回结果</span><br><span class="line">                rpcResponse.setData(result);</span><br><span class="line">                rpcResponse.setDataType(method.getReturnType());</span><br><span class="line">                rpcResponse.setMessage(&quot;ok&quot;);</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                rpcResponse.setMessage(e.getMessage());</span><br><span class="line">                rpcResponse.setException(e);</span><br><span class="line">            &#125;</span><br><span class="line">            // 响应</span><br><span class="line">            doResponse(request, rpcResponse, serializer);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 响应</span><br><span class="line">     *</span><br><span class="line">     * @param request</span><br><span class="line">     * @param rpcResponse</span><br><span class="line">     * @param serializer</span><br><span class="line">     */</span><br><span class="line">    void doResponse(HttpServerRequest request, RpcResponse rpcResponse, Serializer serializer) &#123;</span><br><span class="line">        HttpServerResponse httpServerResponse = request.response()</span><br><span class="line">                .putHeader(&quot;content-type&quot;, &quot;application/json&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            // 序列化</span><br><span class="line">            byte[] serialized = serializer.serialize(rpcResponse);</span><br><span class="line">            httpServerResponse.end(Buffer.buffer(serialized));</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            httpServerResponse.end(Buffer.buffer());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>消费方发起调用-代理</strong></p>
+<p>代理的实现方式大致分为2类：静态代理和动态代理</p>
+<p><strong>静态代理</strong></p>
+<p>静态代理是指为每一个特定类型的接口或对象，编写一个代理类。</p>
+<p>静态代理虽然很好理解，但缺点也很明显，如果给每个服务接口都写一个实现类，是非常麻烦的，代理方式灵活性很差。</p>
+<p>所以RPC框架中，会使用动态代理。</p>
+<p><strong>动态代理</strong></p>
+<p>动态代理的作用是，根据要生成的对象类型，自动生成一个代理对象。</p>
+<p>常用的动态代理实现方式有JDK动态代理和基于字节码生成的动态代理。前者简单易用、无需引入额外的库，但缺点是只能对接口进行代理；后者更灵活、可以对任何类进行代理，但性能略低于JDK动态代理。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.proxy;</span><br><span class="line"></span><br><span class="line">import cn.hutool.http.HttpRequest;</span><br><span class="line">import cn.hutool.http.HttpResponse;</span><br><span class="line">import com.lkj.yurpc.model.RpcRequest;</span><br><span class="line">import com.lkj.yurpc.model.RpcResponse;</span><br><span class="line">import com.lkj.yurpc.serializer.JdkSerializer;</span><br><span class="line">import com.lkj.yurpc.serializer.Serializer;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.lang.reflect.InvocationHandler;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class ServiceProxy implements InvocationHandler &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 调用代理</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     * @throws Throwable</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">        // 指定序列化器</span><br><span class="line">        Serializer serializer = new JdkSerializer();</span><br><span class="line"></span><br><span class="line">        // 构造请求</span><br><span class="line">        RpcRequest rpcRequest = RpcRequest.builder()</span><br><span class="line">                .serviceName(method.getDeclaringClass().getName())</span><br><span class="line">                .methodName(method.getName())</span><br><span class="line">                .parameterTypes(method.getParameterTypes())</span><br><span class="line">                .args(args)</span><br><span class="line">                .build();</span><br><span class="line">        try &#123;</span><br><span class="line">            // 序列化</span><br><span class="line">            byte[] bodyBytes = serializer.serialize(rpcRequest);</span><br><span class="line">            // 发送请求</span><br><span class="line">            // todo 注意，这里地址被硬编码了（需要使用注册中心和服务发现机制解决）</span><br><span class="line">            try (HttpResponse httpResponse = HttpRequest.post(&quot;http://localhost:8080&quot;)</span><br><span class="line">                    .body(bodyBytes)</span><br><span class="line">                    .execute()) &#123;</span><br><span class="line">                byte[] result = httpResponse.bodyBytes();</span><br><span class="line">                // 反序列化</span><br><span class="line">                RpcResponse rpcResponse = serializer.deserialize(result, RpcResponse.class);</span><br><span class="line">                return rpcResponse.getData();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p> 当用户调用某个接口的方法时，会改为调用invoke方法。在invoke方法中，我们可以获取到要调用的方法信息，传入的参数列表等。</p>
+<p>需要注意的时，上述代码中，请求的服务提供者地址被硬编码了，需要使用注册中心和服务发现机制来解决。</p>
+<ul>
+<li>创建动态代理工厂ServiceProxyFactory，作用是根据指定类创建动态代理对象</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.proxy;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class ServiceProxyFactory &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 根据服务类获取代理对象</span><br><span class="line">     *</span><br><span class="line">     * @param serviceClass</span><br><span class="line">     * @param &lt;T&gt;</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static &lt;T&gt; T getProxy(Class&lt;T&gt; serviceClass) &#123;</span><br><span class="line">        return (T) Proxy.newProxyInstance(</span><br><span class="line">                serviceClass.getClassLoader(),</span><br><span class="line">                new Class[]&#123;serviceClass&#125;,</span><br><span class="line">                new ServiceProxy());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="简易测试"><a href="#简易测试" class="headerlink" title="简易测试"></a>简易测试</h3><p><img src="/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/image-20241015222428567.png" alt="image-20241015222428567"></p>
+<p><img src="/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/image-20241015222646726.png" alt="image-20241015222646726"></p>
+<p><img src="/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/image-20241015222659479.png" alt="image-20241015222659479"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/10/05/%E6%99%BA%E8%83%BD%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -995,143 +1173,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/" class="post-title-link" itemprop="url">地址映射与共享</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-06-12 14:37:08 / Modified: 20:59:59" itemprop="dateCreated datePublished" datetime="2022-06-12T14:37:08+08:00">2022-06-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="地址映射与共享"><a href="#地址映射与共享" class="headerlink" title="地址映射与共享"></a>地址映射与共享</h1><h2 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h2><ul>
-<li>用 <code>Bochs</code> 调试工具跟踪 <code>Linux 0.11</code> 的地址翻译（地址映射）过程，了解 <code>IA-32</code> 和 <code>Linux 0.11</code> 的内存管理机制；</li>
-<li>在 <code>Ubuntu</code> 上编写多进程的生产者-消费者程序，用共享内存做缓冲区；</li>
-<li>在信号量实验的基础上，为 <code>Linux 0.11</code> 增加共享内存功能，并将生产者-消费者程序移植到 <code>Linux 0.11</code> 。</li>
-</ul>
-<h2 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h2><h3 id="创建test-c"><a href="#创建test-c" class="headerlink" title="创建test.c"></a>创建test.c</h3><p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612154248888.png" alt="image-20220612154248888"></p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612154259966.png" alt="image-20220612154259966"></p>
-<h3 id="寻找物理地址"><a href="#寻找物理地址" class="headerlink" title="寻找物理地址"></a>寻找物理地址</h3><p>首先进入Linux-0.11目录内make编译系统，然后运行系统，编译运行test.c文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -o test test.c</span><br><span class="line">./test</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612154459443.png" alt="image-20220612154459443"></p>
-<p>此时会进入在test.c内的while死循环，然后ctrl+c暂停bochs。<br>此时需要让Linux-0.11的test跳出死循环，所以需要找到逻辑地址ds:0X00003004对应的物理地址，将它的内容更改为0。<br>在终端中输入sreg，得到gdtr的基址值为0x00005cb8,ldtr为0x0068即0000 0000 0110 1000 b，可知索引为1101b即13，TI位为0，即GDT中的第13项为LDT的段描述符。</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612162319691.png" alt="image-20220612162319691"></p>
-<p>输入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xp /2w 0x00005cb8+13*8</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612162954016.png" alt="image-20220612162954016"></p>
-<p>可以得到LDT的基址为0x00fe92d0</p>
-<p>ds段选择子为0x0017 =&gt; 0000 0000 0001 0111 b，可知索引为10b即2，TI位为1，即LDT中的第2项为ds的段描述符</p>
-<p>输入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xp/2w 0x00fe92d0+2*8</span><br></pre></td></tr></table></figure>
-<p>得到ds段描述符</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612163210299.png" alt="image-20220612163210299"></p>
-<p>可以知道ds的基址为0x10000000，所以0x3004对应的线性地址为0x10000000+0x3004=0x10003004</p>
-<p>输入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xp /w 64*4</span><br></pre></td></tr></table></figure>
-<p>获取页目录项</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612164505087.png" alt="image-20220612164505087"></p>
-<p>表所在的物理页框号为<code>0x00fa7</code>，即页表在物理内存为<code>0x00fa7000</code>处，从该位置开始查找<code>3</code>号页表项</p>
-<p>输入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xp /w 0x00fa7000 + 3*4</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612164837721.png" alt="image-20220612164837721"></p>
-<p>线性地址<code>0x10003004</code>对应的物理页框号为<code>0x00fa6</code>，和页内偏移<code>0x004</code>接到一起，得到<code>0x00fa6004</code>，这就是变量i的物理地址</p>
-<p>用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xp /w 0x00fa6004</span><br></pre></td></tr></table></figure>
-<p>验证</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612165035955.png" alt="image-20220612165035955"></p>
-<p>修改物理地址，使其变量i为0</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setpmem 0x00fa6004 4 0</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612165143590.png" alt="image-20220612165143590"></p>
-<p>输入c，可以看到，会在bochs中顺利退出</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612165212346.png" alt="image-20220612165212346"></p>
-<h3 id="添加系统调用"><a href="#添加系统调用" class="headerlink" title="添加系统调用"></a>添加系统调用</h3><p>在unistd.h中增加下面的代码</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612155524270.png" alt="image-20220612155524270"></p>
-<p>再添加系统调用</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612155644251.png" alt="image-20220612155644251"></p>
-<p><strong>注意</strong>：要在挂载下再修改一次</p>
-<h3 id="修改sys-h文件"><a href="#修改sys-h文件" class="headerlink" title="修改sys.h文件"></a>修改sys.h文件</h3><p>增加函数声明</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612155826510.png" alt="image-20220612155826510"></p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612155924786.png" alt="image-20220612155924786"></p>
-<p>在system_call.s中把nr_system_calls改为78</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612165738290.png" alt="image-20220612165738290"></p>
-<h3 id="增加shm-c"><a href="#增加shm-c" class="headerlink" title="增加shm.c"></a>增加shm.c</h3><p>在kernel目录下</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612165927254.png" alt="image-20220612165927254"></p>
-<p>然后修改kernel下的Makefile</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612170053415.png" alt="image-20220612170053415"></p>
-<h3 id="编写消费者和生产者程序"><a href="#编写消费者和生产者程序" class="headerlink" title="编写消费者和生产者程序"></a>编写消费者和生产者程序</h3><p>producer.c</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612203642964.png" alt="image-20220612203642964"></p>
-<p>consumer.c</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612203703637.png" alt="image-20220612203703637"></p>
-<h3 id="运行验证"><a href="#运行验证" class="headerlink" title="运行验证"></a>运行验证</h3><p>编译</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -o pro producer.c</span><br><span class="line">gcc -o con consumer.c</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612202823323.png" alt="image-20220612202823323"></p>
-<p>输入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pro &gt; proOutput &amp;</span><br><span class="line">con &gt; conOutput &amp;</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612202905073.png" alt="image-20220612202905073"></p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612203010281.png" alt="image-20220612203010281"></p>
-<p>输入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sync</span><br></pre></td></tr></table></figure>
-<p>关闭linux-0.11回到ubunt终端，输入sudo less hdc/usr/root/conOutput查看结果如下</p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612203138227.png" alt="image-20220612203138227"></p>
-<h2 id="问题回答"><a href="#问题回答" class="headerlink" title="问题回答"></a>问题回答</h2><p><strong>对于地址映射实验部分(第一部分)，列出你认为最重要的几步(不超过四步)，并给出你获得的实际数据。</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入命令u/7反汇编，查看变量i对应的逻辑地址</span><br><span class="line">逻辑地址找虚拟地址要通过段表，也就是IDT表，然后IDT表要根据LDTR寄存器和GDT表，对应的命令就是sreg</span><br><span class="line">根据ds(代码段)寄存器查找IDT表，得到基址，然后通过基址 + 逻辑地址 = 虚拟地址</span><br><span class="line">根据虚拟地址找到物理地址，核心就是查找页表</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612154459443.png" alt="image-20220612154459443"></p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612162319691.png" alt="image-20220612162319691"></p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612162954016.png" alt="image-20220612162954016"></p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612163210299.png" alt="image-20220612163210299"></p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612164505087.png" alt="image-20220612164505087"></p>
-<p><img src="/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/image-20220612164837721.png" alt="image-20220612164837721"></p>
-<p><strong><code>test.c</code>退出后，如果马上再运行一次程序，并再进行地址跟踪，你会发现哪些异同？为什么？</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">再运行一次程序，等同于重来，变量i重新被赋非0值，所以仍然会死循环。</span><br><span class="line">继续进行地址跟踪，根据虚拟地址找到物理地址，发现物理地址和第一次运行时的不一样了，因为在这个进程没有被运行时，内存是会被释放的，所以其他进程是可以利用这个内存的，虽然还是这个虚拟地址，但是重新分配内存的时候，物理地址并不一定还是那个地址。</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1201,7 +1242,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

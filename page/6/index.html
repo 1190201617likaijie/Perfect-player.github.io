@@ -145,6 +145,82 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/01/NAS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/01/NAS/" class="post-title-link" itemprop="url">NAS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-01 09:19:15 / Modified: 16:26:25" itemprop="dateCreated datePublished" datetime="2021-10-01T09:19:15+08:00">2021-10-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="NAS"><a href="#NAS" class="headerlink" title="NAS"></a>NAS</h4><p>神经结构搜索（Neural Architecture Search，简称NAS）是一种自动设计神经网络的技术，可以通过算法根据样本集自动设计出高性能的网络结构，在某些任务上甚至可以媲美人类专家的水准，甚至发现某些人类之前未曾提出的网络结构，这可以有效的降低神经网络的使用和实现成本。</p>
+<p>NAS的原理是给定一个称为搜索空间的候选神经网络结构集合，用某种策略从中搜索出最优网络结构。神经网络结构的优劣即性能用某些指标如精度、速度来度量，称为性能评估。这一过程如下图所示。</p>
+<p><img src="/2021/10/01/NAS/image-20211001131823612.png" alt="image-20211001131823612"></p>
+<p>在搜索过程的每次迭代中，从搜索空间产生“样本”即得到一个神经网络结构，称为“子网络”。在训练样本集上训练子网络，然后在验证集上评估其性能。逐步优化网络结构，直至找到最优的子网络。</p>
+<p>搜索空间，搜索策略，性能评估策略是NAS算法的核心要素。搜索空间定义了可以搜索的神经网络结构的集合，即解的空间。搜索策略定义了如何在搜索空间中寻找最优网络结构。性能评估策略定义了如何评估搜索出的网络结构的性能。对这些要素的不同实现得到了各种不同的NAS算法，本节将选择有代表性的进行介绍。</p>
+<h4 id="基于梯度的神经架构优化算法"><a href="#基于梯度的神经架构优化算法" class="headerlink" title="基于梯度的神经架构优化算法"></a>基于梯度的神经架构优化算法</h4><p>前面介绍的NAS算法都存在计算量大的问题，虽然存在改进方案。强化学习、遗传算法等方案低效的一个原因是结构搜索被当作离散空间（网络结构的表示是离散的，如遗传算法中的二进制串编码）中的黑箱优化问题，无法利用梯度信息来求解。</p>
+<p>其中一种解决思路是将离散优化问题连续化。文献[6]提出了一种称为可微结构搜索（Differentiable Architecture Search，简称DARTS）的算法，将网络结构搜索转化为连续空间的优化问题，采用梯度下降法求解，可高效地搜索神经网络架构，同时得到网络的权重参数。</p>
+<p>DARTS将网络结构、网络单元表示成有向无环图，对结构搜索问题进行松弛，转化为连续变量优化问题。目标函数是可导的，能够用梯度下降法求解，同时得到网络结构和权重等参数。算法寻找计算单元，作为最终网络结构的基本构建块。这些单元可以堆积形成卷积神经网络，递归连接形成循环神经网络。</p>
+<h4 id="教师-学生网络"><a href="#教师-学生网络" class="headerlink" title="教师-学生网络"></a>教师-学生网络</h4><p>教师—学生网络的方法，属于迁移学习的一种。迁移学习也就是将一个模型的性能迁移到另一个模型上，而对于教师—学生网络，教师网络往往是一个更加复杂的网络，具有非常好的性能和泛化能力，可以用这个网络来作为一个soft target来指导另外一个更加简单的学生网络来学习，使得更加简单、参数运算量更少的学生模型也能够具有和教师网络相近的性能，也算是一种模型压缩的方式。</p>
+<p>较大、较复杂的网络虽然通常具有很好的性能，但是也存在很多的冗余信息，因此运算量以及资源的消耗都非常多。而所谓的Distilling就是将复杂网络中的有用信息提取出来迁移到一个更小的网络上，这样学习来的小网络可以具备和大的复杂网络想接近的性能效果，并且也大大的节省了计算资源。这个复杂的网络可以看成一个教师，而小的网络则可以看成是一个学生。</p>
+<h4 id="知识蒸馏"><a href="#知识蒸馏" class="headerlink" title="知识蒸馏"></a>知识蒸馏</h4><p>一般认为模型的参数保留了模型学到的知识，因此最常见的迁移学习的方式就是在一个大的数据集上先做预训练，然后使用预训练得到的参数在一个小的数据集上做微调（两个数据集往往领域不同或者任务不同）。例如先在Imagenet上做预训练，然后在COCO数据集上做检测。在这篇论文中，作者认为可以将模型看成是黑盒子，知识可以看成是输入到输出的映射关系。因此，我们可以先训练好一个teacher网络，然后将teacher的网络的输出结果 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 作为student网络的目标，训练student网络，使得student网络的结果 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 接近 <img src="https://www.zhihu.com/equation?tex=q" alt="[公式]"> ，因此，我们可以将损失函数写成 <img src="https://www.zhihu.com/equation?tex=L%3DCE%28y%2C+p%29%2B%5Calpha+CE%28q%2C+p%29" alt="[公式]"> 。这里CE是交叉熵（Cross Entropy），y是真实标签的onehot编码，q是teacher网络的输出结果，p是student网络的输出结果。</p>
+<p>但是，直接使用teacher网络的softmax的输出结果 <img src="https://www.zhihu.com/equation?tex=q" alt="[公式]"> ，可能不大合适。因此，一个网络训练好之后，对于正确的答案会有一个很高的置信度。例如，在MNIST数据中，对于某个2的输入，对于2的预测概率会很高，而对于2类似的数字，例如3和7的预测概率为 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 和 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 。这样的话，teacher网络学到数据的相似信息（例如数字2和3，7很类似）很难传达给student网络。由于它们的概率值接近0。因此，文章提出了softmax-T，公式如下所示：</p>
+<p><img src="/2021/10/01/NAS/equation" alt="[公式]"></p>
+<p>这里 <img src="/2021/10/01/NAS/equation" alt="[公式]"> 是student网络学习的对象（soft targets），<img src="/2021/10/01/NAS/equation" alt="[公式]"> 是神经网络softmax前的输出logit。如果将T取1，这个公式就是softmax，根据logit输出各个类别的概率。如果T接近于0，则最大的值会越近1，其它值会接近0，近似于onehot编码。如果T越大，则输出的结果的分布越平缓，相当于平滑的一个作用，起到保留相似信息的作用。如果T等于无穷，就是一个均匀分布。</p>
+<p>知识蒸馏，可以将一个网络的知识转移到另一个网络，两个网络可以是同构或者异构。做法是先训练一个teacher网络，然后使用这个teacher网络的输出和数据的真实标签去训练student网络。知识蒸馏，可以用来将网络从大网络转化成一个小网络，并保留接近于大网络的性能；也可以将多个网络的学到的知识转移到一个网络中，使得单个网络的性能接近emsemble的结果。</p>
+<h4 id="EMD"><a href="#EMD" class="headerlink" title="EMD"></a>EMD</h4><p>对于离散的概率分布，Wasserstein距离也被描述为推土距离(EMD)。如果我们将分布想象为两个有一定存土量的土堆，那么EMD就是将一个土堆 转换 为另一个土堆所需的最小总工作量。工作量的定义是 单位泥土 的总量乘以它移动的距离。</p>
+<p>有很多种推土的方式，我们的目标是找到其中工作量最少的那一种，这是个优化问题。</p>
+<h4 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h4><p>BERT（Bidirectional Encoder Representation from Transformers)</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/27/CTR/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1151,91 +1227,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/" class="post-title-link" itemprop="url">接口与内部类</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-29 19:47:49 / Modified: 21:00:45" itemprop="dateCreated datePublished" datetime="2021-06-29T19:47:49+08:00">2021-06-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><h4 id="接口的概念"><a href="#接口的概念" class="headerlink" title="接口的概念"></a>接口的概念</h4><p>接口中的所有方法都自动是public方法。因此，在接口中声明方法时，不必提供关键字public。</p>
-<h4 id="接口的属性"><a href="#接口的属性" class="headerlink" title="接口的属性"></a>接口的属性</h4><p>接口不是类。具体来说，不能用new运算符实例化一个接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x =new Comparable(...);/erron</span><br></pre></td></tr></table></figure>
-<p>不过，尽管不能构造接口的对象，却能声明接口的变量：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Comparable x;//ok</span><br></pre></td></tr></table></figure>
-<p>接下来，如同使用instanceof检查一个对象是否属于某个特定类一样，也可以使用instanceof检查一个对象是否实现了某个特定的接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(anObject instanceof Comparable)&#123;...&#125;</span><br></pre></td></tr></table></figure>
-<p>与建立类的继承层次一样，也可以扩展接口。。这里允许有多条接口链，从通用性较高的接口扩展到专用性较高的接口。例如，假设有一个名为Moveable的接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Moveable</span><br><span class="line">&#123;</span><br><span class="line">void move(double x,double y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后，可以假设一个名为Powered的接口扩展了以上接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Powered extends Moveable</span><br><span class="line">&#123;</span><br><span class="line">double milePerGallon();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>虽然在接口中不能包含实例字段，但是可以包含常量。</p>
-<h4 id="解决默认方法冲突"><a href="#解决默认方法冲突" class="headerlink" title="解决默认方法冲突"></a>解决默认方法冲突</h4><p>如果先在一个接口中将一个方法定义为默认方法，然后又在超类或另一个接口中定义同样的方法，会发生什么情况？java的规则如下：</p>
-<p>（1）超类优先。如果超类提供了一个具体方法，同名而且参数相同的默认方法会被忽略。</p>
-<p>（2）接口冲突。如果一个接口提供了一个默认方法，另一个接口1提供了一个同名而且参数类型（不论是否是默认参数）相同的方法，必须覆盖这个方法来解决冲突。</p>
-<h4 id="回调"><a href="#回调" class="headerlink" title="回调"></a>回调</h4><p><strong>回调</strong>是一种常见的程序设计模式。在这种模式中，可以指定某个特定事件发生时应该采取的动作。</p>
-<h3 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h3><p>内部类是定义在另一个类中的类。使用的原因主要有两点：</p>
-<p>（1）内部类可以对同一个包中的其他类隐藏。</p>
-<p>（2）内部类方法可以访问定义这个类的作用域中的数据，包括原本私有的数据。</p>
-<h3 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h3><p>利用代理可以在运行时创建实现了一组给定接口的新类。只有在编译时期无法确定需要实现哪个接口时才有必要使用代理。对于编写应用程序的程序员来说，这种情况很少见，所以如果对这种高级技术不感兴趣，可以跳过本节内容。不过，对于某些系统应用程序，代带来的灵活性可能十分重要。</p>
-<h4 id="何时使用代理"><a href="#何时使用代理" class="headerlink" title="何时使用代理"></a>何时使用代理</h4><p>假设你想构造一个类的对象，这个类实现了一个多个接口，但是在编译时你可能并不知道这些接口到底是什么。这个问题确实有些难度。要想构造一个具体的类，只需要使用 newInstance方法或者使用反射找出构造器。但是，不能实例化接口。需要在运行的程序中定义一个新类。<br>为了解决这个问题，有些程序会生成代码，将这些代码放在一个文件中，调用编译器， 然后再加载得到的类文件。很自然地，这样做速度会比较慢，并且需要将编译器连同程序 一起部署。而代理机制则是一种更好的解决方案。代理类可以在运行时创建全新的类。这样的代理类能够实现你指定的接口。具体地，代理类包含以下方法：</p>
-<p>●指定接口所需要的全部方法。<br>●object类中的全部方法，例如， toString、 equals等。</p>
-<p>不过，不能在运行时为这些方法定义新代码。实际上，必须提供一个调用处理器。调用处理器是实现了 InvocationHandler接口的类的对象。这个接口只有一个方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object invoke(Object proxy, Method method, Object[] args)</span><br></pre></td></tr></table></figure>
-<p>无论何时调用代理对象的方法，调用处器的 invoke方法都会被调用，并向其传递Method对象和原调用的参数。之后调用处理必须确定如何处理这个调用。</p>
-<h4 id="创建代理对象"><a href="#创建代理对象" class="headerlink" title="创建代理对象"></a>创建代理对象</h4><p>要想创建一个代理对象，需要使用 Proxy类 newProxyInstance方法。这个方法有三个参数：<br>●一个类加载器。作为java安全模型的一部分，可以对平台和应用类、 从因特网下载的类等使用不同的类加载器。<br>●一个 Class对象数组，每个元素对应需要实现的各个接口。<br>●一个调用处理器。<br>还有两个需要解决的问题。如何定义处理器?另外，对于得到的代理对象能够做些什么?当然，这两个问题的答案取决于我们想要用代理机制解决什么问题。使用代理可能出于很多目的，例如：</p>
-<p>●将方法调用路由到远程服务器。<br>●在运行的程序中将用户界面事件与动作关联起来。<br>●为了调试，跟踪方法调用。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1305,7 +1296,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
