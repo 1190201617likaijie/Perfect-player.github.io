@@ -40,8 +40,9 @@
 <meta property="og:image" content="http://example.com/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/image-20241016143828389.png">
 <meta property="og:image" content="http://example.com/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/image-20241017153826043.png">
 <meta property="og:image" content="http://example.com/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/image-20241017193602008.png">
+<meta property="og:image" content="http://example.com/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/image-20241020182959528.png">
 <meta property="article:published_time" content="2024-10-11T01:27:52.000Z">
-<meta property="article:modified_time" content="2024-10-18T10:36:04.600Z">
+<meta property="article:modified_time" content="2024-10-25T04:10:03.906Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/image-20241015192036350.png">
@@ -194,7 +195,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-10-18 18:36:04" itemprop="dateModified" datetime="2024-10-18T18:36:04+08:00">2024-10-18</time>
+                <time title="Modified: 2024-10-25 12:10:03" itemprop="dateModified" datetime="2024-10-25T12:10:03+08:00">2024-10-25</time>
               </span>
 
           
@@ -451,7 +452,978 @@
 <li>定义获取实例方法，根据用户传入的接口和键名，从map中寻找对应的实现类，然后通过反射获取到实现类对象。可以维护一个对象实例缓存，创建过一次的对象从缓存中读取即可。</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.spi;</span><br><span class="line"></span><br><span class="line">import cn.hutool.core.io.resource.ResourceUtil;</span><br><span class="line">import com.lkj.yurpc.serializer.Serializer;</span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line"></span><br><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line">import java.net.URL;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.concurrent.ConcurrentHashMap;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * SPI 加载器</span><br><span class="line"> * 自定义实现，支持键值对映射</span><br><span class="line"> *</span><br><span class="line"></span><br><span class="line"> */</span><br><span class="line">@Slf4j</span><br><span class="line">public class SpiLoader &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 存储已加载的类：接口名 =&gt;（key =&gt; 实现类）</span><br><span class="line">     */</span><br><span class="line">    private static final Map&lt;String, Map&lt;String, Class&lt;?&gt;&gt;&gt; loaderMap = new ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 对象实例缓存（避免重复 new），类路径 =&gt; 对象实例，单例模式</span><br><span class="line">     */</span><br><span class="line">    private static final Map&lt;String, Object&gt; instanceCache = new ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 系统 SPI 目录</span><br><span class="line">     */</span><br><span class="line">    private static final String RPC_SYSTEM_SPI_DIR = &quot;META-INF/rpc/system/&quot;;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 用户自定义 SPI 目录</span><br><span class="line">     */</span><br><span class="line">    private static final String RPC_CUSTOM_SPI_DIR = &quot;META-INF/rpc/custom/&quot;;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 扫描路径</span><br><span class="line">     */</span><br><span class="line">    private static final String[] SCAN_DIRS = new String[]&#123;RPC_SYSTEM_SPI_DIR, RPC_CUSTOM_SPI_DIR&#125;;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 动态加载的类列表</span><br><span class="line">     */</span><br><span class="line">    private static final List&lt;Class&lt;?&gt;&gt; LOAD_CLASS_LIST = Arrays.asList(Serializer.class);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 加载所有类型</span><br><span class="line">     */</span><br><span class="line">    public static void loadAll() &#123;</span><br><span class="line">        log.info(&quot;加载所有 SPI&quot;);</span><br><span class="line">        for (Class&lt;?&gt; aClass : LOAD_CLASS_LIST) &#123;</span><br><span class="line">            load(aClass);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取某个接口的实例</span><br><span class="line">     *</span><br><span class="line">     * @param tClass</span><br><span class="line">     * @param key</span><br><span class="line">     * @param &lt;T&gt;</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static &lt;T&gt; T getInstance(Class&lt;?&gt; tClass, String key) &#123;</span><br><span class="line">        String tClassName = tClass.getName();</span><br><span class="line">        Map&lt;String, Class&lt;?&gt;&gt; keyClassMap = loaderMap.get(tClassName);</span><br><span class="line">        if (keyClassMap == null) &#123;</span><br><span class="line">            throw new RuntimeException(String.format(&quot;SpiLoader 未加载 %s 类型&quot;, tClassName));</span><br><span class="line">        &#125;</span><br><span class="line">        if (!keyClassMap.containsKey(key)) &#123;</span><br><span class="line">            throw new RuntimeException(String.format(&quot;SpiLoader 的 %s 不存在 key=%s 的类型&quot;, tClassName, key));</span><br><span class="line">        &#125;</span><br><span class="line">        // 获取到要加载的实现类型</span><br><span class="line">        Class&lt;?&gt; implClass = keyClassMap.get(key);</span><br><span class="line">        // 从实例缓存中加载指定类型的实例</span><br><span class="line">        String implClassName = implClass.getName();</span><br><span class="line">        if (!instanceCache.containsKey(implClassName)) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                instanceCache.put(implClassName, implClass.newInstance());</span><br><span class="line">            &#125; catch (InstantiationException | IllegalAccessException e) &#123;</span><br><span class="line">                String errorMsg = String.format(&quot;%s 类实例化失败&quot;, implClassName);</span><br><span class="line">                throw new RuntimeException(errorMsg, e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return (T) instanceCache.get(implClassName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 加载某个类型</span><br><span class="line">     *</span><br><span class="line">     * @param loadClass</span><br><span class="line">     * @throws IOException</span><br><span class="line">     */</span><br><span class="line">    public static Map&lt;String, Class&lt;?&gt;&gt; load(Class&lt;?&gt; loadClass) &#123;</span><br><span class="line">        log.info(&quot;加载类型为 &#123;&#125; 的 SPI&quot;, loadClass.getName());</span><br><span class="line">        // 扫描路径，用户自定义的 SPI 优先级高于系统 SPI</span><br><span class="line">        Map&lt;String, Class&lt;?&gt;&gt; keyClassMap = new HashMap&lt;&gt;();</span><br><span class="line">        for (String scanDir : SCAN_DIRS) &#123;</span><br><span class="line">            List&lt;URL&gt; resources = ResourceUtil.getResources(scanDir + loadClass.getName());</span><br><span class="line">            // 读取每个资源文件</span><br><span class="line">            for (URL resource : resources) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    InputStreamReader inputStreamReader = new InputStreamReader(resource.openStream());</span><br><span class="line">                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);</span><br><span class="line">                    String line;</span><br><span class="line">                    while ((line = bufferedReader.readLine()) != null) &#123;</span><br><span class="line">                        String[] strArray = line.split(&quot;=&quot;);</span><br><span class="line">                        if (strArray.length &gt; 1) &#123;</span><br><span class="line">                            String key = strArray[0];</span><br><span class="line">                            String className = strArray[1];</span><br><span class="line">                            keyClassMap.put(key, Class.forName(className));</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; catch (Exception e) &#123;</span><br><span class="line">                    log.error(&quot;spi resource load error&quot;, e);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        loaderMap.put(loadClass.getName(), keyClassMap);</span><br><span class="line">        return keyClassMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws IOException, ClassNotFoundException &#123;</span><br><span class="line">        loadAll();</span><br><span class="line">        System.out.println(loaderMap);</span><br><span class="line">        Serializer serializer = getInstance(Serializer.class, &quot;e&quot;);</span><br><span class="line">        System.out.println(serializer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="注册中心基本实现"><a href="#注册中心基本实现" class="headerlink" title="注册中心基本实现"></a>注册中心基本实现</h2>
+<h2 id="注册中心基本实现"><a href="#注册中心基本实现" class="headerlink" title="注册中心基本实现"></a>注册中心基本实现</h2><h3 id="需求分析-2"><a href="#需求分析-2" class="headerlink" title="需求分析"></a>需求分析</h3><p>RPC框架的一个核心模块式注册中心，其目的是帮助服务消费者获取到服务提供者的调用地址，而不是把调用地址硬编码到项目中</p>
+<p><img src="/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/image-20241020182959528.png" alt="image-20241020182959528"></p>
+<h3 id="设计方案-1"><a href="#设计方案-1" class="headerlink" title="设计方案"></a>设计方案</h3><h4 id="注册中心核心功能"><a href="#注册中心核心功能" class="headerlink" title="注册中心核心功能"></a>注册中心核心功能</h4><ul>
+<li>数据分布式存储：集中的注册信息数据存储、读取和共享</li>
+<li>服务注册：服务提供者上报服务信息到注册中心</li>
+<li>服务发现：服务消费者从注册中心拉取服务信息</li>
+<li>心跳检测：定期检查服务提供者的存活状态</li>
+<li>服务注销：手动剔除节点，或者自动删除失效节点</li>
+</ul>
+<h4 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h4><ul>
+<li>需要一个能够集中存储和读取数据的中间件。还需要有数据过期，数据监听的能力，使我们移除失效节点，更新节点列表。</li>
+</ul>
+<h3 id="ETCD"><a href="#ETCD" class="headerlink" title="ETCD"></a>ETCD</h3><h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><p>采用层次化的键值对来存储数据，支持类似于文件系统路径的层次结构</p>
+<p>核心结构：</p>
+<ul>
+<li>key：Etcd的基本数据单元，类似于文件系统的文件名。每个键都唯一标识一个值，并且可以包含子键，形成于类似路径的层次结构。</li>
+<li>value：与键关联的数据，通常为字符型</li>
+</ul>
+<p>ETCD核心特性：</p>
+<ul>
+<li>Lease（租约）：用于对键值对进行TTL超时设置，即设置键值对的过期时间。</li>
+<li>Watch（监听）：可以监视特定键的变化，当键的值发生变化时，会触发相应通知。</li>
+</ul>
+<h3 id="开发实现-1"><a href="#开发实现-1" class="headerlink" title="开发实现"></a>开发实现</h3><h4 id="注册中心开发"><a href="#注册中心开发" class="headerlink" title="注册中心开发"></a>注册中心开发</h4><ul>
+<li>注册信息定义</li>
+</ul>
+<p>在model包下新建ServiceMetaInfo类，封装服务的注册信息，包括服务名称、服务版本号、服务地址和服务分组等。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.model;</span><br><span class="line"></span><br><span class="line">import cn.hutool.core.util.StrUtil;</span><br><span class="line">import com.lkj.yurpc.constant.RpcConstant;</span><br><span class="line">import lombok.Data;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 服务元信息（注册信息）</span><br><span class="line"> *</span><br><span class="line"></span><br><span class="line"> */</span><br><span class="line">@Data</span><br><span class="line">public class ServiceMetaInfo &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 服务名称</span><br><span class="line">     */</span><br><span class="line">    private String serviceName;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 服务版本号</span><br><span class="line">     */</span><br><span class="line">    private String serviceVersion = RpcConstant.DEFAULT_SERVICE_VERSION;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 服务域名</span><br><span class="line">     */</span><br><span class="line">    private String serviceHost;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 服务端口号</span><br><span class="line">     */</span><br><span class="line">    private Integer servicePort;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 服务分组（暂未实现）</span><br><span class="line">     */</span><br><span class="line">    private String serviceGroup = &quot;default&quot;;</span><br><span class="line">     /**</span><br><span class="line">     * 获取服务键名</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public String getServiceKey() &#123;</span><br><span class="line">        // 后续可扩展服务分组</span><br><span class="line">//        return String.format(&quot;%s:%s:%s&quot;, serviceName, serviceVersion, serviceGroup);</span><br><span class="line">        return String.format(&quot;%s:%s&quot;, serviceName, serviceVersion);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取服务注册节点键名</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public String getServiceNodeKey() &#123;</span><br><span class="line">        return String.format(&quot;%s/%s:%s&quot;, getServiceKey(), serviceHost, servicePort);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取完整服务地址</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public String getServiceAddress() &#123;</span><br><span class="line">        if (!StrUtil.contains(serviceHost, &quot;http&quot;)) &#123;</span><br><span class="line">            return String.format(&quot;http://%s:%s&quot;, serviceHost, servicePort);</span><br><span class="line">        &#125;</span><br><span class="line">        return String.format(&quot;%s:%s&quot;, serviceHost, servicePort);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>注册中心配置</li>
+</ul>
+<p>在config包下编写注册中心配置类RegistryConfig，让用户配置连接注册中心所需的信息，比如注册中心类别、注册中心地址、用户名、密码、连接超时等。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.config;</span><br><span class="line"></span><br><span class="line">//import com.lkj.yurpc.registry.RegistryKeys;</span><br><span class="line">import lombok.Data;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * RPC 框架注册中心配置</span><br><span class="line"> *</span><br><span class="line"></span><br><span class="line"> */</span><br><span class="line">@Data</span><br><span class="line">public class RegistryConfig &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 注册中心类别</span><br><span class="line">     */</span><br><span class="line">    private String registry = &quot;etcd&quot;;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 注册中心地址</span><br><span class="line">     */</span><br><span class="line">    private String address = &quot;http://localhost:2380&quot;;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 用户名</span><br><span class="line">     */</span><br><span class="line">    private String username;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 密码</span><br><span class="line">     */</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 超时时间（单位毫秒）</span><br><span class="line">     */</span><br><span class="line">    private Long timeout = 10000L;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>注册中心接口</li>
+</ul>
+<p>遵循可扩展机制，先写一个注册中心接口，后续可以实现多种不同的注册中心，使用SPI机制动态加载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.registry;</span><br><span class="line"></span><br><span class="line">import com.lkj.yurpc.config.RegistryConfig;</span><br><span class="line">import com.lkj.yurpc.model.ServiceMetaInfo;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 注册中心</span><br><span class="line"> *</span><br><span class="line"></span><br><span class="line"> */</span><br><span class="line">public interface Registry &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 初始化</span><br><span class="line">     *</span><br><span class="line">     * @param registryConfig</span><br><span class="line">     */</span><br><span class="line">    void init(RegistryConfig registryConfig);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 注册服务（服务端）</span><br><span class="line">     *</span><br><span class="line">     * @param serviceMetaInfo</span><br><span class="line">     */</span><br><span class="line">    void register(ServiceMetaInfo serviceMetaInfo) throws Exception;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 注销服务（服务端）</span><br><span class="line">     *</span><br><span class="line">     * @param serviceMetaInfo</span><br><span class="line">     */</span><br><span class="line">    void unRegister(ServiceMetaInfo serviceMetaInfo);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 服务发现（获取某服务的所有节点，消费端）</span><br><span class="line">     *</span><br><span class="line">     * @param serviceKey 服务键名</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    List&lt;ServiceMetaInfo&gt; serviceDiscovery(String serviceKey);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 心跳检测（服务端）</span><br><span class="line">     */</span><br><span class="line">    //void heartBeat();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 监听（消费端）</span><br><span class="line">     *</span><br><span class="line">     * @param serviceNodeKey</span><br><span class="line">     */</span><br><span class="line">   // void watch(String serviceNodeKey);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 服务销毁</span><br><span class="line">     */</span><br><span class="line">    void destroy();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>etcd注册中心实现</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.registry;</span><br><span class="line"></span><br><span class="line">import cn.hutool.core.collection.CollUtil;</span><br><span class="line">import cn.hutool.cron.CronUtil;</span><br><span class="line">import cn.hutool.cron.task.Task;</span><br><span class="line">import cn.hutool.json.JSONUtil;</span><br><span class="line">import com.lkj.yurpc.config.RegistryConfig;</span><br><span class="line">import com.lkj.yurpc.model.ServiceMetaInfo;</span><br><span class="line">import io.etcd.jetcd.*;</span><br><span class="line">import io.etcd.jetcd.options.GetOption;</span><br><span class="line">import io.etcd.jetcd.options.PutOption;</span><br><span class="line"></span><br><span class="line">import java.nio.charset.StandardCharsets;</span><br><span class="line">import java.time.Duration;</span><br><span class="line">import java.util.HashSet;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Set;</span><br><span class="line">import java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line">public class EtcdRegistry implements Registry &#123;</span><br><span class="line"></span><br><span class="line">    private Client client;</span><br><span class="line"></span><br><span class="line">    private KV kvClient;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 根节点</span><br><span class="line">     */</span><br><span class="line">    private static final String ETCD_ROOT_PATH = &quot;/rpc/&quot;;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void init(RegistryConfig registryConfig) &#123;</span><br><span class="line">        client = Client.builder().endpoints(registryConfig.getAddress()).connectTimeout(Duration.ofMillis(registryConfig.getTimeout())).build();</span><br><span class="line">        kvClient = client.getKVClient();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void register(ServiceMetaInfo serviceMetaInfo) throws Exception &#123;</span><br><span class="line">        // 创建 Lease 和 KV 客户端</span><br><span class="line">        Lease leaseClient = client.getLeaseClient();</span><br><span class="line"></span><br><span class="line">        // 创建一个 30 秒的租约</span><br><span class="line">        long leaseId = leaseClient.grant(30).get().getID();</span><br><span class="line"></span><br><span class="line">        // 设置要存储的键值对</span><br><span class="line">        String registerKey = ETCD_ROOT_PATH + serviceMetaInfo.getServiceNodeKey();</span><br><span class="line">        ByteSequence key = ByteSequence.from(registerKey, StandardCharsets.UTF_8);</span><br><span class="line">        ByteSequence value = ByteSequence.from(JSONUtil.toJsonStr(serviceMetaInfo), StandardCharsets.UTF_8);</span><br><span class="line"></span><br><span class="line">        // 将键值对与租约关联起来，并设置过期时间</span><br><span class="line">        PutOption putOption = PutOption.builder().withLeaseId(leaseId).build();</span><br><span class="line">        kvClient.put(key, value, putOption).get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void unRegister(ServiceMetaInfo serviceMetaInfo) &#123;</span><br><span class="line">        kvClient.delete(ByteSequence.from(ETCD_ROOT_PATH + serviceMetaInfo.getServiceNodeKey(), StandardCharsets.UTF_8));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public List&lt;ServiceMetaInfo&gt; serviceDiscovery(String serviceKey) &#123;</span><br><span class="line">        // 前缀搜索，结尾一定要加 &#x27;/&#x27;</span><br><span class="line">        String searchPrefix = ETCD_ROOT_PATH + serviceKey + &quot;/&quot;;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            // 前缀查询</span><br><span class="line">            GetOption getOption = GetOption.builder().isPrefix(true).build();</span><br><span class="line">            List&lt;KeyValue&gt; keyValues = kvClient.get(</span><br><span class="line">                            ByteSequence.from(searchPrefix, StandardCharsets.UTF_8),</span><br><span class="line">                            getOption)</span><br><span class="line">                    .get()</span><br><span class="line">                    .getKvs();</span><br><span class="line">            // 解析服务信息</span><br><span class="line">            return keyValues.stream()</span><br><span class="line">                    .map(keyValue -&gt; &#123;</span><br><span class="line">                        String value = keyValue.getValue().toString(StandardCharsets.UTF_8);</span><br><span class="line">                        return JSONUtil.toBean(value, ServiceMetaInfo.class);</span><br><span class="line">                    &#125;)</span><br><span class="line">                    .collect(Collectors.toList());</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            throw new RuntimeException(&quot;获取服务列表失败&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void destroy() &#123;</span><br><span class="line">        System.out.println(&quot;当前节点下线&quot;);</span><br><span class="line">        // 释放资源</span><br><span class="line">        if (kvClient != null) &#123;</span><br><span class="line">            kvClient.close();</span><br><span class="line">        &#125;</span><br><span class="line">        if (client != null) &#123;</span><br><span class="line">            client.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="支持配置和扩展注册中心"><a href="#支持配置和扩展注册中心" class="headerlink" title="支持配置和扩展注册中心"></a>支持配置和扩展注册中心</h4><p>一个成熟的rpc框架可能会支持多个注册中心，我们的需求是，让开发者能够填写配置来指定使用的注册中心，并且支持自定义注册中心</p>
+<ul>
+<li>注册中心常量</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.lkj.yurpc.registry;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 注册中心键名常量</span><br><span class="line"> *</span><br><span class="line"></span><br><span class="line"> */</span><br><span class="line">public interface RegistryKeys &#123;</span><br><span class="line"></span><br><span class="line">    String ETCD = &quot;etcd&quot;;</span><br><span class="line"></span><br><span class="line">    String ZOOKEEPER = &quot;zookeeper&quot;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>工厂模式</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class RegistryFactory &#123;</span><br><span class="line"></span><br><span class="line">    // SPI 动态加载</span><br><span class="line">    static &#123;</span><br><span class="line">        SpiLoader.load(Registry.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 默认注册中心</span><br><span class="line">     */</span><br><span class="line">    private static final Registry DEFAULT_REGISTRY = new EtcdRegistry();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取实例</span><br><span class="line">     *</span><br><span class="line">     * @param key</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static Registry getInstance(String key) &#123;</span><br><span class="line">        return SpiLoader.getInstance(Registry.class, key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改ServiceProxy类</li>
+</ul>
+<ul>
+<li><p>[ ] ```<br>package com.lkj.yurpc.proxy;</p>
+<p>import cn.hutool.core.collection.CollUtil;<br>import cn.hutool.http.HttpRequest;<br>import cn.hutool.http.HttpResponse;<br>import com.lkj.yurpc.RpcApplication;<br>import com.lkj.yurpc.config.RpcConfig;<br>import com.lkj.yurpc.constant.RpcConstant;<br>import com.lkj.yurpc.model.RpcRequest;<br>import com.lkj.yurpc.model.RpcResponse;<br>import com.lkj.yurpc.model.ServiceMetaInfo;<br>import com.lkj.yurpc.registry.Registry;<br>import com.lkj.yurpc.registry.RegistryFactory;<br>import com.lkj.yurpc.serializer.Serializer;<br>import com.lkj.yurpc.serializer.SerializerFactory;</p>
+<p>import java.io.IOException;<br>import java.lang.reflect.InvocationHandler;<br>import java.lang.reflect.Method;<br>import java.util.List;</p>
+<p>/**</p>
+<ul>
+<li><p>服务代理（JDK 动态代理）<br>*</p>
+<p>*/<br>public class ServiceProxy implements InvocationHandler {</p>
+<p> /**</p>
+<ul>
+<li>调用代理<br>*</li>
+<li>@return</li>
+<li><p>@throws Throwable<br>*/<br>@Override<br>public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {<br> // 指定序列化器<br> final Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());</p>
+<p> // 构造请求<br> String serviceName = method.getDeclaringClass().getName();<br> RpcRequest rpcRequest = RpcRequest.builder()</p>
+<pre><code>     .serviceName(serviceName)
+     .methodName(method.getName())
+     .parameterTypes(method.getParameterTypes())
+     .args(args)
+     .build();
+</code></pre><p> try {</p>
+<pre><code> // 序列化
+ byte[] bodyBytes = serializer.serialize(rpcRequest);
+
+ // 从注册中心获取服务提供者请求地址
+ RpcConfig rpcConfig = RpcApplication.getRpcConfig();
+ Registry registry = RegistryFactory.getInstance(rpcConfig.getRegistryConfig().getRegistry());
+ ServiceMetaInfo serviceMetaInfo = new ServiceMetaInfo();
+ serviceMetaInfo.setServiceName(serviceName);
+ serviceMetaInfo.setServiceVersion(RpcConstant.DEFAULT_SERVICE_VERSION);
+ List&lt;ServiceMetaInfo&gt; serviceMetaInfoList = registry.serviceDiscovery(serviceMetaInfo.getServiceKey());
+ if (CollUtil.isEmpty(serviceMetaInfoList)) &#123;
+     throw new RuntimeException(&quot;暂无服务地址&quot;);
+ &#125;
+ ServiceMetaInfo selectedServiceMetaInfo = serviceMetaInfoList.get(0);
+
+ // 发送请求
+ try (HttpResponse httpResponse = HttpRequest.post(selectedServiceMetaInfo.getServiceAddress())
+         .body(bodyBytes)
+         .execute()) &#123;
+     byte[] result = httpResponse.bodyBytes();
+     // 反序列化
+     RpcResponse rpcResponse = serializer.deserialize(result, RpcResponse.class);
+     return rpcResponse.getData();
+ &#125;
+</code></pre><p> } catch (IOException e) {</p>
+<pre><code> e.printStackTrace();
+</code></pre><p> }</p>
+<p> return null;<br>}<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 注册中心优化</span><br><span class="line"></span><br><span class="line">### 需求分析</span><br><span class="line"></span><br><span class="line">之前我们完成了基础的注册中心，能够注册和获取服务和节点信息。</span><br><span class="line"></span><br><span class="line">对于数据一致性、性能优化、高可用性、可扩展性还有很多优化空间。</span><br><span class="line"></span><br><span class="line">### 注册中心优化</span><br><span class="line"></span><br><span class="line">#### 心跳检测和持续机制</span><br><span class="line"></span><br><span class="line">##### 介绍</span><br><span class="line"></span><br><span class="line">心跳检测是一种用于检测系统是否正常工作的机制。通过定期发送心跳信号来检测目标系统的状态。</span><br><span class="line"></span><br><span class="line">##### 方案设计</span><br><span class="line"></span><br><span class="line">实现心跳检测一般需要两个关键：定时、网络请求</span><br><span class="line"></span><br><span class="line">因为etcd自带了key过期机制，我们可以给节点注册信息一个生命倒计时，让节点定期续期，重置自己的倒计时。如果一直不重置，则删除。</span><br><span class="line"></span><br><span class="line">* 服务提供者向etcd注册自己的服务信息，并在注册时设置TTL</span><br><span class="line">* etcd在收到信息后，自动维护ttl，并在ttl过期时删除</span><br><span class="line">* 服务提供者定期请求etcd续签自己的注册信息，重写ttl</span><br><span class="line"></span><br><span class="line">##### 开发实现</span><br><span class="line"></span><br><span class="line">* 给注册中心补充心跳检测方法</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>/**</p>
+<ul>
+<li>心跳检测（服务端）<br>*/<br>void heartBeat();<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 维护续期节点集合</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+/**</li>
+<li><p>本机注册的节点 key 集合（用于维护续期）<br>*/<br>private final Set<String> localRegisterNodeKeySet = new HashSet&lt;&gt;();</String></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 实现hearBeat方法</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>@Override<br>public void heartBeat() {<br> // 10 秒续签一次<br> CronUtil.schedule(“<em>/10 </em> <em> </em> <em> </em>“, new Task() {</p>
+<pre><code> @Override
+ public void execute() &#123;
+     // 遍历本节点所有的 key
+     for (String key : localRegisterNodeKeySet) &#123;
+         try &#123;
+             List&lt;KeyValue&gt; keyValues = kvClient.get(ByteSequence.from(key, StandardCharsets.UTF_8))
+                     .get()
+                     .getKvs();
+             // 该节点已过期（需要重启节点才能重新注册）
+             if (CollUtil.isEmpty(keyValues)) &#123;
+                 continue;
+             &#125;
+             // 节点未过期，重新注册（相当于续签）
+             KeyValue keyValue = keyValues.get(0);
+             String value = keyValue.getValue().toString(StandardCharsets.UTF_8);
+             ServiceMetaInfo serviceMetaInfo = JSONUtil.toBean(value, ServiceMetaInfo.class);
+             register(serviceMetaInfo);
+         &#125; catch (Exception e) &#123;
+             throw new RuntimeException(key + &quot;续签失败&quot;, e);
+         &#125;
+     &#125;
+ &#125;
+</code></pre><p> });</p>
+<p> // 支持秒级别定时任务<br> CronUtil.setMatchSecond(true);<br> CronUtil.start();<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 服务节点下线机制</span><br><span class="line"></span><br><span class="line">当服务提供者节点宕机时，应该从注册中心移除已注册的节点。</span><br><span class="line"></span><br><span class="line">##### 方案设计</span><br><span class="line"></span><br><span class="line">服务节点下线又分为：</span><br><span class="line"></span><br><span class="line">* 主动下线：服务提供者项目正常退出</span><br><span class="line">* 被动下线：异常退出</span><br><span class="line"></span><br><span class="line">被动下线已经实现，现在开发主动下线。</span><br><span class="line"></span><br><span class="line">利用JVM的ShutdownHook机制。</span><br><span class="line"></span><br><span class="line">##### 开发实现</span><br><span class="line"></span><br><span class="line">* 完善destory</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>public void destroy() {<br>System.out.println(“当前节点下线”);<br>// 下线节点<br>// 遍历本节点所有的 key<br>for (String key : localRegisterNodeKeySet) {<br> try {</p>
+<pre><code> kvClient.delete(ByteSequence.from(key, StandardCharsets.UTF_8)).get();
+</code></pre><p> } catch (Exception e) {</p>
+<pre><code> throw new RuntimeException(key + &quot;节点下线失败&quot;);
+</code></pre><p> }<br>}</p>
+<p>// 释放资源<br>if (kvClient != null) {<br> kvClient.close();<br>}<br>if (client != null) {<br> client.close();<br>}<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 在RpcApplication的init中，注册shutdown hook</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>public static void init(RpcConfig newRpcConfig) {<br>    rpcConfig = newRpcConfig;<br>    log.info(“rpc init, config = {}”, newRpcConfig.toString());<br>    // 注册中心初始化<br>    RegistryConfig registryConfig = rpcConfig.getRegistryConfig();<br>    Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());<br>    registry.init(registryConfig);<br>    log.info(“registry init, config = {}”, registryConfig);</p>
+<pre><code>// 创建并注册 Shutdown Hook，JVM 退出时执行操作
+Runtime.getRuntime().addShutdownHook(new Thread(registry::destroy));
+</code></pre><p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 自定义协议</span><br><span class="line"></span><br><span class="line">### 需求分析</span><br><span class="line"></span><br><span class="line">目前rpc框架，使用Vert.x的HttpServer作为服务提供者的服务器，底层使用的是http协议。</span><br><span class="line"></span><br><span class="line">一般情况下，rpc框架注重性能，而HTTP协议中的头部信息，请求响应格式较重，会影响传输。</span><br><span class="line"></span><br><span class="line">所以，我们需要自定义一套rpc协议，来实现更灵活的框架。</span><br><span class="line"></span><br><span class="line">### 设计方案</span><br><span class="line"></span><br><span class="line">分为两个核心部分：</span><br><span class="line"></span><br><span class="line">* 自定义网络传输</span><br><span class="line">* 自定义消息结构</span><br><span class="line"></span><br><span class="line">#### 网络传输设计</span><br><span class="line"></span><br><span class="line">目标：选择一个能够高性能通信的网络协议和传输方式</span><br><span class="line"></span><br><span class="line">选择使用TCP协议完成网络传输，有更多的自主设计空间。</span><br><span class="line"></span><br><span class="line">#### 消息结构设计</span><br><span class="line"></span><br><span class="line">目标：用最少的空间传递需要的信息。</span><br><span class="line"></span><br><span class="line">* 如何用最少空间：尽量使用轻量的类型，比如byte字节类型，同时每个数据凑到整个字节。</span><br><span class="line">* 消息内部所需信息：</span><br><span class="line"></span><br><span class="line">   魔数：作用是安全校验，防止服务器处理非框架发送的无用信息</span><br><span class="line"></span><br><span class="line">   版本号：保证请求和响应的一致性</span><br><span class="line"></span><br><span class="line">   序列化方式：告知如何解析数据</span><br><span class="line"></span><br><span class="line">   类型：标识是请求还是响应</span><br><span class="line"></span><br><span class="line">   状态：记录响应结果</span><br><span class="line"></span><br><span class="line">   请求id：唯一标识某个请求</span><br><span class="line"></span><br><span class="line">   请求体：包含数据</span><br><span class="line"></span><br><span class="line">   请求体数据长度：保证完整的获取body内容信息</span><br><span class="line"></span><br><span class="line">最终的消息结构设计如下图所示：</span><br><span class="line"></span><br><span class="line">![image-20241023175713736](手写RPC框架/image-20241023175713736.png)</span><br><span class="line"></span><br><span class="line">请求体信息总长17字节。在后续，需要有消息编码器和消息解码器，编码器先new一个空的Buffer缓冲区，然后按照顺序向缓冲区依次写入；解码器则依次读出。</span><br><span class="line"></span><br><span class="line">### 开发设计</span><br><span class="line"></span><br><span class="line">#### 消息结构</span><br><span class="line"></span><br><span class="line">新建protocol包</span><br><span class="line"></span><br><span class="line">* 新建歇息消息类，把消息头单独封装为一个内部类。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.protocol;</p>
+<p>import lombok.AllArgsConstructor;<br>import lombok.Data;<br>import lombok.NoArgsConstructor;</p>
+<p>/**</p>
+<ul>
+<li>协议消息结构<br>*</li>
+</ul>
+<p> */<br>@Data<br>@AllArgsConstructor<br>@NoArgsConstructor<br>public class ProtocolMessage<T> {</T></p>
+<pre><code>/**
+ * 消息头
+ */
+private Header header;
+
+/**
+ * 消息体（请求或响应对象）
+ */
+private T body;
+
+/**
+ * 协议消息头
+ */
+@Data
+public static class Header &#123;
+
+    /**
+     * 魔数，保证安全性
+     */
+    private byte magic;
+
+    /**
+     * 版本号
+     */
+    private byte version;
+
+    /**
+     * 序列化器
+     */
+    private byte serializer;
+
+    /**
+     * 消息类型（请求 / 响应）
+     */
+    private byte type;
+
+    /**
+     * 状态
+     */
+    private byte status;
+
+    /**
+     * 请求 id
+     */
+    private long requestId;
+
+    /**
+     * 消息体长度
+     */
+    private int bodyLength;
+&#125;
+</code></pre><p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 新建协议常量类</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.protocol;</p>
+<p>/**</p>
+<ul>
+<li><p>协议常量<br>*</p>
+<p>*/<br>public interface ProtocolConstant {</p>
+<p> /**</p>
+<ul>
+<li><p>消息头长度<br>*/<br>int MESSAGE_HEADER_LENGTH = 17;</p>
+<p>/**</p>
+</li>
+<li><p>协议魔数<br>*/<br>byte PROTOCOL_MAGIC = 0x1;</p>
+<p>/**</p>
+</li>
+<li>协议版本号<br>*/<br>byte PROTOCOL_VERSION = 0x1;<br>}</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 新建消息字段的枚举类，例如：协议状态枚举，暂时只定义成功、请求失败、响应失败三种枚举值</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.protocol;</p>
+<p>import lombok.Getter;</p>
+<p>/**</p>
+<ul>
+<li>协议消息的状态枚举</li>
+</ul>
+<p>@Getter<br>public enum ProtocolMessageStatusEnum {</p>
+<pre><code>OK(&quot;ok&quot;, 20),
+BAD_REQUEST(&quot;badRequest&quot;, 40),
+BAD_RESPONSE(&quot;badResponse&quot;, 50);
+
+private final String text;
+
+private final int value;
+
+ProtocolMessageStatusEnum(String text, int value) &#123;
+    this.text = text;
+    this.value = value;
+&#125;
+
+/**
+ * 根据 value 获取枚举
+ *
+ * @param value
+ * @return
+ */
+public static ProtocolMessageStatusEnum getEnumByValue(int value) &#123;
+    for (ProtocolMessageStatusEnum anEnum : ProtocolMessageStatusEnum.values()) &#123;
+        if (anEnum.value == value) &#123;
+            return anEnum;
+        &#125;
+    &#125;
+    return null;
+&#125;
+</code></pre><p>}<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 协议信息类型枚举，包括请求响应心跳等。</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>package com.lkj.yurpc.protocol;</p>
+<p>import lombok.Getter;</p>
+<p>/**</p>
+<ul>
+<li><p>协议消息的类型枚举<br>*</p>
+<p>*/<br>@Getter<br>public enum ProtocolMessageTypeEnum {</p>
+<p> REQUEST(0),<br> RESPONSE(1),<br> HEART_BEAT(2),<br> OTHERS(3);</p>
+<p> private final int key;</p>
+<p> ProtocolMessageTypeEnum(int key) {</p>
+<pre><code> this.key = key;
+</code></pre><p> }</p>
+<p> /**</p>
+<ul>
+<li>根据 key 获取枚举<br>*</li>
+<li>@param key</li>
+<li>@return<br>*/<br>public static ProtocolMessageTypeEnum getEnumByKey(int key) {<br> for (ProtocolMessageTypeEnum anEnum : ProtocolMessageTypeEnum.values()) {<pre><code> if (anEnum.key == key) &#123;
+     return anEnum;
+ &#125;
+</code></pre> }<br> return null;<br>}<br>}<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 协议消息的序列化器枚举</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+package com.lkj.yurpc.protocol;</li>
+</ul>
+</li>
+</ul>
+<p>import cn.hutool.core.util.ObjectUtil;<br>import lombok.Getter;</p>
+<p>import java.util.Arrays;<br>import java.util.List;<br>import java.util.stream.Collectors;</p>
+<p>/**</p>
+<p>@Getter<br>public enum ProtocolMessageSerializerEnum {</p>
+<pre><code>JDK(0, &quot;jdk&quot;),
+JSON(1, &quot;json&quot;),
+KRYO(2, &quot;kryo&quot;),
+HESSIAN(3, &quot;hessian&quot;);
+
+private final int key;
+
+private final String value;
+
+ProtocolMessageSerializerEnum(int key, String value) &#123;
+    this.key = key;
+    this.value = value;
+&#125;
+
+/**
+ * 获取值列表
+ *
+ * @return
+ */
+public static List&lt;String&gt; getValues() &#123;
+    return Arrays.stream(values()).map(item -&gt; item.value).collect(Collectors.toList());
+&#125;
+
+/**
+ * 根据 key 获取枚举
+ *
+ * @param key
+ * @return
+ */
+public static ProtocolMessageSerializerEnum getEnumByKey(int key) &#123;
+    for (ProtocolMessageSerializerEnum anEnum : ProtocolMessageSerializerEnum.values()) &#123;
+        if (anEnum.key == key) &#123;
+            return anEnum;
+        &#125;
+    &#125;
+    return null;
+&#125;
+
+
+/**
+ * 根据 value 获取枚举
+ *
+ * @param value
+ * @return
+ */
+public static ProtocolMessageSerializerEnum getEnumByValue(String value) &#123;
+    if (ObjectUtil.isEmpty(value)) &#123;
+        return null;
+    &#125;
+    for (ProtocolMessageSerializerEnum anEnum : ProtocolMessageSerializerEnum.values()) &#123;
+        if (anEnum.value.equals(value)) &#123;
+            return anEnum;
+        &#125;
+    &#125;
+    return null;
+&#125;
+</code></pre><p>}<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 网络传输</span><br><span class="line"></span><br><span class="line">新建server.tcp包，将所有TCP服务相关的代码放到该包中</span><br><span class="line"></span><br><span class="line">* TCP服务器实现</span><br><span class="line"></span><br><span class="line">新建VertcTcpServer类</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>package com.lkj.yurpc.server.tcp;</p>
+<p>import io.vertx.core.Vertx;<br>import io.vertx.core.net.NetServer;<br>import lombok.extern.slf4j.Slf4j;</p>
+<p>/**</p>
+<ul>
+<li><p>Vertx TCP 服务器<br>*</p>
+<p>*/<br>@Slf4j<br>public class VertxTcpServer {</p>
+<p> public void doStart(int port) {</p>
+<pre><code> // 创建 Vert.x 实例
+ Vertx vertx = Vertx.vertx();
+
+ // 创建 TCP 服务器
+ NetServer server = vertx.createNetServer();
+
+ // 处理请求
+ server.connectHandler(new TcpServerHandler());
+
+ // 启动 TCP 服务器并监听指定端口
+ server.listen(port, result -&gt; &#123;
+     if (result.succeeded()) &#123;
+         log.info(&quot;TCP server started on port &quot; + port);
+     &#125; else &#123;
+         log.info(&quot;Failed to start TCP server: &quot; + result.cause());
+     &#125;
+ &#125;);
+</code></pre><p> }</p>
+<p> public static void main(String[] args) {</p>
+<pre><code> new VertxTcpServer().doStart(8888);
+</code></pre><p> }<br>}</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* TCP客户端实现</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.server.tcp;</p>
+<p>import cn.hutool.core.util.IdUtil;<br>import com.yupi.yurpc.RpcApplication;<br>import com.yupi.yurpc.model.RpcRequest;<br>import com.yupi.yurpc.model.RpcResponse;<br>import com.yupi.yurpc.model.ServiceMetaInfo;<br>import com.yupi.yurpc.protocol.*;<br>import io.vertx.core.Vertx;<br>import io.vertx.core.buffer.Buffer;<br>import io.vertx.core.net.NetClient;<br>import io.vertx.core.net.NetSocket;</p>
+<p>import java.io.IOException;<br>import java.util.concurrent.CompletableFuture;<br>import java.util.concurrent.ExecutionException;</p>
+<p>/**</p>
+<ul>
+<li><p>Vertx TCP 请求客户端<br>*</p>
+<p>*/<br>public class VertxTcpClient {</p>
+<p> /**</p>
+<ul>
+<li>发送请求<br>*</li>
+<li>@param rpcRequest</li>
+<li>@param serviceMetaInfo</li>
+<li>@return</li>
+<li>@throws InterruptedException</li>
+<li><p>@throws ExecutionException<br>*/<br>public static RpcResponse doRequest(RpcRequest rpcRequest, ServiceMetaInfo serviceMetaInfo) throws InterruptedException, ExecutionException {<br> // 发送 TCP 请求<br> Vertx vertx = Vertx.vertx();<br> NetClient netClient = vertx.createNetClient();<br> CompletableFuture<RpcResponse> responseFuture = new CompletableFuture&lt;&gt;();<br> netClient.connect(serviceMetaInfo.getServicePort(), serviceMetaInfo.getServiceHost(),</RpcResponse></p>
+<pre><code>     result -&gt; &#123;
+         if (!result.succeeded()) &#123;
+             System.err.println(&quot;Failed to connect to TCP server&quot;);
+             return;
+         &#125;
+         NetSocket socket = result.result();
+         // 发送数据
+         // 构造消息
+         ProtocolMessage&lt;RpcRequest&gt; protocolMessage = new ProtocolMessage&lt;&gt;();
+         ProtocolMessage.Header header = new ProtocolMessage.Header();
+         header.setMagic(ProtocolConstant.PROTOCOL_MAGIC);
+         header.setVersion(ProtocolConstant.PROTOCOL_VERSION);
+         header.setSerializer((byte) ProtocolMessageSerializerEnum.getEnumByValue(RpcApplication.getRpcConfig().getSerializer()).getKey());
+         header.setType((byte) ProtocolMessageTypeEnum.REQUEST.getKey());
+         // 生成全局请求 ID
+         header.setRequestId(IdUtil.getSnowflakeNextId());
+         protocolMessage.setHeader(header);
+         protocolMessage.setBody(rpcRequest);
+
+         // 编码请求
+         try &#123;
+             Buffer encodeBuffer = ProtocolMessageEncoder.encode(protocolMessage);
+             socket.write(encodeBuffer);
+         &#125; catch (IOException e) &#123;
+             throw new RuntimeException(&quot;协议消息编码错误&quot;);
+         &#125;
+
+         // 接收响应
+         TcpBufferHandlerWrapper bufferHandlerWrapper = new TcpBufferHandlerWrapper(
+                 buffer -&gt; &#123;
+                     try &#123;
+                         ProtocolMessage&lt;RpcResponse&gt; rpcResponseProtocolMessage =
+                                 (ProtocolMessage&lt;RpcResponse&gt;) ProtocolMessageDecoder.decode(buffer);
+                         responseFuture.complete(rpcResponseProtocolMessage.getBody());
+                     &#125; catch (IOException e) &#123;
+                         throw new RuntimeException(&quot;协议消息解码错误&quot;);
+                     &#125;
+                 &#125;
+         );
+         socket.handler(bufferHandlerWrapper);
+
+     &#125;);
+</code></pre><p> RpcResponse rpcResponse = responseFuture.get();<br> // 记得关闭连接<br> netClient.close();<br> return rpcResponse;<br>}<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 编码解码器</span><br><span class="line"></span><br><span class="line">* 编码器</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.protocol;</p>
+<p>import com.lkj.yurpc.serializer.Serializer;<br>import com.lkj.yurpc.serializer.SerializerFactory;<br>import io.vertx.core.buffer.Buffer;</p>
+<p>import java.io.IOException;</p>
+<p>/**</p>
+<ul>
+<li>协议消息编码器</li>
+</ul>
+<p>public class ProtocolMessageEncoder {</p>
+<pre><code>/**
+ * 编码
+ *
+ * @param protocolMessage
+ * @return
+ * @throws IOException
+ */
+public static Buffer encode(ProtocolMessage&lt;?&gt; protocolMessage) throws IOException &#123;
+    if (protocolMessage == null || protocolMessage.getHeader() == null) &#123;
+        return Buffer.buffer();
+    &#125;
+    ProtocolMessage.Header header = protocolMessage.getHeader();
+    // 依次向缓冲区写入字节
+    Buffer buffer = Buffer.buffer();
+    buffer.appendByte(header.getMagic());
+    buffer.appendByte(header.getVersion());
+    buffer.appendByte(header.getSerializer());
+    buffer.appendByte(header.getType());
+    buffer.appendByte(header.getStatus());
+    buffer.appendLong(header.getRequestId());
+    // 获取序列化器
+    ProtocolMessageSerializerEnum serializerEnum = ProtocolMessageSerializerEnum.getEnumByKey(header.getSerializer());
+    if (serializerEnum == null) &#123;
+        throw new RuntimeException(&quot;序列化协议不存在&quot;);
+    &#125;
+    Serializer serializer = SerializerFactory.getInstance(serializerEnum.getValue());
+    byte[] bodyBytes = serializer.serialize(protocolMessage.getBody());
+    // 写入 body 长度和数据
+    buffer.appendInt(bodyBytes.length);
+    buffer.appendBytes(bodyBytes);
+    return buffer;
+&#125;
+</code></pre><p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 解码器</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.protocol;</p>
+<p>import com.lkj.yurpc.model.RpcRequest;<br>import com.lkj.yurpc.model.RpcResponse;<br>import com.lkj.yurpc.serializer.Serializer;<br>import com.lkj.yurpc.serializer.SerializerFactory;<br>import io.vertx.core.buffer.Buffer;</p>
+<p>import java.io.IOException;</p>
+<p>/**</p>
+<ul>
+<li><p>协议消息解码器</p>
+<p>*/<br>public class ProtocolMessageDecoder {</p>
+<p> /**</p>
+<ul>
+<li>解码<br>*</li>
+<li>@param buffer</li>
+<li>@return</li>
+<li>@throws IOException<br>*/<br>public static ProtocolMessage&lt;?&gt; decode(Buffer buffer) throws IOException {<br> // 分别从指定位置读出 Buffer<br> ProtocolMessage.Header header = new ProtocolMessage.Header();<br> byte magic = buffer.getByte(0);<br> // 校验魔数<br> if (magic != ProtocolConstant.PROTOCOL_MAGIC) {<pre><code> throw new RuntimeException(&quot;消息 magic 非法&quot;);
+</code></pre> }<br> header.setMagic(magic);<br> header.setVersion(buffer.getByte(1));<br> header.setSerializer(buffer.getByte(2));<br> header.setType(buffer.getByte(3));<br> header.setStatus(buffer.getByte(4));<br> header.setRequestId(buffer.getLong(5));<br> header.setBodyLength(buffer.getInt(13));<br> // 解决粘包问题，只读指定长度的数据<br> byte[] bodyBytes = buffer.getBytes(17, 17 + header.getBodyLength());<br> // 解析消息体<br> ProtocolMessageSerializerEnum serializerEnum = ProtocolMessageSerializerEnum.getEnumByKey(header.getSerializer());<br> if (serializerEnum == null) {<pre><code> throw new RuntimeException(&quot;序列化消息的协议不存在&quot;);
+</code></pre> }<br> Serializer serializer = SerializerFactory.getInstance(serializerEnum.getValue());<br> ProtocolMessageTypeEnum messageTypeEnum = ProtocolMessageTypeEnum.getEnumByKey(header.getType());<br> if (messageTypeEnum == null) {<pre><code> throw new RuntimeException(&quot;序列化消息的类型不存在&quot;);
+</code></pre> }<br> switch (messageTypeEnum) {<pre><code> case REQUEST:
+     RpcRequest request = serializer.deserialize(bodyBytes, RpcRequest.class);
+     return new ProtocolMessage&lt;&gt;(header, request);
+ case RESPONSE:
+     RpcResponse response = serializer.deserialize(bodyBytes, RpcResponse.class);
+     return new ProtocolMessage&lt;&gt;(header, response);
+ case HEART_BEAT:
+ case OTHERS:
+ default:
+     throw new RuntimeException(&quot;暂不支持该消息类型&quot;);
+</code></pre> }<br>}</li>
+</ul>
+</li>
+</ul>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 请求处理器</span><br><span class="line"></span><br><span class="line">作用是接受请求，然后通过反射调用服务实现类。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.server.tcp;</p>
+<p>import com.lkj.yurpc.model.RpcRequest;<br>import com.lkj.yurpc.model.RpcResponse;<br>import com.lkj.yurpc.protocol.*;<br>import com.lkj.yurpc.registry.LocalRegistry;<br>import io.vertx.core.Handler;<br>import io.vertx.core.buffer.Buffer;<br>import io.vertx.core.net.NetSocket;</p>
+<p>import java.io.IOException;<br>import java.lang.reflect.Method;</p>
+<p>/**</p>
+<ul>
+<li><p>TCP 请求处理器</p>
+<p>*/<br>public class TcpServerHandler implements Handler<NetSocket> {</NetSocket></p>
+<p> /**</p>
+<ul>
+<li>处理请求<br>*</li>
+<li><p>@param socket the event to handle<br>*/<br>@Override<br>public void handle(NetSocket socket) {<br> TcpBufferHandlerWrapper bufferHandlerWrapper = new TcpBufferHandlerWrapper(buffer -&gt; {</p>
+<pre><code> // 接受请求，解码
+ ProtocolMessage&lt;RpcRequest&gt; protocolMessage;
+ try &#123;
+     protocolMessage = (ProtocolMessage&lt;RpcRequest&gt;) ProtocolMessageDecoder.decode(buffer);
+ &#125; catch (IOException e) &#123;
+     throw new RuntimeException(&quot;协议消息解码错误&quot;);
+ &#125;
+ RpcRequest rpcRequest = protocolMessage.getBody();
+ ProtocolMessage.Header header = protocolMessage.getHeader();
+
+ // 处理请求
+ // 构造响应结果对象
+ RpcResponse rpcResponse = new RpcResponse();
+ try &#123;
+     // 获取要调用的服务实现类，通过反射调用
+     Class&lt;?&gt; implClass = LocalRegistry.get(rpcRequest.getServiceName());
+     Method method = implClass.getMethod(rpcRequest.getMethodName(), rpcRequest.getParameterTypes());
+     Object result = method.invoke(implClass.newInstance(), rpcRequest.getArgs());
+     // 封装返回结果
+     rpcResponse.setData(result);
+     rpcResponse.setDataType(method.getReturnType());
+     rpcResponse.setMessage(&quot;ok&quot;);
+ &#125; catch (Exception e) &#123;
+     e.printStackTrace();
+     rpcResponse.setMessage(e.getMessage());
+     rpcResponse.setException(e);
+ &#125;
+
+ // 发送响应，编码
+ header.setType((byte) ProtocolMessageTypeEnum.RESPONSE.getKey());
+ header.setStatus((byte) ProtocolMessageStatusEnum.OK.getValue());
+ ProtocolMessage&lt;RpcResponse&gt; responseProtocolMessage = new ProtocolMessage&lt;&gt;(header, rpcResponse);
+ try &#123;
+     Buffer encode = ProtocolMessageEncoder.encode(responseProtocolMessage);
+     socket.write(encode);
+ &#125; catch (IOException e) &#123;
+     throw new RuntimeException(&quot;协议消息编码错误&quot;);
+ &#125;
+</code></pre><p> });<br> socket.handler(bufferHandlerWrapper);<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 请求发送</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.server.tcp;</p>
+<p>import com.lkj.yurpc.protocol.ProtocolConstant;<br>import io.vertx.core.Handler;<br>import io.vertx.core.buffer.Buffer;<br>import io.vertx.core.parsetools.RecordParser;</p>
+<p>/**</p>
+<ul>
+<li>TCP 消息处理器包装</li>
+<li><p>装饰者模式，使用 recordParser 对原有的 buffer 处理能力进行增强</p>
+<p>*/<br>public class TcpBufferHandlerWrapper implements Handler<Buffer> {</Buffer></p>
+<p> /**</p>
+<ul>
+<li><p>解析器，用于解决半包、粘包问题<br>*/<br>private final RecordParser recordParser;</p>
+<p>public TcpBufferHandlerWrapper(Handler<Buffer> bufferHandler) {<br> recordParser = initRecordParser(bufferHandler);<br>}</Buffer></p>
+<p>@Override<br>public void handle(Buffer buffer) {<br> recordParser.handle(buffer);<br>}</p>
+<p>/**</p>
+</li>
+<li>初始化解析器<br>*</li>
+<li>@param bufferHandler</li>
+<li><p>@return<br>*/<br>private RecordParser initRecordParser(Handler<Buffer> bufferHandler) {<br> // 构造 parser<br> RecordParser parser = RecordParser.newFixed(ProtocolConstant.MESSAGE_HEADER_LENGTH);</Buffer></p>
+<p> parser.setOutput(new Handler<Buffer>() {</Buffer></p>
+<pre><code> // 初始化
+ int size = -1;
+ // 一次完整的读取（头 + 体）
+ Buffer resultBuffer = Buffer.buffer();
+
+ @Override
+ public void handle(Buffer buffer) &#123;
+     // 1. 每次循环，首先读取消息头
+     if (-1 == size) &#123;
+         // 读取消息体长度
+         size = buffer.getInt(13);
+         parser.fixedSizeMode(size);
+         // 写入头信息到结果
+         resultBuffer.appendBuffer(buffer);
+     &#125; else &#123;
+         // 2. 然后读取消息体
+         // 写入体信息到结果
+         resultBuffer.appendBuffer(buffer);
+         // 已拼接为完整 Buffer，执行处理
+         bufferHandler.handle(resultBuffer);
+         // 重置一轮
+         parser.fixedSizeMode(ProtocolConstant.MESSAGE_HEADER_LENGTH);
+         size = -1;
+         resultBuffer = Buffer.buffer();
+     &#125;
+ &#125;
+</code></pre><p> });</p>
+<p> return parser;<br>}<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 粘包半包问题解决</span><br><span class="line"></span><br><span class="line">#### 概念</span><br><span class="line"></span><br><span class="line">加入客户端连续两次发送信息：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>// 第一次<br>Hello, server!Hello, server!Hello, server!Hello, server!<br>// 第二次<br>Hello, server!Hello, server!Hello, server!Hello, server!</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">单服务器收到的可能是：</span><br><span class="line"></span><br><span class="line">* 每次收到的数据更少了，这种情况叫做半包</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>// 第一次<br>Hello, server!Hello, server!<br>// 第二次<br>Hello, server!Hello, server!Hello, server!</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 每次收到的数据更多了，这种情况叫做粘包</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>// 第三次<br>Hello, server!Hello, server!Hello, server!Hello, server!Hello, server!</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 如何解决</span><br><span class="line"></span><br><span class="line">* 解决半包</span><br><span class="line"></span><br><span class="line">核心思路：在消息体中设置请求体长度，服务端接收到时，判断每次信息长度是否符合预期，不完整就不读。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>if (buffer == null || buffer.length() == 0) {<br>    throw new RuntimeException(“消息 buffer 为空”);<br>}<br>if (buffer.getBytes().length &lt; ProtocolConstant.MESSAGE_HEADER_LENGTH) {<br>    throw new RuntimeException(“出现了半包问题”);<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 解决粘包</span><br><span class="line"></span><br><span class="line">核心思路也是类似的：每次只读取指定长度的数据，超过长度的留着下一次接收到消息时再读取。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>// 解决粘包问题，只读指定长度的数据<br>byte[] bodyBytes = buffer.getBytes(17, 17 + header.getBodyLength());</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 负载均衡</span><br><span class="line"></span><br><span class="line">### 需求分析</span><br><span class="line"></span><br><span class="line">现在 RPC 框架已经可以从注册中心获取到服务提供者的注册信息了，同一个服务可能会有多个服务提供者，但是目前消费者始终读取了第一个服务提供者节点发起调用，不仅会增大单个节点的压力，而且没有利用好其他节点的资源。</span><br><span class="line"></span><br><span class="line">我们完全可以从服务提供者节点中，选择一个服务提供者发起请求，而不是每次都请求同一个服务提供者，这个操作就叫做 **负载均衡**。</span><br><span class="line"></span><br><span class="line">### 负载均衡</span><br><span class="line"></span><br><span class="line">#### 定义</span><br><span class="line"></span><br><span class="line">1）何为负载？可以把负载理解为要处理的工作和压力，比如网络请求、事务、数据处理任务等。</span><br><span class="line"></span><br><span class="line">2）何为均衡？把工作和压力平均地分配给多个工作者，从而分摊每个工作者的压力，保证大家正常工作。</span><br><span class="line"></span><br><span class="line">#### 常见负载均衡算法</span><br><span class="line"></span><br><span class="line">* 轮询：按照循坏顺序请求分配给每个服务器</span><br><span class="line">* 随机：随机选择</span><br><span class="line">* 加权轮询：根据服务器的性能或权重分配请求。</span><br><span class="line">* 加权随机</span><br><span class="line">* 最小连接数</span><br><span class="line">* IP Hash</span><br><span class="line"></span><br><span class="line">### 开发实现</span><br><span class="line"></span><br><span class="line">#### 多种负载器实现</span><br><span class="line"></span><br><span class="line">在RPC项目中新建loadbalancer包</span><br><span class="line"></span><br><span class="line">* 编写通用接口</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.loadbalancer;</p>
+<p>import com.lkj.yurpc.model.ServiceMetaInfo;</p>
+<p>import java.util.List;<br>import java.util.Map;</p>
+<p>/**</p>
+<ul>
+<li><p>负载均衡器（消费端使用）<br>*</p>
+<p>*/<br>public interface LoadBalancer {</p>
+<p> /**</p>
+<ul>
+<li>选择服务调用<br>*</li>
+<li>@param requestParams       请求参数</li>
+<li>@param serviceMetaInfoList 可用服务列表</li>
+<li>@return<br>*/<br>ServiceMetaInfo select(Map<String, object> requestParams, List<ServiceMetaInfo> serviceMetaInfoList);<br>}</ServiceMetaInfo></String,></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 轮询负载均衡</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.loadbalancer;</p>
+<p>import com.lkj.yurpc.model.ServiceMetaInfo;</p>
+<p>import java.util.List;<br>import java.util.Map;<br>import java.util.concurrent.atomic.AtomicInteger;</p>
+<p>/**</p>
+<ul>
+<li><p>轮询负载均衡器</p>
+<p>*/<br>public class RoundRobinLoadBalancer implements LoadBalancer {</p>
+<p> /**</p>
+<ul>
+<li><p>当前轮询的下标<br>*/<br>private final AtomicInteger currentIndex = new AtomicInteger(0);</p>
+<p>@Override<br>public ServiceMetaInfo select(Map<String, object> requestParams, List<ServiceMetaInfo> serviceMetaInfoList) {<br> if (serviceMetaInfoList.isEmpty()) {</ServiceMetaInfo></String,></p>
+<pre><code> return null;
+</code></pre><p> }<br> // 只有一个服务，无需轮询<br> int size = serviceMetaInfoList.size();<br> if (size == 1) {</p>
+<pre><code> return serviceMetaInfoList.get(0);
+</code></pre><p> }<br> // 取模算法轮询<br> int index = currentIndex.getAndIncrement() % size;<br> return serviceMetaInfoList.get(index);<br>}<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 随机负载均衡</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.loadbalancer;</p>
+<p>import com.lkj.yurpc.model.ServiceMetaInfo;</p>
+<p>import java.util.List;<br>import java.util.Map;<br>import java.util.Random;</p>
+<p>/**</p>
+<ul>
+<li><p>随机负载均衡器</p>
+<p>*/<br>public class RandomLoadBalancer implements LoadBalancer {</p>
+<p> private final Random random = new Random();</p>
+<p> @Override<br> public ServiceMetaInfo select(Map<String, object> requestParams, List<ServiceMetaInfo> serviceMetaInfoList) {</ServiceMetaInfo></String,></p>
+<pre><code> int size = serviceMetaInfoList.size();
+ if (size == 0) &#123;
+     return null;
+ &#125;
+ // 只有 1 个服务，不用随机
+ if (size == 1) &#123;
+     return serviceMetaInfoList.get(0);
+ &#125;
+ return serviceMetaInfoList.get(random.nextInt(size));
+</code></pre><p> }<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 实现一致性 Hash 负载均衡器</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.loadbalancer;</p>
+</li>
+</ul>
+<p>import com.lkj.yurpc.model.ServiceMetaInfo;</p>
+<p>import java.util.List;<br>import java.util.Map;<br>import java.util.TreeMap;</p>
+<p>/**</p>
+<ul>
+<li><p>一致性哈希负载均衡器<br>*</p>
+<p>*/<br>public class ConsistentHashLoadBalancer implements LoadBalancer {</p>
+<p> /**</p>
+<ul>
+<li><p>一致性 Hash 环，存放虚拟节点<br>*/<br>private final TreeMap<Integer, servicemetainfo> virtualNodes = new TreeMap&lt;&gt;();</Integer,></p>
+<p>/**</p>
+</li>
+<li><p>虚拟节点数<br>*/<br>private static final int VIRTUAL_NODE_NUM = 100;</p>
+<p>@Override<br>public ServiceMetaInfo select(Map<String, object> requestParams, List<ServiceMetaInfo> serviceMetaInfoList) {<br> if (serviceMetaInfoList.isEmpty()) {</ServiceMetaInfo></String,></p>
+<pre><code> return null;
+</code></pre><p> }</p>
+<p> // 构建虚拟节点环<br> for (ServiceMetaInfo serviceMetaInfo : serviceMetaInfoList) {</p>
+<pre><code> for (int i = 0; i &lt; VIRTUAL_NODE_NUM; i++) &#123;
+     int hash = getHash(serviceMetaInfo.getServiceAddress() + &quot;#&quot; + i);
+     virtualNodes.put(hash, serviceMetaInfo);
+ &#125;
+</code></pre><p> }</p>
+<p> // 获取调用请求的 hash 值<br> int hash = getHash(requestParams);</p>
+<p> // 选择最接近且大于等于调用请求 hash 值的虚拟节点<br> Map.Entry<Integer, servicemetainfo> entry = virtualNodes.ceilingEntry(hash);<br> if (entry == null) {</Integer,></p>
+<pre><code> // 如果没有大于等于调用请求 hash 值的虚拟节点，则返回环首部的节点
+ entry = virtualNodes.firstEntry();
+</code></pre><p> }<br> return entry.getValue();<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>/**
+ * Hash 算法，可自行实现
+ *
+ * @param key
+ * @return
+ */
+private int getHash(Object key) &#123;
+    return key.hashCode();
+&#125;
+</code></pre><p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 支持配置和扩展</span><br><span class="line"></span><br><span class="line">一个成熟的 RPC 框架可能会支持多个负载均衡器，像序列化器和注册中心一样，我们的需求是，让开发者能够填写配置来指定使用的负载均衡器，并且支持自定义负载均衡器，让框架更易用、更利于扩展。</span><br><span class="line"></span><br><span class="line">* 负载均衡器常量</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.loadbalancer;</p>
+<p>/**</p>
+<ul>
+<li><p>负载均衡器键名常量<br>*</p>
+<p>*/<br>public interface LoadBalancerKeys {</p>
+<p> /**</p>
+<ul>
+<li><p>轮询<br>*/<br>String ROUND_ROBIN = “roundRobin”;</p>
+<p>String RANDOM = “random”;</p>
+<p>String CONSISTENT_HASH = “consistentHash”;</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 使用工厂模式，支持根据key从SPI获取负载均衡器对象实例</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.loadbalancer;</p>
+<p>import com.lkj.yurpc.spi.SpiLoader;</p>
+<p>/**</p>
+<ul>
+<li><p>负载均衡器工厂（工厂模式，用于获取负载均衡器对象）<br>*</p>
+<p>*/<br>public class LoadBalancerFactory {</p>
+<p> static {</p>
+<pre><code> SpiLoader.load(LoadBalancer.class);
+</code></pre><p> }</p>
+<p> /**</p>
+<ul>
+<li><p>默认负载均衡器<br>*/<br>private static final LoadBalancer DEFAULT_LOAD_BALANCER = new RoundRobinLoadBalancer();</p>
+<p>/**</p>
+</li>
+<li>获取实例<br>*</li>
+<li>@param key</li>
+<li>@return<br>*/<br>public static LoadBalancer getInstance(String key) {<br> return SpiLoader.getInstance(LoadBalancer.class, key);<br>}</li>
+</ul>
+</li>
+</ul>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 为RPC全局配置新增</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>/**</p>
+<pre><code> * 负载均衡器
+ */
+private String loadBalancer = LoadBalancerKeys.ROUND_ROBIN;
+</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 重试机制</span><br><span class="line"></span><br><span class="line">### 需求分析</span><br><span class="line"></span><br><span class="line">目前，如果使用 RPC 框架的服务消费者调用接口失败，就会直接报错。</span><br><span class="line"></span><br><span class="line">调用接口失败可能有很多原因，有时可能是服务提供者返回了错误，但有时可能只是网络不稳定或服务提供者重启等临时性问题。这种情况下，我们可能更希望服务消费者拥有自动重试的能力，提高系统的可用性。</span><br><span class="line"></span><br><span class="line">### 设计方案</span><br><span class="line"></span><br><span class="line">#### 重试条件</span><br><span class="line"></span><br><span class="line">当由于网络等异常情况发生时，触发重试。</span><br><span class="line"></span><br><span class="line">#### 重试时间</span><br><span class="line"></span><br><span class="line">* 固定重试间隔：在每次重试之间使用固定的时间间隔</span><br><span class="line">* 指数退避重试：在每次失败后，重试的时间间隔会以指数级增加，以避免请求过于密集。</span><br><span class="line">* 随机延迟重试：在每次重试之间使用随机的时间间隔，以避免请求的同时发生。</span><br><span class="line">* 可变延迟重试：这种策略更 “高级” 了，根据先前重试的成功或失败情况，动态调整下一次重试的延迟时间。比如，根据前一次的响应时间调整下一次重试的等待时间。</span><br><span class="line"></span><br><span class="line">#### 停止重试</span><br><span class="line"></span><br><span class="line">一般来说，重试次数是有上限的，否则随着报错的增多，系统同时发生的重试也会越来越多，造成雪崩。</span><br><span class="line"></span><br><span class="line">主流的停止重试策略有：</span><br><span class="line"></span><br><span class="line">1）最大尝试次数：一般重试当达到最大次数时不再重试。</span><br><span class="line"></span><br><span class="line">2）超时停止：重试达到最大时间的时候，停止重试。</span><br><span class="line"></span><br><span class="line">#### 重试工作</span><br><span class="line"></span><br><span class="line">需要注意的是，当重试次数超过上限时，往往还要进行其他的操作，比如：</span><br><span class="line"></span><br><span class="line">1. 通知告警：让开发者人工介入</span><br><span class="line">2. 降级容错：改为调用其他接口、或者执行其他操作</span><br><span class="line"></span><br><span class="line">### 开发实现</span><br><span class="line"></span><br><span class="line">* 编写重试策略通用接口</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.fault.retry;</p>
+<p>import com.lkj.yurpc.model.RpcResponse;</p>
+<p>import java.util.concurrent.Callable;</p>
+<p>/**</p>
+<ul>
+<li><p>重试策略<br>*</p>
+<p>*/<br>public interface RetryStrategy {</p>
+<p> /**</p>
+<ul>
+<li>重试<br>*</li>
+<li>@param callable</li>
+<li>@return</li>
+<li>@throws Exception<br>*/<br>RpcResponse doRetry(Callable<RpcResponse> callable) throws Exception;<br>}</RpcResponse></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 不重试策略实现</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.fault.retry;</p>
+<p>import com.lkj.yurpc.model.RpcResponse;<br>import lombok.extern.slf4j.Slf4j;</p>
+<p>import java.util.concurrent.Callable;</p>
+<p>/**</p>
+<ul>
+<li><p>不重试 - 重试策略<br>*</p>
+<p>*/<br>@Slf4j<br>public class NoRetryStrategy implements RetryStrategy {</p>
+<p> /**</p>
+<ul>
+<li>重试<br>*</li>
+<li>@param callable</li>
+<li>@return</li>
+<li>@throws Exception<br>*/<br>public RpcResponse doRetry(Callable<RpcResponse> callable) throws Exception {<br> return callable.call();<br>}</RpcResponse></li>
+</ul>
+</li>
+</ul>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 固定重试间隔策略</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.fault.retry;</p>
+<p>import com.github.rholder.retry.*;<br>import com.lkj.yurpc.model.RpcResponse;<br>import lombok.extern.slf4j.Slf4j;</p>
+<p>import java.util.concurrent.Callable;<br>import java.util.concurrent.ExecutionException;<br>import java.util.concurrent.TimeUnit;</p>
+<p>/**</p>
+<ul>
+<li><p>固定时间间隔 - 重试策略<br>*</p>
+<p>*/<br>@Slf4j<br>public class FixedIntervalRetryStrategy implements RetryStrategy {</p>
+<p> /**</p>
+<ul>
+<li>重试<br>*</li>
+<li>@param callable</li>
+<li>@return</li>
+<li>@throws ExecutionException</li>
+<li>@throws RetryException<br>*/<br>public RpcResponse doRetry(Callable<RpcResponse> callable) throws ExecutionException, RetryException {<br> Retryer<RpcResponse> retryer = RetryerBuilder.<RpcResponse>newBuilder()<pre><code>     .retryIfExceptionOfType(Exception.class)
+     .withWaitStrategy(WaitStrategies.fixedWait(3L, TimeUnit.SECONDS))
+     .withStopStrategy(StopStrategies.stopAfterAttempt(3))
+     .withRetryListener(new RetryListener() &#123;
+         @Override
+         public &lt;V&gt; void onRetry(Attempt&lt;V&gt; attempt) &#123;
+             log.info(&quot;重试次数 &#123;&#125;&quot;, attempt.getAttemptNumber());
+         &#125;
+     &#125;)
+     .build();
+</code></pre> return retryer.call(callable);<br>}</RpcResponse></RpcResponse></RpcResponse></li>
+</ul>
+</li>
+</ul>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">上述代码中，重试策略如下：</span><br><span class="line"></span><br><span class="line">- 重试条件：使用 retryIfExceptionOfType 方法指定当出现 Exception 异常时重试。</span><br><span class="line">- 重试等待策略：使用 withWaitStrategy 方法指定策略，选择 fixedWait 固定时间间隔策略。</span><br><span class="line">- 重试停止策略：使用 withStopStrategy 方法指定策略，选择 stopAfterAttempt 超过最大重试次数停止。</span><br><span class="line">- 重试工作：使用 withRetryListener 监听重试，每次重试时，除了再次执行任务外，还能够打印当前的重试次数。</span><br><span class="line"></span><br><span class="line">#### 支持配置和扩展重试策略</span><br><span class="line"></span><br><span class="line">需求是，让开发者能够填写配置来指定使用的重试策略，并且支持自定义重试策略，让框架更易用、更利于扩展。</span><br><span class="line"></span><br><span class="line">要实现这点，开发方式和序列化器、注册中心、负载均衡器都是一样的，都可以使用工厂创建对象、使用 SPI 动态加载自定义的注册中心。</span><br><span class="line"></span><br><span class="line">* 常量</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.fault.retry;</p>
+<p>/**</p>
+<ul>
+<li><p>重试策略键名常量<br>*</p>
+<p>*/<br>public interface RetryStrategyKeys {</p>
+<p> /**</p>
+<ul>
+<li><p>不重试<br>*/<br>String NO = “no”;</p>
+<p>/**</p>
+</li>
+<li>固定时间间隔<br>*/<br>String FIXED_INTERVAL = “fixedInterval”;</li>
+</ul>
+</li>
+</ul>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 使用工厂模式，根据key从SP获取重试策略对象实例</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.fault.retry;</p>
+<p>import com.lkj.yurpc.spi.SpiLoader;</p>
+<p>/**</p>
+<ul>
+<li><p>重试策略工厂（用于获取重试器对象）<br>*</p>
+<p>*/<br>public class RetryStrategyFactory {</p>
+<p> static {</p>
+<pre><code> SpiLoader.load(RetryStrategy.class);
+</code></pre><p> }</p>
+<p> /**</p>
+<ul>
+<li><p>默认重试器<br>*/<br>private static final RetryStrategy DEFAULT_RETRY_STRATEGY = new NoRetryStrategy();</p>
+<p>/**</p>
+</li>
+<li>获取实例<br>*</li>
+<li>@param key</li>
+<li>@return<br>*/<br>public static RetryStrategy getInstance(String key) {<br> return SpiLoader.getInstance(RetryStrategy.class, key);<br>}</li>
+</ul>
+</li>
+</ul>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 应用重试功能</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>// 使用重试机制<br>RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());<br>RpcResponse rpcResponse = retryStrategy.doRetry(() -&gt;<br>        VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo)<br>);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 容错机制</span><br><span class="line"></span><br><span class="line">### 需求分析</span><br><span class="line"></span><br><span class="line">当系统出现异常时，我们仍要保证可以通过一定策略稳步运行。</span><br><span class="line"></span><br><span class="line">### 设计方案</span><br><span class="line"></span><br><span class="line">#### 容错机制</span><br><span class="line"></span><br><span class="line">容错是指系统在出现异常情况时，可以通过一定的策略保证系统仍然稳定运行，从而提高系统的可靠性和健壮性。1800771338183979009_0.5649165956367674</span><br><span class="line"></span><br><span class="line">在分布式系统中，容错机制尤为重要，因为分布式系统中的各个组件都可能存在网络故障、节点故障等各种异常情况。要顾全大局，尽可能消除偶发 / 单点故障对系统带来的整体影响。</span><br><span class="line"></span><br><span class="line">打个比方，将分布式系统类比为一家公司，如果公司某个优秀员工请假了，需要 “触发容错”，让另一个普通员工顶上，这本质上是容错机制的一种 **降级** 策略。</span><br><span class="line"></span><br><span class="line">##### 容错策略</span><br><span class="line"></span><br><span class="line">容错策略有很多种，常用的容错策略主要是以下几个：</span><br><span class="line"></span><br><span class="line">1）Fail-Over 故障转移：一次调用失败后，切换一个其他节点再次进行调用，也算是一种重试。1800771338183979009_0.0852483407241389</span><br><span class="line"></span><br><span class="line">2）Fail-Back 失败自动恢复：系统的某个功能出现调用失败或错误时，通过其他的方法，恢复该功能的正常。可以理解为降级，比如重试、调用其他服务等。</span><br><span class="line"></span><br><span class="line">3）Fail-Safe 静默处理：系统出现部分非重要功能的异常时，直接忽略掉，不做任何处理，就像错误没有发生过一样。</span><br><span class="line"></span><br><span class="line">4）Fail-Fast 快速失败：系统出现调用错误时，立刻报错，交给外层调用方处理。</span><br><span class="line"></span><br><span class="line">##### 容错实现方式</span><br><span class="line"></span><br><span class="line">容错其实是个比较广泛的概念，除了上面几种策略外，很多技术都可以起到容错的作用。</span><br><span class="line"></span><br><span class="line">比如：</span><br><span class="line"></span><br><span class="line">1）重试：重试本质上也是一种容错的降级策略，系统错误后再试一次。</span><br><span class="line"></span><br><span class="line">2）限流：当系统压力过大、已经出现部分错误时，通过限制执行操作（接受请求）的频率或数量，对系统进行保护。</span><br><span class="line"></span><br><span class="line">3）降级：系统出现错误后，改为执行其他更稳定可用的操作。也可以叫做 “兜底” 或 “有损服务”，这种方式的本质是：即使牺牲一定的服务质量，也要保证系统的部分功能可用，保证基本的功能需求得到满足。</span><br><span class="line"></span><br><span class="line">4）熔断：系统出现故障或异常时，暂时中断对该服务的请求，而是执行其他操作，以避免连锁故障。</span><br><span class="line"></span><br><span class="line">5）超时控制：如果请求或操作长时间没处理完成，就进行中断，防止阻塞和资源占用。</span><br><span class="line"></span><br><span class="line">注意，在实际项目中，根据对系统可靠性的需求，我们通常会结合多种策略或方法实现容错机制。</span><br><span class="line"></span><br><span class="line">### 开发实现</span><br><span class="line"></span><br><span class="line">* 通用接口</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.fault.tolerant;</p>
+<p>import com.lkj.yurpc.model.RpcResponse;</p>
+<p>import java.util.Map;</p>
+<p>/**</p>
+<ul>
+<li><p>容错策略<br>*</p>
+<p>*/<br>public interface TolerantStrategy {</p>
+<p> /**</p>
+<ul>
+<li>容错<br>*</li>
+<li>@param context 上下文，用于传递数据</li>
+<li>@param e       异常</li>
+<li>@return<br>*/<br>RpcResponse doTolerant(Map<String, object> context, Exception e);<br>}<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 快速失败容错策略实现</span><br><span class="line"></span><br><span class="line">遇到异常后，将异常再次抛出，交给外层实现</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+package com.lkj.yurpc.fault.tolerant;</String,></li>
+</ul>
+</li>
+</ul>
+<p>import com.lkj.yurpc.model.RpcResponse;</p>
+<p>import java.util.Map;</p>
+<p>/**</p>
+<ul>
+<li><p>快速失败 - 容错策略（立刻通知外层调用方）<br>*</p>
+<p>*/<br>public class FailFastTolerantStrategy implements TolerantStrategy {</p>
+<p> @Override<br> public RpcResponse doTolerant(Map<String, object> context, Exception e) {</String,></p>
+<pre><code> throw new RuntimeException(&quot;服务报错&quot;, e);
+</code></pre><p> }<br>}</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 静默处理容错策略实现</span><br><span class="line"></span><br><span class="line">遇到异常后，记录一条日志，然后正常返回一个响应对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.fault.tolerant;</p>
+<p>import com.lkj.yurpc.model.RpcResponse;<br>import lombok.extern.slf4j.Slf4j;</p>
+<p>import java.util.Map;</p>
+<p>/**</p>
+<ul>
+<li><p>静默处理异常 - 容错策略<br>*</p>
+<p>*/<br>@Slf4j<br>public class FailSafeTolerantStrategy implements TolerantStrategy {</p>
+<p> @Override<br> public RpcResponse doTolerant(Map<String, object> context, Exception e) {</String,></p>
+<pre><code> log.info(&quot;静默处理异常&quot;, e);
+ return new RpcResponse();
+</code></pre><p> }<br>}</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 配置和扩展容错策略</span><br><span class="line"></span><br><span class="line">* 常量</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.fault.tolerant;</p>
+<p>/**</p>
+<ul>
+<li><p>容错策略键名常量<br>*</p>
+<p>*/<br>public interface TolerantStrategyKeys {</p>
+<p> /**</p>
+<ul>
+<li><p>故障恢复<br>*/<br>// String FAIL_BACK = “failBack”;</p>
+<p>/**</p>
+</li>
+<li><p>快速失败<br>*/<br>String FAIL_FAST = “failFast”;</p>
+<p>/**</p>
+</li>
+<li><p>故障转移<br>*/<br>//  String FAIL_OVER = “failOver”;</p>
+<p>/**</p>
+</li>
+<li>静默处理<br>*/<br>String FAIL_SAFE = “failSafe”;</li>
+</ul>
+</li>
+</ul>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 使用工厂模式</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package com.lkj.yurpc.fault.tolerant;</p>
+<p>import com.lkj.yurpc.spi.SpiLoader;</p>
+<p>/**</p>
+<ul>
+<li><p>容错策略工厂（工厂模式，用于获取容错策略对象）<br>*</p>
+<p>*/<br>public class TolerantStrategyFactory {</p>
+<p> static {</p>
+<pre><code> SpiLoader.load(TolerantStrategy.class);
+</code></pre><p> }</p>
+<p> /**</p>
+<ul>
+<li><p>默认容错策略<br>*/<br>private static final TolerantStrategy DEFAULT_RETRY_STRATEGY = new FailFastTolerantStrategy();</p>
+<p>/**</p>
+</li>
+<li>获取实例<br>*</li>
+<li>@param key</li>
+<li>@return<br>*/<br>public static TolerantStrategy getInstance(String key) {<br> return SpiLoader.getInstance(TolerantStrategy.class, key);<br>}</li>
+</ul>
+</li>
+</ul>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 应用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>// rpc 请求<br>// 使用重试机制<br>RpcResponse rpcResponse;<br>try {<br>    RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());<br>    rpcResponse = retryStrategy.doRetry(() -&gt;<br>            VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo)<br>    );<br>} catch (Exception e) {<br>    // 容错机制<br>    TolerantStrategy tolerantStrategy = TolerantStrategyFactory.getInstance(rpcConfig.getTolerantStrategy());<br>    rpcResponse = tolerantStrategy.doTolerant(null, e);<br>}<br>return rpcResponse.getData();</p>
+<p>```</p>
+
     </div>
 
     
@@ -528,7 +1500,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">手写RPC框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E6%98%93%E7%89%88%E6%9C%ACRPC%E5%BC%80%E5%8F%91"><span class="nav-number">1.1.</span> <span class="nav-text">简易版本RPC开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">RPC框架实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E7%AE%80%E6%98%93%E7%89%88RPC%E6%A1%86%E6%9E%B6"><span class="nav-number">1.1.3.</span> <span class="nav-text">开发简易版RPC框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E6%98%93%E6%B5%8B%E8%AF%95"><span class="nav-number">1.1.4.</span> <span class="nav-text">简易测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.2.</span> <span class="nav-text">全局配置加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">1.2.1.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">项目实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">配置加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%B4%E6%8A%A4%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">维护全局配置对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3Mock"><span class="nav-number">1.3.</span> <span class="nav-text">接口Mock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88"><span class="nav-number">1.3.2.</span> <span class="nav-text">设计方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.3.</span> <span class="nav-text">开发实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95-1"><span class="nav-number">1.3.4.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPI"><span class="nav-number">1.4.</span> <span class="nav-text">SPI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.5.</span> <span class="nav-text">注册中心基本实现</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">手写RPC框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E6%98%93%E7%89%88%E6%9C%ACRPC%E5%BC%80%E5%8F%91"><span class="nav-number">1.1.</span> <span class="nav-text">简易版本RPC开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">RPC框架实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E7%AE%80%E6%98%93%E7%89%88RPC%E6%A1%86%E6%9E%B6"><span class="nav-number">1.1.3.</span> <span class="nav-text">开发简易版RPC框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E6%98%93%E6%B5%8B%E8%AF%95"><span class="nav-number">1.1.4.</span> <span class="nav-text">简易测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.2.</span> <span class="nav-text">全局配置加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">1.2.1.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">项目实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">配置加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%B4%E6%8A%A4%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">维护全局配置对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3Mock"><span class="nav-number">1.3.</span> <span class="nav-text">接口Mock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88"><span class="nav-number">1.3.2.</span> <span class="nav-text">设计方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.3.</span> <span class="nav-text">开发实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95-1"><span class="nav-number">1.3.4.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPI"><span class="nav-number">1.4.</span> <span class="nav-text">SPI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.5.</span> <span class="nav-text">注册中心基本实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90-2"><span class="nav-number">1.5.1.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88-1"><span class="nav-number">1.5.2.</span> <span class="nav-text">设计方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">注册中心核心功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">技术选型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ETCD"><span class="nav-number">1.5.3.</span> <span class="nav-text">ETCD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">数据结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">1.5.4.</span> <span class="nav-text">开发实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%80%E5%8F%91"><span class="nav-number">1.5.4.1.</span> <span class="nav-text">注册中心开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E9%85%8D%E7%BD%AE%E5%92%8C%E6%89%A9%E5%B1%95%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.5.4.2.</span> <span class="nav-text">支持配置和扩展注册中心</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
