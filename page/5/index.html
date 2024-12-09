@@ -145,6 +145,161 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">计算机组织原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-13 16:49:24" itemprop="dateCreated datePublished" datetime="2021-12-13T16:49:24+08:00">2021-12-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/09/ASP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/09/ASP/" class="post-title-link" itemprop="url">ASP</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-09 21:45:59" itemprop="dateCreated datePublished" datetime="2021-12-09T21:45:59+08:00">2021-12-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-11 22:43:48" itemprop="dateModified" datetime="2021-12-11T22:43:48+08:00">2021-12-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="简单登录程序"><a href="#简单登录程序" class="headerlink" title="简单登录程序"></a>简单登录程序</h3><p>跳转：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Response.Redirect(&quot;URL&quot;)</span><br></pre></td></tr></table></figure>
+<p>返回弹窗</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Response.Write(&quot;&lt;script&gt;alter(&#x27;用户名或密码错误&#x27;);&lt;/script&gt;&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="文本框的使用"><a href="#文本框的使用" class="headerlink" title="文本框的使用"></a>文本框的使用</h3><p>text默认为单行模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;单行模式&lt;/p&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">        &lt;asp:TextBox ID=&quot;TextBox1&quot; runat=&quot;server&quot;&gt;&lt;/asp:TextBox&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">    &lt;p&gt;密码模式&lt;/p&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">        &lt;asp:TextBox ID=&quot;TextBox2&quot; runat=&quot;server&quot; TextMode=&quot;Password&quot;&gt;&lt;/asp:TextBox&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">    &lt;p&gt;多行模式&lt;/p&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">        &lt;asp:TextBox ID=&quot;TextBox3&quot; runat=&quot;server&quot; TextMode=&quot;MultiLine&quot;&gt;&lt;/asp:TextBox&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/12/09/ASP/image-20211209221532497.png" alt="image-20211209221532497" style="zoom:50%;"></p>
+<p>属性栏修改。</p>
+<h3 id="判断单选框"><a href="#判断单选框" class="headerlink" title="判断单选框"></a>判断单选框</h3><p>单选框将GroupName设置为一样即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;label&gt;性别&lt;/label&gt;</span><br><span class="line">        &lt;asp:RadioButton ID=&quot;RadioButton1&quot; runat=&quot;server&quot; Text=&quot;男&quot; GroupName=&quot;sex&quot;/&gt;</span><br><span class="line">        &amp;nbsp;&amp;nbsp</span><br><span class="line">        &lt;asp:RadioButton ID=&quot;RadioButton2&quot; runat=&quot;server&quot; Text=&quot;女&quot; GroupName=&quot;sex&quot;/&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">        &lt;asp:Button ID=&quot;Button1&quot; runat=&quot;server&quot; Text=&quot;提交&quot; OnClick=&quot;Button1_Click2&quot;  /&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">protected void Button1_Click2(object sender, EventArgs e)</span><br><span class="line">   &#123;</span><br><span class="line">       if (RadioButton1.Checked == true)</span><br><span class="line">       &#123;</span><br><span class="line">           Response.Write(&quot;&lt;script&gt;alert(&#x27;性别为男&#x27;);&lt;/script&gt;&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">       if (RadioButton2.Checked == true)</span><br><span class="line">       &#123;</span><br><span class="line">           Response.Write(&quot;&lt;script&gt;alert(&#x27;性别为女&#x27;);&lt;/script&gt;&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="判断多选框"><a href="#判断多选框" class="headerlink" title="判断多选框"></a>判断多选框</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“+string+”</span><br></pre></td></tr></table></figure>
+<h3 id="下拉框"><a href="#下拉框" class="headerlink" title="下拉框"></a>下拉框</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;asp:DropDownList ID=&quot;DropDownList1&quot; runat=&quot;server&quot;&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;原平&lt;/asp:ListItem&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;忻州&lt;/asp:ListItem&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;五台&lt;/asp:ListItem&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;定襄&lt;/asp:ListItem&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;五寨&lt;/asp:ListItem&gt;</span><br><span class="line">       &lt;/asp:DropDownList&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DropDownList1.SelectedItem.Value</span><br><span class="line">DropDownList1.SelectedValue</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="呈现信息"><a href="#呈现信息" class="headerlink" title="呈现信息"></a>呈现信息</h3><p>构造一个用于盛放HTML代码的变量，用Response.Write(HTML),可先用Response.Clear()清理当前页面</p>
+<h3 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h3><p>Convert.ToDouble()</p>
+<h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">catch(Exception es)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="显示数据"><a href="#显示数据" class="headerlink" title="显示数据"></a>显示数据</h3><p><img src="/2021/12/09/ASP/image-20211210120304445.png" alt="image-20211210120304445"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inf.InnerHtml=HTML;</span><br></pre></td></tr></table></figure>
+<h3 id="读取全部数据"><a href="#读取全部数据" class="headerlink" title="读取全部数据"></a>读取全部数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foreach</span><br></pre></td></tr></table></figure>
+<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><p><img src="/2021/12/09/ASP/image-20211210135917242.png" alt="image-20211210135917242" style="zoom:50%;"></p>
+<p><img src="/2021/12/09/ASP/image-20211210135930367.png" alt="image-20211210135930367" style="zoom:50%;"></p>
+<h3 id="初始"><a href="#初始" class="headerlink" title="初始"></a>初始</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;/system.web&gt;</span><br><span class="line">	&lt;system.webServer&gt;</span><br><span class="line">		&lt;defaultDocument&gt;</span><br><span class="line">			&lt;files&gt;</span><br><span class="line">				&lt;clear/&gt;</span><br><span class="line">				&lt;add value=&quot;index.aspk&quot;/&gt;</span><br><span class="line">			&lt;/files&gt;</span><br><span class="line">		&lt;/defaultDocument&gt;</span><br><span class="line">	&lt;/system.webServer&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="显示表"><a href="#显示表" class="headerlink" title="显示表"></a>显示表</h3><p><img src="/2021/12/09/ASP/image-20211210175458347.png" alt="image-20211210175458347"></p>
+<h3 id="拆包"><a href="#拆包" class="headerlink" title="拆包"></a>拆包</h3><p><img src="/2021/12/09/ASP/image-20211210184423626.png" alt="image-20211210184423626"></p>
+<p><img src="/2021/12/09/ASP/image-20211210184758134.png" alt="image-20211210184758134"></p>
+<p><img src="/2021/12/09/ASP/image-20211210185030345.png" alt="image-20211210185030345"></p>
+<p><img src="/2021/12/09/ASP/image-20211210185043844.png" alt="image-20211210185043844"></p>
+<p><img src="/2021/12/09/ASP/image-20211210190952668.png" alt="image-20211210190952668"></p>
+<p><img src="/2021/12/09/ASP/image-20211210191832719.png" alt="image-20211210191832719"></p>
+<p><img src="/2021/12/09/ASP/image-20211210191935390.png" alt="image-20211210191935390"></p>
+<p><img src="/2021/12/09/ASP/image-20211211204121826.png" alt="image-20211211204121826"></p>
+<p><img src="/2021/12/09/ASP/image-20211211204221557.png" alt="image-20211211204221557"></p>
+<p><img src="/2021/12/09/ASP/image-20211211204301439.png" alt="image-20211211204301439"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/07/%E5%AD%A6%E6%A0%A1%E6%95%99%E5%AE%A4%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2156,220 +2311,6 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/07/DIN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/07/DIN/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-10-07 20:54:24" itemprop="dateCreated datePublished" datetime="2021-10-07T20:54:24+08:00">2021-10-07</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>利用真实的下一个行为作为正样本；</li>
-<li>负例的选择或是从用户未交互过的商品中随机抽取，或是从已展示给用户但用户没有点击的商品中随机抽取；</li>
-</ul>
-<p>具体来讲，就是利用 t 时刻的行为 b(t+1) 作为监督去学习隐含层向量 ht。正负样本分别代表了用户 点击/未点击 的第 t 个物品embedding向量。</p>
-<p>关于mask的作用，这里结合 Transformer 再说一下：</p>
-<p>mask 表示掩码，它对某些值进行掩盖，使其在参数更新时不产生效果。Transformer 模型里面涉及两种 mask，分别是 padding mask 和 sequence mask。其中，padding mask 在所有的 scaled dot-product attention 里面都需要用到，而 sequence mask 只有在 decoder 的 self-attention 里面用到。</p>
-<h5 id="Padding-Mask"><a href="#Padding-Mask" class="headerlink" title="Padding Mask"></a>Padding Mask</h5><p>什么是 padding mask 呢？因为每个批次输入序列长度是不一样的也就是说，我们要对输入序列进行对齐。具体来说，就是给在较短的序列后面填充 0。但是如果输入的序列太长，则是截取左边的内容，把多余的直接舍弃。因为这些填充的位置，其实是没什么意义的，所以attention机制不应该把注意力放在这些位置上，需要进行一些处理。</p>
-<p>具体的做法是，把这些位置的值加上一个非常大的负数(负无穷)，这样的话，经过 softmax，这些位置的概率就会接近0！而我们的 padding mask 实际上是一个张量，每个值都是一个Boolean，值为 false 的地方就是我们要进行处理的地方。</p>
-<h5 id="Sequence-mask"><a href="#Sequence-mask" class="headerlink" title="Sequence mask"></a>Sequence mask</h5><p>sequence mask 是为了使得 decoder 不能看见未来的信息。也就是对于一个序列，在 time_step 为 t 的时刻，我们的解码输出应该只能依赖于 t 时刻之前的输出，而不能依赖 t 之后的输出。因此我们需要想一个办法，把 t 之后的信息给隐藏起来。</p>
-<p>那么具体怎么做呢？也很简单：产生一个上三角矩阵，上三角的值全为0。把这个矩阵作用在每一个序列上，就可以达到我们的目的。</p>
-<p>对于 decoder 的 self-attention，里面使用到的 scaled dot-product attention，同时需要padding mask 和 sequence mask 作为 attn_mask，具体实现就是两个mask相加作为attn_mask。</p>
-<p>其他情况，attn_mask 一律等于 padding mask。</p>
-<p><strong>DIN这里使用的是padding mask。</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/05/tensorflow/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/05/tensorflow/" class="post-title-link" itemprop="url">tensorflow</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-10-05 21:08:48" itemprop="dateCreated datePublished" datetime="2021-10-05T21:08:48+08:00">2021-10-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-07 20:54:27" itemprop="dateModified" datetime="2021-10-07T20:54:27+08:00">2021-10-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="placeholder"><a href="#placeholder" class="headerlink" title="placeholder"></a>placeholder</h4><p>函数形式：<img src="/2021/10/05/tensorflow/image-20211005211038432.png" alt="image-20211005211038432"></p>
-<p>参数：</p>
-<p>dtype：数据类型。常用的是tf.float32,tf.float64等数值类型</p>
-<p>shape：数据形状。默认是None，就是一维值，也可以是多维（比如[2,3], [None, 3]表示列是3，行不定）</p>
-<p>name：名称</p>
-<p>使用原因： Tensorflow的设计理念称之为计算流图，在编写程序时，首先构筑整个系统的graph，代码并不会直接生效，这一点和python的其他数值计算库（如Numpy等）不同，graph为静态的，类似于docker中的镜像。然后，在实际的运行时，启动一个session，程序才会真正的运行。这样做的好处就是：避免反复地切换底层程序实际运行的上下文，tensorflow帮你优化整个系统的代码。我们知道，很多python程序的底层为C语言或者其他语言，执行一行脚本，就要切换一次，是有成本的，tensorflow通过计算流图的方式，帮你优化整个session需要执行的代码，还是很有优势的。</p>
-<p>​        所以placeholder()函数是在神经网络构建graph的时候在模型中的占位，此时并没有把要输入的数据传入模型，它只会分配必要的内存。等建立session，在会话中，运行模型的时候通过feed_dict()函数向占位符喂入数据。</p>
-<h4 id="get-variable"><a href="#get-variable" class="headerlink" title="get_variable"></a>get_variable</h4><p>该函数共有十一个参数，常用的有：名称name、变量规格shape、变量类型dtype、变量初始化方式initializer、所属于的集合collections。</p>
-<p>该函数的作用是创建新的tensorflow变量，常见的initializer有：常量初始化器tf.constant_initializer、正太分布初始化器tf.random_normal_initializer、截断正态分布初始化器tf.truncated_normal_initializer、均匀分布初始化器tf.random_uniform_initializer。</p>
-<h4 id="张量"><a href="#张量" class="headerlink" title="张量"></a>张量</h4><p>关于张量的学习，可参考：</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/140260245">什么是张量？ - 知乎 (zhihu.com)</a></p>
-<h4 id="convert-to-tensor"><a href="#convert-to-tensor" class="headerlink" title="convert_to_tensor"></a>convert_to_tensor</h4><p>将给定值转换为张量。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.convert_to_tensor(</span><br><span class="line">    value,</span><br><span class="line">    dtype=<span class="literal">None</span>,</span><br><span class="line">    dtype_hint=<span class="literal">None</span>,</span><br><span class="line">    name=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>该函数将各种类型的Python对象转换为张量对象。它接受张量对象、数字数组、Python列表和Python标量。</p>
-<h5 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h5><p>value:类型具有注册张量转换函数的对象。<br>dtype:返回张量的可选元素类型。如果缺少，则从值的类型推断类型。<br>dtype_hint:返回张量的可选元素类型，当dtype为None时使用。在某些情况下，调用者在转换为张量时可能没有考虑到dtype，因此dtype_hint可以用作软首选项。如果不能转换为dtype_hint，则此参数没有效果。<br>name:创建新张量时使用的可选名称。</p>
-<h5 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h5><p>一个基于值的张量。</p>
-<h4 id="embedding-lookup"><a href="#embedding-lookup" class="headerlink" title="embedding_lookup()"></a>embedding_lookup()</h4><p>用途主要是选取一个张量里面索引对应的元素。</p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6e61528acad9">tf.nn.embedding_lookup() 详解 - 简书 (jianshu.com)</a></p>
-<h4 id="expand-dims"><a href="#expand-dims" class="headerlink" title="expand_dims()"></a>expand_dims()</h4><p>tf.expand_dims()函数用于给函数增加维度。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.expand_dims(</span><br><span class="line">    input,</span><br><span class="line">    axis=None,</span><br><span class="line">    name=None,</span><br><span class="line">    dim=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h5 id="参数：-1"><a href="#参数：-1" class="headerlink" title="参数："></a>参数：</h5><ul>
-<li>input是输入张量。</li>
-<li>axis是指定扩大输入张量形状的维度索引值。</li>
-<li>dim等同于轴，一般不推荐使用。</li>
-</ul>
-<p>函数的功能是在给定一个input时，在axis轴处给input增加一个维度。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/TeFuirnever/article/details/88797810">(5条消息) tf.expand<em>dims()函数解析（最清晰的解释）</em>种树最好的时间是10年前，其次是现在！！！-CSDN博客_tf.expand_dim</a></p>
-<h4 id="tf-tile"><a href="#tf-tile" class="headerlink" title="tf.tile()"></a>tf.tile()</h4><p>tensorflow中的tile()函数是用来对张量(Tensor)进行扩展的，其特点是对当前张量内的数据进行一定规则的复制。最终的输出张量维度不变。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tf.tile(</span><br><span class="line">    input,</span><br><span class="line">    multiples,</span><br><span class="line">    name=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>input是待扩展的张量，multiples是扩展方法。<br>假如input是一个3维的张量。那么mutiples就必须是一个1x3的1维张量。这个张量的三个值依次表示input的第1，第2，第3维数据扩展几倍。 </p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chamie/p/11124314.html">tf.tile()函数理解 - chamie - 博客园 (cnblogs.com)</a></p>
-<h4 id="concact"><a href="#concact" class="headerlink" title="concact"></a>concact</h4><p>tensorflow中用来拼接张量的函数tf.concat()，用法:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.concat([tensor1, tensor2, tensor3,...], axis)</span><br></pre></td></tr></table></figure>
-<p>axis=0   代表在第0个维度拼接</p>
-<p>axis=1   代表在第1个维度拼接 </p>
-<p>对于一个二维矩阵，第0个维度代表最外层方括号所框下的子集，第1个维度代表内部方括号所框下的子集。维度越高，括号越小。</p>
-<h4 id="tf-layers-batch-normalization"><a href="#tf-layers-batch-normalization" class="headerlink" title="tf.layers.batch_normalization"></a>tf.layers.batch_normalization</h4><p>用来构建待训练的神经网络模型,方法接口如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">tf.layers.batch_normalization(</span><br><span class="line">    inputs,</span><br><span class="line">    axis=-1,</span><br><span class="line">    momentum=0.99,</span><br><span class="line">    epsilon=0.001,</span><br><span class="line">    center=True,</span><br><span class="line">    scale=True,</span><br><span class="line">    beta_initializer=tf.zeros_initializer(),</span><br><span class="line">    gamma_initializer=tf.ones_initializer(),</span><br><span class="line">    moving_mean_initializer=tf.zeros_initializer(),</span><br><span class="line">    moving_variance_initializer=tf.ones_initializer(),</span><br><span class="line">    beta_regularizer=None,</span><br><span class="line">    gamma_regularizer=None,</span><br><span class="line">    beta_constraint=None,</span><br><span class="line">    gamma_constraint=None,</span><br><span class="line">    training=False,</span><br><span class="line">    trainable=True,</span><br><span class="line">    name=None,</span><br><span class="line">    reuse=None,</span><br><span class="line">    renorm=False,</span><br><span class="line">    renorm_clipping=None,</span><br><span class="line">    renorm_momentum=0.99,</span><br><span class="line">    fused=None,</span><br><span class="line">    virtual_batch_size=None,</span><br><span class="line">    adjustment=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>这里有几个重要参数需要注意：</p>
-<ul>
-<li><code>axis</code>的值取决于按照<code>input</code>的哪一个维度进行BN，例如输入为<code>channel_last</code> format，即<code>[batch_size, height, width, channel]</code>，则<code>axis</code>应该设定为4，如果为<code>channel_first</code> format，则<code>axis</code>应该设定为1.</li>
-<li><code>momentum</code>的值用在训练时，滑动平均的方式计算滑动平均值<code>moving_mean</code>和滑动方差<code>moving_variance</code>。</li>
-<li><code>center</code>为<code>True</code>时，添加位移因子<code>beta</code>到该BN层，否则不添加。添加<code>beta</code>是对BN层的变换加入位移操作。注意，<code>beta</code>一般设定为可训练参数，即<code>trainable=True</code>。</li>
-<li><code>scale</code>为<code>True</code>是，添加缩放因子<code>gamma</code>到该BN层，否则不添加。添加<code>gamma</code>是对BN层的变化加入缩放操作。注意，<code>gamma</code>一般设定为可训练参数，即<code>trainable=True</code>。</li>
-<li><code>training</code>表示模型当前的模式，如果为<code>True</code>，则模型在训练模式，否则为推理模式。要非常注意这个模式的设定，这个参数默认值为<code>False</code>。如果在训练时采用了默认值<code>False</code>，则滑动均值<code>moving_mean</code>和滑动方差<code>moving_variance</code>都不会根据当前batch的数据更新，这就意味着在推理模式下，均值和方差都是其初始值，因为这两个值并没有在训练迭代过程中滑动更新。</li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fclbky/p/12636842.html">tf.layers.batch_normalization 介绍 - 大雄fcl - 博客园 (cnblogs.com)</a></li>
-</ul>
-<h4 id="dense"><a href="#dense" class="headerlink" title="dense"></a>dense</h4><p>dense，即全连接网络，layers 模块提供了一个 dense() 方法来实现此操作，定义在 tensorflow/python/layers/core.py 中，下面我们来说明一下它的用法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dense(</span><br><span class="line">    inputs,</span><br><span class="line">    units,</span><br><span class="line">    activation=None,</span><br><span class="line">    use_bias=True,</span><br><span class="line">    kernel_initializer=None,</span><br><span class="line">    bias_initializer=tf.zeros_initializer(),</span><br><span class="line">    kernel_regularizer=None,</span><br><span class="line">    bias_regularizer=None,</span><br><span class="line">    activity_regularizer=None,</span><br><span class="line">    kernel_constraint=None,</span><br><span class="line">    bias_constraint=None,</span><br><span class="line">    trainable=True,</span><br><span class="line">    name=None,</span><br><span class="line">    reuse=None</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>参数说明如下：<br> inputs：必需，即需要进行操作的输入数据。<br> units：必须，即神经元的数量。<br> activation：可选，默认为 None，如果为 None 则是线性激活。<br> use_bias：可选，默认为 True，是否使用偏置。<br> kernel_initializer：可选，默认为 None，即权重的初始化方法，如果为 None，则使用默认的 Xavier 初始化方法。<br> bias_initializer：可选，默认为零值初始化，即偏置的初始化方法。<br> kernel_regularizer：可选，默认为 None，施加在权重上的正则项。<br> bias_regularizer：可选，默认为 None，施加在偏置上的正则项。<br> activity_regularizer：可选，默认为 None，施加在输出上的正则项。<br> kernel_constraint，可选，默认为 None，施加在权重上的约束项。<br> bias_constraint，可选，默认为 None，施加在偏置上的约束项。<br> trainable：可选，默认为 True，布尔类型，如果为 True，则将变量添加到 GraphKeys.TRAINABLE_VARIABLES 中。<br> name：可选，默认为 None，卷积层的名称。<br> reuse：可选，默认为 None，布尔类型，如果为 True，那么如果 name 相同时，会重复利用。<br> 返回值： 全连接网络处理后的 Tensor。</p>
-<h4 id="reshape"><a href="#reshape" class="headerlink" title="reshape()"></a>reshape()</h4><p>tf.reshape(tensor, shape, name=None)<br>函数的作用是将tensor变换为参数shape的形式。 其中shape为一个列表形式，特殊的一点是列表中可以存在-1。</p>
-<p>转换为一般的shape（也就是不涉及-1的）我这里就不说了，主要说一下对-1的理解。<br>-1代表的含义是不用我们自己指定这一维的大小，函数会自动计算，但列表中只能存在一个-1。<br>（当然如果存在多个-1，就是一个存在多解的方程了）</p>
-<p>我理解的要点是：首先shape就是reshape变换后的矩阵大小，先不管-1的那一个维度，先看其它维度，然后用原矩阵的总元素个数除以确定的维度，就能得到-1维度的值。</p>
-<p>我们来看例子。</p>
-<p>M=np.array([[[[1,2,3]]],[[[4,5,6]]],[[[7,8,9]]]])   #M是[3,1,1,3]的四维矩阵</p>
-<p>我想把M重组成若干个3维的向量，那么直接tf.reshape(M,[-1,3])</p>
-<p>那么会得到几个3维向量呢？  M一共有9个元素，9/3=3，那么得到3个三维向量，那么结果就是[3,3]的矩阵。</p>
-<p><img src="/2021/10/05/tensorflow/image-20211006175936881.png" alt="image-20211006175936881"></p>
-<p>那么我想得到若干个[3,3]的矩阵，那么我们tf.reshape(M,[-1,3,3])</p>
-<p>那么结果就是[1,3,3]的矩阵</p>
-<p><img src="/2021/10/05/tensorflow/image-20211006175946915.png" alt="image-20211006175946915"></p>
-<h4 id="tf-reduce-mean"><a href="#tf-reduce-mean" class="headerlink" title="tf.reduce_mean"></a>tf.reduce_mean</h4><p>tf.reduce_mean 函数用于计算张量tensor沿着指定的数轴（tensor的某一维度）上的的平均值，主要用作降维或者计算tensor（图像）的平均值。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reduce_mean(input_tensor,</span><br><span class="line">                axis=None,</span><br><span class="line">                keep_dims=False,</span><br><span class="line">                name=None,</span><br><span class="line">                reduction_indices=None)</span><br></pre></td></tr></table></figure>
-<p>第一个参数input_tensor： 输入的待降维的tensor;<br>第二个参数axis： 指定的轴，如果不指定，则计算所有元素的均值;<br>第三个参数keep_dims：是否降维度，设置为True，输出的结果保持输入tensor的形状，设置为False，输出结果会降低维度;<br>第四个参数name： 操作的名称;<br>第五个参数 reduction_indices：在以前版本中用来指定轴，已弃用;</p>
-<h4 id="tf-nn-sigmoid-cross-entropy-with-logits"><a href="#tf-nn-sigmoid-cross-entropy-with-logits" class="headerlink" title="tf.nn.sigmoid_cross_entropy_with_logits"></a>tf.nn.sigmoid_cross_entropy_with_logits</h4><p>tf.nn.sigmoid_cross_entropy_with_logits(_sentinel=None,,labels=None,logits=None,name=None)</p>
-<p>对于给定的logits计算sigmoid的交叉熵。</p>
-<h4 id="tf-trainable-variables"><a href="#tf-trainable-variables" class="headerlink" title="tf.trainable_variables()"></a>tf.trainable_variables()</h4><p>顾名思义，这个函数可以也仅可以查看可训练的变量，在我们生成变量时，无论是使用tf.Variable()还是tf.get_variable()生成变量，都会涉及一个参数trainable,其默认为True。以tf.Variable()为例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">__init__(</span><br><span class="line">    initial_value=None,</span><br><span class="line">    trainable=True,</span><br><span class="line">    collections=None,</span><br><span class="line">    validate_shape=True,</span><br><span class="line">   ...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>对于一些我们不需要训练的变量，比较典型的例如学习率或者计步器这些变量，我们都需要将trainable设置为False，这时tf.trainable_variables() 就不会打印这些变量。</p>
-<h4 id="tf-train-GradientDescentOptimizer"><a href="#tf-train-GradientDescentOptimizer" class="headerlink" title="tf.train.GradientDescentOptimizer"></a>tf.train.GradientDescentOptimizer</h4><p>TensorFlow中损失优化方法</p>
-<ul>
-<li>tf.train.GradientDescentOptimizer(learningrate, uselocking, name)：原始梯度下降方法，唯一参数就是学习率。</li>
-</ul>
-<h4 id="tf-gradients"><a href="#tf-gradients" class="headerlink" title="tf.gradients()"></a>tf.gradients()</h4><p>参数如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tf.gradients(ys, xs, </span><br><span class="line">			 grad_ys=None, </span><br><span class="line">			 name=&#x27;gradients&#x27;,</span><br><span class="line">			 colocate_gradients_with_ops=False,</span><br><span class="line">			 gate_gradients=False,</span><br><span class="line">			 aggregation_method=None,</span><br><span class="line">			 stop_gradients=None)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>tf.gradients()</code>实现<code>ys</code>对<code>xs</code>求导，接受求导值<code>ys</code>和<code>xs</code>不仅可以是tensor，还可以是list</p>
-<h4 id="tf-clip-by-global-norm"><a href="#tf-clip-by-global-norm" class="headerlink" title="tf.clip_by_global_norm"></a>tf.clip_by_global_norm</h4><p>tf.clip_by_global_norm函数的作用就是通过权重梯度的总和的比率来截取多个张量的值。</p>
-<h4 id="tf-gather"><a href="#tf-gather" class="headerlink" title="tf.gather"></a>tf.gather</h4><p>tf.gather(params,indices,axis=0 )</p>
-<p>从params的axis维根据indices的参数值获取切片</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2439,7 +2380,7 @@ d_{min},d_{max},d_{avg}</script><p>计算时，AGNES算法被相应地称为单�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

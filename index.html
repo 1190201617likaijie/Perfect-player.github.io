@@ -145,6 +145,729 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/25/sky-take-out/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/11/25/sky-take-out/" class="post-title-link" itemprop="url">sky-take-out</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-11-25 12:26:27" itemprop="dateCreated datePublished" datetime="2024-11-25T12:26:27+08:00">2024-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-11-26 21:23:33" itemprop="dateModified" datetime="2024-11-26T21:23:33+08:00">2024-11-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h1><h2 id="功能架构"><a href="#功能架构" class="headerlink" title="功能架构"></a>功能架构</h2><p><img src="/2024/11/25/sky-take-out/image-20241125122839960.png" alt="image-20241125122839960"></p>
+<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><p><img src="/2024/11/25/sky-take-out/image-20241125122858635.png" alt="image-20241125122858635"></p>
+<h3 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h3><p>1.修改数据库中明文密码，改为MD5加密后的密文</p>
+<p>2.修改Java代码，前端提交的密码进行MD5加密后再跟数据库中密码比对</p>
+<h3 id="Swagger"><a href="#Swagger" class="headerlink" title="Swagger"></a>Swagger</h3><p>使用Swagger你只需要按照它的规范去定义接口及接口相关的信息，就可以做到生成接口文档，以及在线接口调试页面。</p>
+<h1 id="员工管理"><a href="#员工管理" class="headerlink" title="员工管理"></a>员工管理</h1><h1 id="面试问题"><a href="#面试问题" class="headerlink" title="面试问题"></a>面试问题</h1><ul>
+<li>nginx反向代理好处</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">提高访问速度</span><br><span class="line">进行负载均衡（所谓负载均衡,就是把大量的请求按照我们指定的方式均衡的分配给集群中的每台服务器）</span><br><span class="line">保证后端服务安全</span><br></pre></td></tr></table></figure>
+<ul>
+<li>DTO</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当前端提交的数据和实体类中对应的属性差别比较大时，建议使用DTO来封装数据</span><br></pre></td></tr></table></figure>
+<ul>
+<li>JWT</li>
+</ul>
+<p><img src="/2024/11/25/sky-take-out/image-20241125192608560.png" alt="image-20241125192608560"></p>
+<ul>
+<li>日期处理</li>
+</ul>
+<p>在WebMvcConfiguration中扩展SpringMVC的消息转换器，统一对日期类型进行格式处理</p>
+<ul>
+<li>公共字段自动填充</li>
+</ul>
+<p>使用AOP切面编程，实现功能增强，来完成公共字段自动填充功能。</p>
+<p>实现步骤：</p>
+<p>1). 自定义注解 AutoFill，用于标识需要进行公共字段自动填充的方法</p>
+<p>2). 自定义切面类 AutoFillAspect，统一拦截加入了 AutoFill 注解的方法，通过反射为公共字段赋值</p>
+<p>3). 在 Mapper 的方法上加入 AutoFill 注解</p>
+<p>技术点：枚举、注解、AOP、反射</p>
+<ul>
+<li>新增菜品，包括图片文件</li>
+</ul>
+<p>使用第三方的存储服务，选用了阿里云的OSS服务进行文件存储。</p>
+<ul>
+<li>删除菜品的性能优化</li>
+</ul>
+<p>在DishServiceImpl中，删除菜品是一条一条传送执行的，大大降低了执行效率，为了提高性能，进行修改，使用动态sql执行删除操作</p>
+<ul>
+<li>redis</li>
+</ul>
+<p>基于键值对的非关系数据库。</p>
+<p>常用数据类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">字符串 string</span><br><span class="line"></span><br><span class="line">哈希 hash</span><br><span class="line"></span><br><span class="line">列表 list</span><br><span class="line"></span><br><span class="line">集合 set</span><br><span class="line"></span><br><span class="line">有序集合 sorted set / zset</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/11/25/sky-take-out/image-20241126104927160.png" alt="image-20241126104927160"></p>
+<ul>
+<li>微信登录</li>
+</ul>
+<p>业务规则：</p>
+<p>基于微信登录实现小程序的登录功能</p>
+<p>如果是新用户需要自动完成注册</p>
+<p>要完成微信登录的话，最终就要获得微信用户的openid。在小程序端获取授权码后，向后端服务发送请求，并携带授权码，这样后端服务在收到授权码后，就可以去请求微信接口服务。最终，后端向小程序返回openid和token等数据。</p>
+<ul>
+<li>应用层</li>
+</ul>
+<p>SpringBoot： 快速构建Spring项目, 采用 “约定优于配置” 的思想, 简化Spring项目的配置开发。</p>
+<p>SpringMVC：SpringMVC是spring框架的一个模块，springmvc和spring无需通过中间整合层进行整合，可以无缝集成。</p>
+<p>Spring Task: 由Spring提供的定时任务框架。</p>
+<p>httpclient: 主要实现了对http请求的发送。</p>
+<p>Spring Cache: 由Spring提供的数据缓存框架</p>
+<p>JWT: 用于对应用程序上的用户进行身份验证的标记。</p>
+<p>阿里云OSS: 对象存储服务，在项目中主要存储文件，如图片等。</p>
+<p>Swagger： 可以自动的帮助开发人员生成接口文档，并对接口进行测试。</p>
+<p>POI: 封装了对Excel表格的常用操作。</p>
+<p>WebSocket: 一种通信网络协议，使客户端和服务器之间的数据交换更加简单，用于项目的来单、催单功能实现。</p>
+<ul>
+<li>数据层</li>
+</ul>
+<p>MySQL： 关系型数据库, 本项目的核心业务数据都会采用MySQL进行存储。</p>
+<p>Redis： 基于key-value格式存储的内存数据库, 访问速度快, 经常使用它做缓存。</p>
+<p>Mybatis： 本项目持久层将会使用Mybatis开发。</p>
+<ul>
+<li>Swagger</li>
+</ul>
+<ol>
+<li>使得前后端分离开发更加方便，有利于团队协作</li>
+<li>接口的文档在线自动生成，降低后端开发人员编写接口文档的负担</li>
+<li>功能测试</li>
+</ol>
+<ul>
+<li>解析出登录员工id后，如何传递给Service的save方法</li>
+</ul>
+<p>通过ThreadLocal进行传递。</p>
+<ul>
+<li>分页</li>
+</ul>
+<p>使用 mybatis 的分页插件 PageHelper 来简化分页代码的开发。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PageHelper是MyBatis的一个插件，内部实现了一个PageInterceptor拦截器。Mybatis会加载这个拦截器到拦截器链中。在我们使用过程中先使用PageHelper.startPage这样的语句在当前线程上下文中设置一个ThreadLocal变量，再利用PageInterceptor这个分页拦截器拦截，从ThreadLocal中拿到分页的信息，如果有分页信息拼装分页SQL（limit语句等）进行分页查询，最后再把ThreadLocal中的东西清除掉。</span><br><span class="line"></span><br><span class="line">设置分页参数：在执行查询之前，首先通过 PageHelper.startPage(int pageNum, int pageSize) 方法设置分页的参数，调用该方法时，通过 ThreadLocal 存储分页信息。</span><br><span class="line">拦截查询语句：PageHelper 利用 MyBatis 提供的插件 API（Interceptor 接口）来拦截原始的查询语句。MyBatis 执行任何 SQL 语句前，都会先通过其插件体系中的拦截器链，PageHelper 正是在这个环节介入的。</span><br><span class="line">修改原始 SQL 语句：在拦截原始查询语句后，PageHelper 会根据分页参数动态地重写或添加 SQL 语句，使其成为一个分页查询。</span><br><span class="line">执行分页查询：修改后的 SQL 语句被执行，返回当前页的数据。</span><br><span class="line">查询总记录数（可选）：如果需要获取总记录数，PageHelper 会自动执行一个派生的查询，以计算原始查询（不包含分页参数）的总记录数。这通常通过移除原始 SQL 的排序（ORDER BY）和分页（LIMIT、OFFSET 等）条件，加上 COUNT(*) 的包装来实现。</span><br><span class="line">返回分页信息：查询结果被封装在 PageInfo 对象中（或其他形式的分页结果对象），这个对象除了包含当前页的数据列表外，还提供了总记录数、总页数、当前页码等分页相关的信息，方便在应用程序中使用。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>前端小程序的微信登录流程</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">微信登录的核心是通过微信小程序提供的临时凭证code换取永久凭证openid的过程</span><br><span class="line"></span><br><span class="line">首先微信小程序会向微信官方申请一个临时登录code</span><br><span class="line">然后，小程序带着code向后台服务发送请求</span><br><span class="line">后台接收到code后，会调用微信官方接口验证code是否合法，如果合法，官方会返回一个openid；这个openid就是此用户在我们系统中的唯一标识，同时也代表用户身份合法</span><br><span class="line">后台服务接收到来着微信的openid之后，会去数据库查询一下是否存在此账户；如果存在，代表这是一个老用户，如果不存在，则代表这是一个新用户首次使用我们的系统，我们需要将其信息保存到用户表中</span><br><span class="line">登录成功之后，需要生成一个标识用户身份的token，返回给前端，前端会将token保存起来</span><br><span class="line">用户后面访问系统的时候，需要携带着这个token，而我们后端需要编写一个拦截器，用于拦截请求，校验token</span><br><span class="line">校验通过，则放行请求，正常访问；校验失败，则禁止通行，返回提示</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>redis应用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">我们项目中有两处地方用到了Redis，分别是：店铺营业状态标识和小程序端的套餐、菜品列表数据</span><br><span class="line"></span><br><span class="line">店铺营业状态标识，仅仅需要在redis中保存一个0|1值即可。这里之所以选择redis，有两个原因</span><br><span class="line"></span><br><span class="line">而没有采用数据库来存储，就是因为这个字段太简单了，没有必要在数据库中新建一张表</span><br><span class="line"></span><br><span class="line">这个状态访问比较频繁，放在redis中，提高了查询速度的同时，可以减轻数据库的访问压力</span><br><span class="line"></span><br><span class="line">小程序端的套餐、菜品列表数据，由于小程序端以后的访问量比较大，所以采用Redis提高访问速度</span><br><span class="line"></span><br><span class="line">具体的操作步骤就是：在查询列表的时候，先判断Redis缓存中是否有数据，如果有，直接返回给前端</span><br><span class="line"></span><br><span class="line">如果没有，再去查询数据库，并将查询结果保存到redis中的同时，再返回给前端</span><br><span class="line"></span><br><span class="line">为了保证Redis和数据库中数据的实时一致性，在对数据库相关数据进行增删改操作时，需要同时清理Redis中数据</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>SpringCache在项目中的应用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">SpringCache是Spring提供的一个缓存框架，它可以通过简单的注解实现缓存的操作，我们常用的注解有下面几个：</span><br><span class="line"></span><br><span class="line">@EnableCaching: 开启基于注解的缓存</span><br><span class="line"></span><br><span class="line">@CachePut: 一般用在查询方法上，表示将方法的返回值放到缓存中</span><br><span class="line"></span><br><span class="line">@Cacheable: 一般用在查询方法上，表示在方法执行前先查看缓存中是否有数据，如果有直接返回；如果没有，再调用方法体查询数据并将返回结果放到缓存中；他有两个关键属性：</span><br><span class="line"></span><br><span class="line">value: 缓存的名称，每个缓存名称下面可以有多个key</span><br><span class="line"></span><br><span class="line">key: 缓存的key，支持Spring的表达式语言SPEL语法</span><br><span class="line"></span><br><span class="line">@CacheEvict: 一般用在增删改方法上 ，用于清理指定缓存，可以根据key清理，也可以清理整个value下的缓存</span><br><span class="line"></span><br><span class="line">SpringCache还有一个有点，就是可以随意切换底层的缓存软件，比如：Redis、内存等等</span><br><span class="line"></span><br><span class="line">本项目中菜品和套餐列表的缓存用到了SpringCache</span><br></pre></td></tr></table></figure>
+<ul>
+<li>SpringTask在项目中的应用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SpringTask是Spring框架提供的一种任务调度工具，用来按照定义的时间格式执行某段代码。</span><br><span class="line">在我们的项目中，超时订单的状态改变用到了SpringTask，比如：</span><br><span class="line"></span><br><span class="line">每隔1分钟检查是否有超过15分钟未支付的订单，如果有就将订单取消</span><br><span class="line">每天凌晨1点检查前一天是否有派送中的订单，如果有将订单状态改成已完成</span><br></pre></td></tr></table></figure>
+<p>cron表达式其实就是一个字符串，通过cron表达式可以定义任务的<code>触发时间</code></p>
+<ul>
+<li>WebSocket对比HTTP</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HTTP的通信是单向的，要先请求后响应，类似于对讲机</span><br><span class="line"></span><br><span class="line">WebSocket的通信双向的、实时的，客户端和服务端可以同时发消息，类似于手机通话</span><br><span class="line"></span><br><span class="line">我们在项目中大部分场景下都是使用HTTP协议，只有在高实时场景下，建议使用WebSocket</span><br><span class="line"></span><br><span class="line">项目在向商家提醒接单时，用户催单发送提醒时使用了webSocket</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>核心功能</li>
+</ul>
+<p>菜品新增：对菜品表和口味表进行新增操作</p>
+<p>首先将前端传过来的菜品信息保存到菜品表并主键返回，然后遍历前端传过来的口味集合，<br>为每个口味设置刚才返回来的主键并保存到口味表<br>菜品修改：对菜品表进行更新，对菜品详情表进行增删操作</p>
+<p>首先根据前端传过来的菜品信息对菜品表进行修改<br>然后根据菜品id删除对应的口味列表集合<br>最后再把前端传过来的口味集合重新加入到口味表中<br>菜品删除：对菜品表和口味表进行删除操作</p>
+<p>遍历前端传过来的菜品id集合得到每个菜品的信息<br>如果当前菜品是启售状态或者被套餐关联那么就不能被删除<br>否则就可以通过菜品id对菜品表和口味表中的数据进行删除<br>套餐新增：对套餐表和套餐菜品关系表进行新增操作</p>
+<p>首先将前端传过来的套餐基本信息保存到套餐表中，并返回主键的id<br>然后为前端传过来的套餐菜品设置套餐id<br>最后将套餐包含的菜品添加到套餐菜品关系表中<br>套餐修改：对套餐表进行修改，在对套餐菜品关系表进行增删操作</p>
+<p>首先根据前端传过来的套餐基本信息更新到套餐表中<br>然后根据套餐的id删除所有套餐菜品关系表中包含的菜品信息<br>最后遍历前端传过来的菜品的列表，设置好套餐的id后重新保存到套餐菜品关系表中<br>套餐删除：对套餐表和套餐菜品关系表进行删除操作</p>
+<p>首先遍历前端传过来套餐id的集合得到每一个套餐的信息<br>然后根据id查询套餐，判断套餐的状态是否为启售状态，如果是启售状态，则不能删除<br>如果是在禁售状态，就可以通过套餐的id进行套餐菜品关系表的删除操作<br>分类删除</p>
+<p>分类删除的核心逻辑就是根据前端传过来的分类id去分类表进行一个删除操作<br>但是要对这个分类里面是否有菜品和套餐做一个判断,拿着这个id去菜品表和套餐表做一个统计查询<br>如果查出来数量大于0,就不能删除,如果为0,直接删除<br>添加购物车：将用户选择的商品基本数据信息添加到数据库表中进行保存</p>
+<p>利用到的数据库表（本次项目）：购物车表，菜品表、套餐表，保存的信息就是从表中查到的</p>
+<p>首先根据id查询购物车中是否有相同商品</p>
+<p>有：则不用添加，只修改查询到的商品number属性+1并重新赋值即可，执行mapper更新。</p>
+<p>无：则判断是菜品还是套餐，查询对应商品的数据库得到基本信息，补全购物车需要的参数执行保存。</p>
+<ul>
+<li>websocket</li>
+</ul>
+<p><img src="/2024/11/25/sky-take-out/3d664769b13b87e8f78dfcb6a8e84c27.jpeg" alt="img"></p>
+<ul>
+<li>threadlocal</li>
+</ul>
+<p><img src="/2024/11/25/sky-take-out/ee8bf28284b46109d36e177762bcfb92.jpeg" alt="img"></p>
+<h1 id="项目困难"><a href="#项目困难" class="headerlink" title="项目困难"></a>项目困难</h1><p><img src="/2024/11/25/sky-take-out/image-20241126203501259.png" alt="image-20241126203501259"></p>
+<p><img src="/2024/11/25/sky-take-out/image-20241126203511824.png" alt="image-20241126203511824"></p>
+<p><img src="/2024/11/25/sky-take-out/image-20241126203519631.png" alt="image-20241126203519631"></p>
+<p><img src="/2024/11/25/sky-take-out/image-20241126203526823.png" alt="image-20241126203526823"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">JAVA面试题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-11-13 10:15:13" itemprop="dateCreated datePublished" datetime="2024-11-13T10:15:13+08:00">2024-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-12-07 19:36:49" itemprop="dateModified" datetime="2024-12-07T19:36:49+08:00">2024-12-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><h4 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h4><ul>
+<li>定义：查询一个不存在数据，每次查询都请求数据库</li>
+<li>解决方案一：缓存空数据。</li>
+</ul>
+<p>优点：简单</p>
+<p>缺点：消耗内存，可能发生不一致问题</p>
+<ul>
+<li>方案二：布隆过滤器</li>
+</ul>
+<p>优点：内存占用少，没有多余key</p>
+<p>缺点：实现复杂，存在误判</p>
+<h4 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h4><ul>
+<li>定义：给某一个key设置了过期时间，当key过期的时候，恰好这个时间点对这个key有大量的并发请求过来，这些并发请求可能会瞬间把DB压垮。</li>
+<li>解决方案一：互斥锁</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113173234318.png" alt="image-20241113173234318"></p>
+<p>可以保证数据强一致性，但是性能较差</p>
+<ul>
+<li>方案二：逻辑过期</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113173410421.png" alt="image-20241113173410421"></p>
+<p>性能较高，不能保证数据绝对一致。</p>
+<h4 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h4><ul>
+<li>定义：同一时段大量的缓存key同时失效或者Redis服务宕机，导致大量请求到达数据库</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113173610988.png" alt="image-20241113173610988"></p>
+<h4 id="双写一致性"><a href="#双写一致性" class="headerlink" title="双写一致性"></a>双写一致性</h4><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113174048777.png" alt="image-20241113174048777"></p>
+<p><strong>一致性高：</strong></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113174219179.png" alt="image-20241113174219179"></p>
+<p>读写锁效率更高一点。</p>
+<p><strong>一致性要求不高：</strong></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113174336123.png" alt="image-20241113174336123"></p>
+<p>允许延时一致。</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113174506462.png" alt="image-20241113174506462"></p>
+<h4 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h4><ul>
+<li>RDB</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113175006561.png" alt="image-20241113175006561"></p>
+<ul>
+<li>AOF</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113180658834.png" alt="image-20241113180658834"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113180919940.png" alt="image-20241113180919940"></p>
+<h4 id="数据过期策略"><a href="#数据过期策略" class="headerlink" title="数据过期策略"></a>数据过期策略</h4><ul>
+<li>惰性删除</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113181025752.png" alt="image-20241113181025752"></p>
+<ul>
+<li>定时删除</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113181041510.png" alt="image-20241113181041510"></p>
+<p>Redis的过期策略是二者结合</p>
+<h4 id="数据淘汰策略"><a href="#数据淘汰策略" class="headerlink" title="数据淘汰策略"></a>数据淘汰策略</h4><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113181313121.png" alt="image-20241113181313121"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113181334256.png" alt="image-20241113181334256"></p>
+<h2 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h2><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113182238011.png" alt="image-20241113182238011"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113182418127.png" alt="image-20241113182418127"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206103952684.png" alt="image-20241206103952684"></p>
+<p>redisson实现的分布式锁-可重入。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="Redis集群"><a href="#Redis集群" class="headerlink" title="Redis集群"></a>Redis集群</h3><h4 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h4><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113183241827.png" alt="image-20241113183241827"></p>
+<p>全量同步：</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113183404603.png" alt="image-20241113183404603"></p>
+<p>增量同步:</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113183902910.png" alt="image-20241113183902910"></p>
+<h3 id="哨兵"><a href="#哨兵" class="headerlink" title="哨兵"></a>哨兵</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113184040244.png" alt="image-20241113184040244"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113184200081.png" alt="image-20241113184200081"></p>
+<h3 id="分片集群"><a href="#分片集群" class="headerlink" title="分片集群"></a>分片集群</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113184906722.png" alt="image-20241113184906722"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113185253280.png" alt="image-20241113185253280"></p>
+<h3 id="其他-1"><a href="#其他-1" class="headerlink" title="其他"></a>其他</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113185344002.png" alt="image-20241113185344002"></p>
+<h1 id="MYSQL"><a href="#MYSQL" class="headerlink" title="MYSQL"></a>MYSQL</h1><h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="定位慢查询"><a href="#定位慢查询" class="headerlink" title="定位慢查询"></a>定位慢查询</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113193527339.png" alt="image-20241113193527339"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113193610868.png" alt="image-20241113193610868"></p>
+<h3 id="如何分析"><a href="#如何分析" class="headerlink" title="如何分析"></a>如何分析</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113194008431.png" alt="image-20241113194008431"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113194108483.png" alt="image-20241113194108483"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113194144778.png" alt="image-20241113194144778"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113194235780.png" alt="image-20241113194235780"></p>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113194829230.png" alt="image-20241113194829230"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113195204510.png" alt="image-20241113195204510"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113200121864.png" alt="image-20241113200121864"></p>
+<p><strong>覆盖索引</strong></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113200156128.png" alt="image-20241113200156128"></p>
+<p><strong>超大分页</strong></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113200333291.png" alt="image-20241113200333291"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113200355259.png" alt="image-20241113200355259"></p>
+<p><strong>索引创建原则</strong></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113200928741.png" alt="image-20241113200928741"></p>
+<p><strong>索引失效</strong></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113201501827.png" alt="image-20241113201501827"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113201640636.png" alt="image-20241113201640636"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113201654548.png" alt="image-20241113201654548"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113201714881.png" alt="image-20241113201714881"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113201757677.png" alt="image-20241113201757677"></p>
+<p><strong>经验</strong></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113202207342.png" alt="image-20241113202207342"></p>
+<ul>
+<li>表的设计优化</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113202252800.png" alt="image-20241113202252800"></p>
+<ul>
+<li>SQL语句优化</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113202318812.png" alt="image-20241113202318812"></p>
+<ul>
+<li>主从复制、读写分离</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113202522118.png" alt="image-20241113202522118"></p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241113202950902.png" alt="image-20241113202950902"></p>
+<h3 id="并发事务"><a href="#并发事务" class="headerlink" title="并发事务"></a>并发事务</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114134351047.png" alt="image-20241114134351047"></p>
+<p>解决方法</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114134617042.png" alt="image-20241114134617042"></p>
+<h3 id="log"><a href="#log" class="headerlink" title="log"></a>log</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114134947783.png" alt="image-20241114134947783"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114135054074.png" alt="image-20241114135054074"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114135133135.png" alt="image-20241114135133135"></p>
+<h3 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114135315206.png" alt="image-20241114135315206"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206104426924.png" alt="image-20241206104426924"></p>
+<h2 id="主从同步原理"><a href="#主从同步原理" class="headerlink" title="主从同步原理"></a>主从同步原理</h2><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114135757985.png" alt="image-20241114135757985"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206111130223.png" alt="image-20241206111130223"></p>
+<h2 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h2><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206160019201.png" alt="image-20241206160019201"></p>
+<h1 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h1><h2 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h2><h3 id="bean"><a href="#bean" class="headerlink" title="bean"></a>bean</h3><p>spring中的单例bean不是线程安全的。</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114140622142.png" alt="image-20241114140622142"></p>
+<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><ul>
+<li>定义</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114141048318.png" alt="image-20241114141048318"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114141748278.png" alt="image-20241114141748278"></p>
+<h3 id="事务失效场景"><a href="#事务失效场景" class="headerlink" title="事务失效场景"></a>事务失效场景</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114142404580.png" alt="image-20241114142404580"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114142553578.png" alt="image-20241114142553578"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114142716007.png" alt="image-20241114142716007"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114142744275.png" alt="image-20241114142744275"></p>
+<h3 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a>bean的生命周期</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206161638418.png" alt="image-20241206161638418"></p>
+<h3 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114150316128.png" alt="image-20241114150316128"></p>
+<h3 id="SpringMVC执行流程"><a href="#SpringMVC执行流程" class="headerlink" title="SpringMVC执行流程"></a>SpringMVC执行流程</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114151239697.png" alt="image-20241114151239697"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114151348773.png" alt="image-20241114151348773"></p>
+<h3 id="Springboot自动配置原理"><a href="#Springboot自动配置原理" class="headerlink" title="Springboot自动配置原理"></a>Springboot自动配置原理</h3><p>自动装配，简单来说就是自动把第三方组件的 Bean 装载到 Spring IOC 器里面，不需要开发人员再去写 Bean 的装配配置。</p>
+<p>在 Spring Boot 应用里面，只需要在启动类加上@SpringBootApplication 注解就可以实现自动装配。</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114152123776.png" alt="image-20241114152123776"></p>
+<h3 id="常见注解"><a href="#常见注解" class="headerlink" title="常见注解"></a>常见注解</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114152423611.png" alt="image-20241114152423611"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114152818452.png" alt></p>
+<h2 id="MyBatis"><a href="#MyBatis" class="headerlink" title="MyBatis"></a>MyBatis</h2><h3 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114153450089.png" alt="image-20241114153450089"></p>
+<h3 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114154312368.png" alt="image-20241114154312368"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114154940442.png" alt="image-20241114154940442"></p>
+<h3 id="一、二级缓存"><a href="#一、二级缓存" class="headerlink" title="一、二级缓存"></a>一、二级缓存</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241114161250932.png" alt="image-20241114161250932"></p>
+<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><h3 id="ArrayList源码"><a href="#ArrayList源码" class="headerlink" title="ArrayList源码"></a>ArrayList源码</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115125549338.png" alt="image-20241115125549338"></p>
+<h3 id="ArrayList底层原理"><a href="#ArrayList底层原理" class="headerlink" title="ArrayList底层原理"></a>ArrayList底层原理</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115131352180.png" alt="image-20241115131352180"></p>
+<h3 id="数组和List之间的转换"><a href="#数组和List之间的转换" class="headerlink" title="数组和List之间的转换"></a>数组和List之间的转换</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115131634843.png" alt="image-20241115131634843"></p>
+<p> <img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115132854166.png" alt="image-20241115132854166"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115133642645.png" alt="image-20241115133642645"></p>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><ul>
+<li>散列表</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115134428936.png" alt="image-20241115134428936"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115134435017.png" alt="image-20241115134435017"></p>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115135057467.png" alt="image-20241115135057467"></p>
+<h3 id="PUT"><a href="#PUT" class="headerlink" title="PUT"></a>PUT</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115140059260.png" alt="image-20241115140059260"></p>
+<h3 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a>扩容机制</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115142626905.png" alt="image-20241115142626905"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115142849019.png" alt="image-20241115142849019"></p>
+<h3 id="寻址算法"><a href="#寻址算法" class="headerlink" title="寻址算法"></a>寻址算法</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115143951187.png" alt="image-20241115143951187"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115144012925.png" alt="image-20241115144012925"></p>
+<h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h2 id="线程基础"><a href="#线程基础" class="headerlink" title="线程基础"></a>线程基础</h2><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115145010258.png" alt="image-20241115145010258"></p>
+<h3 id="创建线程方式"><a href="#创建线程方式" class="headerlink" title="创建线程方式"></a>创建线程方式</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115145725636.png" alt="image-20241115145725636"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115145832750.png" alt="image-20241115145832750"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115145947677.png" alt="image-20241115145947677"></p>
+<h3 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115150521157.png" alt="image-20241115150521157"></p>
+<h3 id="顺序执行"><a href="#顺序执行" class="headerlink" title="顺序执行"></a>顺序执行</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115150736530.png" alt="image-20241115150736530"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115151017584.png" alt="image-20241115151017584"></p>
+<h3 id="wait和sleep"><a href="#wait和sleep" class="headerlink" title="wait和sleep"></a>wait和sleep</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115154722556.png" alt="image-20241115154722556"></p>
+<h3 id="如何终止线程"><a href="#如何终止线程" class="headerlink" title="如何终止线程"></a>如何终止线程</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241115155204426.png" alt="image-20241115155204426"></p>
+<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><h3 id="synchronized底层原理"><a href="#synchronized底层原理" class="headerlink" title="synchronized底层原理"></a>synchronized底层原理</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116085705439.png" alt="image-20241116085705439"></p>
+<p>底层实现是Monitor</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116090021112.png" alt="image-20241116090021112"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116091004674.png" alt="image-20241116091004674"></p>
+<p>一旦锁发生竞争，都会升级为重量级锁。</p>
+<h3 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116091838454.png" alt="image-20241116091838454"></p>
+<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116092430536.png" alt="image-20241116092430536"></p>
+<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><ul>
+<li>保证线程间可见性</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116093135680.png" alt="image-20241116093135680"></p>
+<ul>
+<li>禁止指令重排序</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116093215311.png" alt="image-20241116093215311"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116094023739.png" alt="image-20241116094023739"></p>
+<h3 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116094116845.png" alt="image-20241116094116845"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116094652430.png" alt="image-20241116094652430"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205162529721.png" alt="image-20241205162529721"></p>
+<p>AQS核⼼思想是，如果被请求的共享资源空闲，则将当前请求资源的线程设置为有效的⼯作线程，并且将共享资源设置为锁定状态。如果被请求的共享资源被占⽤，那么就需要⼀套线程阻塞等待以及被唤醒时锁分配的机制，这个机制AQS是⽤CLH队列锁实现的，即将暂时获取不到锁的线程加⼊到队列中。</p>
+<h3 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116095154783.png" alt="image-20241116095154783"></p>
+<h3 id="synchronized和Lock"><a href="#synchronized和Lock" class="headerlink" title="synchronized和Lock"></a>synchronized和Lock</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116100046920.png" alt="image-20241116100046920"></p>
+<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116100927080.png" alt="image-20241116100927080"></p>
+<h3 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116101451404.png" alt="image-20241116101451404"></p>
+<h3 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241116101745631.png" alt="image-20241116101745631"></p>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h3 id="线程池核心参数"><a href="#线程池核心参数" class="headerlink" title="线程池核心参数"></a>线程池核心参数</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241117190318040.png" alt="image-20241117190318040"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241117193538266.png" alt="image-20241117193538266"></p>
+<h3 id="常见阻塞队列"><a href="#常见阻塞队列" class="headerlink" title="常见阻塞队列"></a>常见阻塞队列</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241117194306438.png" alt="image-20241117194306438"></p>
+<h3 id="如何缺点核心线程数"><a href="#如何缺点核心线程数" class="headerlink" title="如何缺点核心线程数"></a>如何缺点核心线程数</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241117194847129.png" alt="image-20241117194847129"></p>
+<h3 id="线程池种类"><a href="#线程池种类" class="headerlink" title="线程池种类"></a>线程池种类</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241117195111040.png" alt="image-20241117195111040"></p>
+<h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206162046309.png" alt="image-20241206162046309"></p>
+<h1 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h1><h2 id="JVM组成"><a href="#JVM组成" class="headerlink" title="JVM组成"></a>JVM组成</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241117200427200.png" alt="image-20241117200427200"></p>
+<h3 id="java堆"><a href="#java堆" class="headerlink" title="java堆"></a>java堆</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241117200756694.png" alt="image-20241117200756694"></p>
+<h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118144631044.png" alt="image-20241118144631044"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118144647293.png" alt="image-20241118144647293"></p>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118144710602.png" alt="image-20241118144710602"></p>
+<h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118144737789.png" alt="image-20241118144737789"></p>
+<h3 id="类装载过程"><a href="#类装载过程" class="headerlink" title="类装载过程"></a>类装载过程</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118144351326.png" alt="image-20241118144351326"></p>
+<h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><h3 id="何时回收"><a href="#何时回收" class="headerlink" title="何时回收"></a>何时回收</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118145115656.png" alt="image-20241118145115656"></p>
+<p>引用计数法可能会循环引用，造成泄露，所以现在经常用可达性分析。</p>
+<h3 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118145357265.png" alt="image-20241118145357265"></p>
+<h3 id="分代回收"><a href="#分代回收" class="headerlink" title="分代回收"></a>分代回收</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118145731845.png" alt="image-20241118145731845"></p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118174802208.png" alt="image-20241118174802208"></p>
+<h3 id="内存泄露排查思路"><a href="#内存泄露排查思路" class="headerlink" title="内存泄露排查思路"></a>内存泄露排查思路</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206170711343.png" alt="image-20241206170711343"></p>
+<h3 id="CPU排查思路"><a href="#CPU排查思路" class="headerlink" title="CPU排查思路"></a>CPU排查思路</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206170735783.png" alt="image-20241206170735783"></p>
+<h1 id="企业场景"><a href="#企业场景" class="headerlink" title="企业场景"></a>企业场景</h1><h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><h3 id="工厂设计模式"><a href="#工厂设计模式" class="headerlink" title="工厂设计模式"></a>工厂设计模式</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118180800590.png" alt="image-20241118180800590"></p>
+<h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118182117601.png" alt="image-20241118182117601"></p>
+<h3 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118182228159.png" alt="image-20241118182228159"></p>
+<h2 id="技术场景"><a href="#技术场景" class="headerlink" title="技术场景"></a>技术场景</h2><h3 id="单点登录"><a href="#单点登录" class="headerlink" title="单点登录"></a>单点登录</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118182524832.png" alt="image-20241118182524832"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118182657373.png" alt="image-20241118182657373"></p>
+<h3 id="权限认证"><a href="#权限认证" class="headerlink" title="权限认证"></a>权限认证</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118183410591.png" alt="image-20241118183410591"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118183419380.png" alt="image-20241118183419380"></p>
+<h3 id="上传数据安全性"><a href="#上传数据安全性" class="headerlink" title="上传数据安全性"></a>上传数据安全性</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118183758848.png" alt="image-20241118183758848"></p>
+<h3 id="棘手问题"><a href="#棘手问题" class="headerlink" title="棘手问题"></a>棘手问题</h3><h3 id="采集日志"><a href="#采集日志" class="headerlink" title="采集日志"></a>采集日志</h3><h3 id="怎么快速定位系统瓶颈"><a href="#怎么快速定位系统瓶颈" class="headerlink" title="怎么快速定位系统瓶颈"></a>怎么快速定位系统瓶颈</h3><p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241118192428648.png" alt="image-20241118192428648"> </p>
+<h1 id="补充1"><a href="#补充1" class="headerlink" title="补充1"></a>补充1</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ul>
+<li>重载和重写</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205221942136.png" alt="image-20241205221942136"></p>
+<ul>
+<li>装箱和拆箱</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222002926.png" alt="image-20241205222002926"></p>
+<ul>
+<li>== <strong>与</strong> equals</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222039872.png" alt="image-20241205222039872"></p>
+<ul>
+<li>hashCode <strong>与</strong> equals</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222159699.png" alt="image-20241205222159699"></p>
+<ul>
+<li>Java 中的异常处理</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222228335.png" alt="image-20241205222228335"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222241278.png" alt="image-20241205222241278"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222250416.png" alt="image-20241205222250416"></p>
+<ul>
+<li>Java 序列化中如果有些字段不想进⾏序列化，怎么办？</li>
+</ul>
+<p>对于不想进⾏序列化的变量，使⽤ transient 关键字修饰。</p>
+<p>transient 关键字的作⽤是：阻⽌实例中那些⽤此关键字修饰的的变量序列化；当对象被反序列化时，被 transient 修饰的变量值不会被持久化和恢复。transient 只能修饰变量，不能修饰类和⽅法。</p>
+<ul>
+<li><p>Java 中 IO 流</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222418104.png" alt="image-20241205222418104"></p>
+</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222356524.png" alt="image-20241205222356524"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241207184109427.png" alt="image-20241207184109427"></p>
+<p><strong>NIO</strong>：基于同步非阻塞 I/O 模型。尽管 NIO 支持非阻塞模式，但所有的 I/O 操作最终都是同步完成的。这意味着当一个 I/O 操作被发起时，它不会立即返回结果，而是需要应用程序通过轮询或选择器来检查操作是否完成。</p>
+<p><strong>AIO</strong>：真正的异步 I/O 模型。在 AIO 中，所有的 I/O 操作都是异步完成的。一旦发起一个 I/O 请求，该请求将立即返回，允许程序继续执行其他任务。操作系统会在 I/O 操作完成后通知应用程序。</p>
+<ul>
+<li>集合框架底层数据结构总结</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222540249.png" alt="image-20241205222540249"></p>
+<ul>
+<li>进程和线程</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222628899.png" alt="image-20241205222628899"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222706738.png" alt="image-20241205222706738"></p>
+<ul>
+<li>死锁</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222735487.png" alt="image-20241205222735487"></p>
+<ul>
+<li>为什么我们调⽤ start() ⽅法时会执⾏run() ⽅法，为什么我们不能直接调⽤run() ⽅法</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205222818227.png" alt="image-20241205222818227"></p>
+<ul>
+<li>双重校验锁实现对象单例（线程安全）</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205223056871.png" alt="image-20241205223056871"></p>
+<ul>
+<li>java对象创建过程</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205223644141.png" alt="image-20241205223644141"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205223653879.png" alt="image-20241205223653879"></p>
+<ul>
+<li>对象的访问定位有哪两种⽅式?</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205223725944.png" alt="image-20241205223725944"></p>
+<ul>
+<li><strong>常⻅的垃圾回收器有那些</strong>?</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205223807138.png" alt="image-20241205223807138"></p>
+<p>Serial<strong>收集器</strong></p>
+<p>Serial（串⾏）收集器收集器是最基本、历史最悠久的垃圾收集器了。⼤家看名字就知道这个收集器是⼀个单线程收集器了。它的 单线程 的意义不仅仅意味着它只会使⽤⼀条垃圾收集线程去完成垃圾收集⼯作，更重要的是它在进⾏垃圾收集⼯作的时候必须暂停其他所有的⼯作线程（ <strong>“Stop The World”</strong>），直到它收集结束。</p>
+<p>ParNew<strong>收集器</strong></p>
+<p>ParNew收集器其实就是Serial收集器的多线程版本，除了使⽤多线程进⾏垃圾收集外，其余⾏为（控参数、收集算法、回收策略等等）和Serial收集器完全⼀样。</p>
+<p>Parallel Scavenge<strong>收集器</strong></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205224253533.png" alt="image-20241205224253533"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205224318164.png" alt="image-20241205224318164"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205224329444.png" alt="image-20241205224329444"></p>
+<ul>
+<li>双亲委派模型</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205224433027.png" alt="image-20241205224433027"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205224439218.png" alt="image-20241205224439218"></p>
+<ul>
+<li><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205224622648.png" alt="image-20241205224622648"></li>
+<li>⼀条SQL语句在MySQL中如何执⾏的</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205225225043.png" alt="image-20241205225225043"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205225340608.png" alt="image-20241205225340608"></p>
+<ul>
+<li>索引实现为什么是B树而不是红黑树</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206104728029.png" alt="image-20241206104728029"></p>
+<ul>
+<li>受检异常和非受检异常</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206105050884.png" alt="image-20241206105050884"></p>
+<ul>
+<li>b+而不是b</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206105931070.png" alt="image-20241206105931070"></p>
+<ul>
+<li>守护线程</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206110838097.png" alt="image-20241206110838097"></p>
+<ul>
+<li>mysql索引类型</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206111247698.png" alt="image-20241206111247698"></p>
+<ul>
+<li>springboot约定优先于配置</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206112124441.png" alt="image-20241206112124441"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206112132390.png" alt="image-20241206112132390"></p>
+<ul>
+<li>Spring中事务的传播行为</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206114452006.png" alt="image-20241206114452006"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206114500379.png" alt="image-20241206114500379"></p>
+<ul>
+<li>Dubbo如何动态感知服务下线</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206114748010.png" alt="image-20241206114748010"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206114801949.png" alt="image-20241206114801949"></p>
+<p>当 Dubbo 服务提供方出现故障导致 Zookeeper 剔除了这个服务的地址，</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206114823628.png" alt="image-20241206114823628"></p>
+<ul>
+<li><strong>Mybatis 中#{}和${}的区别是什么？</strong></li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206115154486.png" alt="image-20241206115154486"></p>
+<ul>
+<li>数据库连接池</li>
+</ul>
+<p>数据库连接池是一种池化技术，池化技术的核心思想是实现资源的复用，避免资源重复创建销毁的开销。</p>
+<p>而在数据库的应用场景里面，应用程序每次向数据库发起 CRUD 操作的时候，都需要创建连接在数据库访问量较大的情况下，频繁的创建连接会带来较大的性能开销。</p>
+<p>（如图）而连接池的核心思想，就是应用程序在启动的时候提前初始化一部分连接保存到连接池里面，当应用需要使用连接的时候，直接从连接池获取一个已经建立好的链接。连接池的设计，避免了每次连接的建立和释放带来的开销。</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206115308060.png" alt="image-20241206115308060"></p>
+<ul>
+<li><strong>new String(“abc”)到底创建了几个对象？</strong></li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206115527338.png" alt="image-20241206115527338"></p>
+<ul>
+<li><strong>String、StringBuffer、StringBuilder 区别</strong></li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206143347813.png" alt="image-20241206143347813"></p>
+<ul>
+<li>JVM年龄代为什么是15次</li>
+</ul>
+<p>一个对象的GC年龄是储存在对象头里的，而对象头里有4位储存GC年龄，最大值为15。</p>
+<ul>
+<li>深拷贝和浅拷贝</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206145323610.png" alt="image-20241206145323610"></p>
+<ul>
+<li>Spring IOC 和 DI</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206145508721.png" alt="image-20241206145508721"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206145518569.png" alt="image-20241206145518569"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206145529526.png" alt="image-20241206145529526"></p>
+<ul>
+<li>finally块一定执行吗</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206150428445.png" alt="image-20241206150428445"></p>
+<ul>
+<li><strong>Integer 和 int 的区别</strong></li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206151407495.png" alt="image-20241206151407495"></p>
+<ul>
+<li>零拷贝</li>
+<li>在2G文件中，找出高频top100</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206152107404.png" alt="image-20241206152107404"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206152114028.png" alt="image-20241206152114028"></p>
+<ul>
+<li>表数据量大的时候，影响查询效率的主要原因</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206152310633.png" alt="image-20241206152310633"></p>
+<ul>
+<li>两个 Integer 对象比较大小，为什么 100 等于 100,1000 不等于 1000</li>
+</ul>
+<p>因为Intefer的valueOf方法，判断时如果目标值在-128-127则会直接从cache取值。</p>
+<ul>
+<li>MQ(消息中间件)</li>
+</ul>
+<p>MQ 全称是 Message Queue，直译过来叫做消息队列，主要是作为分布式应用之间实现异步通信的方式。</p>
+<p>主要由三个部分组成，分别是生产者、消息服务端和消费者</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206153425201.png" alt="image-20241206153425201"></p>
+<p>流量消峰</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206153442652.png" alt="image-20241206153442652"></p>
+<p>应用解耦</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206153455894.png" alt="image-20241206153455894"></p>
+<p>异步处理</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206153529960.png" alt="image-20241206153529960"></p>
+<ul>
+<li><strong>给你 ab,ac,abc 字段，你是如何加索引 的</strong></li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241206154635372.png" alt="image-20241206154635372"></p>
+<ul>
+<li><h1 id="补充2"><a href="#补充2" class="headerlink" title="补充2"></a>补充2</h1></li>
+<li><p>CPU飚高系统反应慢怎么排查</p>
+</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205162936984.png" alt="image-20241205162936984"></p>
+<ul>
+<li>Dubbo的服务请求失败怎么处理</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205163458787.png" alt="image-20241205163458787"></p>
+<ul>
+<li>如何实现Redis和Mysql的一致性</li>
+</ul>
+<p>当应用程序需要去读取某个数据的时候，首先会先尝试去 Redis 里面加载，如果命中就直接返回。如果没有命中，就从数据库查询，查询到数据后再把这个数据缓存到 Redis里面。</p>
+<p>在这种情况下，能够选择的方法只有几种。</p>
+<ol>
+<li><p>先更新数据库，再更新缓存</p>
+</li>
+<li><p>先删除缓存，再更新数据库</p>
+</li>
+</ol>
+<p>如果先更新数据库，再更新缓存，如果缓存更新失败，就会导致数据库和 Redis 中的数据不一致。</p>
+<p>如果是先删除缓存，再更新数据库，理想情况是应用下次访问 Redis 的时候，发现 Redis里面的数据是空的，就从数据库加载保存到 Redis 里面，那么数据是一致的。但是在极端情况下，由于删除 Redis 和更新数据库这两个操作并不是原子的，所以这个过程如果有其他线程来访问，还是会存在数据不一致问题。</p>
+<p>所以，如果需要在极端情况下仍然保证 Redis 和 Mysql 的数据一致性，就只能采用最终一致性方案。（如图）比如基于 RocketMQ 的可靠性消息通信，来实现最终一致性。</p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205165736374.png" alt="image-20241205165736374"></p>
+<p>因为这里是基于最终一致性来实现的，如果业务场景不能接受数据的短期不一致性，那就不能使用这个方案来做。</p>
+<ul>
+<li>Dubbo核心功能</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205170107231.png" alt="image-20241205170107231"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205170117694.png" alt="image-20241205170117694"></p>
+<ul>
+<li>Dubbo工作原理</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205170215391.png" alt="image-20241205170215391"></p>
+<ul>
+<li>Mysql优化</li>
+</ul>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205171151724.png" alt="image-20241205171151724"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205171234879.png" alt="image-20241205171234879"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205171242190.png" alt="image-20241205171242190"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205171253143.png" alt="image-20241205171253143"></p>
+<p><img src="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/image-20241205171303324.png" alt="image-20241205171303324"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/10/11/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2091,188 +2814,6 @@ package com.lkj.yurpc.fault.tolerant;</String,></li>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">毕设机器学习模型总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-03-08 11:33:13 / Modified: 17:31:06" itemprop="dateCreated datePublished" datetime="2023-03-08T11:33:13+08:00">2023-03-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h2><p>近朱者赤近墨者黑，分类或者回归算法。</p>
-<p><strong>n_neighbors</strong>：找最近的n个邻居，然后根据n个邻居判断它为什么。在机器学习库中，默认为5.</p>
-<p><strong>weights</strong>:默认是uniform, 参数可以是uniform、distance, 也可以是用户自己定义的函数</p>
-<ul>
-<li><strong>uniform</strong>: 是均等的权重, 就说所有的邻近点的权重都是相等的</li>
-<li><strong>distance</strong>: 是不均等的权重, 距离近的点比距离远的点的影响大</li>
-<li>用户自定义的函数, 接收距离的数组, 返回一组维数相同的权重</li>
-</ul>
-<p><strong>leaf_size</strong>: 默认是30, 这个是构造的kd树和ball树的大小. 这个值的设置会影响树构建的速度和搜索速度, 同样也影响着存储树所需的内存大小. 需要根据问题的性质选择最优的大小</p>
-<p><strong>p</strong> : minkowski距离度量里的参数. p=2时是欧氏距离, p=1时是曼哈顿距离，对于任意p， 就是minkowski距离</p>
-<p>注：欧式距离为两个点的实际距离；曼哈顿距离为出租车距离，即遵守正南正北、正东正西方向规则；马氏距离：概率论距离，即基于样本分布距离。</p>
-<p><img src="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/image-20230308120004396.png" alt="image-20230308120004396" style="zoom:50%;"></p>
-<h2 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h2><p><img src="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/image-20230308120217890.png" alt="image-20230308120217890" style="zoom:50%;"></p>
-<p><img src="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/image-20230308120314259.png" alt="image-20230308120314259" style="zoom:50%;"></p>
-<p>n_estimators：树的个数(学习器的个数)，提高数值，提高模型准确率，但是训练时间变长</p>
-<p><img src="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/image-20230308120807856.png" alt="image-20230308120807856" style="zoom:50%;"></p>
-<p>max_depth：树的最大深度</p>
-<p><img src="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/image-20230308120934344.png" alt="image-20230308120934344"></p>
-<p><img src="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/image-20230308120956257.png" alt="image-20230308120956257"></p>
-<h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><p>超参数介绍参考随机森林</p>
-<h2 id="SVC"><a href="#SVC" class="headerlink" title="SVC"></a>SVC</h2><p><strong>kernel</strong>：核函数</p>
-<p><strong>C</strong>：惩罚参数</p>
-<ul>
-<li>错误项的惩罚系数。</li>
-<li>c越大，即对分错样本的惩罚程度越大，因此在训练样本中准确率越高，但是泛化能力降低，也就是对测试数据的分类准确率降低。</li>
-<li>相反，减小c的话，允许训练样本中有一些误分类错误样本，泛化能力强。</li>
-<li>对于训练样本带有噪声的情况，一般采用减小c的方法，把训练样本集中错误分类的样本作为噪声2.</li>
-</ul>
-<h2 id="AdaBoost"><a href="#AdaBoost" class="headerlink" title="AdaBoost"></a>AdaBoost</h2><p><strong>n_estimators</strong>：为弱学习器的数量‘</p>
-<p><strong>learning_rate</strong>：为弱学习器的权重缩减系数。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">打印进程地址转换过程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-06-13 19:51:07 / Modified: 20:49:40" itemprop="dateCreated datePublished" datetime="2022-06-13T19:51:07+08:00">2022-06-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="打印进程地址转换过程"><a href="#打印进程地址转换过程" class="headerlink" title="打印进程地址转换过程"></a>打印进程地址转换过程</h1><h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><ul>
-<li>深入理解操作系统的段、页式内存管理，深入理解段表、页表、逻辑地址、线性地址、物理地址等概念；</li>
-<li>实践段、页式内存管理的地址映射过程；</li>
-<li>编程打印特定进程地址转换过程。</li>
-</ul>
-<h2 id="知识储备"><a href="#知识储备" class="headerlink" title="知识储备"></a>知识储备</h2><p>线性地址和物理地址之间的变换</p>
-<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613200700988.png" alt="image-20220613200700988"></p>
-<p>页目录和页表的表项格式</p>
-<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613200727069.png" alt="image-20220613200727069"></p>
-<p>主内存区域</p>
-<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613200748502.png" alt="image-20220613200748502"></p>
-<p>进程代码和数据在其逻辑地址空间中的分布</p>
-<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613200817319.png" alt="image-20220613200817319"></p>
-<h2 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h2><h3 id="修改sys-h"><a href="#修改sys-h" class="headerlink" title="修改sys.h"></a>修改sys.h</h3><p>把debug_paging函数声明为全局变量，添加中断函数表。</p>
-<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613201246999.png" alt="image-20220613201246999"></p>
-<h3 id="修改系统调用函数"><a href="#修改系统调用函数" class="headerlink" title="修改系统调用函数"></a>修改系统调用函数</h3><p>把对应的函数个数进行修改</p>
-<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613201325695.png" alt="image-20220613201325695"></p>
-<h3 id="增加系统调用号"><a href="#增加系统调用号" class="headerlink" title="增加系统调用号"></a>增加系统调用号</h3><p>需要在<code>unistd.h</code> 中修改，注意进行挂载。</p>
-<p>运行 <code>sudo ./mount-hdc</code> 可以把虚拟机硬盘挂载在 <code>oslab/hdc</code> 目录下。<br>在 <code>hdc/usr/include</code> 目录下修改 <code>unistd.h</code></p>
-<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613201526522.png" alt="image-20220613201526522"></p>
-<h3 id="新增debug-paging-c文件"><a href="#新增debug-paging-c文件" class="headerlink" title="新增debug_paging.c文件"></a>新增debug_paging.c文件</h3><p>将完成的文件放入linux-0.01/kernel 目录下</p>
-<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613204253402.png" alt="image-20220613204253402"></p>
-<h3 id="修改makefile"><a href="#修改makefile" class="headerlink" title="修改makefile"></a>修改makefile</h3><p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613201730179.png" alt="image-20220613201730179"></p>
-<h3 id="编写test-c"><a href="#编写test-c" class="headerlink" title="编写test.c"></a>编写test.c</h3><p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613201838239.png" alt="image-20220613201838239"></p>
-<h3 id="实现fprintk"><a href="#实现fprintk" class="headerlink" title="实现fprintk"></a>实现fprintk</h3><p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613202027276.png" alt="image-20220613202027276"></p>
-<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613203314373.png" alt="image-20220613203314373"></p>
-<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613203534624.png" alt="image-20220613203534624"></p>
-<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613203427810.png" alt="image-20220613203427810"></p>
-<h2 id="问题回答"><a href="#问题回答" class="headerlink" title="问题回答"></a>问题回答</h2><ul>
-<li><strong>页表中正在使用的页表项是连续的吗？这体现了分页的什么优点？</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不是。可以充分利用碎片的内存空间，提高空间利用率。</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>你觉的分段是必要的吗？现在的 <code>Linux (x86-64)</code> 是怎么处理分段的？</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不是。在64位模式下：处理器把CS/DS/ES/SS的段基都当作0，忽略与之关联的段描述符中的段基地址。因为在64位模式中，CPU可以访问所有可寻址的内存空间。x86工作在保护模式下时，分段单元将逻辑地址转换成线性地址，分页单元（MMU开启情况下）将线性地址转换成物理地址。当CPU启用了MMU，CPU核发出的地址将被MMU截获，从CPU到MMU的地址称为虚拟地址，而MMU将这个地址翻译成另一个地址发到CPU芯片的外部地址引脚上，也就是将虚拟地址映射成物理地址，在x86_64上，处理器把CS/DS/ES/SS的段基都当作0，实际上摒弃了段式管理，不再使用。指令中使用的地址就是线性地址，当CPU开启MMU时，通过页式管理单元翻译成物理地址。</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2342,7 +2883,7 @@ package com.lkj.yurpc.fault.tolerant;</String,></li>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -2429,61 +2970,6 @@ package com.lkj.yurpc.fault.tolerant;</String,></li>
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-          load: ['[tex]/mhchem'],
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-          packages: {'[+]': ['mhchem']},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 

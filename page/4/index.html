@@ -145,6 +145,329 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">保护模式内存管理-读书笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-04-03 10:09:18" itemprop="dateCreated datePublished" datetime="2022-04-03T10:09:18+08:00">2022-04-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-04 20:56:32" itemprop="dateModified" datetime="2022-04-04T20:56:32+08:00">2022-04-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="保护模式内存管理"><a href="#保护模式内存管理" class="headerlink" title="保护模式内存管理"></a>保护模式内存管理</h1><h2 id="内存管理概览"><a href="#内存管理概览" class="headerlink" title="内存管理概览"></a>内存管理概览</h2><p>IA-32架构的内存管理设施分为两部分：分段和分页。<br>分段提供了一种隔离单个代码、数据和堆栈模块的机制，以便多个程序（或任务）可以在同一个处理器上运行而不互相干扰。分页提供了一种机制来实现传统的需求分页、虚拟内存系统，其中程序执行环境的部分被映射到物理内存中。分页也可以用来提供多个任务之间的隔离。<br>在保护模式下操作时，必须使用某种形式的分段。没有模式位可以禁用分段。然而，分页的使用是可选的。这两种机制（分段和分页）可以被配置为支持简单的单程序（或单任务）系统，或使用共享内存的多处理器系统。</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403145257014.png" alt="image-20220403145257014"></p>
+<p>如图所示，分段提供了一种机制来划分处理器的可寻址内存空间（称为线性地址空间），分成更小的受保护的地址空间，称为段。分段可以可以用来保存程序的代码、数据和堆栈，或者保存系统数据结构（如TSS或LDT）。<br>如果一个处理器上有多个程序（或任务）在运行，每个程序可以被分配到它自己的段组。然后，处理器强制执行这些段之间的界限，并确保一个程序不会因为写进另一个程序的段而干扰程序的执行。分段机制还允许对段进行打字。</p>
+<p>段落机制也允许段的类型化，这样可以限制对特定类型的段进行的操作。一个系统中的所有段都包含在处理器的线性地址空间中。要在一个特定的段中找到一个字节必须提供一个逻辑地址（也称为远指针）。</p>
+<p>一个<strong>逻辑地址</strong>包括一个段选择器和一个偏移量。段选择器是一个段的唯一标识符。在其他方面，它提供了一个<br>在描述符表（如全局描述符表，GDT）中的偏移量，该数据结构称为段描述符。每个网段都有一个网段描述符，它指定了网段的大小，网段的访问权限和段的大小，段的访问权限和特权级别，段的类型，以及段的第一个字节在线性地址空间中的位置（称为段的基址）。逻辑地址的偏移部分被添加到段的基地址中，以定位段的第一个字节。<br>基准地址加上偏移量就形成了处理器线性地址中的一个<strong>线性地址</strong>。<br>如果不使用分页，处理器的线性地址空间将直接被映射到处理器的物理地址空间。<strong>物理地址空间</strong>被定义为处理器可以在其地址总线上产生的地址范围。由于多任务计算系统通常定义的线性地址空间远远大于在物理内存中一次性包含的经济可行性，因此需要一些 “虚拟化 “线性地址空间的方法。这种线性地址空间的虚拟化是通过处理器的分页机制处理的。<br>分页支持 “虚拟内存 “环境，用少量的物理内存（RAM和ROM）和一些磁盘存储来模拟大的线性地址空间。当使用分页时，每个段被划分为若干页（通常每页大小为4KB），这些页存储在物理内存或磁盘上。操作系统或执行器维护一个页面目录和一组页面表，以跟踪这些页面。<em>当一个程序（或任务）试图访问线性地址空间中的一个地址位置时，处理器会使用页目录和页表来将线性地址转换为物理地址</em>，然后执行所要求的操作（读或写）在内存位置上。<br>如果被访问的页面当前不在物理内存中，处理器会中断程序的执行。(通过产生一个页面故障异常)。然后，操作系统或执行程序将该页从磁盘读入物理内存，并继续执行程序。<br>当分页在操作系统或执行系统中被正确实现时，物理内存和磁盘之间的换页对于程序的正确执行是透明的。即使是为16位IA32处理器编写的程序，在虚拟8086模式下运行时也可以进行分页（透明）。</p>
+<h3 id="linux下的内存管理"><a href="#linux下的内存管理" class="headerlink" title="linux下的内存管理"></a>linux下的内存管理</h3><p>Linux系统中的物理存储空间和虚拟存储空间的地址范围分别都是从0x00000000到0xFFFFFFFF，共4GB，但物理存储空间与虚拟存储空间布局完全不同。Linux运行在虚拟存储空间，并负责把系统中实际存在的远小于4GB的物理内存根据不同需求映射到整个4GB的虚拟存储空间中。Linux主要工作在保护模式下。80X86从逻辑地址到物理地址变换中经过了两个阶段。第一阶段使用分段机制把程序的逻辑地址变换成处理器可寻址内存空间（称为线性地址空间）中的地址。第二阶段的分页机制把线性地址转换成物理地址。第一阶段的分段变换机制是必须使用的，但是第二阶段的分页机制是可选择的。如果没有开启分页机制，那么分段机制产生的线性地址空间就直接映射到处理器的物理地址空间上。</p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p><strong>物理地址</strong>： 放在寻址总线上的地址，用于内存芯片级内存单元寻址。放在寻址总线上，如果是读，电路根据这个地址每位的值就将相应地址的物理内存中的数据放到数据总线中传输。如果是写，电路根据这个地址每位的值就将相应地址的物理内存中放入数据总线上的内容。物理内存是以字节(8位)为单位编址的，是地址变换的最终结果地址，物理地址由32位或36位无符号整数表示。</p>
+<p><strong>逻辑地址</strong>：是指由程序产生的与段相关的偏移地址部分，每一个逻辑地址都由一个段和偏移量组成。在进行C语言指针编程中，可以读取指针变量本身值(&amp;操作)，实际上这个值就是逻辑地址，它是相对于你当前进程数据段的地址，不和绝对物理地址相干。只有在Intel实模式下，逻辑地址才和物理地址相等（因为实模式没有分段或分页机制,Cpu不进行自动地址转换）；逻辑也就是在Intel 保护模式下程序执行代码段限长内的偏移地址（假定代码段、数据段如果完全一样）。</p>
+<p><strong>线性地址：</strong>是逻辑地址到物理地址变换之间的中间层。程序代码会产生逻辑地址，或者说是段中的偏移地址，加上相应段的基地址就生成了一个线性地址，是一个32位无符号整数，可以用来表示高达4GB的地址，也就是说，高达4294967296个内存单元，以十六进制表示，0x00000000到oxffffffff。如果启用了分页机制，那么线性地址可以再经变换以产生一个物理地址。若没有启用分页机制，那么线性地址直接就是物理地址。Intel 80386的线性地址空间容量为4G（2的32次方即32根地址总线寻址）。</p>
+<p><strong>虚拟内存</strong>：是指计算机呈现出要比实际拥有的内存大得多的内存量。因此它允许程序员编制并运行比实际系统拥有的内存大得多的程序。这使得许多大型项目也能够在具有有限内存资源的系统上实现。一个很恰当的比喻是：你不需要很长的轨道就可以让一列火车从上海开到北京。你只需要足够长的铁轨（比如说3公里）就可以完成这个任务。采取的方法是把后面的铁轨立刻铺到火车的前面，只要你的操作足够快并能满足要求，列车就能象在一条完整的轨道上运行。这也就是虚拟内存管理需要完成的任务。在现在操作系统中，都使用了MMU的存储管理技术，而MMU管理的地址是虚拟地址，虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。与没有使用虚拟内存技术的系统相比，使用这种技术的系统使得大型程序的编写变得更容易，对真正的物理内存（例如RAM）的使用也更有效率。有时我们也把逻辑地址称为虚拟地址。因为和虚拟内存空间的概念类似，逻辑地址也是和实际物理内存容量无关的。</p>
+<h4 id="逻辑地址如何转换为线性地址"><a href="#逻辑地址如何转换为线性地址" class="headerlink" title="逻辑地址如何转换为线性地址"></a>逻辑地址如何转换为线性地址</h4><p> 完整的内存管理，包含保护和地址变换两个关键部分。80386的工作模式包括实地址模式和虚地址模式（保护模式）。Linux主要工作在保护模式下。80X86从逻辑地址到物理地址变换中经过了两个阶段。第一阶段使用分段机制把程序的逻辑地址变换成处理器可寻址内存空间（称为线性地址空间）中的地址。第二阶段的分页机制把线性地址转换成物理地址。第一阶段的分段变换机制是必须使用的，但是第二阶段的分页机制是可选择的。如果没有开启分页机制，那么分段机制产生的线性地址空间就直接映射到处理器的物理地址空间上。</p>
+<p>  一个逻辑地址由两部份组成，<strong>段标识符: 段内偏移量</strong>。段标识符是由一个16位长的字段组成，称为段选择符。其中前13位是一个索引号。后面3位包含一些硬件细节，表示具体的是代码段寄存器还是栈段寄存器抑或是数据段寄存器，如图1所示。索引号就是“段描述符(segment descriptor)”的索引，段描述符具体地址描述了一个段。很多个段描述符，就组了一个数组，叫“段描述符表”，这样，<strong>可以通过段标识符的前13位，直接在段描述符表中找到一个具体的段描述符</strong>，这句话很关键，说明段标识符的具体作用，每一个段描述符由8个字节组成，如图2所示，与主题最密切的就是Base字段，她表示的是包含段的首字节的线性地址，也就是一个段的开始位置的线性地址。完全引用书中的一句话，一些全局的段描述符，就放在“全局段描述符表(GDT)”中，一些局部的，例如每个进程自己的，就放在所谓的“局部段描述符表(LDT)”中。那究竟什么时候该用GDT，什么时候该用LDT呢？这是由段选择符中的T1字段表示的，=0，表示用GDT，=1表示用LDT，GDT在内存中的地址和大小存放在CPU的GDTR控制寄存器中，而LDT则在IDTR寄存器中。这个过程中有几个基本的概念，一定要理清楚，如段选择符、段描述符、局部段描述符表、全局段描述符表。</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403152513453.png" alt="image-20220403152513453"></p>
+<p>上图显示了一个逻辑地址是怎样转换成相应线性地址的，给定一个完整的逻辑地址[段选择符：段内偏移地址]</p>
+<p> 1、看段选择符的T1=0还是1，即<strong>先检查段选择符中的TI字段，以决定段描述符保存在哪一个描述符表中</strong>，知道当前要转换是GDT中的段（在这种情况下，分段单元从GDTR寄存器中得到GDT的线性基地址），还是LDT中的段（在这种情况下，分段单元从LDTR寄存器中得到GDT的线性基地址），再根据相应寄存器，得到其地址和大小。<br>2、<strong>由于一个段描述符是8字节长，因此她在GDT或LDT内的相对地址是由段选择符的最高13位的值乘以8得到</strong>，拿出段选择符中前13位，可以在这个数组中，查找到对应的段描述符，这样，它的Offset，即偏移地址就知道了。<br>3、把Base + offset，就是要转换的线性地址了。<br>    对于软件来讲，原则上就需要把硬件转换所需的信息准备好，就可以让硬件来完成这个转换了。下图逻辑地址转换为线性地址实例，段选择符为0x7B，指向用户数据段，段起始地址为0x00000000，逻辑偏移地址为0x80495B0，最终的线性地址为Base + offset=0x80495B0。</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403153532441.png" alt="image-20220403153532441"></p>
+<h4 id="线性地址转物理地址"><a href="#线性地址转物理地址" class="headerlink" title="线性地址转物理地址"></a>线性地址转物理地址</h4><p>CPU通过地址来访问内存中的单元，地址有虚拟地址和物理地址之分，如果CPU没有MMU（Memory  Management Unit，内存管理单元），或者有MMU但没有启用，CPU核在取指令或访问内存时发出的地址将直接传到CPU芯片的外部地址引脚上，直接被内存芯片（以下称为物理内存，以便与虚拟内存区分）接收，这称为物理地址（Physical Address，以下简称PA），如下图所示。</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403155046532.png" alt="image-20220403155046532"></p>
+<p>如果CPU启用了MMU，CPU核发出的地址将被MMU截获，从CPU到MMU的地址称为虚拟地址（Virtual Address，以下简称VA），而MMU将这个地址翻译成另一个地址发到CPU芯片的外部地址引脚上，也就是将虚拟地址映射成物理地址，如下图所示</p>
+<p> <img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403155108029.png" alt="image-20220403155108029"></p>
+<p>虚拟内存地址和物理内存地址的分离，给进程带来便利性和安全性。虚拟地址必须和物理地址建立一一对应的关系，才可以正确的进行地址转换。</p>
+<p>记录对应关系最简单的办法，就是把对应关系记录在一张表中。为了让翻译速度足够地快，这个表必须加载在内存中。不过，这种记录方式惊人地浪费。</p>
+<p>因此，Linux采用了分页（paging）的方式来记录对应关系。所谓的分页，就是以更大尺寸的单位页（page）来管理内存。在Linux中，通常每页大小为4KB。</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403155154004.png" alt="image-20220403155154004"></p>
+<p>依据以下步骤进行转换：</p>
+<ol>
+<li>从cr3中取出进程的页目录地址（操作系统负责在调度进程的时候，把这个地址装入对应寄存器）；</li>
+<li>根据线性地址前十位，在数组中，找到对应的索引项，因为引入了二级管理模式，页目录中的项，不再是页的地址，而是一个页表的地址。（又引入了一个数组），页的地址被放到页表中去了。</li>
+<li>根据线性地址的中间十位，在页表（也是数组）中找到页的起始地址；</li>
+<li>将页的起始地址与线性地址中最后12位相加，得到最终我们想要的；</li>
+</ol>
+<h2 id="分段机制"><a href="#分段机制" class="headerlink" title="分段机制"></a>分段机制</h2><p>由IA-32体系结构支持的分段机制可以用来实现各种各样的系统设计。这些设计的范围很广，从只极少使用分段的平面模型到保护。这些设计从扁平模型到多分段模型，这些模型采用分段来创建一个强大的操作环境，在其中多个程序和任务可以可靠地执行。</p>
+<h3 id="Basic-Flat-Model-基本平坦模型"><a href="#Basic-Flat-Model-基本平坦模型" class="headerlink" title="Basic Flat Model(基本平坦模型)"></a>Basic Flat Model(基本平坦模型)</h3><p>一个系统最简单的内存模型是基本的 “平坦模型”，在这个模型中，操作系统和应用程序可以访问一个连续的、没有分割的地址空间。在最大程度上，这种基本的平坦模型对系统设计者和应用程序都隐藏了架构的分割机制。<br>程序员为了实现IA-32体系结构的基本平坦内存模型，至少要创建两个段描述符，一个用于引用代码段，一个用于引用数据段。这两个段都被映射到整个线性地址空间：也就是说，两个段描述符都有同样的基址值为0，同样的段限制为4GBytes。通过设置段限制为4GBytes，分段机制就不会因为超出限制的内存引用而产生异常，即使在一个特定的地址上没有物理内存存在。ROM（EPROM）通常位于物理地址空间的顶部。因为处理器在FFF_FFF0H开始执行。RAM（DRAM）被放在物理地址空间的底部，因为复位初始化后DS数据段的初始基址是0。</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403161325418.png" alt="image-20220403161325418"></p>
+<p>​                                                                        flat model</p>
+<h3 id="Protected-Flat-Model-受保护的平坦模型"><a href="#Protected-Flat-Model-受保护的平坦模型" class="headerlink" title="Protected Flat Model(受保护的平坦模型)"></a>Protected Flat Model(受保护的平坦模型)</h3><p>受保护的平坦模型与基本平坦模型类似，只是段的限制被设置为只包括物理内存实际存在的的地址范围（见下图）。一个一般保护的异常(#GP)会在任何访问不存在的内存的尝试中产生。这个模型提供了一个最低水平的<br>这种模式提供了最低水平的硬件保护，以防止某些类型的程序错误。</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403161745702.png" alt="image-20220403161745702"></p>
+<p>​                                                                  Protected Flat Model</p>
+<p>更多的复杂性可以被添加到这个受保护的平坦模型中，以提供更多的保护。例如，对于分页机制要在用户和主管的代码和数据之间提供隔离，需要定义四个段。用户的代码和数据段的权限级别为3，而主管的代码和数据段的权限级别为0。通常，这些段都是相互重叠的，并从线性地址空间的地址0开始。这种平坦的分段模型和一个简单的分页结构可以保护操作系统不受应用程序的影响。通过为每个任务或进程增加一个单独的分页结构，它还可以保护应用程序之间的相互影响。类似的设计被几个流行的多任务操作系统所采用。</p>
+<h3 id="Multi-Segment-Model-多段模型"><a href="#Multi-Segment-Model-多段模型" class="headerlink" title="Multi-Segment Model(多段模型)"></a>Multi-Segment Model(多段模型)</h3><p>多段模型（如下图）使用分段机制的全部功能，对代码、数据结构、程序和任务提供硬件强制保护。在这里，每个<br>程序（或任务）都有自己的段描述符表和自己的段。这些段可以是对其分配的程序来说是完全私有的，或者在程序之间共享。对所有程序段的访问以及对运行在各个程序上的执行环境都由硬件控制。<br>访问检查不仅可以用来防止引用一个段限制之外的地址，还可以防止在段内进行不允许的操作。例如，由于代码段被指定为只读段，所以可以用硬件来防止向代码段写东西。为段创建的访问权限信息也可以用来设置保护环或保护级别。保护级别可以用来保护操作系统程序免受应用程序的未经授权的访问。</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220403163121670.png" alt="image-20220403163121670"></p>
+<p>​                                                            Multi-Segment Model</p>
+<h3 id="Segmentation-in-IA-32e-Mode"><a href="#Segmentation-in-IA-32e-Mode" class="headerlink" title="Segmentation in IA-32e Mode"></a>Segmentation in IA-32e Mode</h3><p>在英特尔64架构的IA-32e模式下，分段的效果取决于处理器是在兼容模式还是64位模式下运行。在兼容模式下，分段的功能就像使用传统的16位或32位保护模式的语义。在64位模式下，分段功能通常被禁用（但不是完全禁用），创建一个平坦的64位线性地址空间。处理器将CS、DS、ES、SS的段基处理为零，创建一个线性地址，等于<br>有效地址。FS和GS段是个例外。这些段寄存器（存放段基）可以作为线性地址计算中的一个额外的基础寄存器。它们有助于寻址本地数据和某些操作系统的数据结构。注意，在64位模式下，处理器在运行时不执行段限制检查。</p>
+<h3 id="Paging-and-Segmentation-分页和分段"><a href="#Paging-and-Segmentation-分页和分段" class="headerlink" title="Paging and Segmentation(分页和分段)"></a>Paging and Segmentation(分页和分段)</h3><p>分页可以与上图中描述的任何一种分段模式一起使用。处理器的分页机制将线性地址空间（段被映射到其中）分为若干页。然后这些线性地址空间的页被映射到物理地址空间的页中。分页机制提供了几个页级的保护设施，可以和段保护设施一起使用，也可以代替段保护设施。例如，它允许在逐页的基础上强制执行读写保护。分页 机制还提供了两级用户-监督者保护，也可以在每页的基础上指定。</p>
+<h2 id="逻辑地址和线性地址的转换"><a href="#逻辑地址和线性地址的转换" class="headerlink" title="逻辑地址和线性地址的转换"></a>逻辑地址和线性地址的转换</h2><p>注:之前的内容为自己整理，以下为参考指导书翻译</p>
+<p>在保护模式下的系统架构层面，处理器使用两个阶段的地址转换来获得物理地址：逻辑地址转换和线性地址空间分页。<br>物理地址：逻辑地址转换和线性地址空间分页。即使对段的使用降到最低，处理器地址空间中的每一个字节都可以用一个逻辑地址来访问。一个逻辑地址包括一个16位的段选择器和一个32位的偏移量。段选择器确定了字节所处的段，偏移量指定了字节在段中相对于该段的基址的位置。处理器将每个逻辑地址转化为一个线性地址。线性地址是处理器线性地址空间中的一个32位地址。像物理地址空间一样，线性地址空间是一个平面的（未分割的）。232字节的地址空间，地址范围从0到FFFFFFFH。线性地址空间包含所有段和为系统定义的系统表。为了将逻辑地址转换为线性地址，处理器做了以下工作：</p>
+<ol>
+<li>使用段选择器中的偏移量来定位GDT或LDT中段的段描述符，并将其读入处理器。(只有当一个新的段选择器被加载到段寄存器中时才需要这个步骤。）</li>
+<li>检查段描述符，以检查段的访问权限和范围，以确保段是可访问的，并且偏移量在段的限制范围内。</li>
+<li>将段描述符中的段基地址加到偏移量上，形成一个线性地址。</li>
+</ol>
+<p>如果不使用分页，处理器将线性地址直接映射到物理地址上。如果线性地址空间被分页，第二层的地址转换被用来将线性地址转换为物理地址。<br><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404154555152.png" alt="image-20220404154555152"></p>
+<h3 id="Logical-Address-Translation-in-IA-32e-Mode-IA-32e-模式下的逻辑地址转换"><a href="#Logical-Address-Translation-in-IA-32e-Mode-IA-32e-模式下的逻辑地址转换" class="headerlink" title="Logical Address Translation in IA-32e Mode(IA-32e 模式下的逻辑地址转换)"></a>Logical Address Translation in IA-32e Mode(IA-32e 模式下的逻辑地址转换)</h3><p>在 IA-32e 模式下，Intel 64 处理器使用上述步骤将逻辑地址转换为线性地址。在64位模式下，段的偏移量和基地址是64位而不是32位。线性地址地址格式也是64位宽，并受制于典型形式的要求。每个代码段描述符都提供一个L位。这个位允许一个代码段执行64位代码或传统的32位代码的代码段。</p>
+<h3 id="Segment-Selectors-段选择子"><a href="#Segment-Selectors-段选择子" class="headerlink" title="Segment Selectors(段选择子)"></a>Segment Selectors(段选择子)</h3><p>段选择器是一个段的16位标识符（见下图）。它并不直接指向段，而是指向定义该段的段描述符。一个段选择器包含以下内容 ：</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404154957115.png" alt="image-20220404154957115"></p>
+<p>​                                                         Segment Selector</p>
+<p><strong>索引</strong>（第3至15位）- 在GDT或LDT中选择8192个描述符之一。处理器将索引值乘以8（段描述符中的字节数），并将结果加到GDT或LDT的基址上（分别来自GDTR或LDTR寄存器）。<br><strong>TI（表指示器）标志</strong><br>(Bit 2) - 指定要使用的描述符表：清除该标志选择GDT；设置该标志选择当前的LDT。</p>
+<p><strong>要求的权限级别(RPL)</strong><br>(位0和1) - 指定选择器的权限级别。特权级别范围从0到3，其中0为最高权限级别。</p>
+<p>GDT的第一个条目不被处理器使用。指向GDT这个条目的段选择器（即索引为0且TI标志设置为0的段选择器）被用作 “空段选择器”。就是说，一个索引为0且TI标志设置为0的段选择器被用作 “空段选择器”。当一个段寄存器（除了CS或SS寄存器）被载入空段选择器时，处理器不会产生一个异常。然而，当一个持有空段选择器的段寄存器被用来访问内存时，它会产生一个异常。空选择器可以用来初始化未使用的段寄存器。用一个空的段选择器加载CS或SS寄存器会导致一个通用的保护机制。段选择器加载CS或SS寄存器会产生一个通用保护异常（#GP）。段落选择器作为指针变量的一部分对应用程序是可见的，但是选择器的值通常是由链接编辑器分配或修改的，而不是应用程序。</p>
+<h3 id="Segment-Registers-段寄存器"><a href="#Segment-Registers-段寄存器" class="headerlink" title="Segment Registers(段寄存器)"></a>Segment Registers(段寄存器)</h3><p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404160315942.png" alt="image-20220404160315942"></p>
+<p>为了减少地址转换的时间和编码的复杂性，处理器提供了最多容纳6个段选择器的寄存器。这些段寄存器中的每一个都支持一种特定的内存引用(代码、堆栈或数据)。对于几乎任何一种程序的执行，至少要有代码段（CS），数据段（DS）和堆栈段（SS）寄存器且必须被加载有效的段选择器。处理器还提供了三个额外的数据段寄存器（ES、FS和GS），这些寄存器可以用来为当前执行的程序（或任务）提供额外的数据段。</p>
+<p>一个程序要访问一个段，该段的段选择器必须被加载到其中一个段寄存器中。因此，尽管一个系统可以定义数以千计的段，但只有6个可以立即使用。其他的段可以通过在程序执行期间将它们的段选择器加载到这些寄存器中来实现。</p>
+<p>每个段寄存器都有一个 “可见 “部分和一个 “隐藏 “部分。(隐藏部分有时被称为”描述符缓存 “或 “阴影寄存器”）。当段选择器被加载到段寄存器的可见部分时，处理器也会在段寄存器的隐藏部分加载基础地址、段限制和段描述符的访问控制信息。这些信息来自段选择器所指向的段描述符。缓存在段寄存器中的信息（可见的和隐藏的）允许处理器翻译地址，而不需要花费额外的总线周期来读取基址和限制。<br>系统中，多个处理器可以访问相同的描述符表，当描述符表被修改时，软件有责任重新加载段寄存器。如果不这样做，缓存在段寄存器中的旧的段描述符就可能在其内存驻留版本被修改后被使用。<br>为加载段寄存器提供了两种类型的加载指令:</p>
+<ol>
+<li><p>直接加载指令，如MOV, POP, LDS, LES, LSS, LGS和LFS指令。这些指令明确地引用段寄存器。</p>
+</li>
+<li><p>隐含的加载指令，如CALL、JMP和RET指令的远端指针版本，SYSENTER和SYSEXIT指令，以及IRET、INTn、INTO和INT3指令。<br>这些指令改变了CS寄存器的内容（有时也会改变其他段寄存器的内容），这是其操作的附带部分。MOV指令也可以用来将段寄存器的可见部分存储在通用寄存器中。</p>
+</li>
+</ol>
+<h3 id="Segment-Loading-Instructions-in-IA-32e-Mode-IA-32e模式下的段加载指令"><a href="#Segment-Loading-Instructions-in-IA-32e-Mode-IA-32e模式下的段加载指令" class="headerlink" title="Segment Loading Instructions in IA-32e Mode(IA-32e模式下的段加载指令)"></a>Segment Loading Instructions in IA-32e Mode(IA-32e模式下的段加载指令)</h3><p>由于ES、DS和SS段寄存器在64位模式下不被使用，它们在段描述符寄存器中的字段（base, limit, and attribute）被忽略了。某些形式的段装载指令也是无效的（例如LDS, POP ES）。引用ES、DS或SS段的地址计算被视为段基<br>为零。<br>处理器检查所有线性地址引用都是典型的形式，而不是执行极限检查。模式切换并不改变段寄存器或相关描述符寄存器的内容。在64位模式执行过程中，这些寄存器也不会改变，除非执行显式段加载。<br>为了给应用程序设置兼容模式，段加载指令（MOV to Sreg, POP Sreg）在64位模式下正常工作。从系统描述符表（GDT或LDT）中读取一个条目，并加载到段描述符的隐藏部分。描述符寄存器的基数、极限和属性字段都被加载。然而，数据和堆栈段选择器以及描述符寄存器的内容被忽略。<br>当FS和GS段重写在64位模式下使用时，它们各自的基础地址被用于线性地址计算中使用。(FS或GS).base + index + displacement。然后，FS.base和GS.base会被扩展到整个实现所支持的线性地址大小。由此产生的有效地址计算可以跨越正负地址；产生的线性地址必须是规范的。<br>在64位模式下，使用FS段和GS段覆盖的内存访问不会被检查是否有运行时限制也不受属性检查的影响。正常的段加载（MOV to Sreg和POP Sreg）到FS和GS中加载一个在段描述符寄存器的隐藏部分加载一个标准的32位基础值。标准32位以上的基址位以上的基址位被清除为0，以保证使用少于64位的实现方式的一致性。<br>FS.base和GS.base的隐藏描述符寄存器字段被物理映射到MSR，以便加载64位实现支持的所有地址位。64位实现所支持的所有地址位。CPL=0的软件（特权软件）可以使用WRMSR将所有支持的线性地址位加载到FS.base或GS.base。写入64位FS.base和GS.base寄存器中的地址必须是典型的形式。如果WRMSR指令试图向这些寄存器写入非经典地址的WRMSR指令会导致#GP故障。<br>当处于兼容模式时，FS和GS的重写操作与32位模式行为的定义无关。值加载到隐藏描述符寄存器基字段的前32位线性地址位。兼容性模式在计算有效地址时忽略上面的32位。<br>一个新的64位模式指令，SWAPGS，可以用来加载GS base。SWAPGS将IA32_KernelGSbase MSR中的内核数据结构指针与GS base寄存器交换。然后，内核可以使用GS前缀对正常的内存引用来访问内核的数据结构。试图向IA32_KernelGSbase MSR写一个非正则的值（使用WRMSR）会导致一个#GP故障。</p>
+<h3 id="Segment-Descriptors-段描述子"><a href="#Segment-Descriptors-段描述子" class="headerlink" title="Segment Descriptors(段描述子)"></a>Segment Descriptors(段描述子)</h3><p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404161935629.png" alt="image-20220404161935629"></p>
+<p>段描述符是GDT或LDT中的一个数据结构，为处理器提供段的大小和位置以及访问控制和状态信息。段落描述符通常是由编译器、链接器、加载器、操作系统或执行器，但不是应用程序创建的。</p>
+<p>段落描述符中的标志和字段如下:</p>
+<p><strong>分段限制字段</strong><br>指定段的大小。处理器把两个段限制字段放在一起，形成一个 一个20位的值。处理器以两种方式之一解释段限制，这取决于G（粒度）标志的设置：</p>
+<ul>
+<li>如果粒度标志是清除的，段的大小可以从1字节到1MByte，以字节为单位递增。</li>
+<li>如果颗粒度标志被设置，段的大小可以从4KB字节到4GB字节，以4KB字节为增量。</li>
+</ul>
+<p>处理器以两种不同的方式使用段的限制，取决于段是一个向上扩展的段或一个向下扩展的段。对于扩大的段，<br>在逻辑地址中的偏移量可以从0到段的极限范围。大于段限制的偏移量产生一般保护异常（#GP，用于SS以外的所有段）或堆栈故障异常（#SS用于SS段）。对于向下扩展的段，段限具有相反的功能。<br>偏移量可以从段限加1到FFFFFFFH或FFFFFFH，取决于B标志的设置。小于或等于段限制的偏移量产生一般保护异常或堆栈故障异常。减少一个扩展段的段限值字段的值，在段的地址空间的底部分配新的内存，而不是在顶部。<br>IA-32架构的堆栈总是向下增长，使得这种机制对于可扩展堆栈。</p>
+<p><strong>基准地址字段</strong><br>定义段的第0字节在4-GByte线性地址空间中的位置。处理器将三个基础地址字段放在一起，形成一个32位的数值。段的基址应与16字节的边界对齐，尽管16字节对齐不是必须的。这种对齐方式允许程序通过在16字节边界上对齐代码和数据来最大限度地提高性能。</p>
+<p><strong>类型字段</strong></p>
+<p>表示段或门的类型，并指定可以对该段进行的访问类型和增长方向。这个字段的解释取决于描述符类型标志指定的是应用（代码或数据）描述符还是系统描述符。类型字段的类型字段的编码对代码、数据和系统描述符是不同的。</p>
+<p><strong>S（描述符类型）标志</strong><br>指定段描述符是用于系统段（S标志为清除）还是用于代码或数据段（S标志为设置）。<br><strong>DPL（描述符权限级别）字段</strong><br>指定段的权限级别。特权级别的范围是0到3，其中0是最高的级别。<br><strong>P（段存在）标志</strong><br>指示段是否存在于内存中（设置）或不存在（清除）。如果这个标志是清除的，当指向段描述符的段选择器出现时，处理器会产生一个段不存在的异常（#NP）。内存管理软件可以使用这个标志来控制哪些段在给定的时间内被实际加载到物理内存中。它为管理虚拟内存提供了一个除分页之外的控制。当该标志被清除时，操作系统或执行程序可以自由地使用标记为 “可用 “的位置来存储自己的数据，例如关于丢失的段的位置的信息。<br><strong>D/B（默认操作大小/默认堆栈指针大小和/或上界）标志</strong><br>执行不同的功能，取决于段描述符是否是可执行的代码段、扩展的数据段、或者是其他的段，一个扩展的数据段，或者一个堆栈段。(对于32位的代码和数据段，这个标志应该总是设置为1，对于16位的代码和数据段，这个标志应该设置为0）。</p>
+<ul>
+<li>可执行代码段。该标志被称为D标志，它指示了有效地址和操作数的默认长度。如果该标志被设置，32位的地址和32位或8位的操作数；如果它被清除，16位的地址和16位或8位操作数。指令前缀66H可以用来选择默认以外的操作数，而指令前缀67H可以用来选择一个非默认的地址大小。</li>
+<li>堆栈段（由SS寄存器指向的数据段）。该标志被称为B（大）标志。它指定了用于隐式堆栈操作的堆栈指针的大小（如push, pops, and calls）。如果该标志被设置，则使用一个32位的堆栈指针，该指针被存储在32位的ESP寄存器中；如果该标志被清除，则使用16位的堆栈指针，该指针被存储在16位的SP寄存器中。如果堆栈段被设置为一个向下扩展的数据段（在下一段中描述下一段描述），B标志也指定了堆栈段的上界。</li>
+<li>扩大-缩小数据段。该标志被称为B标志，它指定了段的上限。如果该标志被设置，上界是FFFFFFFH（4GB字节）；如果该标志被清除，上限是FFFFFFFF（64KB）。</li>
+</ul>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404164628034.png" alt="image-20220404164628034"></p>
+<h2 id="描述符的分类"><a href="#描述符的分类" class="headerlink" title="描述符的分类"></a>描述符的分类</h2><p>段描述符分类</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404171152577.png" alt="image-20220404171152577"></p>
+<p>段描述符是GDT和LDT中的一个数据结构项，用于向处理器提供有关一个段的位置、大小以及访问控制的状态信息。每个段描述符的长度是8个字节，含有3个主要字段：</p>
+<ul>
+<li>段基地址</li>
+<li>段限长</li>
+<li>段属性</li>
+</ul>
+<p>段描述符通常由编译器，链接器，加载器或者操作系统来创建，但绝不是应用程序。</p>
+<p>段描述符通用格式如下所示</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404170746133.png" alt="image-20220404170746133"></p>
+<p>系统段描述符中各个位的含义如下所示</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404170802198.png" alt="image-20220404170802198"></p>
+<h3 id="存储段描述符"><a href="#存储段描述符" class="headerlink" title="存储段描述符"></a>存储段描述符</h3><h4 id="数据段描述符"><a href="#数据段描述符" class="headerlink" title="数据段描述符"></a>数据段描述符</h4><p>当S=1且TYPE字段的最高位（第2个双字的位11）为0时，表明是一个数据段描述符。</p>
+<p>下图是数据段描述符的格式。</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404171430725.png" alt="image-20220404171430725"></p>
+<h4 id="代码段描述符"><a href="#代码段描述符" class="headerlink" title="代码段描述符"></a>代码段描述符</h4><p>当S=1且TYPE字段的最高位（第2个双字的位11）为1时，表明是一个代码段描述符。</p>
+<p>下图是代码段描述符的格式。</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404171452192.png" alt="image-20220404171452192"></p>
+<h3 id="系统描述符类型"><a href="#系统描述符类型" class="headerlink" title="系统描述符类型"></a>系统描述符类型</h3><p>当段描述符中S标志位(描述符类型)是复位状态(0)的话，那么该描述符是一个系统描述符。处理器能够识别以下一些类型的系统段描述符:</p>
+<ul>
+<li>局部描述符表(LDT)的段描述符</li>
+<li>任务状态段（TSS）描述符</li>
+<li>调用门描述符</li>
+<li>中断门描述符</li>
+<li>陷阱门描述符</li>
+<li>任务门描述符</li>
+</ul>
+<p>这些描述符类型可分为两大类: 系统段描述符和门描述符。系统段描述符指向系统段(如LDT或TSS段)，门描述符也就是一个”门”,对应调用、中断或陷阱门，其中含有代码段的选择符和段中程序入口点的指针；对于任务门，其中含有TSS的段选择符。</p>
+<p>系统段描述符和门描述符类型字段的编码如下所示:</p>
+<p><img src="/2022/04/03/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220404170843601.png" alt="image-20220404170843601"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">x86系统架构预览-读书笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-28 15:44:58 / Modified: 20:05:31" itemprop="dateCreated datePublished" datetime="2022-03-28T15:44:58+08:00">2022-03-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="x86系统架构概述"><a href="#x86系统架构概述" class="headerlink" title="x86系统架构概述"></a>x86系统架构概述</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>[TOC]</p>
+<h2 id="系统级体系架构概述"><a href="#系统级体系架构概述" class="headerlink" title="系统级体系架构概述"></a>系统级体系架构概述</h2><p><img src="/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220328160624845.png" alt="image-20220328160624845"></p>
+<h3 id="Global-and-Local-Descriptor-Tables-全局和局部描述符表"><a href="#Global-and-Local-Descriptor-Tables-全局和局部描述符表" class="headerlink" title="Global and Local Descriptor Tables(全局和局部描述符表)"></a>Global and Local Descriptor Tables(全局和局部描述符表)</h3><p>​         当在保护模式下操作时，所有的内存访问都要经过<strong>全局描述符表（GDT）</strong>或可选的<strong>本地描述符表（LDT）</strong>，如图2-1所示。这些表包含的条目描述符称为段 。段描述符提供了段的基本地址以及访问权限、类型和使用信息。<br>​        每个段描述符都有一个相关的段选择器。一个段选择器为使用它的软件提供了 一个GDT或LDT的索引（其相关段描述符的偏移量），一个全局/本地标志（决定选择器是否指向GDT或LDT），以及访问权限信息。<br>​       要访问段中的一个字节，必须提供一个段选择器和一个偏移量。段选择器提供访问该段的段描述符（在GDT或LDT中）。从段描述符中，处理器获得该段在线性地址空间中的基本地址。然后，偏移量提供了字节相对于基址的位置。这种机制可以用来访问任何有效的代码、数据或堆栈段。只要该段可以从处理器所处的当前权限级别（CPL）访问。CPL被定义为当前执行的代码段的保护级别。<br>​       见图2-1。图中的实心箭头表示一个线性地址，虚线表示一个段选择器。而点状箭头表示物理地址。为了简单起见，许多段选择器被显示为 直接指向一个段。然而，从段选择器到其相关段的实际路径总是通过GDT或LDT。GDT的基址的线性地址包含在GDT寄存器（GDTR）中；LDT的线性地址包含在LDT寄存器（LDTR）中。</p>
+<h4 id="Global-and-Local-Descriptor-Tables-in-IA-32e-Mode"><a href="#Global-and-Local-Descriptor-Tables-in-IA-32e-Mode" class="headerlink" title="Global and Local Descriptor Tables in IA-32e Mode"></a>Global and Local Descriptor Tables in IA-32e Mode</h4><p>​        GDTR 和 LDTR 寄存器在 IA-32e 子模式（64 位模式和兼容模式）中都被扩展到 64 位宽。全局和局部描述符表在64位模式下被扩展以支持64位基地址，（16字节的LDT 描述符持有一个64位的基本地址和各种属性）。在兼容模式下，描述符不被扩展 。</p>
+<h3 id="System-Segments-Segment-Descriptors-and-Gates-系统段，段描述符和门"><a href="#System-Segments-Segment-Descriptors-and-Gates-系统段，段描述符和门" class="headerlink" title="System Segments, Segment Descriptors, and Gates(系统段，段描述符和门)"></a>System Segments, Segment Descriptors, and Gates(系统段，段描述符和门)</h3><p>​       除了构成程序或过程执行环境的代码、数据和堆栈段之外，架构还定义了两个系统段：<strong>任务状态段（TSS）</strong>和<strong>LDT</strong>。GDT不被视为。<br>因为它不是通过段选择器和段描述符访问的。TSSs和LDTs有为它们定义了段描述符。该体系结构还定义了一组特殊的描述符，称为门[调用门（call gates），中断门（interrupt gates），陷阱门（trap gates），和 任务门（task gates）]。这些描述符为系统程序和处理程序提供了受保护的通道，这些程序和处理程序可能在与应用程序不同的权限级别上运行。例如，一个调用门的CALL可以提供访问一个代码段中的程序，该代码段与当前代码段处于相同或更低的权限级别（更多权限）。<br>​        为了通过调用门访问一个过程，调用过程提供了调用门的选择器。然后，处理器对调用门进行访问权限检查，将CPL与调用门和调用门所指向的目标代码段的权限级别进行比较。如果对目标代码段的访问是允许的，处理器就会得到目标代码段的段选择器和该代码段的偏移。如果调用需要改变权限级别，处理器也会切换到目标权限级别的堆栈。新堆栈的段选择器是从当前运行任务的TSS中获得的。门也促进了16位和32位代码段之间的转换，反之亦然。</p>
+<h4 id="Gates-in-IA-32e-Mode"><a href="#Gates-in-IA-32e-Mode" class="headerlink" title="Gates in IA-32e Mode"></a>Gates in IA-32e Mode</h4><p>在IA-32e模式下，以下描述符是16字节的描述符（扩大到允许64位基数）。LDT描述符、64位TSS、调用门、中断门和陷阱门。调用门促进了64位模式和兼容模式之间的转换。在IA32e模式下不支持任务门。在权限级别改变时，堆栈段选择器不从TSS中读取。相反，它们被设置为NULL。</p>
+<h3 id="Task-State-Segments-and-Task-Gates-任务状态段任务门"><a href="#Task-State-Segments-and-Task-Gates-任务状态段任务门" class="headerlink" title="Task-State Segments and Task Gates(任务状态段任务门)"></a>Task-State Segments and Task Gates(任务状态段任务门)</h3><p>​       TSS（见图2-1）定义了一个任务的执行环境的状态。它包括通用寄存器、段寄存器、EFLAGS寄存器、EIP寄存器和段选择器的状态-指向三个堆栈段（每个权限级别有一个堆栈）。TSS还包括段选择器 ，用于与任务相关的LDT和分页结构层次的基址。<br>​       所有受保护模式下的程序执行都发生在一个任务（称为当前任务）的上下文中。<br>​      当前任务的TSS的段选择器被存储在任务寄存器中。最简单的切换方法是调用或跳转到一个新的任务。这里，新任务的TSS的段选择器是在CALL或JMP指令中给出的。在切换任务时，处理器会执行以下动作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 将当前任务的状态存储在当前TSS中。</span><br><span class="line">2. 用新任务的段选择器加载任务寄存器。</span><br><span class="line">3. 通过GDT中的段描述符访问新的TSS。</span><br><span class="line">4. 将新任务的状态从新的TSS加载到通用寄存器、段寄存器中、LDTR，控制寄存器CR3（分页结构层次的基址），EFLAGS寄存器，以及EIP寄存器。</span><br><span class="line">5. 开始执行新的任务。一个任务也可以通过一个任务门来访问。任务门类似于调用门，只是它提供了访问 (通过段选择器)访问一个TSS而不是一个代码段。</span><br></pre></td></tr></table></figure>
+<h4 id="Task-State-Segments-in-IA-32e-Mode"><a href="#Task-State-Segments-in-IA-32e-Mode" class="headerlink" title="Task-State Segments in IA-32e Mode"></a>Task-State Segments in IA-32e Mode</h4><p>在IA-32e模式下不支持硬件任务开关。然而，TSSs继续存在。TSS的基本地址由其描述符指定。一个64位的TSS持有以下对64位操作很重要的信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 每个特权级别的堆栈指针地址</span><br><span class="line">- 中断堆栈表的指针地址</span><br><span class="line">- IO-permission位图的偏移地址（从TSS基数开始）。</span><br><span class="line">  在IA-32e模式下，任务寄存器被扩展为容纳64位基址。</span><br></pre></td></tr></table></figure>
+<h3 id="Interrupt-and-Exception-Handling-中断和异常处理"><a href="#Interrupt-and-Exception-Handling-中断和异常处理" class="headerlink" title="Interrupt and Exception Handling(中断和异常处理)"></a>Interrupt and Exception Handling(中断和异常处理)</h3><p>​          外部中断、软件中断和异常是通过中断描述符表（IDT）处理的。IDT存储了一个门描述符的集合，提供对中断和异常处理程序的访问。与 GDT一样，IDT不是一个段。IDT基础的线性地址包含在IDT寄存器（IDTR）中。IDT中的门描述符可以是中断、陷阱、或任务门描述符。要访问一个中断或异常处理程序 ，处理器首先从内部硬件、外部中断控制器或软件中接收一个中断向量（中断号）。中断控制器，或通过INT、INTO、INT 3或BOUND指令从软件接收一个中断向量（中断号）。中断向量 提供了一个进入IDT的索引。如果选择的门描述符是一个中断门或陷阱门，相关的处理程序就会被访问。处理程序的访问方式与通过调用门调用程序的方式类似。如果描述符是一个<br>任务门，处理程序将通过一个任务开关被访问。</p>
+<h4 id="Interrupt-and-Exception-Handling-IA-32e-Mode"><a href="#Interrupt-and-Exception-Handling-IA-32e-Mode" class="headerlink" title="Interrupt and Exception Handling IA-32e Mode"></a>Interrupt and Exception Handling IA-32e Mode</h4><p>在IA-32e模式下，中断描述符被扩展到16个字节，以支持64位基本地址。IDTR寄存器被扩展为容纳64位基地址。不支持任务门。</p>
+<h3 id="Memory-Management-内存管理"><a href="#Memory-Management-内存管理" class="headerlink" title="Memory Management(内存管理)"></a>Memory Management(内存管理)</h3><p>​        系统架构支持内存的直接物理寻址或虚拟内存（通过分页）。<br>​        当使用物理寻址时，线性地址被当作物理地址处理。当使用分页时：所有的代码、数据、堆栈和系统段（包括GDT和IDT）可以被分页，只有最近访问的 页被保存在物理内存中。物理内存中的页面（有时称为页框）的位置包含在分页结构中。这些结构位于物理内存中。<br>​        分页结构层次结构的基本物理地址包含在控制寄存器CR3中。分页结构中的条目决定了 一个分页框的物理地址、访问权限和内存管理信息。为了使用这种分页机制，一个线性地址被分解成几个部分。这些部分提供了进入分页结构和页框的单独偏移。一个系统可以有一个单一的分页结构层次，也可以有几个。例如 ，每个任务可以有自己的层次结构。</p>
+<h4 id="Memory-Management-in-IA-32e-Mode"><a href="#Memory-Management-in-IA-32e-Mode" class="headerlink" title="Memory Management in IA-32e Mode"></a>Memory Management in IA-32e Mode</h4><p>在IA-32e模式下，物理内存页由一组系统数据结构管理。在兼容模式 和64位模式下，使用四级系统数据结构。这些结构包括 ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 第4级页面映射（PML4）--PML4表中的一个条目包含了一个页面的基点的物理地址目录指针表、访问权限和内存管理信息。PML4的基本物理地址被存储在CR3中。</span><br><span class="line">- 一组页目录指针表 - 页目录指针表中的一个条目包含了页目录指针表基的物理地址。</span><br><span class="line">- 一组页目录 - 页目录表中的一个条目包含了一个页目录表基的物理地址、访问权限和内存管理信息。</span><br><span class="line">- 成套的页表 - 一个页表中的条目包含了一个页框的物理地址，访问权限和内存管理信息。</span><br></pre></td></tr></table></figure>
+<h3 id="System-Registers-系统寄存器"><a href="#System-Registers-系统寄存器" class="headerlink" title="System Registers(系统寄存器)"></a>System Registers(系统寄存器)</h3><p>为了帮助初始化处理器和控制系统操作，系统结构在EFLAGS寄存器中提供了系统标志和几个系统寄存器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- EFLAGS寄存器中的系统标志和IOPL字段控制任务和模式的切换，中断处理，指令跟踪和访问权限。</span><br><span class="line">- 控制寄存器（CR0、CR2、CR3和CR4）包含各种控制系统级操作的标志和数据域。这些寄存器中的其他标志被用来表示对操作系统或执行器中特定处理器能力的支持。</span><br><span class="line">- 调试寄存器允许设置断点以用于调试程序和系统软件。</span><br><span class="line">- GDTR、LDTR和IDTR寄存器包含了它们各自表的线性地址和大小（限制）。</span><br><span class="line">- 任务寄存器包含了当前任务的线性地址和TSS的大小。</span><br><span class="line">- 特定型号的寄存器。这些寄存器控制一些项目，如调试扩展。</span><br><span class="line">  这些寄存器的数量和功能在英特尔64和IA-32处理器系列的不同成员中是不同的。</span><br></pre></td></tr></table></figure>
+<h4 id="System-Registers-in-IA-32e-Mode"><a href="#System-Registers-in-IA-32e-Mode" class="headerlink" title="System Registers in IA-32e Mode"></a>System Registers in IA-32e Mode</h4><p>​        在IA-32e模式下，四个系统描述符表寄存器（GDTR、IDTR、LDTR和TR）在硬件上被扩展为<br>以容纳64位的基本地址。EFLAGS成为64位的RFLAGS寄存器。CR0-CR4被扩展到64位。CR8变得可用。CR8提供了对任务优先级寄存器（TPR）的读写访问，这样操作系统就可以控制外部设备的优先级。在64位模式下，调试寄存器DR0-DR7为64位。在兼容模式下，DR0-DR3的地址匹配也是以64位粒度进行的。在支持IA-32e模式的系统上，扩展功能启用寄存器（IA32_EFER）是可用的。这个特定型号的寄存器控制IA-32e模式的激活和其他IA-32e模式的操作。此外，还有几个特定型号的寄存器管理 IA-32e 模式指令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- IA32_KernelGSbase - 由 SWAPGS 指令使用。</span><br><span class="line">- IA32_LSTAR - 由 SYSCALL 指令使用。</span><br><span class="line">- IA32_SYSCALL_FLAG_MASK - 由SYSCALL指令使用。</span><br><span class="line">- IA32_STAR_CS - 由SYSCALL和SYSRET指令使用。</span><br></pre></td></tr></table></figure>
+<h3 id="Other-System-Resources"><a href="#Other-System-Resources" class="headerlink" title="Other System Resources"></a>Other System Resources</h3><p>除了前几节描述的系统寄存器和数据结构，系统结构还提供了以下的额外资源。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 操作系统指令</span><br><span class="line">- 性能监测计数器</span><br><span class="line">- 内部缓存和缓冲区</span><br><span class="line">  等</span><br></pre></td></tr></table></figure>
+<h2 id="实模式和保护模式转换"><a href="#实模式和保护模式转换" class="headerlink" title="实模式和保护模式转换"></a>实模式和保护模式转换</h2><p>二者根本区别为：进程内存受保护与否</p>
+<p> 保护模式 - 这是处理器的原生操作模式。它提供了一套丰富的结构特性、灵活性、高性能和对现有软件基础的向后兼容性。</p>
+<p>真实地址模式 - 这种操作模式提供了英特尔8086处理器的编程环境，并有一些扩展（如切换到受保护或系统管理模式的能力）。</p>
+<h3 id="实模式工作原理"><a href="#实模式工作原理" class="headerlink" title="实模式工作原理"></a>实模式工作原理</h3><p>实模式出现于早期8088CPU时期。当时由于CPU的性能有限，一共只有20位地址线（所以地址空间只有1MB），以及8个16位的通用寄存器，以及4个16位的段寄存器。所以为了能够通过这些16位的寄存器去构成20位的主存地址，必须采取一种特殊的方式。当某个指令想要访问某个内存地址时，它通常需要用下面的这种格式来表示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(段基址：段偏移量)</span><br></pre></td></tr></table></figure>
+<p>其中第一个字段是段基址，它的值是由段寄存器提供的。</p>
+<p>第二字段是段内偏移量，代表你要访问的这个内存地址距离这个段基址的偏移。它的值就是由通用寄存器来提供的，所以也是16位。</p>
+<p>CPU采用把段寄存器所提供的段基址先向左移4位。这样就变成了一个20位的值，然后再与段偏移量相加，即可组合成一个二十位的地址。即：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">物理地址 = 段基址&lt;&lt;4 + 段内偏移</span><br></pre></td></tr></table></figure>
+<h3 id="保护模式工作原理"><a href="#保护模式工作原理" class="headerlink" title="保护模式工作原理"></a>保护模式工作原理</h3><p>随着CPU的发展，CPU的地址线的个数也从原来的20根变为现在的32根，所以可以访问的内存空间也从1MB变为现在4GB，寄存器的位数也变为32位。所以实模式下的内存地址计算方式就已经不再适合了。所以就引入了现在的保护模式，实现更大空间的，更灵活也更安全的内存访问。</p>
+<p>在保护模式下，CPU的32条地址线全部有效，可寻址高达4G字节的物理地址空间; 但是我们的内存寻址方式还是得兼容老办法，即(段基址：段偏移量)的表示方式。当然此时CPU中的通用寄存器都要换成32位寄存器(除了段寄存器)来保证寄存器能访问所有的4GB空间。</p>
+<p>我们的偏移值和实模式下是一样的，就是变成了32位而已，而段值仍旧是存放在原来16位的段寄存器中，但是这些段寄存器存放的却不再是段基址了，毕竟之前说过实模式下寻址方式不安全，我们在保护模式下需要加一些限制，而这些限制可不是一个寄存器能够容纳的，于是我们把这些关于内存段的限制信息放在一个叫做<strong>全局描述符表(GDT)</strong>的结构里。全局描述符表中含有一个个表项，每一个表项称为<strong>段描述符。</strong>而段寄存器在保护模式下存放的便是相当于一个数组索引的东西，通过这个索引，可以找到对应的表项。段描述符存放了段基址、段界限、内存段类型属性(比如是数据段还是代码段,注意<strong>一个段描述符只能用来定义一个内存段</strong>)等许多属性,具体信息见下图：</p>
+<p><img src="/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220328193206147.png" alt="image-20220328193206147"></p>
+<p>其中，段界限表示段边界的扩张最值，即最大扩展多少或最小扩展多少，用20位来表示，它的单位可以是字节，也可以是4KB，这是由G位决定的(G为1时表示单位为4KB)。</p>
+<p>实际段界限边界值=(描述符中的段界限+1)*（段界限的单位大小(即字节或4KB))-1，如果偏移地址超过了段界限，CPU会抛出异常。</p>
+<p>全局描述符表位于内存中，需要用专门的寄存器指向它后， CPU 才知道它在哪里。这个专门的寄存器便是<strong>GDTR</strong>(一个48位的寄存器),专门用来存储 GDT 的内存地址及大小。</p>
+<p>还需要介绍一个新的概念：段的选择子。段寄存器 CS、 DS、 ES、 FS、 GS、 SS，在实模式下时，段中存储的是段基地址，即内存段的起始地址。 而在保护模式下时，由于段基址已经存入了段描述符中，所以段寄存器中再存放段基址是没有意义的，在段寄存器中存入的是一个叫作选择子的东西。选择子“基本上”是个索引值。由于段寄存器是 16 位，所以选择子也是 16 位，在其低 2 位即第 0～1 位， 用来存储 RPL，即请求特权级，可以表示 0、 1、 2、 3 四种特权级。在选择子的第 2 位是 TI 位，即 Table Indicator，用来指示选择子是在 GDT 中，还是 LDT 中索引描述符。 TI 为 0 表示在 GDT 中索引描述符， TI 为 1 表示在 LDT 中索引描述符。选择子的高 13 位，即第 3～15 位是 描述符的索引值，用此值在 GDT 中索引描述符。前面说过 GDT 相当于一个描述符数组，所以此选择子中的索引值就是 GDT 中的下标。选择子结构如下：</p>
+<p><img src="/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220328193601767.png" alt="image-20220328193601767"></p>
+<p>此外， 扩充的存储器分段管理机制和可选的存储器分页管理机制，不仅为存储器共享和保护提供了硬件支持，而且为实现虚拟存储器提供了硬件支持; 支持多任务，能够快速地进行任务切换(switch)和保护任务环境(context); 4个特权级和完善的特权检查机制，既能实现资源共享又能保证代码和数据的安全和保密及任务的隔离; 支持虚拟8086方式，便于执行8086程序。</p>
+<h3 id="实模式到保护模式的切换"><a href="#实模式到保护模式的切换" class="headerlink" title="实模式到保护模式的切换"></a>实模式到保护模式的切换</h3><p>从实模式切换到保护模式大致可以分为以下几个步骤：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1、屏蔽中断</span><br><span class="line"></span><br><span class="line">2、初始化全局描述符表（GDT）</span><br><span class="line"></span><br><span class="line">3、将CR0寄存器最低位置1</span><br><span class="line"></span><br><span class="line">4、执行远跳转</span><br><span class="line"></span><br><span class="line">5、初始化段寄存器和栈指针</span><br></pre></td></tr></table></figure>
+<h4 id="屏蔽中断"><a href="#屏蔽中断" class="headerlink" title="屏蔽中断"></a>屏蔽中断</h4><p>在16位实模式下的中断由BIOS处理，进入保护模式后，中断将交给中断描述符表IDT里规定的函数处理，在刚进入保护模式时IDTR寄存器的初始值为0，一旦发生中断（例如BIOS的时钟中断）就将导致CPU发生异常，所以需要首先屏蔽中断。屏蔽中断可以使用cli指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cli</span><br></pre></td></tr></table></figure>
+<h4 id="初始化GDT"><a href="#初始化GDT" class="headerlink" title="初始化GDT"></a>初始化GDT</h4><p>在32位保护模式中，段与段之间是互相隔离的，当访问的地址超出段的界限时处理器就会阻止这种访问，因此每个段都需要有起始地址、范围、访问权限以及其他属性四个部分，这四个部分合在一起叫做段描述符（Segment Descriptor），总共需要8个字节来描述。但Intel为了保持向后兼容，将段寄存器仍然规定为16-bit，显然我们无法用16-bit的段寄存器来直接存储64-bit的段描述符。 </p>
+<p>解决的办法是将所有64-bit的段描述符放到一个数组中，将16-bit段寄存器的值作为下标来访问这个数组（以字节为单位），获取64-bit的段描述符，这个数组就叫是全局描述符表</p>
+<h4 id="将CR0最低位置1"><a href="#将CR0最低位置1" class="headerlink" title="将CR0最低位置1"></a>将CR0最低位置1</h4><p>CR0是系统内的32位控制寄存器之一，可以控制CPU的一些重要特性。其中最低位是保护允许位（Protected Mode Enable, PE），PE位置1后CPU进入保护模式（注意此时还是16位保护模式，不是32位保护模式），置0时则为实模式。现在我们要进入保护模式，即将CR0的最低位置1，汇编代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-把 cr0 的最低位置为 1，开启保护模式</span><br><span class="line">mov eax, cr0</span><br><span class="line">or eax, 0x1</span><br><span class="line">mov cr0, eax</span><br></pre></td></tr></table></figure>
+<h4 id="执行远跳转"><a href="#执行远跳转" class="headerlink" title="执行远跳转"></a>执行远跳转</h4><p>将cr0最低位置1后，CPU就进入了保护模式，此时需要马上执行一条远跳转指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmp 08h:PModeMain</span><br></pre></td></tr></table></figure>
+<p>这条指令有两个作用，第一个作用是将cs段寄存器的值修改为08h，切换到保护模式后，CPU寻址的方式就从实模式中的段地址 * 16 + 偏移地址改为了通过gdt寻址，所以这里的08h是段选择子而不是段地址，并且远跳转指令会自动将cs的值修改为对应的段选择子，这里是08h。</p>
+<p>远跳转的另一个作用是清空CPU的流水线，流水线的作用在计组中有提到过，为了加速指令的执行，CPU在执行当前指令时会同时加载并解析接下来的一些指令，在进入保护模式之前，已经有许多指令进入了流水线，这些指令都是按16位模式处理的，而进入保护模式后的指令都是32位，所以这里通过一个远跳转来让CPU清空流水线。</p>
+<p>切换到32位模式后，就应该执行32位的指令了，所以从PModeMain开始的指令都采用32位模式编译，通过[bits 32]这个标记实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[bits 32]</span><br><span class="line">PModeMain:</span><br></pre></td></tr></table></figure>
+<h4 id="初始化段寄存器和栈指针"><a href="#初始化段寄存器和栈指针" class="headerlink" title="初始化段寄存器和栈指针"></a>初始化段寄存器和栈指针</h4><p>上一步中我们将代码段寄存器cs初始化成了0x08，现在我们还需要初始化其他的段寄存器如数据段寄存器ds，拓展段寄存器es，栈段ss以及fs，gs两个由操作系统使用的段。 </p>
+<p>另外我们还需要初始化栈指针ebp和esp，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[bits 32]</span><br><span class="line">PModeMain:</span><br><span class="line">    mov ax, 0x10        ; 将数据段寄存器ds和附加段寄存器es置为0x10</span><br><span class="line">    mov ds, ax         </span><br><span class="line">    mov es, ax</span><br><span class="line">    mov fs, ax          ; fs和gs寄存器由操作系统使用，这里统一设成0x10</span><br><span class="line">    mov gs, ax</span><br><span class="line">    mov ax, 0x18        ; 将栈段寄存器ss置为0x18</span><br><span class="line">    mov ss, ax</span><br><span class="line">    mov ebp, 0x7c00     ; 现在栈顶指向 0x7c00</span><br><span class="line">    mov esp, ebp</span><br></pre></td></tr></table></figure>
+<h3 id="需要修改的内容"><a href="#需要修改的内容" class="headerlink" title="需要修改的内容"></a>需要修改的内容</h3><ul>
+<li><p>GDT初始化：定义段描述符、定义GDTR的数据结构、定义GDT选择子</p>
+</li>
+<li><p>数据段+堆栈段</p>
+</li>
+<li><p>16位代码段（实模式下）的定义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.设置代码运行环境，即给相关寄存器赋值；</span><br><span class="line">2.初始化16位代码段描述符 + 32位代码段描述符 + 堆栈段描述符 +数据段描述符；</span><br><span class="line">3.初始化全局描述符表寄存器GDTR的内容，因为其基地址还没有初始化， 然后通过lgdt [GdtPtr]，将内存中GDTR的内容加载到GDTR中，重点在于保存 GDT的基地址；</span><br><span class="line">4.关中断， 即设置CPU不响应任何其他的外部中断，因为CPU现在的时间片只属于当前加载的程序；</span><br><span class="line">5.打开地址线A20；</span><br><span class="line">6将CR0的 PE 位置1；PE位==1，表明CPU运行在保护模式下；</span><br><span class="line">7.跳转到保护模式： jmp dword SelectorCode32:0 ，这里的代码指提供了选择子，（2.3）末部分，已经说明了为什么通过选择子就可以索引到 32位代码段 LABEL_SEG_CODE32；（这就是从实模式跳入保护模式）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>32位代码段（由实模式跳入，即保护模式）的定义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.将对应选择子赋值到 对应寄存器， 即设置任务代码的运行环境，不得不提的是本段代码还改变了ss和esp，则在32位代码段中所有的堆栈操作将会在新增的堆栈段中进行；</span><br><span class="line">2.做任务；</span><br><span class="line">3.任务做完后，跳转到16位代码段，因为从保护模式跳回实模式，只能从16位代码段中跳回；</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="80x86系统指令寄存器"><a href="#80x86系统指令寄存器" class="headerlink" title="80x86系统指令寄存器"></a>80x86系统指令寄存器</h2><h3 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h3><p><img src="/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220328194436597.png" alt="image-20220328194436597"></p>
+<p>  EFLAGS系统标志和IOPL字段控制I/O，可屏蔽的硬件中断、调试、任务切换和虚拟8086模式。仅允许特权代码（通常为操作系统过执行代码）修改这些位。</p>
+<p>​       在64位模式下，RFLAGS寄存器扩展为64位，保留高32位。PFLAGS中系统标志（64位模式）或EFLAGS（兼容模式）。在IA-32e模式下，处理器不允许设置VM位，因为不支持virtual-8086模式（尝试设置该位将被忽略）。同样，处理器将不会设置NT位。但是处理器确实允许软件将NT位置1（请注意，如果将NT位置1，则IRET会在IA-32e模式下引起一般性保护故障）。在IA-32e模式下，YSCALL/SYSRET指令具有一种可编程的方法来指定哪些位是已RFLAGS/EFLAGS中清除。这些说明保存/恢复EFLAGS/RFLAGS。</p>
+<h3 id="内存管理寄存器"><a href="#内存管理寄存器" class="headerlink" title="内存管理寄存器"></a>内存管理寄存器</h3><p><img src="/2022/03/28/x86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/image-20220328194633100.png" alt="image-20220328194633100"></p>
+<h4 id="GDTR"><a href="#GDTR" class="headerlink" title="GDTR"></a>GDTR</h4><p>保存基地址（在保护模式下为32位，在IA-32e模式下为64位）和16位表GDT的限制。基地址指定GDT字节0的线性地址；表格限制指定了表中的字节数。LGDT和SGDT指令分别加载和存储GDTR寄存器。开机或重置在处理器中，基地址设置为默认值0，限制设置为0FFFFH。必须有新的基本地址将其作为保护模式操作的处理器初始化过程的一部分加载的GDTR。</p>
+<h4 id="LDTR"><a href="#LDTR" class="headerlink" title="LDTR"></a>LDTR</h4><p>​       保留16位段选择器的结伴地址（在保护模式下为32位，在IA-32e模式下为64位）段限制和LDT的描述符属性。基地址指定字节的线性地址LDT段的0，段限制指定段中的字节数。LLDT和SLDT指令分别加载和存储LDTR寄存器的段选择器部分的包含LDT的段必须在GDT中具有段描述符。当LLDT指令加载一个LDTR中的段选择器：LDT描述符中的基地址、限制和描述符属性会自动加载到LDTR中。<br>​       发生任务切换时，LDTR会自动加载LDT的段选择器和描述符为新任务。在写入新的LDT信息之前，不会自动保存LDTR的内容进入寄存器。在处理器加电或重置时，段选择器和基地址被设置为默认值0和限制设置为0FFFFH。</p>
+<h4 id="IDTR"><a href="#IDTR" class="headerlink" title="IDTR"></a>IDTR</h4><p>​        寄存器保存基地址（保护模式下为32位，IA-32e模式下为64位）和16位表限制IDT。基地址指定IDT字节0的线性地址，表限制指定数量表中的字节数。LIDT和SIDT指令分别加载和存储IDTR寄存器。开机或重置处理器后，基地址设置为默认值0，限制设置为0FFFFH。然后可以在处理器初始化过程中更改寄存器中的地址和限制。</p>
+<h4 id="TR"><a href="#TR" class="headerlink" title="TR"></a>TR</h4><p>​        任务寄存器包含16位段选择器，基地址（在保护模式下为32位，在IA-32e中为64位），段限制和当前任务的TSS的描述符属性。选择器引用TSS、GDT的描述符。基地址指定TSS字节0的线性地址；段限制指定TSS中的字节数。LTR和STR指令分别加载和存储任务寄存器的段选择器部分。当LTR指令将段选择器加载到任务寄存器中时，基址、限制和描述符属性从TSS描述符将自动加载到任务寄存器中。处理器加电或重置时，基地址设置为默认值0，限制设置为0FFFFH。发生任务切换时，任务寄存器会自动加载段选择器和描述符新任务的TSS。在写入的新的TSS之前，不会自动保存任务寄存器的内容信息进去寄存器。</p>
+<h3 id="控制寄存器"><a href="#控制寄存器" class="headerlink" title="控制寄存器"></a>控制寄存器</h3><h4 id="CR0"><a href="#CR0" class="headerlink" title="CR0"></a>CR0</h4><p>包含控制处理器的操作模式和状态的系统控制标志。</p>
+<h4 id="CR3"><a href="#CR3" class="headerlink" title="CR3"></a>CR3</h4><p>包含分页结构层次结构基础的物理地址和两个标志（PCD和PWT）。仅指定基址的最高有效位（减去低12位）；低12位地址“0”假定为0.因此，第一个分页结构必须与页面（4KB）对齐边界。PCT和PWT标志控制处理器内部数据中该分页结构的缓存（它们不控制页面目录信息的TLB缓存）。使用物理地址扩展中，CR3寄存器包含页面目录指针表的基地址。在IA-32e模式下，CR3寄存器包含PML4表的基地址。</p>
+<h2 id="系统指令"><a href="#系统指令" class="headerlink" title="系统指令"></a>系统指令</h2><p>LGDT加载GDTR寄存器——将GDT基址和限制从内存加载到GDTR寄存器。<br>SGDT存储GDTR寄存器——将GDT基址和GDTR寄存器中的限制存储到内存。<br>LIDT加载IDTR寄存器——将IDT基址和限制从存储器加载到IDTR寄存器中。<br>SIDT加载IDTR寄存器——将IDT寄存器的IDT基址和限制存储到内存中。<br>LLDT加载LDT寄存器——将LDT段选择器和段描述符从内存加载到LDTR，段选择器操作数也可以位于通用寄存器中。<br>SLDT存储LDT寄存器——将LDTR寄存器中的LDT段选择器存储到存储器或存储器中。<br>LTR记载任务寄存器——将TSS的段选择器和段描述符从内存加载到任务寄存器，段选择器操作数也可以位于通用寄存器中。<br>STR存储任务寄存器——将当前任务TSS的段选择器从任务存储器存储到存储器或通用寄存器。</p>
+<h2 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://zhuanlan.zhihu.com/p/42309472</span><br><span class="line">https://mp.weixin.qq.com/s/VGhpbZaeyVwq3Ghs2E6eEw</span><br><span class="line">https://zhuanlan.zhihu.com/p/412845339</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/12/%E8%A7%A3%E5%86%B3%E5%B9%BF%E5%91%8A%E5%BC%B9%E7%AA%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1746,161 +2069,6 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">计算机组织原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-12-13 16:49:24" itemprop="dateCreated datePublished" datetime="2021-12-13T16:49:24+08:00">2021-12-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/09/ASP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/09/ASP/" class="post-title-link" itemprop="url">ASP</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-12-09 21:45:59" itemprop="dateCreated datePublished" datetime="2021-12-09T21:45:59+08:00">2021-12-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-11 22:43:48" itemprop="dateModified" datetime="2021-12-11T22:43:48+08:00">2021-12-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="简单登录程序"><a href="#简单登录程序" class="headerlink" title="简单登录程序"></a>简单登录程序</h3><p>跳转：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Response.Redirect(&quot;URL&quot;)</span><br></pre></td></tr></table></figure>
-<p>返回弹窗</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Response.Write(&quot;&lt;script&gt;alter(&#x27;用户名或密码错误&#x27;);&lt;/script&gt;&quot;)</span><br></pre></td></tr></table></figure>
-<h3 id="文本框的使用"><a href="#文本框的使用" class="headerlink" title="文本框的使用"></a>文本框的使用</h3><p>text默认为单行模式</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;单行模式&lt;/p&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">        &lt;asp:TextBox ID=&quot;TextBox1&quot; runat=&quot;server&quot;&gt;&lt;/asp:TextBox&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">    &lt;p&gt;密码模式&lt;/p&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">        &lt;asp:TextBox ID=&quot;TextBox2&quot; runat=&quot;server&quot; TextMode=&quot;Password&quot;&gt;&lt;/asp:TextBox&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">    &lt;p&gt;多行模式&lt;/p&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">        &lt;asp:TextBox ID=&quot;TextBox3&quot; runat=&quot;server&quot; TextMode=&quot;MultiLine&quot;&gt;&lt;/asp:TextBox&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/12/09/ASP/image-20211209221532497.png" alt="image-20211209221532497" style="zoom:50%;"></p>
-<p>属性栏修改。</p>
-<h3 id="判断单选框"><a href="#判断单选框" class="headerlink" title="判断单选框"></a>判断单选框</h3><p>单选框将GroupName设置为一样即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;label&gt;性别&lt;/label&gt;</span><br><span class="line">        &lt;asp:RadioButton ID=&quot;RadioButton1&quot; runat=&quot;server&quot; Text=&quot;男&quot; GroupName=&quot;sex&quot;/&gt;</span><br><span class="line">        &amp;nbsp;&amp;nbsp</span><br><span class="line">        &lt;asp:RadioButton ID=&quot;RadioButton2&quot; runat=&quot;server&quot; Text=&quot;女&quot; GroupName=&quot;sex&quot;/&gt;</span><br><span class="line">        &lt;br /&gt;</span><br><span class="line">        &lt;asp:Button ID=&quot;Button1&quot; runat=&quot;server&quot; Text=&quot;提交&quot; OnClick=&quot;Button1_Click2&quot;  /&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">protected void Button1_Click2(object sender, EventArgs e)</span><br><span class="line">   &#123;</span><br><span class="line">       if (RadioButton1.Checked == true)</span><br><span class="line">       &#123;</span><br><span class="line">           Response.Write(&quot;&lt;script&gt;alert(&#x27;性别为男&#x27;);&lt;/script&gt;&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">       if (RadioButton2.Checked == true)</span><br><span class="line">       &#123;</span><br><span class="line">           Response.Write(&quot;&lt;script&gt;alert(&#x27;性别为女&#x27;);&lt;/script&gt;&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="判断多选框"><a href="#判断多选框" class="headerlink" title="判断多选框"></a>判断多选框</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“+string+”</span><br></pre></td></tr></table></figure>
-<h3 id="下拉框"><a href="#下拉框" class="headerlink" title="下拉框"></a>下拉框</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;asp:DropDownList ID=&quot;DropDownList1&quot; runat=&quot;server&quot;&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;原平&lt;/asp:ListItem&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;忻州&lt;/asp:ListItem&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;五台&lt;/asp:ListItem&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;定襄&lt;/asp:ListItem&gt;</span><br><span class="line">           &lt;asp:ListItem&gt;五寨&lt;/asp:ListItem&gt;</span><br><span class="line">       &lt;/asp:DropDownList&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DropDownList1.SelectedItem.Value</span><br><span class="line">DropDownList1.SelectedValue</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="呈现信息"><a href="#呈现信息" class="headerlink" title="呈现信息"></a>呈现信息</h3><p>构造一个用于盛放HTML代码的变量，用Response.Write(HTML),可先用Response.Clear()清理当前页面</p>
-<h3 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h3><p>Convert.ToDouble()</p>
-<h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">catch(Exception es)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="显示数据"><a href="#显示数据" class="headerlink" title="显示数据"></a>显示数据</h3><p><img src="/2021/12/09/ASP/image-20211210120304445.png" alt="image-20211210120304445"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inf.InnerHtml=HTML;</span><br></pre></td></tr></table></figure>
-<h3 id="读取全部数据"><a href="#读取全部数据" class="headerlink" title="读取全部数据"></a>读取全部数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foreach</span><br></pre></td></tr></table></figure>
-<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><p><img src="/2021/12/09/ASP/image-20211210135917242.png" alt="image-20211210135917242" style="zoom:50%;"></p>
-<p><img src="/2021/12/09/ASP/image-20211210135930367.png" alt="image-20211210135930367" style="zoom:50%;"></p>
-<h3 id="初始"><a href="#初始" class="headerlink" title="初始"></a>初始</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;/system.web&gt;</span><br><span class="line">	&lt;system.webServer&gt;</span><br><span class="line">		&lt;defaultDocument&gt;</span><br><span class="line">			&lt;files&gt;</span><br><span class="line">				&lt;clear/&gt;</span><br><span class="line">				&lt;add value=&quot;index.aspk&quot;/&gt;</span><br><span class="line">			&lt;/files&gt;</span><br><span class="line">		&lt;/defaultDocument&gt;</span><br><span class="line">	&lt;/system.webServer&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="显示表"><a href="#显示表" class="headerlink" title="显示表"></a>显示表</h3><p><img src="/2021/12/09/ASP/image-20211210175458347.png" alt="image-20211210175458347"></p>
-<h3 id="拆包"><a href="#拆包" class="headerlink" title="拆包"></a>拆包</h3><p><img src="/2021/12/09/ASP/image-20211210184423626.png" alt="image-20211210184423626"></p>
-<p><img src="/2021/12/09/ASP/image-20211210184758134.png" alt="image-20211210184758134"></p>
-<p><img src="/2021/12/09/ASP/image-20211210185030345.png" alt="image-20211210185030345"></p>
-<p><img src="/2021/12/09/ASP/image-20211210185043844.png" alt="image-20211210185043844"></p>
-<p><img src="/2021/12/09/ASP/image-20211210190952668.png" alt="image-20211210190952668"></p>
-<p><img src="/2021/12/09/ASP/image-20211210191832719.png" alt="image-20211210191832719"></p>
-<p><img src="/2021/12/09/ASP/image-20211210191935390.png" alt="image-20211210191935390"></p>
-<p><img src="/2021/12/09/ASP/image-20211211204121826.png" alt="image-20211211204121826"></p>
-<p><img src="/2021/12/09/ASP/image-20211211204221557.png" alt="image-20211211204221557"></p>
-<p><img src="/2021/12/09/ASP/image-20211211204301439.png" alt="image-20211211204301439"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1970,7 +2138,7 @@ A\longrightarrow \beta</script><h4 id="3型文法"><a href="#3型文法" class="
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

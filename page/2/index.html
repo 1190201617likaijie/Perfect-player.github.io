@@ -145,6 +145,188 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">毕设机器学习模型总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-03-08 11:33:13 / Modified: 17:31:06" itemprop="dateCreated datePublished" datetime="2023-03-08T11:33:13+08:00">2023-03-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h2><p>近朱者赤近墨者黑，分类或者回归算法。</p>
+<p><strong>n_neighbors</strong>：找最近的n个邻居，然后根据n个邻居判断它为什么。在机器学习库中，默认为5.</p>
+<p><strong>weights</strong>:默认是uniform, 参数可以是uniform、distance, 也可以是用户自己定义的函数</p>
+<ul>
+<li><strong>uniform</strong>: 是均等的权重, 就说所有的邻近点的权重都是相等的</li>
+<li><strong>distance</strong>: 是不均等的权重, 距离近的点比距离远的点的影响大</li>
+<li>用户自定义的函数, 接收距离的数组, 返回一组维数相同的权重</li>
+</ul>
+<p><strong>leaf_size</strong>: 默认是30, 这个是构造的kd树和ball树的大小. 这个值的设置会影响树构建的速度和搜索速度, 同样也影响着存储树所需的内存大小. 需要根据问题的性质选择最优的大小</p>
+<p><strong>p</strong> : minkowski距离度量里的参数. p=2时是欧氏距离, p=1时是曼哈顿距离，对于任意p， 就是minkowski距离</p>
+<p>注：欧式距离为两个点的实际距离；曼哈顿距离为出租车距离，即遵守正南正北、正东正西方向规则；马氏距离：概率论距离，即基于样本分布距离。</p>
+<p><img src="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/image-20230308120004396.png" alt="image-20230308120004396" style="zoom:50%;"></p>
+<h2 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h2><p><img src="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/image-20230308120217890.png" alt="image-20230308120217890" style="zoom:50%;"></p>
+<p><img src="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/image-20230308120314259.png" alt="image-20230308120314259" style="zoom:50%;"></p>
+<p>n_estimators：树的个数(学习器的个数)，提高数值，提高模型准确率，但是训练时间变长</p>
+<p><img src="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/image-20230308120807856.png" alt="image-20230308120807856" style="zoom:50%;"></p>
+<p>max_depth：树的最大深度</p>
+<p><img src="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/image-20230308120934344.png" alt="image-20230308120934344"></p>
+<p><img src="/2023/03/08/%E6%AF%95%E8%AE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/image-20230308120956257.png" alt="image-20230308120956257"></p>
+<h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><p>超参数介绍参考随机森林</p>
+<h2 id="SVC"><a href="#SVC" class="headerlink" title="SVC"></a>SVC</h2><p><strong>kernel</strong>：核函数</p>
+<p><strong>C</strong>：惩罚参数</p>
+<ul>
+<li>错误项的惩罚系数。</li>
+<li>c越大，即对分错样本的惩罚程度越大，因此在训练样本中准确率越高，但是泛化能力降低，也就是对测试数据的分类准确率降低。</li>
+<li>相反，减小c的话，允许训练样本中有一些误分类错误样本，泛化能力强。</li>
+<li>对于训练样本带有噪声的情况，一般采用减小c的方法，把训练样本集中错误分类的样本作为噪声2.</li>
+</ul>
+<h2 id="AdaBoost"><a href="#AdaBoost" class="headerlink" title="AdaBoost"></a>AdaBoost</h2><p><strong>n_estimators</strong>：为弱学习器的数量‘</p>
+<p><strong>learning_rate</strong>：为弱学习器的权重缩减系数。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">打印进程地址转换过程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-06-13 19:51:07 / Modified: 20:49:40" itemprop="dateCreated datePublished" datetime="2022-06-13T19:51:07+08:00">2022-06-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="打印进程地址转换过程"><a href="#打印进程地址转换过程" class="headerlink" title="打印进程地址转换过程"></a>打印进程地址转换过程</h1><h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><ul>
+<li>深入理解操作系统的段、页式内存管理，深入理解段表、页表、逻辑地址、线性地址、物理地址等概念；</li>
+<li>实践段、页式内存管理的地址映射过程；</li>
+<li>编程打印特定进程地址转换过程。</li>
+</ul>
+<h2 id="知识储备"><a href="#知识储备" class="headerlink" title="知识储备"></a>知识储备</h2><p>线性地址和物理地址之间的变换</p>
+<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613200700988.png" alt="image-20220613200700988"></p>
+<p>页目录和页表的表项格式</p>
+<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613200727069.png" alt="image-20220613200727069"></p>
+<p>主内存区域</p>
+<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613200748502.png" alt="image-20220613200748502"></p>
+<p>进程代码和数据在其逻辑地址空间中的分布</p>
+<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613200817319.png" alt="image-20220613200817319"></p>
+<h2 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h2><h3 id="修改sys-h"><a href="#修改sys-h" class="headerlink" title="修改sys.h"></a>修改sys.h</h3><p>把debug_paging函数声明为全局变量，添加中断函数表。</p>
+<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613201246999.png" alt="image-20220613201246999"></p>
+<h3 id="修改系统调用函数"><a href="#修改系统调用函数" class="headerlink" title="修改系统调用函数"></a>修改系统调用函数</h3><p>把对应的函数个数进行修改</p>
+<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613201325695.png" alt="image-20220613201325695"></p>
+<h3 id="增加系统调用号"><a href="#增加系统调用号" class="headerlink" title="增加系统调用号"></a>增加系统调用号</h3><p>需要在<code>unistd.h</code> 中修改，注意进行挂载。</p>
+<p>运行 <code>sudo ./mount-hdc</code> 可以把虚拟机硬盘挂载在 <code>oslab/hdc</code> 目录下。<br>在 <code>hdc/usr/include</code> 目录下修改 <code>unistd.h</code></p>
+<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613201526522.png" alt="image-20220613201526522"></p>
+<h3 id="新增debug-paging-c文件"><a href="#新增debug-paging-c文件" class="headerlink" title="新增debug_paging.c文件"></a>新增debug_paging.c文件</h3><p>将完成的文件放入linux-0.01/kernel 目录下</p>
+<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613204253402.png" alt="image-20220613204253402"></p>
+<h3 id="修改makefile"><a href="#修改makefile" class="headerlink" title="修改makefile"></a>修改makefile</h3><p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613201730179.png" alt="image-20220613201730179"></p>
+<h3 id="编写test-c"><a href="#编写test-c" class="headerlink" title="编写test.c"></a>编写test.c</h3><p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613201838239.png" alt="image-20220613201838239"></p>
+<h3 id="实现fprintk"><a href="#实现fprintk" class="headerlink" title="实现fprintk"></a>实现fprintk</h3><p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613202027276.png" alt="image-20220613202027276"></p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613203314373.png" alt="image-20220613203314373"></p>
+<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613203534624.png" alt="image-20220613203534624"></p>
+<p><img src="/2022/06/13/%E6%89%93%E5%8D%B0%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B/image-20220613203427810.png" alt="image-20220613203427810"></p>
+<h2 id="问题回答"><a href="#问题回答" class="headerlink" title="问题回答"></a>问题回答</h2><ul>
+<li><strong>页表中正在使用的页表项是连续的吗？这体现了分页的什么优点？</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不是。可以充分利用碎片的内存空间，提高空间利用率。</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>你觉的分段是必要的吗？现在的 <code>Linux (x86-64)</code> 是怎么处理分段的？</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不是。在64位模式下：处理器把CS/DS/ES/SS的段基都当作0，忽略与之关联的段描述符中的段基地址。因为在64位模式中，CPU可以访问所有可寻址的内存空间。x86工作在保护模式下时，分段单元将逻辑地址转换成线性地址，分页单元（MMU开启情况下）将线性地址转换成物理地址。当CPU启用了MMU，CPU核发出的地址将被MMU截获，从CPU到MMU的地址称为虚拟地址，而MMU将这个地址翻译成另一个地址发到CPU芯片的外部地址引脚上，也就是将虚拟地址映射成物理地址，在x86_64上，处理器把CS/DS/ES/SS的段基都当作0，实际上摒弃了段式管理，不再使用。指令中使用的地址就是线性地址，当CPU开启MMU时，通过页式管理单元翻译成物理地址。</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/12/%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%8E%E5%85%B1%E4%BA%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1234,286 +1416,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-08 19:58:05" itemprop="dateCreated datePublished" datetime="2022-05-08T19:58:05+08:00">2022-05-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-09 01:48:08" itemprop="dateModified" datetime="2023-03-09T01:48:08+08:00">2023-03-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="操作系统的引导"><a href="#操作系统的引导" class="headerlink" title="操作系统的引导"></a>操作系统的引导</h1><h2 id="完成-bootsect-s-的屏幕输出功能"><a href="#完成-bootsect-s-的屏幕输出功能" class="headerlink" title="完成 bootsect.s 的屏幕输出功能"></a>完成 bootsect.s 的屏幕输出功能</h2><p>关键代码如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">! 文件：bootsect.s</span><br><span class="line">entry _start</span><br><span class="line">_start:</span><br><span class="line">    mov ah,#0x03</span><br><span class="line">    xor bh,bh</span><br><span class="line">    int 0x10</span><br><span class="line">    mov cx,#25</span><br><span class="line">    mov bx,#0x0007</span><br><span class="line">    mov bp,#msg1</span><br><span class="line">    mov ax,#0x07c0</span><br><span class="line">    mov es,ax</span><br><span class="line">    mov ax,#0x1301</span><br><span class="line">    int 0x10</span><br><span class="line">inf_loop:</span><br><span class="line">    jmp inf_loop</span><br><span class="line">msg1:</span><br><span class="line">    .byte   13,10</span><br><span class="line">    .ascii &quot;LKJos is running...&quot;</span><br><span class="line">    .byte   13,10,13,10</span><br><span class="line">.org 510</span><br><span class="line">boot_flag:</span><br><span class="line">    .word   0xAA55</span><br></pre></td></tr></table></figure>
-<p>我们修改的字符为19个，再加上前后一共3个回车加换行，所以总共25个字符。</p>
-<p>将 .org 508 修改为 .org 510，是因为这里不需要 root_dev: .word ROOT_DEV，为了保证 boot_flag 一定在最后两个字节，所以要修改 .org。</p>
-<p>执行下面两个命令编译和链接 bootsect.s</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ as86 -0 -a -o bootsect.o bootsect.s</span><br><span class="line">$ ld86 -0 -s -o bootsect bootsect.o</span><br></pre></td></tr></table></figure>
-<p>需要留意的文件是 <code>bootsect</code> 的文件大小是 <code>544</code> 字节，而引导程序必须要正好占用一个磁盘扇区，即 <code>512</code> 个字节。 造成多了 <code>32</code> 个字节的原因是 <code>ld86</code> 产生的是 <code>Minix</code> 可执行文件格式， 这样的可执行文件处理文本段、数据段等部分以外，还包括一个 <code>Minix</code> 可执行文件头部。</p>
-<p>去掉32字节的头部文件。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd bs=1 if=bootsect of=Image skip=32</span><br></pre></td></tr></table></figure>
-<p>接下来进行拷贝，并且run</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 当前的工作路径为 /common/linux-0.11/boot/</span><br><span class="line"># 将刚刚生成的 Image 复制到 linux-0.11 目录下</span><br><span class="line">$ cp ./Image ../Image</span><br><span class="line"># 执行run 脚本</span><br><span class="line">$ ../../run</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>注：由于我执行run的时候有些许问题，所以我对于目录结构进行了修改。</p>
-<p>效果如下图</p>
-<p><img src="/2022/05/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC/image-20220508200758526.png" alt="image-20220508200758526"></p>
-<h2 id="bootsect-s-读入-setup-s"><a href="#bootsect-s-读入-setup-s" class="headerlink" title="bootsect.s 读入 setup.s"></a>bootsect.s 读入 setup.s</h2><p>首先编写一个 setup.s，该 setup.s 可以就直接拷贝前面的 bootsect.s，然后将其中的显示的信息改为：“Now we are in SETUP”。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">entry _start</span><br><span class="line">_start:</span><br><span class="line">	mov ah,#0x03</span><br><span class="line">	xor bh,bh</span><br><span class="line">	int 0x10</span><br><span class="line">	mov cx,#25</span><br><span class="line">	mov bx,#0x0007</span><br><span class="line">	mov bp,#msg2</span><br><span class="line">	mov ax,cs				! 这里的cs其实就是这段代码的段地址</span><br><span class="line">	mov es,ax</span><br><span class="line">	mov ax,#0x1301</span><br><span class="line">	int 0x10</span><br><span class="line">inf_loop:</span><br><span class="line">	jmp inf_loop</span><br><span class="line">msg2:</span><br><span class="line">	.byte	13,10</span><br><span class="line">	.ascii	&quot;Now we are in SETUP&quot;</span><br><span class="line">	.byte	13,10,13,10</span><br><span class="line">.org 510</span><br><span class="line">boot_flag:</span><br><span class="line">	.word	0xAA55</span><br></pre></td></tr></table></figure>
-<p>接下来需要编写 <code>bootsect.s</code> 中载入 <code>setup.s</code> 的关键代码,注意去掉无限循环</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">SETUPLEN=2              ! 读入的扇区数</span><br><span class="line">SETUPSEG=0x07e0         ! setup代码的段地址</span><br><span class="line">entry _start</span><br><span class="line">_start:</span><br><span class="line">    mov ah,#0x03        ! 设置功能号</span><br><span class="line">    xor bh,bh           ! 将bh置0</span><br><span class="line">    int 0x10            ! 返回行号和列号，供显示串用</span><br><span class="line">    mov cx,#25          ！要显示的字符串长度</span><br><span class="line">    mov bx,#0x0007      ! bh=0,bl=07(正常的黑底白字)</span><br><span class="line">    mov bp,#msg1        ! es:bp 要显示的字符串物理地址</span><br><span class="line">    mov ax,#0x07c0      ! 将es段寄存器置为#0x07c0</span><br><span class="line">    mov es,ax           </span><br><span class="line">    mov ax,#0x1301      ! ah=13(设置功能号),al=01(目标字符串仅仅包含字符，属性在BL中包含，光标停在字符串结尾处)</span><br><span class="line">    int 0x10            ! 显示字符串</span><br><span class="line"></span><br><span class="line">! 将setup模块从磁盘的第二个扇区开始读到0x7e00</span><br><span class="line">load_setup:</span><br><span class="line">    mov dx,#0x0000                  ! 磁头=0；驱动器号=0</span><br><span class="line">    mov cx,#0x0002                  ! 磁道=0；扇区=2</span><br><span class="line">    mov bx,#0x0200                  ! 偏移地址</span><br><span class="line">    mov ax,#0x0200+SETUPLEN         ! 设置功能号；需要读出的扇区数量</span><br><span class="line">    int 0x13                        ! 读磁盘扇区到内存</span><br><span class="line">    jnc ok_load_setup               ! CF=0(读入成功)跳转到ok_load_setup  </span><br><span class="line">    mov dx,#0x0000                  ! 如果读入失败，使用功能号ah=0x00————磁盘系统复位</span><br><span class="line">    mov ax,#0x0000</span><br><span class="line">    int 0x13</span><br><span class="line">    jmp load_setup                  ! 尝试重新读入</span><br><span class="line"></span><br><span class="line">ok_load_setup:</span><br><span class="line">    jmpi    0,SETUPSEG              ! 段间跳转指令，跳转到setup模块处(0x07e0:0000)</span><br><span class="line"></span><br><span class="line">! 字符串信息</span><br><span class="line">msg1:</span><br><span class="line">    .byte   13,10           ! 换行+回车</span><br><span class="line">    .ascii  &quot;LKJos is running...&quot;</span><br><span class="line">    .byte   13,10,13,10     ! 换行+回车</span><br><span class="line"></span><br><span class="line">! 将</span><br><span class="line">.org 510</span><br><span class="line"></span><br><span class="line">! 启动盘具有有效引导扇区的标志。仅供BIOS中的程序加载引导扇区时识别使用。它必须位于引导扇区的最后两个字节中</span><br><span class="line">boot_flag:</span><br><span class="line">    .word   0xAA55</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>效果如下图</p>
-<p><img src="/2022/05/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC/image-20220508210219587.png" alt="image-20220508210219587"></p>
-<p>需要修改build.c，并且删除同目录下的 <code>hdc-0.11.img.lock</code> 即可。</p>
-<h2 id="setup-s-获取基本硬件参数"><a href="#setup-s-获取基本硬件参数" class="headerlink" title="setup.s 获取基本硬件参数"></a>setup.s 获取基本硬件参数</h2><p><code>setup.s</code> 将获得硬件参数放在内存的 <code>0x90000</code> 处。原版 <code>setup.s</code> 中已经完成了光标位置、内存大小、显存大小、显卡参数、第一和第二硬盘参数的保存。</p>
-<p>用 <code>ah=#0x03</code> 调用 <code>0x10</code> 中断可以读出光标的位置，用 <code>ah=#0x88</code> 调用 <code>0x15</code> 中断可以读出内存的大小。 有些硬件参数的获取要稍微复杂一些，如磁盘参数表。在 <code>PC</code> 机中 <code>BIOS</code> 设定的中断向量表中 <code>int 0x41</code> 的中断向量位置( <code>4*0x41 = 0x0000:0x0104</code> )存放的并不是中断程序的地址，而是第一个硬盘的基本参数表。 第二个硬盘的基本参数表入口地址存于 <code>int 0x46</code> 中断向量位置处。每个硬盘参数表有 <code>16</code> 个字节大小。</p>
-<p>在PC机中BIOS设定的中断向量表中int 0x41的中断向量位置存放的并不是中断程序的地址,而是第一个硬盘的基本参数表。对于100%兼容的BIOS来说,这里存放着硬盘参数表阵列的首地址0xF000:0E401，第二个硬盘的基本参数表入口地址存于int 0x46中断向量位置处.每个硬盘参数表有16个字节大小.</p>
-<p>这段话是重点，磁盘参数就存放在以0x0000:0x0104为首地址的单元中只存了4个字节，里面存放的是磁盘参数表的偏移地址和段地址，也就是上文所说这里存放着硬盘参数表阵列的首地址0xF000:0E401。</p>
-<p>以十六进制方式显示比较简单。这是因为十六进制与二进制有很好的对应关系（每 4 位二进制数和 1 位十六进制数存在一一对应关系），显示时只需将原二进制数每 4 位划成一组，按组求对应的 ASCII 码送显示器即可。ASCII 码与十六进制数字的对应关系为：0x30 ～ 0x39 对应数字 0 ～ 9，0x41 ～ 0x46 对应数字 a ～ f。从数字 9 到 a，其 ASCII 码间隔了 7h，这一点在转换时要特别注意。为使一个十六进制数能按高位到低位依次显示，实际编程中，需对 bx 中的数每次循环左移一组（4 位二进制），然后屏蔽掉当前高 12 位，对当前余下的 4 位（即 1 位十六进制数）求其 ASCII 码，要判断它是 0 ～ 9 还是 a ～ f，是前者则加 0x30 得对应的 ASCII 码，后者则要加 0x37 才行，最后送显示器输出。以上步骤重复 4 次，就可以完成 bx 中数以 4 位十六进制的形式显示出来。</p>
-<p>如下图：</p>
-<p><img src="/2022/05/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC/image-20220508215057266.png" alt="image-20220508215057266"></p>
-<p>代码如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br></pre></td><td class="code"><pre><span class="line">! 文件setup.s</span><br><span class="line">INITSEG = 0x9000</span><br><span class="line"></span><br><span class="line">entry _start</span><br><span class="line">_start:</span><br><span class="line">! 在显示字符串之前必须先获取当前光标的位置，这样就可以把字符串显示到当前光标处了</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10</span><br><span class="line">    </span><br><span class="line">! 利用10号中断的13号功能打印字符串&quot;Now we are in SETUP.&quot;</span><br><span class="line">    mov    cx,#26</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    bp,#msg1</span><br><span class="line">    mov     ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10</span><br><span class="line"></span><br><span class="line">! 下面开始读取一些硬件参数</span><br><span class="line"></span><br><span class="line">    ! 读入光标位置信息，保存到0x90000处</span><br><span class="line">    mov    ax,#INITSEG</span><br><span class="line">    mov    ds,ax</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10</span><br><span class="line">    mov    [0],ds</span><br><span class="line"></span><br><span class="line">    ! 读入内存大小位置信息，保存到0x90002处</span><br><span class="line">    mov    ah,#0x88</span><br><span class="line">    int    0x15</span><br><span class="line">    mov    [2],ax</span><br><span class="line"></span><br><span class="line">    ! 从0x41处拷贝16个字节（磁盘参数表）到0x90004处</span><br><span class="line">    mov    ax,#0x0000</span><br><span class="line">    mov    ds,ax</span><br><span class="line">    lds    si,[4*0x41]</span><br><span class="line">    mov    ax,#INITSEG</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    di,#0x0004</span><br><span class="line">    mov    cx,#0x10</span><br><span class="line">    rep       ! 重复16次</span><br><span class="line">    movsb</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">! 先打印光标位置</span><br><span class="line">    ! 打印字符串之前要先读取光标位置，将字符串打印到当前光标处</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10</span><br><span class="line"></span><br><span class="line">    ! 打印字符串 &quot;Cursor POS:&quot;</span><br><span class="line">    mov    cx,#11</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    bp,#msg2</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10    </span><br><span class="line">    </span><br><span class="line">    ! 调用打印函数，打印光标位置</span><br><span class="line">    mov    ax,#0x9000</span><br><span class="line">    mov    ds,ax</span><br><span class="line">    mov    dx,0x0</span><br><span class="line">    call    print_hex</span><br><span class="line">    call    print_nl</span><br><span class="line"></span><br><span class="line">! 打印内存大小</span><br><span class="line">    ! 打印字符串&quot;Memory SIZE:&quot;</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10    ! 读取光标位置</span><br><span class="line"></span><br><span class="line">    mov    cx,#12</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    bp,#msg3</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ! 调用打印函数，打印内存大小信息</span><br><span class="line">    mov    ax,#0x9000    </span><br><span class="line">    mov    ds,ax</span><br><span class="line">    mov    dx,0x2</span><br><span class="line">    call     print_hex</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ! 打印字符串&quot;KB&quot;</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10    ! 读取光标位置    </span><br><span class="line">    </span><br><span class="line">    mov    cx,#2</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    bp,#msg4</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10    </span><br><span class="line">    call    print_nl    </span><br><span class="line"></span><br><span class="line">!打印柱面数</span><br><span class="line">    ! 打印字符串&quot;Cyls&quot;</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10    ! 读取光标位置</span><br><span class="line"></span><br><span class="line">    mov    cx,#5</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    bp,#msg5</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10    </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    ! 调用打印函数打印磁盘柱面数</span><br><span class="line">    mov    ax,#0x9000    </span><br><span class="line">    mov    ds,ax</span><br><span class="line">    mov    dx,0x4</span><br><span class="line">    call    print_hex</span><br><span class="line">    call    print_nl</span><br><span class="line"></span><br><span class="line">! 打印磁头数</span><br><span class="line">    ! 打印字符串&quot;Heads:&quot;</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10    ! 读取光标位置</span><br><span class="line"></span><br><span class="line">    mov    cx,#6</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    bp,#msg6</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10    </span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    ! 调用打印函数打印磁盘磁头数</span><br><span class="line">    mov    ax,#0x9000    </span><br><span class="line">    mov    ds,ax</span><br><span class="line">    mov    dx,0x6</span><br><span class="line">    call    print_hex</span><br><span class="line">    call    print_nl</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">! 打印每磁道扇区数</span><br><span class="line">    ! 打印字符串&quot;sectors&quot;</span><br><span class="line">    mov    ah,#0x03</span><br><span class="line">    xor    bh,bh</span><br><span class="line">    int    0x10    ! 读取光标位置</span><br><span class="line"></span><br><span class="line">    mov    cx,#8</span><br><span class="line">    mov    bx,#0x0007</span><br><span class="line">    mov    ax,cs</span><br><span class="line">    mov    es,ax</span><br><span class="line">    mov    bp,#msg7</span><br><span class="line">    mov    ax,#0x1301</span><br><span class="line">    int    0x10    </span><br><span class="line"></span><br><span class="line">    ! 调用打印函数打印扇区数</span><br><span class="line">    mov    ax,#0x9000    </span><br><span class="line">    mov    ds,ax</span><br><span class="line">    mov    dx,0x12</span><br><span class="line">    call    print_hex</span><br><span class="line">    call    print_nl</span><br><span class="line"></span><br><span class="line">Inf_loop:</span><br><span class="line">    jmp Inf_loop    ! 无限循环</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">! print_hex函数：将一个数字转换为ascii码字符，并打印到屏幕上</span><br><span class="line">! 参数值：dx</span><br><span class="line">! 返回值：无</span><br><span class="line">print_hex:</span><br><span class="line">    mov    cx,#4            ! 要打印4个十六进制数字,故循环4次</span><br><span class="line">print_digit:</span><br><span class="line">    rol    dx,#4            ! 循环以使低4比特用上 !! 取dx的高4比特移到低4比特处</span><br><span class="line">    mov    ax,#0xe0f        ! ah = 请求的功能值，al = 半字节(4个比特)掩码</span><br><span class="line">    and    al,dl            ! 取dl的低4比特值</span><br><span class="line">    add    al,#0x30        ! 给al数字加上十六进制0x30</span><br><span class="line">    cmp    al,#0x3a    </span><br><span class="line">    jl    outp            ! 如果是一个不大于十的数字</span><br><span class="line">    add    al,#0x07    ! 如果是a～f，要多加7</span><br><span class="line">outp:</span><br><span class="line">    int    0x10</span><br><span class="line">    loop    print_digit    ! 用loop重复4次</span><br><span class="line">    ret</span><br><span class="line"></span><br><span class="line">! 打印回车换行</span><br><span class="line">print_nl:</span><br><span class="line">    mov    ax,#0xe0d</span><br><span class="line">    int    0x10</span><br><span class="line">    mov    al,#0xa</span><br><span class="line">    int    0x10</span><br><span class="line">    ret</span><br><span class="line"></span><br><span class="line">msg1:</span><br><span class="line">    .byte 13,10</span><br><span class="line">    .ascii &quot;Now we are in SETUP.&quot;</span><br><span class="line">    .byte 13,10,13,10</span><br><span class="line"></span><br><span class="line">msg2:</span><br><span class="line">    .ascii &quot;Cursor POS:&quot;</span><br><span class="line"></span><br><span class="line">msg3:    </span><br><span class="line">    .ascii &quot;Memory SIZE:&quot;</span><br><span class="line"></span><br><span class="line">msg4:</span><br><span class="line">    .ascii &quot;KB&quot;</span><br><span class="line"></span><br><span class="line">msg5:    </span><br><span class="line">    .ascii &quot;Cyls:&quot;</span><br><span class="line"></span><br><span class="line">msg6:</span><br><span class="line">    .ascii &quot;Heads:&quot;</span><br><span class="line"></span><br><span class="line">msg7:</span><br><span class="line">    .ascii &quot;Sectors:&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.org 510</span><br><span class="line">boot_flag:</span><br><span class="line">    .word 0xAA55</span><br></pre></td></tr></table></figure>
-<h2 id="问题解答"><a href="#问题解答" class="headerlink" title="问题解答"></a>问题解答</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当PC的电源打开后，80x86结构的CPU将自动进入实模式，并从地址0xFFFF0开始自动执行程序代码，这个地址通常是ROM—BIOS中的地址。PC机的BIOS将执行某些系统的检测，并在物理地址0处开始初始化中断向量。此后将启动设备的第一个扇区512字节读入内存绝对地址0x7C00处。因为当时system模块的长度不会超过0x80000字节大小512KB，所以bootsect程序把system模块读入物理地址0x10000开始位置处时并不会覆盖在0x90000处开始的bootsect和setup模块，多此一举的是system模块移到内存中相对靠后的位置，以便加载系统主模块。解决方案是在保证操作系统启动引导成功的前提下尽量扩大ROM—BIOS的内存寻址范围。</span><br></pre></td></tr></table></figure>
-<h2 id="知识点记录"><a href="#知识点记录" class="headerlink" title="知识点记录"></a>知识点记录</h2><h3 id="数据寄存器"><a href="#数据寄存器" class="headerlink" title="数据寄存器"></a>数据寄存器</h3><p><strong>AH&amp;AL=AX(accumulator)：</strong>累加寄存器，常用于运算;在乘除等指令中指定用来存放操作数，另外,所有的I/O指令都使用这一寄存器与外界设备传送数据。</p>
-<p><strong>BH&amp;BL=BX(base)：</strong>基址寄存器，常用于地址索引</p>
-<p><strong>CH&amp;CL=CX(count)：</strong>计数寄存器，常用于计数；常用于保存计算值，如在移位指令,循环(loop)和串处理指令中用作隐含的计数器.</p>
-<p><strong>DH&amp;DL=DX(data)：</strong>数据寄存器，常用于数据传递。</p>
-<p>他们的特点是，这4个16位的寄存器可以分为高8位: AH, BH, CH, DH.以及低八位：AL,BL,CL,DL。这2组8位寄存器可以分别寻址，并单独使用。</p>
-<h3 id="中断知识"><a href="#中断知识" class="headerlink" title="中断知识"></a>中断知识</h3><h4 id="int-0x10"><a href="#int-0x10" class="headerlink" title="int 0x10"></a>int 0x10</h4><p><img src="/2022/05/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC/image-20220509162715086.png" alt="image-20220509162715086"></p>
-<p>注意，这里ah要先有值，代表内部子程序的编号</p>
-<p>功能号ah=0x03，作用是读取光标的位置</p>
-<p>输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bh = 页号</span><br></pre></td></tr></table></figure>
-<p>返回：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ch = 扫描开始线；cl = 扫描结束线；dh = 行号；dl = 列号</span><br></pre></td></tr></table></figure>
-<p>功能号ah=0x13，作用是显示字符串</p>
-<p>输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">al = 放置光标的方式及规定属性，下文 al＝1，表示目标字符串仅仅包含字符，属性在BL中包含，光标停在字符串结尾处；es:bp = 字符串起始位置；cx = 显示的字符串字符数；bh = 页号；bl = 字符属性，下文 bl = 07H，表示正常的黑底白字；dh = 行号；dl = 列号</span><br></pre></td></tr></table></figure>
-<p>功能号ah=0x0e，作用是显示字符</p>
-<p>输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">al = 字符</span><br></pre></td></tr></table></figure>
-<h4 id="int-0x13"><a href="#int-0x13" class="headerlink" title="int 0x13"></a>int 0x13</h4><p>在DOS等实模式操作系统下，调用INT 13h会跳转到计算机的ROM-BIOS代码中进行低级磁盘服务，对程序进行基于物理扇区的磁盘读写操作。</p>
-<p>功能号ah=0x02，作用是读磁盘扇区到内存<br>输入：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>寄存器</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ah</td>
-<td>读磁盘扇区到内存</td>
-</tr>
-<tr>
-<td>al</td>
-<td>需要读出的扇区数量</td>
-</tr>
-<tr>
-<td>ch</td>
-<td>磁道</td>
-</tr>
-<tr>
-<td>cl</td>
-<td>扇区</td>
-</tr>
-<tr>
-<td>dh</td>
-<td>磁头</td>
-</tr>
-<tr>
-<td>dl</td>
-<td>驱动器</td>
-</tr>
-<tr>
-<td>es:bx</td>
-<td>数据缓冲区的地址</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>返回</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ah = 出错码（00H表示无错，01H表示非法命令，02H表示地址目标未发现…）；CF为进位标志位，如果没有出错CF=0</span><br></pre></td></tr></table></figure>
-<p>功能号ah=0x00，作用是磁盘系统复位</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：dl = 驱动器</span><br><span class="line">返回：如果操作成功———— C F = 0 CF=0CF=0，a h = 00 H ah=00Hah=00H</span><br></pre></td></tr></table></figure>
-<h4 id="int-0x15"><a href="#int-0x15" class="headerlink" title="int 0x15"></a>int 0x15</h4><p>功能号ah=0x88，作用是获取系统所含扩展内存大小</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：ah = 0x88</span><br><span class="line">返回：ax = 从0x100000(1M)处开始的拓展内存大小(KB)。若出错则CF置位，ax = 出错码。</span><br></pre></td></tr></table></figure>
-<h4 id="int-0x41"><a href="#int-0x41" class="headerlink" title="int 0x41"></a>int 0x41</h4><p>在PC机中BIOS设定的中断向量表中int 0x41的中断向量位置 (4 ∗ 0 x 41 = 0 x 0000 : 0 x 0104 4*0x41 = 0x0000:0x01044∗0x41=0x0000:0x0104)存放的并不是中断程序的地址,而是第一个硬盘的基本参数表。对于100%兼容的BIOS来说,这里存放着硬盘参数表阵列的首地址0xF000:0E401，第二个硬盘的基本参数表入口地址存于int 0x46中断向量位置处.每个硬盘参数表有16个字节大小.</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="lds"><a href="#lds" class="headerlink" title="lds"></a>lds</h4><p>格式： LDS reg16，mem32</p>
-<p>其意义是同时给一个段寄存器和一个16位通用寄存器同时赋值</p>
-<p>举例：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>地址</th>
-<th>100H</th>
-<th>101H</th>
-<th>102H</th>
-<th>103H</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>内容</td>
-<td>00H</td>
-<td>41H</td>
-<td>02H</td>
-<td>03H</td>
-</tr>
-</tbody>
-</table>
-</div>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LDS AX,[100H]</span><br><span class="line">! 结果：AX=4100H  DS=0302H</span><br><span class="line">可以理解为</span><br><span class="line">mov AX,[100H]</span><br><span class="line">mov DS,[100H+2]</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/" class="post-title-link" itemprop="url">调试分析 Linux 0.00 多任务切换</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-05-04 15:17:11 / Modified: 21:51:59" itemprop="dateCreated datePublished" datetime="2022-05-04T15:17:11+08:00">2022-05-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="调试分析-Linux-0-00-多任务切换"><a href="#调试分析-Linux-0-00-多任务切换" class="headerlink" title="调试分析 Linux 0.00 多任务切换"></a>调试分析 Linux 0.00 多任务切换</h1><h2 id="执行-153-行-iret-时栈的变化"><a href="#执行-153-行-iret-时栈的变化" class="headerlink" title="执行 153 行 iret 时栈的变化"></a>执行 153 行 iret 时栈的变化</h2><p>执行前栈的内容</p>
-<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504154137710.png" alt="image-20220504154137710" style="zoom:50%;"></p>
-<p>执行后栈的内容</p>
-<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504154156025.png" alt="image-20220504154156025" style="zoom:50%;"></p>
-<p>在执行前后进行了栈的切换，从任务0的内核栈切换到了任务的用户栈。</p>
-<h2 id="模式切换"><a href="#模式切换" class="headerlink" title="模式切换"></a>模式切换</h2><p>当进入和退出 <code>system_interrupt</code> 时，都发生了模式切换，请总结模式切换时，特权级是如何改变的？栈切换吗？如何进行切换的？</p>
-<p>在进入中断时，通过查询IDT表，获得索引，之后进行特权级检查，要求CPL&lt;=调用门DPL；RPL&lt;=调用门DPL。DPL&lt;=CPL。特权级检查通过，则特权级改变。栈也进行切换。处理器从当前任务的TSS段获得该中断使用的堆栈的段选择符与栈指针，然后把被中断的栈选择符与栈指针压入新栈。EFLAGES、CS、EIP的值也被压栈。</p>
-<p>当退出时，使用iret指令。把保存的寄存器内容恢复到EFLAGES中，完成特权级复原，即切换为3。同时栈也切换回原来的栈。</p>
-<h2 id="任务切换过程"><a href="#任务切换过程" class="headerlink" title="任务切换过程"></a>任务切换过程</h2><p>当时钟中断发生，进入到 <code>timer_interrupt</code> 程序，请详细记录从任务 <code>0</code> 切换到任务 <code>1</code> 的过程。</p>
-<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504170543986.png" alt="image-20220504170543986" style="zoom: 33%;"></p>
-<p>以本图为例分析。说明第一次切换时的状况，第一次切换，即时钟中断发生时，大概率会在227行，此时任务号为0，当跳入时钟中断后，从125行开始进行转换，首先将1写入寄存器eax，然后判断，因为此时任务号为0，所以不执行127行，执行128行，则将任务号改为1，然后在129行跳转到任务1的代码段。</p>
-<p>任务0时的寄存器如下：</p>
-<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/W30F_428FK4HUQ8]K0{NQS.jpg" alt="img" style="zoom:50%;"></p>
-<p>任务1时的寄存器如下：</p>
-<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504205616009.png" alt="image-20220504205616009" style="zoom:50%;"></p>
-<h2 id="任务切回过程"><a href="#任务切回过程" class="headerlink" title="任务切回过程"></a>任务切回过程</h2><p>又过了 <code>10ms</code> ，从任务1切换回到任务 <code>0</code> ，整个流程是怎样的？ <code>TSS</code> 是如何变化的？各个寄存器的值是如何变化的？</p>
-<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504170543986.png" alt="image-20220504170543986" style="zoom:33%;"></p>
-<p>如图，承接上题叙述，从代码段228执行，在232循环，大概率在循环时进行时间中断发生，在126行比较时，由于此时任务号为1，所以跳转到131行，将任务号设为0，在132行处，跳转到任务0，由于任务0执行到129行，所以从130执行，再跳转到133行，弹栈后通过iret返回，由于上次为在226行触发中断，所以回到226行。</p>
-<p>寄存器变化如下：</p>
-<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/QQ图片20220504212642.png" alt="QQ图片20220504212642" style="zoom: 33%;"></p>
-<p>变至</p>
-<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/(PWOBGOQ)2`%MSLMDHDOG4X.png" alt="img" style="zoom:33%;"></p>
-<p>下图为任务0的TSS</p>
-<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504214234727.png" alt="image-20220504214234727" style="zoom:33%;"></p>
-<p>下图为任务1的TSS</p>
-<p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504214319515.png" alt="image-20220504214319515" style="zoom: 33%;"></p>
-<h2 id="详细总结任务切换的过程"><a href="#详细总结任务切换的过程" class="headerlink" title="详细总结任务切换的过程"></a>详细总结任务切换的过程</h2><p><img src="/2022/05/04/%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90-Linux-0-00-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2/image-20220504170543986.png" alt="image-20220504170543986" style="zoom:33%;"></p>
-<p>还是对照这张图片，从头来讲。</p>
-<p>第一次切换，即时钟中断发生时，大概率会在227行，此时任务号为0，当跳入时钟中断后，从125行开始进行转换，首先将1写入寄存器eax，然后判断，因为此时任务号为0，所以不执行127行，执行128行，则将任务号改为1，然后在129行跳转到任务1的代码段。</p>
-<p>从代码段228执行，在232循环，大概率在循环时进行时间中断发生，在126行比较时，由于此时任务号为1，所以跳转到131行，将任务号设为0，在132行处，跳转到任务0，由于任务0执行到129行，所以从130执行，再跳转到133行，弹栈后通过iret返回，由于上次为在226行触发中断，所以回到226行。</p>
-<p>然后大概率在此行，再次遇到时间中断，从125行开始进行转换，首先将1写入寄存器eax，然后判断，因为此时任务号为0，所以不执行127行，执行128行，则将任务号改为1，然后在129行跳转到任务1。由于任务1上次执行至</p>
-<p>132行，所以从133行开始，到iret返回至232行。</p>
-<p>又大概率在232行遇到时钟中断，执行到126行比较后跳转到131行，将任务号变为0，回到任务0的代码段。</p>
-<p>至此为一个流程。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1583,7 +1485,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="项目介绍功能架构 技术选型 MD51.修改数据库中明文密码，改为MD5加密后的密文 2.修改Java代码，前端提交的密码进行MD5加密后再跟数据库中密码比对 Swagger使用Swagger你只需要按照它的规范去定义接口及接口相关的信息，就可以做到生成接口文档，以及在线接口调试页面。 员工管理面试问题 nginx反向代理好处  123提高访问速度进行负载均衡（所谓负载均衡,就是把大量的请求按照我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sky-take-out">
+<meta property="og:url" content="http://example.com/2024/11/25/sky-take-out/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="项目介绍功能架构 技术选型 MD51.修改数据库中明文密码，改为MD5加密后的密文 2.修改Java代码，前端提交的密码进行MD5加密后再跟数据库中密码比对 Swagger使用Swagger你只需要按照它的规范去定义接口及接口相关的信息，就可以做到生成接口文档，以及在线接口调试页面。 员工管理面试问题 nginx反向代理好处  123提高访问速度进行负载均衡（所谓负载均衡,就是把大量的请求按照我们">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/11/25/sky-take-out/image-20241125122839960.png">
+<meta property="og:image" content="http://example.com/2024/11/25/sky-take-out/image-20241125122858635.png">
+<meta property="og:image" content="http://example.com/2024/11/25/sky-take-out/image-20241125192608560.png">
+<meta property="og:image" content="http://example.com/2024/11/25/sky-take-out/image-20241126104927160.png">
+<meta property="og:image" content="http://example.com/2024/11/25/sky-take-out/3d664769b13b87e8f78dfcb6a8e84c27.jpeg">
+<meta property="og:image" content="http://example.com/2024/11/25/sky-take-out/ee8bf28284b46109d36e177762bcfb92.jpeg">
+<meta property="og:image" content="http://example.com/2024/11/25/sky-take-out/image-20241126203501259.png">
+<meta property="og:image" content="http://example.com/2024/11/25/sky-take-out/image-20241126203511824.png">
+<meta property="og:image" content="http://example.com/2024/11/25/sky-take-out/image-20241126203519631.png">
+<meta property="og:image" content="http://example.com/2024/11/25/sky-take-out/image-20241126203526823.png">
+<meta property="article:published_time" content="2024-11-25T04:26:27.000Z">
+<meta property="article:modified_time" content="2024-11-26T13:23:33.807Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/11/25/sky-take-out/image-20241125122839960.png">
+
+<link rel="canonical" href="http://example.com/2024/11/25/sky-take-out/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>sky-take-out | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/25/sky-take-out/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sky-take-out
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-11-25 12:26:27" itemprop="dateCreated datePublished" datetime="2024-11-25T12:26:27+08:00">2024-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-11-26 21:23:33" itemprop="dateModified" datetime="2024-11-26T21:23:33+08:00">2024-11-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h1><h2 id="功能架构"><a href="#功能架构" class="headerlink" title="功能架构"></a>功能架构</h2><p><img src="/2024/11/25/sky-take-out/image-20241125122839960.png" alt="image-20241125122839960"></p>
+<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><p><img src="/2024/11/25/sky-take-out/image-20241125122858635.png" alt="image-20241125122858635"></p>
+<h3 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h3><p>1.修改数据库中明文密码，改为MD5加密后的密文</p>
+<p>2.修改Java代码，前端提交的密码进行MD5加密后再跟数据库中密码比对</p>
+<h3 id="Swagger"><a href="#Swagger" class="headerlink" title="Swagger"></a>Swagger</h3><p>使用Swagger你只需要按照它的规范去定义接口及接口相关的信息，就可以做到生成接口文档，以及在线接口调试页面。</p>
+<h1 id="员工管理"><a href="#员工管理" class="headerlink" title="员工管理"></a>员工管理</h1><h1 id="面试问题"><a href="#面试问题" class="headerlink" title="面试问题"></a>面试问题</h1><ul>
+<li>nginx反向代理好处</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">提高访问速度</span><br><span class="line">进行负载均衡（所谓负载均衡,就是把大量的请求按照我们指定的方式均衡的分配给集群中的每台服务器）</span><br><span class="line">保证后端服务安全</span><br></pre></td></tr></table></figure>
+<ul>
+<li>DTO</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当前端提交的数据和实体类中对应的属性差别比较大时，建议使用DTO来封装数据</span><br></pre></td></tr></table></figure>
+<ul>
+<li>JWT</li>
+</ul>
+<p><img src="/2024/11/25/sky-take-out/image-20241125192608560.png" alt="image-20241125192608560"></p>
+<ul>
+<li>日期处理</li>
+</ul>
+<p>在WebMvcConfiguration中扩展SpringMVC的消息转换器，统一对日期类型进行格式处理</p>
+<ul>
+<li>公共字段自动填充</li>
+</ul>
+<p>使用AOP切面编程，实现功能增强，来完成公共字段自动填充功能。</p>
+<p>实现步骤：</p>
+<p>1). 自定义注解 AutoFill，用于标识需要进行公共字段自动填充的方法</p>
+<p>2). 自定义切面类 AutoFillAspect，统一拦截加入了 AutoFill 注解的方法，通过反射为公共字段赋值</p>
+<p>3). 在 Mapper 的方法上加入 AutoFill 注解</p>
+<p>技术点：枚举、注解、AOP、反射</p>
+<ul>
+<li>新增菜品，包括图片文件</li>
+</ul>
+<p>使用第三方的存储服务，选用了阿里云的OSS服务进行文件存储。</p>
+<ul>
+<li>删除菜品的性能优化</li>
+</ul>
+<p>在DishServiceImpl中，删除菜品是一条一条传送执行的，大大降低了执行效率，为了提高性能，进行修改，使用动态sql执行删除操作</p>
+<ul>
+<li>redis</li>
+</ul>
+<p>基于键值对的非关系数据库。</p>
+<p>常用数据类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">字符串 string</span><br><span class="line"></span><br><span class="line">哈希 hash</span><br><span class="line"></span><br><span class="line">列表 list</span><br><span class="line"></span><br><span class="line">集合 set</span><br><span class="line"></span><br><span class="line">有序集合 sorted set / zset</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/11/25/sky-take-out/image-20241126104927160.png" alt="image-20241126104927160"></p>
+<ul>
+<li>微信登录</li>
+</ul>
+<p>业务规则：</p>
+<p>基于微信登录实现小程序的登录功能</p>
+<p>如果是新用户需要自动完成注册</p>
+<p>要完成微信登录的话，最终就要获得微信用户的openid。在小程序端获取授权码后，向后端服务发送请求，并携带授权码，这样后端服务在收到授权码后，就可以去请求微信接口服务。最终，后端向小程序返回openid和token等数据。</p>
+<ul>
+<li>应用层</li>
+</ul>
+<p>SpringBoot： 快速构建Spring项目, 采用 “约定优于配置” 的思想, 简化Spring项目的配置开发。</p>
+<p>SpringMVC：SpringMVC是spring框架的一个模块，springmvc和spring无需通过中间整合层进行整合，可以无缝集成。</p>
+<p>Spring Task: 由Spring提供的定时任务框架。</p>
+<p>httpclient: 主要实现了对http请求的发送。</p>
+<p>Spring Cache: 由Spring提供的数据缓存框架</p>
+<p>JWT: 用于对应用程序上的用户进行身份验证的标记。</p>
+<p>阿里云OSS: 对象存储服务，在项目中主要存储文件，如图片等。</p>
+<p>Swagger： 可以自动的帮助开发人员生成接口文档，并对接口进行测试。</p>
+<p>POI: 封装了对Excel表格的常用操作。</p>
+<p>WebSocket: 一种通信网络协议，使客户端和服务器之间的数据交换更加简单，用于项目的来单、催单功能实现。</p>
+<ul>
+<li>数据层</li>
+</ul>
+<p>MySQL： 关系型数据库, 本项目的核心业务数据都会采用MySQL进行存储。</p>
+<p>Redis： 基于key-value格式存储的内存数据库, 访问速度快, 经常使用它做缓存。</p>
+<p>Mybatis： 本项目持久层将会使用Mybatis开发。</p>
+<ul>
+<li>Swagger</li>
+</ul>
+<ol>
+<li>使得前后端分离开发更加方便，有利于团队协作</li>
+<li>接口的文档在线自动生成，降低后端开发人员编写接口文档的负担</li>
+<li>功能测试</li>
+</ol>
+<ul>
+<li>解析出登录员工id后，如何传递给Service的save方法</li>
+</ul>
+<p>通过ThreadLocal进行传递。</p>
+<ul>
+<li>分页</li>
+</ul>
+<p>使用 mybatis 的分页插件 PageHelper 来简化分页代码的开发。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PageHelper是MyBatis的一个插件，内部实现了一个PageInterceptor拦截器。Mybatis会加载这个拦截器到拦截器链中。在我们使用过程中先使用PageHelper.startPage这样的语句在当前线程上下文中设置一个ThreadLocal变量，再利用PageInterceptor这个分页拦截器拦截，从ThreadLocal中拿到分页的信息，如果有分页信息拼装分页SQL（limit语句等）进行分页查询，最后再把ThreadLocal中的东西清除掉。</span><br><span class="line"></span><br><span class="line">设置分页参数：在执行查询之前，首先通过 PageHelper.startPage(int pageNum, int pageSize) 方法设置分页的参数，调用该方法时，通过 ThreadLocal 存储分页信息。</span><br><span class="line">拦截查询语句：PageHelper 利用 MyBatis 提供的插件 API（Interceptor 接口）来拦截原始的查询语句。MyBatis 执行任何 SQL 语句前，都会先通过其插件体系中的拦截器链，PageHelper 正是在这个环节介入的。</span><br><span class="line">修改原始 SQL 语句：在拦截原始查询语句后，PageHelper 会根据分页参数动态地重写或添加 SQL 语句，使其成为一个分页查询。</span><br><span class="line">执行分页查询：修改后的 SQL 语句被执行，返回当前页的数据。</span><br><span class="line">查询总记录数（可选）：如果需要获取总记录数，PageHelper 会自动执行一个派生的查询，以计算原始查询（不包含分页参数）的总记录数。这通常通过移除原始 SQL 的排序（ORDER BY）和分页（LIMIT、OFFSET 等）条件，加上 COUNT(*) 的包装来实现。</span><br><span class="line">返回分页信息：查询结果被封装在 PageInfo 对象中（或其他形式的分页结果对象），这个对象除了包含当前页的数据列表外，还提供了总记录数、总页数、当前页码等分页相关的信息，方便在应用程序中使用。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>前端小程序的微信登录流程</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">微信登录的核心是通过微信小程序提供的临时凭证code换取永久凭证openid的过程</span><br><span class="line"></span><br><span class="line">首先微信小程序会向微信官方申请一个临时登录code</span><br><span class="line">然后，小程序带着code向后台服务发送请求</span><br><span class="line">后台接收到code后，会调用微信官方接口验证code是否合法，如果合法，官方会返回一个openid；这个openid就是此用户在我们系统中的唯一标识，同时也代表用户身份合法</span><br><span class="line">后台服务接收到来着微信的openid之后，会去数据库查询一下是否存在此账户；如果存在，代表这是一个老用户，如果不存在，则代表这是一个新用户首次使用我们的系统，我们需要将其信息保存到用户表中</span><br><span class="line">登录成功之后，需要生成一个标识用户身份的token，返回给前端，前端会将token保存起来</span><br><span class="line">用户后面访问系统的时候，需要携带着这个token，而我们后端需要编写一个拦截器，用于拦截请求，校验token</span><br><span class="line">校验通过，则放行请求，正常访问；校验失败，则禁止通行，返回提示</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>redis应用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">我们项目中有两处地方用到了Redis，分别是：店铺营业状态标识和小程序端的套餐、菜品列表数据</span><br><span class="line"></span><br><span class="line">店铺营业状态标识，仅仅需要在redis中保存一个0|1值即可。这里之所以选择redis，有两个原因</span><br><span class="line"></span><br><span class="line">而没有采用数据库来存储，就是因为这个字段太简单了，没有必要在数据库中新建一张表</span><br><span class="line"></span><br><span class="line">这个状态访问比较频繁，放在redis中，提高了查询速度的同时，可以减轻数据库的访问压力</span><br><span class="line"></span><br><span class="line">小程序端的套餐、菜品列表数据，由于小程序端以后的访问量比较大，所以采用Redis提高访问速度</span><br><span class="line"></span><br><span class="line">具体的操作步骤就是：在查询列表的时候，先判断Redis缓存中是否有数据，如果有，直接返回给前端</span><br><span class="line"></span><br><span class="line">如果没有，再去查询数据库，并将查询结果保存到redis中的同时，再返回给前端</span><br><span class="line"></span><br><span class="line">为了保证Redis和数据库中数据的实时一致性，在对数据库相关数据进行增删改操作时，需要同时清理Redis中数据</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>SpringCache在项目中的应用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">SpringCache是Spring提供的一个缓存框架，它可以通过简单的注解实现缓存的操作，我们常用的注解有下面几个：</span><br><span class="line"></span><br><span class="line">@EnableCaching: 开启基于注解的缓存</span><br><span class="line"></span><br><span class="line">@CachePut: 一般用在查询方法上，表示将方法的返回值放到缓存中</span><br><span class="line"></span><br><span class="line">@Cacheable: 一般用在查询方法上，表示在方法执行前先查看缓存中是否有数据，如果有直接返回；如果没有，再调用方法体查询数据并将返回结果放到缓存中；他有两个关键属性：</span><br><span class="line"></span><br><span class="line">value: 缓存的名称，每个缓存名称下面可以有多个key</span><br><span class="line"></span><br><span class="line">key: 缓存的key，支持Spring的表达式语言SPEL语法</span><br><span class="line"></span><br><span class="line">@CacheEvict: 一般用在增删改方法上 ，用于清理指定缓存，可以根据key清理，也可以清理整个value下的缓存</span><br><span class="line"></span><br><span class="line">SpringCache还有一个有点，就是可以随意切换底层的缓存软件，比如：Redis、内存等等</span><br><span class="line"></span><br><span class="line">本项目中菜品和套餐列表的缓存用到了SpringCache</span><br></pre></td></tr></table></figure>
+<ul>
+<li>SpringTask在项目中的应用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SpringTask是Spring框架提供的一种任务调度工具，用来按照定义的时间格式执行某段代码。</span><br><span class="line">在我们的项目中，超时订单的状态改变用到了SpringTask，比如：</span><br><span class="line"></span><br><span class="line">每隔1分钟检查是否有超过15分钟未支付的订单，如果有就将订单取消</span><br><span class="line">每天凌晨1点检查前一天是否有派送中的订单，如果有将订单状态改成已完成</span><br></pre></td></tr></table></figure>
+<p>cron表达式其实就是一个字符串，通过cron表达式可以定义任务的<code>触发时间</code></p>
+<ul>
+<li>WebSocket对比HTTP</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HTTP的通信是单向的，要先请求后响应，类似于对讲机</span><br><span class="line"></span><br><span class="line">WebSocket的通信双向的、实时的，客户端和服务端可以同时发消息，类似于手机通话</span><br><span class="line"></span><br><span class="line">我们在项目中大部分场景下都是使用HTTP协议，只有在高实时场景下，建议使用WebSocket</span><br><span class="line"></span><br><span class="line">项目在向商家提醒接单时，用户催单发送提醒时使用了webSocket</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>核心功能</li>
+</ul>
+<p>菜品新增：对菜品表和口味表进行新增操作</p>
+<p>首先将前端传过来的菜品信息保存到菜品表并主键返回，然后遍历前端传过来的口味集合，<br>为每个口味设置刚才返回来的主键并保存到口味表<br>菜品修改：对菜品表进行更新，对菜品详情表进行增删操作</p>
+<p>首先根据前端传过来的菜品信息对菜品表进行修改<br>然后根据菜品id删除对应的口味列表集合<br>最后再把前端传过来的口味集合重新加入到口味表中<br>菜品删除：对菜品表和口味表进行删除操作</p>
+<p>遍历前端传过来的菜品id集合得到每个菜品的信息<br>如果当前菜品是启售状态或者被套餐关联那么就不能被删除<br>否则就可以通过菜品id对菜品表和口味表中的数据进行删除<br>套餐新增：对套餐表和套餐菜品关系表进行新增操作</p>
+<p>首先将前端传过来的套餐基本信息保存到套餐表中，并返回主键的id<br>然后为前端传过来的套餐菜品设置套餐id<br>最后将套餐包含的菜品添加到套餐菜品关系表中<br>套餐修改：对套餐表进行修改，在对套餐菜品关系表进行增删操作</p>
+<p>首先根据前端传过来的套餐基本信息更新到套餐表中<br>然后根据套餐的id删除所有套餐菜品关系表中包含的菜品信息<br>最后遍历前端传过来的菜品的列表，设置好套餐的id后重新保存到套餐菜品关系表中<br>套餐删除：对套餐表和套餐菜品关系表进行删除操作</p>
+<p>首先遍历前端传过来套餐id的集合得到每一个套餐的信息<br>然后根据id查询套餐，判断套餐的状态是否为启售状态，如果是启售状态，则不能删除<br>如果是在禁售状态，就可以通过套餐的id进行套餐菜品关系表的删除操作<br>分类删除</p>
+<p>分类删除的核心逻辑就是根据前端传过来的分类id去分类表进行一个删除操作<br>但是要对这个分类里面是否有菜品和套餐做一个判断,拿着这个id去菜品表和套餐表做一个统计查询<br>如果查出来数量大于0,就不能删除,如果为0,直接删除<br>添加购物车：将用户选择的商品基本数据信息添加到数据库表中进行保存</p>
+<p>利用到的数据库表（本次项目）：购物车表，菜品表、套餐表，保存的信息就是从表中查到的</p>
+<p>首先根据id查询购物车中是否有相同商品</p>
+<p>有：则不用添加，只修改查询到的商品number属性+1并重新赋值即可，执行mapper更新。</p>
+<p>无：则判断是菜品还是套餐，查询对应商品的数据库得到基本信息，补全购物车需要的参数执行保存。</p>
+<ul>
+<li>websocket</li>
+</ul>
+<p><img src="/2024/11/25/sky-take-out/3d664769b13b87e8f78dfcb6a8e84c27.jpeg" alt="img"></p>
+<ul>
+<li>threadlocal</li>
+</ul>
+<p><img src="/2024/11/25/sky-take-out/ee8bf28284b46109d36e177762bcfb92.jpeg" alt="img"></p>
+<h1 id="项目困难"><a href="#项目困难" class="headerlink" title="项目困难"></a>项目困难</h1><p><img src="/2024/11/25/sky-take-out/image-20241126203501259.png" alt="image-20241126203501259"></p>
+<p><img src="/2024/11/25/sky-take-out/image-20241126203511824.png" alt="image-20241126203511824"></p>
+<p><img src="/2024/11/25/sky-take-out/image-20241126203519631.png" alt="image-20241126203519631"></p>
+<p><img src="/2024/11/25/sky-take-out/image-20241126203526823.png" alt="image-20241126203526823"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/11/13/JAVA%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="prev" title="JAVA面试题">
+      <i class="fa fa-chevron-left"></i> JAVA面试题
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">项目介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E6%9E%B6%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">功能架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">技术选型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MD5"><span class="nav-number">1.2.1.</span> <span class="nav-text">MD5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Swagger"><span class="nav-number">1.2.2.</span> <span class="nav-text">Swagger</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">员工管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">面试问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%9B%B0%E9%9A%BE"><span class="nav-number">4.</span> <span class="nav-text">项目困难</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
